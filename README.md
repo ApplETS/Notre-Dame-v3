@@ -7,6 +7,8 @@ the main way between the user and the École de Technologie Supérieure (ÉTS) o
 * Access to the student's schedules
 * And many more...
 
+_Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-Dame-Android/blob/master/README.fr.md)_
+
 ## Prerequisites
 
 * Git
