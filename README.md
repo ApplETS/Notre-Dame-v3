@@ -14,3 +14,7 @@ _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-
 * Git
 * Java Development Kit (JDK)
 * Android Studio
+
+## License
+
+This projet is licensed under the Apache License V2.0. See the [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) file for more info.
