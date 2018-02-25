@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        title = getString(R.string.title_home)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private fun goToFragment(navigationItem: MenuItem) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        var fragmentTag: String = navigationItem.itemId.toString()
+        val fragmentTag: String = navigationItem.itemId.toString()
         var fragment = fragmentManager.findFragmentByTag(fragmentTag)
 
         if (fragment == null) {
