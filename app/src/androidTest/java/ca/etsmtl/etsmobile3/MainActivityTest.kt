@@ -1,5 +1,6 @@
 package ca.etsmtl.etsmobile3
 
+import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.matcher.ViewMatchers.withId
@@ -31,7 +32,7 @@ class MainActivityTest {
     }
 
     private fun testTitles(activity: MainActivity) {
-        //assertTrue(activity.supportActionBar!!.title!!.equals(activity.getString(R.string.title_home)))
+        assertTrue(activity.title == activity.getString(R.string.title_home))
 
         onView(withId(R.id.navigation_schedule)).perform(click())
         assertTrue(activity.title == activity.getString(R.string.title_schedule))
@@ -43,6 +44,20 @@ class MainActivityTest {
         assertTrue(activity.title == activity.getString(R.string.title_ets))
 
         onView(withId(R.id.navigation_home)).perform(click())
+        assertTrue(activity.title == activity.getString(R.string.title_home))
+    }
+
+    @Test
+    fun testBack() {
+        val activity: MainActivity = activityTestRule.activity
+
+        assertTrue(activity.title == activity.getString(R.string.title_home))
+
+        onView(withId(R.id.navigation_profile)).perform(click())
+        assertTrue(activity.title == activity.getString(R.string.title_profile))
+
+        Espresso.pressBack()
+
         assertTrue(activity.title == activity.getString(R.string.title_home))
     }
 
