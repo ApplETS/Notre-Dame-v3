@@ -5,6 +5,7 @@
     <string name="title_schedule">Schedule</string>
     <string name="title_profile">Profile</string>
     <string name="title_ets">ÉTS</string>
+    <string name="title_more">More</string>
 
     <!-- Strings related to login -->
     <string name="title_activity_login">Login</string>

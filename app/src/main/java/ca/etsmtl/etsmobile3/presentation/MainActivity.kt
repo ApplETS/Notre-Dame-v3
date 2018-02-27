@@ -74,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_ets -> {
             }
+            R.id.navigation_more -> {
+            }
         }
 
         return fragment

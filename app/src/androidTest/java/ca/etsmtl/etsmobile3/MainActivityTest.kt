@@ -43,6 +43,9 @@ class MainActivityTest {
         onView(withId(R.id.navigation_ets)).perform(click())
         assertTrue(activity.title == activity.getString(R.string.title_ets))
 
+        onView(withId(R.id.navigation_more)).perform(click())
+        assertTrue(activity.title == activity.getString(R.string.title_more))
+
         onView(withId(R.id.navigation_home)).perform(click())
         assertTrue(activity.title == activity.getString(R.string.title_home))
     }

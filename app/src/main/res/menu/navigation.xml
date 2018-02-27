@@ -26,4 +26,10 @@
         android:title="@string/title_ets"
         app:showAsAction="always|withText" />
 
+    <item
+        android:id="@+id/navigation_more"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="@string/title_more"
+        app:showAsAction="always|withText" />
+
 </menu>
