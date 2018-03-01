@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -32,6 +34,7 @@ def junit = '4.12'
 def mockito = '2.7.19'
 def mockito_all = '1.10.19'
 def glide = '4.6.1'
+def dagger = '2.11'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -75,5 +78,12 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:${glide}"
-    annotationProcessor "com.github.bumptech.glide:compiler:${glide}"
+    kapt "com.github.bumptech.glide:compiler:${glide}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${dagger}"
+    implementation "com.google.dagger:dagger-android:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
 }

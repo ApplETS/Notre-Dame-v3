@@ -2,26 +2,32 @@ package ca.etsmtl.etsmobile3.presentation.login
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import ca.etsmtl.etsmobile3.R
+import ca.etsmtl.etsmobile3.model.Resource
+import ca.etsmtl.etsmobile3.model.UserCredentials
 import ca.etsmtl.etsmobile3.presentation.MainActivity
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
 
 /**
  * A login screen that offers login via universal code/password.
  */
-class LoginActivity : AppCompatActivity() {
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private var mAuthTask: UserLoginTask? = null
+class LoginActivity : DaggerAppCompatActivity() {
+
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
+    }
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +42,40 @@ class LoginActivity : AppCompatActivity() {
 
         title = getString(R.string.title_activity_login)
         sign_in_button.setOnClickListener { attemptLogin() }
+
+        with(loginViewModel.getCachedUserCredentials()) {
+            initUserCredentialsFields(this)
+        }
+
+        subscribeUI()
+    }
+
+    private fun subscribeUI() {
+        loginViewModel.getUserCredentials().observe(this, Observer<Resource<Boolean>> { resource ->
+            if (resource != null) {
+                when(resource.status) {
+                    Resource.SUCCESS -> {
+                        showProgress(false)
+                        displayMainActivity()
+                    }
+                    Resource.ERROR -> {
+                        showProgress(false)
+                        // TODO:
+                    }
+                    Resource.LOADING -> {
+                        showProgress(true)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun initUserCredentialsFields(userCredentials: UserCredentials?) {
+        if (userCredentials != null) {
+            universal_code.setText(userCredentials.universalCode)
+            password.setText(userCredentials.password)
+        }
+
     }
 
     /**
@@ -44,10 +84,6 @@ class LoginActivity : AppCompatActivity() {
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuthTask != null) {
-            return
-        }
-
         // Reset errors.
         universal_code_layout.error = null
         password_layout.error = null
@@ -59,9 +95,9 @@ class LoginActivity : AppCompatActivity() {
         var cancel = false
         var focusView: View? = null
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(passwordStr) && !isPasswordValid(passwordStr)) {
-            password_layout.error = getString(R.string.error_invalid_password)
+        // Check if the user entered the password
+        if (TextUtils.isEmpty(passwordStr)) {
+            password_layout.error = getString(R.string.error_field_required)
             focusView = password
             cancel = true
         }
@@ -82,22 +118,12 @@ class LoginActivity : AppCompatActivity() {
             // form field with an error.
             focusView?.requestFocus()
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true)
-            mAuthTask = UserLoginTask(universalCodeStr, passwordStr)
-            mAuthTask!!.execute(null as Void?)
+            loginViewModel.setUserCredentials(UserCredentials(universalCodeStr, passwordStr))
         }
     }
 
     private fun isUniversalCodeValid(universalCode: String): Boolean {
-        //TODO: Replace this with your own logic
-        return universalCode.length > 5
-    }
-
-    private fun isPasswordValid(password: String): Boolean {
-        //TODO: Replace this with your own logic
-        return password.length > 1
+        return universalCode.matches(Regex("[a-zA-Z]{2}\\d{5}"))
     }
 
     /**
@@ -127,41 +153,8 @@ class LoginActivity : AppCompatActivity() {
                 })
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    inner class UserLoginTask internal constructor(private val universalCodeStr: String, private val passwordStr: String) : AsyncTask<Void, Void, Boolean>() {
-
-        override fun doInBackground(vararg params: Void): Boolean? {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000)
-            } catch (e: InterruptedException) {
-                return false
-            }
-
-            return true
-        }
-
-        override fun onPostExecute(success: Boolean?) {
-            mAuthTask = null
-            showProgress(false)
-
-            if (success!!) {
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent)
-            } else {
-                password_layout.error = getString(R.string.error_incorrect_password)
-                password.requestFocus()
-            }
-        }
-
-        override fun onCancelled() {
-            mAuthTask = null
-            showProgress(false)
-        }
+    private fun displayMainActivity() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 }

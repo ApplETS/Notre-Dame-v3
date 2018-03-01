@@ -30,7 +30,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
         title = getString(R.string.title_home)
+
+        goToFragment(navigation.menu.getItem(0))
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -88,8 +91,6 @@ class MainActivity : AppCompatActivity() {
             val homeMenuItem = navigation.menu.findItem(R.id.navigation_home)
             homeMenuItem.isChecked = true
             onNavigationItemSelectedListener.onNavigationItemSelected(homeMenuItem)
-        } else {
-            super.onBackPressed()
         }
     }
 }
