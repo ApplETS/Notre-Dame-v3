@@ -2,9 +2,6 @@ package ca.etsmtl.etsmobile3.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.content.ContentValues.TAG
-import android.util.Log
-import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
 import ca.etsmtl.etsmobile3.data.model.Data
 import ca.etsmtl.etsmobile3.data.model.Etudiant
@@ -21,7 +18,7 @@ class InfoEtudiantRepository @Inject constructor(
 ) {
     fun getInfoEtudiant(userCredentials: UserCredentials): LiveData<Resource<Data<Etudiant>>> {
 
-        return object : NetworkBoundResource<Data<Etudiant>, Data<Etudiant>>() {
+        /*return object : NetworkBoundResource<Data<Etudiant>, Data<Etudiant>>() {
             override fun saveCallResult(item: Data<Etudiant>) {
                 Log.d(TAG, "test")
                 //TODO:
@@ -46,6 +43,15 @@ class InfoEtudiantRepository @Inject constructor(
                 return api.infoEtudiant(userCredentials)
             }
 
-        }.asLiveData()
+        }.asLiveData()*/
+
+        val testLD: MutableLiveData<Resource<Data<Etudiant>>> = MutableLiveData()
+        val d = Data(Etudiant())
+        d.data?.nom = "tests"
+        d.data?.prenom = "test"
+        testLD.value = Resource.success(d)
+
+        return testLD
+
     }
 }
