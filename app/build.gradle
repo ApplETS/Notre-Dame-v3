@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 def support = '27.1.0'
@@ -35,6 +39,8 @@ def mockito = '2.7.19'
 def mockito_all = '1.10.19'
 def glide = '4.6.1'
 def dagger = '2.11'
+def moshi = '1.5.0'
+def retrofit = '2.3.0'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -86,4 +92,12 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${dagger}"
     kapt "com.google.dagger:dagger-compiler:${dagger}"
     kapt "com.google.dagger:dagger-android-processor:${dagger}"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:${moshi}"
+    implementation "com.squareup.moshi:moshi-kotlin:${moshi}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
+    implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
 }

@@ -19,7 +19,7 @@ class ViewModelFactory @Inject constructor(
     /**
      * Cette méthode prend en paramètre le type de ViewModel demandé par une Activity ou un
      * Fragment. Par la suite, le Provider est retrouvé en utilisant la Classe fournie en tant que
-     * clé. Celui-ci a alors le rôle d'instancier le ViewModel requis.
+     * clé. Celui-ci a alors le rôle data'instancier le ViewModel requis.
      *
      * @param modelClass Le type de ViewModel requis
      * @return le ViewModel demandé

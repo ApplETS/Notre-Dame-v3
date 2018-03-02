@@ -11,9 +11,10 @@ import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import ca.etsmtl.etsmobile3.R
-import ca.etsmtl.etsmobile3.model.Resource
-import ca.etsmtl.etsmobile3.model.UserCredentials
+import ca.etsmtl.etsmobile3.data.model.Resource
+import ca.etsmtl.etsmobile3.data.model.UserCredentials
 import ca.etsmtl.etsmobile3.presentation.MainActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -60,7 +61,7 @@ class LoginActivity : DaggerAppCompatActivity() {
                     }
                     Resource.ERROR -> {
                         showProgress(false)
-                        // TODO:
+                        Toast.makeText(this, resource.message, Toast.LENGTH_SHORT).show()
                     }
                     Resource.LOADING -> {
                         showProgress(true)

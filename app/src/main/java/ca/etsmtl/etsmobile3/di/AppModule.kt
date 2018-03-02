@@ -2,6 +2,8 @@ package ca.etsmtl.etsmobile3.di
 
 import android.app.Application
 import android.content.Context
+import ca.etsmtl.etsmobile3.data.api.SignetsApi
+import ca.etsmtl.etsmobile3.data.repository.InfoEtudiantRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,4 +17,9 @@ internal object AppModule {
     @Provides
     @JvmStatic
     fun provideContext(application: Application): Context = application
+
+    @Singleton @Provides @JvmStatic
+    fun provideInfoEtudiantRepository(
+            signetsApi: SignetsApi
+    ): InfoEtudiantRepository = InfoEtudiantRepository(signetsApi)
 }

@@ -1,9 +1,9 @@
 package ca.etsmtl.etsmobile3.presentation
 
+import ca.etsmtl.etsmobile3.data.model.UserCredentials
 import ca.etsmtl.etsmobile3.di.DaggerAppComponent
 import ca.etsmtl.etsmobile3.di.DatabaseModule
 import ca.etsmtl.etsmobile3.di.NetworkModule
-import ca.etsmtl.etsmobile3.model.UserCredentials
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
