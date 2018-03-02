@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 /**
- * A login screen that offers login via universal code/password.
+ * A login screen that offers login via universal code/motPasse.
  */
 class LoginActivity : DaggerAppCompatActivity() {
 
@@ -73,8 +73,8 @@ class LoginActivity : DaggerAppCompatActivity() {
 
     private fun initUserCredentialsFields(userCredentials: UserCredentials?) {
         if (userCredentials != null) {
-            universal_code.setText(userCredentials.universalCode)
-            password.setText(userCredentials.password)
+            universal_code.setText(userCredentials.codeAccesUniversel)
+            password.setText(userCredentials.motPasse)
         }
 
     }
@@ -96,7 +96,7 @@ class LoginActivity : DaggerAppCompatActivity() {
         var cancel = false
         var focusView: View? = null
 
-        // Check if the user entered the password
+        // Check if the user entered the motPasse
         if (TextUtils.isEmpty(passwordStr)) {
             password_layout.error = getString(R.string.error_field_required)
             focusView = password

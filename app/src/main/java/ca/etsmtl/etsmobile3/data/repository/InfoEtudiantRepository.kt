@@ -1,7 +1,10 @@
 package ca.etsmtl.etsmobile3.data.repository
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
+import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
 import ca.etsmtl.etsmobile3.data.model.Data
 import ca.etsmtl.etsmobile3.data.model.Etudiant
@@ -16,40 +19,42 @@ import javax.inject.Inject
 class InfoEtudiantRepository @Inject constructor(
         private val api: SignetsApi
 ) {
-    fun getInfoEtudiant(userCredentials: UserCredentials): LiveData<Resource<Data<Etudiant>>> {
+    fun getInfoEtudiant(userCredentials: UserCredentials): LiveData<Resource<Etudiant>> {
 
-        /*return object : NetworkBoundResource<Data<Etudiant>, Data<Etudiant>>() {
-            override fun saveCallResult(item: Data<Etudiant>) {
-                Log.d(TAG, "test")
-                //TODO:
+        /*return object : NetworkBoundResource<Etudiant, Etudiant>() {
+            val fakeDbLD: MutableLiveData<Etudiant> = MutableLiveData()
+
+            override fun saveCallResult(item: Etudiant) {
+                fakeDbLD.postValue(item)
             }
 
 
-            override fun shouldFetch(data: Data<Etudiant>?): Boolean {
+            override fun shouldFetch(data: Etudiant?): Boolean {
                 return true
             }
 
-            override fun loadFromDb(): LiveData<Data<Etudiant>> {
-                val testLD: MutableLiveData<Data<Etudiant>> = MutableLiveData()
-                val d = Data(Etudiant())
-                d.data?.nom = "tests"
-                d.data?.prenom = "test"
-                testLD.postValue(d)
+            override fun loadFromDb(): LiveData<Etudiant> {
 
-                return testLD
+                return fakeDbLD
             }
 
-            override fun createCall(): LiveData<ApiResponse<Data<Etudiant>>> {
+            override fun createCall(): LiveData<ApiResponse<Etudiant>> {
                 return api.infoEtudiant(userCredentials)
             }
 
         }.asLiveData()*/
 
-        val testLD: MutableLiveData<Resource<Data<Etudiant>>> = MutableLiveData()
-        val d = Data(Etudiant())
-        d.data?.nom = "tests"
-        d.data?.prenom = "test"
-        testLD.value = Resource.success(d)
+        // TODO: implement the real thing
+        val testLD: MediatorLiveData<Resource<Etudiant>> = MediatorLiveData()
+        testLD.value = Resource.loading(null)
+        testLD.addSource(api.infoEtudiant(userCredentials)) { response ->
+            if (response != null) {
+                if (response.isSuccessful && response.body != null)
+                    testLD.value = Resource.success(response.body)
+                else
+                    testLD.value = Resource.error(response.errorMessage, response.body)
+            }
+        }
 
         return testLD
 
