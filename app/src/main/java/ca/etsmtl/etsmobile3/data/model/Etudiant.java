@@ -5,13 +5,13 @@ import com.squareup.moshi.Json;
 public class Etudiant {
 
     @Json(name = "d")
-    private Data data;
+    private EtudiantData etudiantData;
 
-    public Data getData() {
-        return data;
+    public EtudiantData getEtudiantData() {
+        return etudiantData;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setEtudiantData(EtudiantData etudiantData) {
+        this.etudiantData = etudiantData;
     }
 }

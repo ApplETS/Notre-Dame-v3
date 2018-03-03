@@ -10,14 +10,12 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile3.R
 
 /**
+ * The fragment displayed to the user after he has successfully log in
+ *
  * Created by Sonphil on 24-02-18.
  */
 
 class HomeFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -27,8 +25,7 @@ class HomeFragment : Fragment() {
     companion object {
 
         fun newInstance(): HomeFragment {
-            val fragment = HomeFragment()
-            return fragment
+            return HomeFragment()
         }
     }
 

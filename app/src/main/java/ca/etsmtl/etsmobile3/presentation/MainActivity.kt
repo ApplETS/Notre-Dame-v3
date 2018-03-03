@@ -12,6 +12,9 @@ import ca.etsmtl.etsmobile3.presentation.schedule.ScheduleFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
+ * A screen which displays a bottom navigation view and wrapper for fragment. The user can
+ * select items on the bottom navigation view to switch between fragments.
+ *
  * Created by Sonphil on 24-02-18.
  */
 
@@ -46,6 +49,12 @@ class MainActivity : AppCompatActivity() {
         title = navigationItem.title
     }
 
+    /**
+     * Displays the fragment corresponding to the selected item. The fragment is instantiated if it
+     * doesn't exist yet.
+     *
+     * @param navigationItem the item the user selected in the bottom navigation view
+     */
     private fun goToFragment(navigationItem: MenuItem) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -62,6 +71,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Creates a new fragment corresponding to the selected item
+     *
+     * @param selectedItemId the id of the item selected in the bottom navigation view
+     * @return the fragment corresponding to the selected item
+     */
     private fun getNewFragment(selectedItemId: Int) : Fragment? {
         var fragment: Fragment? = null
 
@@ -84,6 +99,9 @@ class MainActivity : AppCompatActivity() {
         return fragment
     }
 
+    /**
+     * On back pressed, return to the home screen
+     */
     override fun onBackPressed() {
         val seletedItemId = navigation.selectedItemId
 

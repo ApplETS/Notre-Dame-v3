@@ -2,6 +2,8 @@ package ca.etsmtl.etsmobile3.di
 
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
 import ca.etsmtl.etsmobile3.util.LiveDataCallAdapterFactory
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -19,10 +21,15 @@ open class NetworkModule {
     }
 
     @Singleton @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    }
+
+    @Singleton @Provides
+    fun provideRetrofit(moshi: Moshi): Retrofit {
         return Retrofit.Builder()
                 .baseUrl("https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx/")
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .build()
     }

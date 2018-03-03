@@ -2,11 +2,7 @@ package ca.etsmtl.etsmobile3.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
-import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
-import ca.etsmtl.etsmobile3.data.model.Data
 import ca.etsmtl.etsmobile3.data.model.Etudiant
 import ca.etsmtl.etsmobile3.data.model.Resource
 import ca.etsmtl.etsmobile3.data.model.UserCredentials

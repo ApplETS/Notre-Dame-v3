@@ -3,7 +3,7 @@ package ca.etsmtl.etsmobile3.data.model;
 
 import com.squareup.moshi.Json;
 
-public class Data {
+public class EtudiantData {
 
     @Json(name = "__type")
     private String type;

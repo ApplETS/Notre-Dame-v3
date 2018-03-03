@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 /**
- * A login screen that offers login via universal code/motPasse.
+ * A login screen that offers login via universal code/password.
  */
 class LoginActivity : DaggerAppCompatActivity() {
 
@@ -33,6 +33,7 @@ class LoginActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 attemptLogin()
@@ -51,6 +52,9 @@ class LoginActivity : DaggerAppCompatActivity() {
         subscribeUI()
     }
 
+    /**
+     * Subscribe the UI to the user credentials LiveData
+     */
     private fun subscribeUI() {
         loginViewModel.getUserCredentials().observe(this, Observer<Resource<Boolean>> { resource ->
             if (resource != null) {
@@ -71,6 +75,11 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
     }
 
+    /**
+     * Fill the credentials fields with the specifies user credentials
+     *
+     * @param userCredentials the user credentials used to fill the fields
+     */
     private fun initUserCredentialsFields(userCredentials: UserCredentials?) {
         if (userCredentials != null) {
             universal_code.setText(userCredentials.codeAccesUniversel)
@@ -80,7 +89,7 @@ class LoginActivity : DaggerAppCompatActivity() {
     }
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
+     * Attempts to sign in the account specified by the login form.
      * If there are form errors (invalid universal code, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
@@ -123,6 +132,11 @@ class LoginActivity : DaggerAppCompatActivity() {
         }
     }
 
+    /**
+     * Returns whether a given universal code is valid or not
+     *
+     * @param universalCode the universal code to check
+     */
     private fun isUniversalCodeValid(universalCode: String): Boolean {
         return universalCode.matches(Regex("[a-zA-Z]{2}\\d{5}"))
     }
@@ -154,6 +168,9 @@ class LoginActivity : DaggerAppCompatActivity() {
                 })
     }
 
+    /**
+     * Starts MainActivity
+     */
     private fun displayMainActivity() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)

@@ -18,9 +18,9 @@ interface LoginActivityModule {
     fun providesAppCompatActivity(activity: LoginActivity): AppCompatActivity
 
     /**
-     * Cette fonction injecte dans une Map LoginViewModel::class en tant que clé. En effet, ceci est
-     * clairement stipulé par les annotations(@IntoMap @ViewModelKey(LoginViewModel::class). Cette
-     * clée est associée à un Provider qui aura le rôle d'instancier unLoginViewModel.
+     * Cette fonction injecte, dans une Map, LoginViewModel::class en tant que clé. En effet, ceci
+     * est clairement stipulé par les annotations(@IntoMap @ViewModelKey(LoginViewModel::class).
+     * Cette clée est associée à un Provider qui aura le rôle d'instancier unLoginViewModel.
      */
     @Binds
     @IntoMap @ViewModelKey(LoginViewModel::class)
