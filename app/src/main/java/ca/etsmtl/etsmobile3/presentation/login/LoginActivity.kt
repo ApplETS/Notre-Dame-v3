@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -19,6 +20,15 @@ import ca.etsmtl.etsmobile3.presentation.MainActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.inputmethod.InputMethodManager
+import android.support.v4.view.ViewCompat.animate
+import android.R.attr.button
+
+
+
+
+
 
 /**
  * A login screen that offers login via universal code/password.
@@ -43,7 +53,10 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
 
         title = getString(R.string.title_activity_login)
-        sign_in_button.setOnClickListener { attemptLogin() }
+        sign_in_button.setOnClickListener {
+            hideKeyboard()
+            attemptLogin()
+        }
 
         with(loginViewModel.getCachedUserCredentials()) {
             initUserCredentialsFields(this)
@@ -174,5 +187,11 @@ class LoginActivity : DaggerAppCompatActivity() {
     private fun displayMainActivity() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+
     }
 }
