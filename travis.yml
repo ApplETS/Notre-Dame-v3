@@ -1,0 +1,28 @@
+language: android
+jdk: oraclejdk8
+android:
+  components:
+    - tools
+    - platform-tools
+
+    # The BuildTools version used by the project
+    - build-tools-27.0.3
+
+    # The SDK version used to compile the project
+    - android-27
+
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-27
+
+    # System images to run emulators
+    - sys-img-armeabi-v7a-android-27
+    - sys-img-armeabi-v7a-android-21
+
+script:
+   - ./gradlew assembleDebug -PdisablePreDex
+   - ./gradlew test
+   - ./gradlew connectedAndroidTest
+
