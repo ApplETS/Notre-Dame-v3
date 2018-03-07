@@ -10,7 +10,7 @@
     <!-- Strings related to login -->
     <string name="title_activity_login">Login</string>
     <string name="prompt_universal_code">Universal Code</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="error_invalid_universal_code">This universal code is invalid</string>
     <string name="error_invalid_password">This password is incorrect</string>
