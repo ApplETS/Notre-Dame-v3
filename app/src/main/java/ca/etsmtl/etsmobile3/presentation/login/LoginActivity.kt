@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile3.R
@@ -20,14 +21,6 @@ import ca.etsmtl.etsmobile3.presentation.MainActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.view.inputmethod.InputMethodManager
-import android.support.v4.view.ViewCompat.animate
-import android.R.attr.button
-
-
-
-
 
 
 /**
@@ -38,7 +31,8 @@ class LoginActivity : DaggerAppCompatActivity() {
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
     }
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +65,7 @@ class LoginActivity : DaggerAppCompatActivity() {
     private fun subscribeUI() {
         loginViewModel.getUserCredentials().observe(this, Observer<Resource<Boolean>> { resource ->
             if (resource != null) {
-                when(resource.status) {
+                when (resource.status) {
                     Resource.SUCCESS -> {
                         showProgress(false)
                         displayMainActivity()
