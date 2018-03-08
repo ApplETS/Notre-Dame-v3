@@ -1,12 +1,14 @@
 language: android
 jdk: oraclejdk8
+sudo: false
+
 android:
   components:
     - tools
     - platform-tools
 
     # The BuildTools version used by the project
-    - build-tools-27.0.3
+    - build-tools-26.0.2
 
     # The SDK version used to compile the project
     - android-27
@@ -21,6 +23,9 @@ android:
     - sys-img-armeabi-v7a-android-27
     - sys-img-armeabi-v7a-android-21
 
+before_install:
+  - yes | sdkmanager "platforms;android-27"
+  
 script:
    - ./gradlew assembleDebug -PdisablePreDex
    - ./gradlew test
