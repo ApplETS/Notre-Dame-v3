@@ -16,4 +16,4 @@ Ce projet concrétise la nouvelle génération de l'application ÉTSMobile pour 
 
 ## Licence
 
-Ce projet est licencié selon la licence Apache V2.0. Veuillez conuslter le fichier [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) pour plus d'informations.
+Ce projet est licencié selon la licence Apache V2.0. Veuillez consulter le fichier [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) pour plus d'informations.
