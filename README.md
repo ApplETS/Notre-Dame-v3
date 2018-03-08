@@ -1,7 +1,9 @@
-# Projet Notre-Dame: Android
+# Projet Notre-Dame : Android
+
+[![Build Status](https://travis-ci.org/ApplETS/Notre-Dame-Android.svg?branch=master)](https://travis-ci.org/ApplETS/Notre-Dame-Android)
 
 This project is the placeholder for the next generation of ETSMobile currently available for Android. ETSMobile is first and foremost
-the main way between the user and the École de Technologie Supérieure (ÉTS) on mobile devices. It offers:
+the main way between the user and the École de technologie supérieure (ÉTS) on mobile devices. It offers:
 
 * Access to evaluation grades
 * Access to the student's schedules

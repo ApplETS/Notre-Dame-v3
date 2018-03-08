@@ -8,7 +8,6 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.etsmobile3.presentation.MainActivity
 import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -63,10 +62,5 @@ class MainActivityTest {
         Espresso.pressBack()
 
         assertTrue(activity.title == activity.getString(R.string.title_home))
-    }
-
-    @Test
-    fun testFail() {
-        fail()
     }
 }
