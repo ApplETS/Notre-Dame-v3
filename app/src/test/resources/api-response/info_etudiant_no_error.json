@@ -1,0 +1,11 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+Etudiant",
+        "nom": "Liu                                     ",
+        "prenom": "Philippe            ",
+        "codePerm": "LIUP27099105",
+        "soldeTotal": "0,00$",
+        "masculin": true,
+        "erreur": ""
+    }
+}

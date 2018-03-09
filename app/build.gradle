@@ -41,6 +41,7 @@ def glide = '4.6.1'
 def dagger = '2.11'
 def moshi = '1.5.0'
 def retrofit = '2.3.0'
+def okhttp = '3.8.0'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -66,18 +67,14 @@ dependencies {
     testImplementation "android.arch.persistence.room:testing:${room}"
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "android.arch.core:core-testing:${lifecycle}"
+    testImplementation "org.mockito:mockito-core:${mockito}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
 
     // Android Testing Support Library's runner and rules
     androidTestImplementation "com.android.support.test:runner:${astl}"
     androidTestImplementation "com.android.support.test:rules:${astl}"
     androidTestImplementation "android.arch.persistence.room:testing:${room}"
-    androidTestImplementation "android.arch.core:core-testing:${lifecycle}"
-
-    // Dependencies for Android unit tests
-    androidTestImplementation "junit:junit:${junit}"
-    androidTestImplementation "org.mockito:mockito-core:${mockito}"
-    androidTestImplementation "android.arch.core:core-testing:${lifecycle}" // Test helpers for LiveData
-    androidTestImplementation "android.arch.persistence.room:testing:${room}" // Test helpers for Room
 
     // Espresso UI Testing
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresso}"
