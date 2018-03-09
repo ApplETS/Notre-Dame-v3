@@ -2,10 +2,11 @@ package ca.etsmtl.etsmobile3.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import android.support.annotation.VisibleForTesting
+import android.text.TextUtils
+import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
-import ca.etsmtl.etsmobile3.data.model.Etudiant
-import ca.etsmtl.etsmobile3.data.model.Resource
-import ca.etsmtl.etsmobile3.data.model.UserCredentials
+import ca.etsmtl.etsmobile3.data.model.*
 import javax.inject.Inject
 
 /**
@@ -44,15 +45,34 @@ class InfoEtudiantRepository @Inject constructor(
         val testLD: MediatorLiveData<Resource<Etudiant>> = MediatorLiveData()
         testLD.value = Resource.loading(null)
         testLD.addSource(api.infoEtudiant(userCredentials)) { response ->
-            if (response != null) {
-                if (response.isSuccessful && response.body != null)
-                    testLD.value = Resource.success(response.body)
-                else
-                    testLD.value = Resource.error(response.errorMessage, response.body)
-            }
+            val errorStr = getError(response)
+
+            if (TextUtils.isEmpty(errorStr)) // If there was no error ...
+                testLD.value = Resource.success(response?.body!!)
+            else
+                testLD.value = Resource.error(errorStr, response?.body)
         }
 
         return testLD
+    }
 
+    @VisibleForTesting
+    fun getError(apiResponse: ApiResponse<out SignetsModel>?): String? {
+        if (apiResponse == null)
+            return "No Response"
+
+        val error = !apiResponse.isSuccessful || apiResponse.body == null
+
+        return when (error) {
+            true -> apiResponse.errorMessage
+            false -> getErrorInsideData(apiResponse.body)
+        }
+    }
+
+    private fun getErrorInsideData(signetsModel: SignetsModel?): String? {
+        return when (signetsModel?.getSignetsData() == null) {
+            true -> "No Data"
+            false -> signetsModel!!.getSignetsData()!!.erreur
+        }
     }
 }

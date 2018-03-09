@@ -76,6 +76,8 @@ dependencies {
     // Dependencies for Android unit tests
     androidTestImplementation "junit:junit:${junit}"
     androidTestImplementation "org.mockito:mockito-core:${mockito}"
+    androidTestImplementation "android.arch.core:core-testing:${lifecycle}" // Test helpers for LiveData
+    androidTestImplementation "android.arch.persistence.room:testing:${room}" // Test helpers for Room
 
     // Espresso UI Testing
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresso}"

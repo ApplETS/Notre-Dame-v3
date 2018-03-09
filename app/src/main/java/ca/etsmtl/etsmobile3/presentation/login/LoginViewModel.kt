@@ -46,13 +46,7 @@ class LoginViewModel @Inject constructor(
             if (res != null) {
                 when(res.status) {
                     Resource.SUCCESS -> {
-                        val etudiantData = res.data?.etudiantData
-
-                        if (etudiantData != null && TextUtils.isEmpty(etudiantData.erreur)) {
-                            userCredentialsValid.value = Resource.success(true)
-                        } else {
-                            userCredentialsValid.value = Resource.error(etudiantData?.erreur, false)
-                        }
+                        userCredentialsValid.value = Resource.success(true)
 
                         userCredentialsValid.removeSource(infoEtudiantLD)
                     }
