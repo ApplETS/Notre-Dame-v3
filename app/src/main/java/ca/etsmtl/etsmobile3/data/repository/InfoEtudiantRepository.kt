@@ -18,24 +18,24 @@ class InfoEtudiantRepository @Inject constructor(
 ) {
     fun getInfoEtudiant(userCredentials: UserCredentials): LiveData<Resource<Etudiant>> {
 
-        /*return object : NetworkBoundResource<Etudiant, Etudiant>() {
-            val fakeDbLD: MutableLiveData<Etudiant> = MutableLiveData()
+        /*return object : NetworkBoundResource<EtudiantWrapper, EtudiantWrapper>() {
+            val fakeDbLD: MutableLiveData<EtudiantWrapper> = MutableLiveData()
 
-            override fun saveCallResult(item: Etudiant) {
+            override fun saveCallResult(item: EtudiantWrapper) {
                 fakeDbLD.postValue(item)
             }
 
 
-            override fun shouldFetch(data: Etudiant?): Boolean {
+            override fun shouldFetch(data: EtudiantWrapper?): Boolean {
                 return true
             }
 
-            override fun loadFromDb(): LiveData<Etudiant> {
+            override fun loadFromDb(): LiveData<EtudiantWrapper> {
 
                 return fakeDbLD
             }
 
-            override fun createCall(): LiveData<ApiResponse<Etudiant>> {
+            override fun createCall(): LiveData<ApiResponse<EtudiantWrapper>> {
                 return api.infoEtudiant(userCredentials)
             }
 
@@ -48,9 +48,9 @@ class InfoEtudiantRepository @Inject constructor(
             val errorStr = getError(response)
 
             if (TextUtils.isEmpty(errorStr)) // If there was no error ...
-                testLD.value = Resource.success(response?.body!!)
+                testLD.value = Resource.success(response?.body?.data!!)
             else
-                testLD.value = Resource.error(errorStr, response?.body)
+                testLD.value = Resource.error(errorStr, response?.body?.data)
         }
 
         return testLD

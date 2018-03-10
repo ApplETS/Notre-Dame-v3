@@ -6,7 +6,7 @@ import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
 import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
-import ca.etsmtl.etsmobile3.data.model.Etudiant
+import ca.etsmtl.etsmobile3.data.model.EtudiantWrapper
 import ca.etsmtl.etsmobile3.data.model.UserCredentials
 import ca.etsmtl.etsmobile3.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.KotlinJsonAdapterFactory
@@ -67,11 +67,11 @@ class SignetsApiTest {
     }
 
     @Throws(InterruptedException::class)
-    private fun getValue(@NonNull liveData: LiveData<ApiResponse<Etudiant>>): ApiResponse<Etudiant> {
+    private fun getValue(@NonNull liveData: LiveData<ApiResponse<EtudiantWrapper>>): ApiResponse<EtudiantWrapper> {
         val data = arrayOfNulls<Any>(1)
         val latch = CountDownLatch(1)
-        val observer = object : Observer<ApiResponse<Etudiant>> {
-            override fun onChanged(response: ApiResponse<Etudiant>?) {
+        val observer = object : Observer<ApiResponse<EtudiantWrapper>> {
+            override fun onChanged(response: ApiResponse<EtudiantWrapper>?) {
                 data[0] = response
                 latch.countDown()
                 liveData.removeObserver(this)
@@ -80,7 +80,7 @@ class SignetsApiTest {
         liveData.observeForever(observer)
         latch.await(TIME_OUT.toLong(), TimeUnit.SECONDS)
         //noinspection unchecked
-        return data[0] as ApiResponse<Etudiant>
+        return data[0] as ApiResponse<EtudiantWrapper>
     }
 
     @Test
@@ -88,14 +88,14 @@ class SignetsApiTest {
     fun getInfoEtudiantNoError() {
         enqueueResponse("info_etudiant_no_error.json")
 
-        val etudiant: Etudiant = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
+        val etudiantWrapper: EtudiantWrapper = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
 
-        assertEquals("Liu", etudiant.data?.nom)
-        assertEquals("Philippe", etudiant.data?.prenom)
-        assertEquals("LIUP27099105", etudiant.data?.codePerm)
-        assertEquals("0,00\$", etudiant.data?.soldeTotal)
-        assertTrue { etudiant.data?.masculin!! }
-        val errorStr = etudiant.data?.erreur
+        assertEquals("Liu", etudiantWrapper.data?.nom)
+        assertEquals("Philippe", etudiantWrapper.data?.prenom)
+        assertEquals("LIUP27099105", etudiantWrapper.data?.codePerm)
+        assertEquals("0,00\$", etudiantWrapper.data?.soldeTotal)
+        assertTrue { etudiantWrapper.data?.masculin!! }
+        val errorStr = etudiantWrapper.data?.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
     }
 
@@ -104,13 +104,13 @@ class SignetsApiTest {
     fun getInfoEtudiantError() {
         enqueueResponse("info_etudiant_error.json")
 
-        val etudiant: Etudiant = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
+        val etudiantWrapper: EtudiantWrapper = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
 
-        assertEquals("", etudiant.data?.nom)
-        assertEquals("", etudiant.data?.prenom)
-        assertEquals("", etudiant.data?.codePerm)
-        assertEquals("", etudiant.data?.soldeTotal)
-        val errorStr = etudiant.data?.erreur
+        assertEquals("", etudiantWrapper.data?.nom)
+        assertEquals("", etudiantWrapper.data?.prenom)
+        assertEquals("", etudiantWrapper.data?.codePerm)
+        assertEquals("", etudiantWrapper.data?.soldeTotal)
+        val errorStr = etudiantWrapper.data?.erreur
         assertEquals("Code d'accès ou mot de passe invalide", errorStr)
     }
 
