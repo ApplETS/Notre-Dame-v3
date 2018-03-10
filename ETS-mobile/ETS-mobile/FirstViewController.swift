@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  HomeController.swift
 //  ETS-mobile
 //
 //  Created by Xavier on 3/10/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class HomeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
