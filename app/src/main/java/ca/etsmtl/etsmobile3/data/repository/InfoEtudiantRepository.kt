@@ -6,7 +6,10 @@ import android.support.annotation.VisibleForTesting
 import android.text.TextUtils
 import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
-import ca.etsmtl.etsmobile3.data.model.*
+import ca.etsmtl.etsmobile3.data.model.Etudiant
+import ca.etsmtl.etsmobile3.data.model.Resource
+import ca.etsmtl.etsmobile3.data.model.SignetsModel
+import ca.etsmtl.etsmobile3.data.model.UserCredentials
 import javax.inject.Inject
 
 /**
@@ -57,7 +60,7 @@ class InfoEtudiantRepository @Inject constructor(
     }
 
     @VisibleForTesting
-    fun getError(apiResponse: ApiResponse<out SignetsModel>?): String? {
+    fun getError(apiResponse: ApiResponse<out SignetsModel<Etudiant>>?): String? {
         if (apiResponse == null)
             return "No Response"
 
@@ -69,10 +72,10 @@ class InfoEtudiantRepository @Inject constructor(
         }
     }
 
-    private fun getErrorInsideData(signetsModel: SignetsModel?): String? {
-        return when (signetsModel?.getSignetsData() == null) {
+    private fun getErrorInsideData(signetsModel: SignetsModel<Etudiant>?): String? {
+        return when (signetsModel?.data == null) {
             true -> "No Data"
-            false -> signetsModel!!.getSignetsData()!!.erreur
+            false -> signetsModel!!.data!!.erreur
         }
     }
 }

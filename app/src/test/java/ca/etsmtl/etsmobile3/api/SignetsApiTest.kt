@@ -6,7 +6,8 @@ import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
 import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
-import ca.etsmtl.etsmobile3.data.model.EtudiantWrapper
+import ca.etsmtl.etsmobile3.data.model.Etudiant
+import ca.etsmtl.etsmobile3.data.model.SignetsModel
 import ca.etsmtl.etsmobile3.data.model.UserCredentials
 import ca.etsmtl.etsmobile3.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.KotlinJsonAdapterFactory
@@ -67,11 +68,11 @@ class SignetsApiTest {
     }
 
     @Throws(InterruptedException::class)
-    private fun getValue(@NonNull liveData: LiveData<ApiResponse<EtudiantWrapper>>): ApiResponse<EtudiantWrapper> {
+    private fun getValue(@NonNull liveData: LiveData<ApiResponse<SignetsModel<Etudiant>>>): ApiResponse<SignetsModel<Etudiant>> {
         val data = arrayOfNulls<Any>(1)
         val latch = CountDownLatch(1)
-        val observer = object : Observer<ApiResponse<EtudiantWrapper>> {
-            override fun onChanged(response: ApiResponse<EtudiantWrapper>?) {
+        val observer = object : Observer<ApiResponse<SignetsModel<Etudiant>>> {
+            override fun onChanged(response: ApiResponse<SignetsModel<Etudiant>>?) {
                 data[0] = response
                 latch.countDown()
                 liveData.removeObserver(this)
@@ -80,7 +81,7 @@ class SignetsApiTest {
         liveData.observeForever(observer)
         latch.await(TIME_OUT.toLong(), TimeUnit.SECONDS)
         //noinspection unchecked
-        return data[0] as ApiResponse<EtudiantWrapper>
+        return data[0] as ApiResponse<SignetsModel<Etudiant>>
     }
 
     @Test
@@ -88,7 +89,7 @@ class SignetsApiTest {
     fun getInfoEtudiantNoError() {
         enqueueResponse("info_etudiant_no_error.json")
 
-        val etudiantWrapper: EtudiantWrapper = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
+        val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
 
         assertEquals("Liu", etudiantWrapper.data?.nom)
         assertEquals("Philippe", etudiantWrapper.data?.prenom)
@@ -104,7 +105,7 @@ class SignetsApiTest {
     fun getInfoEtudiantError() {
         enqueueResponse("info_etudiant_error.json")
 
-        val etudiantWrapper: EtudiantWrapper = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
+        val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
 
         assertEquals("", etudiantWrapper.data?.nom)
         assertEquals("", etudiantWrapper.data?.prenom)

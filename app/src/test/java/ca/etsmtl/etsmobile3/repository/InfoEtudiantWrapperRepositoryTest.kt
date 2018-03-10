@@ -1,24 +1,25 @@
 package ca.etsmtl.etsmobile3.repository
 
+import ca.etsmtl.etsmobile3.data.api.ApiResponse
+import ca.etsmtl.etsmobile3.data.api.SignetsApi
+import ca.etsmtl.etsmobile3.data.model.Etudiant
+import ca.etsmtl.etsmobile3.data.model.SignetsModel
+import ca.etsmtl.etsmobile3.data.repository.InfoEtudiantRepository
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import ca.etsmtl.etsmobile3.data.api.ApiResponse
-import ca.etsmtl.etsmobile3.data.api.SignetsApi
-import ca.etsmtl.etsmobile3.data.model.EtudiantWrapper
-import ca.etsmtl.etsmobile3.data.model.Etudiant
-import ca.etsmtl.etsmobile3.data.repository.InfoEtudiantRepository
-import org.junit.Before
 import org.mockito.Mockito.mock
 import retrofit2.Response
-import kotlin.test.*
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 
 /**
  * Created by Sonphil on 09-03-18.
  */
 @RunWith(JUnit4::class)
-class InfoEtudiantWrapperRepositoryTest {
+class InfoEtudiantRepositoryTest {
     private lateinit var signetsApi: SignetsApi
     private lateinit var repo: InfoEtudiantRepository
 
@@ -33,10 +34,10 @@ class InfoEtudiantWrapperRepositoryTest {
 
     @Test
     fun testGetErrorApiResponseNoError() {
-        val etudiant = EtudiantWrapper()
+        val etudiant = SignetsModel<Etudiant>()
         etudiant.data = Etudiant()
         val response = Response.success(etudiant)
-        val apiResponse = ApiResponse<EtudiantWrapper>(response)
+        val apiResponse = ApiResponse<SignetsModel<Etudiant>>(response)
 
         assertNull(repo.getError(apiResponse))
     }
@@ -45,19 +46,19 @@ class InfoEtudiantWrapperRepositoryTest {
     fun testGetErrorApiResponseFail() {
         val expectedErrorStr = "Test error"
         val throwable = Throwable(expectedErrorStr)
-        val apiResponse = ApiResponse<EtudiantWrapper>(throwable)
+        val apiResponse = ApiResponse<SignetsModel<Etudiant>>(throwable)
 
         assertEquals(expectedErrorStr, repo.getError(apiResponse))
     }
 
     @Test
     fun testGetErrorInsideData() {
-        val etudiant = EtudiantWrapper()
+        val etudiant = SignetsModel<Etudiant>()
         etudiant.data = Etudiant()
         val expectedErrorStr = "Test error"
         etudiant.data!!.erreur = expectedErrorStr
         val response = Response.success(etudiant)
-        val apiResponse = ApiResponse<EtudiantWrapper>(response)
+        val apiResponse = ApiResponse<SignetsModel<Etudiant>>(response)
 
         assertEquals(expectedErrorStr, repo.getError(apiResponse))
     }
