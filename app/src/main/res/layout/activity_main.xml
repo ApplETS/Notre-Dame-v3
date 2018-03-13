@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.etsmtl.etsmobile3.presentation.MainActivity">
+    tools:context="ca.etsmtl.etsmobile.presentation.MainActivity">
 
     <FrameLayout
         android:id="@+id/content"
