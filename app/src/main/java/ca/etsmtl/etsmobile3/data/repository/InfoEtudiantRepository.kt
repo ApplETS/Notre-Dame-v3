@@ -3,7 +3,6 @@ package ca.etsmtl.etsmobile3.data.repository
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.VisibleForTesting
-import android.text.TextUtils
 import ca.etsmtl.etsmobile3.data.api.ApiResponse
 import ca.etsmtl.etsmobile3.data.api.SignetsApi
 import ca.etsmtl.etsmobile3.data.model.Etudiant
@@ -50,10 +49,10 @@ class InfoEtudiantRepository @Inject constructor(
         testLD.addSource(api.infoEtudiant(userCredentials)) { response ->
             val errorStr = getError(response)
 
-            if (TextUtils.isEmpty(errorStr)) // If there was no error ...
+            if (errorStr.isNullOrEmpty()) // If there was no error ...
                 testLD.value = Resource.success(response?.body?.data!!)
             else
-                testLD.value = Resource.error(errorStr, response?.body?.data)
+                testLD.value = Resource.error(errorStr!!, response?.body?.data)
         }
 
         return testLD

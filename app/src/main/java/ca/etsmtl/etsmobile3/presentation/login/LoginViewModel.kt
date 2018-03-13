@@ -3,7 +3,6 @@ package ca.etsmtl.etsmobile3.presentation.login
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
-import android.text.TextUtils
 import ca.etsmtl.etsmobile3.data.model.Resource
 import ca.etsmtl.etsmobile3.data.model.UserCredentials
 import ca.etsmtl.etsmobile3.data.repository.InfoEtudiantRepository
@@ -51,7 +50,8 @@ class LoginViewModel @Inject constructor(
                         userCredentialsValid.removeSource(infoEtudiantLD)
                     }
                     Resource.ERROR -> {
-                        userCredentialsValid.value = Resource.error(res.message, false)
+                        val errorStr = res.message ?: "Error"
+                        userCredentialsValid.value = Resource.error(errorStr, false)
 
                         userCredentialsValid.removeSource(infoEtudiantLD)
                     }
