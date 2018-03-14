@@ -1,7 +1,10 @@
 package ca.etsmtl.etsmobile.data.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.squareup.moshi.Json
 
+@Entity
 class Etudiant : SignetsData() {
 
     @Json(name = "__type")
@@ -12,8 +15,9 @@ class Etudiant : SignetsData() {
     @Json(name = "prenom")
     var prenom: String? = null
         get() = field?.trim()
+    @PrimaryKey
     @Json(name = "codePerm")
-    var codePerm: String? = null
+    lateinit var codePerm: String
     @Json(name = "soldeTotal")
     var soldeTotal: String? = null
     @Json(name = "masculin")

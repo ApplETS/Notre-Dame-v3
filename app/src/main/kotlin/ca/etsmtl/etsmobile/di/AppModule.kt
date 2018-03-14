@@ -3,6 +3,7 @@ package ca.etsmtl.etsmobile.di
 import android.app.Application
 import android.content.Context
 import ca.etsmtl.etsmobile.data.api.SignetsApi
+import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import dagger.Module
 import dagger.Provides
@@ -20,6 +21,7 @@ internal object AppModule {
 
     @Singleton @Provides @JvmStatic
     fun provideInfoEtudiantRepository(
-            signetsApi: SignetsApi
-    ): InfoEtudiantRepository = InfoEtudiantRepository(signetsApi)
+            signetsApi: SignetsApi,
+            etudiantDao: EtudiantDao
+    ): InfoEtudiantRepository = InfoEtudiantRepository(signetsApi, etudiantDao)
 }

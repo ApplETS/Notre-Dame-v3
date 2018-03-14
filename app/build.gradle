@@ -9,12 +9,18 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "ca.etsmtl.etsmobile3"
+        applicationId "ca.etsmtl.etsmobile"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
     buildTypes {
         release {
@@ -101,6 +107,10 @@ dependencies {
     // Moshi
     implementation "com.squareup.moshi:moshi:${moshi}"
     implementation "com.squareup.moshi:moshi-kotlin:${moshi}"
+
+    // Kotshi
+    compile 'se.ansman.kotshi:api:1.0.2'
+    kapt 'se.ansman.kotshi:compiler:1.0.2'
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"

@@ -33,7 +33,7 @@ import ca.etsmtl.etsmobile.data.model.Resource
  *
  * @param <ResultType>
  * @param <RequestType>
-</RequestType></ResultType> */
+ */
 abstract class NetworkBoundResource<ResultType, RequestType> @MainThread
 protected constructor() {
 
@@ -60,6 +60,7 @@ protected constructor() {
         // it will dispatch its latest value quickly
         result.addSource(dbSource) { newData -> result.setValue(Resource.loading(newData)) }
         result.addSource(apiResponse) { response ->
+
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
 
@@ -77,14 +78,14 @@ protected constructor() {
 
     @MainThread
     private fun saveResultAndReInit(response: ApiResponse<RequestType>) {
-        object : AsyncTask<Void, Void, Void>() {
+        object : AsyncTask<Void?, Void?, Void?>() {
 
-            override fun doInBackground(vararg voids: Void): Void? {
+            override fun doInBackground(vararg voids: Void?): Void? {
                 saveCallResult(response.body!!)
                 return null
             }
 
-            override fun onPostExecute(aVoid: Void) {
+            override fun onPostExecute(aVoid: Void?) {
                 // we specially request a new live data,
                 // otherwise we will get immediately last cached value,
                 // which may not be updated with latest results received from network.
@@ -99,11 +100,6 @@ protected constructor() {
 
     fun asLiveData(): LiveData<Resource<ResultType>> {
         return result
-    }
-
-    @WorkerThread
-    protected fun processResponse(response: ApiResponse<RequestType>): RequestType? {
-        return response.body
     }
 
     @WorkerThread
