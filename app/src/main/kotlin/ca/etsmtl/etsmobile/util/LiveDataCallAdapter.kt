@@ -18,7 +18,6 @@ package ca.etsmtl.etsmobile.util
 
 
 import android.arch.lifecycle.LiveData
-import android.util.Log
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
@@ -44,7 +43,6 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
 
             override fun onActive() {
                 super.onActive()
-                Log.d("philippe", "active")
 
                 if (started.compareAndSet(false, true)) {
                     call.enqueue(object : Callback<R> {

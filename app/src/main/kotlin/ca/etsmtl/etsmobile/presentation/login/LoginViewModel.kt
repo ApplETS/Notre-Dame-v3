@@ -39,7 +39,7 @@ class LoginViewModel @Inject constructor(
 
         App.userCredentials = userCredentials
 
-        val infoEtudiantLD = repository.getInfoEtudiant(userCredentials)
+        val infoEtudiantLD = repository.getInfoEtudiant(userCredentials, true)
 
         userCredentialsValid.addSource(infoEtudiantLD) { res ->
             if (res != null) {

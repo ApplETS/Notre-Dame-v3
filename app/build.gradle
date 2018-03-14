@@ -52,6 +52,7 @@ def mockito_all = '1.10.19'
 def glide = '4.6.1'
 def dagger = '2.11'
 def moshi = '1.5.0'
+def kotshi = '1.0.2'
 def retrofit = '2.3.0'
 def okhttp = '3.8.0'
 
@@ -109,8 +110,8 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:${moshi}"
 
     // Kotshi
-    compile 'se.ansman.kotshi:api:1.0.2'
-    kapt 'se.ansman.kotshi:compiler:1.0.2'
+    implementation "se.ansman.kotshi:api:${kotshi}"
+    kapt "se.ansman.kotshi:compiler:${kotshi}"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"

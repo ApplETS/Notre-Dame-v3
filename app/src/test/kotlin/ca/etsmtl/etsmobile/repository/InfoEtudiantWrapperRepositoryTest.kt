@@ -2,6 +2,7 @@ package ca.etsmtl.etsmobile.repository
 
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
+import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.SignetsModel
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
@@ -22,6 +23,7 @@ import kotlin.test.assertNull
 class InfoEtudiantRepositoryTest {
     private lateinit var signetsApi: SignetsApi
     private lateinit var repo: InfoEtudiantRepository
+    private lateinit var dao: EtudiantDao
 
 //    @Rule
 //    var instantExecutorRule = InstantTaskExecutorRule()
@@ -29,13 +31,14 @@ class InfoEtudiantRepositoryTest {
     @Before
     fun setup() {
         signetsApi = mock(SignetsApi::class.java)
-        repo = InfoEtudiantRepository(signetsApi)
+        dao = mock(EtudiantDao::class.java)
+        repo = InfoEtudiantRepository(signetsApi, dao)
     }
 
     @Test
     fun testGetErrorApiResponseNoError() {
         val etudiant = SignetsModel<Etudiant>()
-        etudiant.data = Etudiant()
+        etudiant.data = Etudiant(codePerm = "TEST")
         val response = Response.success(etudiant)
         val apiResponse = ApiResponse<SignetsModel<Etudiant>>(response)
 
@@ -54,7 +57,7 @@ class InfoEtudiantRepositoryTest {
     @Test
     fun testGetErrorInsideData() {
         val etudiant = SignetsModel<Etudiant>()
-        etudiant.data = Etudiant()
+        etudiant.data = Etudiant(codePerm = "TEST")
         val expectedErrorStr = "Test error"
         etudiant.data!!.erreur = expectedErrorStr
         val response = Response.success(etudiant)

@@ -21,7 +21,7 @@ class InfoEtudiantRepository @Inject constructor(
         private val api: SignetsApi,
         private val dao: EtudiantDao
 ) {
-    fun getInfoEtudiant(userCredentials: UserCredentials): LiveData<Resource<Etudiant>> {
+    fun getInfoEtudiant(userCredentials: UserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 
         return object: NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>() {
             override fun saveCallResult(item: SignetsModel<Etudiant>) {
@@ -29,7 +29,7 @@ class InfoEtudiantRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: Etudiant?): Boolean {
-                return true
+                return shouldFetch
             }
 
             override fun loadFromDb(): LiveData<Etudiant> {

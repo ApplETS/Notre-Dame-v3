@@ -1,8 +1,8 @@
 package ca.etsmtl.etsmobile.di
 
 import ca.etsmtl.etsmobile.data.api.SignetsApi
+import ca.etsmtl.etsmobile.util.ApplicationJsonAdapterFactory
 import ca.etsmtl.etsmobile.util.LiveDataCallAdapterFactory
-import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -22,7 +22,7 @@ open class NetworkModule {
 
     @Singleton @Provides
     fun provideMoshi(): Moshi {
-        return Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        return Moshi.Builder().add(ApplicationJsonAdapterFactory.INSTANCE).build()
     }
 
     @Singleton @Provides
