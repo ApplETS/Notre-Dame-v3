@@ -53,7 +53,7 @@ class LoginActivity : DaggerAppCompatActivity() {
             initUserCredentialsFields(this)
 
             // Attempt to login if user credentials are not null
-            this?.let { loginViewModel.setUserCredentials(it) }
+            this?.let { attemptLogin() }
         }
     }
 

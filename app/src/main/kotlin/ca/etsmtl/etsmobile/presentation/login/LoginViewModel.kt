@@ -108,7 +108,7 @@ class LoginViewModel @Inject constructor(
 
     private fun getSavedPassword(): String? {
         // TODO: Get password
-        return "TODO"
+        return ""
     }
 
     private fun savePassword(password: String) {
