@@ -1,5 +1,6 @@
 package ca.etsmtl.etsmobile.repository
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
@@ -7,6 +8,7 @@ import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.SignetsModel
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -25,8 +27,8 @@ class InfoEtudiantRepositoryTest {
     private lateinit var repo: InfoEtudiantRepository
     private lateinit var dao: EtudiantDao
 
-//    @Rule
-//    var instantExecutorRule = InstantTaskExecutorRule()
+    @get:Rule
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
