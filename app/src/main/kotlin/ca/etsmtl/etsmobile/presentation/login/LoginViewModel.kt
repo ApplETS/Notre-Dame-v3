@@ -1,8 +1,10 @@
 package ca.etsmtl.etsmobile.presentation.login
 
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
+import android.content.Context
+import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
@@ -14,8 +16,13 @@ import javax.inject.Inject
  */
 
 class LoginViewModel @Inject constructor(
-        private val repository: InfoEtudiantRepository
-): ViewModel() {
+        private val repository: InfoEtudiantRepository,
+        app: App
+) : AndroidViewModel(app) {
+
+    companion object {
+        private const val UNIVERSAL_CODE_PREF = "UniversalCodePref"
+    }
 
     private val userCredentialsValid: MediatorLiveData<Resource<Boolean>> by lazy {
         MediatorLiveData<Resource<Boolean>>()
@@ -25,11 +32,19 @@ class LoginViewModel @Inject constructor(
         return userCredentialsValid
     }
 
-    fun getCachedUserCredentials(): UserCredentials? {
-        //TODO: Get cached user credentials
-        val userCredentials = UserCredentials("AM41123", "test!")
+    fun getSavedUserCredentials(): UserCredentials? {
+        val codeAccesUniversel = getSavedUniversalCode()
 
-        App.userCredentials = userCredentials
+        var userCredentials: UserCredentials? = null
+
+        if (codeAccesUniversel != null) {
+            val motPasse = getSavedPassword()
+
+            if (motPasse != null) {
+                userCredentials = UserCredentials(codeAccesUniversel, motPasse)
+                App.userCredentials = userCredentials
+            }
+        }
 
         return userCredentials
     }
@@ -43,9 +58,11 @@ class LoginViewModel @Inject constructor(
 
         userCredentialsValid.addSource(infoEtudiantLD) { res ->
             if (res != null) {
-                when(res.status) {
+                when (res.status) {
                     Resource.SUCCESS -> {
                         userCredentialsValid.value = Resource.success(true)
+
+                        saveUserCredentials(userCredentials)
 
                         userCredentialsValid.removeSource(infoEtudiantLD)
                     }
@@ -63,5 +80,38 @@ class LoginViewModel @Inject constructor(
         }
 
         return userCredentialsValid
+    }
+
+    private fun saveUserCredentials(userCredentials: UserCredentials) {
+        saveUniversalCode(userCredentials.codeAccesUniversel)
+        savePassword(userCredentials.motPasse)
+    }
+
+    private fun saveUniversalCode(universalCode: String) {
+        val app = getApplication<App>()
+        val sharedPref = app.getSharedPreferences(app.getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString(UNIVERSAL_CODE_PREF, universalCode)
+            apply()
+        }
+    }
+
+    private fun getSavedUniversalCode(): String? {
+        val app = getApplication<App>()
+        val sharedPref = getApplication<App>()
+                .getSharedPreferences(app.getString(R.string.preference_file_key),
+                        Context.MODE_PRIVATE) ?: return null
+
+        return sharedPref.getString(UNIVERSAL_CODE_PREF, null)
+    }
+
+    private fun getSavedPassword(): String? {
+        // TODO: Get password
+        return "TODO"
+    }
+
+    private fun savePassword(password: String) {
+        // TODO: Save password in Android Keystore System https://developer.android.com/training/articles/keystore.html
     }
 }

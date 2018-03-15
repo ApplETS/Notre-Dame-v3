@@ -3,8 +3,6 @@ package ca.etsmtl.etsmobile.presentation.login
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,11 +26,8 @@ import javax.inject.Inject
  */
 class LoginActivity : DaggerAppCompatActivity() {
 
-    private val loginViewModel: LoginViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
-    }
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +47,14 @@ class LoginActivity : DaggerAppCompatActivity() {
             attemptLogin()
         }
 
-        with(loginViewModel.getCachedUserCredentials()) {
-            initUserCredentialsFields(this)
-        }
-
         subscribeUI()
+
+        with(loginViewModel.getSavedUserCredentials()) {
+            initUserCredentialsFields(this)
+
+            // Attempt to login if user credentials are not null
+            this?.let { loginViewModel.setUserCredentials(it) }
+        }
     }
 
     /**
@@ -92,7 +90,6 @@ class LoginActivity : DaggerAppCompatActivity() {
             universal_code.setText(userCredentials.codeAccesUniversel)
             password.setText(userCredentials.motPasse)
         }
-
     }
 
     /**
@@ -184,8 +181,9 @@ class LoginActivity : DaggerAppCompatActivity() {
     }
 
     private fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
-
+        if (currentFocus != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        }
     }
 }
