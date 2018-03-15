@@ -1,12 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ca.etsmtl.etsmobile.presentation.profile.ProfileFragment">
 
-    <TextView
+    <fragment
+        android:name="ca.etsmtl.etsmobile.presentation.profile.infoetudiant.InfoEtudiantFragment"
+        android:id="@+id/info_etudiant_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_profile" />
+        android:layout_height="150dp" />
 
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

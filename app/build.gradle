@@ -70,6 +70,7 @@ dependencies {
 
     // Architecture components
     implementation "android.arch.lifecycle:extensions:${lifecycle}"
+    implementation 'com.android.support:support-v4:27.1.0'
     kapt "android.arch.lifecycle:compiler:${lifecycle}"
     implementation "android.arch.persistence.room:runtime:${room}"
     kapt "android.arch.persistence.room:compiler:${room}"
