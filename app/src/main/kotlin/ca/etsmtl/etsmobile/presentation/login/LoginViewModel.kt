@@ -42,7 +42,7 @@ class LoginViewModel @Inject constructor(
 
             if (motPasse != null) {
                 userCredentials = UserCredentials(codeAccesUniversel, motPasse)
-                App.userCredentials = userCredentials
+                App.userCredentials.set(userCredentials)
             }
         }
 
@@ -52,8 +52,6 @@ class LoginViewModel @Inject constructor(
     fun setUserCredentials(userCredentials: UserCredentials): LiveData<Resource<Boolean>> {
         userCredentialsValid.value = Resource.loading(true)
 
-        App.userCredentials = userCredentials
-
         val infoEtudiantLD = repository.getInfoEtudiant(userCredentials, true)
 
         userCredentialsValid.addSource(infoEtudiantLD) { res ->
@@ -62,12 +60,14 @@ class LoginViewModel @Inject constructor(
                     Resource.SUCCESS -> {
                         userCredentialsValid.value = Resource.success(true)
 
+                        App.userCredentials.set(userCredentials)
+
                         saveUserCredentials(userCredentials)
 
                         userCredentialsValid.removeSource(infoEtudiantLD)
                     }
                     Resource.ERROR -> {
-                        val errorStr = res.message ?: "Error"
+                        val errorStr = res.message ?: getApplication<App>().getString(R.string.error)
                         userCredentialsValid.value = Resource.error(errorStr, false)
 
                         userCredentialsValid.removeSource(infoEtudiantLD)

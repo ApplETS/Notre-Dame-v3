@@ -66,6 +66,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${support}"
     implementation "com.android.support:design:${support}"
     implementation "com.android.support:support-v4:${support}"
+    implementation "com.android.support:cardview-v7:${support}"
     implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
 
     // Architecture components

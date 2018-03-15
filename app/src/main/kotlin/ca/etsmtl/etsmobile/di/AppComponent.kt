@@ -2,6 +2,7 @@ package ca.etsmtl.etsmobile.di
 
 import android.app.Application
 import ca.etsmtl.etsmobile.di.activitymodule.LoginActivityBuilder
+import ca.etsmtl.etsmobile.di.activitymodule.MainActivityBuilder
 import ca.etsmtl.etsmobile.presentation.App
 import dagger.BindsInstance
 import dagger.Component
@@ -19,7 +20,8 @@ import javax.inject.Singleton
     NetworkModule::class,
     DatabaseModule::class,
     ViewModelModule::class,
-    LoginActivityBuilder::class
+    LoginActivityBuilder::class,
+    MainActivityBuilder::class
 ])
 interface AppComponent : AndroidInjector<App> {
     @Component.Builder

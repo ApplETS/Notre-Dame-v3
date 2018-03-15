@@ -70,7 +70,7 @@ class LoginActivity : DaggerAppCompatActivity() {
                     }
                     Resource.ERROR -> {
                         showProgress(false)
-                        Toast.makeText(this, resource.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                     Resource.LOADING -> {
                         showProgress(true)

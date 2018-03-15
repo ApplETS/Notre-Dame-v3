@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ÉTSMobile</string>
     <string name="preference_file_key">ETSMobilePrefs</string>
+    <string name="error">Une erreur est survenue</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_home">Accueil</string>

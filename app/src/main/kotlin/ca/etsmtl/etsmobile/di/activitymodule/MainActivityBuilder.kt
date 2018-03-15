@@ -10,6 +10,5 @@ import dagger.android.ContributesAndroidInjector
 @Module
 interface MainActivityBuilder {
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
-
     fun contributeMainActivity(): MainActivity
 }

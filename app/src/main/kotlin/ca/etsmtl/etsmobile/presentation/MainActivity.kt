@@ -3,12 +3,12 @@ package ca.etsmtl.etsmobile.presentation
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.home.HomeFragment
 import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * Created by Sonphil on 24-02-18.
  */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         setUpToolbar(item)
@@ -36,7 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         title = getString(R.string.title_home)
 
-        goToFragment(navigation.menu.getItem(0))
+        // Go to the first fragment only on the first run
+        if (savedInstanceState == null)
+            goToFragment(navigation.menu.getItem(0))
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

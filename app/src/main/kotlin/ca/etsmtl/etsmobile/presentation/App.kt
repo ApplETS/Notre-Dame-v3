@@ -6,6 +6,7 @@ import ca.etsmtl.etsmobile.di.DatabaseModule
 import ca.etsmtl.etsmobile.di.NetworkModule
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
+import java.util.concurrent.atomic.AtomicReference
 
 /**
  * Created by Sonphil on 28-02-18.
@@ -14,7 +15,7 @@ import dagger.android.support.DaggerApplication
 class App : DaggerApplication() {
 
     companion object {
-        @JvmStatic var userCredentials: UserCredentials? = null
+        @JvmStatic var userCredentials: AtomicReference<UserCredentials> = AtomicReference()
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
