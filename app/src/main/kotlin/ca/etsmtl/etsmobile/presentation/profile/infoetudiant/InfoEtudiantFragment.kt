@@ -2,6 +2,8 @@ package ca.etsmtl.etsmobile.presentation.profile.infoetudiant
 
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +23,11 @@ import javax.inject.Inject
 
 class InfoEtudiantFragment : DaggerFragment() {
 
+    private val infoEtudiantViewModel: InfoEtudiantViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(InfoEtudiantViewModel::class.java)
+    }
     @Inject
-    lateinit var infoEtudiantViewModel: InfoEtudiantViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

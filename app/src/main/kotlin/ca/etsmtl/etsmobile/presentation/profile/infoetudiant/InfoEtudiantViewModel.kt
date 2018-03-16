@@ -14,7 +14,13 @@ import javax.inject.Inject
 class InfoEtudiantViewModel @Inject constructor(
         private val repository: InfoEtudiantRepository
 ) : ViewModel() {
+
+    private var etudiant: LiveData<Resource<Etudiant>>? = null
+
     fun getInfoEtudiant(userCredentials: UserCredentials): LiveData<Resource<Etudiant>> {
-        return repository.getInfoEtudiant(userCredentials, true)
+        if (etudiant == null)
+            etudiant = repository.getInfoEtudiant(userCredentials, true)
+
+        return etudiant as LiveData<Resource<Etudiant>>
     }
 }
