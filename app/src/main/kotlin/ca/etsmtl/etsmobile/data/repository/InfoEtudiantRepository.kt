@@ -2,7 +2,6 @@ package ca.etsmtl.etsmobile.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
@@ -20,7 +19,7 @@ import javax.inject.Inject
 class InfoEtudiantRepository @Inject constructor(
         private val api: SignetsApi,
         private val dao: EtudiantDao
-) {
+) : SignetsRepository() {
     fun getInfoEtudiant(userCredentials: UserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 
         return object: NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>() {
@@ -56,25 +55,5 @@ class InfoEtudiantRepository @Inject constructor(
             }
 
         }.asLiveData()
-    }
-
-    @VisibleForTesting
-    fun getError(apiResponse: ApiResponse<out SignetsModel<Etudiant>>?): String? {
-        if (apiResponse == null)
-            return "No Response"
-
-        val error = !apiResponse.isSuccessful || apiResponse.body == null
-
-        return when (error) {
-            true -> apiResponse.errorMessage
-            false -> getErrorInsideData(apiResponse.body)
-        }
-    }
-
-    private fun getErrorInsideData(signetsModel: SignetsModel<Etudiant>?): String? {
-        return when (signetsModel?.data == null) {
-            true -> "No Data"
-            false -> signetsModel!!.data!!.erreur
-        }
     }
 }

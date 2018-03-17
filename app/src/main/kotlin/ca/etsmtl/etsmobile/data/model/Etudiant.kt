@@ -23,7 +23,7 @@ data class Etudiant(
         var masculin: Boolean? = null,
         @Json(name = "erreur")
         var erreur: String? = null
-) {
+) : SignetsData(erreur) {
         val nom: String?
                 get() = n?.trim()
         val prenom: String?
