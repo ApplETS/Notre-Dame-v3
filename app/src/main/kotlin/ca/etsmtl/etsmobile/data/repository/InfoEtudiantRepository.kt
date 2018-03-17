@@ -2,6 +2,7 @@ package ca.etsmtl.etsmobile.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
@@ -17,12 +18,13 @@ import javax.inject.Inject
  */
 
 class InfoEtudiantRepository @Inject constructor(
+        appExecutors: AppExecutors,
         private val api: SignetsApi,
         private val dao: EtudiantDao
-) : SignetsRepository() {
+) : SignetsRepository(appExecutors) {
     fun getInfoEtudiant(userCredentials: UserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 
-        return object: NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>() {
+        return object: NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>(appExecutors) {
             override fun saveCallResult(item: SignetsModel<Etudiant>) {
                 dao.insertEtudiant(item.data)
             }

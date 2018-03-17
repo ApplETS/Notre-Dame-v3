@@ -1,14 +1,25 @@
 package ca.etsmtl.etsmobile.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
+import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
+import ca.etsmtl.etsmobile.data.model.Etudiant
+import ca.etsmtl.etsmobile.data.model.Resource
+import ca.etsmtl.etsmobile.data.model.SignetsModel
+import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
+import ca.etsmtl.etsmobile.util.ApiUtil
+import ca.etsmtl.etsmobile.util.InstantAppExecutors
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.*
 
 
 /**
@@ -27,10 +38,10 @@ class InfoEtudiantRepositoryTest {
     fun setup() {
         signetsApi = mock(SignetsApi::class.java)
         dao = mock(EtudiantDao::class.java)
-        repo = InfoEtudiantRepository(signetsApi, dao)
+        repo = InfoEtudiantRepository(InstantAppExecutors(), signetsApi, dao)
     }
 
-    /*@Test
+    @Test
     fun testLoadFromNetwork() {
         val dbData: MutableLiveData<Etudiant> = MutableLiveData()
         `when`(dao.getEtudiant()).thenReturn(dbData)
@@ -49,6 +60,7 @@ class InfoEtudiantRepositoryTest {
         val observer = mock(Observer::class.java)
         data.observeForever(observer as Observer<Resource<Etudiant>>)
         verifyNoMoreInteractions(signetsApi)
+        verify(observer).onChanged(Resource.loading(null))
         val updatedDbData: MutableLiveData<Etudiant> = MutableLiveData()
         `when`(dao.getEtudiant()).thenReturn(updatedDbData)
 
@@ -58,7 +70,5 @@ class InfoEtudiantRepositoryTest {
 
         updatedDbData.postValue(etudiant)
         verify(observer).onChanged(Resource.success(etudiant))
-    }*/
-
-    // TODO: Find an another way to execute task in NetworkBouncResource otherwise this test would fail because AsyncTask is not mocked.
+    }
 }

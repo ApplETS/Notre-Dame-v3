@@ -5,9 +5,12 @@ import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.SignetsModel
 import ca.etsmtl.etsmobile.data.repository.SignetsRepository
+import ca.etsmtl.etsmobile.util.InstantAppExecutors
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import retrofit2.Response
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -15,6 +18,7 @@ import kotlin.test.assertNull
 /**
  * Created by Sonphil on 17-03-18.
  */
+@RunWith(JUnit4::class)
 class SignetsRepositoryTest {
     private lateinit var repo: SignetsRepository
 
@@ -57,5 +61,5 @@ class SignetsRepositoryTest {
         assertEquals(expectedErrorStr, repo.getError(apiResponse))
     }
 
-    class TestSignetsRepository : SignetsRepository()
+    class TestSignetsRepository : SignetsRepository(InstantAppExecutors())
 }

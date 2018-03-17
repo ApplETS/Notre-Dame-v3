@@ -18,9 +18,9 @@ package ca.etsmtl.etsmobile.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.os.AsyncTask
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
+import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.model.Resource
 
@@ -35,7 +35,7 @@ import ca.etsmtl.etsmobile.data.model.Resource
  * @param <RequestType>
  */
 abstract class NetworkBoundResource<ResultType, RequestType> @MainThread
-protected constructor() {
+protected constructor(private val appExecutors: AppExecutors) {
 
     private val result = MediatorLiveData<Resource<ResultType>>()
 
@@ -78,14 +78,9 @@ protected constructor() {
 
     @MainThread
     private fun saveResultAndReInit(response: ApiResponse<RequestType>) {
-        object : AsyncTask<Void?, Void?, Void?>() {
-
-            override fun doInBackground(vararg voids: Void?): Void? {
-                saveCallResult(response.body!!)
-                return null
-            }
-
-            override fun onPostExecute(aVoid: Void?) {
+        appExecutors.diskIO().execute {
+            saveCallResult(response.body!!)
+            appExecutors.mainThread().execute {
                 // we specially request a new live data,
                 // otherwise we will get immediately last cached value,
                 // which may not be updated with latest results received from network.
@@ -93,7 +88,7 @@ protected constructor() {
                     result.setValue(newData?.let { Resource.success<ResultType>(it) })
                 }
             }
-        }.execute()
+        }
     }
 
     protected fun onFetchFailed() {}
