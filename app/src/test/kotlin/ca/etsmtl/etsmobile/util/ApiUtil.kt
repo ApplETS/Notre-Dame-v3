@@ -30,7 +30,13 @@ class ApiUtil {
             return createCall(Response.success(data))
         }
 
-        fun <T> createCall(response: Response<T>): LiveData<ApiResponse<T>> {
+        fun <T> failCall(errorMsg: String): LiveData<ApiResponse<T>> {
+            val data: MutableLiveData<ApiResponse<T>> = MutableLiveData()
+            data.value = ApiResponse(Throwable(errorMsg))
+            return data
+        }
+
+        private fun <T> createCall(response: Response<T>): LiveData<ApiResponse<T>> {
             val data: MutableLiveData<ApiResponse<T>> = MutableLiveData()
             data.value = ApiResponse(response)
             return data

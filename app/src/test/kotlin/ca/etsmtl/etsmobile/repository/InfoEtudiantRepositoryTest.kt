@@ -71,7 +71,7 @@ class InfoEtudiantRepositoryTest {
 
         // Post null so that the data must be fetched from the network
         dbData.postValue(null)
-        // Check if the data has been fetched from the network
+        // Check if a request a send to get the updated data
         verify(signetsApi).infoEtudiant(userCredentials)
         // After fetching from the network, the data should be inserted into the db.
         verify(dao).insertEtudiant(etudiant)
@@ -82,6 +82,35 @@ class InfoEtudiantRepositoryTest {
          */
         updatedDbData.postValue(etudiant)
         verify(observer).onChanged(Resource.success(etudiant))
+    }
+
+    @Test
+    fun testFailToLoadFromNetwork() {
+        val dbData: MutableLiveData<Etudiant> = MutableLiveData()
+        `when`(dao.getEtudiant()).thenReturn(dbData)
+
+        val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
+        val signetsModel = SignetsModel<Etudiant>()
+        signetsModel.data = etudiant
+        val errorMsg = "Test error"
+        val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.failCall(errorMsg)
+        val userCredentials = UserCredentials("test", "foo")
+        `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
+
+
+        val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
+        val observer = mock(Observer::class.java)
+        // Start observing the LiveData returned by SignetsApi
+        data.observeForever(observer as Observer<Resource<Etudiant>>)
+        verifyNoMoreInteractions(signetsApi)
+        // NeworkBoundResource should have posted an loading resource
+        verify(observer).onChanged(Resource.loading(null))
+        dbData.postValue(etudiant)
+        // Check if a request has been sent to get the updated data
+        verify(signetsApi).infoEtudiant(userCredentials)
+        verify(dao, never()).insertEtudiant(etudiant)
+
+        verify(observer).onChanged(Resource.error(errorMsg, etudiant))
     }
 
     @Test
@@ -102,7 +131,7 @@ class InfoEtudiantRepositoryTest {
 
         dbData.postValue(etudiant)
 
-        // Make sure there wasn't any interaction with signetsApi
+        // Make sure there wasn't any interaction with SignetsApi
         verifyNoMoreInteractions(signetsApi)
 
         verify(observer).onChanged(Resource.success(etudiant))
