@@ -53,21 +53,33 @@ class InfoEtudiantRepositoryTest {
         val userCredentials = UserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
 
-        val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
-        verify(dao).getEtudiant()
-        verifyNoMoreInteractions(signetsApi)
 
+        val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
         val observer = mock(Observer::class.java)
+        // Start observing the LiveData returned by SignetsApi
         data.observeForever(observer as Observer<Resource<Etudiant>>)
         verifyNoMoreInteractions(signetsApi)
+        // NeworkBoundResource should have posted an loading resource
         verify(observer).onChanged(Resource.loading(null))
+
+        // Prepare fake updated db data.
         val updatedDbData: MutableLiveData<Etudiant> = MutableLiveData()
+        // Return the fake updated db data when requested
+        // After fetching from the network, the data will stored in the db and the db's data will be
+        // returned.
         `when`(dao.getEtudiant()).thenReturn(updatedDbData)
 
+        // Post null so that the data must be fetched from the network
         dbData.postValue(null)
+        // Check if the data has been fetched from the network
         verify(signetsApi).infoEtudiant(userCredentials)
+        // After fetching from the network, the data should be inserted into the db.
         verify(dao).insertEtudiant(etudiant)
 
+        /*
+         By now, the updated data has been stored in the db and NetworkBoundResource will get the
+         updated the from the db.
+         */
         updatedDbData.postValue(etudiant)
         verify(observer).onChanged(Resource.success(etudiant))
     }

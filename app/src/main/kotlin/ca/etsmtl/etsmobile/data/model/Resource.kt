@@ -37,7 +37,7 @@ class Resource<T> private constructor(val status: Int, val data: T?, val message
     }
 
     override fun equals(other: Any?): Boolean {
-        // If it's the same object...
+        // If this and other point to the same object ...
         if (this === other) {
             return true
         }
