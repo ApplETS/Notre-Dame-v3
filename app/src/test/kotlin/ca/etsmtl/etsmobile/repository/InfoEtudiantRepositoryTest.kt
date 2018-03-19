@@ -49,7 +49,7 @@ class InfoEtudiantRepositoryTest {
         val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
         val signetsModel = SignetsModel<Etudiant>()
         signetsModel.data = etudiant
-        val call : LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.successCall(signetsModel)
+        val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.successCall(signetsModel)
         val userCredentials = UserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
 
@@ -81,6 +81,30 @@ class InfoEtudiantRepositoryTest {
          updated the from the db.
          */
         updatedDbData.postValue(etudiant)
+        verify(observer).onChanged(Resource.success(etudiant))
+    }
+
+    @Test
+    fun testLoadFromDb() {
+        val dbData: MutableLiveData<Etudiant> = MutableLiveData()
+        `when`(dao.getEtudiant()).thenReturn(dbData)
+
+        val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
+        val userCredentials = UserCredentials("test", "foo")
+
+        val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, false)
+        val observer = mock(Observer::class.java)
+        // Start observing the LiveData returned by SignetsApi
+        data.observeForever(observer as Observer<Resource<Etudiant>>)
+        verifyNoMoreInteractions(signetsApi)
+        // NeworkBoundResource should have posted an loading resource
+        verify(observer).onChanged(Resource.loading(null))
+
+        dbData.postValue(etudiant)
+
+        // Make sure there wasn't any interaction with signetsApi
+        verifyNoMoreInteractions(signetsApi)
+
         verify(observer).onChanged(Resource.success(etudiant))
     }
 }
