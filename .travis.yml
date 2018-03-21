@@ -33,7 +33,7 @@ before_install:
 
 script:
   - ./gradlew assembleDebug -PdisablePreDex
-  - ./gradlew build
+  - ./gradlew ktlintCheck
   - ./gradlew test
   - ./gradlew connectedAndroidTest
 
