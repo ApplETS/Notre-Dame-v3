@@ -38,5 +38,4 @@ open class NetworkModule {
     fun provideSignetsApi(retrofit: Retrofit): SignetsApi {
         return retrofit.create(SignetsApi::class.java)
     }
-
 }

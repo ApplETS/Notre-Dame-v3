@@ -16,7 +16,6 @@
 
 package ca.etsmtl.etsmobile.util
 
-
 import android.arch.lifecycle.LiveData
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import retrofit2.Call

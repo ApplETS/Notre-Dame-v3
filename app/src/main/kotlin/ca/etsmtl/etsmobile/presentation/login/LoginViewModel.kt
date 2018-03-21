@@ -18,8 +18,8 @@ import javax.inject.Inject
  */
 
 class LoginViewModel @Inject constructor(
-        private val repository: InfoEtudiantRepository,
-        app: App
+    private val repository: InfoEtudiantRepository,
+    app: App
 ) : AndroidViewModel(app) {
 
     companion object {

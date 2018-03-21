@@ -1,6 +1,5 @@
 package ca.etsmtl.etsmobile.presentation.profile.infoetudiant
 
-
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -16,7 +15,6 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_info_etudiant.*
 import javax.inject.Inject
 
-
 /**
  * Created by Sonphil on 15-03-18.
  */
@@ -29,8 +27,11 @@ class InfoEtudiantFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info_etudiant, container, false)
     }

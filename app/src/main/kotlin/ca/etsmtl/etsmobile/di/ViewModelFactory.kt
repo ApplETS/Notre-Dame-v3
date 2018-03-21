@@ -13,7 +13,7 @@ import javax.inject.Provider
  * Created by Sonphil on 28-02-18.
  */
 class ViewModelFactory @Inject constructor(
-        private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+    private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
 
     /**
@@ -42,6 +42,5 @@ class ViewModelFactory @Inject constructor(
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
-
     }
 }

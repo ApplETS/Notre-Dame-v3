@@ -26,6 +26,6 @@ interface MainActivityModule {
     @IntoMap
     @ViewModelKey(InfoEtudiantViewModel::class)
     fun bindInfoEtudiantViewModel(
-            infoEtudiantViewModel: InfoEtudiantViewModel
+        infoEtudiantViewModel: InfoEtudiantViewModel
     ): ViewModel
 }

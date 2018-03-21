@@ -51,7 +51,6 @@ class ApiResponse<T> {
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
             }
             if (message == null || message.trim { it <= ' ' }.isEmpty()) {
                 message = response.message()

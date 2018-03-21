@@ -13,15 +13,14 @@ import ca.etsmtl.etsmobile.data.model.SignetsModel
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import javax.inject.Inject
 
-
 /**
  * Created by Sonphil on 02-03-18.
  */
 
 class InfoEtudiantRepository @Inject constructor(
-        appExecutors: AppExecutors,
-        private val api: SignetsApi,
-        private val dao: EtudiantDao
+    appExecutors: AppExecutors,
+    private val api: SignetsApi,
+    private val dao: EtudiantDao
 ) : SignetsRepository(appExecutors) {
     fun getInfoEtudiant(userCredentials: UserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 

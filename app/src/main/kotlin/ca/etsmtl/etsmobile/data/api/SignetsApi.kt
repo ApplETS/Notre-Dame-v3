@@ -9,7 +9,6 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 import javax.inject.Singleton
 
-
 /**
  * Created by Sonphil on 02-03-18.
  */

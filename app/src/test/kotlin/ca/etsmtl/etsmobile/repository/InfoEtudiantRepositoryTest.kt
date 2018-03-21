@@ -19,8 +19,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.Mockito.*
-
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoMoreInteractions
+import org.mockito.Mockito.never
 
 /**
  * Created by Sonphil on 09-03-18.
@@ -52,7 +55,6 @@ class InfoEtudiantRepositoryTest {
         val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.successCall(signetsModel)
         val userCredentials = UserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
-
 
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
         val observer = mock(Observer::class.java)
@@ -96,7 +98,6 @@ class InfoEtudiantRepositoryTest {
         val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.failCall(errorMsg)
         val userCredentials = UserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
-
 
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
         val observer = mock(Observer::class.java)

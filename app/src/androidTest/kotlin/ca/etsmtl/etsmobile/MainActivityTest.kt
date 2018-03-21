@@ -12,8 +12,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
-
 /**
  * Created by Sonphil on 24-02-18.
  */

@@ -14,6 +14,6 @@ import ca.etsmtl.etsmobile.data.model.Etudiant
         ],
         version = 1
 )
-abstract class AppDatabase: RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun etudiantDao(): EtudiantDao
 }

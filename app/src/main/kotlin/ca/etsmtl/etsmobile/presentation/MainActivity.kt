@@ -24,7 +24,7 @@ class MainActivity : DaggerAppCompatActivity() {
         setUpToolbar(item)
 
         goToFragment(item)
-        
+
         return@OnNavigationItemSelectedListener true
     }
 
@@ -79,7 +79,7 @@ class MainActivity : DaggerAppCompatActivity() {
      * @param selectedItemId the id of the item selected in the bottom navigation view
      * @return the fragment corresponding to the selected item
      */
-    private fun getNewFragment(selectedItemId: Int) : Fragment? {
+    private fun getNewFragment(selectedItemId: Int): Fragment? {
         var fragment: Fragment? = null
 
         when (selectedItemId) {

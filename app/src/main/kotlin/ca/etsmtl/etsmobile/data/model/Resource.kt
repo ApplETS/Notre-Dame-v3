@@ -16,7 +16,6 @@
 
 package ca.etsmtl.etsmobile.data.model
 
-
 class Resource<T> private constructor(val status: Int, val data: T?, val message: String?) {
     companion object {
         const val SUCCESS = 200

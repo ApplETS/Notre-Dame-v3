@@ -9,7 +9,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Response
 
-
 /**
  * Created by Sonphil on 09-03-18.
  */
