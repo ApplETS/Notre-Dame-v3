@@ -2,9 +2,11 @@ package ca.etsmtl.etsmobile.presentation.login
 
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.content.Context
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
@@ -24,12 +26,83 @@ class LoginViewModel @Inject constructor(
         private const val UNIVERSAL_CODE_PREF = "UniversalCodePref"
     }
 
-    private val userCredentialsValid: MediatorLiveData<Resource<Boolean>> by lazy {
-        MediatorLiveData<Resource<Boolean>>()
+    /**
+     * This [LiveData] contains the [UserCredentials] set by the user in the UI. A change triggers
+     * [userCredentialsValidLD], [LiveData] created by [Transformations.switchMap].
+     */
+    private val userCredentialsLD: MutableLiveData<UserCredentials> by lazy {
+        MutableLiveData<UserCredentials>()
     }
 
-    fun getUserCredentials(): LiveData<Resource<Boolean>> {
-        return userCredentialsValid
+    /**
+     * This [LiveData] indicates whether the user credentials are valid or not. It's a
+     * [Transformations.switchMap] which is triggered by a change on [userCredentialsLD]. The new
+     * [UserCredentials] are used to check if an instance of [Etudiant] can be fetched. If that is
+     * the case, the new [UserCredentials] are saved and stored in [App].
+     */
+    private val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
+        Transformations.switchMap(userCredentialsLD) { userCredentials ->
+            Transformations.switchMap(repository.getInfoEtudiant(userCredentials, true)) { res ->
+                val booleanLiveData = getBooleanLiveData(res)
+
+                val blnRessource = booleanLiveData.value
+                if (blnRessource != null && blnRessource.status == Resource.SUCCESS && blnRessource.data!!) {
+                    App.userCredentials.set(userCredentials)
+
+                    saveUserCredentials(userCredentials)
+                }
+
+                booleanLiveData
+            }
+        }
+    }
+
+    /**
+     * Returns a [LiveData] with a [Boolean] which indicates whether the [UserCredentials] are
+     * valid or not.
+     */
+    private fun getBooleanLiveData(res: Resource<Etudiant>?): MutableLiveData<Resource<Boolean>> {
+        val resultLiveData = MutableLiveData<Resource<Boolean>>()
+
+        if (res != null) {
+            when (res.status) {
+                Resource.SUCCESS -> {
+                    resultLiveData.value = Resource.success(true)
+                }
+                Resource.ERROR -> {
+                    val errorStr = res.message ?: getApplication<App>().getString(R.string.error)
+                    resultLiveData.value = Resource.error(errorStr, false)
+                }
+                Resource.LOADING -> {
+                    resultLiveData.value = Resource.loading(true)
+                }
+            }
+        } else {
+            val errorStr = getApplication<App>().getString(R.string.error)
+            resultLiveData.value = Resource.error(errorStr, false)
+        }
+
+        return resultLiveData
+    }
+
+    /**
+     * Returns a [LiveData] indicating whether the user credentials are valid or not
+     */
+    fun getUserCredentialsIsValid(): LiveData<Resource<Boolean>> {
+        return userCredentialsValidLD
+    }
+
+    /**
+     * Triggers a verification of the validity of the [userCredentials].
+     * The result is posted to the [LiveData] returned by [getUserCredentialsIsValid]
+     *
+     * @param userCredentials the credentials of the user
+     */
+    fun setUserCredentials(userCredentials: UserCredentials) {
+        /*
+        Triggers [userCredentialsValid]
+         */
+        this.userCredentialsLD.value = userCredentials
     }
 
     fun getSavedUserCredentials(): UserCredentials? {
@@ -47,39 +120,6 @@ class LoginViewModel @Inject constructor(
         }
 
         return userCredentials
-    }
-
-    fun setUserCredentials(userCredentials: UserCredentials): LiveData<Resource<Boolean>> {
-        userCredentialsValid.value = Resource.loading(true)
-
-        val infoEtudiantLD = repository.getInfoEtudiant(userCredentials, true)
-
-        userCredentialsValid.addSource(infoEtudiantLD) { res ->
-            if (res != null) {
-                when (res.status) {
-                    Resource.SUCCESS -> {
-                        userCredentialsValid.value = Resource.success(true)
-
-                        App.userCredentials.set(userCredentials)
-
-                        saveUserCredentials(userCredentials)
-
-                        userCredentialsValid.removeSource(infoEtudiantLD)
-                    }
-                    Resource.ERROR -> {
-                        val errorStr = res.message ?: getApplication<App>().getString(R.string.error)
-                        userCredentialsValid.value = Resource.error(errorStr, false)
-
-                        userCredentialsValid.removeSource(infoEtudiantLD)
-                    }
-                    Resource.LOADING -> {
-                        userCredentialsValid.value = Resource.loading(true)
-                    }
-                }
-            }
-        }
-
-        return userCredentialsValid
     }
 
     private fun saveUserCredentials(userCredentials: UserCredentials) {

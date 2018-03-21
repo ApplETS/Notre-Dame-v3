@@ -1,7 +1,8 @@
 package ca.etsmtl.etsmobile.data.repository
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
@@ -24,7 +25,7 @@ class InfoEtudiantRepository @Inject constructor(
 ) : SignetsRepository(appExecutors) {
     fun getInfoEtudiant(userCredentials: UserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 
-        return object: NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>(appExecutors) {
+        return object : NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>(appExecutors) {
             override fun saveCallResult(item: SignetsModel<Etudiant>) {
                 dao.insertEtudiant(item.data)
             }
@@ -38,24 +39,19 @@ class InfoEtudiantRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<Etudiant>>> {
-                val resultLiveData = MediatorLiveData<ApiResponse<SignetsModel<Etudiant>>>()
-                val apiResponseLiveData = api.infoEtudiant(userCredentials)
-
-                resultLiveData.addSource(apiResponseLiveData) { apiResponse ->
+                return Transformations.switchMap(api.infoEtudiant(userCredentials)) { apiResponse ->
+                    val resultLiveData = MutableLiveData<ApiResponse<SignetsModel<Etudiant>>>()
                     val errorStr = getError(apiResponse)
 
                     if (errorStr.isNullOrEmpty()) {
                         resultLiveData.value = apiResponse
-                        resultLiveData.removeSource(apiResponseLiveData)
                     } else {
                         resultLiveData.value = ApiResponse(Throwable(errorStr))
-                        resultLiveData.removeSource(apiResponseLiveData)
                     }
+
+                    resultLiveData
                 }
-
-                return resultLiveData
             }
-
         }.asLiveData()
     }
 }

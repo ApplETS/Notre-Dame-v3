@@ -61,7 +61,7 @@ class LoginActivity : DaggerAppCompatActivity() {
      * Subscribe the UI to the user credentials LiveData
      */
     private fun subscribeUI() {
-        loginViewModel.getUserCredentials().observe(this, Observer<Resource<Boolean>> { resource ->
+        loginViewModel.getUserCredentialsIsValid().observe(this, Observer<Resource<Boolean>> { resource ->
             if (resource != null) {
                 when (resource.status) {
                     Resource.SUCCESS -> {
