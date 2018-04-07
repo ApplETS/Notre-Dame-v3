@@ -15,7 +15,8 @@ Ce projet concrétise la nouvelle génération de l'application ÉTSMobile pour 
 * Android Studio
 
 ## Architecture
-![ÉTSMobile Architecture](docs/images/etsmobile_architecture.png)
+
+<image src="docs/images/etsmobile_architecture.png" width="600" />
 
 ## Licence
 

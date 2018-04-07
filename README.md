@@ -17,6 +17,10 @@ _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-
 * Java Development Kit (JDK)
 * Android Studio
 
+## Architecture
+
+<image src="docs/images/etsmobile_architecture.png" width="600" />
+
 ## License
 
 This projet is licensed under the Apache License V2.0. See the [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) file for more info.
