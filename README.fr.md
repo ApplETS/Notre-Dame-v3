@@ -14,6 +14,9 @@ Ce projet concrétise la nouvelle génération de l'application ÉTSMobile pour 
 * Java Development Kit (JDK)
 * Android Studio
 
+## Architecture
+![ÉTSMobile Architecture](docs/images/etsmobile_architecture.png)
+
 ## Licence
 
 Ce projet est licencié selon la licence Apache V2.0. Veuillez consulter le fichier [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) pour plus d'informations.
