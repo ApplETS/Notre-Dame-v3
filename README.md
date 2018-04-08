@@ -19,6 +19,11 @@ _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-
 
 ## Architecture
 
+This app uses an architecture based on the [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Specifically, it uses the following components:  
+* [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData.html)
+* [ViewModel](https://developer.android.com/reference/android/arch/lifecycle/ViewModel.html)
+* [Room](https://developer.android.com/topic/libraries/architecture/room.html)
+
 <image src="docs/images/etsmobile_architecture.png" width="600" />
 
 ## License
