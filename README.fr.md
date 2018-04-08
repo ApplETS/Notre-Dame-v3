@@ -16,6 +16,11 @@ Ce projet concrétise la nouvelle génération de l'application ÉTSMobile pour 
 
 ## Architecture
 
+L'architecture de l'application est basée sur les [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Plus précisément, elle utilise les composantes suivantes : 
+* [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData.html)
+* [ViewModel](https://developer.android.com/reference/android/arch/lifecycle/ViewModel.html)
+* [Room](https://developer.android.com/topic/libraries/architecture/room.html)
+
 <image src="docs/images/etsmobile_architecture.png" width="600" />
 
 ## Licence
