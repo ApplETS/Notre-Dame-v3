@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.presentation.profile.infoetudiant
+package ca.etsmtl.etsmobile.presentation.infoetudiant
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel

@@ -15,7 +15,7 @@
 
         <fragment
             android:id="@+id/info_etudiant_fragment"
-            android:name="ca.etsmtl.etsmobile.presentation.profile.infoetudiant.InfoEtudiantFragment"
+            android:name="ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v7.widget.CardView>

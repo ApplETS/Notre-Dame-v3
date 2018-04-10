@@ -2,8 +2,8 @@ package ca.etsmtl.etsmobile.di.activitymodule
 
 import android.arch.lifecycle.ViewModel
 import ca.etsmtl.etsmobile.di.ViewModelKey
-import ca.etsmtl.etsmobile.presentation.profile.infoetudiant.InfoEtudiantFragment
-import ca.etsmtl.etsmobile.presentation.profile.infoetudiant.InfoEtudiantViewModel
+import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantFragment
+import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
