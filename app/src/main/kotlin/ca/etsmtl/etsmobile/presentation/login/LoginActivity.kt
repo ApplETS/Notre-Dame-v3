@@ -3,6 +3,8 @@ package ca.etsmtl.etsmobile.presentation.login
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -25,8 +27,11 @@ import javax.inject.Inject
  */
 class LoginActivity : DaggerAppCompatActivity() {
 
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
+    }
     @Inject
-    lateinit var loginViewModel: LoginViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
