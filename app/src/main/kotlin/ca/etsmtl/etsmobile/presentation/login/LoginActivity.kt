@@ -23,7 +23,6 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
-
 /**
  * A login screen that offers login via universal code/password.
  */
