@@ -29,4 +29,7 @@
         <item name="android:fontFamily">@font/delta_jaeger_light</item>
         <item name="fontFamily">@font/delta_jaeger_light</item>
     </style>
-</resources>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style></resources>

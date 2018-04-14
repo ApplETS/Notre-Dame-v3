@@ -5,22 +5,24 @@ import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.util.KeyboardUtils
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
+
 
 /**
  * A login screen that offers login via universal code/password.
@@ -47,7 +49,7 @@ class LoginActivity : DaggerAppCompatActivity() {
 
         title = getString(R.string.title_activity_login)
         sign_in_button.setOnClickListener {
-            hideKeyboard()
+            KeyboardUtils.hideKeyboard(currentFocus)
             attemptLogin()
         }
 
@@ -70,7 +72,7 @@ class LoginActivity : DaggerAppCompatActivity() {
                 when (resource.status) {
                     Resource.SUCCESS -> {
                         showProgress(false)
-                        displayMainActivity()
+                        goToMainActivity()
                     }
                     Resource.ERROR -> {
                         showProgress(false)
@@ -176,18 +178,26 @@ class LoginActivity : DaggerAppCompatActivity() {
                 })
     }
 
+    fun displayUniversalCodeDialog(view: View) {
+        val builder = AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle)
+
+        val icon = ContextCompat.getDrawable(this, R.drawable.ic_info_outline_white_24dp)!!
+                .mutate()
+        icon.setTint(ContextCompat.getColor(this, R.color.colorPrimary))
+
+        builder.setMessage(R.string.infos_universal_code)
+                .setTitle(getString(R.string.prompt_universal_code))
+                .setIcon(icon)
+                .setPositiveButton(android.R.string.ok) { dialog, which -> dialog?.dismiss() }
+
+        builder.create().show()
+    }
+
     /**
      * Starts MainActivity
      */
-    private fun displayMainActivity() {
+    private fun goToMainActivity() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
-    }
-
-    private fun hideKeyboard() {
-        if (currentFocus != null) {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
-        }
     }
 }

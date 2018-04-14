@@ -43,10 +43,7 @@ class InfoEtudiantFragment : DaggerFragment() {
     }
 
     companion object {
-        fun newInstance(): InfoEtudiantFragment {
-            val fragment = InfoEtudiantFragment()
-            return fragment
-        }
+        fun newInstance() = InfoEtudiantFragment()
     }
 
     private fun subscribeUI() {

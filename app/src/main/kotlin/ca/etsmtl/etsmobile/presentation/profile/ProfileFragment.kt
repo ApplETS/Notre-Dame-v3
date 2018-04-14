@@ -23,9 +23,6 @@ class ProfileFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): ProfileFragment {
-            val fragment = ProfileFragment()
-            return fragment
-        }
+        fun newInstance() = ProfileFragment()
     }
 }

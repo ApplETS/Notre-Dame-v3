@@ -26,8 +26,6 @@ class HomeFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(): HomeFragment {
-            return HomeFragment()
-        }
+        fun newInstance() = HomeFragment()
     }
 } // Required empty public constructor
