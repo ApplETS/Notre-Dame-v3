@@ -76,12 +76,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:background="?selectableItemBackgroundBorderless"
+                android:onClick="displayUniversalCodeDialog"
                 android:padding="12dp"
                 android:src="@drawable/ic_info_outline_white_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="displayUniversalCodeDialog"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -100,7 +100,6 @@
                 android:hint="@string/prompt_password"
                 android:imeActionId="6"
                 android:imeActionLabel="@string/action_sign_in"
-                android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@android:color/white" />

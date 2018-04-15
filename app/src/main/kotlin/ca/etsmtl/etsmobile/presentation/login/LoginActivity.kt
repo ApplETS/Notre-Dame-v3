@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -22,6 +23,8 @@ import ca.etsmtl.etsmobile.util.KeyboardUtils
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
+
+
 
 /**
  * A login screen that offers login via universal code/password.
@@ -47,6 +50,7 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
 
         title = getString(R.string.title_activity_login)
+        password.transformationMethod = PasswordTransformationMethod()
         sign_in_button.setOnClickListener {
             KeyboardUtils.hideKeyboard(currentFocus)
             attemptLogin()
