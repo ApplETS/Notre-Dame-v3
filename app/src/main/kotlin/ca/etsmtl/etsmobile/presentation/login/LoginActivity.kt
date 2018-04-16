@@ -20,6 +20,7 @@ import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.util.KeyboardUtils
+import com.bumptech.glide.Glide
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
@@ -48,6 +49,7 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
 
         title = getString(R.string.title_activity_login)
+        Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
         password.transformationMethod = PasswordTransformationMethod()
         sign_in_button.setOnClickListener {
             KeyboardUtils.hideKeyboard(currentFocus)
