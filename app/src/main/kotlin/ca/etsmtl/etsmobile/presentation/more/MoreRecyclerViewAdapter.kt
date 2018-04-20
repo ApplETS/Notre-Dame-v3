@@ -1,6 +1,5 @@
 package ca.etsmtl.etsmobile.presentation.more
 
-
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import ca.etsmtl.etsmobile.R
 
-
 class MoreRecyclerViewAdapter(
-        private val items: List<MoreItem>)
+    private val items: List<MoreItem>
+)
     : RecyclerView.Adapter<MoreRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
             LayoutInflater.from(parent.context)

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import java.util.*
 
 class MoreFragment : Fragment() {
 
@@ -15,8 +14,11 @@ class MoreFragment : Fragment() {
         fun newInstance() = MoreFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_more_list, container, false)
 
         // Set the adapter

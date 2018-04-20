@@ -7,6 +7,6 @@ import android.support.annotation.DrawableRes
  */
 
 data class MoreItem(
-        @DrawableRes val iconId: Int,
-        val label: String
+    @DrawableRes val iconId: Int,
+    val label: String
 )
