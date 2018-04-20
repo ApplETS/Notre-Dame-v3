@@ -9,9 +9,11 @@ import android.widget.TextView
 import ca.etsmtl.etsmobile.R
 
 class MoreRecyclerViewAdapter(
-    private val items: List<MoreItem>
+    private val items: List<MoreItem>,
+    private val itemClickListener: OnItemClickListener?
 )
     : RecyclerView.Adapter<MoreRecyclerViewAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
             LayoutInflater.from(parent.context)
                     .inflate(R.layout.fragment_more_item, parent, false)
@@ -24,10 +26,20 @@ class MoreRecyclerViewAdapter(
 
         holder.iconImageView.setImageResource(item.iconId)
         holder.labelTextView.text = item.label
+
+        itemClickListener?.let {
+            holder.view.setOnClickListener {
+                itemClickListener.onItemClick(position)
+            }
+        }
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val iconImageView: ImageView = view.findViewById(R.id.more_item_icon_iv)
         val labelTextView: TextView = view.findViewById(R.id.more_item_label_text_view)
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(index: Int)
     }
 }

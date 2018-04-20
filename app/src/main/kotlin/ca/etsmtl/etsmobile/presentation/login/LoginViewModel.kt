@@ -4,12 +4,13 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
-import android.content.Context
+import android.content.SharedPreferences
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
+import ca.etsmtl.etsmobile.data.repository.LogOutRepository
 import ca.etsmtl.etsmobile.presentation.App
 import javax.inject.Inject
 
@@ -19,6 +20,8 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     private val repository: InfoEtudiantRepository,
+    private val prefs: SharedPreferences,
+    private val logOutRepository: LogOutRepository,
     app: App
 ) : AndroidViewModel(app) {
 
@@ -45,8 +48,8 @@ class LoginViewModel @Inject constructor(
             Transformations.switchMap(repository.getInfoEtudiant(userCredentials, true)) { res ->
                 val booleanLiveData = getBooleanLiveData(res)
 
-                val blnRessource = booleanLiveData.value
-                if (blnRessource != null && blnRessource.status == Resource.SUCCESS && blnRessource.data!!) {
+                val blnResource = booleanLiveData.value
+                if (blnResource != null && blnResource.status == Resource.SUCCESS && blnResource.data!!) {
                     App.userCredentials.set(userCredentials)
 
                     saveUserCredentials(userCredentials)
@@ -128,22 +131,14 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun saveUniversalCode(universalCode: String) {
-        val app = getApplication<App>()
-        val sharedPref = app.getSharedPreferences(app.getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
+        with(prefs.edit()) {
             putString(UNIVERSAL_CODE_PREF, universalCode)
             apply()
         }
     }
 
     private fun getSavedUniversalCode(): String? {
-        val app = getApplication<App>()
-        val sharedPref = getApplication<App>()
-                .getSharedPreferences(app.getString(R.string.preference_file_key),
-                        Context.MODE_PRIVATE) ?: return null
-
-        return sharedPref.getString(UNIVERSAL_CODE_PREF, null)
+        return prefs.getString(UNIVERSAL_CODE_PREF, null)
     }
 
     private fun getSavedPassword(): String? {
@@ -153,5 +148,13 @@ class LoginViewModel @Inject constructor(
 
     private fun savePassword(password: String) {
         // TODO: Save password in Android Keystore System https://developer.android.com/training/articles/keystore.html
+    }
+
+    fun logOut(): LiveData<Boolean> {
+        App.userCredentials.set(null)
+
+        prefs.edit().clear().apply()
+
+        return logOutRepository.clearDb()
     }
 }

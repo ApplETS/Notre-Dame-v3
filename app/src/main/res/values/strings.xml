@@ -2,6 +2,8 @@
     <string name="app_name">ÉTSMobile</string>
     <string name="preference_file_key">ETSMobilePrefs</string>
     <string name="error">Une erreur est survenue</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_home">Accueil</string>
@@ -20,7 +22,9 @@
     <string name="error_incorrect_password">Le mot de passe est erroné</string>
     <string name="error_field_required">Ce champ est requis</string>
     <string name="infos_universal_code">Votre code d\'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.</string>
+    <string name="msg_logout_success">Vous vous êtes déconnecté</string>
 
     <!-- More -->
     <string name="more_item_label_log_out">Se déconnecter</string>
+    <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>
 </resources>

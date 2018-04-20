@@ -30,6 +30,10 @@ import javax.inject.Inject
  */
 class LoginActivity : DaggerAppCompatActivity() {
 
+    companion object {
+        const val LOGGING_OUT_EXTRA: String = "LoggingOut"
+    }
+
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
     }
@@ -58,12 +62,28 @@ class LoginActivity : DaggerAppCompatActivity() {
 
         subscribeUI()
 
-        with(loginViewModel.getSavedUserCredentials()) {
-            initUserCredentialsFields(this)
+        if (intent.getBooleanExtra(LOGGING_OUT_EXTRA, false)) {
+            logOut()
+        } else {
+            with(loginViewModel.getSavedUserCredentials()) {
+                initUserCredentialsFields(this)
 
-            // Attempt to login if user credentials are not null
-            this?.let { attemptLogin() }
+                // Attempt to login if user credentials are not null
+                this?.let { attemptLogin() }
+            }
         }
+    }
+
+    private fun logOut() {
+        showProgress(true)
+        loginViewModel.logOut().observe(this, Observer<Boolean> {
+            if (it != null && it) {
+                Toast.makeText(this@LoginActivity, R.string.msg_logout_success,
+                        Toast.LENGTH_LONG).show()
+
+                showProgress(false)
+            }
+        })
     }
 
     /**
@@ -202,5 +222,6 @@ class LoginActivity : DaggerAppCompatActivity() {
     private fun goToMainActivity() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
