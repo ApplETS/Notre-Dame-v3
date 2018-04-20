@@ -150,10 +150,16 @@ class LoginViewModel @Inject constructor(
         // TODO: Save password in Android Keystore System https://developer.android.com/training/articles/keystore.html
     }
 
+    private fun deletePassword() {
+        // TODO: Delete password on logout
+    }
+
     fun logOut(): LiveData<Boolean> {
         App.userCredentials.set(null)
 
         prefs.edit().clear().apply()
+
+        deletePassword()
 
         return logOutRepository.clearDb()
     }

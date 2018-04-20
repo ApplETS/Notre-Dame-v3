@@ -58,6 +58,7 @@ def kotshi = '1.0.2'
 def retrofit = '2.3.0'
 def okhttp = '3.8.0'
 def dimens = '1.4'
+def leakcanary = '1.5.4'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -124,5 +125,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
 
+    // Material Design Dimensions
     implementation "com.dmitrymalkovich.android:material-design-dimens:${dimens}"
+
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakcanary}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}"
 }

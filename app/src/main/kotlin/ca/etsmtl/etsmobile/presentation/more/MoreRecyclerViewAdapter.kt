@@ -39,7 +39,15 @@ class MoreRecyclerViewAdapter(
         val labelTextView: TextView = view.findViewById(R.id.more_item_label_text_view)
     }
 
+    /**
+     * Interface definition for a callback to be invoked when an item of the recycler view is clicked
+     */
     interface OnItemClickListener {
+        /**
+         * Callback method to be invoked when an item of the recycler view is clicked
+         *
+         * @param index : position of the clicked view
+         */
         fun onItemClick(index: Int)
     }
 }
