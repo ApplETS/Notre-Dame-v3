@@ -61,6 +61,7 @@ def moshi = '1.5.0'
 def kotshi = '1.0.2'
 def retrofit = '2.3.0'
 def okhttp = '3.8.0'
+def dimens = '1.4'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -70,11 +71,11 @@ dependencies {
     implementation "com.android.support:design:${support}"
     implementation "com.android.support:support-v4:${support}"
     implementation "com.android.support:cardview-v7:${support}"
+    implementation "com.android.support:recyclerview-v7:${support}"
     implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
 
     // Architecture components
     implementation "android.arch.lifecycle:extensions:${lifecycle}"
-    implementation "com.android.support:support-v4:${support}"
     kapt "android.arch.lifecycle:compiler:${lifecycle}"
     implementation "android.arch.persistence.room:runtime:${room}"
     kapt "android.arch.persistence.room:compiler:${room}"
@@ -126,4 +127,6 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
+
+    implementation "com.dmitrymalkovich.android:material-design-dimens:${dimens}"
 }

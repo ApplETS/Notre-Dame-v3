@@ -48,7 +48,7 @@ class LoginActivity : DaggerAppCompatActivity() {
             false
         })
 
-        title = getString(R.string.title_activity_login)
+        setTitle(R.string.title_activity_login)
         Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
         password.transformationMethod = PasswordTransformationMethod()
         sign_in_button.setOnClickListener {

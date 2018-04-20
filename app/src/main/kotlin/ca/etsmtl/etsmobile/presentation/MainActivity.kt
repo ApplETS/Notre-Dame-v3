@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.home.HomeFragment
+import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
 import dagger.android.support.DaggerAppCompatActivity
@@ -34,7 +35,7 @@ class MainActivity : DaggerAppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        title = getString(R.string.title_home)
+        setTitle(R.string.title_home)
 
         // Go to the first fragment only on the first run
         if (savedInstanceState == null)
@@ -95,6 +96,7 @@ class MainActivity : DaggerAppCompatActivity() {
             R.id.navigation_ets -> {
             }
             R.id.navigation_more -> {
+                fragment = MoreFragment.newInstance()
             }
         }
 

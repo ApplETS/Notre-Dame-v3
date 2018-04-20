@@ -10,7 +10,7 @@
     <string name="title_ets">ÉTS</string>
     <string name="title_more">Plus</string>
 
-    <!-- Strings related to login -->
+    <!-- Login -->
     <string name="title_activity_login">Connexion</string>
     <string name="prompt_universal_code">Code universel</string>
     <string name="prompt_password">Mot de passe</string>
@@ -20,4 +20,7 @@
     <string name="error_incorrect_password">Le mot de passe est erroné</string>
     <string name="error_field_required">Ce champ est requis</string>
     <string name="infos_universal_code">Votre code d\'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.</string>
+
+    <!-- More -->
+    <string name="more_item_label_log_out">Se déconnecter</string>
 </resources>
