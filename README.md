@@ -19,12 +19,14 @@ _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-
 
 ## Architecture
 
-This app uses an architecture based on the [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Specifically, it uses the following components:  
+This application uses a [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) architecture by relying on the [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Specifically, it uses the following components: 
 * [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData.html)
 * [ViewModel](https://developer.android.com/reference/android/arch/lifecycle/ViewModel.html)
 * [Room](https://developer.android.com/topic/libraries/architecture/room.html)
 
 <image src="docs/images/etsmobile_architecture.png" width="600" />
+
+You can find out more by visiting the [wiki](https://github.com/ApplETS/Notre-Dame-Android/wiki/Architecture-(EN)).
 
 ## License
 
