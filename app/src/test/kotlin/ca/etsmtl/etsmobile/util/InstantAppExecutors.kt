@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.etsmobile.util;
+package ca.etsmtl.etsmobile.util
 
-import java.util.concurrent.Executor;
+import ca.etsmtl.etsmobile.AppExecutors
+import java.util.concurrent.Executor
 
-import ca.etsmtl.etsmobile.AppExecutors;
-
-public class InstantAppExecutors extends AppExecutors {
-    private static Executor instant = command -> command.run();
-
-    public InstantAppExecutors() {
-        super(instant, instant, instant);
+class InstantAppExecutors : AppExecutors(instant, instant, instant) {
+    companion object {
+        private val instant: Executor = Executor {
+            it.run()
+        }
     }
 }
