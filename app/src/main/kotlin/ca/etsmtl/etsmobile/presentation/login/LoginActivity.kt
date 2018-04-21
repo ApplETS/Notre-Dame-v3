@@ -19,14 +19,23 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.presentation.login.LoginActivity.Companion.LOGGING_OUT_EXTRA
 import ca.etsmtl.etsmobile.util.KeyboardUtils
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.bg_iv
+import kotlinx.android.synthetic.main.activity_login.login_form
+import kotlinx.android.synthetic.main.activity_login.login_progress
+import kotlinx.android.synthetic.main.activity_login.password
+import kotlinx.android.synthetic.main.activity_login.password_layout
+import kotlinx.android.synthetic.main.activity_login.sign_in_button
+import kotlinx.android.synthetic.main.activity_login.universal_code
+import kotlinx.android.synthetic.main.activity_login.universal_code_layout
 import javax.inject.Inject
 
 /**
  * A login screen that offers login via universal code/password.
+ * This activity can also offers logout if [LOGGING_OUT_EXTRA] extra is set to true
  */
 class LoginActivity : DaggerAppCompatActivity() {
 
@@ -65,12 +74,7 @@ class LoginActivity : DaggerAppCompatActivity() {
         if (intent.getBooleanExtra(LOGGING_OUT_EXTRA, false)) {
             logOut()
         } else {
-            with(loginViewModel.getSavedUserCredentials()) {
-                initUserCredentialsFields(this)
-
-                // Attempt to login if user credentials are not null
-                this?.let { attemptLogin() }
-            }
+            initLoginForm()
         }
     }
 
@@ -86,6 +90,15 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
     }
 
+    private fun initLoginForm() {
+        with(loginViewModel.getSavedUserCredentials()) {
+            initUserCredentialsFields(this)
+
+            // Attempt to login if user credentials are not null
+            this?.let { attemptLogin() }
+        }
+    }
+
     /**
      * Subscribe the UI to the user credentials LiveData
      */
@@ -94,8 +107,8 @@ class LoginActivity : DaggerAppCompatActivity() {
             if (resource != null) {
                 when (resource.status) {
                     Resource.SUCCESS -> {
-                        showProgress(false)
                         goToMainActivity()
+                        showProgress(false)
                     }
                     Resource.ERROR -> {
                         showProgress(false)
@@ -110,7 +123,7 @@ class LoginActivity : DaggerAppCompatActivity() {
     }
 
     /**
-     * Fill the credentials fields with the specifies user credentials
+     * Fills the credentials fields with the specifies user credentials
      *
      * @param userCredentials the user credentials used to fill the fields
      */

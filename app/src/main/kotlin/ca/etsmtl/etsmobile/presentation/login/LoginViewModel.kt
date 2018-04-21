@@ -4,14 +4,15 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
-import android.content.SharedPreferences
+import android.util.Log
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
-import ca.etsmtl.etsmobile.data.repository.LogOutRepository
+import ca.etsmtl.etsmobile.data.repository.usercredentials.UserCredentialsRepository
 import ca.etsmtl.etsmobile.presentation.App
+import ca.etsmtl.etsmobile.util.NetworkUtils
 import javax.inject.Inject
 
 /**
@@ -20,14 +21,15 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     private val repository: InfoEtudiantRepository,
-    private val prefs: SharedPreferences,
-    private val logOutRepository: LogOutRepository,
+    private val userCredentialsRepository: UserCredentialsRepository,
     app: App
 ) : AndroidViewModel(app) {
 
     companion object {
-        private const val UNIVERSAL_CODE_PREF = "UniversalCodePref"
+        private const val TAG = "LoginViewModel"
     }
+
+    private var userCredentialsAlreadySaved = false
 
     /**
      * This [LiveData] contains the [UserCredentials] set by the user in the UI. A change triggers
@@ -41,30 +43,38 @@ class LoginViewModel @Inject constructor(
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered by a change on [userCredentialsLD]. The new
      * [UserCredentials] are used to check if an instance of [Etudiant] can be fetched. If that is
-     * the case, the new [UserCredentials] are saved and stored in [App].
+     * the case, the new [UserCredentials] are saved and stored in [UserCredentialsRepository].
      */
     private val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->
-            Transformations.switchMap(repository.getInfoEtudiant(userCredentials, true)) { res ->
-                val booleanLiveData = getBooleanLiveData(res)
+            Transformations.switchMap(repository.getInfoEtudiant(userCredentials, NetworkUtils.isDeviceConnected(getApplication()))) { res ->
+                var credentialsValidBooleanLiveData: LiveData<Resource<Boolean>> = getUserCredentialsValidBooleanLiveData(res)
 
-                val blnResource = booleanLiveData.value
-                if (blnResource != null && blnResource.status == Resource.SUCCESS && blnResource.data!!) {
-                    App.userCredentials.set(userCredentials)
+                if (userCredentialsValid(credentialsValidBooleanLiveData.value)) {
+                    UserCredentialsRepository.userCredentials.set(userCredentials)
 
-                    saveUserCredentials(userCredentials)
+                    if (!userCredentialsAlreadySaved)
+                        userCredentialsRepository.saveUserCredentials(userCredentials)
                 }
 
-                booleanLiveData
+                credentialsValidBooleanLiveData
             }
         }
     }
 
+    private fun userCredentialsValid(blnResource: Resource<Boolean>?): Boolean {
+        if (blnResource != null && blnResource.status == Resource.SUCCESS) {
+            return blnResource.data!!
+        }
+
+        return false
+    }
+
     /**
-     * Returns a [LiveData] with a [Boolean] which indicates whether the [UserCredentials] are
-     * valid or not.
+     * Returns a [LiveData] containing a [Boolean] Resource which indicates whether the
+     * [UserCredentials] are valid or not.
      */
-    private fun getBooleanLiveData(res: Resource<Etudiant>?): MutableLiveData<Resource<Boolean>> {
+    private fun getUserCredentialsValidBooleanLiveData(res: Resource<Etudiant>?): MutableLiveData<Resource<Boolean>> {
         val resultLiveData = MutableLiveData<Resource<Boolean>>()
 
         if (res != null) {
@@ -109,58 +119,27 @@ class LoginViewModel @Inject constructor(
     }
 
     fun getSavedUserCredentials(): UserCredentials? {
-        val codeAccesUniversel = getSavedUniversalCode()
+        val codeAccesUniversel = userCredentialsRepository.getSavedUniversalCode()
 
         var userCredentials: UserCredentials? = null
 
         if (codeAccesUniversel != null) {
-            val motPasse = getSavedPassword()
+            val motPasse = userCredentialsRepository.getSavedPassword()
 
             if (motPasse != null) {
                 userCredentials = UserCredentials(codeAccesUniversel, motPasse)
-                App.userCredentials.set(userCredentials)
+                userCredentialsAlreadySaved = true
+                Log.d(TAG, "Successfully retrieved user credentials")
+                UserCredentialsRepository.userCredentials.set(userCredentials)
             }
         }
 
         return userCredentials
     }
 
-    private fun saveUserCredentials(userCredentials: UserCredentials) {
-        saveUniversalCode(userCredentials.codeAccesUniversel)
-        savePassword(userCredentials.motPasse)
-    }
-
-    private fun saveUniversalCode(universalCode: String) {
-        with(prefs.edit()) {
-            putString(UNIVERSAL_CODE_PREF, universalCode)
-            apply()
-        }
-    }
-
-    private fun getSavedUniversalCode(): String? {
-        return prefs.getString(UNIVERSAL_CODE_PREF, null)
-    }
-
-    private fun getSavedPassword(): String? {
-        // TODO: Get password
-        return ""
-    }
-
-    private fun savePassword(password: String) {
-        // TODO: Save password in Android Keystore System https://developer.android.com/training/articles/keystore.html
-    }
-
-    private fun deletePassword() {
-        // TODO: Delete password on logout
-    }
-
-    fun logOut(): LiveData<Boolean> {
-        App.userCredentials.set(null)
-
-        prefs.edit().clear().apply()
-
-        deletePassword()
-
-        return logOutRepository.clearDb()
-    }
+    /**
+     * Should be called when the user want to log out
+     * Clears the user's data
+     */
+    fun logOut(): LiveData<Boolean> = userCredentialsRepository.clearUserData()
 }

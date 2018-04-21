@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Modifications copyright (C) 2018 Thanh-Son-Philippe Lam
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +24,7 @@ import java.io.IOException
  * Common class used by API responses.
  *
  * @param <T>
-</T> */
+*/
 class ApiResponse<T> {
     val code: Int
     val body: T?
