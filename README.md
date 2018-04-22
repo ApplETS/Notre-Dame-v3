@@ -28,6 +28,35 @@ This application uses a [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%
 
 You can find out more by visiting the [wiki](https://github.com/ApplETS/Notre-Dame-Android/wiki/Architecture-(EN)).
 
+## Libraries and technologies
+This project uses a variety of libraries and technologies.
+* Android Support Libraries
+  * AppCompat v7
+  * Design
+  * Support v4
+  * CardView
+  * RecyclerView
+  * ConstraintLayout
+  * AOSP Codes
+* Android Architecture Components
+  * [Lifecycles](https://developer.android.com/topic/libraries/architecture/lifecycle.html)
+  * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html)
+  * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html)
+  * [Room](https://developer.android.com/topic/libraries/architecture/room.html)
+* [Kotlin](http://kotlinlang.org/)
+* [JUnit](https://junit.org/)
+* [Mockito](http://site.mockito.org/)
+* [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
+* [Glide](https://bumptech.github.io/glide/)
+* [Dagger2](https://google.github.io/dagger/)
+* [Moshi](https://github.com/square/moshi/)
+* [Kotshi](https://github.com/ansman/kotshi)
+* [Retrofit2](http://square.github.io/retrofit/)
+* [Material Design Dimens](https://github.com/DmitryMalkovich/material-design-dimens)
+* [LeakCanary](https://github.com/square/leakcanary)
+* [Ktlint Gradle](https://github.com/JLLeitschuh/ktlint-gradle)
+* And more...
+
 ## License
 
 This projet is licensed under the Apache License V2.0. See the [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) file for more info.
