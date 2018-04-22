@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
-import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -63,7 +62,6 @@ class LoginActivity : DaggerAppCompatActivity() {
 
         setTitle(R.string.title_activity_login)
         Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
-        password.transformationMethod = PasswordTransformationMethod()
         sign_in_button.setOnClickListener {
             KeyboardUtils.hideKeyboard(currentFocus)
             attemptLogin()
