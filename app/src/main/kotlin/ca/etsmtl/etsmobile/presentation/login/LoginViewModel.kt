@@ -9,7 +9,7 @@ import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.UserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
-import ca.etsmtl.etsmobile.data.repository.usercredentials.UserCredentialsRepository
+import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.NetworkUtils
 import javax.inject.Inject
@@ -19,9 +19,9 @@ import javax.inject.Inject
  */
 
 class LoginViewModel @Inject constructor(
-    private val repository: InfoEtudiantRepository,
-    private val userCredentialsRepository: UserCredentialsRepository,
-    app: App
+        private val repository: InfoEtudiantRepository,
+        private val loginRepository: LoginRepository,
+        app: App
 ) : AndroidViewModel(app) {
 
     private var userCredentialsAlreadySaved = false
@@ -38,18 +38,18 @@ class LoginViewModel @Inject constructor(
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered by a change on [userCredentialsLD]. The new
      * [UserCredentials] are used to check if an instance of [Etudiant] can be fetched. If that is
-     * the case, the new [UserCredentials] are saved and stored in [UserCredentialsRepository].
+     * the case, the new [UserCredentials] are saved and stored in [LoginRepository].
      */
     private val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->
             Transformations.switchMap(repository.getInfoEtudiant(userCredentials, NetworkUtils.isDeviceConnected(getApplication()))) { res ->
-                var credentialsValidBooleanLiveData: LiveData<Resource<Boolean>> = getUserCredentialsValidBooleanLiveData(res)
+                val credentialsValidBooleanLiveData: LiveData<Resource<Boolean>> = getUserCredentialsValidBooleanLiveData(res)
 
                 if (userCredentialsValid(credentialsValidBooleanLiveData.value)) {
-                    UserCredentialsRepository.userCredentials.set(userCredentials)
+                    LoginRepository.userCredentials.set(userCredentials)
 
                     if (!userCredentialsAlreadySaved)
-                        userCredentialsRepository.saveUserCredentials(userCredentials)
+                        loginRepository.saveUserCredentials(userCredentials)
                 }
 
                 credentialsValidBooleanLiveData
@@ -114,12 +114,12 @@ class LoginViewModel @Inject constructor(
     }
 
     fun getSavedUserCredentials(): UserCredentials? {
-        val userCredentials = userCredentialsRepository.getSavedUserCredentials()
+        val userCredentials = loginRepository.getSavedUserCredentials()
 
         if (!userCredentials?.codeAccesUniversel.isNullOrEmpty() && !userCredentials?.motPasse.isNullOrEmpty()) {
             userCredentialsAlreadySaved = true
 
-            UserCredentialsRepository.userCredentials.set(userCredentials)
+            LoginRepository.userCredentials.set(userCredentials)
         }
 
         return userCredentials
@@ -130,5 +130,5 @@ class LoginViewModel @Inject constructor(
      *
      * Should be called when the user want to log out
      */
-    fun logOut(): LiveData<Boolean> = userCredentialsRepository.clearUserData()
+    fun logOut(): LiveData<Boolean> = loginRepository.clearUserData()
 }

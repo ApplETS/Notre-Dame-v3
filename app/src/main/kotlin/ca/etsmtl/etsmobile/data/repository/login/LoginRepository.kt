@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.repository.usercredentials
+package ca.etsmtl.etsmobile.data.repository.login
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -16,14 +16,14 @@ import javax.inject.Inject
  * Created by Sonphil on 21-04-18.
  */
 
-class UserCredentialsRepository @Inject constructor(
+class LoginRepository @Inject constructor(
     private val context: Context,
     private val prefs: SharedPreferences,
     private val appExecutors: AppExecutors,
     private val db: AppDatabase
 ) {
     companion object {
-        private const val TAG = "UserCredentialsRepo"
+        private const val TAG = "LoginRepository"
         private const val UNIVERSAL_CODE_PREF = "UniversalCodePref"
         private const val ENCRYPTED_PASSWORD_PREF = "EncryptedPasswordPref"
 
@@ -180,7 +180,7 @@ class UserCredentialsRepository @Inject constructor(
     /**
      * Clears the user's data
      *
-     * Clears the [SharedPreferences], deletes the password saved in the Keystore and clears the
+     * Clears the [SharedPreferences], deletes the password saved in the [KeyStore] and clears the
      * database
      *
      * @return A [LiveData] whose the value would be true if the process has finished
@@ -188,9 +188,9 @@ class UserCredentialsRepository @Inject constructor(
     fun clearUserData(): LiveData<Boolean> {
         prefs.edit().clear().apply()
 
-        deletePassword(UserCredentialsRepository.userCredentials.get().codeAccesUniversel)
+        deletePassword(LoginRepository.userCredentials.get().codeAccesUniversel)
 
-        UserCredentialsRepository.userCredentials.set(null)
+        LoginRepository.userCredentials.set(null)
 
         return clearDb()
     }

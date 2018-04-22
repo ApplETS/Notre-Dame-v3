@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-package ca.etsmtl.etsmobile.data.repository.usercredentials
+package ca.etsmtl.etsmobile.data.repository.login
 
 import android.content.Context
 import android.os.Build

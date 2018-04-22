@@ -10,9 +10,10 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.repository.usercredentials.UserCredentialsRepository
+import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_info_etudiant.*
+import kotlinx.android.synthetic.main.fragment_info_etudiant.info_etudiant_progress_bar
+import kotlinx.android.synthetic.main.fragment_info_etudiant.text_view
 import javax.inject.Inject
 
 /**
@@ -47,7 +48,7 @@ class InfoEtudiantFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        val userCredentials = UserCredentialsRepository.userCredentials.get()
+        val userCredentials = LoginRepository.userCredentials.get()
 
         if (userCredentials != null) {
             infoEtudiantViewModel.getInfoEtudiant(userCredentials).observe(this, Observer<Resource<Etudiant>> { res ->

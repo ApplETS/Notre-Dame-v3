@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.repository.usercredentials
+package ca.etsmtl.etsmobile.data.repository.login
 
 import android.util.Base64
 import java.security.Key
