@@ -113,10 +113,11 @@
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in"
-                    android:inputType="textPassword"
+                    android:inputType="textNoSuggestions"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    tools:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
