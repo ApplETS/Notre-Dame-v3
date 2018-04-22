@@ -25,6 +25,34 @@ L'application utilise l'architecture [MVVM](https://fr.wikipedia.org/wiki/Mod%C3
 
 Vous pouvez vous renseigner davantage en consultant le [wiki](https://github.com/ApplETS/Notre-Dame-Android/wiki/Architecture-(FR)).
 
+## Bibliothèques et technologies
+Ce projet utilise une variété de bibliotèques et de technologies.
+* Android Support Libraries
+  * AppCompat v7
+  * Design
+  * Support v4
+  * CardView
+  * RecyclerView
+  * ConstraintLayout
+  * AOSP Codes
+* Android Architecture Components
+  * [Lifecycles](https://developer.android.com/topic/libraries/architecture/lifecycle.html)
+  * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html)
+  * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html)
+  * [Room](https://developer.android.com/topic/libraries/architecture/room.html)
+* [Kotlin](http://kotlinlang.org/)
+* [JUnit](https://junit.org/)
+* [Mockito](http://site.mockito.org/)
+* [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
+* [Glide](https://bumptech.github.io/glide/)
+* [Dagger2](https://google.github.io/dagger/)
+* [Moshi](https://github.com/square/moshi/)
+* [Kotshi](https://github.com/ansman/kotshi)
+* [Retrofit2](http://square.github.io/retrofit/)
+* [Material Design Dimens](https://github.com/DmitryMalkovich/material-design-dimens)
+* [LeakCanary](https://github.com/square/leakcanary)
+* [Ktlint Gradle](https://github.com/JLLeitschuh/ktlint-gradle)
+* Et plus...
 
 ## Licence
 
