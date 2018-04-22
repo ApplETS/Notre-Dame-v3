@@ -26,7 +26,7 @@ L'application utilise l'architecture [MVVM](https://fr.wikipedia.org/wiki/Mod%C3
 Vous pouvez vous renseigner davantage en consultant le [wiki](https://github.com/ApplETS/Notre-Dame-Android/wiki/Architecture-(FR)).
 
 ## Bibliothèques et technologies
-Ce projet utilise une variété de bibliotèques et de technologies.
+Ce projet utilise une variété de bibliothèques et de technologies.
 * Android Support Libraries
   * AppCompat v7
   * Design
