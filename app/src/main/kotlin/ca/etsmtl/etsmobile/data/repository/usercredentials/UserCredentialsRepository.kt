@@ -8,6 +8,7 @@ import android.util.Log
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.db.AppDatabase
 import ca.etsmtl.etsmobile.data.model.UserCredentials
+import java.security.KeyStore
 import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
@@ -25,17 +26,16 @@ class UserCredentialsRepository @Inject constructor(
         private const val TAG = "UserCredentialsRepo"
         private const val UNIVERSAL_CODE_PREF = "UniversalCodePref"
         private const val ENCRYPTED_PASSWORD_PREF = "EncryptedPasswordPref"
-        /** Key for accessing the key stored in the Keystore **/
-        private const val TEST_ALIAS = TAG
 
-        @JvmStatic var userCredentials: AtomicReference<UserCredentials> = AtomicReference()
+        @JvmStatic
+        var userCredentials: AtomicReference<UserCredentials> = AtomicReference()
     }
 
     /**
      * Saves the user's credentials
      *
      * Saves the [UserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
-     * [UserCredentials.motPasse] to the Keystore
+     * [UserCredentials.motPasse] to the [KeyStore]
      *
      * @param userCredentials The user credentials
      * @return A [LiveData] whose value would be true if the save is complete
@@ -47,12 +47,34 @@ class UserCredentialsRepository @Inject constructor(
 
         appExecutors.diskIO().execute {
             saveUniversalCode(userCredentials.codeAccesUniversel)
-            savePassword(userCredentials.motPasse)
+            savePassword(userCredentials.motPasse, userCredentials.codeAccesUniversel)
 
             finishedBlnLD.postValue(true)
         }
 
         return finishedBlnLD
+    }
+
+    /**
+     * Returns the [UserCredentials.codeAccesUniversel] from the [SharedPreferences] and the
+     * [UserCredentials.motPasse] from the [KeyStore]
+     *
+     * @return The saved [UserCredentials]
+     */
+    fun getSavedUserCredentials(): UserCredentials? {
+        val codeAccesUniversel = getSavedUniversalCode()
+
+        var userCredentials: UserCredentials? = null
+
+        if (codeAccesUniversel != null) {
+            val motPasse = getSavedPassword(codeAccesUniversel)
+
+            if (motPasse != null) {
+                userCredentials = UserCredentials(codeAccesUniversel, motPasse)
+            }
+        }
+
+        return userCredentials
     }
 
     /**
@@ -72,20 +94,21 @@ class UserCredentialsRepository @Inject constructor(
      *
      * @return The user's universal code
      */
-    fun getSavedUniversalCode(): String? {
+    private fun getSavedUniversalCode(): String? {
         return prefs.getString(UNIVERSAL_CODE_PREF, null)
     }
 
     /**
      * Gets the password from the Keystore, decrypts it and returns it
      *
+     * @param alias Key for accessing the key stored in the Keystore
      * @return The user's password
      */
-    fun getSavedPassword(): String? {
+    private fun getSavedPassword(alias: String): String? {
         Log.d(TAG, "Getting password")
         val keyStoreUtils = KeyStoreUtils(context)
 
-        val keyPair = keyStoreUtils.getAndroidKeyStoreAsymmetricKeyPair(TEST_ALIAS)
+        val keyPair = keyStoreUtils.getAndroidKeyStoreAsymmetricKeyPair(alias)
 
         val encryptedPW = prefs.getString(ENCRYPTED_PASSWORD_PREF, null)
 
@@ -103,16 +126,17 @@ class UserCredentialsRepository @Inject constructor(
     }
 
     /**
-     * Encrypts the password and put it in the Keystore
+     * Encrypts the password and put it in the [KeyStore]
      *
      * @param password The password to be saved
+     * @param alias Key that would be used to for accessing the key stored in the Keystore
      */
-    private fun savePassword(password: String) {
+    private fun savePassword(password: String, alias: String) {
         val keyStoreUtils = KeyStoreUtils(context)
 
-        keyStoreUtils.createAndroidKeyStoreAsymmetricKey(TEST_ALIAS)
+        keyStoreUtils.createAndroidKeyStoreAsymmetricKey(alias)
 
-        val keyPair = keyStoreUtils.getAndroidKeyStoreAsymmetricKeyPair(TEST_ALIAS)
+        val keyPair = keyStoreUtils.getAndroidKeyStoreAsymmetricKeyPair(alias)
 
         val cipherUtils = CipherUtils()
 
@@ -127,10 +151,12 @@ class UserCredentialsRepository @Inject constructor(
     }
 
     /**
-     * Deletes the password saved in the Keystore
+     * Deletes the password saved in the [KeyStore]
+     *
+     * @param alias Key for accessing the key stored in the Keystore
      */
-    private fun deletePassword() {
-        KeyStoreUtils(context).deleteAndroidKeyStoreKeyEntry(TEST_ALIAS)
+    private fun deletePassword(alias: String) {
+        KeyStoreUtils(context).deleteAndroidKeyStoreKeyEntry(alias)
     }
 
     /**
@@ -160,11 +186,11 @@ class UserCredentialsRepository @Inject constructor(
      * @return A [LiveData] whose the value would be true if the process has finished
      */
     fun clearUserData(): LiveData<Boolean> {
-        UserCredentialsRepository.userCredentials.set(null)
-
         prefs.edit().clear().apply()
 
-        deletePassword()
+        deletePassword(UserCredentialsRepository.userCredentials.get().codeAccesUniversel)
+
+        UserCredentialsRepository.userCredentials.set(null)
 
         return clearDb()
     }

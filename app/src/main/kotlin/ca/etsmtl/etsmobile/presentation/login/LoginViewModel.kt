@@ -4,7 +4,6 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
-import android.util.Log
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
@@ -24,10 +23,6 @@ class LoginViewModel @Inject constructor(
     private val userCredentialsRepository: UserCredentialsRepository,
     app: App
 ) : AndroidViewModel(app) {
-
-    companion object {
-        private const val TAG = "LoginViewModel"
-    }
 
     private var userCredentialsAlreadySaved = false
 
@@ -119,27 +114,21 @@ class LoginViewModel @Inject constructor(
     }
 
     fun getSavedUserCredentials(): UserCredentials? {
-        val codeAccesUniversel = userCredentialsRepository.getSavedUniversalCode()
+        val userCredentials = userCredentialsRepository.getSavedUserCredentials()
 
-        var userCredentials: UserCredentials? = null
+        if (!userCredentials?.codeAccesUniversel.isNullOrEmpty() && !userCredentials?.motPasse.isNullOrEmpty()) {
+            userCredentialsAlreadySaved = true
 
-        if (codeAccesUniversel != null) {
-            val motPasse = userCredentialsRepository.getSavedPassword()
-
-            if (motPasse != null) {
-                userCredentials = UserCredentials(codeAccesUniversel, motPasse)
-                userCredentialsAlreadySaved = true
-                Log.d(TAG, "Successfully retrieved user credentials")
-                UserCredentialsRepository.userCredentials.set(userCredentials)
-            }
+            UserCredentialsRepository.userCredentials.set(userCredentials)
         }
 
         return userCredentials
     }
 
     /**
-     * Should be called when the user want to log out
      * Clears the user's data
+     *
+     * Should be called when the user want to log out
      */
     fun logOut(): LiveData<Boolean> = userCredentialsRepository.clearUserData()
 }
