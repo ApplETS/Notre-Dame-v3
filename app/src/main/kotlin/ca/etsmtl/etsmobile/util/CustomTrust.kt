@@ -126,38 +126,35 @@ class CustomTrust() {
         private fun trustedCertificatesInputStream(): InputStream {
             val comodoRsaCertificationAuthority = ("" +
                     "-----BEGIN CERTIFICATE-----\n" +
-                    "MIIF2DCCA8CgAwIBAgIQTKr5yttjb+Af907YWwOGnTANBgkqhkiG9w0BAQwFADCB\n" +
-                    "hTELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4G\n" +
-                    "A1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxKzApBgNV\n" +
-                    "BAMTIkNPTU9ETyBSU0EgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNMTAwMTE5\n" +
-                    "MDAwMDAwWhcNMzgwMTE4MjM1OTU5WjCBhTELMAkGA1UEBhMCR0IxGzAZBgNVBAgT\n" +
-                    "EkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgGA1UEChMR\n" +
-                    "Q09NT0RPIENBIExpbWl0ZWQxKzApBgNVBAMTIkNPTU9ETyBSU0EgQ2VydGlmaWNh\n" +
-                    "dGlvbiBBdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQCR\n" +
-                    "6FSS0gpWsawNJN3Fz0RndJkrN6N9I3AAcbxT38T6KhKPS38QVr2fcHK3YX/JSw8X\n" +
-                    "pz3jsARh7v8Rl8f0hj4K+j5c+ZPmNHrZFGvnnLOFoIJ6dq9xkNfs/Q36nGz637CC\n" +
-                    "9BR++b7Epi9Pf5l/tfxnQ3K9DADWietrLNPtj5gcFKt+5eNu/Nio5JIk2kNrYrhV\n" +
-                    "/erBvGy2i/MOjZrkm2xpmfh4SDBF1a3hDTxFYPwyllEnvGfDyi62a+pGx8cgoLEf\n" +
-                    "Zd5ICLqkTqnyg0Y3hOvozIFIQ2dOciqbXL1MGyiKXCJ7tKuY2e7gUYPDCUZObT6Z\n" +
-                    "+pUX2nwzV0E8jVHtC7ZcryxjGt9XyD+86V3Em69FmeKjWiS0uqlWPc9vqv9JWL7w\n" +
-                    "qP/0uK3pN/u6uPQLOvnoQ0IeidiEyxPx2bvhiWC4jChWrBQdnArncevPDt09qZah\n" +
-                    "SL0896+1DSJMwBGB7FY79tOi4lu3sgQiUpWAk2nojkxl8ZEDLXB0AuqLZxUpaVIC\n" +
-                    "u9ffUGpVRr+goyhhf3DQw6KqLCGqR84onAZFdr+CGCe01a60y1Dma/RMhnEw6abf\n" +
-                    "Fobg2P9A3fvQQoh/ozM6LlweQRGBY84YcWsr7KaKtzFcOmpH4MN5WdYgGq/yapiq\n" +
-                    "crxXStJLnbsQ/LBMQeXtHT1eKJ2czL+zUdqnR+WEUwIDAQABo0IwQDAdBgNVHQ4E\n" +
-                    "FgQUu69+Aj36pvE8hI6t7jiY7NkyMtQwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB\n" +
-                    "/wQFMAMBAf8wDQYJKoZIhvcNAQEMBQADggIBAArx1UaEt65Ru2yyTUEUAJNMnMvl\n" +
-                    "wFTPoCWOAvn9sKIN9SCYPBMtrFaisNZ+EZLpLrqeLppysb0ZRGxhNaKatBYSaVqM\n" +
-                    "4dc+pBroLwP0rmEdEBsqpIt6xf4FpuHA1sj+nq6PK7o9mfjYcwlYRm6mnPTXJ9OV\n" +
-                    "2jeDchzTc+CiR5kDOF3VSXkAKRzH7JsgHAckaVd4sjn8OoSgtZx8jb8uk2Intzna\n" +
-                    "FxiuvTwJaP+EmzzV1gsD41eeFPfR60/IvYcjt7ZJQ3mFXLrrkguhxuhoqEwWsRqZ\n" +
-                    "CuhTLJK7oQkYdQxlqHvLI7cawiiFwxv/0Cti76R7CZGYZ4wUAc1oBmpjIXUDgIiK\n" +
-                    "boHGhfKppC3n9KUkEEeDys30jXlYsQab5xoq2Z0B15R97QNKyvDb6KkBPvVWmcke\n" +
-                    "jkk9u+UJueBPSZI9FoJAzMxZxuY67RIuaTxslbH9qh17f4a+Hg4yRvv7E491f0yL\n" +
-                    "S0Zj/gA0QHDBw7mh3aZw4gSzQbzpgJHqZJx64SIDqZxubw5lT2yHh17zbqD5daWb\n" +
-                    "QOhTsiedSrnAdyGN/4fy3ryM7xfft0kL0fJuMAsaDk527RH89elWsn2/x20Kk4yl\n" +
-                    "0MC2Hb46TpSi125sC8KKfPog88Tk5c0NqMuRkrF8hey1FGlmDoLnzc7ILaZRfyHB\n" +
-                    "NVOFBkpdn627G190\n" +
+                    "MIIFRzCCBC+gAwIBAgIQEisXalGtHwIXQta+Ta6mAzANBgkqhkiG9w0BAQsFADCB\n" +
+                    "kDELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4G\n" +
+                    "A1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxNjA0BgNV\n" +
+                    "BAMTLUNPTU9ETyBSU0EgRG9tYWluIFZhbGlkYXRpb24gU2VjdXJlIFNlcnZlciBD\n" +
+                    "QTAeFw0xNzExMDcwMDAwMDBaFw0yMTAxMTYyMzU5NTlaMFcxITAfBgNVBAsTGERv\n" +
+                    "bWFpbiBDb250cm9sIFZhbGlkYXRlZDEcMBoGA1UECxMTQ09NT0RPIFNTTCBXaWxk\n" +
+                    "Y2FyZDEUMBIGA1UEAwwLKi5ldHNtdGwuY2EwggEiMA0GCSqGSIb3DQEBAQUAA4IB\n" +
+                    "DwAwggEKAoIBAQC4XwmsnApIdHleFxh2WQNBWy9l6FgW1zcslmfpFJm9lBFGI0Lx\n" +
+                    "sOjoHVu06wC5CQgWadtEkm6VI2ebDujQrpPEW0V6tcxJ0AfDSAS8Uin6cNUAODC0\n" +
+                    "l3O4Wb3mvN5Aej6I6tTqlfeaXVXmaKdFbMf6dbWK+PkIg/FnoPDY14PJcvXN6+iV\n" +
+                    "XyISWoXdek4ee5pPqyKj2HTQp7RLxeX/Ve3ZTJqYhIc/GDrFOdPNy402oBkcd1nh\n" +
+                    "Gju8P7BF1eVt/jrPKzM0Smk/sPHqEr3QBLA3iN7pPaY0SDlnmwbMxsT0UBk3j7V6\n" +
+                    "n5thhjnAOUPi9K22P2YWxPLd7kYpFq2OQEw5AgMBAAGjggHTMIIBzzAfBgNVHSME\n" +
+                    "GDAWgBSQr2o6lFoL2JDqElZz30O0Oija5zAdBgNVHQ4EFgQUvgstff+NmDbIlgT/\n" +
+                    "HmZmV9Vo3JwwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw\n" +
+                    "FAYIKwYBBQUHAwEGCCsGAQUFBwMCME8GA1UdIARIMEYwOgYLKwYBBAGyMQECAgcw\n" +
+                    "KzApBggrBgEFBQcCARYdaHR0cHM6Ly9zZWN1cmUuY29tb2RvLmNvbS9DUFMwCAYG\n" +
+                    "Z4EMAQIBMFQGA1UdHwRNMEswSaBHoEWGQ2h0dHA6Ly9jcmwuY29tb2RvY2EuY29t\n" +
+                    "L0NPTU9ET1JTQURvbWFpblZhbGlkYXRpb25TZWN1cmVTZXJ2ZXJDQS5jcmwwgYUG\n" +
+                    "CCsGAQUFBwEBBHkwdzBPBggrBgEFBQcwAoZDaHR0cDovL2NydC5jb21vZG9jYS5j\n" +
+                    "b20vQ09NT0RPUlNBRG9tYWluVmFsaWRhdGlvblNlY3VyZVNlcnZlckNBLmNydDAk\n" +
+                    "BggrBgEFBQcwAYYYaHR0cDovL29jc3AuY29tb2RvY2EuY29tMCEGA1UdEQQaMBiC\n" +
+                    "CyouZXRzbXRsLmNhgglldHNtdGwuY2EwDQYJKoZIhvcNAQELBQADggEBAA0+MZBG\n" +
+                    "kGJvjohYnvqG/e/rdgqqIQxxMeWNKb6xIFXM+OXXnUnnwOWZSgbnfY/0KABq1E3g\n" +
+                    "46HDobU19pqo/FStqjBMJJFv9PijNm4naOtHmnFPId5S3vkVMPyDlOHGvUKnzpXS\n" +
+                    "RJHjYpgS4G1a1cWISi6LneT6Cvc2B08zSlwCz1z76NuLbRkM+/ZGA2ym6JoXrSRb\n" +
+                    "vRdQaCcBEJvap8irsjDnG30ShRtBMR1ksPgqacd+hdPof/ws6jpNl7JOs1ldasKt\n" +
+                    "i6o75gQXbbfCG9lcMXz0w2S0+/Wpf0XIYfV05H6/tQ78LTVkXlpdZzIfjGJhEjxE\n" +
+                    "iE+LXE3FUVeJdC0=\n" +
                     "-----END CERTIFICATE-----\n")
             return Buffer()
                     .writeUtf8(comodoRsaCertificationAuthority)
