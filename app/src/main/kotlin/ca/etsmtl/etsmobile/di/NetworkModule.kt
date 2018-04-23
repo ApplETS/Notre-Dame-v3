@@ -2,10 +2,12 @@ package ca.etsmtl.etsmobile.di
 
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.util.ApplicationJsonAdapterFactory
+import ca.etsmtl.etsmobile.util.CustomTrust
 import ca.etsmtl.etsmobile.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -18,6 +20,12 @@ open class NetworkModule {
 
     companion object {
         val instance = NetworkModule()
+        private const val URL = "https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx/"
+    }
+
+    @Singleton @Provides
+    fun provideOkHttpClient(): OkHttpClient {
+        return CustomTrust().client
     }
 
     @Singleton @Provides
@@ -26,11 +34,12 @@ open class NetworkModule {
     }
 
     @Singleton @Provides
-    fun provideRetrofit(moshi: Moshi): Retrofit {
+    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx/")
+                .baseUrl(URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(LiveDataCallAdapterFactory())
+                .client(okHttpClient)
                 .build()
     }
 
