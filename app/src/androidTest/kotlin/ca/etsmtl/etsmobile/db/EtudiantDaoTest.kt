@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
  * Created by Sonphil on 22-04-18.
  */
 @RunWith(AndroidJUnit4::class)
-class EtudiantDaoTest: DbTest() {
+class EtudiantDaoTest : DbTest() {
     @Test
     fun testInsertEtudiant() {
         val etudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true, "")

@@ -105,7 +105,7 @@ class KeyStoreUtils constructor(
      */
     @RequiresApi(Build.VERSION_CODES.M)
     private fun getKeyGenParameterSpec(alias: String): AlgorithmParameterSpec {
-        // Make sure the parameters match [CipherUtils.TRANSFORMATION]
+        // Make sure that the parameters match [CipherUtils.TRANSFORMATION]
         val builder = KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
                 .setBlockModes(KeyProperties.BLOCK_MODE_ECB)
                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_PKCS1)

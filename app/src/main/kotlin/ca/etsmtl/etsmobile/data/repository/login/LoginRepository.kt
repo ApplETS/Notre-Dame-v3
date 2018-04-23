@@ -8,7 +8,6 @@ import android.util.Log
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.db.AppDatabase
 import ca.etsmtl.etsmobile.data.model.UserCredentials
-import java.security.KeyStore
 import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
@@ -35,7 +34,7 @@ class LoginRepository @Inject constructor(
      * Saves the user's credentials
      *
      * Saves the [UserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
-     * [UserCredentials.motPasse] to the [KeyStore]
+     * [UserCredentials.motPasse] to the [SharedPreferences] after encrypting it
      *
      * @param userCredentials The user credentials
      * @return A [LiveData] whose value would be true if the save is complete
@@ -56,8 +55,7 @@ class LoginRepository @Inject constructor(
     }
 
     /**
-     * Returns the [UserCredentials.codeAccesUniversel] from the [SharedPreferences] and the
-     * [UserCredentials.motPasse] from the [KeyStore]
+     * Returns the [UserCredentials.codeAccesUniversel] and the [UserCredentials.motPasse]
      *
      * @return The saved [UserCredentials]
      */
@@ -126,7 +124,7 @@ class LoginRepository @Inject constructor(
     }
 
     /**
-     * Encrypts the password and put it in the [KeyStore]
+     * Encrypts the password and put it in the [SharedPreferences]
      *
      * @param password The password to be saved
      * @param alias Key that would be used to for accessing the key stored in the Keystore
@@ -134,13 +132,11 @@ class LoginRepository @Inject constructor(
     private fun savePassword(password: String, alias: String) {
         val keyStoreUtils = KeyStoreUtils(context)
 
-        keyStoreUtils.createAndroidKeyStoreAsymmetricKey(alias)
-
-        val keyPair = keyStoreUtils.getAndroidKeyStoreAsymmetricKeyPair(alias)
+        val keyPair = keyStoreUtils.createAndroidKeyStoreAsymmetricKey(alias)
 
         val cipherUtils = CipherUtils()
 
-        keyPair?.let {
+        keyPair.let {
             val encryptedPW = cipherUtils.encrypt(password, it.public)
 
             with(prefs.edit()) {
@@ -151,12 +147,16 @@ class LoginRepository @Inject constructor(
     }
 
     /**
-     * Deletes the password saved in the [KeyStore]
+     * Deletes the saved password
      *
      * @param alias Key for accessing the key stored in the Keystore
      */
     private fun deletePassword(alias: String) {
         KeyStoreUtils(context).deleteAndroidKeyStoreKeyEntry(alias)
+        with(prefs.edit()) {
+            remove(ENCRYPTED_PASSWORD_PREF)
+            apply()
+        }
     }
 
     /**
@@ -180,7 +180,7 @@ class LoginRepository @Inject constructor(
     /**
      * Clears the user's data
      *
-     * Clears the [SharedPreferences], deletes the password saved in the [KeyStore] and clears the
+     * Clears the [SharedPreferences], deletes the saved password and clears the
      * database
      *
      * @return A [LiveData] whose the value would be true if the process has finished
