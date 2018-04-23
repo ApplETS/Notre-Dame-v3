@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile
+package ca.etsmtl.etsmobile.ui
 
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
@@ -6,6 +6,7 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import org.junit.Assert.assertTrue
 import org.junit.Rule
