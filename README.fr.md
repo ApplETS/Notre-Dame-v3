@@ -36,7 +36,6 @@ Ce projet utilise une variété de bibliothèques et de technologies.
   * ConstraintLayout
   * AOSP Codes
 * Android Architecture Components
-  * [Lifecycles](https://developer.android.com/topic/libraries/architecture/lifecycle.html)
   * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html)
   * [Room](https://developer.android.com/topic/libraries/architecture/room.html)
