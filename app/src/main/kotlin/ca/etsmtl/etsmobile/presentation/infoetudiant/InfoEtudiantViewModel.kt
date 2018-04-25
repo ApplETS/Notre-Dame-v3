@@ -12,12 +12,13 @@ import javax.inject.Inject
  * Created by Sonphil on 15-03-18.
  */
 class InfoEtudiantViewModel @Inject constructor(
-    private val repository: InfoEtudiantRepository
+    private val repository: InfoEtudiantRepository,
+    private var userCredentials: UserCredentials
 ) : ViewModel() {
 
     private var etudiant: LiveData<Resource<Etudiant>>? = null
 
-    fun getInfoEtudiant(userCredentials: UserCredentials): LiveData<Resource<Etudiant>> {
+    fun getInfoEtudiant(): LiveData<Resource<Etudiant>> {
         if (etudiant == null)
             etudiant = repository.getInfoEtudiant(userCredentials, true)
 

@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
 import dagger.Module
 import dagger.Provides
@@ -30,4 +32,9 @@ internal object AppModule {
     fun providePrefs(application: Application): SharedPreferences = application
             .getSharedPreferences(application.getString(R.string.preference_file_key),
                     Context.MODE_PRIVATE)
+
+    @Singleton
+    @Provides
+    @JvmStatic
+    fun providerUserCredentials(): UserCredentials = LoginRepository.userCredentials.get()
 }

@@ -7,8 +7,11 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,6 +25,12 @@ class MainActivityTest {
 
     @get:Rule
     var activityTestRule = ActivityTestRule(MainActivity::class.java)
+
+    @Before
+    fun setup() {
+        LoginRepository.userCredentials.set(UserCredentials("test", "test"))
+        // TODO: Mock View Model
+    }
 
     @Test
     fun testNavigation() {
