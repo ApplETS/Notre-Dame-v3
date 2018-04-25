@@ -2,9 +2,8 @@ package ca.etsmtl.etsmobile.data.repository.login
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
+import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.db.AppDatabase
 import ca.etsmtl.etsmobile.data.model.UserCredentials
@@ -16,7 +15,8 @@ import javax.inject.Inject
  */
 
 class LoginRepository @Inject constructor(
-    private val context: Context,
+    private val keyStoreUtils: KeyStoreUtils,
+    private val cipherUtils: CipherUtils,
     private val prefs: SharedPreferences,
     private val appExecutors: AppExecutors,
     private val db: AppDatabase
@@ -80,7 +80,8 @@ class LoginRepository @Inject constructor(
      *
      * @param universalCode The user's universal code
      */
-    private fun saveUniversalCode(universalCode: String) {
+    @VisibleForTesting
+    fun saveUniversalCode(universalCode: String) {
         with(prefs.edit()) {
             putString(UNIVERSAL_CODE_PREF, universalCode)
             apply()
@@ -92,7 +93,8 @@ class LoginRepository @Inject constructor(
      *
      * @return The user's universal code
      */
-    private fun getSavedUniversalCode(): String? {
+    @VisibleForTesting
+    fun getSavedUniversalCode(): String? {
         return prefs.getString(UNIVERSAL_CODE_PREF, null)
     }
 
@@ -102,10 +104,8 @@ class LoginRepository @Inject constructor(
      * @param alias Key for accessing the key stored in the Keystore
      * @return The user's password
      */
-    private fun getSavedPassword(alias: String): String? {
-        Log.d(TAG, "Getting password")
-        val keyStoreUtils = KeyStoreUtils(context)
-
+    @VisibleForTesting
+    fun getSavedPassword(alias: String): String? {
         val keyPair = keyStoreUtils.getAndroidKeyStoreAsymmetricKeyPair(alias)
 
         val encryptedPW = prefs.getString(ENCRYPTED_PASSWORD_PREF, null)
@@ -113,11 +113,7 @@ class LoginRepository @Inject constructor(
         val privateKey = keyPair?.private
 
         return if (privateKey != null) {
-            val password = CipherUtils().decrypt(encryptedPW, privateKey)
-
-            Log.d(TAG, "Password successfully decrypted")
-
-            return password
+            return cipherUtils.decrypt(encryptedPW, privateKey)
         } else {
             null
         }
@@ -129,12 +125,9 @@ class LoginRepository @Inject constructor(
      * @param password The password to be saved
      * @param alias Key that would be used to for accessing the key stored in the Keystore
      */
-    private fun savePassword(password: String, alias: String) {
-        val keyStoreUtils = KeyStoreUtils(context)
-
+    @VisibleForTesting
+    fun savePassword(password: String, alias: String) {
         val keyPair = keyStoreUtils.createAndroidKeyStoreAsymmetricKey(alias)
-
-        val cipherUtils = CipherUtils()
 
         keyPair.let {
             val encryptedPW = cipherUtils.encrypt(password, it.public)
@@ -151,8 +144,9 @@ class LoginRepository @Inject constructor(
      *
      * @param alias Key for accessing the key stored in the Keystore
      */
-    private fun deletePassword(alias: String) {
-        KeyStoreUtils(context).deleteAndroidKeyStoreKeyEntry(alias)
+    @VisibleForTesting
+    fun deletePassword(alias: String) {
+        keyStoreUtils.deleteAndroidKeyStoreKeyEntry(alias)
         with(prefs.edit()) {
             remove(ENCRYPTED_PASSWORD_PREF)
             apply()
@@ -164,7 +158,8 @@ class LoginRepository @Inject constructor(
      *
      * @return A [LiveData] whose the value would be true if the process has finished
      */
-    private fun clearDb(): LiveData<Boolean> {
+    @VisibleForTesting
+    fun clearDb(): LiveData<Boolean> {
         val clearFinished = MutableLiveData<Boolean>()
 
         clearFinished.value = false

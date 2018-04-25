@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.ui
+package ca.etsmtl.etsmobile.presentation
 
 import android.support.design.widget.TextInputLayout
 import android.support.test.espresso.Espresso.onView

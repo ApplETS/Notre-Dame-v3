@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.etsmobile.util
+package ca.etsmtl.etsmobile
 
-import ca.etsmtl.etsmobile.AppExecutors
 import java.util.concurrent.Executor
 
 class InstantAppExecutors : AppExecutors(instant, instant, instant) {

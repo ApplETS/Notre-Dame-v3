@@ -1,6 +1,5 @@
-package ca.etsmtl.etsmobile.api
+package ca.etsmtl.etsmobile.data.api
 
-import ca.etsmtl.etsmobile.data.api.ApiResponse
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat

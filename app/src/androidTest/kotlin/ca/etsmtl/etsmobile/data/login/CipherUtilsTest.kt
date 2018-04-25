@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.keystore
+package ca.etsmtl.etsmobile.data.login
 
 import android.util.Base64
 import ca.etsmtl.etsmobile.data.repository.login.CipherUtils

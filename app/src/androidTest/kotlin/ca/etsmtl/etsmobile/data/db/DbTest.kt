@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.etsmobile.db
+package ca.etsmtl.etsmobile.data.db
 
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
-import ca.etsmtl.etsmobile.data.db.AppDatabase
 import org.junit.After
 import org.junit.Before
 

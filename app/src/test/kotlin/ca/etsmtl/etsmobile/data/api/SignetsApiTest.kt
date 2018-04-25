@@ -1,11 +1,9 @@
-package ca.etsmtl.etsmobile.api
+package ca.etsmtl.etsmobile.data.api
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
-import ca.etsmtl.etsmobile.data.api.ApiResponse
-import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.SignetsModel
 import ca.etsmtl.etsmobile.data.model.UserCredentials

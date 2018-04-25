@@ -35,9 +35,13 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
         test {
             java.srcDirs += 'src/test/kotlin'
+            java.srcDirs += 'src/test-common/kotlin'
             res.srcDirs += 'src/test/resources'
         }
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        androidTest {
+            java.srcDirs += 'src/androidTest/kotlin'
+            java.srcDirs += 'src/test-common/kotlin'
+        }
     }
 }
 
@@ -50,7 +54,8 @@ def espresso = '3.0.1'
 def astl = '1.0.1'
 def junit = '4.12'
 def mockito = '2.10.0'
-def mockito_all = '1.10.19'
+def mockito_inline = '2.18.3'
+def dexmaker_mockito = '2.16.0'
 def glide = '4.6.1'
 def dagger = '2.15'
 def moshi = '1.5.0'
@@ -82,7 +87,6 @@ dependencies {
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:${junit}"
-    testImplementation "org.mockito:mockito-all:${mockito_all}"
     testImplementation "android.arch.persistence.room:testing:${room}"
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
@@ -91,6 +95,7 @@ dependencies {
     testImplementation "android.arch.core:core-testing:${lifecycle}"
     testImplementation "org.mockito:mockito-core:${mockito}"
     testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
+    testImplementation "org.mockito:mockito-inline:$mockito_inline"
 
     // Android Testing Support Library's runner and rules
     androidTestImplementation "com.android.support.test:runner:${astl}"
@@ -101,6 +106,8 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresso}"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espresso}"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espresso}"
+    androidTestImplementation "org.mockito:mockito-core:${mockito}"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexmaker_mockito"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:${glide}"

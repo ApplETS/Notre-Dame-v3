@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.keystore
+package ca.etsmtl.etsmobile.data.login
 
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull

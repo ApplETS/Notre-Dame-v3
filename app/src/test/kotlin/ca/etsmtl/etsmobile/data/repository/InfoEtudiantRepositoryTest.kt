@@ -1,9 +1,10 @@
-package ca.etsmtl.etsmobile.repository
+package ca.etsmtl.etsmobile.data.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
+import ca.etsmtl.etsmobile.InstantAppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
@@ -11,9 +12,7 @@ import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.SignetsModel
 import ca.etsmtl.etsmobile.data.model.UserCredentials
-import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.util.ApiUtil
-import ca.etsmtl.etsmobile.util.InstantAppExecutors
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,9 +20,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoMoreInteractions
-import org.mockito.Mockito.never
 
 /**
  * Created by Sonphil on 09-03-18.

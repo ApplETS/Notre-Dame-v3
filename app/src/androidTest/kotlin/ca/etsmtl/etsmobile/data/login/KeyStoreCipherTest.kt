@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.keystore
+package ca.etsmtl.etsmobile.data.login
 
 import android.support.test.InstrumentationRegistry
 import ca.etsmtl.etsmobile.data.repository.login.KeyStoreUtils
