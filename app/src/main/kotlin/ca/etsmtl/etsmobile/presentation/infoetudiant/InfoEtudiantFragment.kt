@@ -48,24 +48,20 @@ class InfoEtudiantFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        val userCredentials = LoginRepository.userCredentials.get()
-
-        if (userCredentials != null) {
-            infoEtudiantViewModel.getInfoEtudiant(userCredentials).observe(this, Observer<Resource<Etudiant>> { res ->
-                if (res != null) {
-                    when (res.status) {
-                        Resource.SUCCESS -> {
-                            info_etudiant_progress_bar.visibility = View.GONE
-                            text_view.text = res.data.toString()
-                        }
-                        Resource.ERROR -> {
-                            info_etudiant_progress_bar.visibility = View.GONE
-                            val txt = res.message + res.data.toString()
-                            text_view.text = txt
-                        }
-                        Resource.LOADING -> {
-                            info_etudiant_progress_bar.visibility = View.VISIBLE
-                        }
+        with (LoginRepository.userCredentials.get()) {
+            infoEtudiantViewModel.getInfoEtudiant(this).observe(this@InfoEtudiantFragment, Observer<Resource<Etudiant>> { res ->
+                when (res?.status) {
+                    Resource.SUCCESS -> {
+                        info_etudiant_progress_bar.visibility = View.GONE
+                        text_view.text = res.data.toString()
+                    }
+                    Resource.ERROR -> {
+                        info_etudiant_progress_bar.visibility = View.GONE
+                        val txt = res.message + res.data.toString()
+                        text_view.text = txt
+                    }
+                    Resource.LOADING -> {
+                        info_etudiant_progress_bar.visibility = View.VISIBLE
                     }
                 }
             })
