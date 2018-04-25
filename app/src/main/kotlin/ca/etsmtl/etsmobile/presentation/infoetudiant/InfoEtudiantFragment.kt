@@ -48,8 +48,10 @@ class InfoEtudiantFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        with (LoginRepository.userCredentials.get()) {
-            infoEtudiantViewModel.getInfoEtudiant(this).observe(this@InfoEtudiantFragment, Observer<Resource<Etudiant>> { res ->
+        val userCredentials = LoginRepository.userCredentials.get()
+
+        if (userCredentials != null) {
+            infoEtudiantViewModel.getInfoEtudiant(userCredentials).observe(this, Observer<Resource<Etudiant>> { res ->
                 when (res?.status) {
                     Resource.SUCCESS -> {
                         info_etudiant_progress_bar.visibility = View.GONE

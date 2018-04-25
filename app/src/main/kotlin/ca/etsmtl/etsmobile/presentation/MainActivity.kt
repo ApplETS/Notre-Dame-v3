@@ -10,7 +10,7 @@ import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.navigation
 
 /**
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
@@ -69,7 +69,7 @@ class MainActivity : DaggerAppCompatActivity() {
         }
 
         if (fragment != null) {
-            fragmentTransaction.replace(content.id, fragment, fragmentTag)
+            fragmentTransaction.replace(R.id.content, fragment, fragmentTag)
             fragmentTransaction.commit()
         }
     }
