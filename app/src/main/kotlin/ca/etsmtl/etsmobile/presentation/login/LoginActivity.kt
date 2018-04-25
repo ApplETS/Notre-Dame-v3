@@ -80,8 +80,8 @@ class LoginActivity : DaggerAppCompatActivity() {
 
     private fun logOut() {
         showProgress(true)
-        loginViewModel.logOut().observe(this, Observer<Boolean> {
-            if (it != null && it) {
+        loginViewModel.logOut().observe(this, Observer<Boolean> { finished ->
+            if (finished != null && finished) {
                 Toast.makeText(this@LoginActivity, R.string.msg_logout_success,
                         Toast.LENGTH_LONG).show()
 

@@ -129,6 +129,8 @@ class LoginViewModel @Inject constructor(
      * Clears the user's data
      *
      * Should be called when the user want to log out
+     *
+     * @return A [LiveData] containing a [Boolean] who will be true when the process has finished
      */
     fun logOut(): LiveData<Boolean> = loginRepository.clearUserData()
 }
