@@ -50,11 +50,12 @@ class SignetsRepositoryTest {
 
     @Test
     fun testGetErrorInsideData() {
-        val etudiant = SignetsModel<Etudiant>()
-        etudiant.data = Etudiant(codePerm = "TEST")
+        val signetsModel = SignetsModel<Etudiant>()
+        val etudiant = Etudiant(codePerm = "TEST")
         val expectedErrorStr = "Test error"
-        etudiant.data.erreur = expectedErrorStr
-        val response = Response.success(etudiant)
+        etudiant.erreur = expectedErrorStr
+        signetsModel.data = etudiant
+        val response = Response.success(signetsModel)
         val apiResponse = ApiResponse<SignetsModel<Etudiant>>(response)
 
         assertEquals(expectedErrorStr, repo.getError(apiResponse))

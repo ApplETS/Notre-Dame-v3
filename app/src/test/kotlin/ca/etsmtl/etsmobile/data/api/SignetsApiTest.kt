@@ -7,8 +7,8 @@ import android.support.annotation.NonNull
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.SignetsModel
 import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.util.ApplicationJsonAdapterFactory
 import ca.etsmtl.etsmobile.util.LiveDataCallAdapterFactory
-import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -44,7 +44,7 @@ class SignetsApiTest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var api: SignetsApi
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val moshi = Moshi.Builder().add(ApplicationJsonAdapterFactory.INSTANCE).build()
 
     @Before
     @Throws(IOException::class)

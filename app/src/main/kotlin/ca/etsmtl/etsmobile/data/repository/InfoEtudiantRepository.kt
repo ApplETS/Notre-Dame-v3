@@ -26,7 +26,7 @@ class InfoEtudiantRepository @Inject constructor(
 
         return object : NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>(appExecutors) {
             override fun saveCallResult(item: SignetsModel<Etudiant>) {
-                dao.insertEtudiant(item.data)
+                item.data?.let { dao.insertEtudiant(it) }
             }
 
             override fun shouldFetch(data: Etudiant?): Boolean {
