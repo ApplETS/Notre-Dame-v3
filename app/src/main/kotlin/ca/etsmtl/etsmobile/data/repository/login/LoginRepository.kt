@@ -36,10 +36,10 @@ class LoginRepository @Inject constructor(
      * Saves the [UserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
      * [UserCredentials.motPasse] to the [SharedPreferences] after encrypting it
      *
-     * @param userCredentials The user credentials
+     * @param userCredentials The user's credentials
      * @return A [LiveData] whose value would be true if the save is complete
      */
-    fun saveUserCredentials(userCredentials: UserCredentials): LiveData<Boolean> {
+    private fun saveUserCredentials(userCredentials: UserCredentials): LiveData<Boolean> {
         val finishedBlnLD = MutableLiveData<Boolean>()
 
         finishedBlnLD.value = false
@@ -52,6 +52,28 @@ class LoginRepository @Inject constructor(
         }
 
         return finishedBlnLD
+    }
+
+    /**
+     * Saves the user's credentials if they haven't been saved before
+     *
+     * Saves the [UserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
+     * [UserCredentials.motPasse] to the [SharedPreferences] after encrypting it
+     *
+     * @param userCredentials The user's credentials
+     * @return A [LiveData] whose value would be true if the save is complete
+     */
+    fun saveUserCredentialsIfNeeded(userCredentials: UserCredentials): LiveData<Boolean> {
+        return if (LoginRepository.userCredentials.get() == null) {
+            LoginRepository.userCredentials.set(userCredentials)
+
+            saveUserCredentials(userCredentials)
+        } else {
+            val finishedLD = MutableLiveData<Boolean>()
+            finishedLD.value = true
+
+            finishedLD
+        }
     }
 
     /**
@@ -69,6 +91,7 @@ class LoginRepository @Inject constructor(
 
             if (motPasse != null) {
                 userCredentials = UserCredentials(codeAccesUniversel, motPasse)
+                LoginRepository.userCredentials.set(userCredentials)
             }
         }
 

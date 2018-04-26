@@ -25,11 +25,9 @@ class LoginViewModel @Inject constructor(
     app: App
 ) : AndroidViewModel(app) {
 
-    private var userCredentialsAlreadySaved = false
-
     /**
-     * This [LiveData] contains the [UserCredentials] set by the user in the UI. A change triggers
-     * [userCredentialsValidLD], [LiveData] created by [Transformations.switchMap].
+     * The [LiveData] purpose is to contains the [UserCredentials] set by the user in the UI. A
+     * change on this [LiveData] triggers a [Transformations.switchMap] on [userCredentialsValidLD]
      */
     private val userCredentialsLD: MutableLiveData<UserCredentials> by lazy {
         MutableLiveData<UserCredentials>()
@@ -47,11 +45,8 @@ class LoginViewModel @Inject constructor(
                 val credentialsValidBooleanLiveData: LiveData<Resource<Boolean>> = getUserCredentialsValidBooleanLiveData(res)
 
                 if (userCredentialsValid(credentialsValidBooleanLiveData.value)) {
-                    LoginRepository.userCredentials.set(userCredentials)
+                    loginRepository.saveUserCredentialsIfNeeded(userCredentials)
                     res.data?.let { logUserFabricCrashlytics(userCredentials, it) }
-
-                    if (!userCredentialsAlreadySaved)
-                        loginRepository.saveUserCredentials(userCredentials)
                 }
 
                 credentialsValidBooleanLiveData
@@ -124,21 +119,13 @@ class LoginViewModel @Inject constructor(
     }
 
     fun getSavedUserCredentials(): UserCredentials? {
-        val userCredentials = loginRepository.getSavedUserCredentials()
-
-        if (!userCredentials?.codeAccesUniversel.isNullOrEmpty() && !userCredentials?.motPasse.isNullOrEmpty()) {
-            userCredentialsAlreadySaved = true
-
-            LoginRepository.userCredentials.set(userCredentials)
-        }
-
-        return userCredentials
+        return loginRepository.getSavedUserCredentials()
     }
 
     /**
      * Clears the user's data
      *
-     * Should be called when the user want to log out
+     * This function should be called when the user want to log out.
      *
      * @return A [LiveData] containing a [Boolean] who will be true when the process has finished
      */

@@ -18,8 +18,11 @@ import org.junit.runners.JUnit4
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.atLeastOnce
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.reset
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoMoreInteractions
+import org.mockito.Mockito.verifyZeroInteractions
 import java.security.KeyPair
 import java.security.PrivateKey
 import java.security.PublicKey
@@ -128,5 +131,34 @@ import kotlin.test.assertTrue
         assertNull(LoginRepository.userCredentials.get())
 
         verify(appDatabase).clearAllTables()
+    }
+
+    @Test
+    fun testSaveUserCredentialsIfNeeded() {
+        val userCredentials = UserCredentials("AM12345", "test")
+        val keyPair = mock(KeyPair::class.java)
+        val publicKey = mock(PublicKey::class.java)
+        `when`(keyPair.public).thenReturn(publicKey)
+        `when`(keyStoreUtils.createAndroidKeyStoreAsymmetricKey(userCredentials.codeAccesUniversel)).thenReturn(keyPair)
+        val encryptedPw = "EncryptedPw"
+        `when`(cipherUtils.encrypt(userCredentials.motPasse, publicKey)).thenReturn(encryptedPw)
+        loginRepository.saveUserCredentialsIfNeeded(userCredentials)
+
+        // Check universal code was saved
+        verify(editor, times(1)).putString("UniversalCodePref", userCredentials.codeAccesUniversel)
+        verify(editor, atLeastOnce()).apply()
+
+        // Check password was saved
+        verify(editor, times(1)).putString("EncryptedPasswordPref", encryptedPw)
+        verify(editor, atLeastOnce()).apply()
+
+        loginRepository.saveUserCredentialsIfNeeded(userCredentials)
+
+        // Make sure there was no interactions since the user's credentials have already been saved
+        verifyNoMoreInteractions(editor)
+        reset(keyStoreUtils)
+        verifyZeroInteractions(keyStoreUtils)
+        reset(cipherUtils)
+        verifyZeroInteractions(cipherUtils)
     }
 }
