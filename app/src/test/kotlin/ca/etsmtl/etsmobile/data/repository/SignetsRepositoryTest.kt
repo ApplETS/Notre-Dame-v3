@@ -53,7 +53,7 @@ class SignetsRepositoryTest {
         val etudiant = SignetsModel<Etudiant>()
         etudiant.data = Etudiant(codePerm = "TEST")
         val expectedErrorStr = "Test error"
-        etudiant.data!!.error = expectedErrorStr
+        etudiant.data.erreur = expectedErrorStr
         val response = Response.success(etudiant)
         val apiResponse = ApiResponse<SignetsModel<Etudiant>>(response)
 
