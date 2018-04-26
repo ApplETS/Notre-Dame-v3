@@ -12,6 +12,7 @@ import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.NetworkUtils
+import com.crashlytics.android.Crashlytics
 import javax.inject.Inject
 
 /**
@@ -47,6 +48,7 @@ class LoginViewModel @Inject constructor(
 
                 if (userCredentialsValid(credentialsValidBooleanLiveData.value)) {
                     LoginRepository.userCredentials.set(userCredentials)
+                    res.data?.let { logUserFabricCrashlytics(userCredentials, it) }
 
                     if (!userCredentialsAlreadySaved)
                         loginRepository.saveUserCredentials(userCredentials)
@@ -55,6 +57,14 @@ class LoginViewModel @Inject constructor(
                 credentialsValidBooleanLiveData
             }
         }
+    }
+
+    /**
+     * Set some user information which will be logged with crashes
+     */
+    private fun logUserFabricCrashlytics(userCredentials: UserCredentials, etudiant: Etudiant) {
+        Crashlytics.setUserIdentifier(userCredentials.codeAccesUniversel)
+        Crashlytics.setUserName(etudiant.prenom + " " + etudiant.nom)
     }
 
     private fun userCredentialsValid(blnResource: Resource<Boolean>?): Boolean {
