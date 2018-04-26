@@ -23,9 +23,13 @@ data class Etudiant(
     var masculin: Boolean? = null,
     @Json(name = "erreur")
     var erreur: String? = null
-) : SignetsData(erreur) {
-        val nom: String?
+) : SignetsData() {
+    val nom: String?
                 get() = n?.trim()
         val prenom: String?
                 get() = p?.trim()
+
+    override fun getError(): String? {
+        return erreur
+    }
 }

@@ -26,7 +26,7 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
     private fun getErrorInsideData(signetsModel: SignetsModel<out SignetsData>?): String? {
         return when (signetsModel?.data == null) {
             true -> "No Data"
-            false -> signetsModel!!.data!!.error
+            false -> signetsModel!!.data!!.getError()
         }
     }
 }
