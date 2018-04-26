@@ -1,11 +1,15 @@
 package ca.etsmtl.etsmobile.presentation
 
+import ca.etsmtl.etsmobile.BuildConfig
 import ca.etsmtl.etsmobile.di.DaggerAppComponent
 import ca.etsmtl.etsmobile.di.DatabaseModule
 import ca.etsmtl.etsmobile.di.NetworkModule
+import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsCore
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
+import io.fabric.sdk.android.Fabric
 
 /**
  * Created by Sonphil on 28-02-18.
@@ -21,6 +25,10 @@ class App : DaggerApplication() {
             return
         }
         LeakCanary.install(this)
+        val crashlyticsCore = CrashlyticsCore.Builder()
+                .disabled(BuildConfig.DEBUG)
+                .build()
+        Fabric.with(this, Crashlytics.Builder().core(crashlyticsCore).build())
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

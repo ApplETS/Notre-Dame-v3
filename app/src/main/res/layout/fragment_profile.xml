@@ -13,4 +13,5 @@
         android:id="@+id/info_etudiant_container"
         android:layout_width="match_parent"
         android:layout_height="150dp" />
+
 </LinearLayout>
