@@ -1,17 +1,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/material_grey_200"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.etsmtl.etsmobile.presentation.profile.ProfileFragment">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/info_etudiant_container"
+    <com.github.florent37.expansionpanel.ExpansionHeader
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="wrap_content"
+        android:background="@color/material_light_white"
+        app:expansion_headerIndicator="@id/header_indicator_info_etudiant"
+        app:expansion_layout="@id/expansion_layout_info_etudiant"
+        app:expansion_toggleOnClick="true">
+
+        <!-- Info Etudiant -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_component_lists_single_line_height"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="@dimen/material_component_lists_text_left_padding"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/material_component_lists_icon_left_padding"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:tint="@color/etsGrisFonce" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/title_info_etudiant"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/header_indicator_info_etudiant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="@dimen/material_component_lists_right_padding"
+                android:layout_marginStart="@dimen/material_component_lists_icon_left_padding"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+        </LinearLayout>
+
+    </com.github.florent37.expansionpanel.ExpansionHeader>
+
+    <com.github.florent37.expansionpanel.ExpansionLayout
+        android:id="@+id/expansion_layout_info_etudiant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_light_white">
+
+        <!-- CONTENT -->
+        <FrameLayout
+            android:id="@+id/container_info_etudiant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.github.florent37.expansionpanel.ExpansionLayout>
 
 </LinearLayout>

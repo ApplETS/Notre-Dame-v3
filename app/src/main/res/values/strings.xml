@@ -24,6 +24,9 @@
     <string name="infos_universal_code">Votre code d\'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.</string>
     <string name="msg_logout_success">Vous vous êtes déconnecté</string>
 
+    <!-- Info Etudiant -->
+    <string name="title_info_etudiant">Renseignements personnels</string>
+
     <!-- More -->
     <string name="more_item_label_log_out">Se déconnecter</string>
     <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>

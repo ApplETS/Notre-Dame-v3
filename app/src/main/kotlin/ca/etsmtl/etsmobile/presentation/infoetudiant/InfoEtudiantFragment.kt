@@ -11,7 +11,7 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_info_etudiant.info_etudiant_progress_bar
+import kotlinx.android.synthetic.main.fragment_info_etudiant.progress_bar_info_etudiant
 import kotlinx.android.synthetic.main.fragment_info_etudiant.text_view
 import javax.inject.Inject
 
@@ -50,16 +50,16 @@ class InfoEtudiantFragment : DaggerFragment() {
         infoEtudiantViewModel.getInfoEtudiant().observe(this, Observer<Resource<Etudiant>> { res ->
             when (res?.status) {
                 Resource.SUCCESS -> {
-                    info_etudiant_progress_bar.visibility = View.GONE
+                    progress_bar_info_etudiant.visibility = View.GONE
                     text_view.text = res.data.toString()
                 }
                 Resource.ERROR -> {
-                    info_etudiant_progress_bar.visibility = View.GONE
+                    progress_bar_info_etudiant.visibility = View.GONE
                     val txt = res.message + res.data.toString()
                     text_view.text = txt
                 }
                 Resource.LOADING -> {
-                    info_etudiant_progress_bar.visibility = View.VISIBLE
+                    progress_bar_info_etudiant.visibility = View.VISIBLE
                 }
             }
         })

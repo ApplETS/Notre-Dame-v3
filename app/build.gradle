@@ -70,6 +70,7 @@ def retrofit = '2.3.0'
 def okhttp = '3.8.0'
 def dimens = '1.4'
 def leakcanary = '1.5.4'
+def expansionpanel = '1.1.1'
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -149,4 +150,7 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
         transitive = true
     }
+
+    // ExpansionPanel
+    implementation "com.github.florent37:expansionpanel:$expansionpanel"
 }
