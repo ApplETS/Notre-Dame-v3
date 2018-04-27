@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_person_black_24dp"
+        android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/title_profile"
         app:showAsAction="always|withText" />
 
