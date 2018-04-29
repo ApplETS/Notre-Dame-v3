@@ -11,7 +11,7 @@ import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.SignetsModel
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import ca.etsmtl.etsmobile.util.ApiUtil
 import org.junit.Before
 import org.junit.Rule
@@ -52,7 +52,7 @@ class InfoEtudiantRepositoryTest {
         val signetsModel = SignetsModel<Etudiant>()
         signetsModel.data = etudiant
         val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.successCall(signetsModel)
-        val userCredentials = UserCredentials("test", "foo")
+        val userCredentials = SignetsUserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
 
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
@@ -95,7 +95,7 @@ class InfoEtudiantRepositoryTest {
         signetsModel.data = etudiant
         val errorMsg = "Test error"
         val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.failCall(errorMsg)
-        val userCredentials = UserCredentials("test", "foo")
+        val userCredentials = SignetsUserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
 
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
@@ -119,7 +119,7 @@ class InfoEtudiantRepositoryTest {
         `when`(dao.getEtudiant()).thenReturn(dbData)
 
         val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
-        val userCredentials = UserCredentials("test", "foo")
+        val userCredentials = SignetsUserCredentials("test", "foo")
 
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, false)
         val observer = mock(Observer::class.java)

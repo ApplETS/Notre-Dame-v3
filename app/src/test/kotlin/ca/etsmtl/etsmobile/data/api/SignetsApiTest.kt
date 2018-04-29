@@ -6,7 +6,7 @@ import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.SignetsModel
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import ca.etsmtl.etsmobile.util.ApplicationJsonAdapterFactory
 import ca.etsmtl.etsmobile.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -86,7 +86,7 @@ class SignetsApiTest {
     fun getInfoEtudiantNoError() {
         enqueueResponse("info_etudiant_no_error.json")
 
-        val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
+        val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(SignetsUserCredentials("AM41234", "test!"))).body!!
 
         assertEquals("Liu", etudiantWrapper.data?.nom)
         assertEquals("Philippe", etudiantWrapper.data?.prenom)
@@ -102,7 +102,7 @@ class SignetsApiTest {
     fun getInfoEtudiantError() {
         enqueueResponse("info_etudiant_error.json")
 
-        val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(UserCredentials("AM41234", "test!"))).body!!
+        val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(SignetsUserCredentials("AM41234", "test!"))).body!!
 
         assertEquals("", etudiantWrapper.data?.nom)
         assertEquals("", etudiantWrapper.data?.prenom)

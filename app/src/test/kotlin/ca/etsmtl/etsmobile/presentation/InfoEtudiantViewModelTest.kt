@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantViewModel
 import ca.etsmtl.etsmobile.util.mock
@@ -27,7 +27,7 @@ class InfoEtudiantViewModelTest {
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private var repository: InfoEtudiantRepository = mock(InfoEtudiantRepository::class.java)
-    private val userCredentials: UserCredentials = UserCredentials("test", "test")
+    private val userCredentials: SignetsUserCredentials = SignetsUserCredentials("test", "test")
     private val infoEtudiantViewModel = InfoEtudiantViewModel(repository, userCredentials)
 
     @Test

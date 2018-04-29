@@ -17,7 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.presentation.login.LoginActivity.Companion.LOGGING_OUT_EXTRA
 import ca.etsmtl.etsmobile.util.KeyboardUtils
@@ -127,7 +127,7 @@ class LoginActivity : DaggerAppCompatActivity() {
      *
      * @param userCredentials the user credentials used to fill the fields
      */
-    private fun initUserCredentialsFields(userCredentials: UserCredentials?) {
+    private fun initUserCredentialsFields(userCredentials: SignetsUserCredentials?) {
         if (userCredentials != null) {
             universal_code.setText(userCredentials.codeAccesUniversel)
             password.setText(userCredentials.motPasse)
@@ -174,7 +174,7 @@ class LoginActivity : DaggerAppCompatActivity() {
             // form field with an error.
             focusView?.requestFocus()
         } else {
-            loginViewModel.setUserCredentials(UserCredentials(universalCodeStr, passwordStr))
+            loginViewModel.setUserCredentials(SignetsUserCredentials(universalCodeStr, passwordStr))
         }
     }
 

@@ -7,7 +7,7 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
@@ -26,18 +26,18 @@ class LoginViewModel @Inject constructor(
 ) : AndroidViewModel(app) {
 
     /**
-     * The [LiveData] purpose is to contains the [UserCredentials] set by the user in the UI. A
+     * The [LiveData] purpose is to contains the [SignetsUserCredentials] set by the user in the UI. A
      * change on this [LiveData] triggers a [Transformations.switchMap] on [userCredentialsValidLD]
      */
-    private val userCredentialsLD: MutableLiveData<UserCredentials> by lazy {
-        MutableLiveData<UserCredentials>()
+    private val userCredentialsLD: MutableLiveData<SignetsUserCredentials> by lazy {
+        MutableLiveData<SignetsUserCredentials>()
     }
 
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered by a change on [userCredentialsLD]. The new
-     * [UserCredentials] are used to check if an instance of [Etudiant] can be fetched. If that is
-     * the case, the new [UserCredentials] are saved and stored in [LoginRepository].
+     * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If that is
+     * the case, the new [SignetsUserCredentials] are saved and stored in [LoginRepository].
      */
     private val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->
@@ -57,7 +57,7 @@ class LoginViewModel @Inject constructor(
     /**
      * Set some user information which will be logged with crashes
      */
-    private fun logUserFabricCrashlytics(userCredentials: UserCredentials, etudiant: Etudiant) {
+    private fun logUserFabricCrashlytics(userCredentials: SignetsUserCredentials, etudiant: Etudiant) {
         Crashlytics.setUserIdentifier(userCredentials.codeAccesUniversel)
         Crashlytics.setUserName(etudiant.prenom + " " + etudiant.nom)
     }
@@ -72,7 +72,7 @@ class LoginViewModel @Inject constructor(
 
     /**
      * Returns a [LiveData] containing a [Boolean] Resource which indicates whether the
-     * [UserCredentials] are valid or not.
+     * [SignetsUserCredentials] are valid or not.
      */
     private fun getUserCredentialsValidBooleanLiveData(res: Resource<Etudiant>?): MutableLiveData<Resource<Boolean>> {
         val resultLiveData = MutableLiveData<Resource<Boolean>>()
@@ -111,14 +111,14 @@ class LoginViewModel @Inject constructor(
      *
      * @param userCredentials the credentials of the user
      */
-    fun setUserCredentials(userCredentials: UserCredentials) {
+    fun setUserCredentials(userCredentials: SignetsUserCredentials) {
         /*
         Triggers [userCredentialsValid]
          */
         this.userCredentialsLD.value = userCredentials
     }
 
-    fun getSavedUserCredentials(): UserCredentials? {
+    fun getSavedUserCredentials(): SignetsUserCredentials? {
         return loginRepository.getSavedUserCredentials()
     }
 

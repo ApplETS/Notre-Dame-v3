@@ -6,8 +6,7 @@ import android.content.SharedPreferences
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.db.AppDatabase
-import ca.etsmtl.etsmobile.data.model.UserCredentials
-import java.util.concurrent.atomic.AtomicReference
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -25,21 +24,18 @@ class LoginRepository @Inject constructor(
         private const val TAG = "LoginRepository"
         private const val UNIVERSAL_CODE_PREF = "UniversalCodePref"
         private const val ENCRYPTED_PASSWORD_PREF = "EncryptedPasswordPref"
-
-        @JvmStatic
-        var userCredentials: AtomicReference<UserCredentials> = AtomicReference()
     }
 
     /**
      * Saves the user's credentials
      *
-     * Saves the [UserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
-     * [UserCredentials.motPasse] to the [SharedPreferences] after encrypting it
+     * Saves the [SignetsUserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
+     * [SignetsUserCredentials.motPasse] to the [SharedPreferences] after encrypting it
      *
      * @param userCredentials The user's credentials
      * @return A [LiveData] whose value would be true if the save is complete
      */
-    private fun saveUserCredentials(userCredentials: UserCredentials): LiveData<Boolean> {
+    private fun saveUserCredentials(userCredentials: SignetsUserCredentials): LiveData<Boolean> {
         val finishedBlnLD = MutableLiveData<Boolean>()
 
         finishedBlnLD.value = false
@@ -57,15 +53,15 @@ class LoginRepository @Inject constructor(
     /**
      * Saves the user's credentials if they haven't been saved before
      *
-     * Saves the [UserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
-     * [UserCredentials.motPasse] to the [SharedPreferences] after encrypting it
+     * Saves the [SignetsUserCredentials.codeAccesUniversel] to the [SharedPreferences] and the
+     * [SignetsUserCredentials.motPasse] to the [SharedPreferences] after encrypting it
      *
      * @param userCredentials The user's credentials
      * @return A [LiveData] whose value would be true if the save is complete
      */
-    fun saveUserCredentialsIfNeeded(userCredentials: UserCredentials): LiveData<Boolean> {
-        return if (LoginRepository.userCredentials.get() == null) {
-            LoginRepository.userCredentials.set(userCredentials)
+    fun saveUserCredentialsIfNeeded(userCredentials: SignetsUserCredentials): LiveData<Boolean> {
+        return if (SignetsUserCredentials.INSTANCE.get() == null) {
+            SignetsUserCredentials.INSTANCE.set(userCredentials)
 
             saveUserCredentials(userCredentials)
         } else {
@@ -77,21 +73,21 @@ class LoginRepository @Inject constructor(
     }
 
     /**
-     * Returns the [UserCredentials.codeAccesUniversel] and the [UserCredentials.motPasse]
+     * Returns the [SignetsUserCredentials.codeAccesUniversel] and the [SignetsUserCredentials.motPasse]
      *
-     * @return The saved [UserCredentials]
+     * @return The saved [SignetsUserCredentials]
      */
-    fun getSavedUserCredentials(): UserCredentials? {
+    fun getSavedUserCredentials(): SignetsUserCredentials? {
         val codeAccesUniversel = getSavedUniversalCode()
 
-        var userCredentials: UserCredentials? = null
+        var userCredentials: SignetsUserCredentials? = null
 
         if (codeAccesUniversel != null) {
             val motPasse = getSavedPassword(codeAccesUniversel)
 
             if (motPasse != null) {
-                userCredentials = UserCredentials(codeAccesUniversel, motPasse)
-                LoginRepository.userCredentials.set(userCredentials)
+                userCredentials = SignetsUserCredentials(codeAccesUniversel, motPasse)
+                SignetsUserCredentials.INSTANCE.set(userCredentials)
             }
         }
 
@@ -206,9 +202,9 @@ class LoginRepository @Inject constructor(
     fun clearUserData(): LiveData<Boolean> {
         prefs.edit().clear().apply()
 
-        deletePassword(LoginRepository.userCredentials.get().codeAccesUniversel)
+        deletePassword(SignetsUserCredentials.INSTANCE.get().codeAccesUniversel)
 
-        LoginRepository.userCredentials.set(null)
+        SignetsUserCredentials.INSTANCE.set(null)
 
         return clearDb()
     }

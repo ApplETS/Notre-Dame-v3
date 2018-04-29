@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import javax.inject.Inject
 
@@ -13,7 +13,7 @@ import javax.inject.Inject
  */
 class InfoEtudiantViewModel @Inject constructor(
     private val repository: InfoEtudiantRepository,
-    private var userCredentials: UserCredentials
+    private var userCredentials: SignetsUserCredentials
 ) : ViewModel() {
 
     private var etudiant: LiveData<Resource<Etudiant>>? = null

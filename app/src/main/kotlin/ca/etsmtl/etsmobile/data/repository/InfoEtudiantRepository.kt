@@ -10,7 +10,7 @@ import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
 import ca.etsmtl.etsmobile.data.model.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.SignetsModel
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -22,7 +22,7 @@ class InfoEtudiantRepository @Inject constructor(
     private val api: SignetsApi,
     private val dao: EtudiantDao
 ) : SignetsRepository(appExecutors) {
-    fun getInfoEtudiant(userCredentials: UserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
+    fun getInfoEtudiant(userCredentials: SignetsUserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 
         return object : NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>(appExecutors) {
             override fun saveCallResult(item: SignetsModel<Etudiant>) {

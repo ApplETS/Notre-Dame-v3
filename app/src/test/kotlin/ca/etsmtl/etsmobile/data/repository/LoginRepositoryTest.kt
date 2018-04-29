@@ -6,7 +6,7 @@ import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.InstantAppExecutors
 import ca.etsmtl.etsmobile.LiveDataTestUtil
 import ca.etsmtl.etsmobile.data.db.AppDatabase
-import ca.etsmtl.etsmobile.data.model.UserCredentials
+import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.login.CipherUtils
 import ca.etsmtl.etsmobile.data.repository.login.KeyStoreUtils
 import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
@@ -119,7 +119,7 @@ import kotlin.test.assertTrue
 
     @Test
     fun testClearUserData() {
-        LoginRepository.userCredentials.set(UserCredentials("test", "test"))
+        SignetsUserCredentials.INSTANCE.set(SignetsUserCredentials("test", "test"))
         `when`(editor.clear()).thenReturn(editor)
         val finishedLD = loginRepository.clearUserData()
         assertTrue(LiveDataTestUtil.getValue(finishedLD))
@@ -128,14 +128,14 @@ import kotlin.test.assertTrue
         verify(editor, times(2)).apply()
         verify(editor).remove("EncryptedPasswordPref")
 
-        assertNull(LoginRepository.userCredentials.get())
+        assertNull(SignetsUserCredentials.INSTANCE.get())
 
         verify(appDatabase).clearAllTables()
     }
 
     @Test
     fun testSaveUserCredentialsIfNeeded() {
-        val userCredentials = UserCredentials("AM12345", "test")
+        val userCredentials = SignetsUserCredentials("AM12345", "test")
         val keyPair = mock(KeyPair::class.java)
         val publicKey = mock(PublicKey::class.java)
         `when`(keyPair.public).thenReturn(publicKey)
