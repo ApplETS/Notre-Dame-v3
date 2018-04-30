@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.model
+package ca.etsmtl.etsmobile.data.model.signets
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

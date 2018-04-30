@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.model
+package ca.etsmtl.etsmobile.data.model.signets
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader

@@ -3,7 +3,7 @@ package ca.etsmtl.etsmobile.data.db
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
-import ca.etsmtl.etsmobile.data.model.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 
 /**
  * Created by Sonphil on 13-03-18.

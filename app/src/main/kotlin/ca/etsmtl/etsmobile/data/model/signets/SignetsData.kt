@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.model
+package ca.etsmtl.etsmobile.data.model.signets
 
 /**
  * Created by Sonphil on 17-03-18.

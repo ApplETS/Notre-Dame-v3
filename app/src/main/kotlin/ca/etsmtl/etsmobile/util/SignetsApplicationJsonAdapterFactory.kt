@@ -1,8 +1,8 @@
 package ca.etsmtl.etsmobile.util
 
-import ca.etsmtl.etsmobile.data.model.SignetsData
-import ca.etsmtl.etsmobile.data.model.SignetsModel
-import ca.etsmtl.etsmobile.data.model.SignetsModelAdapter
+import ca.etsmtl.etsmobile.data.model.signets.SignetsData
+import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
+import ca.etsmtl.etsmobile.data.model.signets.SignetsModelAdapter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

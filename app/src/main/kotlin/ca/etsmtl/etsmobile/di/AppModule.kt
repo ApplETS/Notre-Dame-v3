@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
+import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.login.CipherUtils
 import ca.etsmtl.etsmobile.data.repository.login.KeyStoreUtils
 import ca.etsmtl.etsmobile.presentation.App

@@ -3,8 +3,8 @@ package ca.etsmtl.etsmobile.data.repository
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
-import ca.etsmtl.etsmobile.data.model.SignetsData
-import ca.etsmtl.etsmobile.data.model.SignetsModel
+import ca.etsmtl.etsmobile.data.model.signets.SignetsData
+import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 
 /**
  * Created by Sonphil on 17-03-18.

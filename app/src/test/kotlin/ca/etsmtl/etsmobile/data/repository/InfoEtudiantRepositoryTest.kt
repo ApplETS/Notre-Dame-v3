@@ -8,10 +8,10 @@ import ca.etsmtl.etsmobile.InstantAppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
-import ca.etsmtl.etsmobile.data.model.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.SignetsModel
-import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
+import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
+import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.util.ApiUtil
 import org.junit.Before
 import org.junit.Rule

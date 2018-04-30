@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.data.model.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_info_etudiant.progress_bar_info_etudiant

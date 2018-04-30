@@ -1,7 +1,7 @@
 package ca.etsmtl.etsmobile.data.db
 
 import android.support.test.runner.AndroidJUnit4
-import ca.etsmtl.etsmobile.data.model.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.LiveDataTestUtil.getValue
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertFalse

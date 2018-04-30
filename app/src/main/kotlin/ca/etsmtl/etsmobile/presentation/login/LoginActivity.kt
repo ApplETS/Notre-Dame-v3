@@ -17,7 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.SignetsUserCredentials
+import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.presentation.login.LoginActivity.Companion.LOGGING_OUT_EXTRA
 import ca.etsmtl.etsmobile.util.KeyboardUtils

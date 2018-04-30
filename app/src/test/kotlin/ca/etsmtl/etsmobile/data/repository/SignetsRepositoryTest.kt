@@ -3,8 +3,8 @@ package ca.etsmtl.etsmobile.data.repository
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import ca.etsmtl.etsmobile.InstantAppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
-import ca.etsmtl.etsmobile.data.model.Etudiant
-import ca.etsmtl.etsmobile.data.model.SignetsModel
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
