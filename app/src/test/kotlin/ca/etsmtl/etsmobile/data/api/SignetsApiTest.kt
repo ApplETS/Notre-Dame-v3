@@ -5,6 +5,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.HoraireExamenFinal
+import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.SignetsData
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
@@ -85,6 +87,78 @@ class SignetsApiTest {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
+    fun getListeProgrammesNoError() {
+        enqueueResponse("liste_programmes_no_error.json")
+
+        val wrapper: SignetsModel<ListeProgrammes> = getValue(api.listeProgrammes(SignetsUserCredentials("AM41234", "test!"))).body!!
+        val errorStr = wrapper.data?.erreur
+        assertTrue { errorStr == null || errorStr.isEmpty() }
+
+        val listeProgrammes: ListeProgrammes = wrapper.data!!
+        val programmes = listeProgrammes.liste!!
+        val p0 = programmes[0]!!
+        assertEquals("0725", p0.code)
+        assertEquals("Microprogramme de 1er cycle en enseignement coopératif I", p0.libelle)
+        assertEquals("", p0.profil)
+        assertEquals("diplômé", p0.statut)
+        assertEquals("É2016", p0.sessionDebut)
+        assertEquals("É2016", p0.sessionFin)
+        assertEquals("", p0.moyenne)
+        assertEquals(0, p0.nbEquivalences)
+        assertEquals(1, p0.nbCrsReussis)
+        assertEquals(0, p0.nbCrsEchoues)
+        assertEquals(0, p0.nbCreditsInscrits)
+        assertEquals(9, p0.nbCreditsCompletes)
+        assertEquals(9, p0.nbCreditsPotentiels)
+        assertEquals(0, p0.nbCreditsRecherche)
+        assertEquals("SignetsPourEtudiants.SignetsMobile+listeDesProgrammes", wrapper.data!!.type)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun getListeProgrammesError() {
+        enqueueResponse("liste_programmes_error.json")
+
+        val wrapper: SignetsModel<ListeProgrammes> = getValue(api.listeProgrammes(SignetsUserCredentials("AM41234", "test!"))).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertEquals("Code d'accès ou mot de passe invalide", errorStr)
+        assertEquals("SignetsPourEtudiants.SignetsMobile+listeDesProgrammes", wrapper.data!!.type)
+        assertEquals(0, wrapper.data!!.liste!!.size)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun getListeHoraireExamensFinauxNoError() {
+        enqueueResponse("liste_horaire_examens_finaux_no_error.json")
+
+        val wrapper: SignetsModel<ListeHoraireExamensFinaux> = getValue(api.listeHoraireExamensFinaux("AM41234", "test!", "É2018")).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertTrue { errorStr == null || errorStr.isEmpty() }
+        val listeHoraireExamensFinaux = wrapper.data!!
+        assertEquals(4, listeHoraireExamensFinaux.listeHoraire!!.size)
+        val horaireExamenFinal0: HoraireExamenFinal = listeHoraireExamensFinaux.listeHoraire!![0]!!
+        assertEquals("GPE450", horaireExamenFinal0.sigle)
+        assertEquals("01", horaireExamenFinal0.groupe)
+        assertEquals("2018-04-13", horaireExamenFinal0.dateExamen)
+        assertEquals("13:30", horaireExamenFinal0.heureDebut)
+        assertEquals("16:30", horaireExamenFinal0.heureFin)
+        assertEquals("A-1302", horaireExamenFinal0.local)
+        assertEquals("SignetsPourEtudiants.SignetsMobile+listeHoraireExamensFinaux", wrapper.data!!.type)
+
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun getListeHoraireExamensFinauxError() {
+        enqueueResponse("liste_horaire_examens_finaux_error.json")
+        val wrapper: SignetsModel<ListeHoraireExamensFinaux> = getValue(api.listeHoraireExamensFinaux("AM41234", "test!", "É2018")).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertEquals("Code d'accès ou mot de passe invalide", errorStr)
+        assertEquals("SignetsPourEtudiants.SignetsMobile+listeHoraireExamensFinaux", wrapper.data!!.type)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
     fun getInfoEtudiantNoError() {
         enqueueResponse("info_etudiant_no_error.json")
 
@@ -112,46 +186,6 @@ class SignetsApiTest {
         assertEquals("", etudiantWrapper.data?.soldeTotal)
         val errorStr = etudiantWrapper.data?.erreur
         assertEquals("Code d'accès ou mot de passe invalide", errorStr)
-    }
-
-    @Test
-    @Throws(IOException::class, InterruptedException::class)
-    fun getListeProgrammesNoError() {
-        enqueueResponse("liste_programmes_no_error.json")
-
-        val wrapper: SignetsModel<ListeProgrammes> = getValue(api.listeProgrammes(SignetsUserCredentials("AM41234", "test!"))).body!!
-        val errorStr = wrapper.data?.erreur
-        assertTrue { errorStr == null || errorStr.isEmpty() }
-
-        val listeProgrammes: ListeProgrammes = wrapper.data!!
-        val programmes = listeProgrammes.liste!!
-        val p0 = programmes[0]!!
-        assertEquals("0725", p0.code)
-        assertEquals("Microprogramme de 1er cycle en enseignement coopératif I", p0.libelle)
-        assertEquals("", p0.profil)
-        assertEquals("diplômé", p0.statut)
-        assertEquals("É2016", p0.sessionDebut)
-        assertEquals("É2016", p0.sessionFin)
-        assertEquals("", p0.moyenne)
-        assertEquals(0, p0.nbEquivalences)
-        assertEquals(1, p0.nbCrsReussis)
-        assertEquals(0, p0.nbCrsEchoues)
-        assertEquals(0, p0.nbCreditsInscrits)
-        assertEquals(9, p0.nbCreditsCompletes)
-        assertEquals(9, p0.nbCreditsPotentiels)
-        assertEquals(0, p0.nbCreditsRecherche)
-    }
-
-    @Test
-    @Throws(IOException::class, InterruptedException::class)
-    fun getListeProgrammesError() {
-        enqueueResponse("liste_programmes_error.json")
-
-        val wrapper: SignetsModel<ListeProgrammes> = getValue(api.listeProgrammes(SignetsUserCredentials("AM41234", "test!"))).body!!
-        val errorStr = wrapper.data!!.erreur
-        assertEquals("Code d'accès ou mot de passe invalide", errorStr)
-        assertEquals("SignetsPourEtudiants.SignetsMobile+listeDesProgrammes", wrapper.data!!.type)
-        assertEquals(0, wrapper.data!!.liste!!.size)
     }
 
     @Throws(IOException::class)

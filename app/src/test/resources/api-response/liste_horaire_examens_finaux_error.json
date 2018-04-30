@@ -1,0 +1,7 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeHoraireExamensFinaux",
+        "listeHoraire": [],
+        "erreur": "Code d'accès ou mot de passe invalide"
+    }
+}
