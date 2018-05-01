@@ -21,7 +21,7 @@ class NetworkUtils {
 
             val activeNetwork = cm.activeNetworkInfo
 
-            return activeNetwork != null && activeNetwork.isConnectedOrConnecting
+            return activeNetwork != null && activeNetwork.isConnected
         }
     }
 }

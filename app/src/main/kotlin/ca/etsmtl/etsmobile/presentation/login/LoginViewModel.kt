@@ -5,14 +5,15 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.NetworkUtils
 import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
 
 /**
@@ -58,8 +59,10 @@ class LoginViewModel @Inject constructor(
      * Set some user information which will be logged with crashes
      */
     private fun logUserFabricCrashlytics(userCredentials: SignetsUserCredentials, etudiant: Etudiant) {
-        Crashlytics.setUserIdentifier(userCredentials.codeAccesUniversel)
-        Crashlytics.setUserName(etudiant.prenom + " " + etudiant.nom)
+        if (Fabric.isInitialized()) {
+            Crashlytics.setUserIdentifier(userCredentials.codeAccesUniversel)
+            Crashlytics.setUserName(etudiant.prenom + " " + etudiant.nom)
+        }
     }
 
     private fun userCredentialsValid(blnResource: Resource<Boolean>?): Boolean {
@@ -112,10 +115,10 @@ class LoginViewModel @Inject constructor(
      * @param userCredentials the credentials of the user
      */
     fun setUserCredentials(userCredentials: SignetsUserCredentials) {
-        /*
-        Triggers [userCredentialsValid]
-         */
-        this.userCredentialsLD.value = userCredentials
+        if (userCredentialsLD.value != userCredentials) {
+            /** Triggers [userCredentialsValidLD] **/
+            userCredentialsLD.value = userCredentials
+        }
     }
 
     fun getSavedUserCredentials(): SignetsUserCredentials? {
