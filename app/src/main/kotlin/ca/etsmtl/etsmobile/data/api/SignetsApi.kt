@@ -25,9 +25,11 @@ interface SignetsApi {
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @FormUrlEncoded
     @POST("listeHoraireExamensFin")
-    fun listeHoraireExamensFinaux(@Field("codeAccesUniversel") codeAccesUniversel: String,
-                                  @Field("motPasse") motPasse: String,
-                                  @Field("pSession") pSession: String): LiveData<ApiResponse<SignetsModel<ListeHoraireExamensFinaux>>>
+    fun listeHoraireExamensFinaux(
+        @Field("codeAccesUniversel") codeAccesUniversel: String,
+        @Field("motPasse") motPasse: String,
+        @Field("pSession") pSession: String
+    ): LiveData<ApiResponse<SignetsModel<ListeHoraireExamensFinaux>>>
 
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("infoEtudiant")

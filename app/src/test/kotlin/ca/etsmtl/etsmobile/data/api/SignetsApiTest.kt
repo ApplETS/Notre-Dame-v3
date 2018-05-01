@@ -144,7 +144,6 @@ class SignetsApiTest {
         assertEquals("16:30", horaireExamenFinal0.heureFin)
         assertEquals("A-1302", horaireExamenFinal0.local)
         assertEquals("SignetsPourEtudiants.SignetsMobile+listeHoraireExamensFinaux", wrapper.data!!.type)
-
     }
 
     @Test
