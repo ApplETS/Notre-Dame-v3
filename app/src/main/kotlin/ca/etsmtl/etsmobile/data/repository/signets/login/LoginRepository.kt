@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.repository.login
+package ca.etsmtl.etsmobile.data.repository.signets.login
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -14,11 +14,11 @@ import javax.inject.Inject
  */
 
 class LoginRepository @Inject constructor(
-    private val keyStoreUtils: KeyStoreUtils,
-    private val cipherUtils: CipherUtils,
-    private val prefs: SharedPreferences,
-    private val appExecutors: AppExecutors,
-    private val db: AppDatabase
+        private val keyStoreUtils: KeyStoreUtils,
+        private val cipherUtils: CipherUtils,
+        private val prefs: SharedPreferences,
+        private val appExecutors: AppExecutors,
+        private val db: AppDatabase
 ) {
     companion object {
         private const val TAG = "LoginRepository"

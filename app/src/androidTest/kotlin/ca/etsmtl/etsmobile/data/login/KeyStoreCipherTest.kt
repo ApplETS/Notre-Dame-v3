@@ -1,7 +1,7 @@
 package ca.etsmtl.etsmobile.data.login
 
 import android.support.test.InstrumentationRegistry
-import ca.etsmtl.etsmobile.data.repository.login.KeyStoreUtils
+import ca.etsmtl.etsmobile.data.repository.signets.login.KeyStoreUtils
 import org.junit.After
 import org.junit.Before
 

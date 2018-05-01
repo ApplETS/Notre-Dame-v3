@@ -9,8 +9,8 @@ import android.net.NetworkInfo
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
-import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
+import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.etsmobile.data.repository.signets.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.etsmobile.util.mock
 import org.hamcrest.CoreMatchers.notNullValue

@@ -8,8 +8,8 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.data.repository.InfoEtudiantRepository
-import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
+import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.etsmobile.data.repository.signets.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.NetworkUtils
 import com.crashlytics.android.Crashlytics
@@ -21,9 +21,9 @@ import javax.inject.Inject
  */
 
 class LoginViewModel @Inject constructor(
-    private val repository: InfoEtudiantRepository,
-    private val loginRepository: LoginRepository,
-    app: App
+        private val repository: InfoEtudiantRepository,
+        private val loginRepository: LoginRepository,
+        app: App
 ) : AndroidViewModel(app) {
 
     /**

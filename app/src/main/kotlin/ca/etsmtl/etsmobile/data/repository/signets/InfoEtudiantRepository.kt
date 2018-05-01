@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.repository
+package ca.etsmtl.etsmobile.data.repository.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -11,6 +11,8 @@ import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.etsmobile.data.repository.NetworkBoundResource
+import ca.etsmtl.etsmobile.data.repository.SignetsRepository
 import javax.inject.Inject
 
 /**

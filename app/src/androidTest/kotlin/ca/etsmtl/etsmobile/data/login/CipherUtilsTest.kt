@@ -1,7 +1,7 @@
 package ca.etsmtl.etsmobile.data.login
 
 import android.util.Base64
-import ca.etsmtl.etsmobile.data.repository.login.CipherUtils
+import ca.etsmtl.etsmobile.data.repository.signets.login.CipherUtils
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertTrue

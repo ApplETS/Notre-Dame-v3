@@ -12,6 +12,7 @@ import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.util.ApiUtil
 import org.junit.Before
 import org.junit.Rule

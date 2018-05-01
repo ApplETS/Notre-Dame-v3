@@ -7,9 +7,9 @@ import ca.etsmtl.etsmobile.InstantAppExecutors
 import ca.etsmtl.etsmobile.LiveDataTestUtil
 import ca.etsmtl.etsmobile.data.db.AppDatabase
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.data.repository.login.CipherUtils
-import ca.etsmtl.etsmobile.data.repository.login.KeyStoreUtils
-import ca.etsmtl.etsmobile.data.repository.login.LoginRepository
+import ca.etsmtl.etsmobile.data.repository.signets.login.CipherUtils
+import ca.etsmtl.etsmobile.data.repository.signets.login.KeyStoreUtils
+import ca.etsmtl.etsmobile.data.repository.signets.login.LoginRepository
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
