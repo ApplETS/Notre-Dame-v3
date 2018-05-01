@@ -29,7 +29,5 @@ data class Etudiant(
         val prenom: String?
                 get() = p?.trim()
 
-    override fun getError(): String? {
-        return erreur
-    }
+    override fun getError() = erreur
 }

@@ -6,6 +6,7 @@ import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.HoraireExamenFinal
+import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.SignetsData
@@ -87,7 +88,7 @@ class SignetsApiTest {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
-    fun getListeProgrammesNoError() {
+    fun testGetListeProgrammesNoError() {
         enqueueResponse("liste_programmes_no_error.json")
 
         val wrapper: SignetsModel<ListeProgrammes> = getValue(api.listeProgrammes(SignetsUserCredentials("AM41234", "test!"))).body!!
@@ -116,7 +117,7 @@ class SignetsApiTest {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
-    fun getListeProgrammesError() {
+    fun testGetListeProgrammesError() {
         enqueueResponse("liste_programmes_error.json")
 
         val wrapper: SignetsModel<ListeProgrammes> = getValue(api.listeProgrammes(SignetsUserCredentials("AM41234", "test!"))).body!!
@@ -128,7 +129,7 @@ class SignetsApiTest {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
-    fun getListeHoraireExamensFinauxNoError() {
+    fun testGetListeHoraireExamensFinauxNoError() {
         enqueueResponse("liste_horaire_examens_finaux_no_error.json")
 
         val wrapper: SignetsModel<ListeHoraireExamensFinaux> = getValue(api.listeHoraireExamensFinaux("AM41234", "test!", "É2018")).body!!
@@ -148,7 +149,7 @@ class SignetsApiTest {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
-    fun getListeHoraireExamensFinauxError() {
+    fun testGetListeHoraireExamensFinauxError() {
         enqueueResponse("liste_horaire_examens_finaux_error.json")
         val wrapper: SignetsModel<ListeHoraireExamensFinaux> = getValue(api.listeHoraireExamensFinaux("AM41234", "test!", "É2018")).body!!
         val errorStr = wrapper.data!!.erreur
@@ -158,7 +159,37 @@ class SignetsApiTest {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
-    fun getInfoEtudiantNoError() {
+    fun testGetListeCoursIntervalleSessionsNoError() {
+        enqueueResponse("liste_cours_intervalle_sessions_no_error.json")
+        val wrapper: SignetsModel<ListeDeCours> = getValue(api.listeCoursIntervalleSessions("AM41234", "test!", "H2018", "E2018")).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertTrue { errorStr == null || errorStr.isEmpty() }
+        val listeDeCours = wrapper.data!!
+        assertEquals(6, listeDeCours.liste!!.size)
+        with(listeDeCours.liste!![0]) {
+            assertEquals("GPE450", this.sigle)
+            assertEquals("01", this.groupe)
+            assertEquals("H2018", this.session)
+            assertEquals("7365", this.programmeEtudes)
+            assertEquals("A+", this.cote)
+            assertEquals(3, this.nbCredits)
+            assertEquals("Gestion du personnel et relations industrielles", this.titreCours)
+        }
+        assertEquals("SignetsPourEtudiants.SignetsMobile+ListeDeCours", listeDeCours.type)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeCoursIntervalleSessionsError() {
+        enqueueResponse("liste_cours_intervalle_sessions_error.json")
+        val wrapper: SignetsModel<ListeDeCours> = getValue(api.listeCoursIntervalleSessions("AM41234", "test!", "H2018t", "E2018")).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertEquals("Session de début invalide:H2018g. L'année doit avoir 4 chiffres.", errorStr)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetInfoEtudiantNoError() {
         enqueueResponse("info_etudiant_no_error.json")
 
         val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(SignetsUserCredentials("AM41234", "test!"))).body!!
@@ -174,7 +205,7 @@ class SignetsApiTest {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
-    fun getInfoEtudiantError() {
+    fun testGetInfoEtudiantError() {
         enqueueResponse("info_etudiant_error.json")
 
         val etudiantWrapper: SignetsModel<Etudiant> = getValue(api.infoEtudiant(SignetsUserCredentials("AM41234", "test!"))).body!!

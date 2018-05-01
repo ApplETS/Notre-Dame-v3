@@ -1,0 +1,62 @@
+﻿{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+ListeDeCours",
+        "liste": [
+            {
+                "sigle": "GPE450",
+                "groupe": "01",
+                "session": "H2018",
+                "programmeEtudes": "7365",
+                "cote": "A+",
+                "nbCredits": 3,
+                "titreCours": "Gestion du personnel et relations industrielles"
+            },
+            {
+                "sigle": "LOG530",
+                "groupe": "01",
+                "session": "H2018",
+                "programmeEtudes": "7365",
+                "cote": "A",
+                "nbCredits": 3,
+                "titreCours": "Réingénierie du logiciel"
+            },
+            {
+                "sigle": "LOG710",
+                "groupe": "01",
+                "session": "H2018",
+                "programmeEtudes": "7365",
+                "cote": "A-",
+                "nbCredits": 3,
+                "titreCours": "Principes systèmes d'expl. et programmation système"
+            },
+            {
+                "sigle": "PHY332",
+                "groupe": "08",
+                "session": "H2018",
+                "programmeEtudes": "7365",
+                "cote": "B+",
+                "nbCredits": 4,
+                "titreCours": "Électricité et magnétisme"
+            },
+            {
+                "sigle": "GTI785",
+                "groupe": "01",
+                "session": "É2018",
+                "programmeEtudes": "7365",
+                "cote": "C",
+                "nbCredits": 3,
+                "titreCours": "Systèmes d'applications mobiles"
+            },
+            {
+                "sigle": "MAT472",
+                "groupe": "02",
+                "session": "É2018",
+                "programmeEtudes": "7365",
+                "cote": "D",
+                "nbCredits": 4,
+                "titreCours": "Algèbre linéaire et géométrie de l'espace"
+            }
+        ],
+        "erreur": ""
+    }
+}

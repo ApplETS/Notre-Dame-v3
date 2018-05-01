@@ -6,10 +6,10 @@ import se.ansman.kotshi.JsonSerializable
 
 @Entity
 @JsonSerializable
-data class ListeProgrammes(
-    @Json(name = "__type") var type: String? = "",
-    @Json(name = "liste") var liste: List<Programme?>? = listOf(),
-    @Json(name = "erreur") var erreur: String? = ""
+data class ListeDeCours(
+    @Json(name = "__type") val type: String? = "",
+    @Json(name = "liste") val liste: List<Cours>? = listOf(),
+    @Json(name = "erreur") val erreur: String? = ""
 ) : SignetsData() {
     override fun getError() = erreur
 }

@@ -21,9 +21,9 @@ import javax.inject.Inject
  */
 
 class LoginViewModel @Inject constructor(
-        private val repository: InfoEtudiantRepository,
-        private val loginRepository: LoginRepository,
-        app: App
+    private val repository: InfoEtudiantRepository,
+    private val loginRepository: LoginRepository,
+    app: App
 ) : AndroidViewModel(app) {
 
     /**

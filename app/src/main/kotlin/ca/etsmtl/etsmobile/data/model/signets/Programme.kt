@@ -1,12 +1,14 @@
 package ca.etsmtl.etsmobile.data.model.signets
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.squareup.moshi.Json
 import se.ansman.kotshi.JsonSerializable
 
 @Entity
 @JsonSerializable
 data class Programme(
+    @PrimaryKey
     @Json(name = "code") var code: String? = "",
     @Json(name = "libelle") var libelle: String? = "",
     @Json(name = "profil") var profil: String? = "",

@@ -2,8 +2,8 @@ package ca.etsmtl.etsmobile.presentation.infoetudiant
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
 import javax.inject.Inject
@@ -12,8 +12,8 @@ import javax.inject.Inject
  * Created by Sonphil on 15-03-18.
  */
 class InfoEtudiantViewModel @Inject constructor(
-        private val repository: InfoEtudiantRepository,
-        private var userCredentials: SignetsUserCredentials
+    private val repository: InfoEtudiantRepository,
+    private var userCredentials: SignetsUserCredentials
 ) : ViewModel() {
 
     private var etudiant: LiveData<Resource<Etudiant>>? = null
