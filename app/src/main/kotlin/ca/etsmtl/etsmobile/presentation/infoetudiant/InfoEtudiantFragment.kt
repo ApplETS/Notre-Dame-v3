@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_info_etudiant.progress_bar_info_etudiant
-import kotlinx.android.synthetic.main.fragment_info_etudiant.text_view
+import kotlinx.android.synthetic.main.fragment_info_etudiant.recycler_view_info_etudiant
 import javax.inject.Inject
 
 /**
@@ -26,6 +26,7 @@ class InfoEtudiantFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var adapter: InfoEtudiantAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,14 @@ class InfoEtudiantFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpRecycleView()
         subscribeUI()
+    }
+
+    private fun setUpRecycleView() {
+        adapter = InfoEtudiantAdapter()
+        recycler_view_info_etudiant.adapter = adapter
+        recycler_view_info_etudiant.setHasFixedSize(true)
     }
 
     companion object {
@@ -51,12 +59,11 @@ class InfoEtudiantFragment : DaggerFragment() {
             when (res?.status) {
                 Resource.SUCCESS -> {
                     progress_bar_info_etudiant.visibility = View.GONE
-                    text_view.text = res.data.toString()
+                    res.data?.let { adapter.setEtudiant(it) }
                 }
                 Resource.ERROR -> {
                     progress_bar_info_etudiant.visibility = View.GONE
-                    val txt = res.message + res.data.toString()
-                    text_view.text = txt
+                    res.data?.let { adapter.setEtudiant(it) }
                 }
                 Resource.LOADING -> {
                     progress_bar_info_etudiant.visibility = View.VISIBLE

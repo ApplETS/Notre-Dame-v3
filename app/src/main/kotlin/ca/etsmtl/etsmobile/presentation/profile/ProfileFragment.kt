@@ -45,7 +45,7 @@ class ProfileFragment : Fragment() {
             infoEtudiantFragment = InfoEtudiantFragment.newInstance()
 
         with(childFragmentManager.beginTransaction()) {
-            replace(R.id.container_info_etudiant, infoEtudiantFragment)
+            replace(R.id.container_info_etudiant, infoEtudiantFragment, INFO_ETUDIANT_FRAGMENT_TAG)
             commit()
         }
     }

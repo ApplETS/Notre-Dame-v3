@@ -26,6 +26,9 @@
 
     <!-- Info Etudiant -->
     <string name="title_info_etudiant">Renseignements personnels</string>
+    <string name="label_name_info_etudiant">Nom</string>
+    <string name="label_permanent_code_info_etudiant">Code permanent</string>
+    <string name="label_balance_info_etudiant">Solde</string>
 
     <!-- More -->
     <string name="more_item_label_log_out">Se déconnecter</string>

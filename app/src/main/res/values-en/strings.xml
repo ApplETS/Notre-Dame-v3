@@ -25,6 +25,9 @@
 
     <!-- Info Etudiant -->
     <string name="title_info_etudiant">Personal Information</string>
+    <string name="label_name_info_etudiant">Name</string>
+    <string name="label_permanent_code_info_etudiant">Permanent Code</string>
+    <string name="label_balance_info_etudiant">Balance</string>
 
     <!-- More -->
     <string name="more_item_label_log_out">Log out</string>
