@@ -11,9 +11,9 @@ data class Etudiant(
     @Json(name = "__type")
     var type: String? = null,
     @Json(name = "nom")
-    var n: String? = null,
+    var untrimmedNom: String? = null,
     @Json(name = "prenom")
-    var p: String? = null,
+    var untrimmedPrenom: String? = null,
     @PrimaryKey
     @Json(name = "codePerm")
     var codePerm: String,
@@ -25,9 +25,9 @@ data class Etudiant(
     var erreur: String? = null
 ) : SignetsData() {
     val nom: String?
-                get() = n?.trim()
-        val prenom: String?
-                get() = p?.trim()
+                get() = untrimmedNom?.trim()
+    val prenom: String?
+                get() = untrimmedPrenom?.trim()
 
     override fun getError() = erreur
 }
