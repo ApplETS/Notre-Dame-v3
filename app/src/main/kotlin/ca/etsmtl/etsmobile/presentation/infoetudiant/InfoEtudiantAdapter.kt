@@ -32,7 +32,7 @@ class InfoEtudiantAdapter : RecyclerView.Adapter<InfoEtudiantAdapter.ViewHolder>
             when (position) {
                 INFORMATION.NAME.ordinal -> setInfo(holder, R.string.label_name_info_etudiant, etudiant.prenom + " " + etudiant.nom)
                 INFORMATION.PERMANENT_CODE.ordinal -> setInfo(holder, R.string.label_permanent_code_info_etudiant, etudiant.codePerm)
-                INFORMATION.BALANCE.ordinal -> setInfo(holder, R.string.label_balance_info_etudiant, etudiant.soldeTotal)
+                INFORMATION.BALANCE.ordinal -> setInfo(holder, R.string.label_balance_info_etudiant, etudiant.soldeTotal ?: "")
             }
         }
     }

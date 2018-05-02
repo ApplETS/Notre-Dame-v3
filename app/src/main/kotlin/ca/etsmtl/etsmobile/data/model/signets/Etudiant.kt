@@ -18,7 +18,7 @@ data class Etudiant(
     @Json(name = "codePerm")
     var codePerm: String,
     @Json(name = "soldeTotal")
-    var soldeTotal: String,
+    var soldeTotal: String? = null,
     @Json(name = "masculin")
     var masculin: Boolean? = null,
     @Json(name = "erreur")

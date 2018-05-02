@@ -36,6 +36,9 @@ class ProfileFragment : Fragment() {
             if (expanded)
                 addInfoEtudiantFragment()
         }
+
+        if (expansion_layout_info_etudiant.isExpanded)
+            addInfoEtudiantFragment()
     }
 
     private fun addInfoEtudiantFragment() {
