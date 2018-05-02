@@ -1,8 +1,8 @@
 package ca.etsmtl.etsmobile.data.db
 
 import android.support.test.runner.AndroidJUnit4
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.LiveDataTestUtil.getValue
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertNotNull
@@ -23,8 +23,8 @@ class EtudiantDaoTest : DbTest() {
         val etudiantFromDb = getValue(db.etudiantDao().getEtudiant())
         assertNotNull(etudiantFromDb)
         assertEquals("fooType", etudiantFromDb.type)
-        assertEquals("Luu", etudiantFromDb.n)
-        assertEquals(etudiantFromDb.p, "Phil")
+        assertEquals("Luu", etudiantFromDb.nom)
+        assertEquals(etudiantFromDb.prenom, "Phil")
         assertEquals("LUUP12345678", etudiantFromDb.codePerm)
         assertEquals("123,45$", etudiantFromDb.soldeTotal)
         assertTrue(etudiantFromDb.masculin!!)
@@ -41,8 +41,8 @@ class EtudiantDaoTest : DbTest() {
         val etudiantFromDb = getValue(db.etudiantDao().getEtudiant())
         assertNotNull(etudiantFromDb)
         assertEquals("fooType", etudiantFromDb.type)
-        assertEquals("Luu", etudiantFromDb.n)
-        assertEquals(etudiantFromDb.p, "Phil")
+        assertEquals("Luu", etudiantFromDb.nom)
+        assertEquals(etudiantFromDb.prenom, "Phil")
         assertEquals("LUUP12345678", etudiantFromDb.codePerm)
         assertEquals("999,45$", etudiantFromDb.soldeTotal)
         assertTrue(etudiantFromDb.masculin!!)
