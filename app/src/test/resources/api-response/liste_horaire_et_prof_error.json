@@ -1,0 +1,8 @@
+﻿{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeDesActivitesEtProf",
+        "listeActivites": [],
+        "listeEnseignants": [],
+        "erreur": "Session invalide: 42016"
+    }
+}

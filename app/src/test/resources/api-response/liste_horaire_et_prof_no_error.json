@@ -1,0 +1,172 @@
+﻿{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeDesActivitesEtProf",
+        "listeActivites": [
+            {
+                "sigle": "LOG210",
+                "groupe": "02",
+                "jour": "1",
+                "journee": "Lundi",
+                "codeActivite": "C",
+                "nomActivite": "Activité de cours",
+                "activitePrincipale": "Oui",
+                "heureDebut": "08:45",
+                "heureFin": "12:15",
+                "local": "A-1302",
+                "titreCours": "Analyse et conception de logiciels"
+            },
+            {
+                "sigle": "LOG410",
+                "groupe": "02",
+                "jour": "1",
+                "journee": "Lundi",
+                "codeActivite": "L",
+                "nomActivite": "Laboratoire",
+                "activitePrincipale": "Non",
+                "heureDebut": "18:00",
+                "heureFin": "20:00",
+                "local": "A-3412",
+                "titreCours": "Analyse de besoins et spécifications"
+            },
+            {
+                "sigle": "LOG210",
+                "groupe": "02",
+                "jour": "3",
+                "journee": "Mercredi",
+                "codeActivite": "N",
+                "nomActivite": "Laboratoire (2 sous-groupes)",
+                "activitePrincipale": "Non",
+                "heureDebut": "08:30",
+                "heureFin": "11:30",
+                "local": "A-3322",
+                "titreCours": "Analyse et conception de logiciels"
+            },
+            {
+                "sigle": "LOG210",
+                "groupe": "02",
+                "jour": "3",
+                "journee": "Mercredi",
+                "codeActivite": "N",
+                "nomActivite": "Laboratoire (2 sous-groupes)",
+                "activitePrincipale": "Non",
+                "heureDebut": "08:30",
+                "heureFin": "11:30",
+                "local": "A-3326",
+                "titreCours": "Analyse et conception de logiciels"
+            },
+            {
+                "sigle": "GTI610",
+                "groupe": "01",
+                "jour": "3",
+                "journee": "Mercredi",
+                "codeActivite": "L",
+                "nomActivite": "Laboratoire",
+                "activitePrincipale": "Non",
+                "heureDebut": "13:30",
+                "heureFin": "16:30",
+                "local": "A-3324",
+                "titreCours": "Réseaux de télécommunication"
+            },
+            {
+                "sigle": "LOG410",
+                "groupe": "02",
+                "jour": "3",
+                "journee": "Mercredi",
+                "codeActivite": "C",
+                "nomActivite": "Activité de cours",
+                "activitePrincipale": "Oui",
+                "heureDebut": "18:00",
+                "heureFin": "21:30",
+                "local": "A-1752",
+                "titreCours": "Analyse de besoins et spécifications"
+            },
+            {
+                "sigle": "GTI610",
+                "groupe": "01",
+                "jour": "5",
+                "journee": "Vendredi",
+                "codeActivite": "C",
+                "nomActivite": "Activité de cours",
+                "activitePrincipale": "Oui",
+                "heureDebut": "08:30",
+                "heureFin": "12:00",
+                "local": "E-2021",
+                "titreCours": "Réseaux de télécommunication"
+            },
+            {
+                "sigle": "GTI610",
+                "groupe": "01",
+                "jour": "5",
+                "journee": "Vendredi",
+                "codeActivite": "EXAM",
+                "nomActivite": "Examen",
+                "activitePrincipale": "Oui",
+                "heureDebut": "08:30",
+                "heureFin": "12:00",
+                "local": "A-1170",
+                "titreCours": "Réseaux de télécommunication"
+            },
+            {
+                "sigle": "MAT265",
+                "groupe": "11",
+                "jour": "6",
+                "journee": "Samedi",
+                "codeActivite": "E",
+                "nomActivite": "Travaux pratiques",
+                "activitePrincipale": "Non",
+                "heureDebut": "09:00",
+                "heureFin": "12:00",
+                "local": "B-3428",
+                "titreCours": "Équations différentielles"
+            },
+            {
+                "sigle": "MAT265",
+                "groupe": "11",
+                "jour": "6",
+                "journee": "Samedi",
+                "codeActivite": "C",
+                "nomActivite": "Activité de cours",
+                "activitePrincipale": "Oui",
+                "heureDebut": "13:00",
+                "heureFin": "16:30",
+                "local": "B-3428",
+                "titreCours": "Équations différentielles"
+            }
+        ],
+        "listeEnseignants": [
+            {
+                "localBureau": "A-4526",
+                "telephone": "514-396-8800, poste 7810",
+                "enseignantPrincipal": "Oui",
+                "nom": "Houde",
+                "prenom": "Michel",
+                "courriel": "cc-Michel.HOUDE@etsmtl.ca"
+            },
+            {
+                "localBureau": "A-4526",
+                "telephone": "514-396-8800, poste 7810",
+                "enseignantPrincipal": "Oui",
+                "nom": "Ross",
+                "prenom": "Yvan",
+                "courriel": "cc-Yvan.Ross@etsmtl.ca"
+            },
+            {
+                "localBureau": "A-4526",
+                "telephone": "514-396-8800, poste 7810",
+                "enseignantPrincipal": "Oui",
+                "nom": "Dion",
+                "prenom": "Alain",
+                "courriel": "cc-Alain.Dion@etsmtl.ca"
+            },
+            {
+                "localBureau": "B-2540",
+                "telephone": "514-396-8800, poste 7502",
+                "enseignantPrincipal": "Oui",
+                "nom": "Amoura",
+                "prenom": "Karima",
+                "courriel": "Karima.Amoura@etsmtl.ca"
+            }
+        ],
+        "erreur": ""
+    }
+}

@@ -4,10 +4,13 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
+import ca.etsmtl.etsmobile.data.model.signets.Activite
+import ca.etsmtl.etsmobile.data.model.signets.Enseignant
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.HoraireExamenFinal
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
+import ca.etsmtl.etsmobile.data.model.signets.ListeDesActivitesEtProf
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.Session
@@ -246,6 +249,69 @@ class SignetsApiTest {
         assertEquals(
                 "Session de début invalide:H2018g. L'année doit avoir 4 chiffres.",
                 errorStr
+        )
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeDesActivitesEtProfNoError() {
+        enqueueResponse("liste_horaire_et_prof_no_error.json")
+        val apiResponse = api.listeDesActivitesEtProf(
+                "AM41234",
+                "foo",
+                "A2016"
+        )
+        val wrapper: SignetsModel<ListeDesActivitesEtProf> = getValue(apiResponse).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertTrue { errorStr == null || errorStr.isEmpty() }
+        val activites = wrapper.data!!.listeActivites!!
+        val enseignants = wrapper.data!!.listeEnseignants!!
+        assertEquals(10, activites.size)
+        assertEquals(4, enseignants.size)
+        val expectedActivite = Activite(
+                "LOG210",
+                "02",
+                1,
+                "Lundi",
+                "C",
+                "Activité de cours",
+                "Oui",
+                "08:45",
+                "12:15",
+                "A-1302",
+                "Analyse et conception de logiciels"
+        )
+        assertEquals(expectedActivite, activites[0])
+        val expectedEnseignant = Enseignant(
+                "A-4526",
+                "514-396-8800, poste 7810",
+                "Oui",
+                "Houde",
+                "Michel",
+                "cc-Michel.HOUDE@etsmtl.ca"
+        )
+        assertEquals(expectedEnseignant, enseignants[0])
+        assertEquals(
+                "SignetsPourEtudiants.SignetsMobile+listeDesActivitesEtProf",
+                wrapper.data!!.type
+        )
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeDesActivitesEtProfError() {
+        enqueueResponse("liste_horaire_et_prof_error.json")
+        val apiResponse = api.listeDesActivitesEtProf(
+                "AM41234",
+                "foo",
+                "42016"
+        )
+        val wrapper: SignetsModel<ListeDesActivitesEtProf> = getValue(apiResponse).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertEquals("Session invalide: 42016", errorStr)
+        assertEquals(
+                "SignetsPourEtudiants.SignetsMobile+listeDesActivitesEtProf",
+                wrapper.data!!.type
         )
     }
 
