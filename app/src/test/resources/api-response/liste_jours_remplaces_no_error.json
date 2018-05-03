@@ -1,0 +1,18 @@
+﻿{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeJoursRemplaces",
+        "listeJours": [
+            {
+                "dateOrigine": "2016-05-23",
+                "dateRemplacement": "2016-05-25",
+                "description": "Journée nationale des Patriotes    "
+            },
+            {
+                "dateOrigine": "2016-06-24",
+                "dateRemplacement": "2016-06-23",
+                "description": "Fête nationale du Québec           "
+            }
+        ],
+        "erreur": ""
+    }
+}

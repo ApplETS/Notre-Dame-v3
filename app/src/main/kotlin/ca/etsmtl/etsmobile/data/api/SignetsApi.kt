@@ -6,6 +6,7 @@ import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesActivitesEtProf
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
+import ca.etsmtl.etsmobile.data.model.signets.ListeJoursRemplaces
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
@@ -56,6 +57,11 @@ interface SignetsApi {
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("infoEtudiant")
     fun infoEtudiant(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<Etudiant>>>
+
+    @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
+    @FormUrlEncoded
+    @POST("lireJoursRemplaces")
+    fun listeJoursRemplaces(@Field("pSession") pSession: String): LiveData<ApiResponse<SignetsModel<ListeJoursRemplaces>>>
 
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("listeSessions")

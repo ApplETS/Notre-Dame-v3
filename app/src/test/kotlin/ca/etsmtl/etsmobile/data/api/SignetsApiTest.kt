@@ -8,10 +8,12 @@ import ca.etsmtl.etsmobile.data.model.signets.Activite
 import ca.etsmtl.etsmobile.data.model.signets.Enseignant
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.HoraireExamenFinal
+import ca.etsmtl.etsmobile.data.model.signets.JourRemplace
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesActivitesEtProf
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
+import ca.etsmtl.etsmobile.data.model.signets.ListeJoursRemplaces
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.Session
 import ca.etsmtl.etsmobile.data.model.signets.SignetsData
@@ -354,6 +356,50 @@ class SignetsApiTest {
         assertEquals("", etudiantWrapper.data?.soldeTotal)
         val errorStr = etudiantWrapper.data!!.erreur
         assertEquals("Code d'accès ou mot de passe invalide", errorStr)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeJoursRemplacesNoError() {
+        enqueueResponse("liste_jours_remplaces_no_error.json")
+
+        val apiResponse = api.listeJoursRemplaces("É2016")
+        val wrapper: SignetsModel<ListeJoursRemplaces> = getValue(apiResponse).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertTrue { errorStr == null || errorStr.isEmpty() }
+        val listeJours = wrapper.data!!.listeJours!!
+        assertEquals(2, listeJours.size)
+        val expectedJourRemplace0 = JourRemplace(
+                "2016-05-23",
+                "2016-05-25",
+                "Journée nationale des Patriotes    "
+        )
+        assertEquals(expectedJourRemplace0, listeJours[0])
+        val expectedJourRemplace1 = JourRemplace(
+                "2016-06-24",
+                "2016-06-23",
+                "Fête nationale du Québec           "
+        )
+        assertEquals(expectedJourRemplace1, listeJours[1])
+        assertEquals(
+                "SignetsPourEtudiants.SignetsMobile+listeJoursRemplaces",
+                wrapper.data!!.type
+        )
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeJoursRemplacesError() {
+        enqueueResponse("liste_jours_remplaces_error.json")
+
+        val apiResponse = api.listeJoursRemplaces("É2016")
+        val wrapper: SignetsModel<ListeJoursRemplaces> = getValue(apiResponse).body!!
+        val errorStr = wrapper.data!!.erreur
+        assertEquals("Session invalide: É2016e", errorStr)
+        assertEquals(
+                "SignetsPourEtudiants.SignetsMobile+listeJoursRemplaces",
+                wrapper.data!!.type
+        )
     }
 
     @Test

@@ -20,7 +20,7 @@ open class NetworkModule {
 
     companion object {
         val instance = NetworkModule()
-        private const val URL = "https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx/"
+        private const val SIGNETS_URL = "https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx/"
     }
 
     @Singleton @Provides
@@ -36,7 +36,7 @@ open class NetworkModule {
     @Singleton @Provides
     fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(URL)
+                .baseUrl(SIGNETS_URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .client(okHttpClient)
