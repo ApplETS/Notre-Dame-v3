@@ -27,8 +27,9 @@ class LoginViewModel @Inject constructor(
 ) : AndroidViewModel(app) {
 
     /**
-     * The [LiveData] purpose is to contains the [SignetsUserCredentials] set by the user in the UI. A
-     * change on this [LiveData] triggers a [Transformations.switchMap] on [userCredentialsValidLD]
+     * The [LiveData] purpose is to contains the [SignetsUserCredentials] set by the user in the UI.
+     * A change on this [LiveData] triggers a [Transformations.switchMap] on
+     * [userCredentialsValidLD]
      */
     private val userCredentialsLD: MutableLiveData<SignetsUserCredentials> by lazy {
         MutableLiveData<SignetsUserCredentials>()
@@ -37,8 +38,8 @@ class LoginViewModel @Inject constructor(
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered by a change on [userCredentialsLD]. The new
-     * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If that is
-     * the case, the new [SignetsUserCredentials] are saved and stored in [LoginRepository].
+     * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If
+     * that is the case, the new [SignetsUserCredentials] are saved and stored in [LoginRepository].
      */
     private val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->

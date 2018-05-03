@@ -3,6 +3,7 @@ package ca.etsmtl.etsmobile.data.api
 import android.arch.lifecycle.LiveData
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
+import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
@@ -45,4 +46,8 @@ interface SignetsApi {
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("infoEtudiant")
     fun infoEtudiant(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<Etudiant>>>
+
+    @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
+    @POST("listeSessions")
+    fun listeSessions(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<ListeDeSessions>>>
 }
