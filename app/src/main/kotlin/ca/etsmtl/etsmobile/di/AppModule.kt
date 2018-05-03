@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.data.repository.signets.login.CipherUtils
-import ca.etsmtl.etsmobile.data.repository.signets.login.KeyStoreUtils
 import ca.etsmtl.etsmobile.presentation.App
 import dagger.Module
 import dagger.Provides
@@ -38,14 +36,4 @@ internal object AppModule {
     @Provides
     @JvmStatic
     fun provideUserCredentials(): SignetsUserCredentials = SignetsUserCredentials.INSTANCE.get()
-
-    @Singleton
-    @Provides
-    @JvmStatic
-    fun provideKeyStoreUtils(context: Context): KeyStoreUtils = KeyStoreUtils(context)
-
-    @Singleton
-    @Provides
-    @JvmStatic
-    fun provideCipherUtils(): CipherUtils = CipherUtils()
 }

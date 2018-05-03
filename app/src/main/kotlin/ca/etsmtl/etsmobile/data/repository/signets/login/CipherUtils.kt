@@ -3,12 +3,14 @@ package ca.etsmtl.etsmobile.data.repository.signets.login
 import android.util.Base64
 import java.security.Key
 import javax.crypto.Cipher
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by Sonphil on 20-04-18.
  */
-
-class CipherUtils {
+@Singleton
+class CipherUtils @Inject constructor() {
     companion object {
         const val TRANSFORMATION = "RSA/ECB/PKCS1Padding"
     }
