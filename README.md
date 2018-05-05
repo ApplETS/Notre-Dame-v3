@@ -28,8 +28,8 @@ This application uses an architecture based on the [Android Architecture Compone
 
 You can find out more by visiting the [wiki](https://github.com/ApplETS/Notre-Dame-Android/wiki/Architecture-(EN)).
 
-## Libraries and technologies
-This project uses a variety of libraries and technologies.
+## Libraries and tools
+This project uses a variety of libraries and tools.
 * Android Support Libraries
   * AppCompat v7
   * Design
