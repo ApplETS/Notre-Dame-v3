@@ -6,11 +6,13 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.data.repository.signets.login.LoginRepository
+import ca.etsmtl.etsmobile.presentation.login.FieldStatus
 import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.etsmobile.util.mock
 import org.hamcrest.CoreMatchers.notNullValue
@@ -25,6 +27,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
+import kotlin.test.assertEquals
 
 /**
  * Created by Sonphil on 01-05-18.
@@ -56,8 +59,8 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun testLDNull() {
-        assertThat(loginViewModel.getUserCredentialsIsValid(), notNullValue())
+    fun testUserCredentialsValidLDNull() {
+        assertThat(loginViewModel.userCredentialsValidLD, notNullValue())
         loginViewModel.setUserCredentials(userCredentials)
         verify(infoEtudiantRepository, never()).getInfoEtudiant(userCredentials, true)
     }
@@ -67,7 +70,7 @@ class LoginViewModelTest {
         mockNetwork(true)
         val liveData = MutableLiveData<Resource<Etudiant>>()
         `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
-        loginViewModel.getUserCredentialsIsValid().observeForever(mock())
+        loginViewModel.userCredentialsValidLD.observeForever(mock())
         loginViewModel.setUserCredentials(userCredentials)
         verify(infoEtudiantRepository).getInfoEtudiant(userCredentials, true)
 
@@ -79,7 +82,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun testSendResultToUIValidCredentials() {
+    fun testSendValidUserCredentialsResultToUI() {
         mockNetwork(true)
         val liveData = MutableLiveData<Resource<Etudiant>>()
         val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
@@ -87,7 +90,7 @@ class LoginViewModelTest {
         liveData.value = resource
         `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
         val observer: Observer<Resource<Boolean>> = mock()
-        loginViewModel.getUserCredentialsIsValid().observeForever(observer)
+        loginViewModel.userCredentialsValidLD.observeForever(observer)
         verify(observer, never()).onChanged(any())
         loginViewModel.setUserCredentials(userCredentials)
         val expectedBlnRes: Resource<Boolean> = Resource.success(true)
@@ -95,17 +98,52 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun testSendInvalidResultToUIError() {
+    fun testSendInvalidUserCredentialsResultToUI() {
         mockNetwork(true)
         val liveData = MutableLiveData<Resource<Etudiant>>()
         val resource: Resource<Etudiant> = Resource.error("foo", null)
         liveData.value = resource
         `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
         val observer: Observer<Resource<Boolean>> = mock()
-        loginViewModel.getUserCredentialsIsValid().observeForever(observer)
+        loginViewModel.userCredentialsValidLD.observeForever(observer)
         verify(observer, never()).onChanged(any())
         loginViewModel.setUserCredentials(userCredentials)
         val expectedBlnRes: Resource<Boolean> = Resource.error("foo", false)
         verify(observer).onChanged(eq(expectedBlnRes))
+    }
+
+    @Test
+    fun testSendInvalidSendUniversalCodeResultToUI() {
+        `when`(app.getString(R.string.error_invalid_universal_code)).thenReturn("Invalid Universal Code")
+        loginViewModel.setUniversalCode("AM123")
+        val expectedFieldStatus = FieldStatus(false, "Invalid Universal Code")
+        assertEquals(expectedFieldStatus, loginViewModel.setUniversalCode("AM123"))
+    }
+
+    @Test
+    fun testSendEmptyUniversalCodeFieldStatusToUI() {
+        `when`(app.getString(R.string.error_field_required)).thenReturn("The universal code is required!!!")
+        val expectedFieldStatus = FieldStatus(false, "The universal code is required!!!")
+        assertEquals(expectedFieldStatus, loginViewModel.setUniversalCode(""))
+    }
+
+    @Test
+    fun testSendValidUniversalCodeFieldStatusToUI() {
+        val expectedFieldStatus = FieldStatus(true, null)
+        assertEquals(expectedFieldStatus, loginViewModel.setUniversalCode("AM12345"))
+    }
+
+    @Test
+    fun testSendEmptyPasswordFieldStatusToUI() {
+        `when`(app.getString(R.string.error_field_required)).thenReturn("Nothing?")
+        loginViewModel.setPassword("")
+        val expectedFieldStatus = FieldStatus(false, "Nothing?")
+        assertEquals(expectedFieldStatus, loginViewModel.setPassword(""))
+    }
+
+    @Test
+    fun testSendNotEmptyPasswordFieldStatusToUI() {
+        val expectedFieldStatus = FieldStatus(true, null)
+        assertEquals(expectedFieldStatus, loginViewModel.setPassword("xgdfg!4w"))
     }
 }

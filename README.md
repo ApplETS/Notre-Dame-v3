@@ -19,7 +19,7 @@ _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-
 
 ## Architecture
 
-This application uses a [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) architecture by relying on the [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Specifically, it uses the following components: 
+This application uses an architecture based on the [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Specifically, it uses the following components: 
 * [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData.html)
 * [ViewModel](https://developer.android.com/reference/android/arch/lifecycle/ViewModel.html)
 * [Room](https://developer.android.com/topic/libraries/architecture/room.html)

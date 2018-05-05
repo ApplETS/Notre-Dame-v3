@@ -7,9 +7,9 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.TextInputLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
-import android.text.TextUtils
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -53,17 +53,13 @@ class LoginActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
-            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                attemptLogin()
-                return@OnEditorActionListener true
-            }
-            false
-        })
-
         setTitle(R.string.title_activity_login)
+
+        setUpFields()
+
+        // Set up background
         Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
-        password.transformationMethod = PasswordTransformationMethod()
+
         sign_in_button.setOnClickListener {
             KeyboardUtils.hideKeyboard(currentFocus)
             attemptLogin()
@@ -74,7 +70,7 @@ class LoginActivity : DaggerAppCompatActivity() {
         if (intent.getBooleanExtra(LOGGING_OUT_EXTRA, false)) {
             logOut()
         } else {
-            initLoginForm()
+            initLoginFormWithSavedCredentials()
         }
     }
 
@@ -90,7 +86,7 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
     }
 
-    private fun initLoginForm() {
+    private fun initLoginFormWithSavedCredentials() {
         with(loginViewModel.getSavedUserCredentials()) {
             initUserCredentialsFields(this)
 
@@ -99,11 +95,42 @@ class LoginActivity : DaggerAppCompatActivity() {
         }
     }
 
+    private fun setUpFields() {
+        val onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                val fieldStatus: FieldStatus
+                when (view.id) {
+                    R.id.universal_code -> {
+                        fieldStatus = loginViewModel.setUniversalCode(universal_code.text.toString())
+                        adjustTextInputAccordingToStatus(universal_code_layout, fieldStatus)
+                    }
+                    R.id.password -> {
+                        fieldStatus = loginViewModel.setPassword(password.text.toString())
+                        adjustTextInputAccordingToStatus(password_layout, fieldStatus)
+                    }
+                }
+            }
+        }
+
+        universal_code.onFocusChangeListener = onFocusChangeListener
+        password.onFocusChangeListener = onFocusChangeListener
+
+        password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                attemptLogin()
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
+        password.transformationMethod = PasswordTransformationMethod()
+    }
+
     /**
-     * Subscribe the UI to the user credentials LiveData
+     * Subscribes the UI to the LiveData
      */
     private fun subscribeUI() {
-        loginViewModel.getUserCredentialsIsValid().observe(this, Observer<Resource<Boolean>> { resource ->
+        loginViewModel.userCredentialsValidLD.observe(this, Observer<Resource<Boolean>> { resource ->
             if (resource != null) {
                 when (resource.status) {
                     Resource.SUCCESS -> {
@@ -122,6 +149,16 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
     }
 
+    private fun adjustTextInputAccordingToStatus(textInputLayout: TextInputLayout, fieldStatus: FieldStatus?) {
+        fieldStatus?.let {
+            if (fieldStatus.valid) {
+                textInputLayout.error = null
+            } else {
+                textInputLayout.error = fieldStatus.error
+            }
+        }
+    }
+
     /**
      * Fills the credentials fields with the specifies user credentials
      *
@@ -135,56 +172,13 @@ class LoginActivity : DaggerAppCompatActivity() {
     }
 
     /**
-     * Attempts to sign in the account specified by the login form.
-     * If there are form errors (invalid universal code, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * Attempts to sign in the account
      */
     private fun attemptLogin() {
-        // Reset errors.
-        universal_code_layout.error = null
-        password_layout.error = null
-
-        // Store values at the time of the login attempt.
         val universalCodeStr = universal_code.text.toString()
         val passwordStr = password.text.toString()
 
-        var cancel = false
-        var focusView: View? = null
-
-        // Check if the user entered the motPasse
-        if (TextUtils.isEmpty(passwordStr)) {
-            password_layout.error = getString(R.string.error_field_required)
-            focusView = password
-            cancel = true
-        }
-
-        // Check for a valid universal code.
-        if (TextUtils.isEmpty(universalCodeStr)) {
-            universal_code_layout.error = getString(R.string.error_field_required)
-            focusView = universal_code
-            cancel = true
-        } else if (!isUniversalCodeValid(universalCodeStr)) {
-            universal_code_layout.error = getString(R.string.error_invalid_universal_code)
-            focusView = universal_code
-            cancel = true
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView?.requestFocus()
-        } else {
-            loginViewModel.setUserCredentials(SignetsUserCredentials(universalCodeStr, passwordStr))
-        }
-    }
-
-    /**
-     * Returns whether a given universal code is valid or not
-     *
-     * @param universalCode the universal code to check
-     */
-    private fun isUniversalCodeValid(universalCode: String): Boolean {
-        return universalCode.matches(Regex("[a-zA-Z]{2}\\d{5}"))
+        loginViewModel.setUserCredentials(SignetsUserCredentials(universalCodeStr, passwordStr))
     }
 
     /**

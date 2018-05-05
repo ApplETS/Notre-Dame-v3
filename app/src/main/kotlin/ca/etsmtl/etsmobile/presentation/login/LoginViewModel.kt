@@ -23,25 +23,24 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val repository: InfoEtudiantRepository,
     private val loginRepository: LoginRepository,
-    app: App
+    private val app: App
 ) : AndroidViewModel(app) {
 
-    /**
-     * The [LiveData] purpose is to contains the [SignetsUserCredentials] set by the user in the UI.
-     * A change on this [LiveData] triggers a [Transformations.switchMap] on
-     * [userCredentialsValidLD]
-     */
     private val userCredentialsLD: MutableLiveData<SignetsUserCredentials> by lazy {
         MutableLiveData<SignetsUserCredentials>()
     }
 
+    private var universalCode: String? = null
+    private var password: String? = null
+
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
-     * [Transformations.switchMap] which is triggered by a change on [userCredentialsLD]. The new
+     * [Transformations.switchMap] which is triggered when [setUserCredentials] is called. The new
      * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If
-     * that is the case, the new [SignetsUserCredentials] are saved and stored in [LoginRepository].
+     * that is the case, is means that the user's credentials are valid. The new
+     * [SignetsUserCredentials] are saved and stored in [LoginRepository].
      */
-    private val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
+    val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->
             Transformations.switchMap(repository.getInfoEtudiant(userCredentials, NetworkUtils.isDeviceConnected(getApplication()))) { res ->
                 val credentialsValidBooleanLiveData: LiveData<Resource<Boolean>> = getUserCredentialsValidBooleanLiveData(res)
@@ -103,15 +102,42 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
-     * Returns a [LiveData] indicating whether the user credentials are valid or not
+     * Set the universal code
+     *
+     * @param universalCode the user's universal code
+     * @return A [FieldStatus] instance indicating whether the password is valid or not
      */
-    fun getUserCredentialsIsValid(): LiveData<Resource<Boolean>> {
-        return userCredentialsValidLD
+    fun setUniversalCode(universalCode: String): FieldStatus {
+        this.universalCode = universalCode
+
+        return if (universalCode.isEmpty()) {
+            FieldStatus(false, app.getString(R.string.error_field_required))
+        } else if (!universalCode.matches(Regex("[a-zA-Z]{2}\\d{5}"))) {
+            FieldStatus(false, app.getString(R.string.error_invalid_universal_code))
+        } else {
+            FieldStatus(true, null)
+        }
+    }
+
+    /**
+     * Set the password
+     *
+     * @param password the user's password
+     * @return A [FieldStatus] instance indicating whether the password is valid or not
+     */
+    fun setPassword(password: String): FieldStatus {
+        this.password = password
+
+        return if (password.isEmpty()) {
+            FieldStatus(false, app.getString(R.string.error_field_required))
+        } else {
+            FieldStatus(true, null)
+        }
     }
 
     /**
      * Triggers a verification of the validity of the [userCredentials].
-     * The result is posted to the [LiveData] returned by [getUserCredentialsIsValid]
+     * The result is posted to the [userCredentialsValidLD]
      *
      * @param userCredentials the credentials of the user
      */

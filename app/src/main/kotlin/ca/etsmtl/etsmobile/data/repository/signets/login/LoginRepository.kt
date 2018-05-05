@@ -202,9 +202,13 @@ class LoginRepository @Inject constructor(
     fun clearUserData(): LiveData<Boolean> {
         prefs.edit().clear().apply()
 
-        deletePassword(SignetsUserCredentials.INSTANCE.get().codeAccesUniversel)
+        with(SignetsUserCredentials.INSTANCE.get()) {
+            if (this != null) {
+                deletePassword(this.codeAccesUniversel)
 
-        SignetsUserCredentials.INSTANCE.set(null)
+                SignetsUserCredentials.INSTANCE.set(null)
+            }
+        }
 
         return clearDb()
     }
