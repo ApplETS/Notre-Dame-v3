@@ -49,9 +49,16 @@ class LoginActivityTest {
     fun testEmptyUniversalCode() {
         val activity: LoginActivity = activityTestRule.activity
 
-        onView(withId(R.id.universal_code)).perform(replaceText(""))
-        onView(withId(R.id.sign_in_button)).perform(click())
+        // Focus universal code field
+        onView(withId(R.id.universal_code)).perform(click())
 
+        // Set empty universal code
+        onView(withId(R.id.universal_code)).perform(replaceText(""))
+
+        // Remove focus from universal code field
+        onView(withId(R.id.password_layout)).perform(click())
+
+        // Check error
         onView(withId(R.id.universal_code_layout)).check(matches(withError(activity.getString(R.string.error_field_required))))
     }
 
@@ -59,8 +66,17 @@ class LoginActivityTest {
     fun testEmptyPasswordCode() {
         val activity: LoginActivity = activityTestRule.activity
 
+        // Set valid universal code
+        onView(withId(R.id.universal_code)).perform(replaceText("AM112345"))
+
+        // Focus password field
+        onView(withId(R.id.password)).perform(click())
+
+        // Set empty password
         onView(withId(R.id.password)).perform(replaceText(""))
-        onView(withId(R.id.sign_in_button)).perform(click())
+
+        // Remove focus from password field
+        onView(withId(R.id.universal_code)).perform(click())
 
         onView(withId(R.id.password_layout)).check(matches(withError(activity.getString(R.string.error_field_required))))
     }
