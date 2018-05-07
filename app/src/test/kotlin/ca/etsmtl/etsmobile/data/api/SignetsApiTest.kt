@@ -7,11 +7,13 @@ import android.support.annotation.NonNull
 import ca.etsmtl.etsmobile.data.model.signets.Activite
 import ca.etsmtl.etsmobile.data.model.signets.Enseignant
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.Evaluation
 import ca.etsmtl.etsmobile.data.model.signets.HoraireExamenFinal
 import ca.etsmtl.etsmobile.data.model.signets.JourRemplace
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesActivitesEtProf
+import ca.etsmtl.etsmobile.data.model.signets.ListeDesElementsEvaluation
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeJoursRemplaces
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
@@ -400,6 +402,76 @@ class SignetsApiTest {
                 "SignetsPourEtudiants.SignetsMobile+listeJoursRemplaces",
                 wrapper.data!!.type
         )
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeElementsEvaluationNoError() {
+        enqueueResponse("liste_elements_evaluation_no_error.json")
+
+        val apiResponse = api.listeDesElementsEvaluation(
+                "AM12345",
+                "test",
+                "INF111",
+                "01",
+                "H2015"
+        )
+        val wrapper: SignetsModel<ListeDesElementsEvaluation> = getValue(apiResponse).body!!
+        val listeDesElementsEvaluation = wrapper.data!!
+        val errorStr = listeDesElementsEvaluation.erreur
+        assertTrue { errorStr == null || errorStr.isEmpty() }
+
+        val type = wrapper.data!!.type
+        assertEquals("SignetsPourEtudiants.SignetsMobile+ListeDesElementsEvaluation", type)
+        assertEquals("94,6", listeDesElementsEvaluation.noteACeJour)
+        assertEquals("94,6", listeDesElementsEvaluation.scoreFinalSur100)
+        assertEquals("65,9", listeDesElementsEvaluation.moyenneClasse)
+        assertEquals("18,2", listeDesElementsEvaluation.ecartTypeClasse)
+        assertEquals("70,6", listeDesElementsEvaluation.medianeClasse)
+        assertEquals("99,0", listeDesElementsEvaluation.rangCentileClasse)
+        assertEquals("96,4", listeDesElementsEvaluation.noteACeJourElementsIndividuels)
+        assertEquals("65,5", listeDesElementsEvaluation.noteSur100PourElementsIndividuels)
+
+        assertEquals(6, listeDesElementsEvaluation.liste!!.size)
+
+        val expectedEvaluation = Evaluation(
+                "INF111-01",
+                "TP03",
+                "01",
+                "",
+                "89,0",
+                "100",
+                "20",
+                "65,1",
+                "18,4",
+                "68,0",
+                "91",
+                "Oui",
+                "",
+                "Non"
+                )
+        assertEquals(expectedEvaluation, wrapper.data!!.liste!![5])
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeElementsEvaluationError() {
+        enqueueResponse("liste_elements_evaluation_error.json")
+
+        val apiResponse = api.listeDesElementsEvaluation(
+                "AM12345",
+                "test",
+                "INF111",
+                "01",
+                "H2015"
+        )
+        val wrapper: SignetsModel<ListeDesElementsEvaluation> = getValue(apiResponse).body!!
+        val listeDesElementsEvaluation = wrapper.data!!
+
+        val errorStr = listeDesElementsEvaluation.erreur
+        assertEquals("Cours ou bordereau de notes inexistant pour :LIUP27099105, LOG121E-01 à l'hiver 2016", errorStr)
+        val type = listeDesElementsEvaluation.type
+        assertEquals("SignetsPourEtudiants.SignetsMobile+ListeDesElementsEvaluation", type)
     }
 
     @Test

@@ -5,6 +5,7 @@ import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesActivitesEtProf
+import ca.etsmtl.etsmobile.data.model.signets.ListeDesElementsEvaluation
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeJoursRemplaces
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
@@ -120,6 +121,26 @@ interface SignetsApi {
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("listeCours")
     fun listeCours(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<ListeDeCours>>>
+
+    /**
+     * Fetches a list of the student's evaluations (exams, assignments, etc.)
+     *
+     * @param codeAccesUniversel The student's universal code
+     * @param motPasse The student's password
+     * @param pSigle The course number
+     * @param pGroupe The group number
+     * @param pSession The session
+     */
+    @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
+    @FormUrlEncoded
+    @POST("listeElementsEvaluation")
+    fun listeDesElementsEvaluation(
+        @Field("codeAccesUniversel") codeAccesUniversel: String,
+        @Field("motPasse") motPasse: String,
+        @Field("pSigle") pSigle: String,
+        @Field("pGroupe") pGroupe: String,
+        @Field("pSession") pSession: String
+    ): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>>
 
     /**
      * Fetches a list of sessions of the student

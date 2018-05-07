@@ -1,0 +1,15 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+ListeDesElementsEvaluation",
+        "noteACeJour": "",
+        "scoreFinalSur100": "",
+        "moyenneClasse": "",
+        "ecartTypeClasse": "",
+        "medianeClasse": "",
+        "rangCentileClasse": "",
+        "noteACeJourElementsIndividuels": "",
+        "noteSur100PourElementsIndividuels": "",
+        "liste": [],
+        "erreur": "Cours ou bordereau de notes inexistant pour :LIUP27099105, LOG121E-01 à l'hiver 2016"
+    }
+}
