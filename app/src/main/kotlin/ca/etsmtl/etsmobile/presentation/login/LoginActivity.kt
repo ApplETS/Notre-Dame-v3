@@ -61,7 +61,7 @@ class LoginActivity : DaggerAppCompatActivity() {
         Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
 
         sign_in_button.setOnClickListener {
-            KeyboardUtils.hideKeyboard(currentFocus)
+            currentFocus?.let { KeyboardUtils.hideKeyboard(currentFocus) }
             attemptLogin()
         }
 

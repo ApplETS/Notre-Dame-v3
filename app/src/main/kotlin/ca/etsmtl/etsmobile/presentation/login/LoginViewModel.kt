@@ -142,10 +142,8 @@ class LoginViewModel @Inject constructor(
      * @param userCredentials the credentials of the user
      */
     fun setUserCredentials(userCredentials: SignetsUserCredentials) {
-        if (userCredentialsLD.value != userCredentials) {
-            /** Triggers [userCredentialsValidLD] **/
-            userCredentialsLD.value = userCredentials
-        }
+        /** Triggers [userCredentialsValidLD] **/
+        userCredentialsLD.value = userCredentials
     }
 
     fun getSavedUserCredentials(): SignetsUserCredentials? {
