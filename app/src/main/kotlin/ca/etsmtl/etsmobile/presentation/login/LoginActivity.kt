@@ -61,7 +61,6 @@ class LoginActivity : DaggerAppCompatActivity() {
         Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
 
         sign_in_button.setOnClickListener {
-            currentFocus?.let { KeyboardUtils.hideKeyboard(currentFocus) }
             attemptLogin()
         }
 
@@ -175,6 +174,8 @@ class LoginActivity : DaggerAppCompatActivity() {
      * Attempts to sign in the account
      */
     private fun attemptLogin() {
+        currentFocus?.let { KeyboardUtils.hideKeyboard(currentFocus) }
+
         val universalCodeStr = universal_code.text.toString()
         val passwordStr = password.text.toString()
 

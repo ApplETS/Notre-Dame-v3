@@ -132,5 +132,27 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/label_login_applets_logo"
+            app:layout_constraintBottom_toTopOf="@+id/applets_logo_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/applets_logo_iv"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_applets_506dp_198dp"
+            android:tint="@color/material_light_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
