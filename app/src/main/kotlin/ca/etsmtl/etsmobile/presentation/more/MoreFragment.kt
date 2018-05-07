@@ -73,7 +73,7 @@ class MoreFragment : Fragment() {
 
         labels.forEachIndexed { index, label ->
             moreItems.add(MoreItem(icons.getResourceId(index,
-                    R.drawable.ic_info_outline_white_24dp), label))
+                    R.drawable.ic_info_white_24dp), label))
         }
 
         icons.recycle()

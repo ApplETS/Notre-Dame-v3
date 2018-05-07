@@ -211,7 +211,7 @@ class LoginActivity : DaggerAppCompatActivity() {
     fun displayUniversalCodeDialog(view: View) {
         val builder = AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle)
 
-        val icon = ContextCompat.getDrawable(this, R.drawable.ic_info_outline_white_24dp)!!
+        val icon = ContextCompat.getDrawable(this, R.drawable.ic_info_white_24dp)!!
                 .mutate()
         icon.setTint(ContextCompat.getColor(this, R.color.colorPrimary))
 

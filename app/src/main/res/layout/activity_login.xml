@@ -92,7 +92,7 @@
                     android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:onClick="displayUniversalCodeDialog"
                     android:padding="12dp"
-                    android:src="@drawable/ic_info_outline_white_24dp"
+                    android:src="@drawable/ic_info_white_24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
