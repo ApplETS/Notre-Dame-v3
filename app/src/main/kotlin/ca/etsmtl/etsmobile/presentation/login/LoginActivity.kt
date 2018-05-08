@@ -26,11 +26,11 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.bg_iv
 import kotlinx.android.synthetic.main.activity_login.login_form
 import kotlinx.android.synthetic.main.activity_login.login_progress
-import kotlinx.android.synthetic.main.activity_login.password
-import kotlinx.android.synthetic.main.activity_login.password_layout
-import kotlinx.android.synthetic.main.activity_login.sign_in_button
-import kotlinx.android.synthetic.main.activity_login.universal_code
-import kotlinx.android.synthetic.main.activity_login.universal_code_layout
+import kotlinx.android.synthetic.main.layout_login_form.password
+import kotlinx.android.synthetic.main.layout_login_form.password_layout
+import kotlinx.android.synthetic.main.layout_login_form.sign_in_button
+import kotlinx.android.synthetic.main.layout_login_form.universal_code
+import kotlinx.android.synthetic.main.layout_login_form.universal_code_layout
 import javax.inject.Inject
 
 /**

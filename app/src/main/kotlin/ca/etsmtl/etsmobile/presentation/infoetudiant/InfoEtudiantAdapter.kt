@@ -22,7 +22,7 @@ class InfoEtudiantAdapter : RecyclerView.Adapter<InfoEtudiantAdapter.ViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
             LayoutInflater.from(parent.context)
-                    .inflate(R.layout.info_etudiant_item, parent, false)
+                    .inflate(R.layout.item_info_etudiant, parent, false)
     )
 
     override fun getItemCount(): Int = INFORMATION.values().size

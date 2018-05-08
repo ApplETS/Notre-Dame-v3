@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/info_etudiant_item" />
+        tools:listitem="@layout/item_info_etudiant" />
 
     <ProgressBar
         android:id="@+id/progress_bar_info_etudiant"
