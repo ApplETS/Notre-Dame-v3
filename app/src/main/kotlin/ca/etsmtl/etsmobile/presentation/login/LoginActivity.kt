@@ -9,8 +9,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
-import android.text.method.PasswordTransformationMethod
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -122,7 +123,11 @@ class LoginActivity : DaggerAppCompatActivity() {
             false
         })
 
-        password.transformationMethod = PasswordTransformationMethod()
+        // Set the password layout font
+        val fontValue = TypedValue()
+        theme.resolveAttribute(R.attr.fontFamily, fontValue, true)
+        val passwordLayoutTypeFace = ResourcesCompat.getFont(this, fontValue.resourceId)
+        password_layout.setTypeface(passwordLayoutTypeFace)
     }
 
     /**

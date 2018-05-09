@@ -32,7 +32,7 @@
         android:id="@+id/universal_code_info_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:onClick="displayUniversalCodeDialog"
         android:padding="12dp"
@@ -60,11 +60,11 @@
             android:hint="@string/prompt_password"
             android:imeActionId="6"
             android:imeActionLabel="@string/action_sign_in"
-            android:inputType="textNoSuggestions"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            tools:inputType="textPassword" />
+            tools:inputType="textNoSuggestions" />
 
     </android.support.design.widget.TextInputLayout>
 
