@@ -2,8 +2,8 @@ package ca.etsmtl.etsmobile.di
 
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.util.ApplicationJsonAdapterFactory
-import ca.etsmtl.etsmobile.util.CustomTrust
 import ca.etsmtl.etsmobile.util.LiveDataCallAdapterFactory
+import ca.etsmtl.etsmobile.util.SignetsTrust
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -25,7 +25,7 @@ open class NetworkModule {
 
     @Singleton @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        return CustomTrust().client
+        return SignetsTrust().client
     }
 
     @Singleton @Provides
