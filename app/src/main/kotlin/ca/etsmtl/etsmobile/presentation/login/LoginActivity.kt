@@ -139,7 +139,6 @@ class LoginActivity : DaggerAppCompatActivity() {
                 when (resource.status) {
                     Resource.SUCCESS -> {
                         goToMainActivity()
-                        showProgress(false)
                     }
                     Resource.ERROR -> {
                         showProgress(false)
