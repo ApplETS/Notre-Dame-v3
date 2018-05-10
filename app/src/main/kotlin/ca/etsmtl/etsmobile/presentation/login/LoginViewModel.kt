@@ -149,13 +149,4 @@ class LoginViewModel @Inject constructor(
     fun getSavedUserCredentials(): SignetsUserCredentials? {
         return loginRepository.getSavedUserCredentials()
     }
-
-    /**
-     * Clears the user's data
-     *
-     * This function should be called when the user want to log out.
-     *
-     * @return A [LiveData] containing a [Boolean] who will be true when the process has finished
-     */
-    fun logOut(): LiveData<Boolean> = loginRepository.clearUserData()
 }

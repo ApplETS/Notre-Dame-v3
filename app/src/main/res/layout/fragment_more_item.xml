@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="@dimen/material_component_lists_single_line_height"
-android:background="?android:attr/selectableItemBackground"
-android:clickable="true"
-android:focusable="true"
-android:gravity="center_vertical"
-android:orientation="horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/material_component_lists_single_line_height"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
-<FrameLayout
-    android:layout_width="@dimen/material_component_lists_text_left_padding"
-    android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="@dimen/material_component_lists_text_left_padding"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/more_item_icon_iv"
+        <ImageView
+            android:id="@+id/more_item_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/material_component_lists_icon_left_padding"
+            android:tint="@color/etsGrisFonce"
+            tools:src="@drawable/ic_exit_to_app_black_24dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/more_item_label_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/material_component_lists_icon_left_padding"
-        android:tint="@color/etsGrisFonce"
-        tools:src="@drawable/ic_exit_to_app_black_24dp" />
-</FrameLayout>
-
-<TextView
-    android:id="@+id/more_item_label_text_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingEnd="@dimen/material_component_lists_right_padding"
-    android:textAppearance="?android:attr/textAppearanceListItem"
-    tools:text="Labelt" />
+        android:paddingRight="@dimen/material_component_lists_right_padding"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        tools:text="@tools:sample/lorem" />
 </LinearLayout>

@@ -4,9 +4,15 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/delta_jaeger_light</item>
         <item name="fontFamily">@font/delta_jaeger_light</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
     <!-- Login screen theme. -->
@@ -32,4 +38,5 @@
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
-    </style></resources>
+    </style>
+</resources>

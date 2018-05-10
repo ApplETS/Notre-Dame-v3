@@ -20,13 +20,12 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
-import ca.etsmtl.etsmobile.presentation.login.LoginActivity.Companion.LOGGING_OUT_EXTRA
 import ca.etsmtl.etsmobile.util.KeyboardUtils
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.bg_iv
 import kotlinx.android.synthetic.main.activity_login.login_form
-import kotlinx.android.synthetic.main.activity_login.login_progress
+import kotlinx.android.synthetic.main.activity_login.progress_login
 import kotlinx.android.synthetic.main.layout_login_form.password
 import kotlinx.android.synthetic.main.layout_login_form.password_layout
 import kotlinx.android.synthetic.main.layout_login_form.sign_in_button
@@ -36,13 +35,8 @@ import javax.inject.Inject
 
 /**
  * A login screen that offers login via universal code/password.
- * This activity can also offers logout if [LOGGING_OUT_EXTRA] extra is set to true
  */
 class LoginActivity : DaggerAppCompatActivity() {
-
-    companion object {
-        const val LOGGING_OUT_EXTRA: String = "LoggingOut"
-    }
 
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
@@ -52,6 +46,7 @@ class LoginActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_login)
 
         setTitle(R.string.title_activity_login)
@@ -67,23 +62,7 @@ class LoginActivity : DaggerAppCompatActivity() {
 
         subscribeUI()
 
-        if (intent.getBooleanExtra(LOGGING_OUT_EXTRA, false)) {
-            logOut()
-        } else {
-            initLoginFormWithSavedCredentials()
-        }
-    }
-
-    private fun logOut() {
-        showProgress(true)
-        loginViewModel.logOut().observe(this, Observer<Boolean> { finished ->
-            if (finished != null && finished) {
-                Toast.makeText(this@LoginActivity, R.string.msg_logout_success,
-                        Toast.LENGTH_LONG).show()
-
-                showProgress(false)
-            }
-        })
+        initLoginFormWithSavedCredentials()
     }
 
     private fun initLoginFormWithSavedCredentials() {
@@ -202,13 +181,13 @@ class LoginActivity : DaggerAppCompatActivity() {
                     }
                 })
 
-        login_progress.visibility = if (show) View.VISIBLE else View.GONE
-        login_progress.animate()
+        progress_login.visibility = if (show) View.VISIBLE else View.GONE
+        progress_login.animate()
                 .setDuration(shortAnimTime)
                 .alpha((if (show) 1 else 0).toFloat())
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        login_progress.visibility = if (show) View.VISIBLE else View.GONE
+                        progress_login.visibility = if (show) View.VISIBLE else View.GONE
                     }
                 })
     }

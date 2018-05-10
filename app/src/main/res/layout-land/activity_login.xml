@@ -24,7 +24,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin">
         <!-- Login progress -->
         <ProgressBar
-            android:id="@+id/login_progress"
+            android:id="@+id/progress_login"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

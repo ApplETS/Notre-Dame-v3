@@ -34,4 +34,5 @@
     <!-- More -->
     <string name="more_item_label_log_out">Se déconnecter</string>
     <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>
+    <string name="more_label_log_out_progress">Déconnexion en cours</string>
 </resources>
