@@ -191,13 +191,13 @@ class LoginFragment : DaggerFragment() {
     private fun showProgress(show: Boolean) {
         val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
-        login_form.visibility = if (show) View.GONE else View.VISIBLE
+        login_form.visibility = if (show) View.INVISIBLE else View.VISIBLE
         login_form.animate()
                 .setDuration(shortAnimTime)
                 .alpha((if (show) 0 else 1).toFloat())
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        login_form.visibility = if (show) View.GONE else View.VISIBLE
+                        login_form.visibility = if (show) View.INVISIBLE else View.VISIBLE
                     }
                 })
 
