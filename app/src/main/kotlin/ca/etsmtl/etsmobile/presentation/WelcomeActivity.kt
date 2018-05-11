@@ -7,7 +7,7 @@ import dagger.android.support.DaggerAppCompatActivity
 /**
  * First activity displayed to the user
  */
-class LoginActivity : DaggerAppCompatActivity() {
+class WelcomeActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -23,9 +23,9 @@ import org.junit.runner.RunWith
  * Created by Sonphil on 17-04-18.
  */
 @RunWith(AndroidJUnit4::class)
-class LoginActivityTest {
+class WelcomeActivityTest {
     @get:Rule
-    var activityTestRule = ActivityTestRule(LoginActivity::class.java)
+    var activityTestRule = ActivityTestRule(WelcomeActivity::class.java)
 
     @Test
     fun testUniversalCodeDialog() {
@@ -36,7 +36,7 @@ class LoginActivityTest {
 
     @Test
     fun testInvalidUniversalCode() {
-        val activity: LoginActivity = activityTestRule.activity
+        val activity: WelcomeActivity = activityTestRule.activity
 
         onView(withId(R.id.universal_code)).perform(replaceText("AM1234"))
         onView(withId(R.id.sign_in_button)).perform(click())
@@ -46,7 +46,7 @@ class LoginActivityTest {
 
     @Test
     fun testEmptyUniversalCode() {
-        val activity: LoginActivity = activityTestRule.activity
+        val activity: WelcomeActivity = activityTestRule.activity
 
         // Focus universal code field
         onView(withId(R.id.universal_code)).perform(click())
@@ -63,7 +63,7 @@ class LoginActivityTest {
 
     @Test
     fun testEmptyPasswordCode() {
-        val activity: LoginActivity = activityTestRule.activity
+        val activity: WelcomeActivity = activityTestRule.activity
 
         // Set valid universal code
         onView(withId(R.id.universal_code)).perform(replaceText("AM112345"))

@@ -5,6 +5,7 @@ import ca.etsmtl.etsmobile.InstantAppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
+import ca.etsmtl.etsmobile.data.repository.signets.SignetsRepository
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

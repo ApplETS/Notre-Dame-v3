@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.data.repository
+package ca.etsmtl.etsmobile.data.repository.signets
 
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.AppExecutors

@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.LoginActivity
+import ca.etsmtl.etsmobile.presentation.WelcomeActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progress_more
@@ -80,7 +80,7 @@ class MoreFragment : DaggerFragment() {
                 Toast.makeText(context, R.string.msg_logout_success,
                         Toast.LENGTH_LONG).show()
 
-                val intent = Intent(context, LoginActivity::class.java)
+                val intent = Intent(context, WelcomeActivity::class.java)
                 startActivity(intent)
 
                 // Finish the activity to prevent the user from going back

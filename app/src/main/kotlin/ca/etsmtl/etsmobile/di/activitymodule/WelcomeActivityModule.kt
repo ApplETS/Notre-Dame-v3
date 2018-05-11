@@ -13,7 +13,7 @@ import dagger.multibindings.IntoMap
  * Created by Sonphil on 28-02-18.
  */
 @Module
-interface LoginActivityModule {
+interface WelcomeActivityModule {
 
     @ContributesAndroidInjector
     fun contributeLoginFragment(): LoginFragment
