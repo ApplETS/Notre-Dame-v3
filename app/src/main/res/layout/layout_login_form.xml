@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@drawable/bg_ets_red"
     tools:parentTag="android.support.constraint.ConstraintLayout">
 
     <android.support.design.widget.TextInputLayout
@@ -34,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:onClick="displayUniversalCodeDialog"
         android:padding="12dp"
         android:src="@drawable/ic_info_white_24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,8 +63,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@android:color/white"
-            tools:inputType="textNoSuggestions" />
+            android:textColor="@android:color/white" />
 
     </android.support.design.widget.TextInputLayout>
 

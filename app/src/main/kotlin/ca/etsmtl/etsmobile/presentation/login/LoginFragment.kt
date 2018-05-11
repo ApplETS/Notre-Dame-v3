@@ -12,7 +12,9 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
@@ -22,21 +24,29 @@ import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.util.KeyboardUtils
 import com.bumptech.glide.Glide
-import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_login.bg_iv
-import kotlinx.android.synthetic.main.activity_login.login_form
-import kotlinx.android.synthetic.main.activity_login.progress_login
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_login.bg_iv
+import kotlinx.android.synthetic.main.fragment_login.login_form
+import kotlinx.android.synthetic.main.fragment_login.progress_login
 import kotlinx.android.synthetic.main.layout_login_form.password
 import kotlinx.android.synthetic.main.layout_login_form.password_layout
 import kotlinx.android.synthetic.main.layout_login_form.sign_in_button
 import kotlinx.android.synthetic.main.layout_login_form.universal_code
+import kotlinx.android.synthetic.main.layout_login_form.universal_code_info_btn
 import kotlinx.android.synthetic.main.layout_login_form.universal_code_layout
 import javax.inject.Inject
 
 /**
- * A login screen that offers login via universal code/password.
+ * A login fragment that offers login via universal code/password.
+ *
+ * Created by Sonphil on 10-05-18.
  */
-class LoginActivity : DaggerAppCompatActivity() {
+
+class LoginFragment : DaggerFragment() {
+    companion object {
+        const val TAG = "LogiNFragment"
+        fun newInstance() = LoginFragment()
+    }
 
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
@@ -44,21 +54,29 @@ class LoginActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_login, container, false)
 
-        setContentView(R.layout.activity_login)
-
-        setTitle(R.string.title_activity_login)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setUpFields()
 
         // Set up background
         Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
 
-        sign_in_button.setOnClickListener {
-            attemptLogin()
+        val onClickListener = View.OnClickListener {
+            when {
+                it.id == R.id.sign_in_button -> attemptLogin()
+                it.id == R.id.universal_code_info_btn -> displayUniversalCodeDialog(it)
+            }
         }
+
+        sign_in_button.setOnClickListener(onClickListener)
+        universal_code_info_btn.setOnClickListener(onClickListener)
 
         subscribeUI()
 
@@ -103,10 +121,12 @@ class LoginActivity : DaggerAppCompatActivity() {
         })
 
         // Set the password layout font
-        val fontValue = TypedValue()
-        theme.resolveAttribute(R.attr.fontFamily, fontValue, true)
-        val passwordLayoutTypeFace = ResourcesCompat.getFont(this, fontValue.resourceId)
-        password_layout.setTypeface(passwordLayoutTypeFace)
+        activity?.let {
+            val fontValue = TypedValue()
+            it.theme.resolveAttribute(R.attr.fontFamily, fontValue, true)
+            val passwordLayoutTypeFace = ResourcesCompat.getFont(it, fontValue.resourceId)
+            password_layout.setTypeface(passwordLayoutTypeFace)
+        }
     }
 
     /**
@@ -121,7 +141,7 @@ class LoginActivity : DaggerAppCompatActivity() {
                     }
                     Resource.ERROR -> {
                         showProgress(false)
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
                     Resource.LOADING -> {
                         showProgress(true)
@@ -157,7 +177,7 @@ class LoginActivity : DaggerAppCompatActivity() {
      * Attempts to sign in the account
      */
     private fun attemptLogin() {
-        currentFocus?.let { KeyboardUtils.hideKeyboard(currentFocus) }
+        activity?.currentFocus?.let { KeyboardUtils.hideKeyboard(it) }
 
         val universalCodeStr = universal_code.text.toString()
         val passwordStr = password.text.toString()
@@ -193,26 +213,28 @@ class LoginActivity : DaggerAppCompatActivity() {
     }
 
     fun displayUniversalCodeDialog(view: View) {
-        val builder = AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle)
+        context?.let {
+            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
 
-        val icon = ContextCompat.getDrawable(this, R.drawable.ic_info_white_24dp)!!
-                .mutate()
-        icon.setTint(ContextCompat.getColor(this, R.color.colorPrimary))
+            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_white_24dp)!!
+                    .mutate()
+            icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
 
-        builder.setMessage(R.string.infos_universal_code)
-                .setTitle(getString(R.string.prompt_universal_code))
-                .setIcon(icon)
-                .setPositiveButton(android.R.string.ok) { dialog, which -> dialog?.dismiss() }
+            builder.setMessage(R.string.infos_universal_code)
+                    .setTitle(getString(R.string.prompt_universal_code))
+                    .setIcon(icon)
+                    .setPositiveButton(android.R.string.ok) { dialog, which -> dialog?.dismiss() }
 
-        builder.create().show()
+            builder.create().show()
+        }
     }
 
     /**
      * Starts MainActivity
      */
     private fun goToMainActivity() {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
-        finish()
+        activity?.finish()
     }
 }

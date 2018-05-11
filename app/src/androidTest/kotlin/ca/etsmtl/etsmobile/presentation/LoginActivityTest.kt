@@ -12,7 +12,6 @@ import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.login.LoginActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher

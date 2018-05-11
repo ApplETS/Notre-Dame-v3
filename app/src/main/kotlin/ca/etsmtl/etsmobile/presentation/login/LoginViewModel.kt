@@ -42,13 +42,18 @@ class LoginViewModel @Inject constructor(
      */
     val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->
+            // Fetch Etudiant instance
             Transformations.switchMap(repository.getInfoEtudiant(userCredentials, NetworkUtils.isDeviceConnected(getApplication()))) { res ->
-                val credentialsValidBooleanLiveData: LiveData<Resource<Boolean>> = getUserCredentialsValidBooleanLiveData(res)
+                val blnRes = transformEtudiantResToBooleanRes(res)
 
-                if (userCredentialsValid(credentialsValidBooleanLiveData.value)) {
+                if (userCredentialsValid(blnRes)) {
+                    res?.data?.let { logUserToFabricCrashlytics(userCredentials, it) }
+
                     loginRepository.saveUserCredentialsIfNeeded(userCredentials)
-                    res.data?.let { logUserFabricCrashlytics(userCredentials, it) }
                 }
+
+                val credentialsValidBooleanLiveData = MutableLiveData<Resource<Boolean>>()
+                credentialsValidBooleanLiveData.value = blnRes
 
                 credentialsValidBooleanLiveData
             }
@@ -58,13 +63,19 @@ class LoginViewModel @Inject constructor(
     /**
      * Set some user information which will be logged with crashes
      */
-    private fun logUserFabricCrashlytics(userCredentials: SignetsUserCredentials, etudiant: Etudiant) {
+    private fun logUserToFabricCrashlytics(userCredentials: SignetsUserCredentials, etudiant: Etudiant) {
         if (Fabric.isInitialized()) {
             Crashlytics.setUserIdentifier(userCredentials.codeAccesUniversel)
             Crashlytics.setUserName(etudiant.prenom + " " + etudiant.nom)
         }
     }
 
+    /**
+     * Verify that the resource is not null and that his status is not [Resource.LOADING]
+     *
+     * @param blnResource The [Resource] to verify
+     * @return true if the resource is not null and that his status is not [Resource.LOADING]
+     */
     private fun userCredentialsValid(blnResource: Resource<Boolean>?): Boolean {
         if (blnResource != null && blnResource.status == Resource.SUCCESS) {
             return blnResource.data!!
@@ -73,32 +84,24 @@ class LoginViewModel @Inject constructor(
         return false
     }
 
-    /**
-     * Returns a [LiveData] containing a [Boolean] Resource which indicates whether the
-     * [SignetsUserCredentials] are valid or not.
-     */
-    private fun getUserCredentialsValidBooleanLiveData(res: Resource<Etudiant>?): MutableLiveData<Resource<Boolean>> {
-        val resultLiveData = MutableLiveData<Resource<Boolean>>()
-
+    private fun transformEtudiantResToBooleanRes(res: Resource<Etudiant>?): Resource<Boolean> {
         if (res != null) {
             when (res.status) {
                 Resource.SUCCESS -> {
-                    resultLiveData.value = Resource.success(true)
+                    return Resource.success(true)
                 }
                 Resource.ERROR -> {
                     val errorStr = res.message ?: getApplication<App>().getString(R.string.error)
-                    resultLiveData.value = Resource.error(errorStr, false)
+                    return Resource.error(errorStr, false)
                 }
                 Resource.LOADING -> {
-                    resultLiveData.value = Resource.loading(true)
+                    return Resource.loading(null)
                 }
             }
-        } else {
-            val errorStr = getApplication<App>().getString(R.string.error)
-            resultLiveData.value = Resource.error(errorStr, false)
         }
 
-        return resultLiveData
+        val errorStr = getApplication<App>().getString(R.string.error)
+        return Resource.error(errorStr, false)
     }
 
     /**

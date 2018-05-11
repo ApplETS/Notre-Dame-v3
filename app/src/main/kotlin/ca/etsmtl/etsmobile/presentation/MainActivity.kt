@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.navigation
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
  * select items on the bottom navigation view to switch between fragments.
  *
+ * This activity is displayed when the is user logged in.
+ *
  * Created by Sonphil on 24-02-18.
  */
 

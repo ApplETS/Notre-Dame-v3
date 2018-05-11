@@ -84,16 +84,19 @@ class LoginViewModelTest {
     @Test
     fun testSendValidUserCredentialsResultToUI() {
         mockNetwork(true)
-        val liveData = MutableLiveData<Resource<Etudiant>>()
+        val etudiantLD = MutableLiveData<Resource<Etudiant>>()
         val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
         val resource: Resource<Etudiant> = Resource.success(etudiant)
-        liveData.value = resource
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        etudiantLD.value = resource
+        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(etudiantLD)
+        val saveFinishedLD = MutableLiveData<Boolean>()
+        saveFinishedLD.value = true
+        `when`(loginRepository.saveUserCredentialsIfNeeded(userCredentials)).thenReturn(saveFinishedLD)
         val observer: Observer<Resource<Boolean>> = mock()
         loginViewModel.userCredentialsValidLD.observeForever(observer)
         verify(observer, never()).onChanged(any())
         loginViewModel.setUserCredentials(userCredentials)
-        val expectedBlnRes: Resource<Boolean> = Resource.success(true)
+        var expectedBlnRes: Resource<Boolean> = Resource.success(true)
         verify(observer).onChanged(eq(expectedBlnRes))
     }
 

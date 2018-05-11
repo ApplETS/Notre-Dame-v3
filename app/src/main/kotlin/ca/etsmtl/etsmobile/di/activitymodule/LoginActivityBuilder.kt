@@ -1,6 +1,6 @@
 package ca.etsmtl.etsmobile.di.activitymodule
 
-import ca.etsmtl.etsmobile.presentation.login.LoginActivity
+import ca.etsmtl.etsmobile.presentation.LoginActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
