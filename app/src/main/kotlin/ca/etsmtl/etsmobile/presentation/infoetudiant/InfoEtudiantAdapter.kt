@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_info_etudiant.textViewInfoEtudiantItemLabel
+import kotlinx.android.synthetic.main.item_info_etudiant.textViewInfoEtudiantItemValue
 
 /**
  * Created by Sonphil on 02-05-18.
@@ -32,7 +35,8 @@ class InfoEtudiantAdapter : RecyclerView.Adapter<InfoEtudiantAdapter.ViewHolder>
             when (position) {
                 INFORMATION.NAME.ordinal -> setInfo(holder, R.string.label_name_info_etudiant, etudiant.prenom + " " + etudiant.nom)
                 INFORMATION.PERMANENT_CODE.ordinal -> setInfo(holder, R.string.label_permanent_code_info_etudiant, etudiant.codePerm)
-                INFORMATION.BALANCE.ordinal -> setInfo(holder, R.string.label_balance_info_etudiant, etudiant.soldeTotal ?: "")
+                INFORMATION.BALANCE.ordinal -> setInfo(holder, R.string.label_balance_info_etudiant, etudiant.soldeTotal
+                        ?: "")
             }
         }
     }
@@ -47,8 +51,8 @@ class InfoEtudiantAdapter : RecyclerView.Adapter<InfoEtudiantAdapter.ViewHolder>
         holder.infoTextView.text = info
     }
 
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val infoTextView: TextView = view.findViewById(R.id.textViewInfoEtudiantItemValue)
-        val labelTextView: TextView = view.findViewById(R.id.textViewInfoEtudiantItemLabel)
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        val infoTextView: TextView = textViewInfoEtudiantItemValue
+        val labelTextView: TextView = textViewInfoEtudiantItemLabel
     }
 }

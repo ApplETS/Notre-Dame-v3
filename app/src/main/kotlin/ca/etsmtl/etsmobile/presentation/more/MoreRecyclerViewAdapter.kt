@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import ca.etsmtl.etsmobile.R
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.fragment_more_item.iVMoreItemIcon
+import kotlinx.android.synthetic.main.fragment_more_item.textViewMoreItemLabel
 
 class MoreRecyclerViewAdapter(
     private val items: List<MoreItem>,
@@ -28,15 +31,15 @@ class MoreRecyclerViewAdapter(
         holder.labelTextView.text = item.label
 
         itemClickListener?.let {
-            holder.view.setOnClickListener {
+            holder.containerView.setOnClickListener {
                 itemClickListener.onItemClick(position)
             }
         }
     }
 
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val iconImageView: ImageView = view.findViewById(R.id.iVMoreItemIcon)
-        val labelTextView: TextView = view.findViewById(R.id.textViewMoreItemLabel)
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        val iconImageView: ImageView = iVMoreItemIcon
+        val labelTextView: TextView = textViewMoreItemLabel
     }
 
     /**
