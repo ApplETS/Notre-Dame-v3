@@ -16,8 +16,8 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.WelcomeActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_more.progress_more
-import kotlinx.android.synthetic.main.fragment_more.recycler_view_more
+import kotlinx.android.synthetic.main.fragment_more.progressMore
+import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
 import javax.inject.Inject
 
 class MoreFragment : DaggerFragment() {
@@ -41,7 +41,7 @@ class MoreFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpRecyclerView(recycler_view_more)
+        setUpRecyclerView(recyclerViewMore)
     }
 
     private fun setUpRecyclerView(view: RecyclerView) {
@@ -65,8 +65,8 @@ class MoreFragment : DaggerFragment() {
                 .setTitle(getString(R.string.more_item_label_log_out))
                 .setPositiveButton(R.string.yes) { dialog, which ->
                     dialog.dismiss()
-                    recycler_view_more.visibility = View.GONE
-                    progress_more.visibility = View.VISIBLE
+                    recyclerViewMore.visibility = View.GONE
+                    progressMore.visibility = View.VISIBLE
                     subscribeUILogout()
                 }
                 .setNegativeButton(R.string.no) { dialog, which -> dialog.dismiss() }

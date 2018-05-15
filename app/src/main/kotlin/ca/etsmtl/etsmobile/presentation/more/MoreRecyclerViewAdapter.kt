@@ -35,8 +35,8 @@ class MoreRecyclerViewAdapter(
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val iconImageView: ImageView = view.findViewById(R.id.more_item_icon_iv)
-        val labelTextView: TextView = view.findViewById(R.id.more_item_label_text_view)
+        val iconImageView: ImageView = view.findViewById(R.id.iVMoreItemIcon)
+        val labelTextView: TextView = view.findViewById(R.id.textViewMoreItemLabel)
     }
 
     /**

@@ -25,15 +25,15 @@ import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.util.KeyboardUtils
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_login.bg_iv
-import kotlinx.android.synthetic.main.fragment_login.login_form
-import kotlinx.android.synthetic.main.fragment_login.progress_login
+import kotlinx.android.synthetic.main.fragment_login.iVBackground
+import kotlinx.android.synthetic.main.fragment_login.loginForm
+import kotlinx.android.synthetic.main.fragment_login.progressLogin
+import kotlinx.android.synthetic.main.layout_login_form.btnSignIn
+import kotlinx.android.synthetic.main.layout_login_form.btnUniversalCodeInfo
+import kotlinx.android.synthetic.main.layout_login_form.layoutPassword
+import kotlinx.android.synthetic.main.layout_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.layout_login_form.password
-import kotlinx.android.synthetic.main.layout_login_form.password_layout
-import kotlinx.android.synthetic.main.layout_login_form.sign_in_button
-import kotlinx.android.synthetic.main.layout_login_form.universal_code
-import kotlinx.android.synthetic.main.layout_login_form.universal_code_info_btn
-import kotlinx.android.synthetic.main.layout_login_form.universal_code_layout
+import kotlinx.android.synthetic.main.layout_login_form.universalCode
 import javax.inject.Inject
 
 /**
@@ -66,17 +66,17 @@ class LoginFragment : DaggerFragment() {
         setUpFields()
 
         // Set up background
-        Glide.with(this).load(R.drawable.bg_ets_red).into(bg_iv)
+        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
         val onClickListener = View.OnClickListener {
             when {
-                it.id == R.id.sign_in_button -> attemptLogin()
-                it.id == R.id.universal_code_info_btn -> displayUniversalCodeDialog()
+                it.id == R.id.btnSignIn -> attemptLogin()
+                it.id == R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
             }
         }
 
-        sign_in_button.setOnClickListener(onClickListener)
-        universal_code_info_btn.setOnClickListener(onClickListener)
+        btnSignIn.setOnClickListener(onClickListener)
+        btnUniversalCodeInfo.setOnClickListener(onClickListener)
 
         subscribeUI()
 
@@ -97,19 +97,19 @@ class LoginFragment : DaggerFragment() {
             if (!hasFocus) {
                 val fieldStatus: FieldStatus
                 when (view.id) {
-                    R.id.universal_code -> {
-                        fieldStatus = loginViewModel.setUniversalCode(universal_code.text.toString())
-                        adjustTextInputAccordingToStatus(universal_code_layout, fieldStatus)
+                    R.id.universalCode -> {
+                        fieldStatus = loginViewModel.setUniversalCode(universalCode.text.toString())
+                        adjustTextInputAccordingToStatus(layoutUniversalCode, fieldStatus)
                     }
                     R.id.password -> {
                         fieldStatus = loginViewModel.setPassword(password.text.toString())
-                        adjustTextInputAccordingToStatus(password_layout, fieldStatus)
+                        adjustTextInputAccordingToStatus(layoutPassword, fieldStatus)
                     }
                 }
             }
         }
 
-        universal_code.onFocusChangeListener = onFocusChangeListener
+        universalCode.onFocusChangeListener = onFocusChangeListener
         password.onFocusChangeListener = onFocusChangeListener
 
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
@@ -125,7 +125,7 @@ class LoginFragment : DaggerFragment() {
             val fontValue = TypedValue()
             it.theme.resolveAttribute(R.attr.fontFamily, fontValue, true)
             val passwordLayoutTypeFace = ResourcesCompat.getFont(it, fontValue.resourceId)
-            password_layout.setTypeface(passwordLayoutTypeFace)
+            layoutPassword.setTypeface(passwordLayoutTypeFace)
         }
     }
 
@@ -168,7 +168,7 @@ class LoginFragment : DaggerFragment() {
      */
     private fun initUserCredentialsFields(userCredentials: SignetsUserCredentials?) {
         if (userCredentials != null) {
-            universal_code.setText(userCredentials.codeAccesUniversel)
+            universalCode.setText(userCredentials.codeAccesUniversel)
             password.setText(userCredentials.motPasse)
         }
     }
@@ -179,7 +179,7 @@ class LoginFragment : DaggerFragment() {
     private fun attemptLogin() {
         activity?.currentFocus?.let { KeyboardUtils.hideKeyboard(it) }
 
-        val universalCodeStr = universal_code.text.toString()
+        val universalCodeStr = universalCode.text.toString()
         val passwordStr = password.text.toString()
 
         loginViewModel.setUserCredentials(SignetsUserCredentials(universalCodeStr, passwordStr))
@@ -191,23 +191,23 @@ class LoginFragment : DaggerFragment() {
     private fun showProgress(show: Boolean) {
         val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
-        login_form.visibility = if (show) View.INVISIBLE else View.VISIBLE
-        login_form.animate()
+        loginForm.visibility = if (show) View.INVISIBLE else View.VISIBLE
+        loginForm.animate()
                 .setDuration(shortAnimTime)
                 .alpha((if (show) 0 else 1).toFloat())
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        login_form.visibility = if (show) View.INVISIBLE else View.VISIBLE
+                        loginForm.visibility = if (show) View.INVISIBLE else View.VISIBLE
                     }
                 })
 
-        progress_login.visibility = if (show) View.VISIBLE else View.GONE
-        progress_login.animate()
+        progressLogin.visibility = if (show) View.VISIBLE else View.GONE
+        progressLogin.animate()
                 .setDuration(shortAnimTime)
                 .alpha((if (show) 1 else 0).toFloat())
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        progress_login.visibility = if (show) View.VISIBLE else View.GONE
+                        progressLogin.visibility = if (show) View.VISIBLE else View.GONE
                     }
                 })
     }

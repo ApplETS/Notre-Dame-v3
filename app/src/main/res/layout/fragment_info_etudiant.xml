@@ -6,14 +6,14 @@
     tools:context="ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_info_etudiant"
+        android:id="@+id/recyclerViewInfoEtudiant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/item_info_etudiant" />
 
     <ProgressBar
-        android:id="@+id/progress_bar_info_etudiant"
+        android:id="@+id/progressBarInfoEtudiant"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

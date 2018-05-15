@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantFragment
-import kotlinx.android.synthetic.main.fragment_profile.expansion_layout_info_etudiant
+import kotlinx.android.synthetic.main.fragment_profile.expansionLayoutInfoEtudiant
 
 /**
  * Created by Sonphil on 24-02-18.
@@ -32,12 +32,12 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        expansion_layout_info_etudiant.addListener { _, expanded ->
+        expansionLayoutInfoEtudiant.addListener { _, expanded ->
             if (expanded)
                 addInfoEtudiantFragment()
         }
 
-        if (expansion_layout_info_etudiant.isExpanded)
+        if (expansionLayoutInfoEtudiant.isExpanded)
             addInfoEtudiantFragment()
     }
 
@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
             infoEtudiantFragment = InfoEtudiantFragment.newInstance()
 
         with(childFragmentManager.beginTransaction()) {
-            replace(R.id.container_info_etudiant, infoEtudiantFragment, INFO_ETUDIANT_FRAGMENT_TAG)
+            replace(R.id.containerInfoEtudiant, infoEtudiantFragment, INFO_ETUDIANT_FRAGMENT_TAG)
             commit()
         }
     }

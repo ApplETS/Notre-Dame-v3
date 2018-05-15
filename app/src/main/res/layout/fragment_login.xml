@@ -7,7 +7,7 @@
 
     <!-- Background -->
     <ImageView
-        android:id="@+id/bg_iv"
+        android:id="@+id/iVBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -24,7 +24,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin">
         <!-- Login progress -->
         <ProgressBar
-            android:id="@+id/progress_login"
+            android:id="@+id/progressLogin"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,19 +37,19 @@
             tools:visibility="visible" />
 
         <ImageView
-            android:id="@+id/iv_ets_logo"
+            android:id="@+id/iVETSLogo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerInside"
             android:src="@drawable/ets_blanc_impr_fond_transparent"
-            app:layout_constraintBottom_toTopOf="@+id/login_form"
+            app:layout_constraintBottom_toTopOf="@+id/loginForm"
             app:layout_constraintDimensionRatio="W,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/login_form"
+            android:id="@+id/loginForm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,12 +67,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="@string/label_login_applets_logo"
-            app:layout_constraintBottom_toTopOf="@+id/applets_logo_iv"
+            app:layout_constraintBottom_toTopOf="@+id/iVAppletsLogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/applets_logo_iv"
+            android:id="@+id/iVAppletsLogo"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"

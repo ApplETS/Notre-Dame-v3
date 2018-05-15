@@ -19,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/material_light_white"
-            app:expansion_headerIndicator="@id/header_indicator_info_etudiant"
-            app:expansion_layout="@id/expansion_layout_info_etudiant"
+            app:expansion_headerIndicator="@id/headerIndicatorInfoEtudiant"
+            app:expansion_layout="@id/expansionLayoutInfoEtudiant"
             app:expansion_toggleOnClick="true">
 
             <!-- Info Etudiant -->
@@ -50,7 +50,7 @@
                     android:textAppearance="?android:attr/textAppearanceListItem" />
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/header_indicator_info_etudiant"
+                    android:id="@+id/headerIndicatorInfoEtudiant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
@@ -63,7 +63,7 @@
         </com.github.florent37.expansionpanel.ExpansionHeader>
 
         <com.github.florent37.expansionpanel.ExpansionLayout
-            android:id="@+id/expansion_layout_info_etudiant"
+            android:id="@+id/expansionLayoutInfoEtudiant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/material_light_white"
@@ -71,7 +71,7 @@
 
             <!-- CONTENT -->
             <FrameLayout
-                android:id="@+id/container_info_etudiant"
+                android:id="@+id/containerInfoEtudiant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

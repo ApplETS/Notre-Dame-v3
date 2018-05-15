@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/info_etudiant_item_value_text_view"
+            android:id="@+id/textViewInfoEtudiantItemValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceListItem"
@@ -22,7 +22,7 @@
             tools:text="Value" />
 
         <TextView
-            android:id="@+id/info_etudiant_item_label_text_view"
+            android:id="@+id/textViewInfoEtudiantItemLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"

@@ -5,7 +5,7 @@
     tools:context="ca.etsmtl.etsmobile.presentation.WelcomeActivity">
 
     <fragment
-        android:id="@+id/login_fragment"
+        android:id="@+id/fragmentLogin"
         android:name="ca.etsmtl.etsmobile.presentation.login.LoginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -29,7 +29,7 @@ class WelcomeActivityTest {
 
     @Test
     fun testUniversalCodeDialog() {
-        onView(ViewMatchers.withId(R.id.universal_code_info_btn)).perform(click())
+        onView(ViewMatchers.withId(R.id.btnUniversalCodeInfo)).perform(click())
 
         onView(withText(R.string.infos_universal_code)).check(matches(isDisplayed()))
     }
@@ -38,10 +38,10 @@ class WelcomeActivityTest {
     fun testInvalidUniversalCode() {
         val activity: WelcomeActivity = activityTestRule.activity
 
-        onView(withId(R.id.universal_code)).perform(replaceText("AM1234"))
-        onView(withId(R.id.sign_in_button)).perform(click())
+        onView(withId(R.id.universalCode)).perform(replaceText("AM1234"))
+        onView(withId(R.id.btnSignIn)).perform(click())
 
-        onView(withId(R.id.universal_code_layout)).check(matches(withError(activity.getString(R.string.error_invalid_universal_code))))
+        onView(withId(R.id.layoutUniversalCode)).check(matches(withError(activity.getString(R.string.error_invalid_universal_code))))
     }
 
     @Test
@@ -49,16 +49,16 @@ class WelcomeActivityTest {
         val activity: WelcomeActivity = activityTestRule.activity
 
         // Focus universal code field
-        onView(withId(R.id.universal_code)).perform(click())
+        onView(withId(R.id.universalCode)).perform(click())
 
         // Set empty universal code
-        onView(withId(R.id.universal_code)).perform(replaceText(""))
+        onView(withId(R.id.universalCode)).perform(replaceText(""))
 
         // Remove focus from universal code field
-        onView(withId(R.id.password_layout)).perform(click())
+        onView(withId(R.id.layoutPassword)).perform(click())
 
         // Check error
-        onView(withId(R.id.universal_code_layout)).check(matches(withError(activity.getString(R.string.error_field_required))))
+        onView(withId(R.id.layoutUniversalCode)).check(matches(withError(activity.getString(R.string.error_field_required))))
     }
 
     @Test
@@ -66,7 +66,7 @@ class WelcomeActivityTest {
         val activity: WelcomeActivity = activityTestRule.activity
 
         // Set valid universal code
-        onView(withId(R.id.universal_code)).perform(replaceText("AM112345"))
+        onView(withId(R.id.universalCode)).perform(replaceText("AM112345"))
 
         // Focus password field
         onView(withId(R.id.password)).perform(click())
@@ -75,9 +75,9 @@ class WelcomeActivityTest {
         onView(withId(R.id.password)).perform(replaceText(""))
 
         // Remove focus from password field
-        onView(withId(R.id.universal_code)).perform(click())
+        onView(withId(R.id.universalCode)).perform(click())
 
-        onView(withId(R.id.password_layout)).check(matches(withError(activity.getString(R.string.error_field_required))))
+        onView(withId(R.id.layoutPassword)).check(matches(withError(activity.getString(R.string.error_field_required))))
     }
 
     private fun withError(expected: String): Matcher<Any> {

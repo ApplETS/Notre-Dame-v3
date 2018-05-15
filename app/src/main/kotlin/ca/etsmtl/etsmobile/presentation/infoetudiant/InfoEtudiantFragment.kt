@@ -11,8 +11,8 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.data.model.Resource
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_info_etudiant.progress_bar_info_etudiant
-import kotlinx.android.synthetic.main.fragment_info_etudiant.recycler_view_info_etudiant
+import kotlinx.android.synthetic.main.fragment_info_etudiant.progressBarInfoEtudiant
+import kotlinx.android.synthetic.main.fragment_info_etudiant.recyclerViewInfoEtudiant
 import javax.inject.Inject
 
 /**
@@ -46,8 +46,8 @@ class InfoEtudiantFragment : DaggerFragment() {
 
     private fun setUpRecycleView() {
         adapter = InfoEtudiantAdapter()
-        recycler_view_info_etudiant.adapter = adapter
-        recycler_view_info_etudiant.setHasFixedSize(true)
+        recyclerViewInfoEtudiant.adapter = adapter
+        recyclerViewInfoEtudiant.setHasFixedSize(true)
     }
 
     companion object {
@@ -58,15 +58,15 @@ class InfoEtudiantFragment : DaggerFragment() {
         infoEtudiantViewModel.getInfoEtudiant().observe(this, Observer<Resource<Etudiant>> { res ->
             when (res?.status) {
                 Resource.SUCCESS -> {
-                    progress_bar_info_etudiant.visibility = View.GONE
+                    progressBarInfoEtudiant.visibility = View.GONE
                     res.data?.let { adapter.setEtudiant(it) }
                 }
                 Resource.ERROR -> {
-                    progress_bar_info_etudiant.visibility = View.GONE
+                    progressBarInfoEtudiant.visibility = View.GONE
                     res.data?.let { adapter.setEtudiant(it) }
                 }
                 Resource.LOADING -> {
-                    progress_bar_info_etudiant.visibility = View.VISIBLE
+                    progressBarInfoEtudiant.visibility = View.VISIBLE
                 }
             }
         })

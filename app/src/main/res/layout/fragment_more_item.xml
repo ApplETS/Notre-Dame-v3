@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/more_item_icon_iv"
+            android:id="@+id/iVMoreItemIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/material_component_lists_icon_left_padding"
@@ -23,7 +23,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/more_item_label_text_view"
+        android:id="@+id/textViewMoreItemLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="@dimen/material_component_lists_right_padding"

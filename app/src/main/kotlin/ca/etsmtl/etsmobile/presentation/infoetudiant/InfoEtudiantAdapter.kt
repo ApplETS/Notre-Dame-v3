@@ -48,7 +48,7 @@ class InfoEtudiantAdapter : RecyclerView.Adapter<InfoEtudiantAdapter.ViewHolder>
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val infoTextView: TextView = view.findViewById(R.id.info_etudiant_item_value_text_view)
-        val labelTextView: TextView = view.findViewById(R.id.info_etudiant_item_label_text_view)
+        val infoTextView: TextView = view.findViewById(R.id.textViewInfoEtudiantItemValue)
+        val labelTextView: TextView = view.findViewById(R.id.textViewInfoEtudiantItemLabel)
     }
 }
