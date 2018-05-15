@@ -12,7 +12,7 @@ class WelcomeActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_welcome)
 
         setTitle(R.string.title_activity_login)
     }

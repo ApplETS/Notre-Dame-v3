@@ -57,7 +57,7 @@ android {
 def support = '27.1.1'
 def constraint_layout = '1.1.0'
 def lifecycle = '1.1.1'
-def room = '1.1.0-beta3'
+def room = '1.1.0'
 def espresso = '3.0.1'
 def astl = '1.0.1'
 def junit = '4.12'

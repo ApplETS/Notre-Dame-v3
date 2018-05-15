@@ -71,7 +71,7 @@ class LoginFragment : DaggerFragment() {
         val onClickListener = View.OnClickListener {
             when {
                 it.id == R.id.sign_in_button -> attemptLogin()
-                it.id == R.id.universal_code_info_btn -> displayUniversalCodeDialog(it)
+                it.id == R.id.universal_code_info_btn -> displayUniversalCodeDialog()
             }
         }
 
@@ -212,7 +212,7 @@ class LoginFragment : DaggerFragment() {
                 })
     }
 
-    fun displayUniversalCodeDialog(view: View) {
+    private fun displayUniversalCodeDialog() {
         context?.let {
             val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
 
