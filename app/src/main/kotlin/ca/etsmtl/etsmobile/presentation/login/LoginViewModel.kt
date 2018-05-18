@@ -106,9 +106,9 @@ class LoginViewModel @Inject constructor(
 
     private fun getErrorMessage(res: Resource<Etudiant>): String {
         return if (app.isDeviceConnected()) {
-            app.getString(R.string.error_no_internet_connection)
-        } else {
             res.message ?: getApplication<App>().getString(R.string.error)
+        } else {
+            app.getString(R.string.error_no_internet_connection)
         }
     }
 
