@@ -11,7 +11,7 @@ import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.data.repository.signets.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.etsmobile.util.NetworkUtils
+import ca.etsmtl.etsmobile.util.isDeviceConnected
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
@@ -43,7 +43,7 @@ class LoginViewModel @Inject constructor(
     val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->
             // Fetch Etudiant instance
-            Transformations.switchMap(repository.getInfoEtudiant(userCredentials, NetworkUtils.isDeviceConnected(getApplication()))) { res ->
+            Transformations.switchMap(repository.getInfoEtudiant(userCredentials, app.isDeviceConnected())) { res ->
                 val blnRes = transformEtudiantResToBooleanRes(res)
 
                 if (userCredentialsValid(blnRes)) {
@@ -105,7 +105,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun getErrorMessage(res: Resource<Etudiant>): String {
-        return if (NetworkUtils.isDeviceConnected(app)) {
+        return if (app.isDeviceConnected()) {
             app.getString(R.string.error_no_internet_connection)
         } else {
             res.message ?: getApplication<App>().getString(R.string.error)
