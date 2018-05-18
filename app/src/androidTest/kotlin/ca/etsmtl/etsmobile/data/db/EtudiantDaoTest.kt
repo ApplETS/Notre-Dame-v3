@@ -4,10 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.etsmobile.LiveDataTestUtil.getValue
 import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertNotNull
-import junit.framework.Assert.assertNull
-import junit.framework.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -19,46 +16,32 @@ class EtudiantDaoTest : DbTest() {
     @Test
     fun testInsertEtudiant() {
         val etudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true, "")
-        db.etudiantDao().insertEtudiant(etudiant)
-        val etudiantFromDb = getValue(db.etudiantDao().getEtudiant())
+        db.etudiantDao().insert(etudiant)
+        val etudiantFromDb = getValue(db.etudiantDao().getAll())
         assertNotNull(etudiantFromDb)
-        assertEquals("fooType", etudiantFromDb.type)
-        assertEquals("Luu", etudiantFromDb.nom)
-        assertEquals(etudiantFromDb.prenom, "Phil")
-        assertEquals("LUUP12345678", etudiantFromDb.codePerm)
-        assertEquals("123,45$", etudiantFromDb.soldeTotal)
-        assertTrue(etudiantFromDb.masculin!!)
-        assertFalse(!etudiantFromDb.masculin!!)
-        assertEquals("", etudiantFromDb.erreur)
+        assertEquals(etudiant, etudiantFromDb[0])
     }
 
     @Test
     fun testInsertSameEtudiant() {
         val etudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true, "")
-        db.etudiantDao().insertEtudiant(etudiant)
+        db.etudiantDao().insert(etudiant)
         val sameEtudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "999,45$", true, "")
-        db.etudiantDao().insertEtudiant(sameEtudiant)
-        val etudiantFromDb = getValue(db.etudiantDao().getEtudiant())
+        db.etudiantDao().insert(sameEtudiant)
+        val etudiantFromDb = getValue(db.etudiantDao().getAll())
         assertNotNull(etudiantFromDb)
-        assertEquals("fooType", etudiantFromDb.type)
-        assertEquals("Luu", etudiantFromDb.nom)
-        assertEquals(etudiantFromDb.prenom, "Phil")
-        assertEquals("LUUP12345678", etudiantFromDb.codePerm)
-        assertEquals("999,45$", etudiantFromDb.soldeTotal)
-        assertTrue(etudiantFromDb.masculin!!)
-        assertFalse(!etudiantFromDb.masculin!!)
-        assertEquals("", etudiantFromDb.erreur)
+        assertEquals(sameEtudiant, etudiantFromDb[0])
     }
 
     @Test
     fun testDelete() {
         val etudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true, "")
-        db.etudiantDao().insertEtudiant(etudiant)
-        var etudiantFromDb = getValue(db.etudiantDao().getEtudiant())
-        assertNotNull(etudiantFromDb)
+        db.etudiantDao().insert(etudiant)
+        var etudiantFromDb = getValue(db.etudiantDao().getAll())
+        assertEquals(1, etudiantFromDb.size)
 
         db.etudiantDao().deleteAll()
-        etudiantFromDb = getValue(db.etudiantDao().getEtudiant())
-        assertNull(etudiantFromDb)
+        etudiantFromDb = getValue(db.etudiantDao().getAll())
+        assertEquals(0, etudiantFromDb.size)
     }
 }

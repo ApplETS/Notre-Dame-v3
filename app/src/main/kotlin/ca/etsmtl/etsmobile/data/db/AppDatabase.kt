@@ -12,12 +12,12 @@ import ca.etsmtl.etsmobile.data.model.signets.Programme
  */
 @Database(
         entities = [
-            (Etudiant::class),
-            (Programme::class)
+            (Programme::class),
+            (Etudiant::class)
         ],
         version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun etudiantDao(): EtudiantDao
     abstract fun programmeDao(): ProgrammeDao
+    abstract fun etudiantDao(): EtudiantDao
 }

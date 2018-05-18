@@ -8,8 +8,8 @@ import ca.etsmtl.etsmobile.InstantAppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.Resource
+import ca.etsmtl.etsmobile.data.model.signets.Etudiant
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
@@ -33,6 +33,10 @@ class InfoEtudiantRepositoryTest {
     private lateinit var signetsApi: SignetsApi
     private lateinit var repo: InfoEtudiantRepository
     private lateinit var dao: EtudiantDao
+    private lateinit var etudiant: Etudiant
+    private lateinit var etudiantList: ArrayList<Etudiant>
+    private val dbData: MutableLiveData<List<Etudiant>> = MutableLiveData()
+    private val userCredentials = SignetsUserCredentials("test", "foo")
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -41,100 +45,120 @@ class InfoEtudiantRepositoryTest {
     fun setup() {
         signetsApi = mock(SignetsApi::class.java)
         dao = mock(EtudiantDao::class.java)
+        `when`(dao.getAll()).thenReturn(dbData)
         repo = InfoEtudiantRepository(InstantAppExecutors(), signetsApi, dao)
+        etudiantList = ArrayList()
+        etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
+        etudiantList.add(etudiant)
     }
 
     @Test
     fun testLoadFromNetwork() {
-        val dbData: MutableLiveData<Etudiant> = MutableLiveData()
-        `when`(dao.getEtudiant()).thenReturn(dbData)
-
-        val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
         val signetsModel = SignetsModel<Etudiant>()
         signetsModel.data = etudiant
         val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.successCall(signetsModel)
-        val userCredentials = SignetsUserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
 
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
         val observer = mock(Observer::class.java)
-        // Start observing the LiveData returned by SignetsApi
+        // Start observing the LiveData returned
         data.observeForever(observer as Observer<Resource<Etudiant>>)
         verifyNoMoreInteractions(signetsApi)
-        // NeworkBoundResource should have posted an loading resource
+        /*
+         NeworkBoundResource should have posted an loading resource while the cached data is being
+         fetched from the DB
+          */
         verify(observer).onChanged(Resource.loading(null))
 
         // Prepare fake updated db data.
-        val updatedDbData: MutableLiveData<Etudiant> = MutableLiveData()
+        val updatedDbData: MutableLiveData<List<Etudiant>> = MutableLiveData()
+        updatedDbData.value = etudiantList
         // Return the fake updated db data when requested
         // After fetching from the network, the data will stored in the db and the db's data will be
         // returned.
-        `when`(dao.getEtudiant()).thenReturn(updatedDbData)
+        `when`(dao.getAll()).thenReturn(updatedDbData)
 
-        // Post null so that the data must be fetched from the network
-        dbData.postValue(null)
-        // Check if a request a send to get the updated data
+        // Post empty list so that the data must be fetched from the network
+        dbData.postValue(ArrayList())
+        // Check if a request waa sent to fetch new data
         verify(signetsApi).infoEtudiant(userCredentials)
         // After fetching from the network, the data should be inserted into the db.
-        verify(dao).insertEtudiant(etudiant)
+        verify(dao).insert(etudiant)
 
         /*
          By now, the updated data has been stored in the db and NetworkBoundResource will get the
-         updated the from the db.
+         updated data from the db.
          */
-        updatedDbData.postValue(etudiant)
+        updatedDbData.postValue(etudiantList)
         verify(observer).onChanged(Resource.success(etudiant))
     }
 
     @Test
     fun testFailToLoadFromNetwork() {
-        val dbData: MutableLiveData<Etudiant> = MutableLiveData()
-        `when`(dao.getEtudiant()).thenReturn(dbData)
-
-        val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
         val signetsModel = SignetsModel<Etudiant>()
         signetsModel.data = etudiant
         val errorMsg = "Test error"
         val call: LiveData<ApiResponse<SignetsModel<Etudiant>>> = ApiUtil.failCall(errorMsg)
-        val userCredentials = SignetsUserCredentials("test", "foo")
         `when`(signetsApi.infoEtudiant(userCredentials)).thenReturn(call)
 
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, true)
         val observer = mock(Observer::class.java)
-        // Start observing the LiveData returned by SignetsApi
+        // Start observing the LiveData returned
         data.observeForever(observer as Observer<Resource<Etudiant>>)
         verifyNoMoreInteractions(signetsApi)
-        // NeworkBoundResource should have posted an loading resource
+        /*
+         NeworkBoundResource should have posted an loading resource while the cached data is being
+         fetched from the DB
+          */
         verify(observer).onChanged(Resource.loading(null))
-        dbData.postValue(etudiant)
-        // Check if a request has been sent to get the updated data
+        dbData.postValue(etudiantList)
+        // Check if a request has been sent to fetch new data
         verify(signetsApi).infoEtudiant(userCredentials)
-        verify(dao, never()).insertEtudiant(etudiant)
-
+        // The data should not be inserted to the DB since there was an error
+        verify(dao, never()).insert(etudiant)
+        // Verify that observer has been notified
         verify(observer).onChanged(Resource.error(errorMsg, etudiant))
     }
 
     @Test
     fun testLoadFromDb() {
-        val dbData: MutableLiveData<Etudiant> = MutableLiveData()
-        `when`(dao.getEtudiant()).thenReturn(dbData)
-
-        val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
-        val userCredentials = SignetsUserCredentials("test", "foo")
-
         val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, false)
         val observer = mock(Observer::class.java)
-        // Start observing the LiveData returned by SignetsApi
+        // Start observing the LiveData
         data.observeForever(observer as Observer<Resource<Etudiant>>)
         verifyNoMoreInteractions(signetsApi)
-        // NeworkBoundResource should have posted an loading resource
+        /*
+         NeworkBoundResource should have posted an loading resource while the cached data is being
+         fetched from the DB
+          */
         verify(observer).onChanged(Resource.loading(null))
 
-        dbData.postValue(etudiant)
+        dbData.postValue(etudiantList)
 
         // Make sure there wasn't any interaction with SignetsApi
         verifyNoMoreInteractions(signetsApi)
 
         verify(observer).onChanged(Resource.success(etudiant))
+    }
+
+    @Test
+    fun testFailToLoadFromDb() {
+        val data: LiveData<Resource<Etudiant>> = repo.getInfoEtudiant(userCredentials, false)
+        val observer = mock(Observer::class.java)
+        // Start observing the LiveData
+        data.observeForever(observer as Observer<Resource<Etudiant>>)
+        verifyNoMoreInteractions(signetsApi)
+        /*
+         NeworkBoundResource should have posted an loading resource while the cached data is being
+         fetched from the DB
+          */
+        verify(observer).onChanged(Resource.loading(null))
+
+        dbData.postValue(ArrayList())
+
+        // Make sure there wasn't any interaction with SignetsApi
+        verifyNoMoreInteractions(signetsApi)
+
+        verify(observer).onChanged(Resource.error(NetworkBoundResource.MSG_NO_DATA_DB, null))
     }
 }

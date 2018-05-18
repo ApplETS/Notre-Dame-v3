@@ -37,10 +37,15 @@ import ca.etsmtl.etsmobile.data.model.Resource
 abstract class NetworkBoundResource<ResultType, RequestType> @MainThread
 protected constructor(private val appExecutors: AppExecutors) {
 
+    companion object {
+        const val MSG_NO_DATA_DB = "No data in DB"
+        const val CALL_FAILED_WITHTOUT_ERROR_MSG = "The call failed, but there was no error message."
+    }
     private val result = MediatorLiveData<Resource<ResultType>>()
 
     init {
         result.value = Resource.loading(null)
+        @Suppress("LeakingThis")
         val dbSource = loadFromDb()
         result.addSource(dbSource) { data ->
             result.removeSource(dbSource)
@@ -48,7 +53,11 @@ protected constructor(private val appExecutors: AppExecutors) {
                 fetchFromNetwork(dbSource)
             } else {
                 result.addSource(dbSource) { newData ->
-                    result.setValue(newData?.let { Resource.success(it) })
+                    if (newData != null) {
+                        result.value = Resource.success(newData)
+                    } else {
+                        result.value = Resource.error(MSG_NO_DATA_DB, null)
+                    }
                 }
             }
         }
@@ -69,7 +78,7 @@ protected constructor(private val appExecutors: AppExecutors) {
             } else {
                 onFetchFailed()
                 result.addSource(dbSource) { newData ->
-                    val errorStr = response?.errorMessage ?: "Error"
+                    val errorStr = response?.errorMessage ?: CALL_FAILED_WITHTOUT_ERROR_MSG
                     result.setValue(Resource.error(errorStr, newData))
                 }
             }
@@ -85,7 +94,7 @@ protected constructor(private val appExecutors: AppExecutors) {
                 // otherwise we will get immediately last cached value,
                 // which may not be updated with latest results received from network.
                 result.addSource(loadFromDb()) { newData ->
-                    result.setValue(newData?.let { Resource.success<ResultType>(it) })
+                    result.setValue(newData?.let { Resource.success(it) })
                 }
             }
         }
