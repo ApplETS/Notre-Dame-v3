@@ -91,7 +91,7 @@ class LoginViewModel @Inject constructor(
                     return Resource.success(true)
                 }
                 Resource.ERROR -> {
-                    val errorStr = res.message ?: getApplication<App>().getString(R.string.error)
+                    val errorStr = getErrorMessage(res)
                     return Resource.error(errorStr, false)
                 }
                 Resource.LOADING -> {
@@ -102,6 +102,14 @@ class LoginViewModel @Inject constructor(
 
         val errorStr = getApplication<App>().getString(R.string.error)
         return Resource.error(errorStr, false)
+    }
+
+    private fun getErrorMessage(res: Resource<Etudiant>): String {
+        return if (NetworkUtils.isDeviceConnected(app)) {
+            app.getString(R.string.error_no_internet_connection)
+        } else {
+            res.message ?: getApplication<App>().getString(R.string.error)
+        }
     }
 
     /**
