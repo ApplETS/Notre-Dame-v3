@@ -2,6 +2,7 @@
     <string name="app_name">ÉTSMobile</string>
     <string name="preference_file_key">ETSMobilePrefs</string>
     <string name="error">Une erreur est survenue</string>
+    <string name="error_no_internet_connection">Absence de connexion internet</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
 
