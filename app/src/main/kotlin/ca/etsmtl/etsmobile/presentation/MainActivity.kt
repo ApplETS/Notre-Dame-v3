@@ -63,7 +63,6 @@ class MainActivity : DaggerAppCompatActivity() {
      */
     private fun goToFragment(navigationItem: MenuItem) {
         val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
         val fragmentTag: String = navigationItem.itemId.toString()
         var fragment = fragmentManager.findFragmentByTag(fragmentTag)
 
@@ -72,8 +71,10 @@ class MainActivity : DaggerAppCompatActivity() {
         }
 
         if (fragment != null) {
-            fragmentTransaction.replace(R.id.content, fragment, fragmentTag)
-            fragmentTransaction.commit()
+            with(fragmentManager.beginTransaction()) {
+                replace(R.id.content, fragment, fragmentTag)
+                commit()
+            }
         }
     }
 

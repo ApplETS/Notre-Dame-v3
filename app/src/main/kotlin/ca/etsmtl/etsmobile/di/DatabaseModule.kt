@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.persistence.room.Room
 import ca.etsmtl.etsmobile.data.db.AppDatabase
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
+import ca.etsmtl.etsmobile.data.db.dao.ProgrammeDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -18,8 +19,7 @@ open class DatabaseModule {
         val instance = DatabaseModule()
     }
 
-    @Singleton
-    @Provides
+    @Singleton @Provides
     open fun provideDb(app: Application): AppDatabase =
             Room.databaseBuilder(app, AppDatabase::class.java, "etsmobile.db")
                     .fallbackToDestructiveMigration()
@@ -27,4 +27,7 @@ open class DatabaseModule {
 
     @Singleton @Provides
     fun provideInfoEtudiantDao(db: AppDatabase): EtudiantDao = db.etudiantDao()
+
+    @Singleton @Provides
+    fun provideProgrammeDao(db: AppDatabase): ProgrammeDao = db.programmeDao()
 }
