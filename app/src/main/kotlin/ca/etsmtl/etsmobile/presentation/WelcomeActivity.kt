@@ -2,12 +2,11 @@ package ca.etsmtl.etsmobile.presentation
 
 import android.os.Bundle
 import ca.etsmtl.etsmobile.R
-import dagger.android.support.DaggerAppCompatActivity
 
 /**
  * First activity displayed to the user
  */
-class WelcomeActivity : DaggerAppCompatActivity() {
+class WelcomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -9,7 +9,6 @@ import ca.etsmtl.etsmobile.presentation.home.HomeFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.navigation
 
 /**
@@ -21,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.navigation
  * Created by Sonphil on 24-02-18.
  */
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         setUpToolbar(item)
