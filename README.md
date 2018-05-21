@@ -30,7 +30,7 @@ You can find out more by visiting the [wiki](https://github.com/ApplETS/Notre-Da
 
 ## Libraries and tools
 This project uses a variety of libraries and tools.
-* Android Support Libraries
+* Android Support Libraries : A set of libraries that provide features that are unavailable in the the standard framework as well as backward compatibility classes for newer APIs.
   * AppCompat v7
   * Design
   * Support v4
@@ -38,22 +38,22 @@ This project uses a variety of libraries and tools.
   * RecyclerView
   * ConstraintLayout
   * AOSP Codes
-* Android Architecture Components
+* Android Architecture Components : A collection of libraries that help developers design robust, testable, and maintainable apps.
   * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html)
   * [Room](https://developer.android.com/topic/libraries/architecture/room.html)
-* [Kotlin](http://kotlinlang.org/)
-* [JUnit](https://junit.org/)
-* [Mockito](http://site.mockito.org/)
-* [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
-* [Glide](https://bumptech.github.io/glide/)
-* [Dagger2](https://google.github.io/dagger/)
-* [Moshi](https://github.com/square/moshi/)
-* [Kotshi](https://github.com/ansman/kotshi)
-* [Retrofit2](http://square.github.io/retrofit/)
-* [Material Design Dimens](https://github.com/DmitryMalkovich/material-design-dimens)
-* [LeakCanary](https://github.com/square/leakcanary)
-* [Ktlint Gradle](https://github.com/JLLeitschuh/ktlint-gradle)
+* [Kotlin](http://kotlinlang.org/) : Computer language used for the development of this project
+* [JUnit](https://junit.org/) : Unit testing framework
+* [Mockito](http://site.mockito.org/) : Testing framework that allows the creation of mock objects
+* [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) : Library for simulating HTTP responses
+* [Glide](https://bumptech.github.io/glide/) : Library for loading and caching images
+* [Dagger2](https://google.github.io/dagger/) : Dependency injection framework
+* [Moshi](https://github.com/square/moshi/) : Library for parsing JSON into Java objects
+* [Kotshi](https://github.com/ansman/kotshi) : Annotations processor that generates Moshi adapters from Kotlin classes
+* [Retrofit2](http://square.github.io/retrofit/) : Type-safe HTTP client
+* [Material Design Dimens](https://github.com/DmitryMalkovich/material-design-dimens) : Library containing default colors and dimensions per Material Design guidelines and Android Design guidelines
+* [LeakCanary](https://github.com/square/leakcanary) : A memory leak detection library
+* [Ktlint Gradle](https://github.com/JLLeitschuh/ktlint-gradle) : Wrapper plugin over the ktlint project. Ktlint provides rules that enforce coding standards.
 * And more...
 
 ## License
