@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  ETS-mobile
+
+  Created by Emmanuel on 2018-05-21.
+  Copyright © 2018 applETS. All rights reserved.
+*/
+
+"emergencyCall" = "Appel d'urgence";
+
+"internCall" = "À l'interne";
+
+"extension" = "Poste 55";
+
+"reachSecurity" = "Joindre la sécurité";
+
+"emergencyProcedures" = "Procédures d'urgence";
+
+"bombThreat" = "Appel à la bombe";
+
+"suspiciousPackage" = "Colis suspect";
+
+"fire" = "Incendie";
+
+"suspiciousSmell" = "Odeur suspecte";
+
+"elevatorMalfunction" = "Panne d'ascenseur";
+
+"powerOutage" = "Panne électrique";
+
+"armedPerson" = "Personne armée";
+
+"medicalEmergency" = "Urgence médicale";
