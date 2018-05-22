@@ -16,6 +16,8 @@ import ca.etsmtl.etsmobile.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
+ * This repository provides access to the user's information.
+ *
  * Created by Sonphil on 02-03-18.
  */
 
@@ -24,6 +26,14 @@ class InfoEtudiantRepository @Inject constructor(
     private val api: SignetsApi,
     private val dao: EtudiantDao
 ) : SignetsRepository(appExecutors) {
+
+    /**
+     * Returns the user's information
+     *
+     * @param userCredentials The user's credentials
+     * @param shouldFetch Whether the information should be fetched from the network or only from
+     * the DB
+     */
     fun getInfoEtudiant(userCredentials: SignetsUserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 
         return object : NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>(appExecutors) {
