@@ -1,8 +1,6 @@
 package ca.etsmtl.etsmobile.data.repository.signets
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
@@ -50,18 +48,7 @@ class ProgrammeRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeProgrammes>>> {
-                return Transformations.switchMap(api.listeProgrammes(userCredentials)) { apiResponse ->
-                    val resultLiveData = MutableLiveData<ApiResponse<SignetsModel<ListeProgrammes>>>()
-                    val errorStr = getError(apiResponse)
-
-                    if (errorStr.isNullOrEmpty()) {
-                        resultLiveData.value = apiResponse
-                    } else {
-                        resultLiveData.value = ApiResponse(Throwable(errorStr))
-                    }
-
-                    resultLiveData
-                }
+                return transformsApiLiveData(api.listeProgrammes(userCredentials))
             }
         }.asLiveData()
     }

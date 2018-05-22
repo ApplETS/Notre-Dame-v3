@@ -2,8 +2,6 @@ package ca.etsmtl.etsmobile.data.repository.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
@@ -62,18 +60,7 @@ class InfoEtudiantRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<Etudiant>>> {
-                return Transformations.switchMap(api.infoEtudiant(userCredentials)) { apiResponse ->
-                    val resultLiveData = MutableLiveData<ApiResponse<SignetsModel<Etudiant>>>()
-                    val errorStr = getError(apiResponse)
-
-                    if (errorStr.isNullOrEmpty()) {
-                        resultLiveData.value = apiResponse
-                    } else {
-                        resultLiveData.value = ApiResponse(Throwable(errorStr))
-                    }
-
-                    resultLiveData
-                }
+                return transformsApiLiveData(api.infoEtudiant(userCredentials))
             }
         }.asLiveData()
     }

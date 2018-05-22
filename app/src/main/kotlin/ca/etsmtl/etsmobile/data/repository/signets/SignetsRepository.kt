@@ -1,8 +1,12 @@
 package ca.etsmtl.etsmobile.data.repository.signets
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
+import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.SignetsData
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 
@@ -44,6 +48,21 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
         return when (signetsModel?.data == null) {
             true -> "No Data"
             false -> signetsModel!!.data!!.getError()
+        }
+    }
+    
+    protected inline fun <reified T: SignetsData> transformsApiLiveData(apiLiveData: LiveData<ApiResponse<SignetsModel<T>>>): LiveData<ApiResponse<SignetsModel<T>>> {
+        return Transformations.switchMap(apiLiveData) { apiResponse ->
+            val resultLiveData = MutableLiveData<ApiResponse<SignetsModel<T>>>()
+            val errorStr = getError(apiResponse)
+
+            if (errorStr.isNullOrEmpty()) {
+                resultLiveData.value = apiResponse
+            } else {
+                resultLiveData.value = ApiResponse(Throwable(errorStr))
+            }
+
+            resultLiveData
         }
     }
 }
