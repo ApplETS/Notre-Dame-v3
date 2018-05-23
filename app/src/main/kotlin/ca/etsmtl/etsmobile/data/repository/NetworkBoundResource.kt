@@ -100,21 +100,49 @@ protected constructor(private val appExecutors: AppExecutors) {
         }
     }
 
+    /**
+     * Called when the fetch to the network failed
+     */
     protected fun onFetchFailed() {}
 
     fun asLiveData(): LiveData<Resource<ResultType>> {
         return result
     }
 
+    /**
+     * Called when the data need to be saved
+     *
+     * The data has been fetch from the network and can, now, be saved to the disk.
+     *
+     * @param item The data to save
+     */
     @WorkerThread
     protected abstract fun saveCallResult(item: RequestType)
 
+    /**
+     * Called to determine whether the data should be fetched from the network or only from the disk
+     *
+     * @param data The data currently saved in the disk
+     * @return True if the data should be fetch from the network
+     */
     @MainThread
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
+    /**
+     * Called in order to get a [LiveData] that will be observed in order to get the data currently
+     * cached in the disk
+     *
+     * @return The LiveData to observe in order to get the data currently cached in the disk
+     */
     @MainThread
     protected abstract fun loadFromDb(): LiveData<ResultType>
 
+    /**
+     * Called in order to get a [LiveData] that will be observed in order to get the data from the
+     * webservice
+     *
+     * @return The LiveData to observe in order to get the data from the webservice
+     */
     @MainThread
     protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>
 }
