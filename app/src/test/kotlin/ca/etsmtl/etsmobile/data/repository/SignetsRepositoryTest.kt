@@ -1,9 +1,11 @@
 package ca.etsmtl.etsmobile.data.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.lifecycle.MutableLiveData
 import ca.etsmtl.etsmobile.InstantAppExecutors
+import ca.etsmtl.etsmobile.LiveDataTestUtil.getValue
 import ca.etsmtl.etsmobile.data.api.ApiResponse
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
+import ca.etsmtl.etsmobile.data.model.signets.SignetsData
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 import ca.etsmtl.etsmobile.data.repository.signets.SignetsRepository
 import org.junit.Before
@@ -13,6 +15,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Response
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 
 /**
@@ -32,10 +36,11 @@ class SignetsRepositoryTest {
 
     @Test
     fun testGetErrorApiResponseNoError() {
-        val etudiant = SignetsModel<Etudiant>()
-        etudiant.data = Etudiant(codePerm = "TEST")
-        val response = Response.success(etudiant)
-        val apiResponse = ApiResponse<SignetsModel<Etudiant>>(response)
+        val signetsModel = SignetsModel<TestSignetsData>()
+        val fakeSignetsData = TestSignetsData()
+        signetsModel.data = fakeSignetsData
+        val response = Response.success(signetsModel)
+        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(response)
 
         assertNull(repo.getError(apiResponse))
     }
@@ -44,23 +49,56 @@ class SignetsRepositoryTest {
     fun testGetErrorApiResponseFail() {
         val expectedErrorStr = "Test error"
         val throwable = Throwable(expectedErrorStr)
-        val apiResponse = ApiResponse<SignetsModel<Etudiant>>(throwable)
+        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(throwable)
 
         assertEquals(expectedErrorStr, repo.getError(apiResponse))
     }
 
     @Test
     fun testGetErrorInsideData() {
-        val signetsModel = SignetsModel<Etudiant>()
-        val etudiant = Etudiant(codePerm = "TEST")
-        val expectedErrorStr = "Test error"
-        etudiant.erreur = expectedErrorStr
-        signetsModel.data = etudiant
+        val signetsModel = SignetsModel<TestSignetsData>()
+        val expectedErrorStr = "Foo error"
+        val testSignetsData = TestSignetsData(expectedErrorStr)
+        signetsModel.data = testSignetsData
         val response = Response.success(signetsModel)
-        val apiResponse = ApiResponse<SignetsModel<Etudiant>>(response)
+        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(response)
 
         assertEquals(expectedErrorStr, repo.getError(apiResponse))
     }
 
+    @Test
+    fun testTransformApiLiveDataWithoutError() {
+        val signetsModel = SignetsModel<TestSignetsData>()
+        val fakeSignetsData = TestSignetsData()
+        signetsModel.data = fakeSignetsData
+        val response = Response.success(signetsModel)
+        val expectedApiResponse = ApiResponse<SignetsModel<TestSignetsData>>(response)
+        val liveData = MutableLiveData<ApiResponse<SignetsModel<TestSignetsData>>>()
+        liveData.value = expectedApiResponse
+        val actualApiResponse = getValue(repo.transformsApiLiveData(liveData))
+
+        assertEquals(expectedApiResponse, actualApiResponse)
+    }
+
+    @Test
+    fun testTransformApiLiveDataWithError() {
+        val expectedErrorStr = "Test error"
+        val throwable = Throwable(expectedErrorStr)
+        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(throwable)
+        val liveData = MutableLiveData<ApiResponse<SignetsModel<TestSignetsData>>>()
+        liveData.value = apiResponse
+        val resultApiResponse = getValue(repo.transformsApiLiveData(liveData))
+
+        assertNotEquals(apiResponse, resultApiResponse)
+        assertFalse(apiResponse.isSuccessful)
+        assertEquals(expectedErrorStr, apiResponse.errorMessage)
+    }
+
     class TestSignetsRepository : SignetsRepository(InstantAppExecutors())
+
+    data class TestSignetsData(var erreur: String? = null) : SignetsData() {
+        override fun getError(): String? {
+            return erreur
+        }
+    }
 }

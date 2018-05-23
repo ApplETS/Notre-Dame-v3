@@ -6,13 +6,12 @@ import android.arch.lifecycle.Transformations
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
-import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
 import ca.etsmtl.etsmobile.data.model.signets.SignetsData
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 
 /**
  * On a request, Signets's web service will return a 200 status code. If an error has occurred, it's
- * pushed down to the HTTP response. This abstract class provides a handy way to get the error
+ * pushed down to the HTTP response. This abstract class provides a handy way to handle the error
  * whether it's a network error or an error from Signets.
  *
  * Created by Sonphil on 17-03-18.
@@ -24,9 +23,9 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
      * will be returned. If not, the error inside the payload will be returned. If the request was
      * successful, the [String] returned will be null.
      *
-     * @return The [ApiResponse] error
+     * @return The [ApiResponse] error or null if there was no error
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    @VisibleForTesting
     fun getError(apiResponse: ApiResponse<out SignetsModel<out SignetsData>>?): String? {
         if (apiResponse == null)
             return "No Response"
@@ -50,8 +49,15 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
             false -> signetsModel!!.data!!.getError()
         }
     }
-    
-    protected inline fun <reified T: SignetsData> transformsApiLiveData(apiLiveData: LiveData<ApiResponse<SignetsModel<T>>>): LiveData<ApiResponse<SignetsModel<T>>> {
+
+    /**
+     * Transforms a [LiveData] created by SignetsApi into a new [LiveData] whose value is an
+     * [ApiResponse] that exposes the error if the request failed.
+     *
+     * If the request succeeded, the value is the same [ApiResponse].
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    inline fun <reified T : SignetsData> transformsApiLiveData(apiLiveData: LiveData<ApiResponse<SignetsModel<T>>>): LiveData<ApiResponse<SignetsModel<T>>> {
         return Transformations.switchMap(apiLiveData) { apiResponse ->
             val resultLiveData = MutableLiveData<ApiResponse<SignetsModel<T>>>()
             val errorStr = getError(apiResponse)
