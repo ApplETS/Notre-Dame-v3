@@ -60,7 +60,7 @@ class InfoEtudiantRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<Etudiant>>> {
-                return transformsApiLiveData(api.infoEtudiant(userCredentials))
+                return transformApiLiveData(api.infoEtudiant(userCredentials))
             }
         }.asLiveData()
     }

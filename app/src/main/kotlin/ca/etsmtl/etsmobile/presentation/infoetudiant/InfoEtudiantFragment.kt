@@ -42,11 +42,11 @@ class InfoEtudiantFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpRecycleView()
+        setUpRecyclerView()
         subscribeUI()
     }
 
-    private fun setUpRecycleView() {
+    private fun setUpRecyclerView() {
         adapter = InfoEtudiantAdapter()
         recyclerViewInfoEtudiant.adapter = adapter
         recyclerViewInfoEtudiant.setHasFixedSize(true)

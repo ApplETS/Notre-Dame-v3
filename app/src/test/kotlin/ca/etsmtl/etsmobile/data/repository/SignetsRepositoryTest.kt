@@ -75,7 +75,7 @@ class SignetsRepositoryTest {
         val expectedApiResponse = ApiResponse<SignetsModel<TestSignetsData>>(response)
         val liveData = MutableLiveData<ApiResponse<SignetsModel<TestSignetsData>>>()
         liveData.value = expectedApiResponse
-        val actualApiResponse = getValue(repo.transformsApiLiveData(liveData))
+        val actualApiResponse = getValue(repo.transformApiLiveData(liveData))
 
         assertEquals(expectedApiResponse, actualApiResponse)
     }
@@ -87,7 +87,7 @@ class SignetsRepositoryTest {
         val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(throwable)
         val liveData = MutableLiveData<ApiResponse<SignetsModel<TestSignetsData>>>()
         liveData.value = apiResponse
-        val resultApiResponse = getValue(repo.transformsApiLiveData(liveData))
+        val resultApiResponse = getValue(repo.transformApiLiveData(liveData))
 
         assertNotEquals(apiResponse, resultApiResponse)
         assertFalse(apiResponse.isSuccessful)
