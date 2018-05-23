@@ -28,4 +28,4 @@ class HomeFragment : Fragment() {
 
         fun newInstance() = HomeFragment()
     }
-} // Required empty public constructor
+}

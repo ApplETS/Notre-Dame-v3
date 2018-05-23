@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.fragment_info_etudiant.recyclerViewInfoEtu
 import javax.inject.Inject
 
 /**
+ * Displays the student's information (name, permanent code, balance, etc.)
+ *
  * Created by Sonphil on 15-03-18.
  */
 

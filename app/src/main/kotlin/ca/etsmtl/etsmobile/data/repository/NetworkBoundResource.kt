@@ -101,7 +101,7 @@ protected constructor(private val appExecutors: AppExecutors) {
     }
 
     /**
-     * Called when the fetch to the network failed
+     * Called when the fetch to the network has failed
      */
     protected fun onFetchFailed() {}
 
@@ -110,7 +110,7 @@ protected constructor(private val appExecutors: AppExecutors) {
     }
 
     /**
-     * Called when the data need to be saved
+     * Called when the data need to be saved to the DB
      *
      * The data has been fetch from the network and can, now, be saved to the disk.
      *
@@ -120,10 +120,12 @@ protected constructor(private val appExecutors: AppExecutors) {
     protected abstract fun saveCallResult(item: RequestType)
 
     /**
-     * Called to determine whether the data should be fetched from the network or only from the disk
+     * Called to determine whether the data should be fetched from the network or only from the DB
      *
      * @param data The data currently saved in the disk
-     * @return True if the data should be fetch from the network
+     * @return Whether the data should be fetched from the network or only from the DB. If it's
+     * false, the data cached in the DB will be returned. If it's true, the cached data will be
+     * fetched from the DB and returned while the new data is being fetched from the network.
      */
     @MainThread
     protected abstract fun shouldFetch(data: ResultType?): Boolean

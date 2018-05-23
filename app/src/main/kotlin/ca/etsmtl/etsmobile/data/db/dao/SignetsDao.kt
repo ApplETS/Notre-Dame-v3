@@ -8,9 +8,19 @@ import android.arch.persistence.room.OnConflictStrategy
  */
 
 interface SignetsDao<T> {
+    /**
+     * Insert a data into the DB
+     *
+     * @param obj The data to insert
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(obj: T)
 
+    /**
+     * Insert multiple data into the DB
+     *
+     * @param obj The data to insert
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg obj: T)
 }

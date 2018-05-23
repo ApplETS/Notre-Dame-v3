@@ -1,7 +1,6 @@
 package ca.etsmtl.etsmobile.presentation
 
 import android.os.Bundle
-import android.util.Log
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import dagger.android.support.DaggerAppCompatActivity
 
@@ -21,7 +20,6 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         savedInstanceState?.run {
             val signetsCredentials: SignetsUserCredentials? = this.getParcelable(STATE_SIGNETS_CREDENTIALS)
             if (signetsCredentials != null) {
-                Log.d("Phil", signetsCredentials.codeAccesUniversel)
                 SignetsUserCredentials.INSTANCE.set(signetsCredentials)
             }
         }
