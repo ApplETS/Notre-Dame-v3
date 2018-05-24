@@ -23,7 +23,7 @@ import kotlin.test.assertNull
  * Created by Sonphil on 17-03-18.
  */
 @RunWith(JUnit4::class)
-class SignetsRepositoryTest {
+class AbstractSignetsRepositoryTest {
     private lateinit var repo: SignetsRepository
 
     @get:Rule

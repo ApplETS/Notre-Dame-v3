@@ -3,6 +3,7 @@ package ca.etsmtl.etsmobile.data.db
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
+import ca.etsmtl.etsmobile.data.db.dao.HoraireExamenFinalDao
 import ca.etsmtl.etsmobile.data.db.dao.ProgrammeDao
 import ca.etsmtl.etsmobile.data.model.signets.Activite
 import ca.etsmtl.etsmobile.data.model.signets.Cours
@@ -34,4 +35,5 @@ import ca.etsmtl.etsmobile.data.model.signets.Session
 abstract class AppDatabase : RoomDatabase() {
     abstract fun programmeDao(): ProgrammeDao
     abstract fun etudiantDao(): EtudiantDao
+    abstract fun horaireExamenFinalDao(): HoraireExamenFinalDao
 }
