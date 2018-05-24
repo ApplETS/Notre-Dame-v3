@@ -10,6 +10,7 @@ import ca.etsmtl.etsmobile.data.db.dao.EvaluationDao
 import ca.etsmtl.etsmobile.data.db.dao.HoraireExamenFinalDao
 import ca.etsmtl.etsmobile.data.db.dao.JourRemplaceDao
 import ca.etsmtl.etsmobile.data.db.dao.ProgrammeDao
+import ca.etsmtl.etsmobile.data.db.dao.SessionDao
 import ca.etsmtl.etsmobile.data.model.signets.Activite
 import ca.etsmtl.etsmobile.data.model.signets.Cours
 import ca.etsmtl.etsmobile.data.model.signets.Enseignant
@@ -46,4 +47,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun etudiantDao(): EtudiantDao
     abstract fun jourRemplaceDao(): JourRemplaceDao
     abstract fun evaluationDao(): EvaluationDao
+    abstract fun sessionDao(): SessionDao
 }
