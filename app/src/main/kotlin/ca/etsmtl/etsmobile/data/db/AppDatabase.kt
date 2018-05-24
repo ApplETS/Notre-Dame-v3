@@ -4,6 +4,7 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import ca.etsmtl.etsmobile.data.db.dao.ActiviteDao
 import ca.etsmtl.etsmobile.data.db.dao.CoursDao
+import ca.etsmtl.etsmobile.data.db.dao.EnseignantDao
 import ca.etsmtl.etsmobile.data.db.dao.EtudiantDao
 import ca.etsmtl.etsmobile.data.db.dao.HoraireExamenFinalDao
 import ca.etsmtl.etsmobile.data.db.dao.ProgrammeDao
@@ -39,5 +40,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun horaireExamenFinalDao(): HoraireExamenFinalDao
     abstract fun coursDao(): CoursDao
     abstract fun activiteDao(): ActiviteDao
+    abstract fun enseignantDao(): EnseignantDao
     abstract fun etudiantDao(): EtudiantDao
 }

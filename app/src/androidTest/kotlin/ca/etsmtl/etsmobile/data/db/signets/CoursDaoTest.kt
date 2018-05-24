@@ -35,7 +35,7 @@ class CoursDaoTest : DbTest() {
 
     @Test
     fun testInsert() {
-        val fromDb = getValue(db.coursDao().getAll())
+        val fromDb = getValue(dao.getAll())
         Assert.assertNotNull(fromDb)
         Assert.assertEquals(entity, fromDb[0])
     }
