@@ -1,23 +1,25 @@
 package ca.etsmtl.etsmobile.data.model.signets
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.squareup.moshi.Json
 import se.ansman.kotshi.JsonSerializable
 
 @Entity
 @JsonSerializable
 data class Session(
-    @Json(name = "abrege") val abrege: String = "",
-    @Json(name = "auLong") val auLong: String = "",
-    @Json(name = "dateDebut") val dateDebut: String = "",
-    @Json(name = "dateFin") val dateFin: String = "",
-    @Json(name = "dateFinCours") val dateFinCours: String = "",
-    @Json(name = "dateDebutChemiNot") val dateDebutChemiNot: String = "",
-    @Json(name = "dateFinChemiNot") val dateFinChemiNot: String = "",
-    @Json(name = "dateDebutAnnulationAvecRemboursement") val dateDebutAnnulationAvecRemboursement: String = "",
-    @Json(name = "dateFinAnnulationAvecRemboursement") val dateFinAnnulationAvecRemboursement: String = "",
-    @Json(name = "dateFinAnnulationAvecRemboursementNouveauxEtudiants") val dateFinAnnulationAvecRemboursementNouveauxEtudiants: String = "",
-    @Json(name = "dateDebutAnnulationSansRemboursementNouveauxEtudiants") val dateDebutAnnulationSansRemboursementNouveauxEtudiants: String = "",
-    @Json(name = "dateFinAnnulationSansRemboursementNouveauxEtudiants") val dateFinAnnulationSansRemboursementNouveauxEtudiants: String = "",
-    @Json(name = "dateLimitePourAnnulerASEQ") val dateLimitePourAnnulerASEQ: String = ""
+    @PrimaryKey
+    @Json(name = "abrege") var abrege: String,
+    @Json(name = "auLong") var auLong: String?,
+    @Json(name = "dateDebut") var dateDebut: String?,
+    @Json(name = "dateFin") var dateFin: String?,
+    @Json(name = "dateFinCours") var dateFinCours: String?,
+    @Json(name = "dateDebutChemiNot") var dateDebutChemiNot: String?,
+    @Json(name = "dateFinChemiNot") var dateFinChemiNot: String?,
+    @Json(name = "dateDebutAnnulationAvecRemboursement") var dateDebutAnnulationAvecRemboursement: String?,
+    @Json(name = "dateFinAnnulationAvecRemboursement") var dateFinAnnulationAvecRemboursement: String?,
+    @Json(name = "dateFinAnnulationAvecRemboursementNouveauxEtudiants") var dateFinAnnulationAvecRemboursementNouveauxEtudiants: String?,
+    @Json(name = "dateDebutAnnulationSansRemboursementNouveauxEtudiants") var dateDebutAnnulationSansRemboursementNouveauxEtudiants: String?,
+    @Json(name = "dateFinAnnulationSansRemboursementNouveauxEtudiants") var dateFinAnnulationSansRemboursementNouveauxEtudiants: String?,
+    @Json(name = "dateLimitePourAnnulerASEQ") var dateLimitePourAnnulerASEQ: String?
 )

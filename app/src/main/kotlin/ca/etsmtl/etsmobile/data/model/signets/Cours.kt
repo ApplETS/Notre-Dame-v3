@@ -9,11 +9,11 @@ import se.ansman.kotshi.JsonSerializable
 @JsonSerializable
 data class Cours(
     @PrimaryKey
-    @Json(name = "sigle") val sigle: String? = "",
-    @Json(name = "groupe") val groupe: String? = "",
-    @Json(name = "session") val session: String? = "",
-    @Json(name = "programmeEtudes") val programmeEtudes: String? = "",
-    @Json(name = "cote") val cote: String? = "",
-    @Json(name = "nbCredits") val nbCredits: Int = 0,
-    @Json(name = "titreCours") val titreCours: String? = ""
+    @Json(name = "sigle") var sigle: String,
+    @Json(name = "groupe") var groupe: String?,
+    @Json(name = "session") var session: String?,
+    @Json(name = "programmeEtudes") var programmeEtudes: String?,
+    @Json(name = "cote") var cote: String?,
+    @Json(name = "nbCredits") var nbCredits: Int = 0,
+    @Json(name = "titreCours") var titreCours: String?
 )

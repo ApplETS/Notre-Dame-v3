@@ -4,12 +4,12 @@ import android.arch.persistence.room.Entity
 import com.squareup.moshi.Json
 import se.ansman.kotshi.JsonSerializable
 
-@Entity
+@Entity(primaryKeys = ["dateOrigine", "dateRemplacement"])
 @JsonSerializable
 data class JourRemplace(
-    @Json(name = "dateOrigine") val dateOrigine: String? = "",
-    @Json(name = "dateRemplacement") val dateRemplacement: String? = "",
-    @Json(name = "description") val untrimmedDescription: String? = ""
+    @Json(name = "dateOrigine") var dateOrigine: String,
+    @Json(name = "dateRemplacement") var dateRemplacement: String,
+    @Json(name = "description") var untrimmedDescription: String?
 ) {
     val description: String?
         get() = untrimmedDescription?.trim()
