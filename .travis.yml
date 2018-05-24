@@ -35,5 +35,5 @@ script:
   - ./gradlew assembleDebug -PdisablePreDex
   - ./gradlew ktlintCheck
   - ./gradlew test
-  - ./gradlew connectedAndroidTest
+  - ./gradlew connectedAndroidTest --info
 
