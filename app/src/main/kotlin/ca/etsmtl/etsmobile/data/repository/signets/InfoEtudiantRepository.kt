@@ -1,7 +1,6 @@
 package ca.etsmtl.etsmobile.data.repository.signets
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
 import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.api.ApiResponse
 import ca.etsmtl.etsmobile.data.api.SignetsApi
@@ -43,21 +42,7 @@ class InfoEtudiantRepository @Inject constructor(
                 return shouldFetch
             }
 
-            override fun loadFromDb(): LiveData<Etudiant> {
-                val resultLiveData = MediatorLiveData<Etudiant>()
-                val dbLiveData = dao.getAll()
-                resultLiveData.addSource(dbLiveData, {
-                    if (it != null && it.isNotEmpty()) {
-                        resultLiveData.value = it[0]
-                    } else {
-                        resultLiveData.value = null
-                    }
-
-                    resultLiveData.removeSource(dbLiveData)
-                })
-
-                return resultLiveData
-            }
+            override fun loadFromDb(): LiveData<Etudiant> = getFistItemLiveData(dao.getAll())
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<Etudiant>>> {
                 return transformApiLiveData(api.infoEtudiant(userCredentials))

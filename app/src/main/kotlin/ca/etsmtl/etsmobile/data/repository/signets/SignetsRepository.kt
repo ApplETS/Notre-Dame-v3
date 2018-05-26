@@ -1,6 +1,7 @@
 package ca.etsmtl.etsmobile.data.repository.signets
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.support.annotation.VisibleForTesting
@@ -70,5 +71,28 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
 
             resultLiveData
         }
+    }
+
+    /**
+     * Transforms a list [LiveData] to a single item [LiveData]. The item is the first element of
+     * the list.
+     *
+     * @param listLiveData The list [LiveData] to transform
+     * @return The transformed [LiveData] which will contain the first item. The item can be null
+     * if the list was empty.
+     */
+    inline fun <reified T> getFistItemLiveData(listLiveData: LiveData<List<T>>): LiveData<T> {
+        val resultLiveData = MediatorLiveData<T>()
+        resultLiveData.addSource(listLiveData, {
+            if (it != null && it.isNotEmpty()) {
+                resultLiveData.value = it[0]
+            } else {
+                resultLiveData.value = null
+            }
+
+            resultLiveData.removeSource(listLiveData)
+        })
+
+        return resultLiveData
     }
 }
