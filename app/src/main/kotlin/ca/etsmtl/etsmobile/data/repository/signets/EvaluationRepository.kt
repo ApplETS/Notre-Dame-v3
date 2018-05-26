@@ -12,6 +12,7 @@ import ca.etsmtl.etsmobile.data.model.signets.Evaluation
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesElementsEvaluation
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.etsmobile.data.model.signets.SommaireElementsEvaluation
 import ca.etsmtl.etsmobile.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
@@ -28,6 +29,16 @@ class EvaluationRepository @Inject constructor(
     private val evaluationDao: EvaluationDao,
     private val sommaireElementsEvaluationDao: SommaireElementsEvaluationDao
 ) : SignetsRepository(appExecutors) {
+
+    /**
+     * Returns a [List] of the the student's [Evaluation]s (exams, assignments, etc.) for a given
+     * [Cours]
+     *
+     * @param userCredentials The user's credentials
+     * @param cours The course
+     * @param shouldFetch True if the should be fetched from the network. False if the the data
+     * should only be fetched from the DB.
+     */
     fun getEvaluations(
         userCredentials: SignetsUserCredentials,
         cours: Cours,
@@ -40,6 +51,53 @@ class EvaluationRepository @Inject constructor(
         override fun shouldFetch(data: List<Evaluation>?): Boolean = shouldFetch
 
         override fun loadFromDb(): LiveData<List<Evaluation>> = evaluationDao.getAll()
+
+        override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>> {
+            return transformApiLiveData(api.listeDesElementsEvaluation(
+                    userCredentials.codeAccesUniversel,
+                    userCredentials.motPasse,
+                    cours.sigle,
+                    cours.groupe,
+                    cours.session
+            ))
+        }
+    }.asLiveData()
+
+    /**
+     * Returns a summary of the [Evaluation]s for a given [Cours]
+     *
+     * @param userCredentials The user's credentials
+     * @param cours The course
+     * @param shouldFetch True if the should be fetched from the network. False if the the data
+     * should only be fetched from the DB.
+     */
+    fun getEvaluationsSummary(
+        userCredentials: SignetsUserCredentials,
+        cours: Cours,
+        shouldFetch: Boolean
+    ): LiveData<Resource<SommaireElementsEvaluation>> = object : NetworkBoundResource<SommaireElementsEvaluation, SignetsModel<ListeDesElementsEvaluation>>(appExecutors) {
+        override fun saveCallResult(item: SignetsModel<ListeDesElementsEvaluation>) {
+            item.data?.let {
+                val sommaire = SommaireElementsEvaluation(
+                        cours.sigle,
+                        cours.session,
+                        it.noteACeJour,
+                        it.scoreFinalSur100,
+                        it.moyenneClasse,
+                        it.ecartTypeClasse,
+                        it.medianeClasse,
+                        it.rangCentileClasse,
+                        it.noteACeJourElementsIndividuels,
+                        it.noteSur100PourElementsIndividuels
+                )
+
+                sommaireElementsEvaluationDao.insert(sommaire)
+            }
+        }
+
+        override fun shouldFetch(data: SommaireElementsEvaluation?): Boolean = shouldFetch
+
+        override fun loadFromDb(): LiveData<SommaireElementsEvaluation> = getFistItemLiveData(sommaireElementsEvaluationDao.getAll())
 
         override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>> {
             return transformApiLiveData(api.listeDesElementsEvaluation(
