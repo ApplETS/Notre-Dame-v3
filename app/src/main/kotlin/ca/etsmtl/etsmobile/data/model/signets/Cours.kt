@@ -8,7 +8,7 @@ import se.ansman.kotshi.JsonSerializable
 @JsonSerializable
 data class Cours(
     @Json(name = "sigle") var sigle: String,
-    @Json(name = "groupe") var groupe: String?,
+    @Json(name = "groupe") var groupe: String,
     @Json(name = "session") var session: String,
     @Json(name = "programmeEtudes") var programmeEtudes: String?,
     @Json(name = "cote") var cote: String?,
