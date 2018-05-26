@@ -9,18 +9,18 @@ import se.ansman.kotshi.JsonSerializable
 @JsonSerializable
 data class Programme(
     @PrimaryKey
-    @Json(name = "code") var code: String = "",
-    @Json(name = "libelle") var libelle: String = "",
-    @Json(name = "profil") var profil: String = "",
-    @Json(name = "statut") var statut: String = "",
-    @Json(name = "sessionDebut") var sessionDebut: String = "",
-    @Json(name = "sessionFin") var sessionFin: String = "",
-    @Json(name = "moyenne") var moyenne: String = "",
-    @Json(name = "nbEquivalences") var nbEquivalences: Int = 0,
-    @Json(name = "nbCrsReussis") var nbCrsReussis: Int = 0,
-    @Json(name = "nbCrsEchoues") var nbCrsEchoues: Int = 0,
-    @Json(name = "nbCreditsInscrits") var nbCreditsInscrits: Int = 0,
-    @Json(name = "nbCreditsCompletes") var nbCreditsCompletes: Int = 0,
-    @Json(name = "nbCreditsPotentiels") var nbCreditsPotentiels: Int = 0,
-    @Json(name = "nbCreditsRecherche") var nbCreditsRecherche: Int = 0
+    @Json(name = "code") var code: String,
+    @Json(name = "libelle") var libelle: String,
+    @Json(name = "profil") var profil: String,
+    @Json(name = "statut") var statut: String,
+    @Json(name = "sessionDebut") var sessionDebut: String,
+    @Json(name = "sessionFin") var sessionFin: String,
+    @Json(name = "moyenne") var moyenne: String,
+    @Json(name = "nbEquivalences") var nbEquivalences: Int,
+    @Json(name = "nbCrsReussis") var nbCrsReussis: Int,
+    @Json(name = "nbCrsEchoues") var nbCrsEchoues: Int,
+    @Json(name = "nbCreditsInscrits") var nbCreditsInscrits: Int,
+    @Json(name = "nbCreditsCompletes") var nbCreditsCompletes: Int,
+    @Json(name = "nbCreditsPotentiels") var nbCreditsPotentiels: Int,
+    @Json(name = "nbCreditsRecherche") var nbCreditsRecherche: Int
 )

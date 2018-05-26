@@ -18,13 +18,13 @@ import javax.inject.Inject
  */
 
 class SessionRepository @Inject constructor(
-        appExecutors: AppExecutors,
-        private val api: SignetsApi,
-        private val dao: SessionDao
+    appExecutors: AppExecutors,
+    private val api: SignetsApi,
+    private val dao: SessionDao
 ) : SignetsRepository(appExecutors) {
     fun getSessions(
-            userCredentials: SignetsUserCredentials,
-            shouldFetch: Boolean
+        userCredentials: SignetsUserCredentials,
+        shouldFetch: Boolean
     ): LiveData<Resource<List<Session>>> = object : NetworkBoundResource<List<Session>, SignetsModel<ListeDeSessions>>(appExecutors) {
         override fun saveCallResult(item: SignetsModel<ListeDeSessions>) {
             item.data?.liste?.let { dao.insertAll(*it.toTypedArray()) }
