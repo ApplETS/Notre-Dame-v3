@@ -2,10 +2,10 @@ package ca.etsmtl.etsmobile.data.model.signets
 
 import android.arch.persistence.room.Entity
 
-@Entity(primaryKeys = ["sigle", "groupe"])
+@Entity(primaryKeys = ["sigleCours", "session"])
 data class SommaireElementsEvaluation(
-    var sigle: String,
-    var groupe: String,
+    var sigleCours: String,
+    var session: String,
     var noteACeJour: String,
     var scoreFinalSur100: String,
     var moyenneClasse: String,

@@ -15,9 +15,9 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class SommaireElementsEvaluationDaoTest : DbTest() {
-    private val entity = SommaireElementsEvaluation(
+    private val sommaireEvaluations = SommaireElementsEvaluation(
             "INF111",
-            "01",
+            "É2018",
             "65,9",
             "18,2",
             "70,6",
@@ -32,55 +32,21 @@ class SommaireElementsEvaluationDaoTest : DbTest() {
     @Before
     fun setUp() {
         dao = db.sommaireElementsEvaluationDao()
-        dao.insert(entity)
+        dao.insert(sommaireEvaluations)
     }
 
     @Test
     fun testInsert() {
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())
         Assert.assertNotNull(fromDb)
-        Assert.assertEquals(entity, fromDb[0])
-    }
-
-    @Test
-    fun testInsertWithDifferentSigleOrGroupe() {
-        val diffSigle = SommaireElementsEvaluation(
-                "ING111",
-                "01",
-                "65,9",
-                "18,2",
-                "70,6",
-                "99,0",
-                "96,4",
-                "99,0",
-                "96,4",
-                "65,5"
-        )
-        val diffGroupe = SommaireElementsEvaluation(
-                "INF111",
-                "02",
-                "65,9",
-                "18,2",
-                "70,6",
-                "99,0",
-                "96,4",
-                "99,0",
-                "96,4",
-                "65,5"
-        )
-        dao.insert(diffSigle)
-        dao.insert(diffGroupe)
-        val fromDb = LiveDataTestUtil.getValue(dao.getAll())
-        Assert.assertEquals(entity, fromDb[0])
-        Assert.assertEquals(diffSigle, fromDb[1])
-        Assert.assertEquals(diffGroupe, fromDb[2])
+        Assert.assertEquals(sommaireEvaluations, fromDb[0])
     }
 
     @Test
     fun testInsertSame() {
         val same = SommaireElementsEvaluation(
                 "INF111",
-                "01",
+                "É2018",
                 "65,9",
                 "65,9",
                 "70,6",
@@ -92,6 +58,7 @@ class SommaireElementsEvaluationDaoTest : DbTest() {
         )
         dao.insert(same)
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(fromDb.size, 1)
         Assert.assertEquals(same, fromDb[0])
     }
 }

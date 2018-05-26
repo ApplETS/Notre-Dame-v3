@@ -14,6 +14,8 @@ import ca.etsmtl.etsmobile.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
+ * This repository provide a list of the user's sessions.
+ *
  * Created by Sonphil on 26-05-18.
  */
 
@@ -22,6 +24,14 @@ class SessionRepository @Inject constructor(
     private val api: SignetsApi,
     private val dao: SessionDao
 ) : SignetsRepository(appExecutors) {
+    /**
+     * Returns a list of the user's sessions
+     *
+     * @param userCredentials The user's credentials
+     * @param shouldFetch True if the should be fetched from the network. False if the the data
+     * should only be fetched from the DB.
+     * @return A list of the user's sessions
+     */
     fun getSessions(
         userCredentials: SignetsUserCredentials,
         shouldFetch: Boolean

@@ -5,7 +5,8 @@ import ca.etsmtl.etsmobile.LiveDataTestUtil.getValue
 import ca.etsmtl.etsmobile.data.db.DbTest
 import ca.etsmtl.etsmobile.data.db.dao.CoursDao
 import ca.etsmtl.etsmobile.data.model.signets.Cours
-import junit.framework.Assert
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,8 +37,44 @@ class CoursDaoTest : DbTest() {
     @Test
     fun testInsert() {
         val fromDb = getValue(dao.getAll())
-        Assert.assertNotNull(fromDb)
-        Assert.assertEquals(entity, fromDb[0])
+        assertNotNull(fromDb)
+        assertEquals(entity, fromDb[0])
+    }
+
+    @Test
+    fun testInsertSameSigleDifferentSession() {
+        val sameSigle = Cours(
+                "LOG530",
+                "01",
+                "E2018",
+                "7365",
+                "B+",
+                3,
+                "Réingénierie du logiciel"
+        )
+
+        dao.insert(sameSigle)
+        val fromDb = getValue(dao.getAll())
+        assertEquals(entity, fromDb[0])
+        assertEquals(sameSigle, fromDb[1])
+    }
+
+    @Test
+    fun testInsertSameSessionDifferentSigle() {
+        val sameSession = Cours(
+                "LOG123",
+                "01",
+                "H2018",
+                "7365",
+                "B+",
+                3,
+                "Titre"
+        )
+
+        dao.insert(sameSession)
+        val fromDb = getValue(dao.getAll())
+        assertEquals(entity, fromDb[0])
+        assertEquals(sameSession, fromDb[1])
     }
 
     @Test
@@ -49,11 +86,12 @@ class CoursDaoTest : DbTest() {
                 "7365",
                 "B+",
                 3,
-                "Réingénierie du logiciel"
+                "Foo"
         )
+
         dao.insert(same)
         val fromDb = getValue(dao.getAll())
-        Assert.assertNotNull(fromDb)
-        Assert.assertEquals(same, fromDb[0])
+        assertEquals(fromDb.size, 1)
+        assertEquals(same, fromDb[0])
     }
 }

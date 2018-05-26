@@ -64,6 +64,7 @@ class SessionDaoTest : DbTest() {
         )
         dao.insert(same)
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(fromDb.size, 1)
         Assert.assertEquals(same, fromDb[0])
     }
 }
