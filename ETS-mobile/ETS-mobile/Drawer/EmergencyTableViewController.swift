@@ -33,8 +33,6 @@ class EmergencyTableViewController: UITableViewController {
     
     @IBOutlet weak var medicalEmergencyLabel: UILabel!
     
-    @IBOutlet weak var callEmergencyButton: UIButton!
-    
     @IBAction func emergencyCall(_ sender: Any) {
         if let phoneCallUrl = URL(string : "tel://514-396-8900") {
             let application:UIApplication = UIApplication.shared
