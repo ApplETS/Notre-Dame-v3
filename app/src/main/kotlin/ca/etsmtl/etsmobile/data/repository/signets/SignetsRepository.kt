@@ -63,10 +63,9 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
             val resultLiveData = MutableLiveData<ApiResponse<SignetsModel<T>>>()
             val errorStr = getError(apiResponse)
 
-            if (errorStr.isNullOrEmpty()) {
-                resultLiveData.value = apiResponse
-            } else {
-                resultLiveData.value = ApiResponse(Throwable(errorStr))
+            resultLiveData.value = when (errorStr.isNullOrEmpty()) {
+                true -> apiResponse
+                false -> ApiResponse(Throwable(errorStr))
             }
 
             resultLiveData
@@ -84,10 +83,9 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
     inline fun <reified T> getFirstItemLiveData(listLiveData: LiveData<List<T>>): LiveData<T> {
         val resultLiveData = MediatorLiveData<T>()
         resultLiveData.addSource(listLiveData, {
-            resultLiveData.value = if (it != null && it.isNotEmpty()) {
-                it[0]
-            } else {
-                null
+            resultLiveData.value = when {
+                it != null && it.isNotEmpty() -> it[0]
+                else -> null
             }
 
             resultLiveData.removeSource(listLiveData)
