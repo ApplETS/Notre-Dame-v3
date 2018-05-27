@@ -81,13 +81,13 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
      * @return The transformed [LiveData] which will contain the first item. The item can be null
      * if the list was empty.
      */
-    inline fun <reified T> getFistItemLiveData(listLiveData: LiveData<List<T>>): LiveData<T> {
+    inline fun <reified T> getFirstItemLiveData(listLiveData: LiveData<List<T>>): LiveData<T> {
         val resultLiveData = MediatorLiveData<T>()
         resultLiveData.addSource(listLiveData, {
-            if (it != null && it.isNotEmpty()) {
-                resultLiveData.value = it[0]
+            resultLiveData.value = if (it != null && it.isNotEmpty()) {
+                it[0]
             } else {
-                resultLiveData.value = null
+                null
             }
 
             resultLiveData.removeSource(listLiveData)

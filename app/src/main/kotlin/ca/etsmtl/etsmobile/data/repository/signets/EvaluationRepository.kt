@@ -97,7 +97,7 @@ class EvaluationRepository @Inject constructor(
 
         override fun shouldFetch(data: SommaireElementsEvaluation?): Boolean = shouldFetch
 
-        override fun loadFromDb(): LiveData<SommaireElementsEvaluation> = getFistItemLiveData(sommaireElementsEvaluationDao.getAll())
+        override fun loadFromDb(): LiveData<SommaireElementsEvaluation> = getFirstItemLiveData(sommaireElementsEvaluationDao.getAll())
 
         override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>> {
             return transformApiLiveData(api.listeDesElementsEvaluation(

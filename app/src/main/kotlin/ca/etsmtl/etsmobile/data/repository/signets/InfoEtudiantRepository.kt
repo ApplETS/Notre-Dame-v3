@@ -42,7 +42,7 @@ class InfoEtudiantRepository @Inject constructor(
                 return shouldFetch
             }
 
-            override fun loadFromDb(): LiveData<Etudiant> = getFistItemLiveData(dao.getAll())
+            override fun loadFromDb(): LiveData<Etudiant> = getFirstItemLiveData(dao.getAll())
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<Etudiant>>> {
                 return transformApiLiveData(api.infoEtudiant(userCredentials))
