@@ -64,7 +64,7 @@ interface SignetsApi {
      */
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @FormUrlEncoded
-    @POST("listeHoraireExamensFin")
+    @POST("listeCoursIntervalleSessions")
     fun listeCoursIntervalleSessions(
         @Field("codeAccesUniversel") codeAccesUniversel: String,
         @Field("motPasse") motPasse: String,
