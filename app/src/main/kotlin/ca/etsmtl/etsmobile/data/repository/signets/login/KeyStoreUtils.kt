@@ -32,14 +32,12 @@ import java.security.spec.AlgorithmParameterSpec
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
-import javax.inject.Singleton
 import javax.security.auth.x500.X500Principal
 
 /**
  * Created by Sonphil on 20-04-18.
  */
 
-@Singleton
 class KeyStoreUtils @Inject constructor(
     private val context: Context
 ) {

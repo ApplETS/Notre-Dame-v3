@@ -8,13 +8,11 @@ import ca.etsmtl.etsmobile.AppExecutors
 import ca.etsmtl.etsmobile.data.db.AppDatabase
 import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by Sonphil on 21-04-18.
  */
 
-@Singleton
 class LoginRepository @Inject constructor(
     private val keyStoreUtils: KeyStoreUtils,
     private val cipherUtils: CipherUtils,

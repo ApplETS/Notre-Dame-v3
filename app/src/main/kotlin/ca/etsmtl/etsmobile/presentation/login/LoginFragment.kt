@@ -43,10 +43,6 @@ import javax.inject.Inject
  */
 
 class LoginFragment : DaggerFragment() {
-    companion object {
-        const val TAG = "LogiNFragment"
-        fun newInstance() = LoginFragment()
-    }
 
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
