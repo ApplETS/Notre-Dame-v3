@@ -173,43 +173,37 @@ class LoginRepository @Inject constructor(
     }
 
     /**
-     * Clears all the tables that are registered to the database
-     *
-     * @return A [LiveData] whose the value would be true if the process has finished
-     */
-    @VisibleForTesting
-    fun clearDb(): LiveData<Boolean> {
-        val clearFinished = MutableLiveData<Boolean>()
-
-        clearFinished.value = false
-
-        appExecutors.diskIO().execute {
-            db.clearAllTables()
-            clearFinished.postValue(true)
-        }
-
-        return clearFinished
-    }
-
-    /**
      * Clears the user's data
      *
      * Clears the [SharedPreferences], deletes the saved password and clears the
      * database
      *
-     * @return A [LiveData] whose the value would be true if the process has finished
+     * @return A [LiveData] with a value set to true if the process has finished or false if the
+     * process hasn't finished yet
      */
     fun clearUserData(): LiveData<Boolean> {
-        prefs.edit().clear().apply()
+        val clearFinished = MutableLiveData<Boolean>()
+        clearFinished.value = false
 
-        with(SignetsUserCredentials.INSTANCE.get()) {
-            if (this != null) {
-                deletePassword(this.codeAccesUniversel)
+        // Add clearing task to diskIO queue
+        // Wait for operations running on diskIO thread to finish
+        // Prevent crash when the user when logout while the password is being saved
+        appExecutors.diskIO().execute {
+            prefs.edit().clear().apply()
 
-                SignetsUserCredentials.INSTANCE.set(null)
+            with(SignetsUserCredentials.INSTANCE.get()) {
+                if (this != null) {
+                    deletePassword(this.codeAccesUniversel)
+
+                    SignetsUserCredentials.INSTANCE.set(null)
+                }
             }
+
+            db.clearAllTables()
+
+            clearFinished.postValue(true)
         }
 
-        return clearDb()
+        return clearFinished
     }
 }

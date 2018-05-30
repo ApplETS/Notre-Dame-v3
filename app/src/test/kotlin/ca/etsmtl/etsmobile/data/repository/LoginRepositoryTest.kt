@@ -111,13 +111,6 @@ import kotlin.test.assertTrue
     }
 
     @Test
-    fun testClearDb() {
-        val finishedLD = loginRepository.clearDb()
-        assertTrue(LiveDataTestUtil.getValue(finishedLD))
-        verify(appDatabase).clearAllTables()
-    }
-
-    @Test
     fun testClearUserData() {
         SignetsUserCredentials.INSTANCE.set(SignetsUserCredentials("test", "test"))
         `when`(editor.clear()).thenReturn(editor)
