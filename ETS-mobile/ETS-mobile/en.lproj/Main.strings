@@ -1,0 +1,78 @@
+
+/* Class = "UILabel"; text = "Urgences"; ObjectID = "0xL-Za-qMC"; */
+"0xL-Za-qMC.text" = "Urgences";
+
+/* Class = "UILabel"; text = "Poste 55"; ObjectID = "2Bf-M4-KWN"; */
+"2Bf-M4-KWN.text" = "Poste 55";
+
+/* Class = "UILabel"; text = "Panne d'ascenseur"; ObjectID = "2nU-qh-9Vr"; */
+"2nU-qh-9Vr.text" = "Panne d'ascenseur";
+
+/* Class = "UILabel"; text = "514-396-8900"; ObjectID = "4pe-go-UGb"; */
+"4pe-go-UGb.text" = "514-396-8900";
+
+/* Class = "UILabel"; text = "Incendie"; ObjectID = "7ix-sm-pPQ"; */
+"7ix-sm-pPQ.text" = "Incendie";
+
+/* Class = "UILabel"; text = "Odeur suspecte"; ObjectID = "8cj-B3-kPI"; */
+"8cj-B3-kPI.text" = "Odeur suspecte";
+
+/* Class = "UIViewController"; title = "Home"; ObjectID = "9pv-A4-QxB"; */
+"9pv-A4-QxB.title" = "Home";
+
+/* Class = "UILabel"; text = "Loaded by FirstViewController"; ObjectID = "A5M-7J-77L"; */
+"A5M-7J-77L.text" = "Loaded by FirstViewController";
+
+/* Class = "UILabel"; text = "Urgence médicale"; ObjectID = "G9D-RJ-zI3"; */
+"G9D-RJ-zI3.text" = "Urgence médicale";
+
+/* Class = "UILabel"; text = "Home"; ObjectID = "KQZ-1w-vlD"; */
+"KQZ-1w-vlD.text" = "Home";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
+"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "Roi-gk-H5H"; */
+"Roi-gk-H5H.title" = "Item";
+
+/* Class = "UILabel"; text = "Colis suspect"; ObjectID = "Skm-QE-p2x"; */
+"Skm-QE-p2x.text" = "Colis suspect";
+
+/* Class = "UILabel"; text = "Panne électrique"; ObjectID = "Uzq-bM-QDz"; */
+"Uzq-bM-QDz.text" = "Panne électrique";
+
+/* Class = "UITableViewSection"; headerTitle = "Outils"; ObjectID = "Wni-Yu-o4Z"; */
+"Wni-Yu-o4Z.headerTitle" = "Outils";
+
+/* Class = "UILabel"; text = "Personne armée"; ObjectID = "a8C-aF-zrd"; */
+"a8C-aF-zrd.text" = "Personne armée";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Home";
+
+/* Class = "UILabel"; text = "Appel à la bombe"; ObjectID = "bom-NX-kIw"; */
+"bom-NX-kIw.text" = "Appel à la bombe";
+
+/* Class = "UITabBarItem"; title = "Second"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Second";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "ezp-do-Zzc"; */
+"ezp-do-Zzc.title" = "Item";
+
+/* Class = "UILabel"; text = "Appel d'urgence"; ObjectID = "gNB-g1-did"; */
+"gNB-g1-did.text" = "Appel d'urgence";
+
+/* Class = "UITableViewSection"; headerTitle = "Procédures d'urgence"; ObjectID = "jEh-eG-P6e"; */
+"jEh-eG-P6e.headerTitle" = "Procédures d'urgence";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "kN4-eT-Zqu"; */
+"kN4-eT-Zqu.text" = "Label";
+
+/* Class = "UITableViewSection"; headerTitle = "Joindre la sécurité"; ObjectID = "s27-Bc-C77"; */
+"s27-Bc-C77.headerTitle" = "Joindre la sécurité";
+
+/* Class = "UILabel"; text = "À l'interne"; ObjectID = "xqE-fZ-yfo"; */
+"xqE-fZ-yfo.text" = "À l'interne";
+
+/* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
+"zEq-FU-wV5.text" = "Second View";
