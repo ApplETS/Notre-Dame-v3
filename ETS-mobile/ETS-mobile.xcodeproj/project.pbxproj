@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142FC845208B9B6600C58563 /* BombThreatViewController.swift */; };
 		14487BEF20C4808000769881 /* SuspiciousPackageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14487BEE20C4808000769881 /* SuspiciousPackageViewController.swift */; };
+		14487BF120C4938100769881 /* FireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14487BF020C4938100769881 /* FireViewController.swift */; };
 		1454550520B3647000EB7682 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1454550320B3647000EB7682 /* Localizable.strings */; };
 		146F3B04208B878900275F71 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B03208B878900275F71 /* HomeViewController.swift */; };
 		146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B05208B87AD00275F71 /* ProfileViewController.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		142FC845208B9B6600C58563 /* BombThreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombThreatViewController.swift; sourceTree = "<group>"; };
 		14487BEE20C4808000769881 /* SuspiciousPackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousPackageViewController.swift; sourceTree = "<group>"; };
+		14487BF020C4938100769881 /* FireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireViewController.swift; sourceTree = "<group>"; };
 		1454550220B3625500EB7682 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		1454550420B3647000EB7682 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1454550620B3655C00EB7682 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				142FC845208B9B6600C58563 /* BombThreatViewController.swift */,
 				14487BEE20C4808000769881 /* SuspiciousPackageViewController.swift */,
+				14487BF020C4938100769881 /* FireViewController.swift */,
 			);
 			path = Emergencies;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				146F3B0C208B883400275F71 /* EmergencyTableViewController.swift in Sources */,
 				25553FA520545D42009897F7 /* AppDelegate.swift in Sources */,
 				146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */,
+				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
 				146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */,
 				142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */,
 				146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */,

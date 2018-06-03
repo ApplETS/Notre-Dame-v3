@@ -171,7 +171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRq-I7-W2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="1742"/>
+            <point key="canvasLocation" x="-391" y="2013"/>
         </scene>
         <!--EmergencyTableViewController-->
         <scene sceneID="rIV-Ar-pJZ">
@@ -208,7 +208,7 @@
                                             <constraints>
                                                 <constraint firstItem="gNB-g1-did" firstAttribute="leading" secondItem="FF1-YU-ndp" secondAttribute="leadingMargin" id="OeV-V3-OWa"/>
                                                 <constraint firstItem="nXg-RZ-jyk" firstAttribute="centerY" secondItem="FF1-YU-ndp" secondAttribute="centerY" id="bAd-vL-Iro"/>
-                                                <constraint firstItem="nXg-RZ-jyk" firstAttribute="leading" secondItem="gNB-g1-did" secondAttribute="trailing" constant="103.5" id="fVM-mI-fMQ"/>
+                                                <constraint firstItem="nXg-RZ-jyk" firstAttribute="leading" relation="lessThanOrEqual" secondItem="gNB-g1-did" secondAttribute="trailing" constant="103.5" id="fVM-mI-fMQ"/>
                                                 <constraint firstItem="gNB-g1-did" firstAttribute="centerY" secondItem="FF1-YU-ndp" secondAttribute="centerY" id="rN0-8c-TAf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="nXg-RZ-jyk" secondAttribute="trailing" constant="10" id="rWh-kO-JQh"/>
                                             </constraints>
@@ -238,7 +238,7 @@
                                                 <constraint firstItem="xqE-fZ-yfo" firstAttribute="leading" secondItem="gIK-Bc-9gf" secondAttribute="leadingMargin" id="7cC-j7-6Og"/>
                                                 <constraint firstItem="2Bf-M4-KWN" firstAttribute="centerY" secondItem="gIK-Bc-9gf" secondAttribute="centerY" id="GCO-C8-yQH"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="2Bf-M4-KWN" secondAttribute="trailing" constant="10" id="KJW-Lm-04h"/>
-                                                <constraint firstItem="2Bf-M4-KWN" firstAttribute="leading" secondItem="xqE-fZ-yfo" secondAttribute="trailing" constant="100" id="mnF-3P-tPG"/>
+                                                <constraint firstItem="2Bf-M4-KWN" firstAttribute="leading" relation="lessThanOrEqual" secondItem="xqE-fZ-yfo" secondAttribute="trailing" constant="100" id="mnF-3P-tPG"/>
                                                 <constraint firstItem="xqE-fZ-yfo" firstAttribute="centerY" secondItem="gIK-Bc-9gf" secondAttribute="centerY" id="sda-SK-mJK"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -268,7 +268,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="p87-Yy-WVg" firstAttribute="leading" secondItem="bom-NX-kIw" secondAttribute="trailing" constant="189" id="j2Z-7h-kN1"/>
+                                                <constraint firstItem="p87-Yy-WVg" firstAttribute="leading" relation="lessThanOrEqual" secondItem="bom-NX-kIw" secondAttribute="trailing" constant="189" id="j2Z-7h-kN1"/>
                                                 <constraint firstItem="p87-Yy-WVg" firstAttribute="centerY" secondItem="cDI-ao-EDQ" secondAttribute="centerY" id="r9L-Sr-5J5"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="p87-Yy-WVg" secondAttribute="trailing" constant="10" id="tCm-Sx-eXH"/>
                                                 <constraint firstItem="bom-NX-kIw" firstAttribute="leading" secondItem="cDI-ao-EDQ" secondAttribute="leadingMargin" id="ume-bx-okJ"/>
@@ -336,9 +336,12 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="qTQ-ab-AQD" secondAttribute="trailing" constant="10" id="OZl-1w-AwP"/>
                                                 <constraint firstItem="qTQ-ab-AQD" firstAttribute="centerY" secondItem="9f9-hs-gXs" secondAttribute="centerY" id="W6V-FB-05h"/>
                                                 <constraint firstItem="7ix-sm-pPQ" firstAttribute="leading" secondItem="9f9-hs-gXs" secondAttribute="leadingMargin" id="e5q-gI-uCe"/>
-                                                <constraint firstItem="qTQ-ab-AQD" firstAttribute="leading" secondItem="7ix-sm-pPQ" secondAttribute="trailing" constant="257" id="wf1-gu-IiD"/>
+                                                <constraint firstItem="qTQ-ab-AQD" firstAttribute="leading" relation="lessThanOrEqual" secondItem="7ix-sm-pPQ" secondAttribute="trailing" constant="257" id="wf1-gu-IiD"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="JDV-G6-Jnn" kind="show" id="90m-Bk-MDY"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7nG-Ix-pf4">
                                         <rect key="frame" x="0.0" y="276" width="375" height="44"/>
@@ -419,7 +422,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wy6-0a-kXm" firstAttribute="leading" secondItem="Uzq-bM-QDz" secondAttribute="trailing" constant="193.5" id="0RE-bP-WYH"/>
+                                                <constraint firstItem="wy6-0a-kXm" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Uzq-bM-QDz" secondAttribute="trailing" constant="193.5" id="0RE-bP-WYH"/>
                                                 <constraint firstItem="Uzq-bM-QDz" firstAttribute="leading" secondItem="R7J-r0-h1Z" secondAttribute="leadingMargin" id="9Ph-xJ-AXY"/>
                                                 <constraint firstItem="Uzq-bM-QDz" firstAttribute="centerY" secondItem="R7J-r0-h1Z" secondAttribute="centerY" id="Ex2-Od-uLJ"/>
                                                 <constraint firstItem="wy6-0a-kXm" firstAttribute="centerY" secondItem="R7J-r0-h1Z" secondAttribute="centerY" id="MZA-Y5-NW0"/>
@@ -520,12 +523,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="24" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdE-WK-arD" userLabel="BombInstructionsLabel">
-                                <rect key="frame" x="20" y="84" width="335" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UQ-jO-ZLf" userLabel="EmergencyBombCallOutlet">
                                 <rect key="frame" x="20" y="565" width="335" height="33"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -540,21 +537,29 @@
                                     <action selector="emergencyCallButtonAction:" destination="u0i-vm-rDV" eventType="touchUpInside" id="qyX-5c-Mvu"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rqp-og-mXa" userLabel="BombThreatInstructionsTextView">
+                                <rect key="frame" x="10" y="74" width="355" height="481"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="X1z-ss-ED4" firstAttribute="trailing" secondItem="1UQ-jO-ZLf" secondAttribute="trailing" constant="20" id="JK0-Ee-baT"/>
-                            <constraint firstItem="1UQ-jO-ZLf" firstAttribute="leading" secondItem="X1z-ss-ED4" secondAttribute="leading" constant="20" id="XoF-Ue-ccC"/>
-                            <constraint firstItem="X1z-ss-ED4" firstAttribute="trailing" secondItem="CdE-WK-arD" secondAttribute="trailing" constant="20" id="ee7-7L-IZa"/>
-                            <constraint firstItem="X1z-ss-ED4" firstAttribute="bottom" secondItem="1UQ-jO-ZLf" secondAttribute="bottom" constant="20" id="fyI-S1-I6Z"/>
-                            <constraint firstItem="CdE-WK-arD" firstAttribute="leading" secondItem="X1z-ss-ED4" secondAttribute="leading" constant="20" id="sSo-96-s43"/>
-                            <constraint firstItem="CdE-WK-arD" firstAttribute="top" secondItem="X1z-ss-ED4" secondAttribute="top" constant="20" id="x2i-XK-dNX"/>
+                            <constraint firstItem="rqp-og-mXa" firstAttribute="top" secondItem="X1z-ss-ED4" secondAttribute="top" constant="10" id="0Kn-D5-gI8"/>
+                            <constraint firstItem="X1z-ss-ED4" firstAttribute="trailing" secondItem="1UQ-jO-ZLf" secondAttribute="trailing" constant="20" id="Lb3-Nb-8w7"/>
+                            <constraint firstItem="X1z-ss-ED4" firstAttribute="bottom" secondItem="1UQ-jO-ZLf" secondAttribute="bottom" constant="20" id="OsQ-lg-c9Q"/>
+                            <constraint firstItem="rqp-og-mXa" firstAttribute="leading" secondItem="X1z-ss-ED4" secondAttribute="leading" constant="10" id="VHE-48-LGE"/>
+                            <constraint firstItem="1UQ-jO-ZLf" firstAttribute="leading" secondItem="X1z-ss-ED4" secondAttribute="leading" constant="20" id="mA7-4p-1Iw"/>
+                            <constraint firstItem="X1z-ss-ED4" firstAttribute="trailing" secondItem="rqp-og-mXa" secondAttribute="trailing" constant="10" id="mh8-Uc-nez"/>
+                            <constraint firstItem="1UQ-jO-ZLf" firstAttribute="top" secondItem="rqp-og-mXa" secondAttribute="bottom" constant="10" id="wJF-iE-hf3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X1z-ss-ED4"/>
                     </view>
                     <connections>
                         <outlet property="emergencyCallButtonOutlet" destination="1UQ-jO-ZLf" id="yFZ-gI-wm0"/>
-                        <outlet property="instructionsLabel" destination="CdE-WK-arD" id="OZx-2P-ihB"/>
+                        <outlet property="instructionsLabel" destination="rqp-og-mXa" id="D3E-jb-KdE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1a-B3-B1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -584,32 +589,93 @@
                                     <action selector="emergencyCallButtonAction:" destination="u0i-vm-rDV" eventType="touchUpInside" id="Irl-V1-dHb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="24" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrp-Oz-n0m" userLabel="PackageInstructionsLabel">
-                                <rect key="frame" x="20" y="84" width="335" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oCe-h6-aIC" userLabel="PackageInstructionsText">
+                                <rect key="frame" x="10" y="74" width="355" height="481"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nrp-Oz-n0m" firstAttribute="top" secondItem="wKu-Gc-rch" secondAttribute="top" constant="20" id="A4u-N6-AUg"/>
-                            <constraint firstItem="nrp-Oz-n0m" firstAttribute="leading" secondItem="wKu-Gc-rch" secondAttribute="leading" constant="20" id="Hpi-tk-b5b"/>
+                            <constraint firstItem="oCe-h6-aIC" firstAttribute="top" secondItem="wKu-Gc-rch" secondAttribute="top" constant="10" id="XcA-Hk-LBS"/>
+                            <constraint firstItem="oCe-h6-aIC" firstAttribute="leading" secondItem="wKu-Gc-rch" secondAttribute="leading" constant="10" id="Yco-i1-7iT"/>
                             <constraint firstItem="wKu-Gc-rch" firstAttribute="trailing" secondItem="M8e-uw-nRn" secondAttribute="trailing" constant="20" id="caK-r5-1AI"/>
                             <constraint firstItem="wKu-Gc-rch" firstAttribute="bottom" secondItem="M8e-uw-nRn" secondAttribute="bottom" constant="20" id="eSg-Nv-JSB"/>
-                            <constraint firstItem="wKu-Gc-rch" firstAttribute="trailing" secondItem="nrp-Oz-n0m" secondAttribute="trailing" constant="20" id="eiw-mP-Ldo"/>
+                            <constraint firstItem="wKu-Gc-rch" firstAttribute="trailing" secondItem="oCe-h6-aIC" secondAttribute="trailing" constant="10" id="p4h-TF-Knw"/>
                             <constraint firstItem="M8e-uw-nRn" firstAttribute="leading" secondItem="wKu-Gc-rch" secondAttribute="leading" constant="20" id="teg-g6-h41"/>
+                            <constraint firstItem="M8e-uw-nRn" firstAttribute="top" secondItem="oCe-h6-aIC" secondAttribute="bottom" constant="10" id="x6h-ZU-ofn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wKu-Gc-rch"/>
                     </view>
                     <connections>
                         <outlet property="emergencyCallButtonOutlet" destination="M8e-uw-nRn" id="IKc-GU-ozc"/>
-                        <outlet property="instructionsLabel" destination="nrp-Oz-n0m" id="cCt-8S-sTz"/>
+                        <outlet property="instructionsLabel" destination="oCe-h6-aIC" id="4Gr-Kx-nby"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRA-5y-zFa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2609" y="2546"/>
+        </scene>
+        <!--Fire View Controller-->
+        <scene sceneID="zxs-uH-A5m">
+            <objects>
+                <viewController id="JDV-G6-Jnn" customClass="FireViewController" customModule="ETS_mobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lKD-U3-rMH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipd-pm-29y" userLabel="EmergencyPackageCallOutlet">
+                                <rect key="frame" x="20" y="565" width="335" height="33"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Appel d'urgence">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="emergencyCallButtonAction:" destination="fUK-GQ-Iqf" eventType="touchUpInside" id="0jk-UA-ij7"/>
+                                    <action selector="emergencyCallButtonAction:" destination="u0i-vm-rDV" eventType="touchUpInside" id="CDX-z4-ITt"/>
+                                    <action selector="emergencyCallButtonAction:" destination="JDV-G6-Jnn" eventType="touchUpInside" id="aXh-5o-8mG"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3G-cy-Wp9" userLabel="FireInstructionsTextView">
+                                <rect key="frame" x="10" y="74" width="355" height="481"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <mutableString key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".SFNSDisplay"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cdF-08-2yh" firstAttribute="trailing" secondItem="e3G-cy-Wp9" secondAttribute="trailing" constant="10" id="00T-Rh-QkV"/>
+                            <constraint firstItem="e3G-cy-Wp9" firstAttribute="leading" secondItem="cdF-08-2yh" secondAttribute="leading" constant="10" id="9X9-ge-DJt"/>
+                            <constraint firstItem="e3G-cy-Wp9" firstAttribute="top" secondItem="cdF-08-2yh" secondAttribute="top" constant="10" id="EV4-LU-Ra9"/>
+                            <constraint firstItem="ipd-pm-29y" firstAttribute="leading" secondItem="cdF-08-2yh" secondAttribute="leading" constant="20" id="dqD-Ic-oAJ"/>
+                            <constraint firstItem="ipd-pm-29y" firstAttribute="top" secondItem="e3G-cy-Wp9" secondAttribute="bottom" constant="10" id="fCs-MX-nSz"/>
+                            <constraint firstItem="cdF-08-2yh" firstAttribute="bottom" secondItem="ipd-pm-29y" secondAttribute="bottom" constant="20" id="rTB-sg-Yby"/>
+                            <constraint firstItem="cdF-08-2yh" firstAttribute="trailing" secondItem="ipd-pm-29y" secondAttribute="trailing" constant="20" id="x2U-5r-4iS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cdF-08-2yh"/>
+                    </view>
+                    <connections>
+                        <outlet property="emergencyCallButtonOutlet" destination="ipd-pm-29y" id="uON-fq-kgA"/>
+                        <outlet property="instructionsLabel" destination="e3G-cy-Wp9" id="O6o-vt-r5s"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mND-5A-8Ad" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1820" y="2545"/>
         </scene>
         <!--Item-->
         <scene sceneID="loD-Zo-xdf">

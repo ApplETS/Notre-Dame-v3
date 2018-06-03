@@ -1,5 +1,5 @@
 //
-//  SuspiciousPackageViewController.swift
+//  FireViewController.swift
 //  ETS-mobile
 //
 //  Created by Emmanuel on 2018-06-03.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-class SuspiciousPackageViewController: UIViewController {
+class FireViewController: UIViewController {
 
-    @IBOutlet weak var emergencyCallButtonOutlet: UIButton!
-    
+  
     @IBOutlet weak var instructionsLabel: UITextView!
+    
+    @IBOutlet weak var emergencyCallButtonOutlet: UIButton!
     
     @IBAction func emergencyCallButtonAction(_ sender: Any) {
         if let phoneCallUrl = URL(string : "tel://514-396-8900") {
@@ -23,11 +24,9 @@ class SuspiciousPackageViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        instructionsLabel!.attributedText = NSMutableAttributedString(string: NSLocalizedString("suspiciousPackageInstructions", comment: "Instructions for suspicious package"))
+        instructionsLabel!.attributedText = NSMutableAttributedString(string: NSLocalizedString("fireInstructions", comment: "Instructions for fire"))
         
         instructionsLabel!.font = UIFont(name: instructionsLabel.font!.fontName, size: 16)
         
@@ -41,11 +40,9 @@ class SuspiciousPackageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     override func viewDidLayoutSubviews() {
         instructionsLabel.setContentOffset(CGPoint.zero, animated: false)
     }
-    
     
     /*
     // MARK: - Navigation

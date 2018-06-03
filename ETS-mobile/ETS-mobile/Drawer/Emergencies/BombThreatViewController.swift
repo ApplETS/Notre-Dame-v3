@@ -10,8 +10,10 @@ import UIKit
 
 class BombThreatViewController: UIViewController {
     
-    @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var instructionsLabel: UITextView!
+    
     @IBOutlet weak var emergencyCallButtonOutlet: UIButton!
+    
     @IBAction func emergencyCallButtonAction(_ sender: Any) {
         if let phoneCallUrl = URL(string : "tel://514-396-8900") {
             let application:UIApplication = UIApplication.shared
@@ -26,6 +28,10 @@ class BombThreatViewController: UIViewController {
         
         instructionsLabel!.attributedText = NSMutableAttributedString(string: NSLocalizedString("bombThreatInstructions", comment: "Instructions for bomb threat"))
         
+        instructionsLabel.font = UIFont(name: instructionsLabel.font!.fontName, size: 16)
+        
+        
+        
         emergencyCallButtonOutlet.layer.cornerRadius = 5
     emergencyCallButtonOutlet.setTitle(NSLocalizedString("emergencyCall", comment: "Emergency call"), for: UIControlState.normal)
         // Do any additional setup after loading the view.
@@ -36,6 +42,10 @@ class BombThreatViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        instructionsLabel.setContentOffset(CGPoint.zero, animated: false)
     }
     
     
