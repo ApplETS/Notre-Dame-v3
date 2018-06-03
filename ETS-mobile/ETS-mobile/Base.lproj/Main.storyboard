@@ -307,6 +307,9 @@
                                                 <constraint firstItem="Skm-QE-p2x" firstAttribute="leading" secondItem="Ejg-NH-4dx" secondAttribute="leadingMargin" id="xvS-BF-BWK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="fUK-GQ-Iqf" kind="show" id="Q04-RM-kCq"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="e2W-qh-ZHU">
                                         <rect key="frame" x="0.0" y="232" width="375" height="44"/>
@@ -509,21 +512,21 @@
             </objects>
             <point key="canvasLocation" x="1456.8" y="1741.9790104947529"/>
         </scene>
-        <!--BombeViewController-->
+        <!--BombThreatViewController-->
         <scene sceneID="czD-46-3tf">
             <objects>
-                <viewController id="u0i-vm-rDV" userLabel="BombeViewController" customClass="BombThreatViewController" customModule="ETS_mobile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="u0i-vm-rDV" userLabel="BombThreatViewController" customClass="BombThreatViewController" customModule="ETS_mobile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aUQ-GV-5nh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="24" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdE-WK-arD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="24" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdE-WK-arD" userLabel="BombInstructionsLabel">
                                 <rect key="frame" x="20" y="84" width="335" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UQ-jO-ZLf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UQ-jO-ZLf" userLabel="EmergencyBombCallOutlet">
                                 <rect key="frame" x="20" y="565" width="335" height="33"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -534,7 +537,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="emergencyCallButton:" destination="u0i-vm-rDV" eventType="touchUpInside" id="qyX-5c-Mvu"/>
+                                    <action selector="emergencyCallButtonAction:" destination="u0i-vm-rDV" eventType="touchUpInside" id="qyX-5c-Mvu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -551,12 +554,62 @@
                     </view>
                     <connections>
                         <outlet property="emergencyCallButtonOutlet" destination="1UQ-jO-ZLf" id="yFZ-gI-wm0"/>
-                        <outlet property="instructionsStep1" destination="CdE-WK-arD" id="OZx-2P-ihB"/>
+                        <outlet property="instructionsLabel" destination="CdE-WK-arD" id="OZx-2P-ihB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1a-B3-B1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2608.8000000000002" y="1752.7736131934034"/>
+        </scene>
+        <!--SuspciciousPackageViewController-->
+        <scene sceneID="D8g-qz-sn8">
+            <objects>
+                <viewController id="fUK-GQ-Iqf" userLabel="SuspciciousPackageViewController" customClass="SuspiciousPackageViewController" customModule="ETS_mobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Geu-YQ-8MT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8e-uw-nRn" userLabel="EmergencyPackageCallOutlet">
+                                <rect key="frame" x="20" y="565" width="335" height="33"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Appel d'urgence">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="emergencyCallButtonAction:" destination="fUK-GQ-Iqf" eventType="touchUpInside" id="GG6-0f-1Y1"/>
+                                    <action selector="emergencyCallButtonAction:" destination="u0i-vm-rDV" eventType="touchUpInside" id="Irl-V1-dHb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="24" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrp-Oz-n0m" userLabel="PackageInstructionsLabel">
+                                <rect key="frame" x="20" y="84" width="335" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nrp-Oz-n0m" firstAttribute="top" secondItem="wKu-Gc-rch" secondAttribute="top" constant="20" id="A4u-N6-AUg"/>
+                            <constraint firstItem="nrp-Oz-n0m" firstAttribute="leading" secondItem="wKu-Gc-rch" secondAttribute="leading" constant="20" id="Hpi-tk-b5b"/>
+                            <constraint firstItem="wKu-Gc-rch" firstAttribute="trailing" secondItem="M8e-uw-nRn" secondAttribute="trailing" constant="20" id="caK-r5-1AI"/>
+                            <constraint firstItem="wKu-Gc-rch" firstAttribute="bottom" secondItem="M8e-uw-nRn" secondAttribute="bottom" constant="20" id="eSg-Nv-JSB"/>
+                            <constraint firstItem="wKu-Gc-rch" firstAttribute="trailing" secondItem="nrp-Oz-n0m" secondAttribute="trailing" constant="20" id="eiw-mP-Ldo"/>
+                            <constraint firstItem="M8e-uw-nRn" firstAttribute="leading" secondItem="wKu-Gc-rch" secondAttribute="leading" constant="20" id="teg-g6-h41"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wKu-Gc-rch"/>
+                    </view>
+                    <connections>
+                        <outlet property="emergencyCallButtonOutlet" destination="M8e-uw-nRn" id="IKc-GU-ozc"/>
+                        <outlet property="instructionsLabel" destination="nrp-Oz-n0m" id="cCt-8S-sTz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aRA-5y-zFa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2609" y="2546"/>
         </scene>
         <!--Item-->
         <scene sceneID="loD-Zo-xdf">

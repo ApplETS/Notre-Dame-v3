@@ -33,3 +33,5 @@
 "medicalEmergency" = "Medical emergency";
 
 "bombThreatInstructions" = "\U2022 Do not end the phone conversation.\n\n\U2022 Try to get as much information as possible. \n\n\U2022 Repeat or pretend to have some difficulty to understand in order to take more time. \n\n\U2022 Whenever possible and depending on the situation, try to obtain the following information: \n\t\U2022 The time at which the bomb will explode. \n\t\U2022 The type of bomb. \n\t\U2022 The location of the bomb.\n\t\U2022 The caller's name and address. \n\n\U2022 Let the caller hang up first. \n\n\U2022 It is essential to communicate IMMEDIATELY with security at 514-396-8900 extension 55 ";
+
+"suspiciousPackageInstructions" = "\U2022 Never touch, push, hit, lift, or open a suspicious package\n\n\U2022 Never take for granted that it is the only package.\n\n\U2022 Leave the area and if possible restrict access by closing the doors.\n\n\U2022 Notify those you meet not to enter the area.\n\n\U2022 Once outside the area, call security at 514-396-8900 extension 55.\n\n\U2022 Never activate a manual fire station (red station).";
