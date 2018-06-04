@@ -28,14 +28,11 @@ class LoginViewModel @Inject constructor(
         MutableLiveData<SignetsUserCredentials>()
     }
 
-    private var universalCode: String? = null
-    private var password: String? = null
-
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered when [setUserCredentials] is called. The new
      * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If
-     * an instance can be fetched, it means that the user's credentials are valid. Ad a result, the
+     * an instance can be fetched, it means that the user's credentials are valid. As a result, the
      * new [SignetsUserCredentials] are saved and stored in [LoginRepository].
      */
     val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
@@ -67,6 +64,13 @@ class LoginViewModel @Inject constructor(
         return false
     }
 
+    /**
+     * Transforms a [Resource<Etudiant>] to a [Resource<Boolean>]. The result [Resource] contains
+     * an [Boolean] which indicates whether the credentials used to fetch the [Etudiant] of the
+     * original [Resource] is valid or not.
+     *
+     * @return Tranformed [Resource]
+     */
     private fun transformEtudiantResToBooleanRes(res: Resource<Etudiant>?): Resource<Boolean> {
         if (res != null) {
             when (res.status) {
@@ -87,6 +91,15 @@ class LoginViewModel @Inject constructor(
         return Resource.error(errorStr, false)
     }
 
+    /**
+     * Generates an error for the given [Resource<Etudiant]
+     *
+     * If the device isn't connected, [R.string.error_no_internet_connection] is returned. If the
+     * the device is connected, the [Resource<Etudiant]'s error message is returned. However, if its
+     * error message is null, [R.string.error] is returned.
+     *
+     * @return error message
+     */
     private fun getErrorMessage(res: Resource<Etudiant>): String {
         return if (app.isDeviceConnected()) {
             res.message ?: getApplication<App>().getString(R.string.error)
@@ -99,11 +112,9 @@ class LoginViewModel @Inject constructor(
      * Set the universal code
      *
      * @param universalCode the user's universal code
-     * @return A [FieldStatus] instance indicating whether the password is valid or not
+     * @return A [FieldStatus] instance indicating whether the universal code is valid or not
      */
     fun setUniversalCode(universalCode: String): FieldStatus {
-        this.universalCode = universalCode
-
         return if (universalCode.isEmpty()) {
             FieldStatus(false, app.getString(R.string.error_field_required))
         } else if (!universalCode.matches(Regex("[a-zA-Z]{2}\\d{5}"))) {
@@ -120,8 +131,6 @@ class LoginViewModel @Inject constructor(
      * @return A [FieldStatus] instance indicating whether the password is valid or not
      */
     fun setPassword(password: String): FieldStatus {
-        this.password = password
-
         return if (password.isEmpty()) {
             FieldStatus(false, app.getString(R.string.error_field_required))
         } else {
