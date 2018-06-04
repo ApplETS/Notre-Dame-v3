@@ -78,7 +78,7 @@ class EvaluationRepository @Inject constructor(
     ): LiveData<Resource<SommaireElementsEvaluation>> = object : NetworkBoundResource<SommaireElementsEvaluation, SignetsModel<ListeDesElementsEvaluation>>(appExecutors) {
         override fun saveCallResult(item: SignetsModel<ListeDesElementsEvaluation>) {
             item.data?.let {
-                val sommaire = SommaireElementsEvaluation(
+                with(SommaireElementsEvaluation(
                         cours.sigle,
                         cours.session,
                         it.noteACeJour,
@@ -89,9 +89,9 @@ class EvaluationRepository @Inject constructor(
                         it.rangCentileClasse,
                         it.noteACeJourElementsIndividuels,
                         it.noteSur100PourElementsIndividuels
-                )
-
-                sommaireElementsEvaluationDao.insert(sommaire)
+                )) {
+                    sommaireElementsEvaluationDao.insert(this)
+                }
             }
         }
 

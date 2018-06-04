@@ -2,7 +2,6 @@ package ca.etsmtl.etsmobile.data.repository.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.etsmobile.AppExecutors
