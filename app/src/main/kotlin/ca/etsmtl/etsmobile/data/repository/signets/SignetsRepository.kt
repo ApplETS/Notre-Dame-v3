@@ -59,16 +59,13 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
      */
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     inline fun <reified T : SignetsData> transformApiLiveData(apiLiveData: LiveData<ApiResponse<SignetsModel<T>>>): LiveData<ApiResponse<SignetsModel<T>>> {
-        return Transformations.switchMap(apiLiveData) { apiResponse ->
-            val resultLiveData = MutableLiveData<ApiResponse<SignetsModel<T>>>()
+        return Transformations.map(apiLiveData) { apiResponse ->
             val errorStr = getError(apiResponse)
 
-            resultLiveData.value = when (errorStr.isNullOrEmpty()) {
+            when (errorStr.isNullOrEmpty()) {
                 true -> apiResponse
                 false -> ApiResponse(Throwable(errorStr))
             }
-
-            resultLiveData
         }
     }
 
