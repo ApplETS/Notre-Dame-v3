@@ -35,29 +35,26 @@ class LoginViewModel @Inject constructor(
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered when [setUserCredentials] is called. The new
      * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If
-     * that is the case, is means that the user's credentials are valid. The new
-     * [SignetsUserCredentials] are saved and stored in [LoginRepository].
+     * an instance can be fetched, it means that the user's credentials are valid. Ad a result, the
+     * new [SignetsUserCredentials] are saved and stored in [LoginRepository].
      */
     val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentialsLD) { userCredentials ->
             // Fetch Etudiant instance
-            Transformations.switchMap(repository.getInfoEtudiant(userCredentials, app.isDeviceConnected())) { res ->
+            Transformations.map(repository.getInfoEtudiant(userCredentials, app.isDeviceConnected())) { res ->
                 val blnRes = transformEtudiantResToBooleanRes(res)
 
                 if (userCredentialsValid(blnRes)) {
                     loginRepository.saveUserCredentialsIfNeeded(userCredentials)
                 }
 
-                val credentialsValidBooleanLiveData = MutableLiveData<Resource<Boolean>>()
-                credentialsValidBooleanLiveData.value = blnRes
-
-                credentialsValidBooleanLiveData
+                blnRes
             }
         }
     }
 
     /**
-     * Verify that the resource is not null and that his status is not [Resource.LOADING]
+     * Verifies that a given resource is not null and that his status is not [Resource.LOADING]
      *
      * @param blnResource The [Resource] to verify
      * @return true if the resource is not null and that his status is not [Resource.LOADING]
