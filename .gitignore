@@ -59,5 +59,6 @@ xcuserdata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 
+commit.txt
 
 # End of https://www.gitignore.io/api/macos,xcode

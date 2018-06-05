@@ -13,6 +13,7 @@ class FireViewController: UIViewController {
   
     @IBOutlet weak var instructionsLabel: UITextView!
     
+    @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var emergencyCallButtonOutlet: UIButton!
     
     @IBAction func emergencyCallButtonAction(_ sender: Any) {
@@ -29,6 +30,7 @@ class FireViewController: UIViewController {
         instructionsLabel!.attributedText = NSMutableAttributedString(string: NSLocalizedString("fireInstructions", comment: "Instructions for fire"))
         
         instructionsLabel!.font = UIFont(name: instructionsLabel.font!.fontName, size: 16)
+        titleLabel.title = NSLocalizedString("fire", comment: "Title for fire")
         
         emergencyCallButtonOutlet.layer.cornerRadius = 5
         emergencyCallButtonOutlet.setTitle(NSLocalizedString("emergencyCall", comment: "Emergency call"), for: UIControlState.normal)

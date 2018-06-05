@@ -11,6 +11,7 @@ import UIKit
 class EmergencyTableViewController: UITableViewController {
 
     
+    @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var emergencyCallLabel: UILabel!
     
     @IBOutlet weak var internCallLabel: UILabel!
@@ -48,7 +49,7 @@ class EmergencyTableViewController: UITableViewController {
 
         emergencyCallLabel!.attributedText = NSMutableAttributedString(string: NSLocalizedString("emergencyCall", comment: "Emergency call"))
 
-        
+        titleLabel.title = NSLocalizedString("emergencies", comment: "Title for emergencies")
         
         
         
