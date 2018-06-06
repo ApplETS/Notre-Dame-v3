@@ -69,7 +69,7 @@ class LoginViewModel @Inject constructor(
      * an [Boolean] which indicates whether the credentials used to fetch the [Etudiant] of the
      * original [Resource] is valid or not.
      *
-     * @return Tranformed [Resource]
+     * @return The transformed [Resource]
      */
     private fun transformEtudiantResToBooleanRes(res: Resource<Etudiant>?): Resource<Boolean> {
         if (res != null) {

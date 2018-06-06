@@ -14,9 +14,11 @@ import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesActivitesEtProf
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesElementsEvaluation
+import ca.etsmtl.etsmobile.data.model.signets.ListeDesSeances
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeJoursRemplaces
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
+import ca.etsmtl.etsmobile.data.model.signets.Seance
 import ca.etsmtl.etsmobile.data.model.signets.Session
 import ca.etsmtl.etsmobile.data.model.signets.SignetsData
 import ca.etsmtl.etsmobile.data.model.signets.SignetsModel
@@ -449,7 +451,7 @@ class SignetsApiTest {
                 "Oui",
                 "",
                 "Non"
-                )
+        )
         assertEquals(expectedEvaluation, wrapper.data!!.liste!![5])
     }
 
@@ -524,5 +526,61 @@ class SignetsApiTest {
         assertEquals("Code d'accès ou mot de passe invalide", errorStr)
         val type = wrapper.data!!.type
         assertEquals("SignetsPourEtudiants.SignetsMobile+ListeDeSessions", type)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeSeancesNoError() {
+        enqueueResponse("liste_seances_no_error.json")
+
+        val apiResponse = api.listeDesSeances(
+                "AM41234",
+                "test!",
+                "MAT472",
+                "É2016",
+                "2018-01-01",
+                "2019-04-01"
+        )
+
+        val wrapper: SignetsModel<ListeDesSeances> = getValue(apiResponse).body!!
+
+        val errorStr = wrapper.data!!.erreur
+        assertTrue { errorStr == null || errorStr.isEmpty() }
+        assertEquals(26, wrapper.data!!.liste.size)
+
+        val expectedSeance = Seance(
+                "/Date(1525093200000)/",
+                "/Date(1525105800000)/",
+                "MAT472-02",
+                "Cours",
+                "B-0904",
+                "Activité de cours",
+                "Algèbre linéaire et géométrie de l'espace"
+        )
+
+        assertEquals(expectedSeance, wrapper.data!!.liste[0])
+        val type = wrapper.data!!.type
+        assertEquals("SignetsPourEtudiants.SignetsMobile+listeSeances", type)
+    }
+
+    @Test
+    @Throws(IOException::class, InterruptedException::class)
+    fun testGetListeSeancesError() {
+        enqueueResponse("liste_seances_error.json")
+
+        val apiResponse = api.listeDesSeances(
+                "AM41234",
+                "test!",
+                "MAT472",
+                "É2016",
+                "2018-01-01",
+                "1 avril 2019"
+        )
+        val wrapper: SignetsModel<ListeDesSeances> = getValue(apiResponse).body!!
+
+        val errorStr = wrapper.data!!.erreur
+        assertEquals("Date de fin. Date invalide, format attendu: aaaa-mm-jj. 1 avril 2019", errorStr)
+        val type = wrapper.data!!.type
+        assertEquals("SignetsPourEtudiants.SignetsMobile+listeSeances", type)
     }
 }

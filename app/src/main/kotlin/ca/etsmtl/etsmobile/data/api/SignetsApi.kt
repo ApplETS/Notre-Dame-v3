@@ -6,6 +6,7 @@ import ca.etsmtl.etsmobile.data.model.signets.ListeDeCours
 import ca.etsmtl.etsmobile.data.model.signets.ListeDeSessions
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesActivitesEtProf
 import ca.etsmtl.etsmobile.data.model.signets.ListeDesElementsEvaluation
+import ca.etsmtl.etsmobile.data.model.signets.ListeDesSeances
 import ca.etsmtl.etsmobile.data.model.signets.ListeHoraireExamensFinaux
 import ca.etsmtl.etsmobile.data.model.signets.ListeJoursRemplaces
 import ca.etsmtl.etsmobile.data.model.signets.ListeProgrammes
@@ -143,7 +144,7 @@ interface SignetsApi {
     ): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>>
 
     /**
-     * Fetches a list of sessions of the student
+     * Fetches a list of the student's session
      *
      * @param body The student's credentials
      * @return A list of sessions of the student
@@ -151,4 +152,26 @@ interface SignetsApi {
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("listeSessions")
     fun listeSessions(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<ListeDeSessions>>>
+
+    /**
+     * Fetches the schedule of the sessions for a given course
+     *
+     * @param codeAccesUniversel The student's universal code
+     * @param motPasse The student's password
+     * @param pCoursGroupe The group number
+     * @param pSession The session
+     * @param pDateDebut The starting date
+     * @param pDateFin The end date
+     */
+    @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
+    @FormUrlEncoded
+    @POST("lireHoraireDesSeances")
+    fun listeDesSeances(
+        @Field("codeAccesUniversel") codeAccesUniversel: String,
+        @Field("motPasse") motPasse: String,
+        @Field("pCoursGroupe") pSigle: String,
+        @Field("pSession") pSession: String,
+        @Field("pDateDebut") pDateDebut: String,
+        @Field("pDateFin") pDateFin: String
+    ): LiveData<ApiResponse<SignetsModel<ListeDesSeances>>>
 }
