@@ -76,16 +76,28 @@ class LoginFragment : DaggerFragment() {
 
         subscribeUI()
 
-        initLoginFormWithSavedCredentials()
+        initWithSavedCredentials()
     }
 
-    private fun initLoginFormWithSavedCredentials() {
-        with(loginViewModel.getSavedUserCredentials()) {
-            initUserCredentialsFields(this)
-
-            // Attempt to login if user credentials are not null
-            this?.let { attemptLogin() }
+    /**
+     * Gets the saved credentials from the view model. If are the credentials are not null, the form
+     * will be filled up and an login attempt will be made
+     */
+    private fun initWithSavedCredentials() {
+        loginViewModel.getSavedUserCredentials()?.let {
+            fillLoginForm(it)
+            attemptLogin()
         }
+    }
+
+    /**
+     * Fills the credentials fields with the specified user credentials
+     *
+     * @param userCredentials The user credentials to fill the fields with
+     */
+    private fun fillLoginForm(userCredentials: SignetsUserCredentials) {
+        universalCode.setText(userCredentials.codeAccesUniversel)
+        password.setText(userCredentials.motPasse)
     }
 
     private fun setUpFields() {
@@ -154,18 +166,6 @@ class LoginFragment : DaggerFragment() {
             } else {
                 textInputLayout.error = fieldStatus.error
             }
-        }
-    }
-
-    /**
-     * Fills the credentials fields with the specifies user credentials
-     *
-     * @param userCredentials the user credentials used to fill the fields
-     */
-    private fun initUserCredentialsFields(userCredentials: SignetsUserCredentials?) {
-        if (userCredentials != null) {
-            universalCode.setText(userCredentials.codeAccesUniversel)
-            password.setText(userCredentials.motPasse)
         }
     }
 
