@@ -1,0 +1,10 @@
+os: osx
+language: swift
+osx_image: xcode9.3
+xcode_project: ../Notre-Dame-iOS/ETS-mobile/ETS-mobile.xcodeproj
+xcode_scheme: ../Notre-Dame-iOS/ETS-mobile/ETS-mobile
+xcode_sdk: iphonesimulator11.3
+before_script:
+- gem install xcpretty
+script:
+  - xcodebuild clean -project ../Notre-Dame-iOS/ETS-mobile/ETS-mobile.xcodeproj && xcodebuild build -project ../Notre-Dame-iOS/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
