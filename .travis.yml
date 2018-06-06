@@ -7,4 +7,4 @@ before_script:
 - gem install xcpretty
 script:
 - swift package generate-xcodeproj
-- set -o pipefail && xcodebuild -scheme ETS-mobile-Package clean build | xcpretty
+- set -o pipefail && xcodebuild -scheme /ETS-mobile/ETS-mobile-Package clean build | xcpretty
