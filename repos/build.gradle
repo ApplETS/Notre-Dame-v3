@@ -1,0 +1,124 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test {
+            java.srcDirs += 'src/test/kotlin'
+            java.srcDirs += 'src/test-common/kotlin'
+            res.srcDirs += 'src/test/resources'
+        }
+        androidTest {
+            java.srcDirs += 'src/androidTest/kotlin'
+            java.srcDirs += 'src/test-common/kotlin'
+        }
+    }
+}
+
+// Versions
+def lifecycle = '1.1.1'
+def room = '1.1.0'
+def espresso = '3.0.1'
+def astl = '1.0.1'
+def junit = '4.12'
+def mockito = '2.10.0'
+def mockito_inline = '2.18.3'
+def dexmaker_mockito = '2.16.0'
+def dagger = '2.15'
+def moshi = '1.5.0'
+def kotshi = '1.0.2'
+def retrofit = '2.3.0'
+def okhttp = '3.8.0'
+def dimens = '1.4'
+def leakcanary = '1.5.4'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Architecture components
+    implementation "android.arch.lifecycle:extensions:${lifecycle}"
+    kapt "android.arch.lifecycle:compiler:${lifecycle}"
+    implementation "android.arch.persistence.room:runtime:${room}"
+    kapt "android.arch.persistence.room:compiler:${room}"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:${junit}"
+    testImplementation "android.arch.persistence.room:testing:${room}"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "android.arch.core:core-testing:${lifecycle}"
+    testImplementation "org.mockito:mockito-core:${mockito}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
+    testImplementation "org.mockito:mockito-inline:$mockito_inline"
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation "com.android.support.test:runner:${astl}"
+    androidTestImplementation "com.android.support.test:rules:${astl}"
+    androidTestImplementation "android.arch.persistence.room:testing:${room}"
+
+    // Espresso UI Testing
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espresso}"
+    androidTestImplementation "org.mockito:mockito-core:${mockito}"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexmaker_mockito"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${dagger}"
+    implementation "com.google.dagger:dagger-android:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:${moshi}"
+    implementation "com.squareup.moshi:moshi-kotlin:${moshi}"
+
+    // Kotshi
+    implementation "se.ansman.kotshi:api:${kotshi}"
+    kapt "se.ansman.kotshi:compiler:${kotshi}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
+    implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
+
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakcanary}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}"
+
+    // Fabric Crashlytics
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
+        transitive = true
+    }
+}
