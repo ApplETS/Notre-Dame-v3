@@ -18,6 +18,7 @@
 		146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B0D208B89AA00275F71 /* HomeView.swift */; };
 		146F3B10208B89E100275F71 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B0F208B89E100275F71 /* ProfileView.swift */; };
 		146F3B12208B89EB00275F71 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B11208B89EB00275F71 /* ScheduleView.swift */; };
+		14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8E3BD20C8CC9B00751350 /* SuspiciousSmellViewController.swift */; };
 		25553FA520545D42009897F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FA420545D42009897F7 /* AppDelegate.swift */; };
 		25553FAC20545D42009897F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAA20545D42009897F7 /* Main.storyboard */; };
 		25553FAE20545D42009897F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAD20545D42009897F7 /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		146F3B0D208B89AA00275F71 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		146F3B0F208B89E100275F71 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		146F3B11208B89EB00275F71 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		14E8E3BD20C8CC9B00751350 /* SuspiciousSmellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousSmellViewController.swift; sourceTree = "<group>"; };
 		25553FA120545D42009897F7 /* ETS-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETS-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25553FA420545D42009897F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25553FAB20545D42009897F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				14487BEE20C4808000769881 /* SuspiciousPackageViewController.swift */,
 				14487BF020C4938100769881 /* FireViewController.swift */,
 				84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */,
+				14E8E3BD20C8CC9B00751350 /* SuspiciousSmellViewController.swift */,
 			);
 			path = Emergencies;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				146F3B0C208B883400275F71 /* EmergencyTableViewController.swift in Sources */,
 				25553FA520545D42009897F7 /* AppDelegate.swift in Sources */,
 				146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */,
+				14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */,
 				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
 				146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */,
 				142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */,
