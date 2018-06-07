@@ -151,5 +151,5 @@ dependencies {
     // ExpansionPanel
     implementation "com.github.florent37:expansionpanel:$expansionpanel"
 
-    implementation project(':repos')
+    implementation project(':repository')
 }
