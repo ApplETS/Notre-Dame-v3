@@ -4,8 +4,7 @@ import android.app.Application
 import ca.etsmtl.etsmobile.di.activitymodule.MainActivityBuilder
 import ca.etsmtl.etsmobile.di.activitymodule.WelcomeActivityBuilder
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.repos.di.DatabaseModule
-import ca.etsmtl.repos.di.NetworkModule
+import ca.etsmtl.repos.di.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -19,8 +18,7 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     AppModule::class,
-    NetworkModule::class,
-    DatabaseModule::class,
+    RepositoryModule::class,
     ViewModelModule::class,
     WelcomeActivityBuilder::class,
     MainActivityBuilder::class
@@ -29,8 +27,7 @@ interface AppComponent : AndroidInjector<App> {
     @Component.Builder
     interface Builder {
         @BindsInstance fun application(application: Application): Builder
-        fun networkModule(networkModule: NetworkModule): Builder
-        fun databaseModule(databaseModule: DatabaseModule): Builder
+        fun repositoryModule(repositoryModule: RepositoryModule): Builder
         fun build(): AppComponent
     }
 

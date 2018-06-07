@@ -37,7 +37,7 @@ import javax.net.ssl.X509TrustManager
  * credentials" list (Settings > Security > Trusted Credentials). Therefore, this classes is used
  * for allowing the app to communicate with Signets on older APIs.
  */
-class SignetsTrust {
+internal class SignetsTrust {
     val client: OkHttpClient
 
     init {

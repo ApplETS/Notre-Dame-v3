@@ -13,7 +13,7 @@ import java.lang.reflect.Type
  * Created by Sonphil on 26-04-18.
  */
 
-class SignetsApplicationJsonAdapterFactory : ApplicationJsonAdapterFactory() {
+internal class SignetsApplicationJsonAdapterFactory : ApplicationJsonAdapterFactory() {
     companion object {
         private val KOTSHI_APPLICATION_ADAPTER_FACTORY_INSTANCE = KotshiApplicationJsonAdapterFactory()
     }

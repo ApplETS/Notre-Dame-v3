@@ -2,8 +2,7 @@ package ca.etsmtl.etsmobile.presentation
 
 import ca.etsmtl.etsmobile.BuildConfig
 import ca.etsmtl.etsmobile.di.DaggerAppComponent
-import ca.etsmtl.repos.di.DatabaseModule
-import ca.etsmtl.repos.di.NetworkModule
+import ca.etsmtl.repos.di.RepositoryModule
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.squareup.leakcanary.LeakCanary
@@ -34,8 +33,7 @@ class App : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.builder()
                 .application(this)
-                .networkModule(NetworkModule.instance)
-                .databaseModule(DatabaseModule.instance)
+                .repositoryModule(RepositoryModule.instance)
                 .build()
     }
 }

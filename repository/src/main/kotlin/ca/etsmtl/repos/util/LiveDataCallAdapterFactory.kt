@@ -24,7 +24,7 @@ import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-class LiveDataCallAdapterFactory : CallAdapter.Factory() {
+internal class LiveDataCallAdapterFactory : CallAdapter.Factory() {
 
     /**
      * Returns a call adapter for interface methods that return `returnType`, or null if it

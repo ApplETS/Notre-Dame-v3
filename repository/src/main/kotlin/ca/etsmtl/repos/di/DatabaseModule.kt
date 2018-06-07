@@ -13,7 +13,7 @@ import javax.inject.Singleton
  * Created by Sonphil on 28-02-18.
  */
 @Module
-open class DatabaseModule {
+internal open class DatabaseModule {
 
     companion object {
         val instance = DatabaseModule()

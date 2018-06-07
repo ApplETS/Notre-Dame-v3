@@ -16,7 +16,7 @@ import javax.inject.Singleton
  * Created by Sonphil on 28-02-18.
  */
 @Module
-open class NetworkModule {
+internal open class NetworkModule {
 
     companion object {
         val instance = NetworkModule()
