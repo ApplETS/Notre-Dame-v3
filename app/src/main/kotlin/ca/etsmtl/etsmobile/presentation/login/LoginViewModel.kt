@@ -5,13 +5,13 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
-import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
-import ca.etsmtl.etsmobile.data.repository.signets.login.LoginRepository
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.isDeviceConnected
+import ca.etsmtl.repos.data.model.Resource
+import ca.etsmtl.repos.data.model.signets.Etudiant
+import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repos.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.repos.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
 /**

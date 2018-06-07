@@ -25,12 +25,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas".toString())
-            }
-        }
     }
     buildTypes {
         release {
@@ -43,12 +37,9 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
         test {
             java.srcDirs += 'src/test/kotlin'
-            java.srcDirs += 'src/test-common/kotlin'
-            res.srcDirs += 'src/test/resources'
         }
         androidTest {
             java.srcDirs += 'src/androidTest/kotlin'
-            java.srcDirs += 'src/test-common/kotlin'
         }
     }
 }
@@ -159,4 +150,6 @@ dependencies {
 
     // ExpansionPanel
     implementation "com.github.florent37:expansionpanel:$expansionpanel"
+
+    implementation project(':repos')
 }

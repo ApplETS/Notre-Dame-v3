@@ -18,6 +18,11 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
 
     buildTypes {
@@ -42,6 +47,8 @@ android {
 }
 
 // Versions
+def support = '27.1.1'
+def constraint_layout = '1.1.0'
 def lifecycle = '1.1.1'
 def room = '1.1.0'
 def espresso = '3.0.1'
@@ -60,6 +67,11 @@ def leakcanary = '1.5.4'
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Support libraries
+    implementation "com.android.support:appcompat-v7:${support}"
+    implementation "com.android.support:design:${support}"
+    implementation "com.android.support:support-v4:${support}"
 
     // Architecture components
     implementation "android.arch.lifecycle:extensions:${lifecycle}"

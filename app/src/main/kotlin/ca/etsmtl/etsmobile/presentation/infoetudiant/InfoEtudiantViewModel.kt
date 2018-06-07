@@ -2,10 +2,10 @@ package ca.etsmtl.etsmobile.presentation.infoetudiant
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
-import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.repos.data.model.Resource
+import ca.etsmtl.repos.data.model.signets.Etudiant
+import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repos.data.repository.signets.InfoEtudiantRepository
 import javax.inject.Inject
 
 /**

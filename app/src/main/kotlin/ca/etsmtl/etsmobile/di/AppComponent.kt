@@ -4,6 +4,8 @@ import android.app.Application
 import ca.etsmtl.etsmobile.di.activitymodule.MainActivityBuilder
 import ca.etsmtl.etsmobile.di.activitymodule.WelcomeActivityBuilder
 import ca.etsmtl.etsmobile.presentation.App
+import ca.etsmtl.repos.di.DatabaseModule
+import ca.etsmtl.repos.di.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

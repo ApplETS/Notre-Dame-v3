@@ -2,8 +2,8 @@ package ca.etsmtl.etsmobile.presentation
 
 import ca.etsmtl.etsmobile.BuildConfig
 import ca.etsmtl.etsmobile.di.DaggerAppComponent
-import ca.etsmtl.etsmobile.di.DatabaseModule
-import ca.etsmtl.etsmobile.di.NetworkModule
+import ca.etsmtl.repos.di.DatabaseModule
+import ca.etsmtl.repos.di.NetworkModule
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.squareup.leakcanary.LeakCanary

@@ -3,12 +3,12 @@ package ca.etsmtl.etsmobile.presentation
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.signets.Etudiant
-import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantViewModel
 import ca.etsmtl.etsmobile.util.mock
+import ca.etsmtl.repos.data.model.Resource
+import ca.etsmtl.repos.data.model.signets.Etudiant
+import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repos.data.repository.signets.InfoEtudiantRepository
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers

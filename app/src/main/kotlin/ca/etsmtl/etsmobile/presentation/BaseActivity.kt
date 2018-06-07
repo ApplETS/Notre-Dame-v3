@@ -1,7 +1,7 @@
 package ca.etsmtl.etsmobile.presentation
 
 import android.os.Bundle
-import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
 import dagger.android.support.DaggerAppCompatActivity
 
 /**
