@@ -48,22 +48,17 @@ android {
 
 // Versions
 def support = '27.1.1'
-def constraint_layout = '1.1.0'
 def lifecycle = '1.1.1'
 def room = '1.1.0'
-def espresso = '3.0.1'
 def astl = '1.0.1'
 def junit = '4.12'
 def mockito = '2.10.0'
 def mockito_inline = '2.18.3'
-def dexmaker_mockito = '2.16.0'
 def dagger = '2.15'
 def moshi = '1.5.0'
 def kotshi = '1.0.2'
 def retrofit = '2.3.0'
 def okhttp = '3.8.0'
-def dimens = '1.4'
-def leakcanary = '1.5.4'
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -99,13 +94,6 @@ dependencies {
     androidTestImplementation "com.android.support.test:rules:${astl}"
     androidTestImplementation "android.arch.persistence.room:testing:${room}"
 
-    // Espresso UI Testing
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresso}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espresso}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espresso}"
-    androidTestImplementation "org.mockito:mockito-core:${mockito}"
-    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexmaker_mockito"
-
     // Dagger
     implementation "com.google.dagger:dagger:${dagger}"
     implementation "com.google.dagger:dagger-android:${dagger}"
@@ -124,10 +112,6 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
-
-    // LeakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakcanary}"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}"
 
     // Fabric Crashlytics
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
