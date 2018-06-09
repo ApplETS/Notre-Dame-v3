@@ -46,20 +46,6 @@ android {
     }
 }
 
-// Versions
-def support = '27.1.1'
-def lifecycle = '1.1.1'
-def room = '1.1.0'
-def astl = '1.0.1'
-def junit = '4.12'
-def mockito = '2.10.0'
-def mockito_inline = '2.18.3'
-def dagger = '2.15'
-def moshi = '1.5.0'
-def kotshi = '1.0.2'
-def retrofit = '2.3.0'
-def okhttp = '3.8.0'
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
