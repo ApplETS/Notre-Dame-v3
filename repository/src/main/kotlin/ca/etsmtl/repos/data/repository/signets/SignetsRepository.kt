@@ -78,14 +78,14 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
      */
     inline fun <reified T> getFirstItemLiveData(listLiveData: LiveData<List<T>>): LiveData<T> {
         val resultLiveData = MediatorLiveData<T>()
-        resultLiveData.addSource(listLiveData, {
+        resultLiveData.addSource(listLiveData) {
             resultLiveData.value = when {
                 it != null && it.isNotEmpty() -> it[0]
                 else -> null
             }
 
             resultLiveData.removeSource(listLiveData)
-        })
+        }
 
         return resultLiveData
     }

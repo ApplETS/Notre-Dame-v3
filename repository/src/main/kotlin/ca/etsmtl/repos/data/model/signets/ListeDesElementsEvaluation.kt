@@ -14,7 +14,7 @@ data class ListeDesElementsEvaluation(
     @Json(name = "rangCentileClasse") var rangCentileClasse: String,
     @Json(name = "noteACeJourElementsIndividuels") var noteACeJourElementsIndividuels: String,
     @Json(name = "noteSur100PourElementsIndividuels") var noteSur100PourElementsIndividuels: String,
-    @Json(name = "liste") var liste: List<Evaluation>? = listOf(),
+    @Json(name = "liste") var liste: List<Evaluation> = listOf(),
     @Json(name = "erreur") var erreur: String
 ) : SignetsData() {
     override fun getError() = erreur
