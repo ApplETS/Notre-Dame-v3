@@ -4,7 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import ca.etsmtl.repos.InstantAppExecutors
+import ca.etsmtl.repos.util.InstantAppExecutors
 import ca.etsmtl.repos.data.api.ApiResponse
 import ca.etsmtl.repos.data.api.SignetsApi
 import ca.etsmtl.repos.data.db.dao.ProgrammeDao

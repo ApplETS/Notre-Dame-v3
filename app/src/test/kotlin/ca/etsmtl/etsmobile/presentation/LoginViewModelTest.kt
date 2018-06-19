@@ -7,14 +7,14 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.login.FieldStatus
+import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
+import ca.etsmtl.etsmobile.util.mock
 import ca.etsmtl.repos.data.model.Resource
 import ca.etsmtl.repos.data.model.signets.Etudiant
 import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.repos.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.repos.data.repository.signets.login.LoginRepository
-import ca.etsmtl.etsmobile.presentation.login.FieldStatus
-import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
-import ca.etsmtl.etsmobile.util.mock
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule

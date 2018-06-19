@@ -3,7 +3,7 @@ package ca.etsmtl.repos.data.repository
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.content.SharedPreferences
 import ca.etsmtl.repos.AppExecutors
-import ca.etsmtl.repos.InstantAppExecutors
+import ca.etsmtl.repos.util.InstantAppExecutors
 import ca.etsmtl.repos.LiveDataTestUtil
 import ca.etsmtl.repos.data.db.AppDatabase
 import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
