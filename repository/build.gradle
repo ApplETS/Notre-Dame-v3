@@ -98,9 +98,4 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
-
-    // Fabric Crashlytics
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
-        transitive = true
-    }
 }
