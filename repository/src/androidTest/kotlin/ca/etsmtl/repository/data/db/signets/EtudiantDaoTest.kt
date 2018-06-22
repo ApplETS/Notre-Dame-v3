@@ -1,9 +1,9 @@
-package ca.etsmtl.repos.data.db.signets
+package ca.etsmtl.repository.data.db.signets
 
 import android.support.test.runner.AndroidJUnit4
-import ca.etsmtl.repos.LiveDataTestUtil.getValue
-import ca.etsmtl.repos.data.db.DbTest
-import ca.etsmtl.repos.data.model.signets.Etudiant
+import ca.etsmtl.repository.LiveDataTestUtil.getValue
+import ca.etsmtl.repository.data.db.DbTest
+import ca.etsmtl.repository.data.model.signets.Etudiant
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Test

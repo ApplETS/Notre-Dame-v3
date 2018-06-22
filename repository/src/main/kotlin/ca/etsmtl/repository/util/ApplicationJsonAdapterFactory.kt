@@ -1,4 +1,4 @@
-package ca.etsmtl.repos.util
+package ca.etsmtl.repository.util
 
 import com.squareup.moshi.JsonAdapter
 import se.ansman.kotshi.KotshiJsonAdapterFactory

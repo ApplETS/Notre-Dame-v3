@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repos.data.model
+package ca.etsmtl.repository.data.model
 
 class Resource<T> private constructor(val status: Int, val data: T?, val message: String?) {
     companion object {

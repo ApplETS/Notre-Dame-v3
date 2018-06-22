@@ -1,13 +1,13 @@
-package ca.etsmtl.repos.data.repository
+package ca.etsmtl.repository.data.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
-import ca.etsmtl.repos.util.InstantAppExecutors
-import ca.etsmtl.repos.LiveDataTestUtil.getValue
-import ca.etsmtl.repos.data.api.ApiResponse
-import ca.etsmtl.repos.data.model.signets.SignetsData
-import ca.etsmtl.repos.data.model.signets.SignetsModel
-import ca.etsmtl.repos.data.repository.signets.SignetsRepository
+import ca.etsmtl.repository.util.InstantAppExecutors
+import ca.etsmtl.repository.LiveDataTestUtil.getValue
+import ca.etsmtl.repository.data.api.ApiResponse
+import ca.etsmtl.repository.data.model.signets.SignetsData
+import ca.etsmtl.repository.data.model.signets.SignetsModel
+import ca.etsmtl.repository.data.repository.signets.SignetsRepository
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

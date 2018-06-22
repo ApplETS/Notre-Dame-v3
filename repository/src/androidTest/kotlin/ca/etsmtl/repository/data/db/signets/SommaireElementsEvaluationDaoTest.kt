@@ -1,10 +1,10 @@
-package ca.etsmtl.repos.data.db.signets
+package ca.etsmtl.repository.data.db.signets
 
 import android.support.test.runner.AndroidJUnit4
-import ca.etsmtl.repos.LiveDataTestUtil
-import ca.etsmtl.repos.data.db.DbTest
-import ca.etsmtl.repos.data.db.dao.SommaireElementsEvaluationDao
-import ca.etsmtl.repos.data.model.signets.SommaireElementsEvaluation
+import ca.etsmtl.repository.LiveDataTestUtil
+import ca.etsmtl.repository.data.db.DbTest
+import ca.etsmtl.repository.data.db.dao.SommaireElementsEvaluationDao
+import ca.etsmtl.repository.data.model.signets.SommaireElementsEvaluation
 import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test

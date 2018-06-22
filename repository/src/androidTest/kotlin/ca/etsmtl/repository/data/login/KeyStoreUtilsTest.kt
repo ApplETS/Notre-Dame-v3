@@ -1,4 +1,4 @@
-package ca.etsmtl.repos.data.login
+package ca.etsmtl.repository.data.login
 
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull

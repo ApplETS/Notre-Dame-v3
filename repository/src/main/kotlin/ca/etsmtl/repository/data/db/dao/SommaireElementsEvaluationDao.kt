@@ -1,9 +1,9 @@
-package ca.etsmtl.repos.data.db.dao
+package ca.etsmtl.repository.data.db.dao
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
-import ca.etsmtl.repos.data.model.signets.SommaireElementsEvaluation
+import ca.etsmtl.repository.data.model.signets.SommaireElementsEvaluation
 
 /**
  * Created by Sonphil on 26-05-18.

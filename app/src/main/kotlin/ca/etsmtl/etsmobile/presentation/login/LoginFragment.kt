@@ -19,8 +19,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.repos.data.model.Resource
-import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.Resource
+import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.util.KeyboardUtils
 import com.bumptech.glide.Glide

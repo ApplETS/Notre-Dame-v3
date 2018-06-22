@@ -1,10 +1,10 @@
-package ca.etsmtl.repos.data.db.signets
+package ca.etsmtl.repository.data.db.signets
 
 import android.support.test.runner.AndroidJUnit4
-import ca.etsmtl.repos.LiveDataTestUtil
-import ca.etsmtl.repos.data.db.DbTest
-import ca.etsmtl.repos.data.db.dao.JourRemplaceDao
-import ca.etsmtl.repos.data.model.signets.JourRemplace
+import ca.etsmtl.repository.LiveDataTestUtil
+import ca.etsmtl.repository.data.db.DbTest
+import ca.etsmtl.repository.data.db.dao.JourRemplaceDao
+import ca.etsmtl.repository.data.model.signets.JourRemplace
 import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test

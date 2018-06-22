@@ -1,15 +1,15 @@
-package ca.etsmtl.repos.data.repository.signets
+package ca.etsmtl.repository.data.repository.signets
 
 import android.arch.lifecycle.LiveData
-import ca.etsmtl.repos.AppExecutors
-import ca.etsmtl.repos.data.api.ApiResponse
-import ca.etsmtl.repos.data.api.SignetsApi
-import ca.etsmtl.repos.data.db.dao.EtudiantDao
-import ca.etsmtl.repos.data.model.Resource
-import ca.etsmtl.repos.data.model.signets.Etudiant
-import ca.etsmtl.repos.data.model.signets.SignetsModel
-import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.repos.data.repository.NetworkBoundResource
+import ca.etsmtl.repository.AppExecutors
+import ca.etsmtl.repository.data.api.ApiResponse
+import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.db.dao.EtudiantDao
+import ca.etsmtl.repository.data.model.Resource
+import ca.etsmtl.repository.data.model.signets.Etudiant
+import ca.etsmtl.repository.data.model.signets.SignetsModel
+import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**

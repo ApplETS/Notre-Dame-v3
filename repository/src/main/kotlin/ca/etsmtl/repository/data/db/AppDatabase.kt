@@ -1,29 +1,29 @@
-package ca.etsmtl.repos.data.db
+package ca.etsmtl.repository.data.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import ca.etsmtl.repos.data.db.dao.ActiviteDao
-import ca.etsmtl.repos.data.db.dao.CoursDao
-import ca.etsmtl.repos.data.db.dao.EnseignantDao
-import ca.etsmtl.repos.data.db.dao.EtudiantDao
-import ca.etsmtl.repos.data.db.dao.EvaluationDao
-import ca.etsmtl.repos.data.db.dao.HoraireExamenFinalDao
-import ca.etsmtl.repos.data.db.dao.JourRemplaceDao
-import ca.etsmtl.repos.data.db.dao.ProgrammeDao
-import ca.etsmtl.repos.data.db.dao.SeanceDao
-import ca.etsmtl.repos.data.db.dao.SessionDao
-import ca.etsmtl.repos.data.db.dao.SommaireElementsEvaluationDao
-import ca.etsmtl.repos.data.model.signets.Activite
-import ca.etsmtl.repos.data.model.signets.Cours
-import ca.etsmtl.repos.data.model.signets.Enseignant
-import ca.etsmtl.repos.data.model.signets.Etudiant
-import ca.etsmtl.repos.data.model.signets.Evaluation
-import ca.etsmtl.repos.data.model.signets.HoraireExamenFinal
-import ca.etsmtl.repos.data.model.signets.JourRemplace
-import ca.etsmtl.repos.data.model.signets.Programme
-import ca.etsmtl.repos.data.model.signets.Seance
-import ca.etsmtl.repos.data.model.signets.Session
-import ca.etsmtl.repos.data.model.signets.SommaireElementsEvaluation
+import ca.etsmtl.repository.data.db.dao.ActiviteDao
+import ca.etsmtl.repository.data.db.dao.CoursDao
+import ca.etsmtl.repository.data.db.dao.EnseignantDao
+import ca.etsmtl.repository.data.db.dao.EtudiantDao
+import ca.etsmtl.repository.data.db.dao.EvaluationDao
+import ca.etsmtl.repository.data.db.dao.HoraireExamenFinalDao
+import ca.etsmtl.repository.data.db.dao.JourRemplaceDao
+import ca.etsmtl.repository.data.db.dao.ProgrammeDao
+import ca.etsmtl.repository.data.db.dao.SeanceDao
+import ca.etsmtl.repository.data.db.dao.SessionDao
+import ca.etsmtl.repository.data.db.dao.SommaireElementsEvaluationDao
+import ca.etsmtl.repository.data.model.signets.Activite
+import ca.etsmtl.repository.data.model.signets.Cours
+import ca.etsmtl.repository.data.model.signets.Enseignant
+import ca.etsmtl.repository.data.model.signets.Etudiant
+import ca.etsmtl.repository.data.model.signets.Evaluation
+import ca.etsmtl.repository.data.model.signets.HoraireExamenFinal
+import ca.etsmtl.repository.data.model.signets.JourRemplace
+import ca.etsmtl.repository.data.model.signets.Programme
+import ca.etsmtl.repository.data.model.signets.Seance
+import ca.etsmtl.repository.data.model.signets.Session
+import ca.etsmtl.repository.data.model.signets.SommaireElementsEvaluation
 
 /**
  * Created by Sonphil on 13-03-18.

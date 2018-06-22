@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.repos.data.model.signets.Etudiant
+import ca.etsmtl.repository.data.model.signets.Etudiant
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_info_etudiant.textViewInfoEtudiantItemLabel
 import kotlinx.android.synthetic.main.item_info_etudiant.textViewInfoEtudiantItemValue

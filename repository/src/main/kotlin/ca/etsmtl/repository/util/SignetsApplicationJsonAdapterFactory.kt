@@ -1,8 +1,8 @@
-package ca.etsmtl.repos.util
+package ca.etsmtl.repository.util
 
-import ca.etsmtl.repos.data.model.signets.SignetsData
-import ca.etsmtl.repos.data.model.signets.SignetsModel
-import ca.etsmtl.repos.data.model.signets.SignetsModelAdapter
+import ca.etsmtl.repository.data.model.signets.SignetsData
+import ca.etsmtl.repository.data.model.signets.SignetsModel
+import ca.etsmtl.repository.data.model.signets.SignetsModelAdapter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

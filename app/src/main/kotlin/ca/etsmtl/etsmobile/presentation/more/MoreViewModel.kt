@@ -4,7 +4,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.repos.data.repository.signets.login.LoginRepository
+import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
 /**

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repos
+package ca.etsmtl.repository
 
 import android.os.Handler
 import android.os.Looper

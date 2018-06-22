@@ -1,4 +1,4 @@
-package ca.etsmtl.repos.data.model.signets
+package ca.etsmtl.repository.data.model.signets
 
 import com.squareup.moshi.Json
 

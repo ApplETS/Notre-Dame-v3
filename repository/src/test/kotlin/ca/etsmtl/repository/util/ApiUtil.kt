@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repos.util
+package ca.etsmtl.repository.util
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import ca.etsmtl.repos.data.api.ApiResponse
+import ca.etsmtl.repository.data.api.ApiResponse
 import retrofit2.Response
 
 /**

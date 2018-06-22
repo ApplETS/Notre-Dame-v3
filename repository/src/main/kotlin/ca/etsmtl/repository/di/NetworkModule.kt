@@ -1,9 +1,9 @@
-package ca.etsmtl.repos.di
+package ca.etsmtl.repository.di
 
-import ca.etsmtl.repos.data.api.SignetsApi
-import ca.etsmtl.repos.util.ApplicationJsonAdapterFactory
-import ca.etsmtl.repos.util.LiveDataCallAdapterFactory
-import ca.etsmtl.repos.util.SignetsTrust
+import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.util.ApplicationJsonAdapterFactory
+import ca.etsmtl.repository.util.LiveDataCallAdapterFactory
+import ca.etsmtl.repository.util.SignetsTrust
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

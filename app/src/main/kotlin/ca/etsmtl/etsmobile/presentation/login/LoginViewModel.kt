@@ -7,11 +7,11 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.isDeviceConnected
-import ca.etsmtl.repos.data.model.Resource
-import ca.etsmtl.repos.data.model.signets.Etudiant
-import ca.etsmtl.repos.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.repos.data.repository.signets.InfoEtudiantRepository
-import ca.etsmtl.repos.data.repository.signets.login.LoginRepository
+import ca.etsmtl.repository.data.model.Resource
+import ca.etsmtl.repository.data.model.signets.Etudiant
+import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
 /**

@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repos.data.repository
+package ca.etsmtl.repository.data.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import ca.etsmtl.repos.data.api.ApiResponse
-import ca.etsmtl.repos.data.model.Resource
-import ca.etsmtl.repos.util.ApiUtil
-import ca.etsmtl.repos.util.CountingAppExecutors
-import ca.etsmtl.repos.util.InstantAppExecutors
-import ca.etsmtl.repos.util.mock
+import ca.etsmtl.repository.data.api.ApiResponse
+import ca.etsmtl.repository.data.model.Resource
+import ca.etsmtl.repository.util.ApiUtil
+import ca.etsmtl.repository.util.CountingAppExecutors
+import ca.etsmtl.repository.util.InstantAppExecutors
+import ca.etsmtl.repository.util.mock
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import org.hamcrest.CoreMatchers.`is`

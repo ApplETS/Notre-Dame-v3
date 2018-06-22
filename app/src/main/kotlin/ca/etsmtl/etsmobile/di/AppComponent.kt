@@ -4,7 +4,7 @@ import android.app.Application
 import ca.etsmtl.etsmobile.di.activitymodule.MainActivityBuilder
 import ca.etsmtl.etsmobile.di.activitymodule.WelcomeActivityBuilder
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.repos.di.RepositoryModule
+import ca.etsmtl.repository.di.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

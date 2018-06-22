@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repos.util
+package ca.etsmtl.repository.util
 
 import org.mockito.ArgumentCaptor
 import org.mockito.Mockito

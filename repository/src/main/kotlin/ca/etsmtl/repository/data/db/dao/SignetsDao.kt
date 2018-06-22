@@ -1,4 +1,4 @@
-package ca.etsmtl.repos.data.db.dao
+package ca.etsmtl.repository.data.db.dao
 
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy

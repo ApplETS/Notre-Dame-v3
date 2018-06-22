@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repos.util
+package ca.etsmtl.repository.util
 
 import android.arch.lifecycle.LiveData
-import ca.etsmtl.repos.data.api.ApiResponse
+import ca.etsmtl.repository.data.api.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback
