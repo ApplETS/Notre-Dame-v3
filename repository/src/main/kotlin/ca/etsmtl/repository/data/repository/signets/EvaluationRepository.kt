@@ -24,10 +24,10 @@ import javax.inject.Inject
  */
 
 class EvaluationRepository @Inject constructor(
-        appExecutors: AppExecutors,
-        private val api: SignetsApi,
-        private val evaluationDao: EvaluationDao,
-        private val sommaireElementsEvaluationDao: SommaireElementsEvaluationDao
+    appExecutors: AppExecutors,
+    private val api: SignetsApi,
+    private val evaluationDao: EvaluationDao,
+    private val sommaireElementsEvaluationDao: SommaireElementsEvaluationDao
 ) : SignetsRepository(appExecutors) {
 
     /**
@@ -36,7 +36,7 @@ class EvaluationRepository @Inject constructor(
      *
      * @param userCredentials The user's credentials
      * @param cours The course
-     * @param shouldFetch True if the should be fetched from the network. False if the the data
+     * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      */
     fun getEvaluations(
@@ -68,7 +68,7 @@ class EvaluationRepository @Inject constructor(
      *
      * @param userCredentials The user's credentials
      * @param cours The course
-     * @param shouldFetch True if the should be fetched from the network. False if the the data
+     * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      */
     fun getEvaluationsSummary(

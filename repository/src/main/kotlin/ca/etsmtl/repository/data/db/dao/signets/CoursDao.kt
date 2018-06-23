@@ -12,4 +12,7 @@ import ca.etsmtl.repository.data.model.signets.Cours
 abstract class CoursDao : SignetsDao<Cours> {
     @Query("SELECT * FROM cours")
     abstract fun getAll(): LiveData<List<Cours>>
+
+    @Query("SELECT * FROM cours WHERE session LIKE :sessionAbrege")
+    abstract fun getCoursSession(sessionAbrege: String): LiveData<List<Cours>>
 }

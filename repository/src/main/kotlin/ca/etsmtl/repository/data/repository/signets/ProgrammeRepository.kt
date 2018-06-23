@@ -29,7 +29,7 @@ class ProgrammeRepository @Inject constructor(
      * Returns the user's program
      *
      * @param userCredentials The user's credentials
-     * @param shouldFetch True if the should be fetched from the network. False if the the data
+     * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      */
     fun getProgrammes(userCredentials: SignetsUserCredentials, shouldFetch: Boolean = true): LiveData<Resource<List<Programme>>> {

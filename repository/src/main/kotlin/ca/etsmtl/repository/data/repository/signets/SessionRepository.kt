@@ -28,7 +28,7 @@ class SessionRepository @Inject constructor(
      * Returns a list of the user's sessions
      *
      * @param userCredentials The user's credentials
-     * @param shouldFetch True if the should be fetched from the network. False if the the data
+     * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      * @return A list of the user's sessions
      */
