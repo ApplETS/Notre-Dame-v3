@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.db.dao.EvaluationDao
-import ca.etsmtl.repository.data.db.dao.SommaireElementsEvaluationDao
+import ca.etsmtl.repository.data.db.dao.signets.EvaluationDao
+import ca.etsmtl.repository.data.db.dao.signets.SommaireElementsEvaluationDao
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.Cours
 import ca.etsmtl.repository.data.model.signets.Evaluation
@@ -24,10 +24,10 @@ import javax.inject.Inject
  */
 
 class EvaluationRepository @Inject constructor(
-    appExecutors: AppExecutors,
-    private val api: SignetsApi,
-    private val evaluationDao: EvaluationDao,
-    private val sommaireElementsEvaluationDao: SommaireElementsEvaluationDao
+        appExecutors: AppExecutors,
+        private val api: SignetsApi,
+        private val evaluationDao: EvaluationDao,
+        private val sommaireElementsEvaluationDao: SommaireElementsEvaluationDao
 ) : SignetsRepository(appExecutors) {
 
     /**

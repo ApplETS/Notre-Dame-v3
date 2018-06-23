@@ -3,8 +3,8 @@ package ca.etsmtl.repository.di
 import android.app.Application
 import android.arch.persistence.room.Room
 import ca.etsmtl.repository.data.db.AppDatabase
-import ca.etsmtl.repository.data.db.dao.EtudiantDao
-import ca.etsmtl.repository.data.db.dao.ProgrammeDao
+import ca.etsmtl.repository.data.db.dao.signets.EtudiantDao
+import ca.etsmtl.repository.data.db.dao.signets.ProgrammeDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

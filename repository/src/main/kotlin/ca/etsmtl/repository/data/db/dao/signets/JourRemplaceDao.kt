@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.db.dao
+package ca.etsmtl.repository.data.db.dao.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao

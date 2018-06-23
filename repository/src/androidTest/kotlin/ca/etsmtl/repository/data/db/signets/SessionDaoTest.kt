@@ -3,7 +3,7 @@ package ca.etsmtl.repository.data.db.signets
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
-import ca.etsmtl.repository.data.db.dao.SessionDao
+import ca.etsmtl.repository.data.db.dao.signets.SessionDao
 import ca.etsmtl.repository.data.model.signets.Session
 import junit.framework.Assert
 import org.junit.Before

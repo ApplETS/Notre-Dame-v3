@@ -7,7 +7,7 @@ import android.arch.lifecycle.Observer
 import ca.etsmtl.repository.util.InstantAppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.db.dao.ProgrammeDao
+import ca.etsmtl.repository.data.db.dao.signets.ProgrammeDao
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.ListeProgrammes
 import ca.etsmtl.repository.data.model.signets.Programme

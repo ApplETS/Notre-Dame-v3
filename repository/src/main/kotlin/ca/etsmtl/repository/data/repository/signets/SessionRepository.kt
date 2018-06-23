@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.db.dao.SessionDao
+import ca.etsmtl.repository.data.db.dao.signets.SessionDao
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.ListeDeSessions
 import ca.etsmtl.repository.data.model.signets.Session
