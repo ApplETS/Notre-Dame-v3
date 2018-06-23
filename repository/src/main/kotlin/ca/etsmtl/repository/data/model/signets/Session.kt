@@ -8,9 +8,9 @@ import se.ansman.kotshi.JsonSerializable
 @Entity
 @JsonSerializable
 data class Session(
-    @PrimaryKey
     @Json(name = "abrege") var abrege: String,
-    @Json(name = "auLong") var auLong: String?,
+    @PrimaryKey
+    @Json(name = "auLong") var auLong: String,
     @Json(name = "dateDebut") var dateDebut: String?,
     @Json(name = "dateFin") var dateFin: String?,
     @Json(name = "dateFinCours") var dateFinCours: String?,
