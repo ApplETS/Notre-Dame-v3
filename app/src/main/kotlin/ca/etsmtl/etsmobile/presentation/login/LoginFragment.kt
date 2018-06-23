@@ -1,7 +1,5 @@
 package ca.etsmtl.etsmobile.presentation.login
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -19,10 +17,11 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.util.KeyboardUtils
+import ca.etsmtl.etsmobile.util.fadeTo
+import ca.etsmtl.repository.data.model.Resource
+import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.iVBackground
@@ -145,6 +144,7 @@ class LoginFragment : DaggerFragment() {
             if (resource != null) {
                 when (resource.status) {
                     Resource.SUCCESS -> {
+                        progressLogin.fadeTo(View.GONE)
                         goToMainActivity()
                     }
                     Resource.ERROR -> {
@@ -185,27 +185,13 @@ class LoginFragment : DaggerFragment() {
      * Shows the progress UI and hides the login form.
      */
     private fun showProgress(show: Boolean) {
-        val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-
-        loginForm.visibility = if (show) View.INVISIBLE else View.VISIBLE
-        loginForm.animate()
-                .setDuration(shortAnimTime)
-                .alpha((if (show) 0 else 1).toFloat())
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        loginForm.visibility = if (show) View.INVISIBLE else View.VISIBLE
-                    }
-                })
-
-        progressLogin.visibility = if (show) View.VISIBLE else View.GONE
-        progressLogin.animate()
-                .setDuration(shortAnimTime)
-                .alpha((if (show) 1 else 0).toFloat())
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        progressLogin.visibility = if (show) View.VISIBLE else View.GONE
-                    }
-                })
+        if (show) {
+            loginForm.fadeTo(View.INVISIBLE)
+            progressLogin.fadeTo(View.VISIBLE)
+        } else {
+            loginForm.fadeTo(View.VISIBLE)
+            progressLogin.fadeTo(View.GONE)
+        }
     }
 
     private fun displayUniversalCodeDialog() {
