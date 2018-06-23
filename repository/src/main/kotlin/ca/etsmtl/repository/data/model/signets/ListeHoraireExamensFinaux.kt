@@ -6,7 +6,7 @@ import se.ansman.kotshi.JsonSerializable
 @JsonSerializable
 data class ListeHoraireExamensFinaux(
     @Json(name = "__type") var type: String? = "",
-    @Json(name = "listeHoraire") var listeHoraire: List<HoraireExamenFinal?>? = listOf(),
+    @Json(name = "listeHoraire") var listeHoraire: List<HoraireExamenFinal>? = listOf(),
     @Json(name = "erreur") var erreur: String? = ""
 ) : SignetsData() {
     override fun getError(): String? {
