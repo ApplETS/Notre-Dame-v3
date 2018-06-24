@@ -144,7 +144,7 @@ interface SignetsApi {
     ): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>>
 
     /**
-     * Fetches a list of the student's session
+     * Fetches a list of the student's sessions
      *
      * @param body The student's credentials
      * @return A list of sessions of the student
