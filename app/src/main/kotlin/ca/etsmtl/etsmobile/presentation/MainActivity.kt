@@ -72,6 +72,7 @@ class MainActivity : BaseActivity() {
         if (fragment != null) {
             with(fragmentManager.beginTransaction()) {
                 replace(R.id.content, fragment, fragmentTag)
+                addToBackStack(fragmentTag)
                 commit()
             }
         }
