@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.presentation.home
+package ca.etsmtl.etsmobile.presentation.dashboard
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,23 +9,23 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 
 /**
- * The fragment displayed to the user after he has successfully log in
+ * The fragment displaying the dashboard.
  *
- * Created by Sonphil on 24-02-18.
+ * Created by Sonphil on 26-06-18.
  */
 
-class HomeFragment : Fragment() {
+class DashboardFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     companion object {
 
-        fun newInstance() = HomeFragment()
+        fun newInstance() = DashboardFragment()
     }
 }

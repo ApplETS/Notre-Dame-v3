@@ -6,9 +6,9 @@
     <string name="no">No</string>
 
     <!-- Bottom navigation titles -->
-    <string name="title_home">Home</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_profile">Profile</string>
+    <string name="title_dashboard">Dashboard</string>
     <string name="title_ets">ÉTS</string>
     <string name="title_more">More</string>
 

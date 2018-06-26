@@ -7,9 +7,9 @@
     <string name="no">Non</string>
 
     <!-- Bottom navigation titles -->
-    <string name="title_home">Accueil</string>
     <string name="title_schedule">Horaire</string>
     <string name="title_profile">Profil</string>
+    <string name="title_dashboard">Tableau de bord</string>
     <string name="title_ets">ÉTS</string>
     <string name="title_more">Plus</string>
 

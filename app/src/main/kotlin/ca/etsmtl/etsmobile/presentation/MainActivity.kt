@@ -5,7 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.home.HomeFragment
+import ca.etsmtl.etsmobile.presentation.dashboard.DashboardFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
@@ -37,11 +37,9 @@ class MainActivity : BaseActivity() {
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        setTitle(R.string.title_home)
-
-        // Go to the first fragment only on the first run
-        if (savedInstanceState == null)
-            goToFragment(navigation.menu.getItem(0))
+        if (savedInstanceState == null) {
+            selectDashboard()
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -88,14 +86,14 @@ class MainActivity : BaseActivity() {
         var fragment: Fragment? = null
 
         when (selectedItemId) {
-            R.id.navigation_home -> {
-                fragment = HomeFragment.newInstance()
-            }
             R.id.navigation_schedule -> {
                 fragment = ScheduleFragment.newInstance()
             }
             R.id.navigation_profile -> {
                 fragment = ProfileFragment.newInstance()
+            }
+            R.id.navigation_dashboard -> {
+                fragment = DashboardFragment.newInstance()
             }
             R.id.navigation_ets -> {
             }
@@ -113,10 +111,14 @@ class MainActivity : BaseActivity() {
     override fun onBackPressed() {
         val seletedItemId = navigation.selectedItemId
 
-        if (R.id.navigation_home != seletedItemId) {
-            val homeMenuItem = navigation.menu.findItem(R.id.navigation_home)
-            homeMenuItem.isChecked = true
-            onNavigationItemSelectedListener.onNavigationItemSelected(homeMenuItem)
+        if (R.id.navigation_dashboard != seletedItemId) {
+            selectDashboard()
         }
+    }
+
+    private fun selectDashboard() {
+        val homeMenuItem = navigation.menu.findItem(R.id.navigation_dashboard)
+        homeMenuItem.isChecked = true
+        onNavigationItemSelectedListener.onNavigationItemSelected(homeMenuItem)
     }
 }
