@@ -76,7 +76,7 @@ class CoursRepository @Inject constructor(
             }
 
             override fun loadFromDb(): LiveData<List<Cours>> {
-                return dao.getCoursSession(session.abrege)
+                return dao.getCoursBySession(session.abrege)
             }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeDeCours>>> {

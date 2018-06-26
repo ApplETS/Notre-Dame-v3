@@ -50,7 +50,9 @@ class EvaluationRepository @Inject constructor(
 
         override fun shouldFetch(data: List<Evaluation>?): Boolean = shouldFetch
 
-        override fun loadFromDb(): LiveData<List<Evaluation>> = evaluationDao.getAll()
+        override fun loadFromDb(): LiveData<List<Evaluation>> {
+            TODO()
+        }
 
         override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>> {
             return transformApiLiveData(api.listeDesElementsEvaluation(
@@ -97,7 +99,9 @@ class EvaluationRepository @Inject constructor(
 
         override fun shouldFetch(data: SommaireElementsEvaluation?): Boolean = shouldFetch
 
-        override fun loadFromDb(): LiveData<SommaireElementsEvaluation> = getFirstItemLiveData(sommaireElementsEvaluationDao.getAll())
+        override fun loadFromDb(): LiveData<SommaireElementsEvaluation> {
+            TODO()
+        }
 
         override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>> {
             return transformApiLiveData(api.listeDesElementsEvaluation(

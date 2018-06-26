@@ -39,7 +39,9 @@ class EnseignantRepository @Inject constructor(
 
             override fun shouldFetch(data: List<Enseignant>?): Boolean = shouldFetch
 
-            override fun loadFromDb(): LiveData<List<Enseignant>> = dao.getAll()
+            override fun loadFromDb(): LiveData<List<Enseignant>> {
+                TODO()
+            }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeDesActivitesEtProf>>> {
                 return transformApiLiveData(api.listeDesActivitesEtProf(

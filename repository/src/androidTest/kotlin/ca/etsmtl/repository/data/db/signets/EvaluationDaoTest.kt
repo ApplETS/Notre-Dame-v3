@@ -5,7 +5,8 @@ import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.EvaluationDao
 import ca.etsmtl.repository.data.model.signets.Evaluation
-import junit.framework.Assert
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,8 +43,8 @@ class EvaluationDaoTest : DbTest() {
     @Test
     fun testInsert() {
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())
-        Assert.assertNotNull(fromDb)
-        Assert.assertEquals(entity, fromDb[0])
+        assertNotNull(fromDb)
+        assertEquals(entity, fromDb[0])
     }
 
     @Test
@@ -66,6 +67,49 @@ class EvaluationDaoTest : DbTest() {
         )
         dao.insert(same)
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())
-        Assert.assertEquals(same, fromDb[0])
+        assertEquals(same, fromDb[0])
+    }
+
+    @Test
+    fun testGetByCoursGroupe() {
+        val expectedEvaluation = Evaluation(
+                "LOG123-01",
+                "TP03",
+                "01",
+                "",
+                "89,0",
+                "100",
+                "20",
+                "65,1",
+                "18,4",
+                "68,0",
+                "91",
+                "Oui",
+                "",
+                "Non"
+        )
+        dao.insert(expectedEvaluation)
+
+        val unexpectedEvaluation = Evaluation(
+                "LOG123-02",
+                "TP03",
+                "01",
+                "",
+                "89,0",
+                "100",
+                "20",
+                "65,1",
+                "18,4",
+                "68,0",
+                "91",
+                "Oui",
+                "",
+                "Non"
+        )
+        dao.insert(unexpectedEvaluation)
+
+        val evaluations = LiveDataTestUtil.getValue(dao.getByCoursGroupe("LOG123-01"))
+        assertEquals(1, evaluations.size)
+        assertEquals(expectedEvaluation, evaluations[0])
     }
 }

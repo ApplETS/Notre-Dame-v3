@@ -46,7 +46,9 @@ class HoraireExamenFinalRepository @Inject constructor(
 
             override fun shouldFetch(data: List<HoraireExamenFinal>?) = shouldFetch
 
-            override fun loadFromDb(): LiveData<List<HoraireExamenFinal>> = dao.getAll()
+            override fun loadFromDb(): LiveData<List<HoraireExamenFinal>> {
+                TODO()
+            }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeHoraireExamensFinaux>>> {
                 return transformApiLiveData(api.listeHoraireExamensFinaux(

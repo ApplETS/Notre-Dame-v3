@@ -14,5 +14,5 @@ abstract class CoursDao : SignetsDao<Cours> {
     abstract fun getAll(): LiveData<List<Cours>>
 
     @Query("SELECT * FROM cours WHERE session LIKE :sessionAbrege")
-    abstract fun getCoursSession(sessionAbrege: String): LiveData<List<Cours>>
+    abstract fun getCoursBySession(sessionAbrege: String): LiveData<List<Cours>>
 }

@@ -38,7 +38,9 @@ class JourRemplaceRepository @Inject constructor(
 
             override fun shouldFetch(data: List<JourRemplace>?): Boolean = shouldFetch
 
-            override fun loadFromDb(): LiveData<List<JourRemplace>> = dao.getAll()
+            override fun loadFromDb(): LiveData<List<JourRemplace>> {
+                TODO()
+            }
 
             override fun createCall(): LiveData<ApiResponse<SignetsModel<ListeJoursRemplaces>>> {
                 return transformApiLiveData(api.listeJoursRemplaces(session.abrege))

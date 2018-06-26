@@ -10,6 +10,10 @@ import ca.etsmtl.repository.data.model.signets.Evaluation
  */
 @Dao
 abstract class EvaluationDao : SignetsDao<Evaluation> {
+
     @Query("SELECT * FROM evaluation")
     abstract fun getAll(): LiveData<List<Evaluation>>
+
+    @Query("SELECT * FROM evaluation WHERE coursGroupe LIKE :coursGroupe")
+    abstract fun getByCoursGroupe(coursGroupe: String): LiveData<List<Evaluation>>
 }

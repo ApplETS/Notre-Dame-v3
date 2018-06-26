@@ -143,7 +143,7 @@ class CoursDaoTest : DbTest() {
         )
         dao.insert(coursSession3)
 
-        val fromDb = getValue(dao.getCoursSession(sessionAbrege))
+        val fromDb = getValue(dao.getCoursBySession(sessionAbrege))
         assertEquals(fromDb.size, 3)
         assertEquals(coursSession1, fromDb[0])
         assertEquals(coursSession2, fromDb[1])
