@@ -7,8 +7,8 @@ import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.dashboard.DashboardFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
-import ca.etsmtl.etsmobile.presentation.student.StudentFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
+import ca.etsmtl.etsmobile.presentation.student.StudentFragment
 import kotlinx.android.synthetic.main.activity_main.navigation
 
 /**
@@ -86,14 +86,14 @@ class MainActivity : BaseActivity() {
         var fragment: Fragment? = null
 
         when (selectedItemId) {
+            R.id.navigation_dashboard -> {
+                fragment = DashboardFragment.newInstance()
+            }
             R.id.navigation_schedule -> {
                 fragment = ScheduleFragment.newInstance()
             }
             R.id.navigation_profile -> {
                 fragment = StudentFragment.newInstance()
-            }
-            R.id.navigation_dashboard -> {
-                fragment = DashboardFragment.newInstance()
             }
             R.id.navigation_ets -> {
             }
@@ -113,6 +113,8 @@ class MainActivity : BaseActivity() {
 
         if (R.id.navigation_dashboard != seletedItemId) {
             selectDashboard()
+        } else {
+            finishAndRemoveTask()
         }
     }
 
