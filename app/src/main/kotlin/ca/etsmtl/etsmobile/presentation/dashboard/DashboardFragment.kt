@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.etsmtl.etsmobile.R
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**
  * The fragment displaying the dashboard.
@@ -27,5 +28,11 @@ class DashboardFragment : Fragment() {
     companion object {
 
         fun newInstance() = DashboardFragment()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        toolbar.setTitle(R.string.title_dashboard)
     }
 }

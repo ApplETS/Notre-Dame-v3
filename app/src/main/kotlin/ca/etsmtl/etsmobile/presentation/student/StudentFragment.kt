@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import kotlinx.android.synthetic.main.fragment_student.*
+import kotlinx.android.synthetic.main.fragment_student.tabsStudent
+import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**
  * This fragment contains a [TabLayout] and a [ViewPager] that let the user switch between
@@ -35,6 +37,7 @@ class StudentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         context?.let {
+            toolbar.setTitle(R.string.title_student)
             viewPagerStudent.adapter = StudentPagerAdapter(it, childFragmentManager)
             tabsStudent.setupWithViewPager(viewPagerStudent)
         }
