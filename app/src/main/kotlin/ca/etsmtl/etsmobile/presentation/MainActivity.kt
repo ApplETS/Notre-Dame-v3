@@ -7,7 +7,7 @@ import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.dashboard.DashboardFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
-import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
+import ca.etsmtl.etsmobile.presentation.student.StudentFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
 import kotlinx.android.synthetic.main.activity_main.navigation
 
@@ -90,7 +90,7 @@ class MainActivity : BaseActivity() {
                 fragment = ScheduleFragment.newInstance()
             }
             R.id.navigation_profile -> {
-                fragment = ProfileFragment.newInstance()
+                fragment = StudentFragment.newInstance()
             }
             R.id.navigation_dashboard -> {
                 fragment = DashboardFragment.newInstance()

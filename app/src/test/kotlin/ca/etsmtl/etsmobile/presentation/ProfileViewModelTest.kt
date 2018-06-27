@@ -3,7 +3,7 @@ package ca.etsmtl.etsmobile.presentation
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantViewModel
+import ca.etsmtl.etsmobile.presentation.profile.ProfileViewModel
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.Etudiant
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
@@ -22,13 +22,13 @@ import org.mockito.Mockito.verify
  * Created by Sonphil on 28-04-18.
  */
 
-class InfoEtudiantViewModelTest {
+class ProfileViewModelTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private var repository: InfoEtudiantRepository = mock(InfoEtudiantRepository::class.java)
     private val userCredentials: SignetsUserCredentials = SignetsUserCredentials("test", "test")
-    private val infoEtudiantViewModel = InfoEtudiantViewModel(repository, userCredentials)
+    private val infoEtudiantViewModel = ProfileViewModel(repository, userCredentials)
 
     @Test
     fun testCallRepo() {

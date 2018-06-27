@@ -8,7 +8,7 @@
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Horaire</string>
-    <string name="title_profile">Profil</string>
+    <string name="title_student">Étudiant</string>
     <string name="title_dashboard">Tableau de bord</string>
     <string name="title_ets">ÉTS</string>
     <string name="title_more">Plus</string>
@@ -26,11 +26,15 @@
     <string name="msg_logout_success">Vous vous êtes déconnecté</string>
     <string name="label_login_applets_logo">Conçue par</string>
 
-    <!-- Info Etudiant -->
-    <string name="title_info_etudiant">Renseignements personnels</string>
-    <string name="label_name_info_etudiant">Nom</string>
-    <string name="label_permanent_code_info_etudiant">Code permanent</string>
-    <string name="label_balance_info_etudiant">Solde</string>
+    <!-- Notes -->
+    <string name="title_grades">Notes</string>
+
+    <!-- Profil -->
+    <string name="title_profile">Profil</string>
+    <string name="label_first_name_profile">Prénom</string>
+    <string name="label_last_name_profile">Nom de famille</string>
+    <string name="label_permanent_code_profile">Code permanent</string>
+    <string name="label_balance_profile">Solde</string>
 
     <!-- More -->
     <string name="more_item_label_log_out">Se déconnecter</string>

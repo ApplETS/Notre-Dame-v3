@@ -1,24 +1,34 @@
 package ca.etsmtl.etsmobile.presentation.profile
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantFragment
-import kotlinx.android.synthetic.main.fragment_profile.expansionLayoutInfoEtudiant
+import ca.etsmtl.repository.data.model.Resource
+import ca.etsmtl.repository.data.model.signets.Etudiant
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_profile.progressBarInfoEtudiant
+import kotlinx.android.synthetic.main.fragment_profile.recyclerViewInfoEtudiant
+import javax.inject.Inject
 
 /**
- * Created by Sonphil on 24-02-18.
+ * Displays the student's information (name, permanent code, balance, etc.)
+ *
+ * Created by Sonphil on 15-03-18.
  */
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : DaggerFragment() {
 
-    companion object {
-        private const val INFO_ETUDIANT_FRAGMENT_TAG = "InfoEtudiantFragment"
-        fun newInstance() = ProfileFragment()
+    private val profileViewModel: ProfileViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(ProfileViewModel::class.java)
     }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var adapter: ProfileAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,24 +42,35 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        expansionLayoutInfoEtudiant.addListener { _, expanded ->
-            if (expanded)
-                addInfoEtudiantFragment()
-        }
-
-        if (expansionLayoutInfoEtudiant.isExpanded)
-            addInfoEtudiantFragment()
+        setUpRecyclerView()
+        subscribeUI()
     }
 
-    private fun addInfoEtudiantFragment() {
-        var infoEtudiantFragment = childFragmentManager.findFragmentByTag(INFO_ETUDIANT_FRAGMENT_TAG)
+    private fun setUpRecyclerView() {
+        adapter = ProfileAdapter()
+        recyclerViewInfoEtudiant.adapter = adapter
+        recyclerViewInfoEtudiant.setHasFixedSize(true)
+    }
 
-        if (infoEtudiantFragment == null)
-            infoEtudiantFragment = InfoEtudiantFragment.newInstance()
+    companion object {
+        fun newInstance() = ProfileFragment()
+    }
 
-        with(childFragmentManager.beginTransaction()) {
-            replace(R.id.containerInfoEtudiant, infoEtudiantFragment, INFO_ETUDIANT_FRAGMENT_TAG)
-            commit()
-        }
+    private fun subscribeUI() {
+        profileViewModel.getInfoEtudiant().observe(this, Observer<Resource<Etudiant>> { res ->
+            when (res?.status) {
+                Resource.SUCCESS -> {
+                    progressBarInfoEtudiant.visibility = View.GONE
+                    res.data?.let { adapter.setEtudiant(it) }
+                }
+                Resource.ERROR -> {
+                    progressBarInfoEtudiant.visibility = View.GONE
+                    res.data?.let { adapter.setEtudiant(it) }
+                }
+                Resource.LOADING -> {
+                    progressBarInfoEtudiant.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 }

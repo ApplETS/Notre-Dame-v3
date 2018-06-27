@@ -7,7 +7,7 @@
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Schedule</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_student">Student</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_ets">ÉTS</string>
     <string name="title_more">More</string>
@@ -25,11 +25,15 @@
     <string name="msg_logout_success">You have logged out</string>
     <string name="label_login_applets_logo">Made by</string>
 
-    <!-- Info Etudiant -->
-    <string name="title_info_etudiant">Personal Information</string>
-    <string name="label_name_info_etudiant">Name</string>
-    <string name="label_permanent_code_info_etudiant">Permanent Code</string>
-    <string name="label_balance_info_etudiant">Balance</string>
+    <!-- Grades -->
+    <string name="title_grades">Grades</string>
+
+    <!-- Profile -->
+    <string name="title_profile">Profile</string>
+    <string name="label_first_name_profile">First Name</string>
+    <string name="label_last_name_profile">Last Name</string>
+    <string name="label_permanent_code_profile">Permanent Code</string>
+    <string name="label_balance_profile">Balance</string>
 
     <!-- More -->
     <string name="more_item_label_log_out">Log out</string>
