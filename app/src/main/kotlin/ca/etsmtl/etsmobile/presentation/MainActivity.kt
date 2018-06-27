@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.activity_main.navigation
 class MainActivity : BaseActivity() {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        //setUpToolbar(item)
 
         goToFragment(item)
 
@@ -40,10 +39,6 @@ class MainActivity : BaseActivity() {
         if (savedInstanceState == null) {
             selectDashboard()
         }
-    }
-
-    private fun setUpToolbar(navigationItem: MenuItem) {
-        title = navigationItem.title
     }
 
     /**
