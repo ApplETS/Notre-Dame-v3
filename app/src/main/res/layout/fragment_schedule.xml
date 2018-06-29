@@ -4,9 +4,12 @@
     android:layout_height="match_parent"
     tools:context="ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment">
 
-    <TextView
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_schedule" />
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/include_toolbar" />
+    </android.support.design.widget.AppBarLayout>
 
 </FrameLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 /**
  * This fragment shows information related to the university.
@@ -31,5 +32,7 @@ class EtsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolbar.setTitle(R.string.title_ets)
     }
 }
