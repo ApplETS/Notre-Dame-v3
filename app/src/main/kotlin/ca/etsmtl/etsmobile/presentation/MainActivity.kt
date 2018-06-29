@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.dashboard.DashboardFragment
+import ca.etsmtl.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
 import ca.etsmtl.etsmobile.presentation.student.StudentFragment
@@ -85,6 +86,7 @@ class MainActivity : BaseActivity() {
                 fragment = StudentFragment.newInstance()
             }
             R.id.navigation_ets -> {
+                fragment = EtsFragment.newInstance()
             }
             R.id.navigation_more -> {
                 fragment = MoreFragment.newInstance()
