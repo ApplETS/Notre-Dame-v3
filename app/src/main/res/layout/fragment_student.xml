@@ -25,7 +25,7 @@
             android:layout_gravity="bottom"
             app:tabIndicatorColor="@android:color/white"
             app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="@android:color/darker_gray" />
+            app:tabTextColor="@color/material_grey_200" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager

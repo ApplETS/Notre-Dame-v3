@@ -10,6 +10,7 @@ import ca.etsmtl.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
 import ca.etsmtl.etsmobile.presentation.student.StudentFragment
+import ca.etsmtl.etsmobile.util.disableShiftMode
 import kotlinx.android.synthetic.main.activity_main.navigation
 
 /**
@@ -35,6 +36,7 @@ class MainActivity : BaseActivity() {
 
         setContentView(R.layout.activity_main)
 
+        navigation.disableShiftMode()
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         if (savedInstanceState == null) {
