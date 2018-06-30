@@ -31,6 +31,7 @@
 
     <!-- Profil -->
     <string name="title_profile">Profil</string>
+    <string name="title_personal_information_profile">Informations personnelles</string>
     <string name="label_first_name_profile">Prénom</string>
     <string name="label_last_name_profile">Nom de famille</string>
     <string name="label_permanent_code_profile">Code permanent</string>
