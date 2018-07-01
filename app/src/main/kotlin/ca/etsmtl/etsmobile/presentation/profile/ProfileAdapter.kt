@@ -64,8 +64,8 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         val titleTextView: TextView = textViewTitleProfile
-        val itemContentLayout = layoutProfileItemContent
-        val infoTextView: TextView = textViewInfoProfileItemLabel
-        val labelTextView: TextView = textViewInfoProfileItemValue
+        val itemContentLayout: View = layoutProfileItemContent
+        val labelTextView: TextView = textViewInfoProfileItemLabel
+        val infoTextView: TextView = textViewInfoProfileItemValue
     }
 }
