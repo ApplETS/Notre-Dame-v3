@@ -38,6 +38,7 @@
     <string name="label_balance_profile">Solde</string>
 
     <!-- More -->
+    <string name="more_item_label_faq">FAQ</string>
     <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
     <string name="more_item_label_log_out">Se déconnecter</string>
     <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>

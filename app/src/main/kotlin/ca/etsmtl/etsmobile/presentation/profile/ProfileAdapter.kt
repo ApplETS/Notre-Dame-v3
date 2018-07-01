@@ -21,7 +21,7 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 
     private var etudiant: Etudiant? = null
 
-    enum class INFORMATION {
+    enum class Information {
         TITLE_PERSONAL_INFO, FIRST_NAME, LAST_NAME, PERMANENT_CODE, BALANCE
     }
 
@@ -30,16 +30,16 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
                     .inflate(R.layout.item_profile, parent, false)
     )
 
-    override fun getItemCount(): Int = INFORMATION.values().size
+    override fun getItemCount(): Int = Information.values().size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         etudiant?.let { etudiant ->
             when (position) {
-                INFORMATION.TITLE_PERSONAL_INFO.ordinal -> setTitle(holder, R.string.title_personal_information_profile)
-                INFORMATION.FIRST_NAME.ordinal -> setInfo(holder, R.string.label_first_name_profile, etudiant.prenom)
-                INFORMATION.LAST_NAME.ordinal -> setInfo(holder, R.string.label_last_name_profile, etudiant.nom)
-                INFORMATION.PERMANENT_CODE.ordinal -> setInfo(holder, R.string.label_permanent_code_profile, etudiant.codePerm)
-                INFORMATION.BALANCE.ordinal -> setInfo(holder, R.string.label_balance_profile, etudiant.soldeTotal)
+                Information.TITLE_PERSONAL_INFO.ordinal -> setTitle(holder, R.string.title_personal_information_profile)
+                Information.FIRST_NAME.ordinal -> setInfo(holder, R.string.label_first_name_profile, etudiant.prenom)
+                Information.LAST_NAME.ordinal -> setInfo(holder, R.string.label_last_name_profile, etudiant.nom)
+                Information.PERMANENT_CODE.ordinal -> setInfo(holder, R.string.label_permanent_code_profile, etudiant.codePerm)
+                Information.BALANCE.ordinal -> setInfo(holder, R.string.label_balance_profile, etudiant.soldeTotal)
             }
         }
     }

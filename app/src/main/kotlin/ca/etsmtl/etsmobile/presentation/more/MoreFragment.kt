@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import javax.inject.Inject
 class MoreFragment : DaggerFragment() {
 
     companion object {
+        const val TAG = "MoreFragment"
         fun newInstance() = MoreFragment()
     }
 
@@ -55,8 +57,9 @@ class MoreFragment : DaggerFragment() {
             adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
                 override fun onItemClick(index: Int) {
                     when (index) {
-                        0 -> goToAbout()
-                        1 -> displayLogoutConfirmationDialog(context)
+                        MoreViewModel.ItemsIndex.FAQ.ordinal -> Log.d(TAG, "FAQ") // TODO
+                        MoreViewModel.ItemsIndex.ABOUT.ordinal -> goToAbout()
+                        MoreViewModel.ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog(context)
                     }
                 }
             })
