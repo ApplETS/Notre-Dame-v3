@@ -26,10 +26,10 @@
     <string name="msg_logout_success">Vous vous êtes déconnecté</string>
     <string name="label_login_applets_logo">Conçue par</string>
 
-    <!-- Notes -->
+    <!-- Grades -->
     <string name="title_grades">Notes</string>
 
-    <!-- Profil -->
+    <!-- Profile -->
     <string name="title_profile">Profil</string>
     <string name="title_personal_information_profile">Informations personnelles</string>
     <string name="label_first_name_profile">Prénom</string>
@@ -38,7 +38,12 @@
     <string name="label_balance_profile">Solde</string>
 
     <!-- More -->
+    <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
     <string name="more_item_label_log_out">Se déconnecter</string>
     <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>
     <string name="more_label_log_out_progress">Déconnexion en cours</string>
+
+    <!-- About -->
+    <string name="applets_about">ÉTSMobile a été réalisée par le club scientifique ApplETS de l\'École de technologie supérieure.\n\nApplETS se veut, avant tout, un regroupement d’étudiants qui partagent un intérêt commun pour le domaine des télécommunications et des applications mobiles.
+        La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nPour en savoir plus, n\'hésitez pas à consulter notre site web : \n\nhttp://clubapplets.ca\n\n</string>
 </resources>

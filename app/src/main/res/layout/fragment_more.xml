@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="ca.etsmtl.etsmobile.presentation.more.MoreFragment">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -44,7 +45,9 @@
         android:name="ca.etsmtl.etsmobile.presentation.more.MoreFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:context=".presentation.more.MoreFragment"
         tools:listitem="@layout/fragment_more_item" />

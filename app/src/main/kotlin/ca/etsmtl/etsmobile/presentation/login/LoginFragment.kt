@@ -18,12 +18,14 @@ import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.util.KeyboardUtils
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_login.btnApplets
 import kotlinx.android.synthetic.main.fragment_login.iVBackground
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
@@ -67,11 +69,13 @@ class LoginFragment : DaggerFragment() {
             when {
                 it.id == R.id.btnSignIn -> attemptLogin()
                 it.id == R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
+                it.id == R.id.btnApplets -> goToAboutActivity()
             }
         }
 
         btnSignIn.setOnClickListener(onClickListener)
         btnUniversalCodeInfo.setOnClickListener(onClickListener)
+        btnApplets.setOnClickListener(onClickListener)
 
         subscribeUI()
 
@@ -218,5 +222,13 @@ class LoginFragment : DaggerFragment() {
         val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
         activity?.finish()
+    }
+
+    /**
+     * Starts AboutActivity
+     */
+    private fun goToAboutActivity() {
+        val intent = Intent(activity, AboutActivity::class.java)
+        startActivity(intent)
     }
 }

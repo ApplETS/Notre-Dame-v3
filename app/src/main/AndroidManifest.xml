@@ -16,7 +16,6 @@
         <activity
             android:name=".presentation.WelcomeActivity"
             android:label="@string/app_name"
-            android:noHistory="true"
             android:theme="@style/LoginTheme"
             android:windowSoftInputMode="stateHidden|adjustUnspecified">
             <intent-filter>
@@ -31,5 +30,9 @@
             android:name="ca.etsmtl.etsmobile.presentation.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".presentation.about.AboutActivity"
+            android:label="@string/more_item_label_about_applets"
+            android:theme="@style/AppTheme"/>
     </application>
 </manifest>

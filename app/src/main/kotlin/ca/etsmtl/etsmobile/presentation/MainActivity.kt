@@ -99,7 +99,7 @@ class MainActivity : BaseActivity() {
     }
 
     /**
-     * On back pressed, return to the home screen
+     * On back pressed, return to the dashboard or close if the dashboard has already been selected
      */
     override fun onBackPressed() {
         val seletedItemId = navigation.selectedItemId

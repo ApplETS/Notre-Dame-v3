@@ -14,11 +14,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.WelcomeActivity
+import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
-import kotlinx.android.synthetic.main.include_toolbar.*
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 import javax.inject.Inject
 
 class MoreFragment : DaggerFragment() {
@@ -43,6 +44,7 @@ class MoreFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         toolbar.setTitle(R.string.title_more)
+
         setUpRecyclerView(recyclerViewMore)
     }
 
@@ -52,7 +54,10 @@ class MoreFragment : DaggerFragment() {
 
             adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
                 override fun onItemClick(index: Int) {
-                    displayLogoutConfirmationDialog(context)
+                    when (index) {
+                        0 -> goToAbout()
+                        1 -> displayLogoutConfirmationDialog(context)
+                    }
                 }
             })
         }
@@ -89,5 +94,10 @@ class MoreFragment : DaggerFragment() {
                 activity?.finish()
             }
         })
+    }
+
+    private fun goToAbout() {
+        val intent = Intent(context, AboutActivity::class.java)
+        startActivity(intent)
     }
 }

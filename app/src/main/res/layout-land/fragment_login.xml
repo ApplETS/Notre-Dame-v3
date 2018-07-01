@@ -61,8 +61,8 @@
                 android:src="@drawable/ets_blanc_impr_fond_transparent"
                 app:layout_constraintBottom_toTopOf="@+id/textView"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@+id/iVAppletsLogo"
-                app:layout_constraintStart_toStartOf="@+id/iVAppletsLogo" />
+                app:layout_constraintEnd_toEndOf="@+id/btnApplets"
+                app:layout_constraintStart_toStartOf="@+id/btnApplets" />
 
             <TextView
                 android:id="@+id/textView"
@@ -70,12 +70,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/label_login_applets_logo" />
 
-            <ImageView
-                android:id="@+id/iVAppletsLogo"
+            <ImageButton
+                android:id="@+id/btnApplets"
                 android:layout_width="99dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:background="@null"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_applets_506dp_198dp"
                 android:tint="@color/material_light_white" />
