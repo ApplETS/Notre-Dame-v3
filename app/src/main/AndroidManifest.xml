@@ -33,6 +33,6 @@
         <activity
             android:name=".presentation.about.AboutActivity"
             android:label="@string/more_item_label_about_applets"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AboutTheme"/>
     </application>
 </manifest>

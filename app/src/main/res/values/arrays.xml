@@ -2,7 +2,7 @@
 <resources>
 <integer-array name="more_items_icons">
     <item>@drawable/ic_help_black_24dp</item>
-    <item>@drawable/ic_applets_506dp_198dp</item>
+    <item>@drawable/ic_mini_logo_applets</item>
     <item>@drawable/ic_exit_to_app_black_24dp</item>
 </integer-array>
 

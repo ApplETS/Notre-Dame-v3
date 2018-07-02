@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/about_scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/appletsBg"
+    android:theme="@style/AboutTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +19,7 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:src="@drawable/ic_applets_506dp_198dp"
-            android:tint="@color/colorPrimary" />
+            android:src="@drawable/ic_mini_logo_applets" />
 
         <TextView
             android:layout_width="match_parent"
@@ -40,11 +41,11 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background=" ?android:selectableItemBackgroundBorderless"
+
                 android:src="@drawable/ic_github_white_24dp" />
 
             <Space
@@ -52,11 +53,10 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background=" ?android:selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_facebook_white_24dp" />
 
             <Space
@@ -64,11 +64,11 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background=" ?android:selectableItemBackgroundBorderless"
+
                 android:src="@drawable/ic_twitter_white_24dp" />
 
             <Space
@@ -76,11 +76,10 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background=" ?android:selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_youtube_white_24dp" />
 
             <Space

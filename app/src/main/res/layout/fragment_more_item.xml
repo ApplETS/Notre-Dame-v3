@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_component_lists_icon_left_padding"
             android:scaleType="centerInside"
-            android:tint="@color/etsGrisFonce"
             tools:src="@drawable/ic_exit_to_app_black_24dp" />
     </FrameLayout>
 
