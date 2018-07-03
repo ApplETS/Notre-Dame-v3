@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -14,6 +15,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.presentation.MainActivityBackKeyListener
 import ca.etsmtl.etsmobile.presentation.WelcomeActivity
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
@@ -23,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
 import javax.inject.Inject
 
-class MoreFragment : DaggerFragment() {
+class MoreFragment : DaggerFragment(), MainActivityBackKeyListener {
 
     companion object {
         const val TAG = "MoreFragment"
@@ -48,6 +51,22 @@ class MoreFragment : DaggerFragment() {
         toolbar.setTitle(R.string.title_more)
 
         setUpRecyclerView(recyclerViewMore)
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        val mainActivity = activity as? MainActivity
+
+        mainActivity?.setBackKeyListener(this)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+        val mainActivity = activity as? MainActivity
+
+        mainActivity?.setBackKeyListener(null)
     }
 
     private fun setUpRecyclerView(view: RecyclerView) {
@@ -99,8 +118,31 @@ class MoreFragment : DaggerFragment() {
         })
     }
 
+    /**
+     * Starts AboutActivity
+     */
     private fun goToAbout() {
         val intent = Intent(context, AboutActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun goToFragment(fragment: Fragment, fragmentTag: String, title: String) {
+        toolbar.title = title
+
+        with(childFragmentManager.beginTransaction()) {
+            replace(R.id.containerItem, fragment, fragmentTag)
+            addToBackStack(fragmentTag)
+            commit()
+        }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return if (childFragmentManager.backStackEntryCount > 0) {
+            toolbar.setTitle(R.string.title_more)
+            childFragmentManager.popBackStack()
+            true
+        } else {
+            false
+        }
     }
 }
