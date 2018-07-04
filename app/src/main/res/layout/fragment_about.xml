@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll_about"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AboutTheme"
@@ -14,12 +13,14 @@
         android:background="@color/appletsBg" />
 
     <ScrollView
+        android:id="@+id/scroll_about"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:orientation="vertical">
 
             <ImageView
@@ -56,7 +57,7 @@
                 <android.support.v7.widget.AppCompatImageButton
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background=" ?android:selectableItemBackgroundBorderless"
+                    android:background="?android:selectableItemBackgroundBorderless"
 
                     android:src="@drawable/ic_github_white_24dp" />
 
@@ -68,7 +69,7 @@
                 <android.support.v7.widget.AppCompatImageButton
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background=" ?android:selectableItemBackgroundBorderless"
+                    android:background="?android:selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_facebook_white_24dp" />
 
                 <Space
@@ -79,7 +80,7 @@
                 <android.support.v7.widget.AppCompatImageButton
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background=" ?android:selectableItemBackgroundBorderless"
+                    android:background="?android:selectableItemBackgroundBorderless"
 
                     android:src="@drawable/ic_twitter_white_24dp" />
 
@@ -91,7 +92,7 @@
                 <android.support.v7.widget.AppCompatImageButton
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background=" ?android:selectableItemBackgroundBorderless"
+                    android:background="?android:selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_youtube_white_24dp" />
 
                 <Space
