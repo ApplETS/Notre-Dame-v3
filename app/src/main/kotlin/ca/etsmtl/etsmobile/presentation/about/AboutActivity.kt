@@ -21,10 +21,16 @@ class AboutActivity : BaseActivity() {
     companion object {
         const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
 
+        /**
+         * Starts the activity without a shared element transition animation
+         */
         fun start(context: Context) {
             context.startActivity(Intent(context, AboutActivity::class.java))
         }
 
+        /**
+         * Starts the activity with a shared element transition animation
+         */
         fun start(activity: AppCompatActivity, sharedElement: Pair<View, String>) {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElement)
             activity.startActivity(Intent(activity, AboutActivity::class.java).apply {

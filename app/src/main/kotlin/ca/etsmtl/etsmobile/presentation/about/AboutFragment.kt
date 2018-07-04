@@ -29,15 +29,21 @@ class AboutFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
+        val view = inflater.inflate(R.layout.fragment_about, container, false)
+
+        activity?.supportStartPostponedEnterTransition()
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.supportStartPostponedEnterTransition()
-
-        if (arguments?.getString(EXTRA_TRANSITION_NAME)?.isNotEmpty() == true) {
+        if (arguments?.getString(EXTRA_TRANSITION_NAME).isNullOrEmpty()) {
+            view.post {
+                executeCircularReveal(background_about)
+            }
+        } else {
             initViewTransition(savedInstanceState)
         }
     }
