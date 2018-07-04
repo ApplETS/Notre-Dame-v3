@@ -1,93 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/about_scroll"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_about"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appletsBg"
-    android:theme="@style/AboutTheme">
+    android:theme="@style/AboutTheme"
+    tools:context="ca.etsmtl.etsmobile.presentation.about.AboutFragment">
 
-    <LinearLayout
+    <View
+        android:id="@+id/background_about"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/appletsBg" />
 
-        <ImageView
-            android:id="@+id/iv_applets_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="130dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:src="@drawable/ic_mini_logo_applets" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:autoLink="all"
-            android:text="@string/applets_about" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/activity_vertical_margin">
+            android:orientation="vertical">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+            <ImageView
+                android:id="@+id/iv_applets_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_mini_logo_applets" />
 
-            <android.support.v7.widget.AppCompatImageButton
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background=" ?android:selectableItemBackgroundBorderless"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:autoLink="all"
+                android:text="@string/applets_about" />
 
-                android:src="@drawable/ic_github_white_24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_vertical_margin">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-            <android.support.v7.widget.AppCompatImageButton
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background=" ?android:selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_facebook_white_24dp" />
+                <android.support.v7.widget.AppCompatImageButton
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background=" ?android:selectableItemBackgroundBorderless"
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                    android:src="@drawable/ic_github_white_24dp" />
 
-            <android.support.v7.widget.AppCompatImageButton
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background=" ?android:selectableItemBackgroundBorderless"
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-                android:src="@drawable/ic_twitter_white_24dp" />
+                <android.support.v7.widget.AppCompatImageButton
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background=" ?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_facebook_white_24dp" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-            <android.support.v7.widget.AppCompatImageButton
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background=" ?android:selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_youtube_white_24dp" />
+                <android.support.v7.widget.AppCompatImageButton
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background=" ?android:selectableItemBackgroundBorderless"
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                    android:src="@drawable/ic_twitter_white_24dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <android.support.v7.widget.AppCompatImageButton
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background=" ?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_youtube_white_24dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</FrameLayout>

@@ -5,13 +5,13 @@
     android:id="@+id/containerItemContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_grey_200"
     tools:context="ca.etsmtl.etsmobile.presentation.about.AboutActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

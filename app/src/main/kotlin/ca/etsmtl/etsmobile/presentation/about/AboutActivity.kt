@@ -10,7 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.BaseActivity
-import kotlinx.android.synthetic.main.include_toolbar.*
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**
  * Created by Sonphil on 01-07-18.
@@ -27,7 +27,7 @@ class AboutActivity : BaseActivity() {
 
         fun start(activity: AppCompatActivity, sharedElement: Pair<View, String>) {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElement)
-            activity.startActivity(Intent(activity,  AboutActivity::class.java).apply {
+            activity.startActivity(Intent(activity, AboutActivity::class.java).apply {
                 putExtra(EXTRA_TRANSITION_NAME, sharedElement.second)
             }, options.toBundle())
         }
