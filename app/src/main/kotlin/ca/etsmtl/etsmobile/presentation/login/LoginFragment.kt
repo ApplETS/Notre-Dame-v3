@@ -228,7 +228,6 @@ class LoginFragment : DaggerFragment() {
      * Starts AboutActivity
      */
     private fun goToAboutActivity() {
-        val intent = Intent(activity, AboutActivity::class.java)
-        startActivity(intent)
+        context?.let { AboutActivity.start(it) }
     }
 }

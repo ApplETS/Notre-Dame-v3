@@ -32,7 +32,7 @@ class MoreRecyclerViewAdapter(
 
         itemClickListener?.let {
             holder.containerView.setOnClickListener {
-                itemClickListener.onItemClick(position)
+                itemClickListener.onItemClick(position, holder)
             }
         }
     }
@@ -51,6 +51,6 @@ class MoreRecyclerViewAdapter(
          *
          * @param index : position of the clicked view
          */
-        fun onItemClick(index: Int)
+        fun onItemClick(index: Int, viewHolder: ViewHolder)
     }
 }

@@ -78,7 +78,6 @@ dependencies {
     // Android Testing Support Library's runner and rules
     androidTestImplementation "com.android.support.test:runner:${astl}"
     androidTestImplementation "com.android.support.test:rules:${astl}"
-    androidTestImplementation "android.arch.persistence.room:testing:${room}"
 
     // Espresso UI Testing
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresso}"

@@ -7,7 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.util.Pair
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -74,10 +76,10 @@ class MoreFragment : DaggerFragment(), MainActivityBackKeyListener {
             val itemsList = moreViewModel.itemsList()
 
             adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
-                override fun onItemClick(index: Int) {
+                override fun onItemClick(index: Int, viewHolder: MoreRecyclerViewAdapter.ViewHolder) {
                     when (index) {
                         MoreViewModel.ItemsIndex.FAQ.ordinal -> Log.d(TAG, "FAQ") // TODO
-                        MoreViewModel.ItemsIndex.ABOUT.ordinal -> goToAbout()
+                        MoreViewModel.ItemsIndex.ABOUT.ordinal -> goToAbout(viewHolder.iconImageView, viewHolder.labelTextView.text.toString())
                         MoreViewModel.ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog(context)
                     }
                 }
@@ -121,9 +123,10 @@ class MoreFragment : DaggerFragment(), MainActivityBackKeyListener {
     /**
      * Starts AboutActivity
      */
-    private fun goToAbout() {
-        val intent = Intent(context, AboutActivity::class.java)
-        startActivity(intent)
+    private fun goToAbout(iconView: View, label: String) {
+        activity?.let {
+            AboutActivity.start(it as AppCompatActivity, Pair(iconView, label))
+        }
     }
 
     private fun goToFragment(fragment: Fragment, fragmentTag: String, title: String) {
