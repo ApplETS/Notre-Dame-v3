@@ -24,6 +24,8 @@ class AboutFragment : Fragment() {
         }
     }
 
+    private val circularRevealRunnable = Runnable { executeCircularReveal() }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -40,9 +42,7 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments?.getString(EXTRA_TRANSITION_NAME).isNullOrEmpty()) {
-            view.post {
-                executeCircularReveal(background_about)
-            }
+            view.post(circularRevealRunnable)
         } else {
             initViewTransition(savedInstanceState)
         }
@@ -68,7 +68,7 @@ class AboutFragment : Fragment() {
                         override fun onTransitionStart(transition: Transition) {}
 
                         override fun onTransitionEnd(transition: Transition) {
-                            executeCircularReveal(background_about)
+                            view?.post(circularRevealRunnable)
                         }
                     })
         } else {
@@ -79,14 +79,21 @@ class AboutFragment : Fragment() {
                 .inflateTransition(R.transition.image_shared_element_transition)
     }
 
-    private fun executeCircularReveal(revealView: View) {
-        val cx = iv_applets_logo.run { (x + width / 2).toInt() }
-        val cy = iv_applets_logo.run { (y + height / 2).toInt() }
-        ViewAnimationUtils.createCircularReveal(revealView, cx, cy, 0f, revealView.width.toFloat())
+    private fun executeCircularReveal() {
+        val revealView = background_about
+        val centerX = iv_applets_logo.run { (x + width / 2).toInt() }
+        val centerY = iv_applets_logo.run { (y + height / 2).toInt() }
+        ViewAnimationUtils.createCircularReveal(revealView, centerX, centerY, 0f, revealView.width.toFloat())
                 .apply {
                     duration = 444
                     revealView.visibility = View.VISIBLE
                     start()
                 }
+    }
+
+    override fun onDestroyView() {
+        view?.removeCallbacks(circularRevealRunnable)
+
+        super.onDestroyView()
     }
 }
