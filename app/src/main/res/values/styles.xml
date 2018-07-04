@@ -53,7 +53,7 @@
     <!-- About screen theme -->
     <style name="AboutTheme" parent="AppTheme">
         <item name="colorPrimary">@color/appletsBg</item>
-        <item name="colorAccent">@color/appletsBg</item>
+        <item name="colorPrimaryDark">@color/appletsBg</item>
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/white</item>
         <item name="colorControlHighlight">@android:color/white</item>
@@ -63,7 +63,5 @@
         <item name="colorButtonNormal">@android:color/white</item>
         <item name="android:fontFamily">@font/delta_jaeger_light</item>
         <item name="fontFamily">@font/delta_jaeger_light</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 </resources>

@@ -10,11 +10,9 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import kotlinx.android.synthetic.main.fragment_about.background_about
-import kotlinx.android.synthetic.main.fragment_about.iv_applets_logo
+import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment() {
-
     companion object {
         const val TAG = "AboutFragment"
         const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
@@ -27,9 +25,9 @@ class AboutFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
@@ -40,47 +38,47 @@ class AboutFragment : Fragment() {
         activity?.supportStartPostponedEnterTransition()
 
         if (arguments?.getString(EXTRA_TRANSITION_NAME)?.isNotEmpty() == true) {
-            initViewTransition()
+            initViewTransition(savedInstanceState)
         }
     }
 
-    private fun initViewTransition() {
+    private fun initViewTransition(savedInstanceState: Bundle?) {
         val transitionName = arguments!!.getString(EXTRA_TRANSITION_NAME)
-
-        background_about.visibility = View.INVISIBLE
 
         ViewCompat.setTransitionName(iv_applets_logo, transitionName)
 
-        val transition = TransitionInflater
-                .from(activity)
+        val transitionInflater = TransitionInflater.from(activity)
+
+        if (savedInstanceState == null) {
+            activity?.window?.sharedElementEnterTransition = transitionInflater
+                    .inflateTransition(R.transition.image_shared_element_transition)
+                    .addListener(object : Transition.TransitionListener {
+                        override fun onTransitionResume(transition: Transition) {}
+
+                        override fun onTransitionPause(transition: Transition) {}
+
+                        override fun onTransitionCancel(transition: Transition) {}
+
+                        override fun onTransitionStart(transition: Transition) {}
+
+                        override fun onTransitionEnd(transition: Transition) {
+                            executeCircularReveal(background_about)
+                        }
+                    })
+        } else {
+            background_about.visibility = View.VISIBLE
+        }
+
+        activity?.window?.sharedElementReturnTransition = transitionInflater
                 .inflateTransition(R.transition.image_shared_element_transition)
-
-        activity?.window?.sharedElementReturnTransition = transition
-
-        activity?.window?.sharedElementEnterTransition = transition.addListener(object : Transition.TransitionListener {
-            override fun onTransitionResume(transition: Transition) {}
-
-            override fun onTransitionPause(transition: Transition) {}
-
-            override fun onTransitionCancel(transition: Transition) {}
-
-            override fun onTransitionStart(transition: Transition) {}
-
-            override fun onTransitionEnd(transition: Transition) {
-                executeCircularReveal()
-            }
-        })
-
-        activity?.window?.sharedElementReturnTransition = transition
     }
 
-    private fun executeCircularReveal() {
-        val revealView = background_about
+    private fun executeCircularReveal(revealView: View) {
         val cx = iv_applets_logo.run { (x + width / 2).toInt() }
         val cy = iv_applets_logo.run { (y + height / 2).toInt() }
         ViewAnimationUtils.createCircularReveal(revealView, cx, cy, 0f, revealView.width.toFloat())
                 .apply {
-                    duration = 400
+                    duration = 444
                     revealView.visibility = View.VISIBLE
                     start()
                 }

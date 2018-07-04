@@ -10,7 +10,9 @@
         android:id="@+id/background_about"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/appletsBg" />
+        android:background="@color/appletsBg"
+        android:visibility="invisible"
+        tools:visibility="visible" />
 
     <ScrollView
         android:id="@+id/scroll_about"
@@ -22,6 +24,11 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:orientation="vertical">
+
+            <!-- Space for activity's toolbar -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="?android:attr/actionBarSize" />
 
             <ImageView
                 android:id="@+id/iv_applets_logo"
