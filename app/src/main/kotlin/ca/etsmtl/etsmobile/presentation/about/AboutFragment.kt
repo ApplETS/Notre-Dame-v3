@@ -52,7 +52,7 @@ class AboutFragment : Fragment() {
     private fun initViewTransition(savedInstanceState: Bundle?) {
         val transitionName = arguments!!.getString(EXTRA_TRANSITION_NAME)
 
-        ViewCompat.setTransitionName(iv_applets_logo, transitionName)
+        ViewCompat.setTransitionName(ivAppletsLogo, transitionName)
 
         val transitionInflater = TransitionInflater.from(activity)
 
@@ -78,7 +78,7 @@ class AboutFragment : Fragment() {
                         }
                     })
         } else {
-            background_about.visibility = View.VISIBLE
+            backgroundAbout.visibility = View.VISIBLE
         }
 
         activity?.window?.sharedElementReturnTransition = transitionInflater
@@ -86,9 +86,9 @@ class AboutFragment : Fragment() {
     }
 
     private fun executeCircularReveal() {
-        val revealView = background_about
-        val centerX = iv_applets_logo.run { (x + width / 2).toInt() }
-        val centerY = iv_applets_logo.run { (y + height / 2).toInt() }
+        val revealView = backgroundAbout
+        val centerX = ivAppletsLogo.run { (x + width / 2).toInt() }
+        val centerY = ivAppletsLogo.run { (y + height / 2).toInt() }
         ViewAnimationUtils.createCircularReveal(revealView, centerX, centerY, 0f, revealView.width.toFloat())
                 .apply {
                     duration = 444
