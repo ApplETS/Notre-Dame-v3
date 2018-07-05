@@ -25,11 +25,12 @@ class AboutFragment : Fragment() {
     }
 
     private val circularRevealRunnable = Runnable { executeCircularReveal() }
+    private var isTransitionCanceled: Boolean = false
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_about, container, false)
 
@@ -61,14 +62,19 @@ class AboutFragment : Fragment() {
                     .addListener(object : Transition.TransitionListener {
                         override fun onTransitionResume(transition: Transition) {}
 
-                        override fun onTransitionPause(transition: Transition) {}
+                        override fun onTransitionPause(transition: Transition) {
+                            isTransitionCanceled = true
+                        }
 
-                        override fun onTransitionCancel(transition: Transition) {}
+                        override fun onTransitionCancel(transition: Transition) {
+                            isTransitionCanceled = true
+                        }
 
                         override fun onTransitionStart(transition: Transition) {}
 
                         override fun onTransitionEnd(transition: Transition) {
-                            view?.post(circularRevealRunnable)
+                            if (!isTransitionCanceled)
+                                view?.post(circularRevealRunnable)
                         }
                     })
         } else {
