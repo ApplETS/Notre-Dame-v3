@@ -18,7 +18,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainActivity
-import ca.etsmtl.etsmobile.presentation.MainActivityBackKeyListener
+import ca.etsmtl.etsmobile.presentation.MainFragment
 import ca.etsmtl.etsmobile.presentation.WelcomeActivity
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
 import javax.inject.Inject
 
-class MoreFragment : DaggerFragment(), MainActivityBackKeyListener {
+class MoreFragment : MainFragment() {
 
     companion object {
         const val TAG = "MoreFragment"
@@ -53,22 +53,6 @@ class MoreFragment : DaggerFragment(), MainActivityBackKeyListener {
         toolbar.setTitle(R.string.title_more)
 
         setUpRecyclerView(recyclerViewMore)
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        val mainActivity = activity as? MainActivity
-
-        mainActivity?.setBackKeyListener(this)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-
-        val mainActivity = activity as? MainActivity
-
-        mainActivity?.setBackKeyListener(null)
     }
 
     private fun setUpRecyclerView(view: RecyclerView) {
