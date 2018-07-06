@@ -17,12 +17,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.presentation.MainFragment
 import ca.etsmtl.etsmobile.presentation.WelcomeActivity
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
