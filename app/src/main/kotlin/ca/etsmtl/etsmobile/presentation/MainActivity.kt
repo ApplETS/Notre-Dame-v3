@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.navigation
 
 class MainActivity : BaseActivity() {
 
-    private var backKeyListener: MainActivityBackKeyListener? = null
+    private lateinit var currentFragmentTag: String
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         goToFragment(item)
@@ -61,6 +61,7 @@ class MainActivity : BaseActivity() {
         }
 
         if (fragment != null) {
+            currentFragmentTag = fragmentTag
             with(fragmentManager.beginTransaction()) {
                 replace(R.id.content, fragment, fragmentTag)
                 addToBackStack(fragmentTag)
@@ -100,13 +101,16 @@ class MainActivity : BaseActivity() {
     }
 
     /**
-     * On back pressed, lets the [backKeyListener] handles the event if it's not null
+     * On back pressed, lets the current fragment handles the event if it's an instance of
+     * [MainFragment] and if it's not null.
      * If the event hasn't been consumed, returns to the dashboard or close if the dashboard has
      * already been selected
      */
     override fun onBackPressed() {
-        if (backKeyListener?.onBackPressed() == true) {
-            return // Return if the back key listener has consumed the event
+        val currentFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
+
+        if ((currentFragment as? MainFragment)?.onBackPressed() == true) {
+            return // Return if the fragment has consumed the event
         }
 
         if (navigation.selectedItemId != R.id.navigation_dashboard) {
@@ -120,12 +124,5 @@ class MainActivity : BaseActivity() {
         val homeMenuItem = navigation.menu.findItem(R.id.navigation_dashboard)
         homeMenuItem.isChecked = true
         onNavigationItemSelectedListener.onNavigationItemSelected(homeMenuItem)
-    }
-
-    /**
-     * Registers a callback to be invoked when the back button has been pressed
-     */
-    fun setBackKeyListener(backKeyListener: MainActivityBackKeyListener?) {
-        this.backKeyListener = backKeyListener
     }
 }

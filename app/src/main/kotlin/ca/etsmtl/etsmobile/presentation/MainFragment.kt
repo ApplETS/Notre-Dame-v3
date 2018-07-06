@@ -1,15 +1,12 @@
 package ca.etsmtl.etsmobile.presentation
 
-/**
- * Interface definition for a callback to be invoked when the back button is pressed in
- * [MainActivity]
- */
-interface MainActivityBackKeyListener {
+import dagger.android.support.DaggerFragment
 
+abstract class MainFragment : DaggerFragment() {
     /**
      * Called when the back button has been pressed
      *
      * @return True if the listener has consumed the event, false otherwise
      */
-    fun onBackPressed(): Boolean
+    open fun onBackPressed() = false
 }
