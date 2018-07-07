@@ -9,25 +9,25 @@ import se.ansman.kotshi.JsonSerializable
 @JsonSerializable
 data class Etudiant(
     @Json(name = "__type")
-    var type: String? = null,
+    var type: String,
     @Json(name = "nom")
-    var untrimmedNom: String? = null,
+    var untrimmedNom: String,
     @Json(name = "prenom")
-    var untrimmedPrenom: String? = null,
+    var untrimmedPrenom: String,
     @PrimaryKey
     @Json(name = "codePerm")
     var codePerm: String,
     @Json(name = "soldeTotal")
-    var soldeTotal: String? = null,
+    var soldeTotal: String,
     @Json(name = "masculin")
-    var masculin: Boolean? = null,
+    var masculin: Boolean,
     @Json(name = "erreur")
     var erreur: String? = null
 ) : SignetsData() {
-    val nom: String?
-                get() = untrimmedNom?.trim()
-    val prenom: String?
-                get() = untrimmedPrenom?.trim()
+    val nom: String
+                get() = untrimmedNom.trim()
+    val prenom: String
+                get() = untrimmedPrenom.trim()
 
     override fun getError() = erreur
 }

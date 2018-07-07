@@ -3,7 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="ca.etsmtl.etsmobile.presentation.more.MoreFragment">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/include_toolbar" />
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/progressMore"
@@ -33,10 +42,19 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewMore"
-        android:name="ca.etsmtl.etsmobile.presentation.more.MoreFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:context=".presentation.more.MoreFragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:listitem="@layout/fragment_more_item" />
+
+    <FrameLayout
+        android:id="@+id/containerItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewMore"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewMore"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewMore"
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewMore" />
 </android.support.constraint.ConstraintLayout>

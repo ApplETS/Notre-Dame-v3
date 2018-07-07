@@ -6,23 +6,28 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.MainFragment
 import ca.etsmtl.etsmobile.presentation.WelcomeActivity
+import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 import javax.inject.Inject
 
-class MoreFragment : DaggerFragment() {
+class MoreFragment : MainFragment() {
 
     companion object {
+        const val TAG = "MoreFragment"
         fun newInstance() = MoreFragment()
     }
 
@@ -41,6 +46,8 @@ class MoreFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        toolbar.setTitle(R.string.title_more)
+
         setUpRecyclerView(recyclerViewMore)
     }
 
@@ -50,7 +57,11 @@ class MoreFragment : DaggerFragment() {
 
             adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
                 override fun onItemClick(index: Int) {
-                    displayLogoutConfirmationDialog(context)
+                    when (index) {
+                        MoreViewModel.ItemsIndex.FAQ.ordinal -> Log.d(TAG, "FAQ") // TODO
+                        MoreViewModel.ItemsIndex.ABOUT.ordinal -> goToAbout()
+                        MoreViewModel.ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog(context)
+                    }
                 }
             })
         }
@@ -87,5 +98,33 @@ class MoreFragment : DaggerFragment() {
                 activity?.finish()
             }
         })
+    }
+
+    /**
+     * Starts AboutActivity
+     */
+    private fun goToAbout() {
+        val intent = Intent(context, AboutActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goToFragment(fragment: Fragment, fragmentTag: String, title: String) {
+        toolbar.title = title
+
+        with(childFragmentManager.beginTransaction()) {
+            replace(R.id.containerItem, fragment, fragmentTag)
+            addToBackStack(fragmentTag)
+            commit()
+        }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return if (childFragmentManager.backStackEntryCount > 0) {
+            toolbar.setTitle(R.string.title_more)
+            childFragmentManager.popBackStack()
+            true
+        } else {
+            false
+        }
     }
 }

@@ -2,8 +2,8 @@ package ca.etsmtl.etsmobile.di.activitymodule
 
 import android.arch.lifecycle.ViewModel
 import ca.etsmtl.etsmobile.di.ViewModelKey
-import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantFragment
-import ca.etsmtl.etsmobile.presentation.infoetudiant.InfoEtudiantViewModel
+import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
+import ca.etsmtl.etsmobile.presentation.profile.ProfileViewModel
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreViewModel
 import dagger.Binds
@@ -17,16 +17,16 @@ import dagger.multibindings.IntoMap
 @Module
 interface MainActivityModule {
     @ContributesAndroidInjector
-    fun contributeInfoEtudiantFragment(): InfoEtudiantFragment
+    fun contributeProfileFragment(): ProfileFragment
 
     @ContributesAndroidInjector
     fun contributeMoreFragment(): MoreFragment
 
     @Binds
     @IntoMap
-    @ViewModelKey(InfoEtudiantViewModel::class)
+    @ViewModelKey(ProfileViewModel::class)
     fun bindInfoEtudiantViewModel(
-        infoEtudiantViewModel: InfoEtudiantViewModel
+        profileViewModel: ProfileViewModel
     ): ViewModel
 
     @Binds

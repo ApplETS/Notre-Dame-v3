@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.presentation.infoetudiant
+package ca.etsmtl.etsmobile.presentation.profile
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * Created by Sonphil on 15-03-18.
  */
-class InfoEtudiantViewModel @Inject constructor(
+class ProfileViewModel @Inject constructor(
     private val repository: InfoEtudiantRepository,
     private var userCredentials: SignetsUserCredentials
 ) : ViewModel() {

@@ -15,6 +15,11 @@ class MoreViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
     private val app: App
 ) : AndroidViewModel(app) {
+
+    enum class ItemsIndex {
+        FAQ, ABOUT, LOGOUT
+    }
+
     /**
      * Clears the user's data
      *
