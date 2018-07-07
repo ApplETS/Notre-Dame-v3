@@ -11,7 +11,7 @@ buildscript {
     ext.firebase_crashlytics = '2.9.4'
     ext.glide = '4.6.1'
     ext.junit = '4.12'
-    ext.kotlin_version = '1.2.50'
+    ext.kotlin_version = '1.2.51'
     ext.kotshi = '1.0.2'
     ext.leakcanary = '1.5.4'
     ext.lifecycle = '1.1.1'
