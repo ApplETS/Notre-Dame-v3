@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import ca.etsmtl.etsmobile.presentation.profile.ProfileViewModel
 import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.Etudiant
+import ca.etsmtl.repository.data.api.response.signets.Etudiant
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.etsmobile.util.mock

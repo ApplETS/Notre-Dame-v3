@@ -1,13 +1,13 @@
-package ca.etsmtl.repository.data.model.signets
+package ca.etsmtl.repository.data.api.response.signets
 
 import com.squareup.moshi.Json
 import se.ansman.kotshi.JsonSerializable
 
 @JsonSerializable
-data class ListeProgrammes(
+data class ApiListeProgrammes(
     @Json(name = "__type") var type: String? = "",
-    @Json(name = "liste") var liste: List<Programme> = listOf(),
+    @Json(name = "liste") var liste: List<ApiProgramme> = listOf(),
     @Json(name = "erreur") var erreur: String? = ""
-) : SignetsData() {
+) : ApiSignetsData() {
     override fun getError() = erreur
 }

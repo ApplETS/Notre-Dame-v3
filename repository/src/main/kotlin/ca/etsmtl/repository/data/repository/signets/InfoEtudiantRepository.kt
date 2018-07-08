@@ -4,10 +4,12 @@ import android.arch.lifecycle.LiveData
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.api.response.mapper.signets.toEtudiantEntity
+import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.repository.data.db.dao.signets.EtudiantDao
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.Etudiant
-import ca.etsmtl.repository.data.model.signets.SignetsModel
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
@@ -33,9 +35,9 @@ class InfoEtudiantRepository @Inject constructor(
      */
     fun getInfoEtudiant(userCredentials: SignetsUserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
 
-        return object : NetworkBoundResource<Etudiant, SignetsModel<Etudiant>>(appExecutors) {
-            override fun saveCallResult(item: SignetsModel<Etudiant>) {
-                item.data?.let { dao.insert(it) }
+        return object : NetworkBoundResource<Etudiant, ApiSignetsModel<ApiEtudiant>>(appExecutors) {
+            override fun saveCallResult(item: ApiSignetsModel<ApiEtudiant>) {
+                item.data?.let { dao.insert(it.toEtudiantEntity()) }
             }
 
             override fun shouldFetch(data: Etudiant?): Boolean {
@@ -44,7 +46,7 @@ class InfoEtudiantRepository @Inject constructor(
 
             override fun loadFromDb(): LiveData<Etudiant> = getFirstItemLiveData(dao.getAll())
 
-            override fun createCall(): LiveData<ApiResponse<SignetsModel<Etudiant>>> {
+            override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiEtudiant>>> {
                 return transformApiLiveData(api.infoEtudiant(userCredentials))
             }
         }.asLiveData()

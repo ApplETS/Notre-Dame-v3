@@ -1,7 +1,7 @@
 package ca.etsmtl.repository.di
 
 import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.util.ApplicationJsonAdapterFactory
+import ca.etsmtl.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
 import ca.etsmtl.repository.util.LiveDataCallAdapterFactory
 import ca.etsmtl.repository.util.SignetsTrust
 import com.squareup.moshi.Moshi

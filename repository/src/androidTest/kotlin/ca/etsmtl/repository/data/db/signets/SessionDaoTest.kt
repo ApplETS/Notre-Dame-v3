@@ -29,7 +29,7 @@ class SessionDaoTest : DbTest() {
             "2018-04-30",
             "2018-04-30",
             "2018-04-30"
-            )
+    )
     private lateinit var dao: SessionDao
 
     @Before

@@ -2,12 +2,12 @@ package ca.etsmtl.repository.data.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
-import ca.etsmtl.repository.util.InstantAppExecutors
 import ca.etsmtl.repository.LiveDataTestUtil.getValue
 import ca.etsmtl.repository.data.api.ApiResponse
-import ca.etsmtl.repository.data.model.signets.SignetsData
-import ca.etsmtl.repository.data.model.signets.SignetsModel
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsData
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.repository.data.repository.signets.SignetsRepository
+import ca.etsmtl.repository.util.InstantAppExecutors
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -36,11 +36,11 @@ class AbstractSignetsRepositoryTest {
 
     @Test
     fun testGetErrorApiResponseNoError() {
-        val signetsModel = SignetsModel<TestSignetsData>()
-        val fakeSignetsData = TestSignetsData()
+        val signetsModel = ApiSignetsModel<TestApiSignetsData>()
+        val fakeSignetsData = TestApiSignetsData()
         signetsModel.data = fakeSignetsData
         val response = Response.success(signetsModel)
-        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(response)
+        val apiResponse = ApiResponse<ApiSignetsModel<TestApiSignetsData>>(response)
 
         assertNull(repo.getError(apiResponse))
     }
@@ -49,31 +49,31 @@ class AbstractSignetsRepositoryTest {
     fun testGetErrorApiResponseFail() {
         val expectedErrorStr = "Test error"
         val throwable = Throwable(expectedErrorStr)
-        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(throwable)
+        val apiResponse = ApiResponse<ApiSignetsModel<TestApiSignetsData>>(throwable)
 
         assertEquals(expectedErrorStr, repo.getError(apiResponse))
     }
 
     @Test
     fun testGetErrorInsideData() {
-        val signetsModel = SignetsModel<TestSignetsData>()
+        val signetsModel = ApiSignetsModel<TestApiSignetsData>()
         val expectedErrorStr = "Foo error"
-        val testSignetsData = TestSignetsData(expectedErrorStr)
+        val testSignetsData = TestApiSignetsData(expectedErrorStr)
         signetsModel.data = testSignetsData
         val response = Response.success(signetsModel)
-        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(response)
+        val apiResponse = ApiResponse<ApiSignetsModel<TestApiSignetsData>>(response)
 
         assertEquals(expectedErrorStr, repo.getError(apiResponse))
     }
 
     @Test
     fun testTransformApiLiveDataWithoutError() {
-        val signetsModel = SignetsModel<TestSignetsData>()
-        val fakeSignetsData = TestSignetsData()
+        val signetsModel = ApiSignetsModel<TestApiSignetsData>()
+        val fakeSignetsData = TestApiSignetsData()
         signetsModel.data = fakeSignetsData
         val response = Response.success(signetsModel)
-        val expectedApiResponse = ApiResponse<SignetsModel<TestSignetsData>>(response)
-        val liveData = MutableLiveData<ApiResponse<SignetsModel<TestSignetsData>>>()
+        val expectedApiResponse = ApiResponse<ApiSignetsModel<TestApiSignetsData>>(response)
+        val liveData = MutableLiveData<ApiResponse<ApiSignetsModel<TestApiSignetsData>>>()
         liveData.value = expectedApiResponse
         val actualApiResponse = getValue(repo.transformApiLiveData(liveData))
 
@@ -84,8 +84,8 @@ class AbstractSignetsRepositoryTest {
     fun testTransformApiLiveDataWithError() {
         val expectedErrorStr = "Test error"
         val throwable = Throwable(expectedErrorStr)
-        val apiResponse = ApiResponse<SignetsModel<TestSignetsData>>(throwable)
-        val liveData = MutableLiveData<ApiResponse<SignetsModel<TestSignetsData>>>()
+        val apiResponse = ApiResponse<ApiSignetsModel<TestApiSignetsData>>(throwable)
+        val liveData = MutableLiveData<ApiResponse<ApiSignetsModel<TestApiSignetsData>>>()
         liveData.value = apiResponse
         val resultApiResponse = getValue(repo.transformApiLiveData(liveData))
 
@@ -96,7 +96,7 @@ class AbstractSignetsRepositoryTest {
 
     class TestSignetsRepository : SignetsRepository(InstantAppExecutors())
 
-    data class TestSignetsData(var erreur: String? = null) : SignetsData() {
+    data class TestApiSignetsData(var erreur: String? = null) : ApiSignetsData() {
         override fun getError(): String? {
             return erreur
         }

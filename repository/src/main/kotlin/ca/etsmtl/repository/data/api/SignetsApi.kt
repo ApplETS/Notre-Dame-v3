@@ -1,16 +1,16 @@
 package ca.etsmtl.repository.data.api
 
 import android.arch.lifecycle.LiveData
-import ca.etsmtl.repository.data.model.signets.Etudiant
-import ca.etsmtl.repository.data.model.signets.ListeDeCours
-import ca.etsmtl.repository.data.model.signets.ListeDeSessions
-import ca.etsmtl.repository.data.model.signets.ListeDesActivitesEtProf
-import ca.etsmtl.repository.data.model.signets.ListeDesElementsEvaluation
-import ca.etsmtl.repository.data.model.signets.ListeDesSeances
-import ca.etsmtl.repository.data.model.signets.ListeHoraireExamensFinaux
-import ca.etsmtl.repository.data.model.signets.ListeJoursRemplaces
-import ca.etsmtl.repository.data.model.signets.ListeProgrammes
-import ca.etsmtl.repository.data.model.signets.SignetsModel
+import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDeCours
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDeSessions
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDesActivitesEtProf
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDesElementsEvaluation
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDesSeances
+import ca.etsmtl.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
+import ca.etsmtl.repository.data.api.response.signets.ApiListeJoursRemplaces
+import ca.etsmtl.repository.data.api.response.signets.ApiListeProgrammes
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -35,7 +35,7 @@ interface SignetsApi {
      */
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("listeProgrammes")
-    fun listeProgrammes(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<ListeProgrammes>>>
+    fun listeProgrammes(@Body body: SignetsUserCredentials): LiveData<ApiResponse<ApiSignetsModel<ApiListeProgrammes>>>
 
     /**
      * Fetches the schedules of the student's final exams with room locations
@@ -52,7 +52,7 @@ interface SignetsApi {
         @Field("codeAccesUniversel") codeAccesUniversel: String,
         @Field("motPasse") motPasse: String,
         @Field("pSession") pSession: String
-    ): LiveData<ApiResponse<SignetsModel<ListeHoraireExamensFinaux>>>
+    ): LiveData<ApiResponse<ApiSignetsModel<ApiListeHoraireExamensFinaux>>>
 
     /**
      * Fetches a list of courses of the student between two sessions
@@ -71,7 +71,7 @@ interface SignetsApi {
         @Field("motPasse") motPasse: String,
         @Field("SesDebut") sesDebut: String,
         @Field("SesFin") sesFin: String
-    ): LiveData<ApiResponse<SignetsModel<ListeDeCours>>>
+    ): LiveData<ApiResponse<ApiSignetsModel<ApiListeDeCours>>>
 
     /**
      * Fetches a list of the student's activities (courses, labs, etc.) with their schedule and
@@ -90,7 +90,7 @@ interface SignetsApi {
         @Field("codeAccesUniversel") codeAccesUniversel: String,
         @Field("motPasse") motPasse: String,
         @Field("pSession") pSession: String
-    ): LiveData<ApiResponse<SignetsModel<ListeDesActivitesEtProf>>>
+    ): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesActivitesEtProf>>>
 
     /**
      * Fetches basic information about the student: name, first name, permanent code and balance
@@ -100,7 +100,7 @@ interface SignetsApi {
      */
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("infoEtudiant")
-    fun infoEtudiant(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<Etudiant>>>
+    fun infoEtudiant(@Body body: SignetsUserCredentials): LiveData<ApiResponse<ApiSignetsModel<ApiEtudiant>>>
 
     /**
      * Fetches a list of days that replace others
@@ -111,7 +111,7 @@ interface SignetsApi {
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @FormUrlEncoded
     @POST("lireJoursRemplaces")
-    fun listeJoursRemplaces(@Field("pSession") pSession: String): LiveData<ApiResponse<SignetsModel<ListeJoursRemplaces>>>
+    fun listeJoursRemplaces(@Field("pSession") pSession: String): LiveData<ApiResponse<ApiSignetsModel<ApiListeJoursRemplaces>>>
 
     /**
      * Fetches a list of all courses of the student. The is list is sorted by session and acronym.
@@ -121,7 +121,7 @@ interface SignetsApi {
      */
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("listeCours")
-    fun listeCours(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<ListeDeCours>>>
+    fun listeCours(@Body body: SignetsUserCredentials): LiveData<ApiResponse<ApiSignetsModel<ApiListeDeCours>>>
 
     /**
      * Fetches a list of the student's evaluations (exams, assignments, etc.)
@@ -141,7 +141,7 @@ interface SignetsApi {
         @Field("pSigle") pSigle: String,
         @Field("pGroupe") pGroupe: String,
         @Field("pSession") pSession: String
-    ): LiveData<ApiResponse<SignetsModel<ListeDesElementsEvaluation>>>
+    ): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>>
 
     /**
      * Fetches a list of the student's sessions
@@ -151,7 +151,7 @@ interface SignetsApi {
      */
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("listeSessions")
-    fun listeSessions(@Body body: SignetsUserCredentials): LiveData<ApiResponse<SignetsModel<ListeDeSessions>>>
+    fun listeSessions(@Body body: SignetsUserCredentials): LiveData<ApiResponse<ApiSignetsModel<ApiListeDeSessions>>>
 
     /**
      * Fetches the schedule of the sessions for a given course
@@ -173,5 +173,5 @@ interface SignetsApi {
         @Field("pSession") pSession: String,
         @Field("pDateDebut") pDateDebut: String,
         @Field("pDateFin") pDateFin: String
-    ): LiveData<ApiResponse<SignetsModel<ListeDesSeances>>>
+    ): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>>
 }

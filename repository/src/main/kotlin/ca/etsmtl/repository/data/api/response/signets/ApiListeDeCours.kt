@@ -1,13 +1,13 @@
-package ca.etsmtl.repository.data.model.signets
+package ca.etsmtl.repository.data.api.response.signets
 
 import com.squareup.moshi.Json
 import se.ansman.kotshi.JsonSerializable
 
 @JsonSerializable
-data class ListeJoursRemplaces(
+data class ApiListeDeCours(
     @Json(name = "__type") val type: String? = "",
-    @Json(name = "listeJours") val listeJours: List<JourRemplace>? = listOf(),
+    @Json(name = "liste") val liste: List<ApiCours>? = listOf(),
     @Json(name = "erreur") val erreur: String? = ""
-) : SignetsData() {
+) : ApiSignetsData() {
     override fun getError() = erreur
 }
