@@ -4,11 +4,11 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import ca.etsmtl.etsmobile.presentation.profile.ProfileViewModel
+import ca.etsmtl.etsmobile.util.mock
 import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.api.response.signets.Etudiant
+import ca.etsmtl.repository.data.model.signets.Etudiant
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
-import ca.etsmtl.etsmobile.util.mock
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -53,7 +53,7 @@ class ProfileViewModelTest {
         verify(observer).onChanged(fooRes)
 
         reset(observer)
-        val fooEtudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
+        val fooEtudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true)
         fooRes = Resource.success(fooEtudiant)
         foo.value = fooRes
         verify(observer).onChanged(fooRes)

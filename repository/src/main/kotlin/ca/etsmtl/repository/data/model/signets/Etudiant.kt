@@ -11,6 +11,5 @@ data class Etudiant(
     @PrimaryKey
     var codePerm: String,
     var soldeTotal: String,
-    var masculin: Boolean,
-    var erreur: String? = null
+    var masculin: Boolean
 )

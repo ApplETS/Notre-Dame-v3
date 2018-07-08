@@ -13,6 +13,5 @@ fun ApiEtudiant.toEtudiantEntity() = Etudiant(
         untrimmedPrenom.trim(),
         this.codePerm,
         this.soldeTotal,
-        this.masculin,
-        this.erreur
+        this.masculin
 )

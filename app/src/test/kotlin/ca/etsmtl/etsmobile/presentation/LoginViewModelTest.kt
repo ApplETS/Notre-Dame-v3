@@ -11,7 +11,7 @@ import ca.etsmtl.etsmobile.presentation.login.FieldStatus
 import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.etsmobile.util.mock
 import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.api.response.signets.Etudiant
+import ca.etsmtl.repository.data.model.signets.Etudiant
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
@@ -85,7 +85,7 @@ class LoginViewModelTest {
     fun testSendValidUserCredentialsResultToUI() {
         mockNetwork(true)
         val etudiantLD = MutableLiveData<Resource<Etudiant>>()
-        val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true, "")
+        val etudiant = Etudiant("testFoo", "foo", "foo", "foo", "0,00", true)
         val resource: Resource<Etudiant> = Resource.success(etudiant)
         etudiantLD.value = resource
         `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(etudiantLD)
