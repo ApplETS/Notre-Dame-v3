@@ -22,7 +22,7 @@ import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.util.KeyboardUtils
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets

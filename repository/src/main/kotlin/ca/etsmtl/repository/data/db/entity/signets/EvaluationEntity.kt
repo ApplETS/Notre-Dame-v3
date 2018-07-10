@@ -1,9 +1,9 @@
-package ca.etsmtl.repository.data.model.signets
+package ca.etsmtl.repository.data.db.entity.signets
 
 import android.arch.persistence.room.Entity
 
 @Entity(primaryKeys = ["coursGroupe", "nom"])
-data class Evaluation(
+data class EvaluationEntity(
     var coursGroupe: String,
     var nom: String,
     var equipe: String?,

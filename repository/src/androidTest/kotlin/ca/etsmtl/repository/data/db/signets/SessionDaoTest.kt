@@ -4,7 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.SessionDao
-import ca.etsmtl.repository.data.model.signets.Session
+import ca.etsmtl.repository.data.db.entity.signets.SessionEntity
 import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class SessionDaoTest : DbTest() {
-    private val entity = Session(
+    private val entity = SessionEntity(
             "É2018",
             "Été 2018",
             "2018-04-30",
@@ -47,7 +47,7 @@ class SessionDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val same = Session(
+        val same = SessionEntity(
                 "É2018",
                 "Été 2018",
                 "2018-03-23",

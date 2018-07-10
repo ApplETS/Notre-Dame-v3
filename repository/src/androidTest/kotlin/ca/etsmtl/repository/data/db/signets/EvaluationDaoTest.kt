@@ -4,7 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.EvaluationDao
-import ca.etsmtl.repository.data.model.signets.Evaluation
+import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class EvaluationDaoTest : DbTest() {
-    private val entity = Evaluation(
+    private val entity = EvaluationEntity(
             "INF111-01",
             "TP03",
             "01",
@@ -49,7 +49,7 @@ class EvaluationDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val same = Evaluation(
+        val same = EvaluationEntity(
                 "INF111-01",
                 "TP03",
                 "01",
@@ -72,7 +72,7 @@ class EvaluationDaoTest : DbTest() {
 
     @Test
     fun testGetByCoursGroupe() {
-        val expectedEvaluation = Evaluation(
+        val expectedEvaluation = EvaluationEntity(
                 "LOG123-01",
                 "TP03",
                 "01",
@@ -90,7 +90,7 @@ class EvaluationDaoTest : DbTest() {
         )
         dao.insert(expectedEvaluation)
 
-        val unexpectedEvaluation = Evaluation(
+        val unexpectedEvaluation = EvaluationEntity(
                 "LOG123-02",
                 "TP03",
                 "01",

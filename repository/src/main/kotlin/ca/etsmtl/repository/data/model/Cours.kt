@@ -1,8 +1,5 @@
-package ca.etsmtl.repository.data.model.signets
+package ca.etsmtl.repository.data.model
 
-import android.arch.persistence.room.Entity
-
-@Entity(primaryKeys = ["sigle", "session"])
 data class Cours(
     var sigle: String,
     var groupe: String,

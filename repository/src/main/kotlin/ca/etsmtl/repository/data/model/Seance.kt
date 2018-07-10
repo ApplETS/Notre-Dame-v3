@@ -1,11 +1,6 @@
-package ca.etsmtl.repository.data.model.signets
+package ca.etsmtl.repository.data.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-
-@Entity
 data class Seance(
-    @PrimaryKey
     var dateDebut: String,
     var dateFin: String,
     var coursGroupe: String,

@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.db.AppDatabase
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**

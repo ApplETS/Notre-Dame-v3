@@ -3,7 +3,7 @@ package ca.etsmtl.repository.data.db.signets
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil.getValue
 import ca.etsmtl.repository.data.db.DbTest
-import ca.etsmtl.repository.data.model.signets.Programme
+import ca.etsmtl.repository.data.db.entity.signets.ProgrammeEntity
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Test
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ProgrammeDaoTest : DbTest() {
 
-    private val programme0 = Programme(
+    private val programme0 = ProgrammeEntity(
             "1234",
             "Test0",
             "",
@@ -34,7 +34,7 @@ class ProgrammeDaoTest : DbTest() {
 
     @Test
     fun testInsert() {
-        val programme1 = Programme(
+        val programme1 = ProgrammeEntity(
                 "4321",
                 "Test1",
                 "",
@@ -61,7 +61,7 @@ class ProgrammeDaoTest : DbTest() {
 
     @Test
     fun testInsertSameProgramme() {
-        val programme1 = Programme(
+        val programme1 = ProgrammeEntity(
                 "1234",
                 "Test1",
                 "",
@@ -87,7 +87,7 @@ class ProgrammeDaoTest : DbTest() {
 
     @Test
     fun testInsertMultipleProgrammesAtOnce() {
-        val programme1 = Programme(
+        val programme1 = ProgrammeEntity(
                 "4321",
                 "Test1",
                 "",
@@ -103,7 +103,7 @@ class ProgrammeDaoTest : DbTest() {
                 987,
                 0
         )
-        val programme2 = Programme(
+        val programme2 = ProgrammeEntity(
                 "4321",
                 "Test2",
                 "",
@@ -130,7 +130,7 @@ class ProgrammeDaoTest : DbTest() {
 
     @Test
     fun testDelete() {
-        val programme1 = Programme(
+        val programme1 = ProgrammeEntity(
                 "4321",
                 "Test1",
                 "",

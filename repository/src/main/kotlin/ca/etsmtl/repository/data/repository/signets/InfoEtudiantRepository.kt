@@ -1,6 +1,7 @@
 package ca.etsmtl.repository.data.repository.signets
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Transformations
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
@@ -8,9 +9,10 @@ import ca.etsmtl.repository.data.api.response.mapper.signets.toEtudiantEntity
 import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.repository.data.db.dao.signets.EtudiantDao
+import ca.etsmtl.repository.data.db.entity.mapper.toEtudiant
+import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.Etudiant
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
@@ -40,11 +42,13 @@ class InfoEtudiantRepository @Inject constructor(
                 item.data?.let { dao.insert(it.toEtudiantEntity()) }
             }
 
-            override fun shouldFetch(data: Etudiant?): Boolean {
-                return shouldFetch
-            }
+            override fun shouldFetch(data: Etudiant?): Boolean = shouldFetch
 
-            override fun loadFromDb(): LiveData<Etudiant> = getFirstItemLiveData(dao.getAll())
+            override fun loadFromDb(): LiveData<Etudiant> {
+                return Transformations.map(getFirstItemLiveData(dao.getAll())) {
+                    it?.toEtudiant()
+                }
+            }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiEtudiant>>> {
                 return transformApiLiveData(api.infoEtudiant(userCredentials))

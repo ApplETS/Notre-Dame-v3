@@ -11,7 +11,7 @@ import ca.etsmtl.repository.data.api.response.signets.ApiListeHoraireExamensFina
 import ca.etsmtl.repository.data.api.response.signets.ApiListeJoursRemplaces
 import ca.etsmtl.repository.data.api.response.signets.ApiListeProgrammes
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

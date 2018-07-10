@@ -1,8 +1,8 @@
-package ca.etsmtl.repository.data.model.signets
+package ca.etsmtl.repository.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials.CREATOR.INSTANCE
+import ca.etsmtl.repository.data.model.SignetsUserCredentials.CREATOR.INSTANCE
 import com.squareup.moshi.Json
 import java.util.concurrent.atomic.AtomicReference
 

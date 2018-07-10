@@ -3,7 +3,7 @@ package ca.etsmtl.repository.data.db.signets
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
-import ca.etsmtl.repository.data.model.signets.HoraireExamenFinal
+import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import junit.framework.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
 class HoraireExamenFinalDaoTest : DbTest() {
     @Test
     fun testInsert() {
-        val horaire = HoraireExamenFinal("LOG330", "01", "2018-04-13", "13:30", "16:30", "A-1302")
+        val horaire = HoraireExamenFinalEntity("LOG330", "01", "2018-04-13", "13:30", "16:30", "A-1302")
         db.horaireExamenFinalDao().insert(horaire)
         val fromDb = LiveDataTestUtil.getValue(db.horaireExamenFinalDao().getAll())
         Assert.assertNotNull(fromDb)
@@ -24,9 +24,9 @@ class HoraireExamenFinalDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val horaire = HoraireExamenFinal("LOG330", "01", "2018-04-13", "13:30", "16:30", "A-1302")
+        val horaire = HoraireExamenFinalEntity("LOG330", "01", "2018-04-13", "13:30", "16:30", "A-1302")
         db.horaireExamenFinalDao().insert(horaire)
-        val same = HoraireExamenFinal("LOG330", "01", "2018-04-13", "13:30", "16:30", "A-1234")
+        val same = HoraireExamenFinalEntity("LOG330", "01", "2018-04-13", "13:30", "16:30", "A-1234")
         db.horaireExamenFinalDao().insert(same)
         val fromDb = LiveDataTestUtil.getValue(db.horaireExamenFinalDao().getAll())
         Assert.assertNotNull(fromDb)

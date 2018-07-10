@@ -10,9 +10,9 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.login.FieldStatus
 import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.etsmobile.util.mock
+import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.Etudiant
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
 import org.hamcrest.CoreMatchers.notNullValue

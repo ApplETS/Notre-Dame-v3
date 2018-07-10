@@ -4,7 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.JourRemplaceDao
-import ca.etsmtl.repository.data.model.signets.JourRemplace
+import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class JourRemplaceDaoTest : DbTest() {
-    private val entity = JourRemplace(
+    private val entity = JourRemplaceEntity(
             "2016-05-23",
             "2016-05-25",
             "Journée nationale des Patriotes    "
@@ -37,7 +37,7 @@ class JourRemplaceDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val same = JourRemplace(
+        val same = JourRemplaceEntity(
                 "2016-05-24",
                 "2016-05-25",
                 "Journée nationale des Tests    "
@@ -46,7 +46,7 @@ class JourRemplaceDaoTest : DbTest() {
         var fromDb = LiveDataTestUtil.getValue(dao.getAll())
         Assert.assertEquals(same, fromDb[0])
 
-        val foo = JourRemplace(
+        val foo = JourRemplaceEntity(
                 "2016-05-23",
                 "2016-05-26",
                 "Foo    "

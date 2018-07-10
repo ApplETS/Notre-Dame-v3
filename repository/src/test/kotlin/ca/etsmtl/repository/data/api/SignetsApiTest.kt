@@ -23,7 +23,7 @@ import ca.etsmtl.repository.data.api.response.signets.ApiSeance
 import ca.etsmtl.repository.data.api.response.signets.ApiSession
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsData
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.Moshi
 import okhttp3.mockwebserver.MockResponse

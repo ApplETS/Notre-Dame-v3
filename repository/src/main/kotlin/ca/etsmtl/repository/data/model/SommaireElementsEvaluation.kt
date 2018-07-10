@@ -1,8 +1,5 @@
-package ca.etsmtl.repository.data.model.signets
+package ca.etsmtl.repository.data.model
 
-import android.arch.persistence.room.Entity
-
-@Entity(primaryKeys = ["sigleCours", "session"])
 data class SommaireElementsEvaluation(
     var sigleCours: String,
     var session: String,

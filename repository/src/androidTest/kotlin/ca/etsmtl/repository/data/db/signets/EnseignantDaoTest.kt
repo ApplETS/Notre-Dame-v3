@@ -4,7 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.EnseignantDao
-import ca.etsmtl.repository.data.model.signets.Enseignant
+import ca.etsmtl.repository.data.db.entity.signets.EnseignantEntity
 import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class EnseignantDaoTest : DbTest() {
-    private val entity = Enseignant(
+    private val entity = EnseignantEntity(
             "A-4526",
             "514-396-8800, poste 7810",
             "Oui",
@@ -40,7 +40,7 @@ class EnseignantDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val same = Enseignant(
+        val same = EnseignantEntity(
                 "A-4526",
                 "514-396-8800, poste 1234",
                 "Non",

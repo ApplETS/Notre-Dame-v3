@@ -4,7 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.SommaireElementsEvaluationDao
-import ca.etsmtl.repository.data.model.signets.SommaireElementsEvaluation
+import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class SommaireElementsEvaluationDaoTest : DbTest() {
-    private val sommaireEvaluations = SommaireElementsEvaluation(
+    private val sommaireEvaluations = SommaireElementsEvaluationEntity(
             "INF111",
             "É2018",
             "65,9",
@@ -44,7 +44,7 @@ class SommaireElementsEvaluationDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val same = SommaireElementsEvaluation(
+        val same = SommaireElementsEvaluationEntity(
                 "INF111",
                 "É2018",
                 "65,9",

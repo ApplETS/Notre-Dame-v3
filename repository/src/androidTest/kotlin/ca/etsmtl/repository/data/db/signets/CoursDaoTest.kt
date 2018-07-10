@@ -4,7 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil.getValue
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.CoursDao
-import ca.etsmtl.repository.data.model.signets.Cours
+import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class CoursDaoTest : DbTest() {
 
-    private val entity = Cours(
+    private val entity = CoursEntity(
             "LOG530",
             "01",
             "H2018",
@@ -43,7 +43,7 @@ class CoursDaoTest : DbTest() {
 
     @Test
     fun testInsertSameSigleDifferentSession() {
-        val sameSigle = Cours(
+        val sameSigle = CoursEntity(
                 "LOG530",
                 "01",
                 "E2018",
@@ -61,7 +61,7 @@ class CoursDaoTest : DbTest() {
 
     @Test
     fun testInsertSameSessionDifferentSigle() {
-        val sameSession = Cours(
+        val sameSession = CoursEntity(
                 "LOG123",
                 "01",
                 "H2018",
@@ -79,7 +79,7 @@ class CoursDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val same = Cours(
+        val same = CoursEntity(
                 "LOG530",
                 "01",
                 "H2018",
@@ -99,7 +99,7 @@ class CoursDaoTest : DbTest() {
     fun testGetCoursesSession() {
         val sessionAbrege = "É2018"
 
-        val coursSession1 = Cours(
+        val coursSession1 = CoursEntity(
                 "LOG530",
                 "01",
                 sessionAbrege,
@@ -110,7 +110,7 @@ class CoursDaoTest : DbTest() {
         )
         dao.insert(coursSession1)
 
-        val coursSession2 = Cours(
+        val coursSession2 = CoursEntity(
                 "FOO123",
                 "01",
                 sessionAbrege,
@@ -121,7 +121,7 @@ class CoursDaoTest : DbTest() {
         )
         dao.insert(coursSession2)
 
-        val coursDifferentSession = Cours(
+        val coursDifferentSession = CoursEntity(
                 "LOG123",
                 "01",
                 "H2018",
@@ -132,7 +132,7 @@ class CoursDaoTest : DbTest() {
         )
         dao.insert(coursDifferentSession)
 
-        val coursSession3 = Cours(
+        val coursSession3 = CoursEntity(
                 "TEST123",
                 "01",
                 sessionAbrege,
