@@ -39,7 +39,7 @@ protected constructor(private val appExecutors: AppExecutors) {
 
     companion object {
         const val MSG_NO_DATA_DB = "No data in DB"
-        const val CALL_FAILED_WITHTOUT_ERROR_MSG = "The call failed, but there was no error message."
+        const val CALL_FAILED_WITHOUT_ERROR_MSG = "The call failed, but there was no error message."
     }
     private val result = MediatorLiveData<Resource<ResultType>>()
 
@@ -78,7 +78,7 @@ protected constructor(private val appExecutors: AppExecutors) {
             } else {
                 onFetchFailed()
                 result.addSource(dbSource) { newData ->
-                    val errorStr = response?.errorMessage ?: CALL_FAILED_WITHTOUT_ERROR_MSG
+                    val errorStr = response?.errorMessage ?: CALL_FAILED_WITHOUT_ERROR_MSG
                     result.setValue(Resource.error(errorStr, newData))
                 }
             }

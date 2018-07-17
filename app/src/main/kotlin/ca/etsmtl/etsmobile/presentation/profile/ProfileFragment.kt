@@ -65,10 +65,10 @@ class ProfileFragment : DaggerFragment() {
                 }
                 Resource.ERROR -> {
                     progressBarInfoEtudiant.visibility = View.GONE
-                    res.data?.let { adapter.setEtudiant(it) }
                 }
                 Resource.LOADING -> {
                     progressBarInfoEtudiant.visibility = View.VISIBLE
+                    res.data?.let { adapter.setEtudiant(it) }
                 }
             }
         })
