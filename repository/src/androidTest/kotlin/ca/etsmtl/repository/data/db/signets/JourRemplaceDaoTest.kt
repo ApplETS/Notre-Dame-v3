@@ -18,7 +18,8 @@ class JourRemplaceDaoTest : DbTest() {
     private val entity = JourRemplaceEntity(
             "2016-05-23",
             "2016-05-25",
-            "Journée nationale des Patriotes    "
+            "Journée nationale des Patriotes    ",
+            "É2018"
     )
     private lateinit var dao: JourRemplaceDao
 
@@ -40,7 +41,8 @@ class JourRemplaceDaoTest : DbTest() {
         val same = JourRemplaceEntity(
                 "2016-05-24",
                 "2016-05-25",
-                "Journée nationale des Tests    "
+                "Journée nationale des Tests    ",
+                "E2018"
         )
         dao.insert(same)
         var fromDb = LiveDataTestUtil.getValue(dao.getAll())
@@ -49,7 +51,8 @@ class JourRemplaceDaoTest : DbTest() {
         val foo = JourRemplaceEntity(
                 "2016-05-23",
                 "2016-05-26",
-                "Foo    "
+                "Foo    ",
+                "E2018"
         )
         dao.insert(foo)
         fromDb = LiveDataTestUtil.getValue(dao.getAll())

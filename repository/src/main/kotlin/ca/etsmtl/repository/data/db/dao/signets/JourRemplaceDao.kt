@@ -12,4 +12,7 @@ import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 abstract class JourRemplaceDao : SignetsDao<JourRemplaceEntity> {
     @Query("SELECT * FROM jourremplaceentity")
     abstract fun getAll(): LiveData<List<JourRemplaceEntity>>
+
+    @Query("SELECT * FROM jourremplaceentity WHERE session LIKE :session")
+    abstract fun getAllBySession(session: String): LiveData<List<JourRemplaceEntity>>
 }

@@ -3,6 +3,7 @@ package ca.etsmtl.repository.data.db.signets
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
 import ca.etsmtl.repository.data.db.dao.signets.SeanceDao
+import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import junit.framework.Assert
 import org.junit.Before
@@ -15,11 +16,18 @@ class SeanceDaoTest : DbTest() {
     private val entity = SeanceEntity(
             "/Date(1525093200000)/",
             "/Date(1525105800000)/",
-            "MAT472-02",
+            CoursEntity(
+                    "MAT472",
+                    "02",
+                    "É2018",
+                    "foo",
+                    "B+",
+                    4,
+                    "Algèbre linéaire et géométrie de l'espace"
+            ),
             "Cours",
             "B-0904",
-            "Activité de cours",
-            "Algèbre linéaire et géométrie de l'espace"
+            "Activité de cours"
     )
     private lateinit var dao: SeanceDao
 
@@ -41,11 +49,18 @@ class SeanceDaoTest : DbTest() {
         val same = SeanceEntity(
                 "/Date(1525093200000)/",
                 "/Date(1527950896000)/",
-                "MAT472-02",
+                CoursEntity(
+                        "MAT472",
+                        "02",
+                        "É2018",
+                        "foo",
+                        "B+",
+                        4,
+                        "Algèbre linéaire et géométrie de l'espace"
+                ),
                 "Cours",
                 "B-0904",
-                "Activité de cours",
-                "Algèbre linéaire et géométrie de l'espace"
+                "Activité de cours"
         )
         dao.insert(same)
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())

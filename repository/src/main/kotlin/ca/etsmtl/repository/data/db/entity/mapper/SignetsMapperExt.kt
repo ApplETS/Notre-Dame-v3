@@ -1,9 +1,11 @@
 package ca.etsmtl.repository.data.db.entity.mapper
 
 import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
+import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.repository.data.model.Etudiant
+import ca.etsmtl.repository.data.model.HoraireExamenFinal
 import ca.etsmtl.repository.data.model.JourRemplace
 import ca.etsmtl.repository.data.model.Seance
 
@@ -20,6 +22,19 @@ fun EtudiantEntity.toEtudiant() = Etudiant(
         this.masculin
 )
 
+fun HoraireExamenFinalEntity.toHoraireExamenFinal() = HoraireExamenFinal(
+        this.sigle,
+        this.groupe,
+        this.dateExamen,
+        this.heureDebut,
+        this.heureFin,
+        this.local
+)
+
+fun List<HoraireExamenFinalEntity>.toHorairesExamensFinaux() = ArrayList<HoraireExamenFinal>().apply {
+    this@toHorairesExamensFinaux.forEach { add(it.toHoraireExamenFinal()) }
+}
+
 fun JourRemplaceEntity.toJourRemplace() = JourRemplace(
         this.dateOrigine,
         this.dateRemplacement,
@@ -27,19 +42,18 @@ fun JourRemplaceEntity.toJourRemplace() = JourRemplace(
 )
 
 fun List<JourRemplaceEntity>.toJoursRemplaces(): List<JourRemplace> = ArrayList<JourRemplace>().apply {
-    this@toJoursRemplaces.forEach {
-        add(it.toJourRemplace())
-    }
+    this@toJoursRemplaces.forEach { add(it.toJourRemplace()) }
 }
 
 fun SeanceEntity.toSeance() = Seance(
         this.dateDebut,
         this.dateFin,
-        this.coursGroupe,
+        this.cours.sigle,
+        this.cours.groupe,
         this.nomActivite,
         this.local,
         this.descriptionActivite,
-        this.libelleCours
+        this.cours.titreCours
 )
 
 fun List<SeanceEntity>.toSeances(): List<Seance> = ArrayList<Seance>().apply {

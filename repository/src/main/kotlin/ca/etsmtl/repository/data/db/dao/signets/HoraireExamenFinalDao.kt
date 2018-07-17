@@ -12,4 +12,7 @@ import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 abstract class HoraireExamenFinalDao : SignetsDao<HoraireExamenFinalEntity> {
     @Query("SELECT * FROM horaireexamenfinalentity")
     abstract fun getAll(): LiveData<List<HoraireExamenFinalEntity>>
+
+    @Query("SELECT * FROM horaireexamenfinalentity WHERE session LIKE :session")
+    abstract fun getAllBySession(session: String): LiveData<List<HoraireExamenFinalEntity>>
 }

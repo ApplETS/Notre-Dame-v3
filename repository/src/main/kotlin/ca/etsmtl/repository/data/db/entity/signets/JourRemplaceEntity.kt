@@ -8,5 +8,6 @@ data class JourRemplaceEntity(
     var dateOrigine: String,
     @PrimaryKey
     var dateRemplacement: String,
-    var description: String?
+    var description: String?,
+    var session: String
 )

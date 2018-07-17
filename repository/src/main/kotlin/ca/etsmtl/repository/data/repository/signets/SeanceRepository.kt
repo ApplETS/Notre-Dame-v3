@@ -32,7 +32,6 @@ class SeanceRepository @Inject constructor(
      *
      * @param userCredentials The user's credentials
      * @param cours The course
-     * @param session The session
      * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      * @return The schedule of the sessions
@@ -45,7 +44,7 @@ class SeanceRepository @Inject constructor(
     ): LiveData<Resource<List<Seance>>> {
         return object : NetworkBoundResource<List<Seance>, ApiSignetsModel<ApiListeDesSeances>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiListeDesSeances>) {
-                item.data?.let { dao.insertAll(*it.toSeancesEntities().toTypedArray()) }
+                item.data?.let { dao.insertAll(*it.toSeancesEntities(cours).toTypedArray()) }
             }
 
             override fun shouldFetch(data: List<Seance>?): Boolean = shouldFetch

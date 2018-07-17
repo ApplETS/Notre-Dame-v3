@@ -36,7 +36,7 @@ class JourRemplaceRepository @Inject constructor(
     fun getJoursRemplaces(session: Session, shouldFetch: Boolean = true): LiveData<Resource<List<JourRemplace>>> {
         return object : NetworkBoundResource<List<JourRemplace>, ApiSignetsModel<ApiListeJoursRemplaces>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiListeJoursRemplaces>) {
-                item.data?.toJourRemplaceEntities()?.let {
+                item.data?.toJourRemplaceEntities(session)?.let {
                     dao.insertAll(*it.toTypedArray())
                 }
             }
@@ -44,7 +44,7 @@ class JourRemplaceRepository @Inject constructor(
             override fun shouldFetch(data: List<JourRemplace>?): Boolean = shouldFetch
 
             override fun loadFromDb(): LiveData<List<JourRemplace>> {
-                return Transformations.map(dao.getAll()) {
+                return Transformations.map(dao.getAllBySession(session.abrege)) {
                     it.toJoursRemplaces()
                 }
             }
