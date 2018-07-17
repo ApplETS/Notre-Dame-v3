@@ -119,8 +119,8 @@ class ProgrammeDaoTest : DbTest() {
                 987,
                 0
         )
-        val programmes = arrayOf(programme0, programme1, programme2)
-        db.programmeDao().insertAll(*programmes)
+        val programmes = listOf(programme0, programme1, programme2)
+        db.programmeDao().insertAll(programmes)
         val programmesFromDb = getValue(db.programmeDao().getAll())
         assertNotNull(programmesFromDb)
         assertEquals(2, programmesFromDb.size)

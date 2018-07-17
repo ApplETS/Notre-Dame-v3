@@ -44,7 +44,7 @@ class SeanceRepository @Inject constructor(
     ): LiveData<Resource<List<Seance>>> {
         return object : NetworkBoundResource<List<Seance>, ApiSignetsModel<ApiListeDesSeances>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiListeDesSeances>) {
-                item.data?.let { dao.insertAll(*it.toSeancesEntities(cours).toTypedArray()) }
+                item.data?.let { dao.insertAll(it.toSeancesEntities(cours)) }
             }
 
             override fun shouldFetch(data: List<Seance>?): Boolean = shouldFetch

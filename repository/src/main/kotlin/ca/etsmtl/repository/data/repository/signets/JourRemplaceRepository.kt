@@ -37,7 +37,7 @@ class JourRemplaceRepository @Inject constructor(
         return object : NetworkBoundResource<List<JourRemplace>, ApiSignetsModel<ApiListeJoursRemplaces>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiListeJoursRemplaces>) {
                 item.data?.toJourRemplaceEntities(session)?.let {
-                    dao.insertAll(*it.toTypedArray())
+                    dao.insertAll(it)
                 }
             }
 

@@ -92,6 +92,5 @@ class JourRemplaceDaoTest : DbTest() {
         val joursRemplacesH2018 = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAllBySession("H2018"))
         Assert.assertEquals(1, joursRemplacesH2018.size)
         Assert.assertEquals(jourH2018, joursRemplacesH2018[0])
-
     }
 }

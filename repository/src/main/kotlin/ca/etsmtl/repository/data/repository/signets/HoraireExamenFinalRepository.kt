@@ -44,7 +44,7 @@ class HoraireExamenFinalRepository @Inject constructor(
     ): LiveData<Resource<List<HoraireExamenFinal>>> {
         return object : NetworkBoundResource<List<HoraireExamenFinal>, ApiSignetsModel<ApiListeHoraireExamensFinaux>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiListeHoraireExamensFinaux>) {
-                item.data?.let { dao.insertAll(*it.toHoraireExamensFinauxEntities(session).toTypedArray()) }
+                item.data?.let { dao.insertAll(it.toHoraireExamensFinauxEntities(session)) }
             }
 
             override fun shouldFetch(data: List<HoraireExamenFinal>?) = shouldFetch

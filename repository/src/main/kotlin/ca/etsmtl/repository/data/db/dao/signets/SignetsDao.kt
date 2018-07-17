@@ -22,5 +22,5 @@ interface SignetsDao<T> {
      * @param obj The data to insert
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg obj: T)
+    fun insertAll(objs: List<T>)
 }

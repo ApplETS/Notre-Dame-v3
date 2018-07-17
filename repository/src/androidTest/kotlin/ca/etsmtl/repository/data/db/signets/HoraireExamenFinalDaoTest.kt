@@ -96,6 +96,5 @@ class HoraireExamenFinalDaoTest : DbTest() {
         val horairesE2018 = LiveDataTestUtil.getValue(db.horaireExamenFinalDao().getAllBySession("E2018"))
         Assert.assertEquals(1, horairesE2018.size)
         Assert.assertEquals(horaireE2018, horairesE2018[0])
-
     }
 }
