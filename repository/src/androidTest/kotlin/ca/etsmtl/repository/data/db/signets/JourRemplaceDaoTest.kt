@@ -19,7 +19,7 @@ class JourRemplaceDaoTest : DbTest() {
             "2016-05-23",
             "2016-05-25",
             "Journée nationale des Patriotes    ",
-            "É2018"
+            "E2018"
     )
     private lateinit var dao: JourRemplaceDao
 
@@ -86,11 +86,21 @@ class JourRemplaceDaoTest : DbTest() {
         dao.insert(jourH2018)
 
         val joursRemplacesE2018 = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAllBySession("E2018"))
-        Assert.assertEquals(2, joursRemplacesE2018.size)
+        Assert.assertEquals(3, joursRemplacesE2018.size)
         Assert.assertEquals(jour1E2018, joursRemplacesE2018[0])
         Assert.assertEquals(jour2E2018, joursRemplacesE2018[1])
         val joursRemplacesH2018 = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAllBySession("H2018"))
         Assert.assertEquals(1, joursRemplacesH2018.size)
         Assert.assertEquals(jourH2018, joursRemplacesH2018[0])
+    }
+
+    @Test
+    fun testDeleteBySession() {
+        db.horaireExamenFinalDao().deleteBySession("A2018")
+        var joursRemplaces = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAll())
+        Assert.assertEquals(1, joursRemplaces.size)
+        db.horaireExamenFinalDao().deleteBySession("E2018")
+        joursRemplaces = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAll())
+        Assert.assertEquals(1, joursRemplaces.size)
     }
 }

@@ -97,4 +97,24 @@ class HoraireExamenFinalDaoTest : DbTest() {
         Assert.assertEquals(1, horairesE2018.size)
         Assert.assertEquals(horaireE2018, horairesE2018[0])
     }
+
+    @Test
+    fun testDeleteBySession() {
+        val horaire = HoraireExamenFinalEntity(
+                "LOG330",
+                "01",
+                "2018-04-13",
+                "13:30",
+                "16:30",
+                "A-1302",
+                "H2018"
+        )
+        db.horaireExamenFinalDao().insert(horaire)
+        db.horaireExamenFinalDao().deleteBySession("A2018")
+        var horaires = LiveDataTestUtil.getValue(db.horaireExamenFinalDao().getAll())
+        Assert.assertEquals(1, horaires.size)
+        db.horaireExamenFinalDao().deleteBySession("H2018")
+        horaires = LiveDataTestUtil.getValue(db.horaireExamenFinalDao().getAll())
+        Assert.assertEquals(0, horaires.size)
+    }
 }

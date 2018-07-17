@@ -19,7 +19,7 @@ class SeanceDaoTest : DbTest() {
             CoursEntity(
                     "MAT472",
                     "02",
-                    "É2018",
+                    "E2018",
                     "foo",
                     "B+",
                     4,

@@ -50,6 +50,7 @@ class SeanceRepository @Inject constructor(
             override fun shouldFetch(data: List<Seance>?): Boolean = shouldFetch
 
             override fun loadFromDb(): LiveData<List<Seance>> {
+                TODO("Get by Cours")
                 return Transformations.map(dao.getAll()) {
                     it.toSeances()
                 }
