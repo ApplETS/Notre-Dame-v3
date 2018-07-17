@@ -1,6 +1,7 @@
 package ca.etsmtl.etsmobile.presentation.profile
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.Etudiant
@@ -16,12 +17,25 @@ class ProfileViewModel @Inject constructor(
     private var userCredentials: SignetsUserCredentials
 ) : ViewModel() {
 
+    private val etudiantMediatorLiveData: MediatorLiveData<Resource<Etudiant>> = MediatorLiveData()
     private var etudiant: LiveData<Resource<Etudiant>>? = null
 
     fun getInfoEtudiant(): LiveData<Resource<Etudiant>> {
-        if (etudiant == null)
+        if (etudiant == null) {
             etudiant = repository.getInfoEtudiant(userCredentials, true)
+            etudiant?.let {
+                etudiantMediatorLiveData.addSource<Resource<Etudiant>>(it) {
+                    etudiantMediatorLiveData.value = it
+                }
+            }
+        }
 
-        return etudiant as LiveData<Resource<Etudiant>>
+        return etudiantMediatorLiveData
+    }
+
+    fun refresh() {
+        etudiant?.let { etudiantMediatorLiveData.removeSource(it) }
+        etudiant = null
+        getInfoEtudiant()
     }
 }

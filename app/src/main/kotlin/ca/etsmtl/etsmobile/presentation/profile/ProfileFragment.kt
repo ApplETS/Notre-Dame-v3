@@ -11,8 +11,8 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.Etudiant
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_profile.progressBarInfoEtudiant
 import kotlinx.android.synthetic.main.fragment_profile.recyclerViewInfoEtudiant
+import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutInfoEtudiant
 import javax.inject.Inject
 
 /**
@@ -42,8 +42,14 @@ class ProfileFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpSwipeRefresh()
         setUpRecyclerView()
         subscribeUI()
+    }
+
+    private fun setUpSwipeRefresh() {
+        swipeRefreshLayoutInfoEtudiant.setColorSchemeResources(R.color.colorPrimary)
+        swipeRefreshLayoutInfoEtudiant.setOnRefreshListener { profileViewModel.refresh() }
     }
 
     private fun setUpRecyclerView() {
@@ -60,14 +66,14 @@ class ProfileFragment : DaggerFragment() {
         profileViewModel.getInfoEtudiant().observe(this, Observer<Resource<Etudiant>> { res ->
             when (res?.status) {
                 Resource.SUCCESS -> {
-                    progressBarInfoEtudiant.visibility = View.GONE
+                    swipeRefreshLayoutInfoEtudiant.isRefreshing = false
                     res.data?.let { adapter.setEtudiant(it) }
                 }
                 Resource.ERROR -> {
-                    progressBarInfoEtudiant.visibility = View.GONE
+                    swipeRefreshLayoutInfoEtudiant.isRefreshing = false
                 }
                 Resource.LOADING -> {
-                    progressBarInfoEtudiant.visibility = View.VISIBLE
+                    swipeRefreshLayoutInfoEtudiant.isRefreshing = true
                     res.data?.let { adapter.setEtudiant(it) }
                 }
             }
