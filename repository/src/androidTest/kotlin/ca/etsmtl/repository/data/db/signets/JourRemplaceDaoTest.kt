@@ -59,4 +59,39 @@ class JourRemplaceDaoTest : DbTest() {
         Assert.assertEquals(same, fromDb[0])
         Assert.assertEquals(foo, fromDb[1])
     }
+
+    @Test
+    fun testGetBySession() {
+        val jour1E2018 = JourRemplaceEntity(
+                "2016-06-24",
+                "2016-06-25",
+                "Journée nationale des Tests    ",
+                "E2018"
+        )
+        dao.insert(jour1E2018)
+        val jour2E2018 = JourRemplaceEntity(
+                "2016-07-24",
+                "2016-07-25",
+                "Journée nationale des Tests    ",
+                "E2018"
+        )
+        dao.insert(jour2E2018)
+
+        val jourH2018 = JourRemplaceEntity(
+                "2016-02-24",
+                "2016-02-25",
+                "Foo    ",
+                "H2018"
+        )
+        dao.insert(jourH2018)
+
+        val joursRemplacesE2018 = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAllBySession("E2018"))
+        Assert.assertEquals(2, joursRemplacesE2018.size)
+        Assert.assertEquals(jour1E2018, joursRemplacesE2018[0])
+        Assert.assertEquals(jour2E2018, joursRemplacesE2018[1])
+        val joursRemplacesH2018 = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAllBySession("H2018"))
+        Assert.assertEquals(1, joursRemplacesH2018.size)
+        Assert.assertEquals(jourH2018, joursRemplacesH2018[0])
+
+    }
 }
