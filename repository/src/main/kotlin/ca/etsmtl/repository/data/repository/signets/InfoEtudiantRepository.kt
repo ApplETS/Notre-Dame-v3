@@ -5,7 +5,7 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.api.response.mapper.signets.toEtudiantEntity
+import ca.etsmtl.repository.data.api.response.mapper.toEtudiantEntity
 import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.repository.data.db.dao.signets.EtudiantDao
