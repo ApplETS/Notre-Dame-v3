@@ -3,6 +3,7 @@ package ca.etsmtl.repository.data.db.dao.signets
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
+import android.arch.persistence.room.Transaction
 import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
 
 /**
@@ -14,6 +15,15 @@ abstract class EvaluationDao : SignetsDao<EvaluationEntity> {
     @Query("SELECT * FROM evaluationentity")
     abstract fun getAll(): LiveData<List<EvaluationEntity>>
 
-    @Query("SELECT * FROM evaluationentity WHERE coursGroupe LIKE :coursGroupe")
-    abstract fun getByCoursGroupe(coursGroupe: String): LiveData<List<EvaluationEntity>>
+    @Query("SELECT * FROM evaluationentity WHERE cours LIKE :cours AND groupe LIKE :groupe AND session LIKE :session")
+    abstract fun getByCoursGroupeAndSession(cours: String, groupe: String, session: String): LiveData<List<EvaluationEntity>>
+
+    @Query("DELETE FROM evaluationentity WHERE cours LIKE :cours AND groupe LIKE :groupe AND session LIKE :session")
+    abstract fun deleteByCoursGroupeAndSession(cours: String, groupe: String, session: String)
+
+    @Transaction
+    open fun clearAndInsertByCoursGroupeAndSession(cours: String, groupe: String, session: String, evaluationEntities: List<EvaluationEntity>) {
+        deleteByCoursGroupeAndSession(cours, groupe, session)
+        insertAll(evaluationEntities)
+    }
 }

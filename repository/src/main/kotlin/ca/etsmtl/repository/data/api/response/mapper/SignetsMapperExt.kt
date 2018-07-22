@@ -7,6 +7,7 @@ import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.repository.data.api.response.signets.ApiEvaluation
 import ca.etsmtl.repository.data.api.response.signets.ApiHoraireExamenFinal
 import ca.etsmtl.repository.data.api.response.signets.ApiJourRemplace
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDesElementsEvaluation
 import ca.etsmtl.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.repository.data.api.response.signets.ApiListeJoursRemplaces
@@ -19,6 +20,7 @@ import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
 import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
+import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Session
 
@@ -68,8 +70,10 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
         this.masculin
 )
 
-fun ApiEvaluation.toEvaluationEntity() = EvaluationEntity(
-        this.coursGroupe,
+fun ApiEvaluation.toEvaluationEntity(cours: Cours) = EvaluationEntity(
+        cours.sigle,
+        cours.groupe,
+        cours.session,
         this.nom,
         this.equipe,
         this.dateCible,
@@ -80,9 +84,28 @@ fun ApiEvaluation.toEvaluationEntity() = EvaluationEntity(
         this.ecartType,
         this.mediane,
         this.rangCentile,
-        this.publie,
+        this.publie == "Oui",
         this.messageDuProf,
-        this.ignoreDuCalcul
+        this.ignoreDuCalcul == "Oui"
+)
+
+fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = ArrayList<EvaluationEntity>().apply {
+    this@toEvaluationEntities.liste.forEach {
+        add(it.toEvaluationEntity(cours))
+    }
+}
+
+fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours) = SommaireElementsEvaluationEntity(
+        cours.sigle,
+        cours.session,
+        this.noteACeJour,
+        this.scoreFinalSur100,
+        this.moyenneClasse,
+        this.ecartTypeClasse,
+        this.medianeClasse,
+        this.rangCentileClasse,
+        this.noteACeJourElementsIndividuels,
+        this.noteSur100PourElementsIndividuels
 )
 
 fun ApiHoraireExamenFinal.toHoraireExemanFinalEntity(session: Session) = HoraireExamenFinalEntity(

@@ -1,7 +1,8 @@
 package ca.etsmtl.repository.data.model
 
 data class Evaluation(
-    var coursGroupe: String,
+    var cours: String,
+    var groupe: String,
     var nom: String,
     var equipe: String?,
     var dateCible: String?,
@@ -12,7 +13,7 @@ data class Evaluation(
     var ecartType: String?,
     var mediane: String?,
     var rangCentile: String?,
-    var publie: String?,
+    var publie: Boolean,
     var messageDuProf: String?,
-    var ignoreDuCalcul: String?
+    var ignoreDuCalcul: Boolean
 )

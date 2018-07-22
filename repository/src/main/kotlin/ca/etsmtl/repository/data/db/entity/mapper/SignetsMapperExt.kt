@@ -1,13 +1,17 @@
 package ca.etsmtl.repository.data.db.entity.mapper
 
 import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
+import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
 import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
+import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.repository.data.model.Etudiant
+import ca.etsmtl.repository.data.model.Evaluation
 import ca.etsmtl.repository.data.model.HoraireExamenFinal
 import ca.etsmtl.repository.data.model.JourRemplace
 import ca.etsmtl.repository.data.model.Seance
+import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -21,6 +25,28 @@ fun EtudiantEntity.toEtudiant() = Etudiant(
         this.soldeTotal,
         this.masculin
 )
+
+fun EvaluationEntity.toEvaluation() = Evaluation(
+        this.cours,
+        this.groupe,
+        this.nom,
+        this.equipe,
+        this.dateCible,
+        this.note,
+        this.corrigeSur,
+        this.ponderation,
+        this.moyenne,
+        this.ecartType,
+        this.mediane,
+        this.rangCentile,
+        this.publie,
+        this.messageDuProf,
+        this.ignoreDuCalcul
+)
+
+fun List<EvaluationEntity>.toEvaluations() = ArrayList<Evaluation>().apply {
+    this@toEvaluations.forEach { add(it.toEvaluation()) }
+}
 
 fun HoraireExamenFinalEntity.toHoraireExamenFinal() = HoraireExamenFinal(
         this.sigle,
@@ -57,7 +83,18 @@ fun SeanceEntity.toSeance() = Seance(
 )
 
 fun List<SeanceEntity>.toSeances(): List<Seance> = ArrayList<Seance>().apply {
-    this@toSeances.forEach {
-        add(it.toSeance())
-    }
+    this@toSeances.forEach { add(it.toSeance()) }
 }
+
+fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEvaluation(
+        this.sigleCours,
+        this.session,
+        this.noteACeJour,
+        this.scoreFinalSur100,
+        this.moyenneClasse,
+        this.ecartTypeClasse,
+        this.medianeClasse,
+        this.rangCentileClasse,
+        this.noteACeJourElementsIndividuels,
+        this.noteSur100PourElementsIndividuels
+)
