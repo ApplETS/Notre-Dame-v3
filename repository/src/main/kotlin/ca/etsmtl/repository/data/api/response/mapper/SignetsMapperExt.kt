@@ -146,18 +146,12 @@ fun ApiListeJoursRemplaces.toJourRemplaceEntities(session: Session): List<JourRe
 fun ApiSeance.toSeanceEntity(cours: Cours) = SeanceEntity(
         this.dateDebut,
         this.dateFin,
-        CoursEntity(
-                cours.sigle,
-                cours.session,
-                cours.programmeEtudes,
-                cours.programmeEtudes,
-                cours.cote,
-                cours.nbCredits,
-                cours.titreCours
-        ),
         this.nomActivite,
         this.local,
-        this.descriptionActivite
+        this.descriptionActivite,
+        this.libelleCours,
+        cours.sigle,
+        cours.session
 )
 
 fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = ArrayList<SeanceEntity>().apply {

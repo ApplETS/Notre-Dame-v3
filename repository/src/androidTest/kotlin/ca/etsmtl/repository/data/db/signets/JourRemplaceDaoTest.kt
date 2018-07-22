@@ -85,23 +85,23 @@ class JourRemplaceDaoTest : DbTest() {
         )
         dao.insert(jourH2018)
 
-        val joursRemplacesE2018 = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAllBySession("E2018"))
+        val joursRemplacesE2018 = LiveDataTestUtil.getValue(dao.getAllBySession("E2018"))
         Assert.assertEquals(3, joursRemplacesE2018.size)
         Assert.assertEquals(entity, joursRemplacesE2018[0])
         Assert.assertEquals(jour1E2018, joursRemplacesE2018[1])
         Assert.assertEquals(jour2E2018, joursRemplacesE2018[2])
-        val joursRemplacesH2018 = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAllBySession("H2018"))
+        val joursRemplacesH2018 = LiveDataTestUtil.getValue(dao.getAllBySession("H2018"))
         Assert.assertEquals(1, joursRemplacesH2018.size)
         Assert.assertEquals(jourH2018, joursRemplacesH2018[0])
     }
 
     @Test
     fun testDeleteBySession() {
-        db.horaireExamenFinalDao().deleteBySession("A2018")
-        var joursRemplaces = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAll())
+        dao.deleteBySession("A2018")
+        var joursRemplaces = LiveDataTestUtil.getValue(dao.getAll())
         Assert.assertEquals(1, joursRemplaces.size)
-        db.horaireExamenFinalDao().deleteBySession("E2018")
-        joursRemplaces = LiveDataTestUtil.getValue(db.jourRemplaceDao().getAll())
-        Assert.assertEquals(1, joursRemplaces.size)
+        dao.deleteBySession(entity.session)
+        joursRemplaces = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(0, joursRemplaces.size)
     }
 }

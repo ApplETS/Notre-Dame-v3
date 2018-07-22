@@ -74,12 +74,12 @@ fun List<JourRemplaceEntity>.toJoursRemplaces(): List<JourRemplace> = ArrayList<
 fun SeanceEntity.toSeance() = Seance(
         this.dateDebut,
         this.dateFin,
-        this.cours.sigle,
-        this.cours.groupe,
         this.nomActivite,
         this.local,
         this.descriptionActivite,
-        this.cours.titreCours
+        this.libelleCours,
+        this.sigleCours,
+        this.session
 )
 
 fun List<SeanceEntity>.toSeances(): List<Seance> = ArrayList<Seance>().apply {

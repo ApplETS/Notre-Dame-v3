@@ -44,14 +44,13 @@ class SeanceRepository @Inject constructor(
     ): LiveData<Resource<List<Seance>>> {
         return object : NetworkBoundResource<List<Seance>, ApiSignetsModel<ApiListeDesSeances>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiListeDesSeances>) {
-                item.data?.let { dao.insertAll(it.toSeancesEntities(cours)) }
+                item.data?.let { dao.clearAndInsertByCoursAndSession(cours.sigle, cours.session, it.toSeancesEntities(cours)) }
             }
 
             override fun shouldFetch(data: List<Seance>?): Boolean = shouldFetch
 
             override fun loadFromDb(): LiveData<List<Seance>> {
-                TODO("Get by Cours")
-                return Transformations.map(dao.getAll()) {
+                return Transformations.map(dao.getByCoursAndSession(cours.sigle, cours.session)) {
                     it.toSeances()
                 }
             }
