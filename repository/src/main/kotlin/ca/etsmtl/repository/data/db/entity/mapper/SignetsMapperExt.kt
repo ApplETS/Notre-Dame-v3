@@ -1,21 +1,26 @@
 package ca.etsmtl.repository.data.db.entity.mapper
 
-import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
-import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
-import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
-import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
-import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
-import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import ca.etsmtl.repository.data.model.Etudiant
-import ca.etsmtl.repository.data.model.Evaluation
-import ca.etsmtl.repository.data.model.HoraireExamenFinal
-import ca.etsmtl.repository.data.model.JourRemplace
-import ca.etsmtl.repository.data.model.Seance
-import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
+import ca.etsmtl.repository.data.db.entity.signets.*
+import ca.etsmtl.repository.data.model.*
 
 /**
  * Created by Sonphil on 09-07-18.
  */
+
+fun CoursEntity.toCours() = Cours(
+        this.sigle,
+        this.groupe,
+        this.session,
+        this.programmeEtudes,
+        this.cote,
+        this.noteSur100,
+        this.nbCredits,
+        this.titreCours
+)
+
+fun List<CoursEntity>.toCours() = ArrayList<Cours>().apply {
+    this@toCours.forEach { add(it.toCours()) }
+}
 
 fun EtudiantEntity.toEtudiant() = Etudiant(
         this.type,

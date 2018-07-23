@@ -2,7 +2,9 @@ package ca.etsmtl.repository.data.db.dao.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Query
+import android.arch.persistence.room.Transaction
 import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
 
 /**
@@ -15,4 +17,7 @@ abstract class CoursDao : SignetsDao<CoursEntity> {
 
     @Query("SELECT * FROM coursentity WHERE session LIKE :sessionAbrege")
     abstract fun getCoursBySession(sessionAbrege: String): LiveData<List<CoursEntity>>
+
+    @Query("DELETE FROM coursentity")
+    abstract fun deleteAll()
 }

@@ -5,7 +5,8 @@ data class Cours(
     var groupe: String,
     var session: String,
     var programmeEtudes: String,
-    var cote: String,
+    var cote: String?,
+    var noteSur100: String,
     var nbCredits: Int = 0,
     var titreCours: String
 )

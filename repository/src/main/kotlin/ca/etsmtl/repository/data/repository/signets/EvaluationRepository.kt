@@ -94,7 +94,7 @@ class EvaluationRepository @Inject constructor(
     fun getEvaluationsSummary(
         userCredentials: SignetsUserCredentials,
         cours: Cours,
-        shouldFetch: Boolean
+        shouldFetch: Boolean = true
     ): LiveData<Resource<SommaireElementsEvaluation>> = object : NetworkBoundResource<SommaireElementsEvaluation, ApiSignetsModel<ApiListeDesElementsEvaluation>>(appExecutors) {
         override fun saveCallResult(item: ApiSignetsModel<ApiListeDesElementsEvaluation>) {
             item.data?.let {

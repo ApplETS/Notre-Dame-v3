@@ -4,7 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.content.SharedPreferences
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.util.InstantAppExecutors
-import ca.etsmtl.repository.LiveDataTestUtil
+import ca.etsmtl.repository.util.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.AppDatabase
 import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.login.CipherUtils
