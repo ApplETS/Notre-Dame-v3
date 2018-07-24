@@ -1,7 +1,19 @@
 package ca.etsmtl.repository.data.db.entity.mapper
 
-import ca.etsmtl.repository.data.db.entity.signets.*
-import ca.etsmtl.repository.data.model.*
+import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
+import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
+import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
+import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
+import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
+import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
+import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
+import ca.etsmtl.repository.data.model.Cours
+import ca.etsmtl.repository.data.model.Etudiant
+import ca.etsmtl.repository.data.model.Evaluation
+import ca.etsmtl.repository.data.model.HoraireExamenFinal
+import ca.etsmtl.repository.data.model.JourRemplace
+import ca.etsmtl.repository.data.model.Seance
+import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -72,7 +84,7 @@ fun JourRemplaceEntity.toJourRemplace() = JourRemplace(
         this.description
 )
 
-fun List<JourRemplaceEntity>.toJoursRemplaces(): List<JourRemplace> = ArrayList<JourRemplace>().apply {
+fun List<JourRemplaceEntity>.toJoursRemplaces() = ArrayList<JourRemplace>().apply {
     this@toJoursRemplaces.forEach { add(it.toJourRemplace()) }
 }
 

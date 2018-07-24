@@ -7,7 +7,7 @@ import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
 import ca.etsmtl.repository.data.api.response.mapper.toCoursEntity
-import ca.etsmtl.repository.data.api.response.signets.*
+import ca.etsmtl.repository.data.api.response.signets.ApiCours
 import ca.etsmtl.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.repository.data.db.entity.mapper.toCours
 import ca.etsmtl.repository.data.model.Cours
@@ -62,13 +62,14 @@ class CoursRepository @Inject constructor(
                                 with(getCallForCours(apiCours)) {
                                     mediatorLiveData.addSource(this) {
                                         it?.let {
-                                            if (it.status == Resource.SUCCESS) {
-                                                hashMap[apiCours] = it.data!!
-                                                if (hashMap.size == liste.size) {
-                                                    mediatorLiveData.value = ApiResponse(Response.success(hashMap))
+                                            when (it.status) {
+                                                Resource.SUCCESS -> {
+                                                    hashMap[apiCours] = it.data!!
+                                                    if (hashMap.size == liste.size) {
+                                                        mediatorLiveData.value = ApiResponse(Response.success(hashMap))
+                                                    }
                                                 }
-                                            } else if (it.status == Resource.ERROR) {
-                                                mediatorLiveData.value = ApiResponse(Throwable(it.message))
+                                                Resource.ERROR -> mediatorLiveData.value = ApiResponse(Throwable(it.message))
                                             }
 
                                             if (it.status != Resource.LOADING)
@@ -87,7 +88,7 @@ class CoursRepository @Inject constructor(
             }
 
             private fun getCallForCours(apiCours: ApiCours): LiveData<Resource<SommaireElementsEvaluation>> {
-                val cours = Cours(
+                return with(Cours(
                         apiCours.sigle,
                         apiCours.groupe,
                         apiCours.session,
@@ -96,11 +97,14 @@ class CoursRepository @Inject constructor(
                         "",
                         apiCours.nbCredits,
                         apiCours.titreCours
-                )
-
-                return evaluationRepository.getEvaluationsSummary(userCredentials, cours, true)
+                )) {
+                    evaluationRepository.getEvaluationsSummary(
+                            userCredentials,
+                            this,
+                            true
+                    )
+                }
             }
-
         }.asLiveData()
     }
 }
