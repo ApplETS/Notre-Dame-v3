@@ -3,15 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/LoginTheme">
-
-    <!-- Background -->
-    <ImageView
-        android:id="@+id/iVBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/bg_ets_red" />
+    android:theme="@style/LoginTheme"
+    tools:background="@drawable/splash_background">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
