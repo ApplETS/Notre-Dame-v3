@@ -27,6 +27,8 @@
 		25553FC720545D42009897F7 /* ETS_mobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FC620545D42009897F7 /* ETS_mobileUITests.swift */; };
 		846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */; };
 		84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */; };
+		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
+		958F2F022106ADF70074DBF5 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* LoginModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		25553FC820545D42009897F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmedPersonViewController.swift; sourceTree = "<group>"; };
 		84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalEmergencyViewController.swift; sourceTree = "<group>"; };
+		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		958F2F012106ADF70074DBF5 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,7 @@
 		25553FA320545D42009897F7 /* ETS-mobile */ = {
 			isa = PBXGroup;
 			children = (
+				958F2F002106ADB30074DBF5 /* Login Screen */,
 				146F3AFF208B84FE00275F71 /* Dashboard */,
 				146F3B00208B850F00275F71 /* Profile */,
 				146F3B01208B853100275F71 /* Schedule */,
@@ -206,6 +211,15 @@
 				25553FC820545D42009897F7 /* Info.plist */,
 			);
 			path = "ETS-mobileUITests";
+			sourceTree = "<group>";
+		};
+		958F2F002106ADB30074DBF5 /* Login Screen */ = {
+			isa = PBXGroup;
+			children = (
+				958F2F012106ADF70074DBF5 /* LoginModel.swift */,
+				958AD36D210E069200A5D5B0 /* LoginViewController.swift */,
+			);
+			path = "Login Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,7 +368,9 @@
 				146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */,
 				142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */,
 				84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */,
+				958F2F022106ADF70074DBF5 /* LoginModel.swift in Sources */,
 				146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */,
+				958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */,
 				146F3B12208B89EB00275F71 /* ScheduleView.swift in Sources */,
 				146F3B10208B89E100275F71 /* ProfileView.swift in Sources */,
 				146F3B04208B878900275F71 /* HomeViewController.swift in Sources */,
