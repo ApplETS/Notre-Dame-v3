@@ -12,11 +12,12 @@ import android.view.View
  * Fades a [View] to the provided visibility state
  *
  * @param visibility [View.VISIBLE], [View.GONE] or [View.INVISIBLE]
+ * @param shortAnimTime Fade duration
  */
-fun View.fadeTo(visibility: Int) {
-    val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-
-    this.visibility = visibility
+fun View.fadeTo(
+    visibility: Int,
+    shortAnimTime: Long = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+) {
     animate().setDuration(shortAnimTime)
             .alpha((if (visibility == View.VISIBLE) 1 else 0).toFloat())
             .setListener(object : AnimatorListenerAdapter() {

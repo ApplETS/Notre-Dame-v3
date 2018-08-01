@@ -25,8 +25,10 @@ import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
+import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
+import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
 import kotlinx.android.synthetic.main.layout_login_form.btnSignIn
 import kotlinx.android.synthetic.main.layout_login_form.btnUniversalCodeInfo
 import kotlinx.android.synthetic.main.layout_login_form.layoutPassword
@@ -185,11 +187,17 @@ class LoginFragment : DaggerFragment() {
      */
     private fun showProgress(show: Boolean) {
         if (show) {
-            loginForm.fadeTo(View.INVISIBLE)
             progressLogin.fadeTo(View.VISIBLE)
+            loginForm.visibility = View.INVISIBLE
+            iVETSLogo.visibility = View.INVISIBLE
+            tvMadeBy.visibility = View.INVISIBLE
+            btnApplets.visibility = View.INVISIBLE
         } else {
-            loginForm.fadeTo(View.VISIBLE)
             progressLogin.fadeTo(View.GONE)
+            loginForm.visibility = View.VISIBLE
+            iVETSLogo.visibility = View.VISIBLE
+            tvMadeBy.visibility = View.VISIBLE
+            btnApplets.visibility = View.VISIBLE
         }
     }
 
