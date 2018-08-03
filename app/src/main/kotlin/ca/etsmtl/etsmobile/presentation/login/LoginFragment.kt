@@ -19,8 +19,8 @@ import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
-import ca.etsmtl.etsmobile.util.KeyboardUtils
 import ca.etsmtl.etsmobile.util.fadeTo
+import ca.etsmtl.etsmobile.util.hideKeyboard
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import dagger.android.support.DaggerFragment
@@ -174,7 +174,7 @@ class LoginFragment : DaggerFragment() {
      * Attempts to sign in the account
      */
     private fun attemptLogin() {
-        activity?.currentFocus?.let { KeyboardUtils.hideKeyboard(it) }
+        activity?.currentFocus?.hideKeyboard()
 
         val universalCodeStr = universalCode.text.toString()
         val passwordStr = password.text.toString()

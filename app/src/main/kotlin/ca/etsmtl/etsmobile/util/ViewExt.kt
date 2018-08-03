@@ -2,7 +2,9 @@ package ca.etsmtl.etsmobile.util
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 
 /**
  * Created by Sonphil on 23-06-18.
@@ -25,4 +27,18 @@ fun View.fadeTo(
                     this@fadeTo.visibility = visibility
                 }
             })
+}
+
+/**
+ * Tries to hide the keyboard
+ *
+ * @return True if it worked
+ */
+fun View.hideKeyboard(): Boolean {
+    return try {
+        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    } catch (ignored: RuntimeException) {
+        false
+    }
 }
