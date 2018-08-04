@@ -23,8 +23,10 @@ import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
+import kotlinx.android.synthetic.main.fragment_login.iVBackground
 import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
@@ -60,6 +62,7 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
         setUpFields()
 
         val onClickListener = View.OnClickListener {

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="center"
-        android:src="@drawable/bg_ets_red" />
+        tools:src="@drawable/bg_ets_red" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,8 +34,8 @@
             android:layout_marginStart="8dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/loginForm"
-            app:layout_constraintStart_toStartOf="@+id/loginForm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
