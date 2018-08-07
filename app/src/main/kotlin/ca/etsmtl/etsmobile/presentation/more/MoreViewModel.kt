@@ -80,9 +80,9 @@ class MoreViewModel @Inject constructor(
 
     fun selectItem(index: Int) {
         when (index) {
-            MoreViewModel.ItemsIndex.FAQ.ordinal -> TODO()
-            MoreViewModel.ItemsIndex.ABOUT.ordinal -> activityToGoTo.value = AboutActivity::class.java
-            MoreViewModel.ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog.call()
+            ItemsIndex.FAQ.ordinal -> TODO()
+            ItemsIndex.ABOUT.ordinal -> activityToGoTo.value = AboutActivity::class.java
+            ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog.call()
         }
     }
 }
