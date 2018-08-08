@@ -64,7 +64,7 @@ class LoginFragment : DaggerFragment() {
 
         View.OnClickListener {
             when {
-                it.id == R.id.btnSignIn -> { loginViewModel.submitCredentials() }
+                it.id == R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
                 it.id == R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
                 it.id == R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
             }
@@ -103,7 +103,7 @@ class LoginFragment : DaggerFragment() {
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 loginViewModel.setUniversalCode(universalCode.text.toString())
                 loginViewModel.setPassword(password.text.toString())
-                loginViewModel.submitCredentials()
+                clearFocusAndSubmitCredentials()
                 return@OnEditorActionListener true
             }
             false
@@ -119,7 +119,8 @@ class LoginFragment : DaggerFragment() {
     }
 
     /**
-     * Subscribes the UI to the LiveData
+     * Subscribes the UI to [loginViewModel]'s LiveData's and add [loginViewModel] as an observer
+     * of the lifecycle
      */
     private fun subscribeUI() {
         with (loginViewModel) {
@@ -195,5 +196,17 @@ class LoginFragment : DaggerFragment() {
 
             builder.create().show()
         }
+    }
+
+    /**
+     * Clears the focus on each field and submit the credentials
+     *
+     * Clearing the focus will set the universal code and password in [loginViewModel] and trigger
+     * a validity check for each field
+     */
+    private fun clearFocusAndSubmitCredentials() {
+        universalCode.clearFocus()
+        password.clearFocus()
+        loginViewModel.submitCredentials()
     }
 }

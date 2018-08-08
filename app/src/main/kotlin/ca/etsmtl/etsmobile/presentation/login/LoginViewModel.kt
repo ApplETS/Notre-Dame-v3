@@ -145,6 +145,7 @@ class LoginViewModel @Inject constructor(
      * an [Boolean] which indicates whether the credentials used to fetch the [Etudiant] of the
      * original [Resource] is valid or not.
      *
+     * @param res The Resource<Etudiant>
      * @return The transformed [Resource]
      */
     private fun transformEtudiantResToBooleanRes(res: Resource<Etudiant>?): Resource<Boolean> {
@@ -184,10 +185,24 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Set the user's universal code
+     *
+     * This will trigger a validity check for the given universal code.
+     *
+     * @param universalCode
+     */
     fun setUniversalCode(universalCode: String) {
         this.universalCode.value = universalCode
     }
 
+    /**
+     * Set the user's password
+     *
+     * This will trigger a validity check for the given password.
+     *
+     * @param password
+     */
     fun setPassword(password: String) {
         this.password.value = password
     }
