@@ -17,12 +17,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.MainActivity
-import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
@@ -62,59 +58,39 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
+        loadImages()
+
         setUpFields()
 
-        val onClickListener = View.OnClickListener {
+        View.OnClickListener {
             when {
-                it.id == R.id.btnSignIn -> attemptLogin()
+                it.id == R.id.btnSignIn -> { loginViewModel.submitCredentials() }
                 it.id == R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
-                it.id == R.id.btnApplets -> goToAboutActivity()
+                it.id == R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
             }
+        }.apply {
+            btnSignIn.setOnClickListener(this)
+            btnUniversalCodeInfo.setOnClickListener(this)
+            btnApplets.setOnClickListener(this)
         }
-
-        btnSignIn.setOnClickListener(onClickListener)
-        btnUniversalCodeInfo.setOnClickListener(onClickListener)
-        btnApplets.setOnClickListener(onClickListener)
 
         subscribeUI()
-
-        initWithSavedCredentials()
     }
 
-    /**
-     * Gets the saved credentials from the view model. If are the credentials are not null, the form
-     * will be filled up and an login attempt will be made
-     */
-    private fun initWithSavedCredentials() {
-        loginViewModel.getSavedUserCredentials()?.let {
-            fillLoginForm(it)
-            attemptLogin()
-        }
-    }
-
-    /**
-     * Fills the credentials fields with the specified user credentials
-     *
-     * @param userCredentials The user credentials to fill the fields with
-     */
-    private fun fillLoginForm(userCredentials: SignetsUserCredentials) {
-        universalCode.setText(userCredentials.codeAccesUniversel)
-        password.setText(userCredentials.motPasse)
+    private fun loadImages() {
+        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
+        Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
     }
 
     private fun setUpFields() {
         val onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
-                val fieldStatus: FieldStatus
                 when (view.id) {
                     R.id.universalCode -> {
-                        fieldStatus = loginViewModel.setUniversalCode(universalCode.text.toString())
-                        adjustTextInputAccordingToStatus(layoutUniversalCode, fieldStatus)
+                        loginViewModel.setUniversalCode(universalCode.text.toString())
                     }
                     R.id.password -> {
-                        fieldStatus = loginViewModel.setPassword(password.text.toString())
-                        adjustTextInputAccordingToStatus(layoutPassword, fieldStatus)
+                        loginViewModel.setPassword(password.text.toString())
                     }
                 }
             }
@@ -125,7 +101,9 @@ class LoginFragment : DaggerFragment() {
 
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                attemptLogin()
+                loginViewModel.setUniversalCode(universalCode.text.toString())
+                loginViewModel.setPassword(password.text.toString())
+                loginViewModel.submitCredentials()
                 return@OnEditorActionListener true
             }
             false
@@ -144,45 +122,43 @@ class LoginFragment : DaggerFragment() {
      * Subscribes the UI to the LiveData
      */
     private fun subscribeUI() {
-        loginViewModel.userCredentialsValidLD.observe(this, Observer<Resource<Boolean>> { resource ->
-            if (resource != null) {
-                when (resource.status) {
-                    Resource.SUCCESS -> {
-                        progressLogin.fadeTo(View.GONE)
-                        goToMainActivity()
-                    }
-                    Resource.ERROR -> {
-                        showProgress(false)
-                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
-                    }
-                    Resource.LOADING -> {
-                        showProgress(true)
-                    }
-                }
-            }
-        })
-    }
+        with (loginViewModel) {
+            getShowLoading().observe(this@LoginFragment, Observer {
+                showProgress(it == true)
+            })
 
-    private fun adjustTextInputAccordingToStatus(textInputLayout: TextInputLayout, fieldStatus: FieldStatus?) {
-        fieldStatus?.let {
-            if (fieldStatus.valid) {
-                textInputLayout.error = null
-            } else {
-                textInputLayout.error = fieldStatus.error
-            }
+            getErrorMessage().observe(this@LoginFragment, Observer {
+                it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+            })
+
+            getUniversalCodeError().observe(this@LoginFragment, Observer {
+                setFieldError(layoutUniversalCode, it)
+            })
+
+            getPasswordError().observe(this@LoginFragment, Observer {
+                setFieldError(layoutPassword, it)
+            })
+
+            getActivityToGoTo().observe(this@LoginFragment, Observer {
+                with(Intent(context, it)) {
+                    startActivity(this)
+                }
+            })
+
+            getHideKeyboard().observe(this@LoginFragment, Observer {
+                activity?.currentFocus?.hideKeyboard()
+            })
+
+            lifecycle.addObserver(this)
         }
     }
 
-    /**
-     * Attempts to sign in the account
-     */
-    private fun attemptLogin() {
-        activity?.currentFocus?.hideKeyboard()
-
-        val universalCodeStr = universalCode.text.toString()
-        val passwordStr = password.text.toString()
-
-        loginViewModel.setUserCredentials(SignetsUserCredentials(universalCodeStr, passwordStr))
+    private fun setFieldError(textInputLayout: TextInputLayout, errorMessage: String?) {
+        if (errorMessage.isNullOrEmpty()) {
+            textInputLayout.error = null
+        } else {
+            textInputLayout.error = errorMessage
+        }
     }
 
     /**
@@ -219,22 +195,5 @@ class LoginFragment : DaggerFragment() {
 
             builder.create().show()
         }
-    }
-
-    /**
-     * Starts MainActivity
-     */
-    private fun goToMainActivity() {
-        val intent = Intent(activity, MainActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
-    }
-
-    /**
-     * Starts AboutActivity
-     */
-    private fun goToAboutActivity() {
-        val intent = Intent(activity, AboutActivity::class.java)
-        startActivity(intent)
     }
 }
