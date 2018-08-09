@@ -65,10 +65,7 @@ class LoginRepository @Inject constructor(
 
             saveUserCredentials(userCredentials)
         } else {
-            val finishedLD = MutableLiveData<Boolean>()
-            finishedLD.value = true
-
-            finishedLD
+            MutableLiveData<Boolean>().apply { value = true }
         }
     }
 

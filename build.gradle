@@ -4,14 +4,14 @@ buildscript {
     // Versions
     ext.astl = '1.0.1'
     ext.constraint_layout = '1.1.2'
-    ext.espresso = '3.0.1'
     ext.dagger = '2.15'
     ext.dimens = '1.4'
+    ext.espresso = '3.0.1'
     ext.firebase = '16.0.1'
     ext.firebase_crashlytics = '2.9.4'
     ext.glide = '4.6.1'
     ext.junit = '4.12'
-    ext.kotlin_version = '1.2.51'
+    ext.kotlin_version = '1.2.60'
     ext.kotshi = '1.0.2'
     ext.leakcanary = '1.5.4'
     ext.lifecycle = '1.1.1'
@@ -19,8 +19,8 @@ buildscript {
     ext.mockito_inline = '2.18.3'
     ext.moshi = '1.5.0'
     ext.okhttp = '3.8.0'
-    ext.room = '1.1.0'
     ext.retrofit = '2.3.0'
+    ext.room = '1.1.0'
     ext.support = '27.1.1'
 
     repositories {
@@ -34,7 +34,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:3.2.0"
         classpath 'com.akaita.android:easylauncher:1.2.0'

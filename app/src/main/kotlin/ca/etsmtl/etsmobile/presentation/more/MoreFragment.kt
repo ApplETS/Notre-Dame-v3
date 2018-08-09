@@ -6,18 +6,14 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainFragment
-import ca.etsmtl.etsmobile.presentation.WelcomeActivity
-import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
@@ -49,6 +45,8 @@ class MoreFragment : MainFragment() {
         toolbar.setTitle(R.string.title_more)
 
         setUpRecyclerView(recyclerViewMore)
+
+        subscribeUI()
     }
 
     private fun setUpRecyclerView(view: RecyclerView) {
@@ -57,11 +55,7 @@ class MoreFragment : MainFragment() {
 
             adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
                 override fun onItemClick(index: Int) {
-                    when (index) {
-                        MoreViewModel.ItemsIndex.FAQ.ordinal -> Log.d(TAG, "FAQ") // TODO
-                        MoreViewModel.ItemsIndex.ABOUT.ordinal -> goToAbout()
-                        MoreViewModel.ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog(context)
-                    }
+                    moreViewModel.selectItem(index)
                 }
             })
         }
@@ -76,55 +70,38 @@ class MoreFragment : MainFragment() {
                 .setTitle(getString(R.string.more_item_label_log_out))
                 .setPositiveButton(R.string.yes) { dialog, which ->
                     dialog.dismiss()
-                    recyclerViewMore.visibility = View.GONE
-                    progressMore.visibility = View.VISIBLE
-                    subscribeUILogout()
+                    moreViewModel.logout()
                 }
                 .setNegativeButton(R.string.no) { dialog, which -> dialog.dismiss() }
 
         builder.create().show()
     }
 
-    private fun subscribeUILogout() {
-        moreViewModel.logout().observe(this, Observer<Boolean> { finished ->
-            if (finished != null && finished) {
-                Toast.makeText(context, R.string.msg_logout_success,
-                        Toast.LENGTH_LONG).show()
+    private fun subscribeUI() {
+        moreViewModel.getDisplayLogoutDialog().observe(this, Observer {
+            context?.let { context -> displayLogoutConfirmationDialog(context) }
+        })
 
-                val intent = Intent(context, WelcomeActivity::class.java)
-                startActivity(intent)
+        moreViewModel.getDisplayMessage().observe(this, Observer { message ->
+            message?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+        })
 
-                // Finish the activity to prevent the user from going back
-                activity?.finish()
+        moreViewModel.getActivityToGoTo().observe(this, Observer {
+            with(Intent(context, it)) {
+                startActivity(this)
             }
         })
-    }
 
-    /**
-     * Starts AboutActivity
-     */
-    private fun goToAbout() {
-        val intent = Intent(context, AboutActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun goToFragment(fragment: Fragment, fragmentTag: String, title: String) {
-        toolbar.title = title
-
-        with(childFragmentManager.beginTransaction()) {
-            replace(R.id.containerItem, fragment, fragmentTag)
-            addToBackStack(fragmentTag)
-            commit()
-        }
-    }
-
-    override fun onBackPressed(): Boolean {
-        return if (childFragmentManager.backStackEntryCount > 0) {
-            toolbar.setTitle(R.string.title_more)
-            childFragmentManager.popBackStack()
-            true
-        } else {
-            false
-        }
+        moreViewModel.getLoading().observe(this, Observer {
+            it?.let {
+                if (it) {
+                    recyclerViewMore.visibility = View.GONE
+                    progressMore.visibility = View.VISIBLE
+                } else {
+                    recyclerViewMore.visibility = View.VISIBLE
+                    progressMore.visibility = View.GONE
+                }
+            }
+        })
     }
 }

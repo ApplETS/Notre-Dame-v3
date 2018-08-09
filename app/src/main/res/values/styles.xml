@@ -38,6 +38,11 @@
         <item name="fontFamily">@font/delta_jaeger_light</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="LoginErrorTextAppearance" parent="TextAppearance.Design.Error">

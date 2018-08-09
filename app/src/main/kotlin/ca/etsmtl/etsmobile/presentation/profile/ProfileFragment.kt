@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.repository.data.model.Etudiant
-import ca.etsmtl.repository.data.model.Resource
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.recyclerViewInfoEtudiant
 import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutInfoEtudiant
@@ -28,7 +27,9 @@ class ProfileFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var adapter: ProfileAdapter
+    val adapter: ProfileAdapter by lazy {
+        ProfileAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +54,6 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun setUpRecyclerView() {
-        adapter = ProfileAdapter()
         recyclerViewInfoEtudiant.adapter = adapter
         recyclerViewInfoEtudiant.setHasFixedSize(true)
     }
@@ -63,20 +63,12 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        profileViewModel.getInfoEtudiant().observe(this, Observer<Resource<Etudiant>> { res ->
-            when (res?.status) {
-                Resource.SUCCESS -> {
-                    swipeRefreshLayoutInfoEtudiant.isRefreshing = false
-                    res.data?.let { adapter.setEtudiant(it) }
-                }
-                Resource.ERROR -> {
-                    swipeRefreshLayoutInfoEtudiant.isRefreshing = false
-                }
-                Resource.LOADING -> {
-                    swipeRefreshLayoutInfoEtudiant.isRefreshing = true
-                    res.data?.let { adapter.setEtudiant(it) }
-                }
-            }
+        profileViewModel.getEtudiant().observe(this, Observer<Etudiant> {
+            it?.let { adapter.setEtudiant(it) }
         })
+        profileViewModel.getLoading().observe(this, Observer<Boolean> {
+            it?.let { swipeRefreshLayoutInfoEtudiant.isRefreshing = it }
+        })
+        this.lifecycle.addObserver(profileViewModel)
     }
 }

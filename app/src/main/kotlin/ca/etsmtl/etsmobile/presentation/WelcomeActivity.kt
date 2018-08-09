@@ -9,6 +9,10 @@ import ca.etsmtl.etsmobile.R
 class WelcomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Setting theme to LoginTheme because, on launch, the theme is set to SplashTheme in order
+        // to display the splash screen
+        setTheme(R.style.LoginTheme)
+
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_welcome)

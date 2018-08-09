@@ -1,9 +1,17 @@
 package ca.etsmtl.etsmobile.presentation.more
 
+import android.app.Activity
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
+import android.support.annotation.StringRes
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
+import ca.etsmtl.etsmobile.presentation.WelcomeActivity
+import ca.etsmtl.etsmobile.presentation.about.AboutActivity
+import ca.etsmtl.etsmobile.util.call
 import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
@@ -20,14 +28,40 @@ class MoreViewModel @Inject constructor(
         FAQ, ABOUT, LOGOUT
     }
 
+    private val displayLogoutConfirmationDialog by lazy { MutableLiveData<Void>() }
+    private val displayMessage by lazy { MutableLiveData<@StringRes Int>() }
+    private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
+    private val activityToGoTo by lazy { MutableLiveData<Class<out Activity>>() }
+
+    fun getDisplayLogoutDialog(): LiveData<Void> = displayLogoutConfirmationDialog
+    fun getDisplayMessage(): LiveData<String> = Transformations.map(displayMessage) {
+        app.getString(it)
+    }
+    fun getActivityToGoTo(): LiveData<Class<out Activity>> = activityToGoTo
+    fun getLoading(): LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
+
     /**
      * Clears the user's data
      *
      * This function should be called when the user want to log out.
-     *
-     * @return A [LiveData] containing a [Boolean] who will be true when the process has finished
      */
-    fun logout(): LiveData<Boolean> = loginRepository.clearUserData()
+    fun logout() {
+        with(loginRepository.clearUserData()) {
+            logoutMediatorLiveData.addSource(this) { finished ->
+                finished?.let {
+                    logoutMediatorLiveData.value = finished
+
+                    if (finished) {
+                        displayMessage.value = R.string.msg_logout_success
+
+                        logoutMediatorLiveData.removeSource(this)
+
+                        activityToGoTo.value = WelcomeActivity::class.java
+                    }
+                }
+            }
+        }
+    }
 
     fun itemsList(): List<MoreItem> {
         val moreItems = ArrayList<MoreItem>()
@@ -42,5 +76,13 @@ class MoreViewModel @Inject constructor(
         icons.recycle()
 
         return moreItems
+    }
+
+    fun selectItem(index: Int) {
+        when (index) {
+            ItemsIndex.FAQ.ordinal -> TODO()
+            ItemsIndex.ABOUT.ordinal -> activityToGoTo.value = AboutActivity::class.java
+            ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog.call()
+        }
     }
 }

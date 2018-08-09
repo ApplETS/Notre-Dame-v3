@@ -1,11 +1,18 @@
 package ca.etsmtl.etsmobile.presentation.login
 
+import android.app.Activity
 import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
+import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.presentation.about.AboutActivity
+import ca.etsmtl.etsmobile.util.call
 import ca.etsmtl.etsmobile.util.isDeviceConnected
 import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
@@ -22,11 +29,15 @@ class LoginViewModel @Inject constructor(
     private val repository: InfoEtudiantRepository,
     private val loginRepository: LoginRepository,
     private val app: App
-) : AndroidViewModel(app) {
+) : AndroidViewModel(app), LifecycleObserver {
 
-    private val userCredentialsLD: MutableLiveData<SignetsUserCredentials> by lazy {
+    private val universalCode: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    private val password: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    private val userCredentials: MutableLiveData<SignetsUserCredentials> by lazy {
         MutableLiveData<SignetsUserCredentials>()
     }
+    private val activityToGoTo by lazy { MutableLiveData<Class<out Activity>>() }
+    private val hideKeyboard by lazy { MutableLiveData<Void>() }
 
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
@@ -35,20 +46,85 @@ class LoginViewModel @Inject constructor(
      * an instance can be fetched, it means that the user's credentials are valid. As a result, the
      * new [SignetsUserCredentials] are saved and stored in [LoginRepository].
      */
-    val userCredentialsValidLD: LiveData<Resource<Boolean>> by lazy {
-        Transformations.switchMap(userCredentialsLD) { userCredentials ->
+    private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
+        Transformations.switchMap(userCredentials) { userCredentials ->
             // Fetch Etudiant instance
             Transformations.map(repository.getInfoEtudiant(userCredentials, app.isDeviceConnected())) { res ->
-                val blnRes = transformEtudiantResToBooleanRes(res)
-
-                if (userCredentialsValid(blnRes)) {
-                    loginRepository.saveUserCredentialsIfNeeded(userCredentials)
+                transformEtudiantResToBooleanRes(res).apply {
+                    if (userCredentialsValid(this)) {
+                        loginRepository.saveUserCredentialsIfNeeded(userCredentials)
+                        activityToGoTo.value = MainActivity::class.java
+                    }
                 }
-
-                blnRes
             }
         }
     }
+
+    /**
+     * Returns an error message to be displayed to the user.
+     *
+     * This is triggered after the user's credentials have been submitted.
+     *
+     * @return A [LiveData] containing an error message to be displayed to the user
+     */
+    fun getErrorMessage(): LiveData<String> = Transformations.map(userCredentialsValid) {
+        when {
+            it.status == Resource.ERROR -> it.message
+            else -> null
+        }
+    }
+
+    /**
+     * Returns whether or not a loading animation should be displayed.
+     *
+     * This is triggered after the user's credentials have been submitted.
+     *
+     * @return A [LiveData] with a [Boolean] which would be set to true a loading animation should
+     * be displayed
+     */
+    fun getShowLoading(): LiveData<Boolean> = Transformations.map(userCredentialsValid) {
+        it.status == Resource.SUCCESS || it.status == Resource.LOADING
+    }
+
+    /**
+     * Returns an error message related to the universal code field.
+     *
+     * This is triggered after the universal code has been submitted.
+     *
+     * @return A [LiveData] containing an error message related to the universal code field. The
+     * error message is null if there is not error in the universal code.
+     */
+    fun getUniversalCodeError(): LiveData<String> = Transformations.map(universalCode) {
+        when {
+            it.isEmpty() -> app.getString(R.string.error_field_required)
+            !it.matches(Regex("[a-zA-Z]{2}\\d{5}")) -> app.getString(R.string.error_invalid_universal_code)
+            else -> null
+        }
+    }
+
+    /**
+     * Returns an error message related to the password field.
+     *
+     * This is triggered after the password has been submitted.
+     *
+     * @return A [LiveData] containing an error message related to the password field. The
+     * error message is null if there is not error in the password.
+     */
+    fun getPasswordError(): LiveData<String> = Transformations.map(password) {
+        when {
+            it.isEmpty() -> app.getString(R.string.error_field_required)
+            else -> null
+        }
+    }
+
+    /**
+     * Returns the activity to navigate to.
+     *
+     * @return A [LiveData] containing an [Activity] to navigate to.
+     */
+    fun getActivityToGoTo(): LiveData<Class<out Activity>> = activityToGoTo
+
+    fun getHideKeyboard(): LiveData<Void> = hideKeyboard
 
     /**
      * Verifies that a given resource is not null and that his status is not [Resource.LOADING]
@@ -69,6 +145,7 @@ class LoginViewModel @Inject constructor(
      * an [Boolean] which indicates whether the credentials used to fetch the [Etudiant] of the
      * original [Resource] is valid or not.
      *
+     * @param res The Resource<Etudiant>
      * @return The transformed [Resource]
      */
     private fun transformEtudiantResToBooleanRes(res: Resource<Etudiant>?): Resource<Boolean> {
@@ -109,47 +186,55 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
-     * Set the universal code
+     * Set the user's universal code
      *
-     * @param universalCode the user's universal code
-     * @return A [FieldStatus] instance indicating whether the universal code is valid or not
+     * This will trigger a validity check for the given universal code.
+     *
+     * @param universalCode
      */
-    fun setUniversalCode(universalCode: String): FieldStatus {
-        return if (universalCode.isEmpty()) {
-            FieldStatus(false, app.getString(R.string.error_field_required))
-        } else if (!universalCode.matches(Regex("[a-zA-Z]{2}\\d{5}"))) {
-            FieldStatus(false, app.getString(R.string.error_invalid_universal_code))
-        } else {
-            FieldStatus(true, null)
+    fun setUniversalCode(universalCode: String) {
+        this.universalCode.value = universalCode
+    }
+
+    /**
+     * Set the user's password
+     *
+     * This will trigger a validity check for the given password.
+     *
+     * @param password
+     */
+    fun setPassword(password: String) {
+        this.password.value = password
+    }
+
+    /**
+     * Submits the user's credentials
+     *
+     * If the universal code and the password are not null, this will trigger a validity check of
+     * the user's credentials.
+     */
+    fun submitCredentials() {
+        if (universalCode.value != null && password.value != null) {
+            hideKeyboard.call()
+            userCredentials.value = SignetsUserCredentials(universalCode.value!!, password.value!!)
         }
     }
 
     /**
-     * Set the password
+     * Submits the saved user's credentials [Lifecycle.Event.ON_START]
      *
-     * @param password the user's password
-     * @return A [FieldStatus] instance indicating whether the password is valid or not
+     * Calls [submitCredentials] with the saved user's credentials if they are not null
      */
-    fun setPassword(password: String): FieldStatus {
-        return if (password.isEmpty()) {
-            FieldStatus(false, app.getString(R.string.error_field_required))
-        } else {
-            FieldStatus(true, null)
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun submitSavedCredentials() {
+        loginRepository.getSavedUserCredentials()?.let {
+            universalCode.value = it.codeAccesUniversel
+            password.value = it.motPasse
+            submitCredentials()
         }
     }
 
-    /**
-     * Triggers a verification of the validity of the [userCredentials].
-     * The result is posted to the [userCredentialsValidLD]
-     *
-     * @param userCredentials the credentials of the user
-     */
-    fun setUserCredentials(userCredentials: SignetsUserCredentials) {
-        /** Triggers [userCredentialsValidLD] **/
-        userCredentialsLD.value = userCredentials
-    }
-
-    fun getSavedUserCredentials(): SignetsUserCredentials? {
-        return loginRepository.getSavedUserCredentials()
+    fun clickOnAppletsLogo() {
+        activityToGoTo.value = AboutActivity::class.java
     }
 }

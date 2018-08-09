@@ -27,8 +27,8 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putParcelable(STATE_SIGNETS_CREDENTIALS, SignetsUserCredentials.INSTANCE.get())
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(STATE_SIGNETS_CREDENTIALS, SignetsUserCredentials.INSTANCE.get())
 
         super.onSaveInstanceState(outState)
     }

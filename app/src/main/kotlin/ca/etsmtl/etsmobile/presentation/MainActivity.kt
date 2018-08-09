@@ -24,6 +24,10 @@ import kotlinx.android.synthetic.main.activity_main.navigation
 
 class MainActivity : BaseActivity() {
 
+    companion object {
+        private const val CURRENT_FRAGMENT_TAG_KEY = "CurrentFragmentTag"
+    }
+
     private lateinit var currentFragmentTag: String
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
@@ -42,7 +46,15 @@ class MainActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
             selectDashboard()
+        } else { // Another fragment is being displayed
+            currentFragmentTag = savedInstanceState.getString(CURRENT_FRAGMENT_TAG_KEY)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(CURRENT_FRAGMENT_TAG_KEY, currentFragmentTag)
+
+        super.onSaveInstanceState(outState)
     }
 
     /**
