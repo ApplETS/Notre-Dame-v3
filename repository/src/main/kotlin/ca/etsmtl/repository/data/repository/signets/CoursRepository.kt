@@ -25,7 +25,7 @@ class CoursRepository @Inject constructor(
     private val coursDao: CoursDao,
     private val evaluationRepository: EvaluationRepository
 ) : SignetsRepository(appExecutors) {
-    fun getCoursNotes(
+    fun getCours(
         userCredentials: SignetsUserCredentials,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<Cours>>> {
@@ -52,32 +52,11 @@ class CoursRepository @Inject constructor(
                     val mediatorLiveData = MediatorLiveData<ApiResponse<HashMap<ApiCours, SommaireElementsEvaluation>>>()
 
                     if (it.isSuccessful) {
-                        val hashMap = HashMap<ApiCours, SommaireElementsEvaluation>()
                         val liste = it.body?.data?.liste
 
-                        if (liste == null) {
-                            mediatorLiveData.value = ApiResponse(Throwable(it.errorMessage))
-                        } else {
-                            liste.forEach { apiCours ->
-                                with(getCallForCours(apiCours)) {
-                                    mediatorLiveData.addSource(this) {
-                                        it?.let {
-                                            when (it.status) {
-                                                Resource.SUCCESS -> {
-                                                    hashMap[apiCours] = it.data!!
-                                                    if (hashMap.size == liste.size) {
-                                                        mediatorLiveData.value = ApiResponse(Response.success(hashMap))
-                                                    }
-                                                }
-                                                Resource.ERROR -> mediatorLiveData.value = ApiResponse(Throwable(it.message))
-                                            }
-
-                                            if (it.status != Resource.LOADING)
-                                                mediatorLiveData.removeSource(this)
-                                        }
-                                    }
-                                }
-                            }
+                        when (liste) {
+                            null -> mediatorLiveData.value = ApiResponse(Throwable(it.errorMessage))
+                            else -> getEvaluationsForListOfCours(liste, mediatorLiveData)
                         }
                     } else {
                         mediatorLiveData.value = ApiResponse(Throwable(it.errorMessage))
@@ -87,7 +66,32 @@ class CoursRepository @Inject constructor(
                 }
             }
 
-            private fun getCallForCours(apiCours: ApiCours): LiveData<Resource<SommaireElementsEvaluation>> {
+            private fun getEvaluationsForListOfCours(cours: List<ApiCours>, mediatorLiveData: MediatorLiveData<ApiResponse<HashMap<ApiCours, SommaireElementsEvaluation>>>) {
+                val hashMap = HashMap<ApiCours, SommaireElementsEvaluation>()
+
+                cours.forEach { apiCours ->
+                    with(getEvaluationSummaryForCours(apiCours)) {
+                        mediatorLiveData.addSource(this) {
+                            it?.let {
+                                when (it.status) {
+                                    Resource.SUCCESS -> {
+                                        hashMap[apiCours] = it.data!!
+                                        if (hashMap.size == cours.size) {
+                                            mediatorLiveData.value = ApiResponse(Response.success(hashMap))
+                                        }
+                                    }
+                                    Resource.ERROR -> mediatorLiveData.value = ApiResponse(Throwable(it.message))
+                                }
+
+                                if (it.status != Resource.LOADING)
+                                    mediatorLiveData.removeSource(this)
+                            }
+                        }
+                    }
+                }
+            }
+
+            private fun getEvaluationSummaryForCours(apiCours: ApiCours): LiveData<Resource<SommaireElementsEvaluation>> {
                 return with(Cours(
                         apiCours.sigle,
                         apiCours.groupe,
