@@ -18,7 +18,6 @@ import ca.etsmtl.repository.data.repository.NetworkBoundResource
 import retrofit2.Response
 import javax.inject.Inject
 
-// TODO: Test...
 class CoursRepository @Inject constructor(
     appExecutors: AppExecutors,
     private val api: SignetsApi,
