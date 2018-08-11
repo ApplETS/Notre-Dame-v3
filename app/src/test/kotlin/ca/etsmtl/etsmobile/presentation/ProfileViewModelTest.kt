@@ -4,11 +4,11 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import ca.etsmtl.etsmobile.presentation.profile.ProfileViewModel
-import ca.etsmtl.etsmobile.util.mock
 import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
+import com.nhaarman.mockito_kotlin.mock
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers

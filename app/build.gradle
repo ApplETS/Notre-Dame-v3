@@ -72,7 +72,7 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "android.arch.core:core-testing:${lifecycle}"
-    testImplementation "org.mockito:mockito-core:${mockito}"
+    testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation "org.mockito:mockito-inline:$mockito_inline"
 
     // Android Testing Support Library's runner and rules
@@ -111,6 +111,9 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-core:$firebase"
     implementation "com.crashlytics.sdk.android:crashlytics:$firebase_crashlytics"
+
+    // Mockito-Kotlin
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
 
     implementation project(':repository')
 }

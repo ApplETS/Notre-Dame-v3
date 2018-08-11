@@ -10,13 +10,13 @@ import android.net.NetworkInfo
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
-import ca.etsmtl.etsmobile.util.capture
-import ca.etsmtl.etsmobile.util.mock
 import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
+import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.mock
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
