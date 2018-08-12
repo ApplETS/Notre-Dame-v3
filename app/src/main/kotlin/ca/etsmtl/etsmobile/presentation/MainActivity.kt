@@ -5,10 +5,11 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.home.HomeFragment
+import ca.etsmtl.etsmobile.presentation.dashboard.DashboardFragment
+import ca.etsmtl.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
-import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
+import ca.etsmtl.etsmobile.presentation.student.StudentFragment
 import kotlinx.android.synthetic.main.activity_main.navigation
 
 /**
@@ -22,8 +23,12 @@ import kotlinx.android.synthetic.main.activity_main.navigation
 
 class MainActivity : BaseActivity() {
 
+    companion object {
+        private const val CURRENT_FRAGMENT_TAG_KEY = "CurrentFragmentTag"
+    }
+
+    private lateinit var currentFragmentTag: String
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        setUpToolbar(item)
 
         goToFragment(item)
 
@@ -35,23 +40,20 @@ class MainActivity : BaseActivity() {
 
         setContentView(R.layout.activity_main)
 
+        //navigation.disableShiftMode()
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        setTitle(R.string.title_home)
-
-        // Go to the first fragment only on the first run
-        if (savedInstanceState == null)
-            goToFragment(navigation.menu.getItem(0))
+        if (savedInstanceState == null) {
+            selectDashboard()
+        } else { // Another fragment is being displayed
+            currentFragmentTag = savedInstanceState.getString(CURRENT_FRAGMENT_TAG_KEY)
+        }
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(CURRENT_FRAGMENT_TAG_KEY, currentFragmentTag)
 
-        setUpToolbar(navigation.menu.findItem(navigation.selectedItemId))
-    }
-
-    private fun setUpToolbar(navigationItem: MenuItem) {
-        title = navigationItem.title
+        super.onSaveInstanceState(outState)
     }
 
     /**
@@ -70,8 +72,10 @@ class MainActivity : BaseActivity() {
         }
 
         if (fragment != null) {
+            currentFragmentTag = fragmentTag
             with(fragmentManager.beginTransaction()) {
                 replace(R.id.content, fragment, fragmentTag)
+                addToBackStack(fragmentTag)
                 commit()
             }
         }
@@ -87,16 +91,17 @@ class MainActivity : BaseActivity() {
         var fragment: Fragment? = null
 
         when (selectedItemId) {
-            R.id.navigation_home -> {
-                fragment = HomeFragment.newInstance()
+            R.id.navigation_dashboard -> {
+                fragment = DashboardFragment.newInstance()
             }
             R.id.navigation_schedule -> {
                 fragment = ScheduleFragment.newInstance()
             }
             R.id.navigation_profile -> {
-                fragment = ProfileFragment.newInstance()
+                fragment = StudentFragment.newInstance()
             }
             R.id.navigation_ets -> {
+                fragment = EtsFragment.newInstance()
             }
             R.id.navigation_more -> {
                 fragment = MoreFragment.newInstance()
@@ -107,15 +112,28 @@ class MainActivity : BaseActivity() {
     }
 
     /**
-     * On back pressed, return to the home screen
+     * On back pressed, lets the current fragment handles the event if it's an instance of
+     * [MainFragment] and if it's not null.
+     * If the event hasn't been consumed, returns to the dashboard or close if the dashboard has
+     * already been selected
      */
     override fun onBackPressed() {
-        val seletedItemId = navigation.selectedItemId
+        val currentFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
 
-        if (R.id.navigation_home != seletedItemId) {
-            val homeMenuItem = navigation.menu.findItem(R.id.navigation_home)
-            homeMenuItem.isChecked = true
-            onNavigationItemSelectedListener.onNavigationItemSelected(homeMenuItem)
+        if ((currentFragment as? MainFragment)?.onBackPressed() == true) {
+            return // Return if the fragment has consumed the event
         }
+
+        if (navigation.selectedItemId != R.id.navigation_dashboard) {
+            selectDashboard()
+        } else {
+            finishAndRemoveTask()
+        }
+    }
+
+    private fun selectDashboard() {
+        val homeMenuItem = navigation.menu.findItem(R.id.navigation_dashboard)
+        homeMenuItem.isChecked = true
+        onNavigationItemSelectedListener.onNavigationItemSelected(homeMenuItem)
     }
 }

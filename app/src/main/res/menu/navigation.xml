@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home"
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_dashboard"
         app:showAsAction="always|withText" />
 
     <item
@@ -17,12 +17,12 @@
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_account_circle_black_24dp"
-        android:title="@string/title_profile"
+        android:title="@string/title_student"
         app:showAsAction="always|withText" />
 
     <item
         android:id="@+id/navigation_ets"
-        android:icon="@drawable/ic_school_black_24dp"
+        android:icon="@drawable/ic_account_balance_black_24dp"
         android:title="@string/title_ets"
         app:showAsAction="always|withText" />
 

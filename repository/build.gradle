@@ -1,0 +1,99 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test {
+            java.srcDirs += 'src/test/kotlin'
+            java.srcDirs += 'src/test-common/kotlin'
+            res.srcDirs += 'src/test/resources'
+        }
+        androidTest {
+            java.srcDirs += 'src/androidTest/kotlin'
+            java.srcDirs += 'src/test-common/kotlin'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Architecture components
+    implementation "android.arch.lifecycle:extensions:${lifecycle}"
+    kapt "android.arch.lifecycle:compiler:${lifecycle}"
+    implementation "android.arch.persistence.room:runtime:${room}"
+    kapt "android.arch.persistence.room:compiler:${room}"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:${junit}"
+    testImplementation "android.arch.persistence.room:testing:${room}"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "android.arch.core:core-testing:${lifecycle}"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
+    testImplementation "org.mockito:mockito-inline:$mockito_inline"
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation "com.android.support.test:runner:${astl}"
+    androidTestImplementation "com.android.support.test:rules:${astl}"
+    androidTestImplementation "android.arch.persistence.room:testing:${room}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${dagger}"
+    implementation "com.google.dagger:dagger-android:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:${moshi}"
+    implementation "com.squareup.moshi:moshi-kotlin:${moshi}"
+
+    // Kotshi
+    implementation "se.ansman.kotshi:api:${kotshi}"
+    kapt "se.ansman.kotshi:compiler:${kotshi}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
+    implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
+
+    // Mockito-Kotlin
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
+}

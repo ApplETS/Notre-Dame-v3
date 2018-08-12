@@ -13,16 +13,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.WelcomeActivity
+import ca.etsmtl.etsmobile.presentation.MainFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 import javax.inject.Inject
 
-class MoreFragment : DaggerFragment() {
+class MoreFragment : MainFragment() {
 
     companion object {
+        const val TAG = "MoreFragment"
         fun newInstance() = MoreFragment()
     }
 
@@ -41,7 +42,11 @@ class MoreFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        toolbar.setTitle(R.string.title_more)
+
         setUpRecyclerView(recyclerViewMore)
+
+        subscribeUI()
     }
 
     private fun setUpRecyclerView(view: RecyclerView) {
@@ -50,7 +55,7 @@ class MoreFragment : DaggerFragment() {
 
             adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
                 override fun onItemClick(index: Int) {
-                    displayLogoutConfirmationDialog(context)
+                    moreViewModel.selectItem(index)
                 }
             })
         }
@@ -65,26 +70,37 @@ class MoreFragment : DaggerFragment() {
                 .setTitle(getString(R.string.more_item_label_log_out))
                 .setPositiveButton(R.string.yes) { dialog, which ->
                     dialog.dismiss()
-                    recyclerViewMore.visibility = View.GONE
-                    progressMore.visibility = View.VISIBLE
-                    subscribeUILogout()
+                    moreViewModel.logout()
                 }
                 .setNegativeButton(R.string.no) { dialog, which -> dialog.dismiss() }
 
         builder.create().show()
     }
 
-    private fun subscribeUILogout() {
-        moreViewModel.logout().observe(this, Observer<Boolean> { finished ->
-            if (finished != null && finished) {
-                Toast.makeText(context, R.string.msg_logout_success,
-                        Toast.LENGTH_LONG).show()
+    private fun subscribeUI() {
+        moreViewModel.getDisplayLogoutDialog().observe(this, Observer {
+            context?.let { context -> displayLogoutConfirmationDialog(context) }
+        })
 
-                val intent = Intent(context, WelcomeActivity::class.java)
-                startActivity(intent)
+        moreViewModel.getDisplayMessage().observe(this, Observer { message ->
+            message?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+        })
 
-                // Finish the activity to prevent the user from going back
-                activity?.finish()
+        moreViewModel.getActivityToGoTo().observe(this, Observer {
+            with(Intent(context, it)) {
+                startActivity(this)
+            }
+        })
+
+        moreViewModel.getLoading().observe(this, Observer {
+            it?.let {
+                if (it) {
+                    recyclerViewMore.visibility = View.GONE
+                    progressMore.visibility = View.VISIBLE
+                } else {
+                    recyclerViewMore.visibility = View.VISIBLE
+                    progressMore.visibility = View.GONE
+                }
             }
         })
     }

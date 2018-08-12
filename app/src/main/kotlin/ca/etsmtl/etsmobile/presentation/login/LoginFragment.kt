@@ -1,7 +1,5 @@
 package ca.etsmtl.etsmobile.presentation.login
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -19,15 +17,16 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.data.model.Resource
-import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.etsmobile.presentation.MainActivity
-import ca.etsmtl.etsmobile.util.KeyboardUtils
+import ca.etsmtl.etsmobile.util.fadeTo
+import ca.etsmtl.etsmobile.util.hideKeyboard
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_login.btnApplets
 import kotlinx.android.synthetic.main.fragment_login.iVBackground
+import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
+import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
 import kotlinx.android.synthetic.main.layout_login_form.btnSignIn
 import kotlinx.android.synthetic.main.layout_login_form.btnUniversalCodeInfo
 import kotlinx.android.synthetic.main.layout_login_form.layoutPassword
@@ -59,59 +58,39 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadImages()
+
         setUpFields()
 
-        // Set up background
-        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
-
-        val onClickListener = View.OnClickListener {
+        View.OnClickListener {
             when {
-                it.id == R.id.btnSignIn -> attemptLogin()
+                it.id == R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
                 it.id == R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
+                it.id == R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
             }
+        }.apply {
+            btnSignIn.setOnClickListener(this)
+            btnUniversalCodeInfo.setOnClickListener(this)
+            btnApplets.setOnClickListener(this)
         }
-
-        btnSignIn.setOnClickListener(onClickListener)
-        btnUniversalCodeInfo.setOnClickListener(onClickListener)
 
         subscribeUI()
-
-        initWithSavedCredentials()
     }
 
-    /**
-     * Gets the saved credentials from the view model. If are the credentials are not null, the form
-     * will be filled up and an login attempt will be made
-     */
-    private fun initWithSavedCredentials() {
-        loginViewModel.getSavedUserCredentials()?.let {
-            fillLoginForm(it)
-            attemptLogin()
-        }
-    }
-
-    /**
-     * Fills the credentials fields with the specified user credentials
-     *
-     * @param userCredentials The user credentials to fill the fields with
-     */
-    private fun fillLoginForm(userCredentials: SignetsUserCredentials) {
-        universalCode.setText(userCredentials.codeAccesUniversel)
-        password.setText(userCredentials.motPasse)
+    private fun loadImages() {
+        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
+        Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
     }
 
     private fun setUpFields() {
         val onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
-                val fieldStatus: FieldStatus
                 when (view.id) {
                     R.id.universalCode -> {
-                        fieldStatus = loginViewModel.setUniversalCode(universalCode.text.toString())
-                        adjustTextInputAccordingToStatus(layoutUniversalCode, fieldStatus)
+                        loginViewModel.setUniversalCode(universalCode.text.toString())
                     }
                     R.id.password -> {
-                        fieldStatus = loginViewModel.setPassword(password.text.toString())
-                        adjustTextInputAccordingToStatus(layoutPassword, fieldStatus)
+                        loginViewModel.setPassword(password.text.toString())
                     }
                 }
             }
@@ -122,7 +101,9 @@ class LoginFragment : DaggerFragment() {
 
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                attemptLogin()
+                loginViewModel.setUniversalCode(universalCode.text.toString())
+                loginViewModel.setPassword(password.text.toString())
+                clearFocusAndSubmitCredentials()
                 return@OnEditorActionListener true
             }
             false
@@ -138,74 +119,66 @@ class LoginFragment : DaggerFragment() {
     }
 
     /**
-     * Subscribes the UI to the LiveData
+     * Subscribes the UI to [loginViewModel]'s LiveData's and add [loginViewModel] as an observer
+     * of the lifecycle
      */
     private fun subscribeUI() {
-        loginViewModel.userCredentialsValidLD.observe(this, Observer<Resource<Boolean>> { resource ->
-            if (resource != null) {
-                when (resource.status) {
-                    Resource.SUCCESS -> {
-                        goToMainActivity()
-                    }
-                    Resource.ERROR -> {
-                        showProgress(false)
-                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
-                    }
-                    Resource.LOADING -> {
-                        showProgress(true)
-                    }
-                }
-            }
-        })
-    }
+        with (loginViewModel) {
+            getShowLoading().observe(this@LoginFragment, Observer {
+                showProgress(it == true)
+            })
 
-    private fun adjustTextInputAccordingToStatus(textInputLayout: TextInputLayout, fieldStatus: FieldStatus?) {
-        fieldStatus?.let {
-            if (fieldStatus.valid) {
-                textInputLayout.error = null
-            } else {
-                textInputLayout.error = fieldStatus.error
-            }
+            getErrorMessage().observe(this@LoginFragment, Observer {
+                it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+            })
+
+            getUniversalCodeError().observe(this@LoginFragment, Observer {
+                setFieldError(layoutUniversalCode, it)
+            })
+
+            getPasswordError().observe(this@LoginFragment, Observer {
+                setFieldError(layoutPassword, it)
+            })
+
+            getActivityToGoTo().observe(this@LoginFragment, Observer {
+                with(Intent(context, it)) {
+                    startActivity(this)
+                }
+            })
+
+            getHideKeyboard().observe(this@LoginFragment, Observer {
+                activity?.currentFocus?.hideKeyboard()
+            })
+
+            lifecycle.addObserver(this)
         }
     }
 
-    /**
-     * Attempts to sign in the account
-     */
-    private fun attemptLogin() {
-        activity?.currentFocus?.let { KeyboardUtils.hideKeyboard(it) }
-
-        val universalCodeStr = universalCode.text.toString()
-        val passwordStr = password.text.toString()
-
-        loginViewModel.setUserCredentials(SignetsUserCredentials(universalCodeStr, passwordStr))
+    private fun setFieldError(textInputLayout: TextInputLayout, errorMessage: String?) {
+        if (errorMessage.isNullOrEmpty()) {
+            textInputLayout.error = null
+        } else {
+            textInputLayout.error = errorMessage
+        }
     }
 
     /**
      * Shows the progress UI and hides the login form.
      */
     private fun showProgress(show: Boolean) {
-        val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-
-        loginForm.visibility = if (show) View.INVISIBLE else View.VISIBLE
-        loginForm.animate()
-                .setDuration(shortAnimTime)
-                .alpha((if (show) 0 else 1).toFloat())
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        loginForm.visibility = if (show) View.INVISIBLE else View.VISIBLE
-                    }
-                })
-
-        progressLogin.visibility = if (show) View.VISIBLE else View.GONE
-        progressLogin.animate()
-                .setDuration(shortAnimTime)
-                .alpha((if (show) 1 else 0).toFloat())
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        progressLogin.visibility = if (show) View.VISIBLE else View.GONE
-                    }
-                })
+        if (show) {
+            progressLogin.fadeTo(View.VISIBLE)
+            loginForm.visibility = View.INVISIBLE
+            iVETSLogo.visibility = View.INVISIBLE
+            tvMadeBy.visibility = View.INVISIBLE
+            btnApplets.visibility = View.INVISIBLE
+        } else {
+            progressLogin.fadeTo(View.GONE)
+            loginForm.visibility = View.VISIBLE
+            iVETSLogo.visibility = View.VISIBLE
+            tvMadeBy.visibility = View.VISIBLE
+            btnApplets.visibility = View.VISIBLE
+        }
     }
 
     private fun displayUniversalCodeDialog() {
@@ -226,11 +199,14 @@ class LoginFragment : DaggerFragment() {
     }
 
     /**
-     * Starts MainActivity
+     * Clears the focus on each field and submit the credentials
+     *
+     * Clearing the focus will set the universal code and password in [loginViewModel] and trigger
+     * a validity check for each field
      */
-    private fun goToMainActivity() {
-        val intent = Intent(activity, MainActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
+    private fun clearFocusAndSubmitCredentials() {
+        universalCode.clearFocus()
+        password.clearFocus()
+        loginViewModel.submitCredentials()
     }
 }

@@ -15,10 +15,10 @@
 
         <ImageView
             android:id="@+id/iVMoreItemIcon"
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/material_component_lists_icon_left_padding"
-            android:tint="@color/etsGrisFonce"
+            android:layout_marginStart="@dimen/material_component_lists_icon_left_padding"
+            android:scaleType="centerInside"
             tools:src="@drawable/ic_exit_to_app_black_24dp" />
     </FrameLayout>
 
@@ -26,7 +26,7 @@
         android:id="@+id/textViewMoreItemLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="@dimen/material_component_lists_right_padding"
+        android:paddingEnd="@dimen/material_component_lists_right_padding"
         android:textAppearance="?android:attr/textAppearanceListItem"
         tools:text="@tools:sample/lorem" />
 </LinearLayout>

@@ -1,7 +1,7 @@
 package ca.etsmtl.etsmobile.presentation
 
 import android.os.Bundle
-import ca.etsmtl.etsmobile.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import dagger.android.support.DaggerAppCompatActivity
 
 /**
@@ -27,8 +27,8 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putParcelable(STATE_SIGNETS_CREDENTIALS, SignetsUserCredentials.INSTANCE.get())
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(STATE_SIGNETS_CREDENTIALS, SignetsUserCredentials.INSTANCE.get())
 
         super.onSaveInstanceState(outState)
     }

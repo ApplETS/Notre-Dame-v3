@@ -10,4 +10,6 @@
     <color name="etsGrisFonce">#636467</color>
     <color name="etsGrisClair">#807F83</color>
     <color name="etsNoir">#2E2A25</color>
+
+    <color name="appletsBg">#003462</color>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.etsmtl.etsmobile.R
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 /**
  * Created by Sonphil on 25-02-18.
@@ -25,8 +26,12 @@ class ScheduleFragment : Fragment() {
 
     companion object {
         fun newInstance(): ScheduleFragment {
-            val fragment = ScheduleFragment()
-            return fragment
+            return ScheduleFragment()
         }
     }
-} // Required empty public constructor
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        toolbar.setTitle(R.string.title_schedule)
+    }
+}
