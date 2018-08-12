@@ -32,7 +32,7 @@ class CoursRepository @Inject constructor(
      * Returns the user's courses
      *
      * @param userCredentials The user's credentials
-     * @param True if the data should be fetched from the network. False if the the data
+     * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      * @return The courses
      */
@@ -54,7 +54,7 @@ class CoursRepository @Inject constructor(
 
             override fun loadFromDb(): LiveData<List<Cours>> {
                 return Transformations.map(coursDao.getAll()) {
-                    it.toCours()
+                    it?.toCours()
                 }
             }
 

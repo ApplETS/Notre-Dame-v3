@@ -45,7 +45,7 @@ class JourRemplaceRepository @Inject constructor(
 
             override fun loadFromDb(): LiveData<List<JourRemplace>> {
                 return Transformations.map(dao.getAllBySession(session.abrege)) {
-                    it.toJoursRemplaces()
+                    it?.toJoursRemplaces()
                 }
             }
 

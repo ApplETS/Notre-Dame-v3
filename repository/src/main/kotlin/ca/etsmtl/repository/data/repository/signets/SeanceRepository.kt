@@ -51,7 +51,7 @@ class SeanceRepository @Inject constructor(
 
             override fun loadFromDb(): LiveData<List<Seance>> {
                 return Transformations.map(dao.getByCoursAndSession(cours.sigle, cours.session)) {
-                    it.toSeances()
+                    it?.toSeances()
                 }
             }
 

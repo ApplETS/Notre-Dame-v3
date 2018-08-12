@@ -51,7 +51,7 @@ class HoraireExamenFinalRepository @Inject constructor(
 
             override fun loadFromDb(): LiveData<List<HoraireExamenFinal>> {
                 return Transformations.map(dao.getAllBySession(session.abrege)) {
-                    it.toHorairesExamensFinaux()
+                    it?.toHorairesExamensFinaux()
                 }
             }
 

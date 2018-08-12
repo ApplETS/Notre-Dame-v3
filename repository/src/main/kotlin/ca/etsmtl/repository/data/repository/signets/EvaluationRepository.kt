@@ -110,7 +110,7 @@ class EvaluationRepository @Inject constructor(
 
         override fun loadFromDb(): LiveData<SommaireElementsEvaluation> {
             return Transformations.map(sommaireElementsEvaluationDao.getBySigleCoursAndSession(cours.sigle, cours.session)) {
-                it.toSommaireEvaluation()
+                it?.toSommaireEvaluation()
             }
         }
 
