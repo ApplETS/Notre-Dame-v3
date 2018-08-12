@@ -84,8 +84,13 @@ class CoursRepository @Inject constructor(
              * [ApiCours]s and their [SommaireElementsEvaluation]
              *
              * This is performed by calling [EvaluationRepository.getEvaluationsSummary] for each
-             * [ApiCours]. However, if one of the calls fails, a failed Api response will be
-             * posted to the [LiveData]
+             * [ApiCours].
+             *
+             * However, if a call for a course fails, this course will not be inserted in to the
+             * [HashMap].
+             *
+             * The function also skips courses that have an invalid session such as "s.o".
+             * (hors-trimestre).
              *
              * @param cours The courses
              */
@@ -93,22 +98,27 @@ class CoursRepository @Inject constructor(
                 val mediatorLiveData = MediatorLiveData<ApiResponse<HashMap<ApiCours, SommaireElementsEvaluation>>>()
                 val hashMap = HashMap<ApiCours, SommaireElementsEvaluation>()
 
-                cours.forEach { apiCours ->
-                    with(getEvaluationSummaryForCours(apiCours)) {
-                        mediatorLiveData.addSource(this) {
-                            it?.let {
-                                when (it.status) {
-                                    Resource.SUCCESS -> {
-                                        hashMap[apiCours] = it.data!!
-                                        if (hashMap.size == cours.size) {
-                                            mediatorLiveData.value = ApiResponse(Response.success(hashMap))
+                with(cours.filter { it.hasValidSession() }) {
+                    var nbCalls = this.count()
+
+                    this.forEach { apiCours ->
+                        with(getEvaluationSummaryForCours(apiCours)) {
+                            mediatorLiveData.addSource(this) {
+                                it?.let {
+                                    when (it.status) {
+                                        Resource.SUCCESS -> {
+                                            hashMap[apiCours] = it.data!!
                                         }
                                     }
-                                    Resource.ERROR -> mediatorLiveData.value = ApiResponse(Throwable(it.message))
-                                }
 
-                                if (it.status != Resource.LOADING)
-                                    mediatorLiveData.removeSource(this)
+                                    if (it.status != Resource.LOADING) {
+                                        if (--nbCalls == 0) { // If it's the last call...
+                                            mediatorLiveData.value = ApiResponse(Response.success(hashMap))
+                                        }
+
+                                        mediatorLiveData.removeSource(this)
+                                    }
+                                }
                             }
                         }
                     }
