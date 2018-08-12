@@ -9,10 +9,10 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "org.jlleitschuh.gradle.ktlint"
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -48,11 +48,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-    // Support libraries
-    implementation "com.android.support:appcompat-v7:${support}"
-    implementation "com.android.support:design:${support}"
-    implementation "com.android.support:support-v4:${support}"
 
     // Architecture components
     implementation "android.arch.lifecycle:extensions:${lifecycle}"

@@ -13,11 +13,11 @@ apply plugin: 'com.akaita.android.easylauncher'
 //apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "ca.etsmtl.etsmobile"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -51,11 +51,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Support libraries
-    implementation "com.android.support:appcompat-v7:${support}"
-    implementation "com.android.support:design:${support}"
-    implementation "com.android.support:support-v4:${support}"
-    implementation "com.android.support:cardview-v7:${support}"
-    implementation "com.android.support:recyclerview-v7:${support}"
+    implementation "com.android.support:appcompat-v7:$support"
+    implementation "com.android.support:design:$support"
+    implementation "com.android.support:support-v4:$support"
+    implementation "com.android.support:cardview-v7:$support"
+    implementation "com.android.support:recyclerview-v7:$support"
     implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
 
     // Architecture components
