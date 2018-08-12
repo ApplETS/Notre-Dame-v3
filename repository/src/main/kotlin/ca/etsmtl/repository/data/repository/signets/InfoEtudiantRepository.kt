@@ -5,6 +5,7 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.api.requestbody.signets.EtudiantRequestBody
 import ca.etsmtl.repository.data.api.response.mapper.toEtudiantEntity
 import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
@@ -51,7 +52,7 @@ class InfoEtudiantRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiEtudiant>>> {
-                return transformApiLiveData(api.infoEtudiant(userCredentials))
+                return transformApiLiveData(api.infoEtudiant(EtudiantRequestBody(userCredentials)))
             }
         }.asLiveData()
     }

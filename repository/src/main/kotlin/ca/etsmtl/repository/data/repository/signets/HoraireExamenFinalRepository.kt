@@ -5,6 +5,7 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeHoraireExamensFinauxRequestBody
 import ca.etsmtl.repository.data.api.response.mapper.toHoraireExamensFinauxEntities
 import ca.etsmtl.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
@@ -57,9 +58,11 @@ class HoraireExamenFinalRepository @Inject constructor(
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeHoraireExamensFinaux>>> {
                 return transformApiLiveData(api.listeHoraireExamensFinaux(
-                        userCredentials.codeAccesUniversel,
-                        userCredentials.motPasse,
-                        session.abrege
+                        ListeHoraireExamensFinauxRequestBody(
+                                userCredentials.codeAccesUniversel,
+                                userCredentials.motPasse,
+                                session.abrege
+                        )
                 ))
             }
         }.asLiveData()

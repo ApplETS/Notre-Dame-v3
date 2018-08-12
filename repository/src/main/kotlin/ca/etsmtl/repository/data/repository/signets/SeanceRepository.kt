@@ -5,6 +5,7 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeDesSeancesRequestBody
 import ca.etsmtl.repository.data.api.response.mapper.toSeancesEntities
 import ca.etsmtl.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
@@ -57,12 +58,14 @@ class SeanceRepository @Inject constructor(
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>> {
                 return transformApiLiveData(api.listeDesSeances(
-                        userCredentials.codeAccesUniversel,
-                        userCredentials.motPasse,
-                        cours.sigle,
-                        session.abrege,
-                        session.dateDebut,
-                        session.dateFin
+                        ListeDesSeancesRequestBody(
+                                userCredentials.codeAccesUniversel,
+                                userCredentials.motPasse,
+                                cours.sigle,
+                                session.abrege,
+                                session.dateDebut,
+                                session.dateFin
+                        )
                 ))
             }
         }.asLiveData()

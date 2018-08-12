@@ -5,6 +5,7 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeDesElementsEvaluationRequestBody
 import ca.etsmtl.repository.data.api.response.mapper.toEvaluationEntities
 import ca.etsmtl.repository.data.api.response.mapper.toSommaireEvaluationEntity
 import ca.etsmtl.repository.data.api.response.signets.ApiListeDesElementsEvaluation
@@ -74,11 +75,13 @@ class EvaluationRepository @Inject constructor(
 
         override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>> {
             return transformApiLiveData(api.listeDesElementsEvaluation(
-                    userCredentials.codeAccesUniversel,
-                    userCredentials.motPasse,
-                    cours.sigle,
-                    cours.groupe,
-                    cours.session
+                    ListeDesElementsEvaluationRequestBody(
+                            userCredentials.codeAccesUniversel,
+                            userCredentials.motPasse,
+                            cours.sigle,
+                            cours.groupe,
+                            cours.session
+                    )
             ))
         }
     }.asLiveData()
@@ -116,11 +119,13 @@ class EvaluationRepository @Inject constructor(
 
         override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>> {
             return transformApiLiveData(api.listeDesElementsEvaluation(
-                    userCredentials.codeAccesUniversel,
-                    userCredentials.motPasse,
-                    cours.sigle,
-                    cours.groupe,
-                    cours.session
+                    ListeDesElementsEvaluationRequestBody(
+                            userCredentials.codeAccesUniversel,
+                            userCredentials.motPasse,
+                            cours.sigle,
+                            cours.groupe,
+                            cours.session
+                    )
             ))
         }
     }.asLiveData()

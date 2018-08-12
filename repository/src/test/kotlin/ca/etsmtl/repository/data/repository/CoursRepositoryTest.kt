@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.api.requestbody.signets.EtudiantRequestBody
 import ca.etsmtl.repository.data.api.response.signets.ApiCours
 import ca.etsmtl.repository.data.api.response.signets.ApiListeDeCours
 import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
@@ -100,7 +101,7 @@ class CoursRepositoryTest {
     @Test
     fun testLoadFromNetwork() {
         val callCours: LiveData<ApiResponse<ApiSignetsModel<ApiListeDeCours>>> = ApiUtil.successCall(signetsModel)
-        `when`(signetsApi.listeCours(userCredentials)).thenReturn(callCours)
+        `when`(signetsApi.listeCours(EtudiantRequestBody(userCredentials))).thenReturn(callCours)
 
         val sommaireElementsEvaluation = SommaireElementsEvaluation(
                 "",
@@ -155,8 +156,8 @@ class CoursRepositoryTest {
 
         // Post the result of the first call to the DB
         dbData.postValue(ArrayList())
-        // Check if a request was sent to fetch new data
-        verify(signetsApi).listeCours(userCredentials)
+        // Check if a Request was sent to fetch new data
+        verify(signetsApi).listeCours(EtudiantRequestBody(userCredentials))
 
         // After fetching from the network, the data should be inserted into the DB.
         verify(dao, times(2)).insert(capture(coursEntityArgumentCaptor))
@@ -197,7 +198,7 @@ class CoursRepositoryTest {
     @Test
     fun testFailToLoadFromNetwork() {
         val errorMsg = "Test error couldn't load from network"
-        `when`(signetsApi.listeCours(userCredentials)).thenReturn(ApiUtil.failCall(errorMsg))
+        `when`(signetsApi.listeCours(EtudiantRequestBody(userCredentials))).thenReturn(ApiUtil.failCall(errorMsg))
 
         val repoLiveData: LiveData<Resource<List<Cours>>> = repo.getCours(userCredentials, true)
         val observer = mock(Observer::class.java)
@@ -226,8 +227,8 @@ class CoursRepositoryTest {
         }
         dbData.postValue(currentDBdata)
 
-        // Check if a request was sent to fetch new data
-        verify(signetsApi).listeCours(userCredentials)
+        // Check if a Request was sent to fetch new data
+        verify(signetsApi).listeCours(EtudiantRequestBody(userCredentials))
 
         // No data should be inserted to the DB since there was an error
         verify(dao, never()).insert(any())

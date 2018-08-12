@@ -7,6 +7,7 @@ import android.arch.lifecycle.Transformations
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
 import ca.etsmtl.repository.data.api.SignetsApi
+import ca.etsmtl.repository.data.api.requestbody.signets.EtudiantRequestBody
 import ca.etsmtl.repository.data.api.response.mapper.toCoursEntity
 import ca.etsmtl.repository.data.api.response.signets.ApiCours
 import ca.etsmtl.repository.data.db.dao.signets.CoursDao
@@ -59,7 +60,7 @@ class CoursRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<HashMap<ApiCours, SommaireElementsEvaluation>>> {
-                return Transformations.switchMap(transformApiLiveData(api.listeCours(userCredentials))) {
+                return Transformations.switchMap(transformApiLiveData(api.listeCours(EtudiantRequestBody(userCredentials)))) {
                     if (it.isSuccessful) {
                         val liste = it.body?.data?.liste
 

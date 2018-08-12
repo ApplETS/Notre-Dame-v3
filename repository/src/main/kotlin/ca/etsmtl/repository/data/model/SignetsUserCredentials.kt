@@ -3,7 +3,6 @@ package ca.etsmtl.repository.data.model
 import android.os.Parcel
 import android.os.Parcelable
 import ca.etsmtl.repository.data.model.SignetsUserCredentials.CREATOR.INSTANCE
-import com.squareup.moshi.Json
 import java.util.concurrent.atomic.AtomicReference
 
 /**
@@ -13,8 +12,8 @@ import java.util.concurrent.atomic.AtomicReference
  * Created by Sonphil on 28-02-18.
  */
 data class SignetsUserCredentials(
-    @Json(name = "codeAccesUniversel") val codeAccesUniversel: String,
-    @Json(name = "motPasse") val motPasse: String
+    val codeAccesUniversel: String,
+    val motPasse: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
