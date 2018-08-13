@@ -58,10 +58,6 @@ class ProfileFragment : DaggerFragment() {
         recyclerViewInfoEtudiant.setHasFixedSize(true)
     }
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
     private fun subscribeUI() {
         profileViewModel.getEtudiant().observe(this, Observer<Etudiant> {
             it?.let { adapter.setEtudiant(it) }
@@ -70,5 +66,9 @@ class ProfileFragment : DaggerFragment() {
             it?.let { swipeRefreshLayoutInfoEtudiant.isRefreshing = it }
         })
         this.lifecycle.addObserver(profileViewModel)
+    }
+
+    companion object {
+        fun newInstance() = ProfileFragment()
     }
 }

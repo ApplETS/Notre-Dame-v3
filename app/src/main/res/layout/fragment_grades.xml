@@ -1,9 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayoutCoursesGrades"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     tools:context="ca.etsmtl.etsmobile.presentation.grades.GradesFragment">
 
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewCoursesGrades"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        tools:listitem="@layout/item_grade_course" />
+</android.support.v4.widget.SwipeRefreshLayout>
