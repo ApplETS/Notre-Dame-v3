@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayoutCoursesGrades"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="ca.etsmtl.etsmobile.presentation.grades.GradesFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewCoursesGrades"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         tools:listitem="@layout/item_grade_course" />

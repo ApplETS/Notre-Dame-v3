@@ -26,7 +26,9 @@ class GradesViewModel @Inject constructor(
     }
     private var coursRes: LiveData<Resource<List<Cours>>>? = null
 
-    fun getCours(): LiveData<List<Cours>> = Transformations.map(coursMediatorLiveData) { it.data }
+    fun getCours(): LiveData<List<Cours>> = Transformations.map(coursMediatorLiveData) {
+        it.data
+    }
     fun getLoading(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         it.status == Resource.LOADING
     }
@@ -43,7 +45,7 @@ class GradesViewModel @Inject constructor(
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun refresh() {
         coursRes?.let { coursMediatorLiveData.removeSource(it) }
         coursRes = null

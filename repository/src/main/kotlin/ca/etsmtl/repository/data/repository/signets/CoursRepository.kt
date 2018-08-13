@@ -52,12 +52,13 @@ class CoursRepository @Inject constructor(
 
             override fun loadFromDb(): LiveData<List<Cours>> {
                 return Transformations.map(coursDao.getAll()) {
-                    it?.toCours()?.asReversed()
+                    it?.toCours()
                 }
             }
 
             override fun createCall(): LiveData<ApiResponse<List<CoursEntity>>> {
                 return Transformations.switchMap(transformApiLiveData(api.listeCours(EtudiantRequestBody(userCredentials)))) {
+
                     val mediatorLiveData = MediatorLiveData<ApiResponse<List<CoursEntity>>>()
 
                     if (it.isSuccessful) {
@@ -81,7 +82,7 @@ class CoursRepository @Inject constructor(
                                     )) {
                                         mediatorLiveData.addSource(this) {
                                             if (it?.status == Resource.SUCCESS && it.data != null) {
-                                                coursEntity.noteSur100 = it.data.scoreFinalSur100
+                                                coursEntity.noteSur100 = it.data?.scoreFinalSur100
                                             }
 
                                             if (it?.status != Resource.LOADING) {

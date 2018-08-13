@@ -1,5 +1,7 @@
 package ca.etsmtl.etsmobile.presentation.grades
 
+import android.support.v7.recyclerview.extensions.AsyncListDiffer
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,12 +20,24 @@ import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 
 class GradesAdapter : RecyclerView.Adapter<GradesAdapter.ViewHolder>() {
 
-    private var courses: List<Cours> = emptyList()
+    private val differ = AsyncListDiffer<Cours>(this, object: DiffUtil.ItemCallback<Cours>() {
+        override fun areItemsTheSame(oldItem: Cours, newItem: Cours): Boolean {
+            return oldItem.sigle == newItem.sigle && oldItem.groupe == newItem.groupe && oldItem.session == newItem.session
+        }
 
-    fun setCourses(courses: List<Cours>) {
-        this.courses = courses
-        notifyDataSetChanged()
+        override fun areContentsTheSame(oldItem: Cours, newItem: Cours): Boolean = oldItem == newItem
+
+    })
+    var courses: List<Cours> = emptyList()
+        set(value) {
+            field = value
+            differ.submitList(value)
+        }
+
+    init {
+        differ.submitList(courses)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cardView: CardView = LayoutInflater.from(parent.context)
@@ -32,7 +46,7 @@ class GradesAdapter : RecyclerView.Adapter<GradesAdapter.ViewHolder>() {
         return ViewHolder(cardView)
     }
 
-    override fun getItemCount() = courses.size
+    override fun getItemCount() = differ.currentList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(courses[position]) {

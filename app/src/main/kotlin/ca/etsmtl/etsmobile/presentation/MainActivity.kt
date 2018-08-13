@@ -40,7 +40,6 @@ class MainActivity : BaseActivity() {
 
         setContentView(R.layout.activity_main)
 
-        //navigation.disableShiftMode()
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         if (savedInstanceState == null) {
