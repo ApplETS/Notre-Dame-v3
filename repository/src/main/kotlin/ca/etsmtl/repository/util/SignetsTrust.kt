@@ -15,6 +15,8 @@
  */
 package ca.etsmtl.repository.util
 
+import android.content.Context
+import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okio.Buffer
@@ -37,7 +39,7 @@ import javax.net.ssl.X509TrustManager
  * credentials" list (Settings > Security > Trusted Credentials). Therefore, this classes is used
  * for allowing the app to communicate with Signets on older APIs.
  */
-internal class SignetsTrust {
+internal class SignetsTrust(context: Context) {
     val client: OkHttpClient
 
     init {
@@ -54,6 +56,7 @@ internal class SignetsTrust {
 
         client = OkHttpClient.Builder()
                 .sslSocketFactory(sslSocketFactory, trustManager)
+                .addInterceptor(ChuckInterceptor(context.applicationContext))
                 .build()
     }
 

@@ -3,6 +3,7 @@
 buildscript {
     // Versions
     ext.astl = '1.0.1'
+    ext.chuck = '1.1.0'
     ext.constraint_layout = '1.1.2'
     ext.dagger = '2.15'
     ext.dimens = '1.4'

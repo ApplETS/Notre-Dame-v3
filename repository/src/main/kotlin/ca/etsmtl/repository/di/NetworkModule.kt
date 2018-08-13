@@ -1,5 +1,6 @@
 package ca.etsmtl.repository.di
 
+import android.content.Context
 import ca.etsmtl.repository.data.api.SignetsApi
 import ca.etsmtl.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
 import ca.etsmtl.repository.util.LiveDataCallAdapterFactory
@@ -24,8 +25,8 @@ internal open class NetworkModule {
     }
 
     @Singleton @Provides
-    fun provideOkHttpClient(): OkHttpClient {
-        return SignetsTrust().client
+    fun provideOkHttpClient(context: Context): OkHttpClient {
+        return SignetsTrust(context).client
     }
 
     @Singleton @Provides

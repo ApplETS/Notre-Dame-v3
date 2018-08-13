@@ -96,4 +96,8 @@ dependencies {
 
     // Mockito-Kotlin
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
+
+    // Chuck
+    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 }
