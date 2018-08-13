@@ -23,7 +23,6 @@ import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Session
-import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
 
 /**
  * Created by Sonphil on 08-07-18.
@@ -43,13 +42,13 @@ fun ApiActivite.toActiviteEntity() = ActiviteEntity(
         this.titreCours
 )
 
-fun ApiCours.toCoursEntity(sommaireElementsEvaluation: SommaireElementsEvaluation) = CoursEntity(
+fun ApiCours.toCoursEntity(scoreFinalSur100: String) = CoursEntity(
         this.sigle,
         this.groupe,
         this.session,
         this.programmeEtudes,
         this.cote,
-        sommaireElementsEvaluation.scoreFinalSur100,
+        scoreFinalSur100,
         this.nbCredits,
         this.titreCours
 )

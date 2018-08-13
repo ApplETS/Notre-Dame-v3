@@ -35,7 +35,6 @@ import org.mockito.Captor
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
-import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.MockitoAnnotations
@@ -66,7 +65,7 @@ class CoursRepositoryTest {
             "01",
             "H2018",
             "7365",
-            "A-",
+            "",
             3,
             "Principes systèmes d'expl. et programmation système"
     )
@@ -82,7 +81,7 @@ class CoursRepositoryTest {
     }
     private val userCredentials = SignetsUserCredentials("test", "foo")
     @Captor
-    private lateinit var coursEntityArgumentCaptor: ArgumentCaptor<CoursEntity>
+    private lateinit var coursEntitiesArgumentCaptor: ArgumentCaptor<List<CoursEntity>>
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -115,7 +114,6 @@ class CoursRepositoryTest {
                 "96,4",
                 "65,5"
         )
-        val scoreFinalSur100Cours1 = ThreadLocalRandom.current().nextDouble(0.0, 100.0)
         val scoreFinalSur100Cours2 = ThreadLocalRandom.current().nextDouble(0.0, 100.0)
         `when`(evaluationRepository.getEvaluationsSummary(eq(userCredentials), any(), eq(true)))
                 .thenAnswer(Answer<LiveData<Resource<SommaireElementsEvaluation>>> {
@@ -125,10 +123,7 @@ class CoursRepositoryTest {
                                 this.sigleCours = this@with.sigle
                                 this.session = this@with.session
 
-                                this.scoreFinalSur100 = when (sigleCours) {
-                                    apiCours1.sigle -> scoreFinalSur100Cours1.toString()
-                                    else -> scoreFinalSur100Cours2.toString()
-                                }
+                                this.scoreFinalSur100 = scoreFinalSur100Cours2.toString()
                             })
                         }
                     }
@@ -160,19 +155,18 @@ class CoursRepositoryTest {
         verify(signetsApi).listeCours(EtudiantRequestBody(userCredentials))
 
         // After fetching from the network, the data should be inserted into the DB.
-        verify(dao, times(2)).insert(capture(coursEntityArgumentCaptor))
+        verify(dao).insertAll(capture(coursEntitiesArgumentCaptor))
         val coursEntity1 = CoursEntity(
                 apiCours1.sigle,
                 apiCours1.groupe,
                 apiCours1.session,
                 apiCours1.programmeEtudes,
                 apiCours1.cote,
-                scoreFinalSur100Cours1.toString(),
+                "",
                 apiCours1.nbCredits,
                 apiCours1.titreCours
         )
-        assertEquals(coursEntity1, coursEntityArgumentCaptor.allValues[0])
-        verify(dao, times(2)).insert(capture(coursEntityArgumentCaptor))
+        assertEquals(coursEntity1, coursEntitiesArgumentCaptor.allValues[0][0])
         val coursEntity2 = CoursEntity(
                 apiCours2.sigle,
                 apiCours2.groupe,
@@ -183,7 +177,7 @@ class CoursRepositoryTest {
                 apiCours2.nbCredits,
                 apiCours2.titreCours
         )
-        assertEquals(coursEntity2, coursEntityArgumentCaptor.allValues[1])
+        assertEquals(coursEntity2, coursEntitiesArgumentCaptor.allValues[0][1])
 
         /*
          By now, the updated data has been stored in the DB and NetworkBoundResource has requested
@@ -191,7 +185,7 @@ class CoursRepositoryTest {
          */
         with(listOf(coursEntity1, coursEntity2)) {
             updatedDbData.postValue(this)
-            verify(observer).onChanged(Resource.success(this.toCours()))
+            verify(observer).onChanged(Resource.success(this.toCours().asReversed()))
         }
     }
 

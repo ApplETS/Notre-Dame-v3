@@ -62,7 +62,9 @@ class GradesFragment : DaggerFragment() {
 
     private fun subscribeUI() {
         gradesViewModel.getCours().observe(this, Observer {
-            it?.let { adapter.setCourses(it) }
+            it?.let {
+                adapter.setCourses(it)
+            }
         })
         gradesViewModel.getLoading().observe(this, Observer {
             it?.let { swipeRefreshLayoutCoursesGrades.isRefreshing = it }

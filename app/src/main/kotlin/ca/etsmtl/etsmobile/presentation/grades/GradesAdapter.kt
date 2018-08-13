@@ -36,9 +36,10 @@ class GradesAdapter : RecyclerView.Adapter<GradesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(courses[position]) {
-            when {
-                !this.cote.isNullOrEmpty() -> holder.gradeTextView.text = this.cote
-                else -> holder.gradeTextView.text = this.noteSur100
+            holder.gradeTextView.text = when {
+                !this.cote.isNullOrEmpty() -> this.cote
+                !this.noteSur100.isNullOrEmpty() -> this.noteSur100
+                else -> "--"
             }
 
             holder.sigleTextView.text = this.sigle

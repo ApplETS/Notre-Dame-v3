@@ -36,9 +36,9 @@ class GradesViewModel @Inject constructor(
     }
 
     private fun load() {
-        coursRes = repository.getCours(userCredentials).apply {
+        coursRes = repository.getCours(userCredentials, true).apply {
             coursMediatorLiveData.addSource(this) {
-                coursMediatorLiveData.value = sortCourses(it)
+                coursMediatorLiveData.value = it
             }
         }
     }
@@ -48,13 +48,5 @@ class GradesViewModel @Inject constructor(
         coursRes?.let { coursMediatorLiveData.removeSource(it) }
         coursRes = null
         load()
-    }
-
-    private fun sortCourses(resCourses: Resource<List<Cours>>?): Resource<List<Cours>>? {
-        return when {
-            resCourses?.data == null || resCourses.status == Resource.ERROR -> resCourses
-            resCourses.status == Resource.LOADING -> Resource.loading(resCourses.data?.sortedByDescending { it.session })
-            else -> Resource.success(resCourses.data!!.sortedByDescending { it.session })
-        }
     }
 }
