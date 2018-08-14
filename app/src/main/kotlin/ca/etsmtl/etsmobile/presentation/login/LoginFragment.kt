@@ -22,7 +22,6 @@ import ca.etsmtl.etsmobile.util.hideKeyboard
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
-import kotlinx.android.synthetic.main.fragment_login.iVBackground
 import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
@@ -58,7 +57,7 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadImages()
+        Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
 
         setUpFields()
 
@@ -75,11 +74,6 @@ class LoginFragment : DaggerFragment() {
         }
 
         subscribeUI()
-    }
-
-    private fun loadImages() {
-        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
-        Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
     }
 
     private fun setUpFields() {
@@ -147,7 +141,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             getHideKeyboard().observe(this@LoginFragment, Observer {
-                activity?.currentFocus?.hideKeyboard()
+                btnSignIn.hideKeyboard()
             })
 
             lifecycle.addObserver(this)

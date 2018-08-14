@@ -9,6 +9,8 @@ import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.BaseActivity
 import ca.etsmtl.etsmobile.util.show
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_welcome.iVBackground
 import kotlinx.android.synthetic.main.activity_welcome.progressBarWelcome
 import javax.inject.Inject
 
@@ -33,6 +35,8 @@ class WelcomeActivity : BaseActivity() {
         setContentView(R.layout.activity_welcome)
 
         setTitle(R.string.title_activity_login)
+
+        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
         subscribeUI()
     }
