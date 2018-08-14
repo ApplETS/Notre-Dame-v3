@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
+        android:scrollbars="vertical"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
         tools:listitem="@layout/item_grade_course" />
 </android.support.v4.widget.SwipeRefreshLayout>
