@@ -25,6 +25,8 @@
     <string name="info_universal_code">Votre code d\'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.</string>
     <string name="msg_logout_success">Vous vous êtes déconnecté</string>
     <string name="label_login_applets_logo">Conçue par</string>
+    <string name="password_forgotten">Mot de passe oublié?</string>
+    <string name="uri_password_forgotten">https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx</string>
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>

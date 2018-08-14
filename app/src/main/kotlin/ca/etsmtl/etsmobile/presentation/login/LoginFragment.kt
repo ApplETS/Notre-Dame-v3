@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.content.ContextCompat
@@ -19,6 +20,7 @@ import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
+import ca.etsmtl.etsmobile.util.openWithChromeCustomTabs
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
@@ -26,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
+import kotlinx.android.synthetic.main.layout_login_form.btnForgotPassword
 import kotlinx.android.synthetic.main.layout_login_form.btnSignIn
 import kotlinx.android.synthetic.main.layout_login_form.btnUniversalCodeInfo
 import kotlinx.android.synthetic.main.layout_login_form.layoutPassword
@@ -62,14 +65,20 @@ class LoginFragment : DaggerFragment() {
         setUpFields()
 
         View.OnClickListener {
-            when {
-                it.id == R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
-                it.id == R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
-                it.id == R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
+            when (it.id) {
+                R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
+                R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
+                R.id.btnForgotPassword -> {
+                    context?.let {
+                        Uri.parse(getString(R.string.uri_password_forgotten)).openWithChromeCustomTabs(it)
+                    }
+                }
+                R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
             }
         }.apply {
             btnSignIn.setOnClickListener(this)
             btnUniversalCodeInfo.setOnClickListener(this)
+            btnForgotPassword.setOnClickListener(this)
             btnApplets.setOnClickListener(this)
         }
 

@@ -24,6 +24,7 @@
     <string name="info_universal_code">The format of your universal code is AB12345. It was sent to you by the Bureau du registraire upon your admission.</string>
     <string name="msg_logout_success">You have logged out</string>
     <string name="label_login_applets_logo">Made by</string>
+    <string name="password_forgotten">Forgot your password?</string>
 
     <!-- Grades -->
     <string name="title_grades">Grades</string>
