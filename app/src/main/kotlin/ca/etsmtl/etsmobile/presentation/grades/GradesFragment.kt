@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.repository.data.model.Cours
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
@@ -55,15 +56,24 @@ class GradesFragment : DaggerFragment() {
     }
 
     private fun setUpRecyclerView() {
-        // TODO: Fill?
-        recyclerViewCoursesGrades.layoutManager = GridLayoutManager(context, 3)
         recyclerViewCoursesGrades.adapter = adapter
+        with(recyclerViewCoursesGrades.layoutManager as GridLayoutManager) {
+            this.spanCount = 4
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (adapter.differ.currentList[position]) {
+                        is Cours -> 1
+                        else -> this@with.spanCount
+                    }
+                }
+            }
+        }
     }
 
     private fun subscribeUI() {
         gradesViewModel.getCours().observe(this, Observer {
             it?.let {
-                adapter.courses = it
+                adapter.items = it
             }
         })
         gradesViewModel.getLoading().observe(this, Observer {

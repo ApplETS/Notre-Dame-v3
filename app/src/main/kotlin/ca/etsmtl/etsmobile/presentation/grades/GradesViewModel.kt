@@ -26,8 +26,8 @@ class GradesViewModel @Inject constructor(
     }
     private var coursRes: LiveData<Resource<List<Cours>>>? = null
 
-    fun getCours(): LiveData<List<Cours>> = Transformations.map(coursMediatorLiveData) {
-        it.data
+    fun getCours(): LiveData<Map<String, List<Cours>>> = Transformations.map(coursMediatorLiveData) {
+        it.data?.asReversed()?.groupBy { it.session }
     }
     fun getLoading(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         it.status == Resource.LOADING
