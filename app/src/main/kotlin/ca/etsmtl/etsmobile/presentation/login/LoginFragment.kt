@@ -189,7 +189,7 @@ class LoginFragment : DaggerFragment() {
                     .mutate()
             icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
 
-            builder.setMessage(R.string.infos_universal_code)
+            builder.setMessage(R.string.info_universal_code)
                     .setTitle(getString(R.string.prompt_universal_code))
                     .setIcon(icon)
                     .setPositiveButton(android.R.string.ok) { dialog, which -> dialog?.dismiss() }
@@ -208,5 +208,11 @@ class LoginFragment : DaggerFragment() {
         universalCode.clearFocus()
         password.clearFocus()
         loginViewModel.submitCredentials()
+    }
+
+    companion object {
+        const val TAG = "LoginFragment"
+
+        fun newInstance() = LoginFragment()
     }
 }

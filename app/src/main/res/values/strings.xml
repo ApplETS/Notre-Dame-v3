@@ -22,7 +22,7 @@
     <string name="error_invalid_password">Ce mot de passe est erroné</string>
     <string name="error_incorrect_password">Le mot de passe est erroné</string>
     <string name="error_field_required">Ce champ est requis</string>
-    <string name="infos_universal_code">Votre code d\'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.</string>
+    <string name="info_universal_code">Votre code d\'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.</string>
     <string name="msg_logout_success">Vous vous êtes déconnecté</string>
     <string name="label_login_applets_logo">Conçue par</string>
 

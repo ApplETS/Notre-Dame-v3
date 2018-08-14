@@ -21,7 +21,7 @@
     <string name="error_invalid_password">This password is incorrect</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="infos_universal_code">The format of your universal code is AB12345. It was sent to you by the Bureau du registraire upon your admission.</string>
+    <string name="info_universal_code">The format of your universal code is AB12345. It was sent to you by the Bureau du registraire upon your admission.</string>
     <string name="msg_logout_success">You have logged out</string>
     <string name="label_login_applets_logo">Made by</string>
 
