@@ -12,6 +12,7 @@ import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.openWithChromeCustomTabs
+import ca.etsmtl.etsmobile.util.show
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
 import kotlinx.android.synthetic.main.fragment_about.btnGithub
@@ -87,7 +88,7 @@ class AboutFragment : Fragment() {
                         }
                     })
         } else {
-            backgroundAbout.visibility = View.VISIBLE
+            backgroundAbout.show(true)
         }
 
         activity?.window?.sharedElementReturnTransition = transitionInflater
@@ -98,10 +99,11 @@ class AboutFragment : Fragment() {
         val revealView = backgroundAbout
         val centerX = ivAppletsLogo.run { (x + width / 2).toInt() }
         val centerY = ivAppletsLogo.run { (y + height / 2).toInt() }
-        ViewAnimationUtils.createCircularReveal(revealView, centerX, centerY, 0f, revealView.width.toFloat())
+        val endRadius = revealView.run { Math.max(revealView.width, revealView.height) }
+        ViewAnimationUtils.createCircularReveal(revealView, centerX, centerY, 0f, endRadius.toFloat())
                 .apply {
                     duration = 444
-                    revealView.visibility = View.VISIBLE
+                    revealView.show(true)
                     start()
                 }
     }
