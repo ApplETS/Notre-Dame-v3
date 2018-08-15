@@ -98,12 +98,13 @@ class MoreFragment : MainFragment() {
         moreViewModel.getActivityToGoTo().observe(this, Observer {
             if (it == AboutActivity::class.java) {
                 val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
-                with (recyclerViewMore.getChildViewHolder(aboutItemView) as MoreRecyclerViewAdapter.ViewHolder) {
+                with (recyclerViewMore.getChildViewHolder(aboutItemView)as MoreRecyclerViewAdapter.ViewHolder) {
                     goToAbout(this.iconImageView, this.labelTextView.text.toString())
                 }
             } else {
                 with(Intent(context, it)) {
                     startActivity(this)
+                    activity?.finish()
                 }
             }
         })

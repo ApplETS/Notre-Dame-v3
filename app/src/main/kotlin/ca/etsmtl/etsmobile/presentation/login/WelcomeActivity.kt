@@ -66,6 +66,7 @@ class WelcomeActivity : BaseActivity() {
             getActivityToGoTo().observe(this@WelcomeActivity, Observer {
                 with(Intent(this@WelcomeActivity, it)) {
                     startActivity(this)
+                    finish()
                 }
             })
 

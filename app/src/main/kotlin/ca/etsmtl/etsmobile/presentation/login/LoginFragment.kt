@@ -18,6 +18,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
 import ca.etsmtl.etsmobile.util.openWithChromeCustomTabs
@@ -146,6 +147,9 @@ class LoginFragment : DaggerFragment() {
             getActivityToGoTo().observe(this@LoginFragment, Observer {
                 with(Intent(context, it)) {
                     startActivity(this)
+                    if (it == MainActivity::class.java) {
+                        activity?.finish()
+                    }
                 }
             })
 
