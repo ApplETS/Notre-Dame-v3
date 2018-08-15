@@ -48,5 +48,9 @@
 
     <!-- About -->
     <string name="applets_about">ÉTSMobile a été réalisée par le club scientifique ApplETS de l\'École de technologie supérieure.\n\nApplETS se veut, avant tout, un regroupement d’étudiants qui partagent un intérêt commun pour le domaine des télécommunications et des applications mobiles.
-        La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nPour en savoir plus, n\'hésitez pas à consulter notre site web : \n\nhttp://clubapplets.ca\n\n</string>
+        La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nPour en savoir plus, n\'hésitez pas à consulter notre site web : http://clubapplets.ca</string>
+    <string name="uri_applets_gh">https://github.com/orgs/ApplETS/</string>
+    <string name="uri_applets_fb">https://www.facebook.com/ClubApplETS</string>
+    <string name="uri_applets_twitter">https://twitter.com/ClubApplETS</string>
+    <string name="uri_applets_yt">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
 </resources>
