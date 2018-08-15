@@ -185,7 +185,7 @@ class CoursRepositoryTest {
          */
         with(listOf(coursEntity1, coursEntity2)) {
             updatedDbData.postValue(this)
-            verify(observer).onChanged(Resource.success(this.toCours().asReversed()))
+            verify(observer).onChanged(Resource.success(this.toCours()))
         }
     }
 
