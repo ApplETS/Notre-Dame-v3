@@ -1,5 +1,6 @@
 package ca.etsmtl.etsmobile.presentation.about
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewCompat
@@ -10,7 +11,13 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import kotlinx.android.synthetic.main.fragment_about.*
+import ca.etsmtl.etsmobile.util.openWithChromeCustomTabs
+import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
+import kotlinx.android.synthetic.main.fragment_about.btnFacebook
+import kotlinx.android.synthetic.main.fragment_about.btnGithub
+import kotlinx.android.synthetic.main.fragment_about.btnTwitter
+import kotlinx.android.synthetic.main.fragment_about.btnYoutube
+import kotlinx.android.synthetic.main.fragment_about.ivAppletsLogo
 
 class AboutFragment : Fragment() {
     companion object {
@@ -28,9 +35,9 @@ class AboutFragment : Fragment() {
     private var isTransitionCanceled: Boolean = false
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_about, container, false)
 
@@ -47,6 +54,8 @@ class AboutFragment : Fragment() {
         } else {
             initViewTransition(savedInstanceState)
         }
+
+        setSocialButtonsListener()
     }
 
     private fun initViewTransition(savedInstanceState: Bundle?) {
@@ -101,5 +110,27 @@ class AboutFragment : Fragment() {
         view?.removeCallbacks(circularRevealRunnable)
 
         super.onDestroyView()
+    }
+
+    private fun setSocialButtonsListener() {
+        with(View.OnClickListener { view ->
+            context?.let {
+                Uri.parse(
+                        getString(
+                                when (view.id) {
+                                    R.id.btnGithub -> R.string.uri_applets_gh
+                                    R.id.btnFacebook -> R.string.uri_applets_fb
+                                    R.id.btnTwitter -> R.string.uri_applets_twitter
+                                    else -> R.string.uri_applets_yt
+                                }
+                        )
+                ).openWithChromeCustomTabs(it, R.color.appletsBg)
+            }
+        }) {
+            btnGithub.setOnClickListener(this)
+            btnFacebook.setOnClickListener(this)
+            btnTwitter.setOnClickListener(this)
+            btnYoutube.setOnClickListener(this)
+        }
     }
 }
