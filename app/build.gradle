@@ -116,6 +116,9 @@ dependencies {
     // Mockito-Kotlin
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
 
+    // FlowLayoutManager
+    implementation "com.xiaofeng.android:flowlayoutmanager:$flowlayoutmanager"
+
     implementation project(':repository')
 }
 

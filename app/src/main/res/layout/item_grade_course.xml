@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="85dp"
-    android:layout_height="85dp"
-    android:layout_marginTop="20dp"
-    cardview:cardCornerRadius="2dp"
-    cardview:cardElevation="1dp">
+    android:layout_width="105dp"
+    android:layout_height="105dp"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp"
+    android:paddingTop="20dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvCourseGrade"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:textSize="25sp"
+        tools:text="A+" />
 
-        <TextView
-            android:id="@+id/tvCourseGrade"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="25sp"
-            tools:text="A+" />
-
-        <TextView
-            android:id="@+id/tvCourseSigle"
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            tools:text="LOG121" />
-    </LinearLayout>
-</android.support.v7.widget.CardView>
+    <TextView
+        android:id="@+id/tvCourseSigle"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        tools:text="LOG121" />
+</LinearLayout>

@@ -4,13 +4,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.repository.data.model.Cours
+import com.xiaofeng.flowlayoutmanager.Alignment
+import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
@@ -57,16 +57,9 @@ class GradesFragment : DaggerFragment() {
 
     private fun setUpRecyclerView() {
         recyclerViewCoursesGrades.adapter = adapter
-        with(recyclerViewCoursesGrades.layoutManager as GridLayoutManager) {
-            this.spanCount = 4
-            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (adapter.differ.currentList[position]) {
-                        is Cours -> 1
-                        else -> this@with.spanCount
-                    }
-                }
-            }
+        recyclerViewCoursesGrades.layoutManager = FlowLayoutManager().apply {
+            this.isAutoMeasureEnabled = true
+            setAlignment(Alignment.LEFT)
         }
     }
 

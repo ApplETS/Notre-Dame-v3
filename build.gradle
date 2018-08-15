@@ -10,6 +10,7 @@ buildscript {
     ext.espresso = '3.0.1'
     ext.firebase = '16.0.1'
     ext.firebase_crashlytics = '2.9.4'
+    ext.flowlayoutmanager = '1.2.3.2'
     ext.glide = '4.6.1'
     ext.junit = '4.12'
     ext.kotlin_version = '1.2.60'
