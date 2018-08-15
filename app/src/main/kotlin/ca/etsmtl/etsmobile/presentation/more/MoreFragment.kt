@@ -18,6 +18,7 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainFragment
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
+import ca.etsmtl.etsmobile.util.EventObserver
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
@@ -91,11 +92,11 @@ class MoreFragment : MainFragment() {
             context?.let { context -> displayLogoutConfirmationDialog(context) }
         })
 
-        moreViewModel.getDisplayMessage().observe(this, Observer { message ->
-            message?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+        moreViewModel.getDisplayMessage().observe(this, EventObserver {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
 
-        moreViewModel.getActivityToGoTo().observe(this, Observer {
+        moreViewModel.getActivityToGoTo().observe(this, EventObserver {
             if (it == AboutActivity::class.java) {
                 val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
                 with (recyclerViewMore.getChildViewHolder(aboutItemView)as MoreRecyclerViewAdapter.ViewHolder) {
