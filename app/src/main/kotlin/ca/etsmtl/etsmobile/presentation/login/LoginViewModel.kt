@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
@@ -37,18 +38,28 @@ class LoginViewModel @Inject constructor(
         MutableLiveData<SignetsUserCredentials>()
     }
     private val activityToGoTo by lazy { MutableLiveData<Class<out Activity>>() }
-    private val hideKeyboard by lazy { MutableLiveData<Void>() }
+    private val showLoginFragment by lazy {
+        MediatorLiveData<Void>().apply {
+            addSource(userCredentialsValid) {
+                it?.let {
+                    if (it.status != Resource.LOADING && it.data == false) {
+                        this.call()
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
-     * [Transformations.switchMap] which is triggered when [setUserCredentials] is called. The new
+     * [Transformations.switchMap] which is triggered when [userCredentials] is called. The new
      * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If
      * an instance can be fetched, it means that the user's credentials are valid. As a result, the
      * new [SignetsUserCredentials] are saved and stored in [LoginRepository].
      */
     private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentials) { userCredentials ->
-            // Fetch Etudiant instance
+            // Fetch [Etudiant] instance
             Transformations.map(repository.getInfoEtudiant(userCredentials, app.isDeviceConnected())) { res ->
                 transformEtudiantResToBooleanRes(res).apply {
                     if (userCredentialsValid(this)) {
@@ -61,9 +72,17 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
-     * Returns an error message to be displayed to the user.
+     * Returns a [LiveData] which is called when the [LoginFragment] needs to be displayed
      *
-     * This is triggered after the user's credentials have been submitted.
+     * The [LoginFragment] needs to be displayed when the user needs to login for the first time or
+     * if his credentials are no longer valid.
+     *
+     * @return A [LiveData] which is called when the [LoginFragment] needs to be displayed
+     */
+    fun getShowLoginFragment(): LiveData<Void> = showLoginFragment
+
+    /**
+     * Returns an error message to be displayed to the user.
      *
      * @return A [LiveData] containing an error message to be displayed to the user
      */
@@ -124,13 +143,20 @@ class LoginViewModel @Inject constructor(
      */
     fun getActivityToGoTo(): LiveData<Class<out Activity>> = activityToGoTo
 
-    fun getHideKeyboard(): LiveData<Void> = hideKeyboard
+    /**
+     * Returns a [LiveData] which is called when the keyboard needs to be hidden
+     *
+     * The keyboard needs to be hidden when the user's credentials is submitted.
+     *
+     * @return A [LiveData] which is called when the keyboard needs to be hidden
+     */
+    fun getHideKeyboard(): LiveData<Void> = Transformations.map(userCredentials) { null }
 
     /**
-     * Verifies that a given resource is not null and that his status is not [Resource.LOADING]
+     * Verifies that a given resource is not null and that his status is [Resource.SUCCESS]
      *
      * @param blnResource The [Resource] to verify
-     * @return true if the resource is not null and that his status is not [Resource.LOADING]
+     * @return true if the resource is not null and that his status is [Resource.SUCCESS]
      */
     private fun userCredentialsValid(blnResource: Resource<Boolean>?): Boolean {
         if (blnResource != null && blnResource.status == Resource.SUCCESS) {
@@ -215,25 +241,31 @@ class LoginViewModel @Inject constructor(
      */
     fun submitCredentials() {
         if (universalCode.value != null && password.value != null) {
-            hideKeyboard.call()
             userCredentials.value = SignetsUserCredentials(universalCode.value!!, password.value!!)
         }
     }
 
     /**
-     * Submits the saved user's credentials [Lifecycle.Event.ON_START]
+     * Submits the saved user's credentials on [Lifecycle.Event.ON_START]
      *
      * Calls [submitCredentials] with the saved user's credentials if they are not null
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun submitSavedCredentials() {
-        loginRepository.getSavedUserCredentials()?.let {
-            universalCode.value = it.codeAccesUniversel
-            password.value = it.motPasse
-            submitCredentials()
+        with(loginRepository.getSavedUserCredentials()) {
+            if (this == null) {
+                showLoginFragment.call()
+            } else {
+                universalCode.value = this.codeAccesUniversel
+                password.value = this.motPasse
+                submitCredentials()
+            }
         }
     }
 
+    /**
+     * Triggers a navigation to [AboutActivity]
+     */
     fun clickOnAppletsLogo() {
         activityToGoTo.value = AboutActivity::class.java
     }

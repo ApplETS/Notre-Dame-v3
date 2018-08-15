@@ -254,4 +254,28 @@ class LoginViewModelTest {
         loginViewModel.submitCredentials()
         verify(observer).onChanged(null)
     }
+
+    @Test
+    fun showLoginFragment() {
+        loginViewModel.getShowLoading().observeForever(mock())
+
+        val observer: Observer<Void> = mock()
+        loginViewModel.getShowLoginFragment().observeForever(observer)
+
+        val liveData = MutableLiveData<Resource<Etudiant>>()
+        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        setAndSubmitCredentials(userCredentials)
+        liveData.value = Resource.success(Etudiant(
+                "fooType",
+                "Luu",
+                "Phil",
+                "LUUP12345678",
+                "123,45$",
+                true
+        ))
+        verifyZeroInteractions(observer)
+
+        liveData.value = Resource.error("foo", null)
+        verify(observer).onChanged(null)
+    }
 }

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.content.ContextCompat
@@ -19,14 +20,15 @@ import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
+import ca.etsmtl.etsmobile.util.openWithChromeCustomTabs
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
-import kotlinx.android.synthetic.main.fragment_login.iVBackground
 import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
+import kotlinx.android.synthetic.main.layout_login_form.btnForgotPassword
 import kotlinx.android.synthetic.main.layout_login_form.btnSignIn
 import kotlinx.android.synthetic.main.layout_login_form.btnUniversalCodeInfo
 import kotlinx.android.synthetic.main.layout_login_form.layoutPassword
@@ -58,28 +60,29 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadImages()
+        Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
 
         setUpFields()
 
         View.OnClickListener {
-            when {
-                it.id == R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
-                it.id == R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
-                it.id == R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
+            when (it.id) {
+                R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
+                R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
+                R.id.btnForgotPassword -> {
+                    context?.let {
+                        Uri.parse(getString(R.string.uri_password_forgotten)).openWithChromeCustomTabs(it)
+                    }
+                }
+                R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
             }
         }.apply {
             btnSignIn.setOnClickListener(this)
             btnUniversalCodeInfo.setOnClickListener(this)
+            btnForgotPassword.setOnClickListener(this)
             btnApplets.setOnClickListener(this)
         }
 
         subscribeUI()
-    }
-
-    private fun loadImages() {
-        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
-        Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
     }
 
     private fun setUpFields() {
@@ -147,7 +150,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             getHideKeyboard().observe(this@LoginFragment, Observer {
-                activity?.currentFocus?.hideKeyboard()
+                btnSignIn.hideKeyboard()
             })
 
             lifecycle.addObserver(this)
@@ -189,7 +192,7 @@ class LoginFragment : DaggerFragment() {
                     .mutate()
             icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
 
-            builder.setMessage(R.string.infos_universal_code)
+            builder.setMessage(R.string.info_universal_code)
                     .setTitle(getString(R.string.prompt_universal_code))
                     .setIcon(icon)
                     .setPositiveButton(android.R.string.ok) { dialog, which -> dialog?.dismiss() }
@@ -208,5 +211,11 @@ class LoginFragment : DaggerFragment() {
         universalCode.clearFocus()
         password.clearFocus()
         loginViewModel.submitCredentials()
+    }
+
+    companion object {
+        const val TAG = "LoginFragment"
+
+        fun newInstance() = LoginFragment()
     }
 }

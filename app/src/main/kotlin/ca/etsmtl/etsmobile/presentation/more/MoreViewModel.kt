@@ -9,7 +9,7 @@ import android.arch.lifecycle.Transformations
 import android.support.annotation.StringRes
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.etsmobile.presentation.WelcomeActivity
+import ca.etsmtl.etsmobile.presentation.login.WelcomeActivity
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.util.call
 import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
