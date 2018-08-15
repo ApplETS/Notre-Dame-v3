@@ -13,11 +13,11 @@ apply plugin: 'com.akaita.android.easylauncher'
 //apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "ca.etsmtl.etsmobile"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -51,16 +51,17 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Support libraries
-    implementation "com.android.support:appcompat-v7:${support}"
-    implementation "com.android.support:design:${support}"
-    implementation "com.android.support:support-v4:${support}"
-    implementation "com.android.support:cardview-v7:${support}"
-    implementation "com.android.support:recyclerview-v7:${support}"
-    implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
+    implementation "com.android.support:appcompat-v7:$support"
+    implementation "com.android.support:design:$support"
+    implementation "com.android.support:support-v4:$support"
+    implementation "com.android.support:cardview-v7:$support"
+    implementation "com.android.support:recyclerview-v7:$support"
+    implementation "com.android.support:customtabs:$support"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
 
     // Architecture components
-    implementation "android.arch.lifecycle:extensions:${lifecycle}"
-    kapt "android.arch.lifecycle:compiler:${lifecycle}"
+    implementation "android.arch.lifecycle:extensions:$lifecycle"
+    kapt "android.arch.lifecycle:compiler:$lifecycle"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -71,8 +72,8 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testImplementation "android.arch.core:core-testing:${lifecycle}"
-    testImplementation "org.mockito:mockito-core:${mockito}"
+    testImplementation "android.arch.core:core-testing:$lifecycle"
+    testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation "org.mockito:mockito-inline:$mockito_inline"
 
     // Android Testing Support Library's runner and rules
@@ -110,6 +111,9 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-core:$firebase"
     implementation "com.crashlytics.sdk.android:crashlytics:$firebase_crashlytics"
+
+    // Mockito-Kotlin
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
 
     implementation project(':repository')
 }

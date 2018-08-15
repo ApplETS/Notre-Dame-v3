@@ -3,7 +3,7 @@ package ca.etsmtl.repository.data.db.signets
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil.getValue
 import ca.etsmtl.repository.data.db.DbTest
-import ca.etsmtl.repository.data.model.signets.Etudiant
+import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Test
@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 class EtudiantDaoTest : DbTest() {
     @Test
     fun testInsertEtudiant() {
-        val etudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true, "")
+        val etudiant = EtudiantEntity("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true)
         db.etudiantDao().insert(etudiant)
         val etudiantFromDb = getValue(db.etudiantDao().getAll())
         assertNotNull(etudiantFromDb)
@@ -25,9 +25,9 @@ class EtudiantDaoTest : DbTest() {
 
     @Test
     fun testInsertSameEtudiant() {
-        val etudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true, "")
+        val etudiant = EtudiantEntity("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true)
         db.etudiantDao().insert(etudiant)
-        val sameEtudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "999,45$", true, "")
+        val sameEtudiant = EtudiantEntity("fooType", "Luu", "Phil", "LUUP12345678", "999,45$", true)
         db.etudiantDao().insert(sameEtudiant)
         val etudiantFromDb = getValue(db.etudiantDao().getAll())
         assertNotNull(etudiantFromDb)
@@ -36,7 +36,7 @@ class EtudiantDaoTest : DbTest() {
 
     @Test
     fun testDelete() {
-        val etudiant = Etudiant("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true, "")
+        val etudiant = EtudiantEntity("fooType", "Luu", "Phil", "LUUP12345678", "123,45$", true)
         db.etudiantDao().insert(etudiant)
         var etudiantFromDb = getValue(db.etudiantDao().getAll())
         assertEquals(1, etudiantFromDb.size)

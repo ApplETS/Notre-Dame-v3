@@ -6,8 +6,8 @@ import android.arch.lifecycle.Transformations
 import android.support.annotation.VisibleForTesting
 import ca.etsmtl.repository.AppExecutors
 import ca.etsmtl.repository.data.api.ApiResponse
-import ca.etsmtl.repository.data.model.signets.SignetsData
-import ca.etsmtl.repository.data.model.signets.SignetsModel
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsData
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
 
 /**
  * On a request, Signets's web service will return a 200 status code. If an error has occurred, it's
@@ -26,7 +26,7 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
      * @return The [ApiResponse] error or null if there was no error
      */
     @VisibleForTesting
-    fun getError(apiResponse: ApiResponse<out SignetsModel<out SignetsData>>?): String? {
+    fun getError(apiResponse: ApiResponse<out ApiSignetsModel<out ApiSignetsData>>?): String? {
         if (apiResponse == null)
             return "No Response"
 
@@ -43,10 +43,10 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
      *
      * @return The value of the error's field
      */
-    private fun getErrorInsideData(signetsModel: SignetsModel<out SignetsData>?): String? {
-        return when (signetsModel?.data == null) {
+    private fun getErrorInsideData(apiSignetsModel: ApiSignetsModel<out ApiSignetsData>?): String? {
+        return when (apiSignetsModel?.data == null) {
             true -> "No Data"
-            false -> signetsModel!!.data!!.getError()
+            false -> apiSignetsModel!!.data!!.getError()
         }
     }
 
@@ -57,7 +57,7 @@ abstract class SignetsRepository(protected val appExecutors: AppExecutors) {
      * If the request succeeded, the value is the same [ApiResponse].
      */
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    inline fun <reified T : SignetsData> transformApiLiveData(apiLiveData: LiveData<ApiResponse<SignetsModel<T>>>): LiveData<ApiResponse<SignetsModel<T>>> {
+    inline fun <reified T : ApiSignetsData> transformApiLiveData(apiLiveData: LiveData<ApiResponse<ApiSignetsModel<T>>>): LiveData<ApiResponse<ApiSignetsModel<T>>> {
         return Transformations.map(apiLiveData) { apiResponse ->
             val errorStr = getError(apiResponse)
 

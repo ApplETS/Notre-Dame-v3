@@ -3,15 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/LoginTheme">
-
-    <!-- Background -->
-    <ImageView
-        android:id="@+id/iVBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/bg_ets_red" />
+    android:theme="@style/LoginTheme"
+    tools:background="@drawable/bg_ets_red">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,8 +27,8 @@
             android:layout_marginStart="8dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/loginForm"
-            app:layout_constraintStart_toStartOf="@+id/loginForm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
@@ -59,13 +52,13 @@
                 android:layout_height="100dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ets_blanc_impr_fond_transparent"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintBottom_toTopOf="@+id/tvMadeBy"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@+id/btnApplets"
                 app:layout_constraintStart_toStartOf="@+id/btnApplets" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvMadeBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_login_applets_logo" />

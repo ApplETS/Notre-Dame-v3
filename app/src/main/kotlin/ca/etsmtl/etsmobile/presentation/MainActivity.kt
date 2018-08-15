@@ -10,7 +10,6 @@ import ca.etsmtl.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.schedule.ScheduleFragment
 import ca.etsmtl.etsmobile.presentation.student.StudentFragment
-import ca.etsmtl.etsmobile.util.disableShiftMode
 import kotlinx.android.synthetic.main.activity_main.navigation
 
 /**
@@ -23,6 +22,10 @@ import kotlinx.android.synthetic.main.activity_main.navigation
  */
 
 class MainActivity : BaseActivity() {
+
+    companion object {
+        private const val CURRENT_FRAGMENT_TAG_KEY = "CurrentFragmentTag"
+    }
 
     private lateinit var currentFragmentTag: String
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -37,12 +40,20 @@ class MainActivity : BaseActivity() {
 
         setContentView(R.layout.activity_main)
 
-        navigation.disableShiftMode()
+        //navigation.disableShiftMode()
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         if (savedInstanceState == null) {
             selectDashboard()
+        } else { // Another fragment is being displayed
+            currentFragmentTag = savedInstanceState.getString(CURRENT_FRAGMENT_TAG_KEY)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(CURRENT_FRAGMENT_TAG_KEY, currentFragmentTag)
+
+        super.onSaveInstanceState(outState)
     }
 
     /**

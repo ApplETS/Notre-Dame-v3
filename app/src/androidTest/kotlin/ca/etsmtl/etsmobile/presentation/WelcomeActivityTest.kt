@@ -12,6 +12,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.login.WelcomeActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
@@ -31,7 +32,7 @@ class WelcomeActivityTest {
     fun testUniversalCodeDialog() {
         onView(ViewMatchers.withId(R.id.btnUniversalCodeInfo)).perform(click())
 
-        onView(withText(R.string.infos_universal_code)).check(matches(isDisplayed()))
+        onView(withText(R.string.info_universal_code)).check(matches(isDisplayed()))
     }
 
     @Test

@@ -40,6 +40,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="LoginErrorTextAppearance" parent="TextAppearance.Design.Error">
         <item name="android:textColor">@color/material_yellow_500</item>
         <item name="android:fontFamily">@font/delta_jaeger_light</item>

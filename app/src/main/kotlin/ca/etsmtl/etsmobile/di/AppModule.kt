@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

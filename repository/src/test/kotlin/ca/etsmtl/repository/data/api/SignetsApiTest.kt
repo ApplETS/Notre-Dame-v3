@@ -4,26 +4,31 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
-import ca.etsmtl.repository.data.model.signets.Activite
-import ca.etsmtl.repository.data.model.signets.Enseignant
-import ca.etsmtl.repository.data.model.signets.Etudiant
-import ca.etsmtl.repository.data.model.signets.Evaluation
-import ca.etsmtl.repository.data.model.signets.HoraireExamenFinal
-import ca.etsmtl.repository.data.model.signets.JourRemplace
-import ca.etsmtl.repository.data.model.signets.ListeDeCours
-import ca.etsmtl.repository.data.model.signets.ListeDeSessions
-import ca.etsmtl.repository.data.model.signets.ListeDesActivitesEtProf
-import ca.etsmtl.repository.data.model.signets.ListeDesElementsEvaluation
-import ca.etsmtl.repository.data.model.signets.ListeDesSeances
-import ca.etsmtl.repository.data.model.signets.ListeHoraireExamensFinaux
-import ca.etsmtl.repository.data.model.signets.ListeJoursRemplaces
-import ca.etsmtl.repository.data.model.signets.ListeProgrammes
-import ca.etsmtl.repository.data.model.signets.Seance
-import ca.etsmtl.repository.data.model.signets.Session
-import ca.etsmtl.repository.data.model.signets.SignetsData
-import ca.etsmtl.repository.data.model.signets.SignetsModel
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
-import ca.etsmtl.repository.util.ApplicationJsonAdapterFactory
+import ca.etsmtl.repository.data.api.requestbody.signets.EtudiantRequestBody
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeCoursIntervalleSessionsRequestBody
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeDesActivitesEtProfRequestBody
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeDesElementsEvaluationRequestBody
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeDesSeancesRequestBody
+import ca.etsmtl.repository.data.api.requestbody.signets.ListeHoraireExamensFinauxRequestBody
+import ca.etsmtl.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
+import ca.etsmtl.repository.data.api.response.signets.ApiActivite
+import ca.etsmtl.repository.data.api.response.signets.ApiEnseignant
+import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
+import ca.etsmtl.repository.data.api.response.signets.ApiEvaluation
+import ca.etsmtl.repository.data.api.response.signets.ApiHoraireExamenFinal
+import ca.etsmtl.repository.data.api.response.signets.ApiJourRemplace
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDeCours
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDeSessions
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDesActivitesEtProf
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDesElementsEvaluation
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDesSeances
+import ca.etsmtl.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
+import ca.etsmtl.repository.data.api.response.signets.ApiListeJoursRemplaces
+import ca.etsmtl.repository.data.api.response.signets.ApiListeProgrammes
+import ca.etsmtl.repository.data.api.response.signets.ApiSeance
+import ca.etsmtl.repository.data.api.response.signets.ApiSession
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsData
+import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.repository.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.Moshi
 import okhttp3.mockwebserver.MockResponse
@@ -81,11 +86,11 @@ class SignetsApiTest {
     }
 
     @Throws(InterruptedException::class)
-    private inline fun <reified T : SignetsData> getValue(@NonNull liveData: LiveData<ApiResponse<SignetsModel<T>>>): ApiResponse<SignetsModel<T>> {
+    private inline fun <reified T : ApiSignetsData> getValue(@NonNull liveData: LiveData<ApiResponse<ApiSignetsModel<T>>>): ApiResponse<ApiSignetsModel<T>> {
         val data = arrayOfNulls<Any>(1)
         val latch = CountDownLatch(1)
-        val observer = object : Observer<ApiResponse<SignetsModel<T>>> {
-            override fun onChanged(response: ApiResponse<SignetsModel<T>>?) {
+        val observer = object : Observer<ApiResponse<ApiSignetsModel<T>>> {
+            override fun onChanged(response: ApiResponse<ApiSignetsModel<T>>?) {
                 data[0] = response
                 latch.countDown()
                 liveData.removeObserver(this)
@@ -94,7 +99,7 @@ class SignetsApiTest {
         liveData.observeForever(observer)
         latch.await(TIME_OUT.toLong(), TimeUnit.SECONDS)
         //noinspection unchecked
-        return data[0] as ApiResponse<SignetsModel<T>>
+        return data[0] as ApiResponse<ApiSignetsModel<T>>
     }
 
     @Throws(IOException::class)
@@ -119,15 +124,15 @@ class SignetsApiTest {
     fun testGetListeProgrammesNoError() {
         enqueueResponse("liste_programmes_no_error.json")
 
-        val apiResponse = api.listeProgrammes(SignetsUserCredentials(
+        val apiResponse = api.listeProgrammes(EtudiantRequestBody(
                 "AM41234",
                 "test!"
         ))
-        val wrapper: SignetsModel<ListeProgrammes> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeProgrammes> = getValue(apiResponse).body!!
         val errorStr = wrapper.data?.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
 
-        val listeProgrammes: ListeProgrammes = wrapper.data!!
+        val listeProgrammes: ApiListeProgrammes = wrapper.data!!
         val programmes = listeProgrammes.liste!!
         val p0 = programmes[0]!!
         assertEquals("0725", p0.code)
@@ -154,11 +159,11 @@ class SignetsApiTest {
     fun testGetListeProgrammesError() {
         enqueueResponse("liste_programmes_error.json")
 
-        val apiResponse = api.listeProgrammes(SignetsUserCredentials(
+        val apiResponse = api.listeProgrammes(EtudiantRequestBody(
                 "AM41234",
                 "test!"
         ))
-        val wrapper: SignetsModel<ListeProgrammes> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeProgrammes> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertEquals("Code d'accès ou mot de passe invalide", errorStr)
         assertEquals(
@@ -174,16 +179,18 @@ class SignetsApiTest {
         enqueueResponse("liste_horaire_examens_finaux_no_error.json")
 
         val apiResponse = api.listeHoraireExamensFinaux(
-                "AM41234",
-                "test!",
-                "É2018"
+                ListeHoraireExamensFinauxRequestBody(
+                        "AM41234",
+                        "test!",
+                        "É2018"
+                )
         )
-        val wrapper: SignetsModel<ListeHoraireExamensFinaux> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeHoraireExamensFinaux> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
         val listeHoraireExamensFinaux = wrapper.data!!
         assertEquals(4, listeHoraireExamensFinaux.listeHoraire!!.size)
-        val horaireExamenFinal0: HoraireExamenFinal = listeHoraireExamensFinaux.listeHoraire!![0]!!
+        val horaireExamenFinal0: ApiHoraireExamenFinal = listeHoraireExamensFinaux.listeHoraire!![0]!!
         assertEquals("GPE450", horaireExamenFinal0.sigle)
         assertEquals("01", horaireExamenFinal0.groupe)
         assertEquals("2018-04-13", horaireExamenFinal0.dateExamen)
@@ -199,11 +206,13 @@ class SignetsApiTest {
     fun testGetListeHoraireExamensFinauxError() {
         enqueueResponse("liste_horaire_examens_finaux_error.json")
         val apiResponse = api.listeHoraireExamensFinaux(
-                "AM41234",
-                "test!",
-                "É2018"
+                ListeHoraireExamensFinauxRequestBody(
+                        "AM41234",
+                        "test!",
+                        "É2018"
+                )
         )
-        val wrapper: SignetsModel<ListeHoraireExamensFinaux> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeHoraireExamensFinaux> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertEquals("Code d'accès ou mot de passe invalide", errorStr)
         assertEquals(
@@ -216,12 +225,14 @@ class SignetsApiTest {
     @Throws(IOException::class, InterruptedException::class)
     fun testGetListeCoursIntervalleSessionsNoError() {
         enqueueResponse("liste_cours_intervalle_sessions_no_error.json")
-        val wrapper: SignetsModel<ListeDeCours> = getValue(api
+        val wrapper: ApiSignetsModel<ApiListeDeCours> = getValue(api
                 .listeCoursIntervalleSessions(
-                        "AM41234",
-                        "test!",
-                        "H2018",
-                        "E2018"
+                        ListeCoursIntervalleSessionsRequestBody(
+                                "AM41234",
+                                "test!",
+                                "H2018",
+                                "E2018"
+                        )
                 ))
                 .body!!
         val errorStr = wrapper.data!!.erreur
@@ -245,12 +256,14 @@ class SignetsApiTest {
     fun testGetListeCoursIntervalleSessionsError() {
         enqueueResponse("liste_cours_intervalle_sessions_error.json")
         val apiResponse = api.listeCoursIntervalleSessions(
-                "AM41234",
-                "test!",
-                "H2018t",
-                "E2018"
+                ListeCoursIntervalleSessionsRequestBody(
+                        "AM41234",
+                        "test!",
+                        "H2018t",
+                        "E2018"
+                )
         )
-        val wrapper: SignetsModel<ListeDeCours> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDeCours> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertEquals(
                 "Session de début invalide:H2018g. L'année doit avoir 4 chiffres.",
@@ -263,18 +276,20 @@ class SignetsApiTest {
     fun testGetListeDesActivitesEtProfNoError() {
         enqueueResponse("liste_horaire_et_prof_no_error.json")
         val apiResponse = api.listeDesActivitesEtProf(
-                "AM41234",
-                "foo",
-                "A2016"
+                ListeDesActivitesEtProfRequestBody(
+                        "AM41234",
+                        "foo",
+                        "A2016"
+                )
         )
-        val wrapper: SignetsModel<ListeDesActivitesEtProf> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDesActivitesEtProf> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
         val activites = wrapper.data!!.listeActivites!!
         val enseignants = wrapper.data!!.listeEnseignants!!
         assertEquals(10, activites.size)
         assertEquals(4, enseignants.size)
-        val expectedActivite = Activite(
+        val expectedActivite = ApiActivite(
                 "LOG210",
                 "02",
                 1,
@@ -288,7 +303,7 @@ class SignetsApiTest {
                 "Analyse et conception de logiciels"
         )
         assertEquals(expectedActivite, activites[0])
-        val expectedEnseignant = Enseignant(
+        val expectedEnseignant = ApiEnseignant(
                 "A-4526",
                 "514-396-8800, poste 7810",
                 "Oui",
@@ -308,11 +323,13 @@ class SignetsApiTest {
     fun testGetListeDesActivitesEtProfError() {
         enqueueResponse("liste_horaire_et_prof_error.json")
         val apiResponse = api.listeDesActivitesEtProf(
-                "AM41234",
-                "foo",
-                "42016"
+                ListeDesActivitesEtProfRequestBody(
+                        "AM41234",
+                        "foo",
+                        "42016"
+                )
         )
-        val wrapper: SignetsModel<ListeDesActivitesEtProf> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDesActivitesEtProf> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertEquals("Session invalide: 42016", errorStr)
         assertEquals(
@@ -327,9 +344,9 @@ class SignetsApiTest {
         enqueueResponse("info_etudiant_no_error.json")
 
         val apiResponse = api
-                .infoEtudiant(SignetsUserCredentials("AM41234", "test!"))
-        val etudiantWrapper: SignetsModel<Etudiant> = getValue(apiResponse).body!!
-        val etudiant = Etudiant(
+                .infoEtudiant(EtudiantRequestBody("AM41234", "test!"))
+        val etudiantWrapper: ApiSignetsModel<ApiEtudiant> = getValue(apiResponse).body!!
+        val etudiant = ApiEtudiant(
                 "SignetsPourEtudiants.SignetsMobile+Etudiant",
                 "Liu                                     ",
                 "Philippe            ",
@@ -348,14 +365,14 @@ class SignetsApiTest {
     fun testGetInfoEtudiantError() {
         enqueueResponse("info_etudiant_error.json")
 
-        val apiResponse = api.infoEtudiant(SignetsUserCredentials(
+        val apiResponse = api.infoEtudiant(EtudiantRequestBody(
                 "AM41234",
                 "test!"
         ))
-        val etudiantWrapper: SignetsModel<Etudiant> = getValue(apiResponse).body!!
+        val etudiantWrapper: ApiSignetsModel<ApiEtudiant> = getValue(apiResponse).body!!
 
-        assertEquals("", etudiantWrapper.data?.nom)
-        assertEquals("", etudiantWrapper.data?.prenom)
+        assertEquals("", etudiantWrapper.data?.untrimmedNom)
+        assertEquals("", etudiantWrapper.data?.untrimmedPrenom)
         assertEquals("", etudiantWrapper.data?.codePerm)
         assertEquals("", etudiantWrapper.data?.soldeTotal)
         val errorStr = etudiantWrapper.data!!.erreur
@@ -368,18 +385,18 @@ class SignetsApiTest {
         enqueueResponse("liste_jours_remplaces_no_error.json")
 
         val apiResponse = api.listeJoursRemplaces("É2016")
-        val wrapper: SignetsModel<ListeJoursRemplaces> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeJoursRemplaces> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
         val listeJours = wrapper.data!!.listeJours!!
         assertEquals(2, listeJours.size)
-        val expectedJourRemplace0 = JourRemplace(
+        val expectedJourRemplace0 = ApiJourRemplace(
                 "2016-05-23",
                 "2016-05-25",
                 "Journée nationale des Patriotes    "
         )
         assertEquals(expectedJourRemplace0, listeJours[0])
-        val expectedJourRemplace1 = JourRemplace(
+        val expectedJourRemplace1 = ApiJourRemplace(
                 "2016-06-24",
                 "2016-06-23",
                 "Fête nationale du Québec           "
@@ -397,7 +414,7 @@ class SignetsApiTest {
         enqueueResponse("liste_jours_remplaces_error.json")
 
         val apiResponse = api.listeJoursRemplaces("É2016")
-        val wrapper: SignetsModel<ListeJoursRemplaces> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeJoursRemplaces> = getValue(apiResponse).body!!
         val errorStr = wrapper.data!!.erreur
         assertEquals("Session invalide: É2016e", errorStr)
         assertEquals(
@@ -412,13 +429,15 @@ class SignetsApiTest {
         enqueueResponse("liste_elements_evaluation_no_error.json")
 
         val apiResponse = api.listeDesElementsEvaluation(
-                "AM12345",
-                "test",
-                "INF111",
-                "01",
-                "H2015"
+                ListeDesElementsEvaluationRequestBody(
+                        "AM12345",
+                        "test",
+                        "INF111",
+                        "01",
+                        "H2015"
+                )
         )
-        val wrapper: SignetsModel<ListeDesElementsEvaluation> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDesElementsEvaluation> = getValue(apiResponse).body!!
         val listeDesElementsEvaluation = wrapper.data!!
         val errorStr = listeDesElementsEvaluation.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
@@ -436,7 +455,7 @@ class SignetsApiTest {
 
         assertEquals(6, listeDesElementsEvaluation.liste!!.size)
 
-        val expectedEvaluation = Evaluation(
+        val expectedEvaluation = ApiEvaluation(
                 "INF111-01",
                 "TP03",
                 "01",
@@ -461,13 +480,15 @@ class SignetsApiTest {
         enqueueResponse("liste_elements_evaluation_error.json")
 
         val apiResponse = api.listeDesElementsEvaluation(
-                "AM12345",
-                "test",
-                "INF111",
-                "01",
-                "H2015"
+                ListeDesElementsEvaluationRequestBody(
+                        "AM12345",
+                        "test",
+                        "INF111",
+                        "01",
+                        "H2015"
+                )
         )
-        val wrapper: SignetsModel<ListeDesElementsEvaluation> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDesElementsEvaluation> = getValue(apiResponse).body!!
         val listeDesElementsEvaluation = wrapper.data!!
 
         val errorStr = listeDesElementsEvaluation.erreur
@@ -481,17 +502,17 @@ class SignetsApiTest {
     fun testGetListeSessionsNoError() {
         enqueueResponse("liste_sessions_no_error.json")
 
-        val apiResponse = api.listeSessions(SignetsUserCredentials(
+        val apiResponse = api.listeSessions(EtudiantRequestBody(
                 "AM41234",
                 "test!"
         ))
-        val wrapper: SignetsModel<ListeDeSessions> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDeSessions> = getValue(apiResponse).body!!
 
         val errorStr = wrapper.data!!.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
         assertEquals(6, wrapper.data!!.liste.size)
 
-        val expectedSession = Session(
+        val expectedSession = ApiSession(
                 "É2018",
                 "Été 2018",
                 "2018-04-30",
@@ -516,11 +537,11 @@ class SignetsApiTest {
     fun testGetListeSessionsError() {
         enqueueResponse("liste_sessions_error.json")
 
-        val apiResponse = api.listeSessions(SignetsUserCredentials(
+        val apiResponse = api.listeSessions(EtudiantRequestBody(
                 "AM41234",
                 "test!"
         ))
-        val wrapper: SignetsModel<ListeDeSessions> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDeSessions> = getValue(apiResponse).body!!
 
         val errorStr = wrapper.data!!.erreur
         assertEquals("Code d'accès ou mot de passe invalide", errorStr)
@@ -534,21 +555,23 @@ class SignetsApiTest {
         enqueueResponse("liste_seances_no_error.json")
 
         val apiResponse = api.listeDesSeances(
-                "AM41234",
-                "test!",
-                "MAT472",
-                "É2016",
-                "2018-01-01",
-                "2019-04-01"
+                ListeDesSeancesRequestBody(
+                        "AM41234",
+                        "test!",
+                        "MAT472",
+                        "É2016",
+                        "2018-01-01",
+                        "2019-04-01"
+                )
         )
 
-        val wrapper: SignetsModel<ListeDesSeances> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDesSeances> = getValue(apiResponse).body!!
 
         val errorStr = wrapper.data!!.erreur
         assertTrue { errorStr == null || errorStr.isEmpty() }
         assertEquals(26, wrapper.data!!.liste.size)
 
-        val expectedSeance = Seance(
+        val expectedSeance = ApiSeance(
                 "/Date(1525093200000)/",
                 "/Date(1525105800000)/",
                 "MAT472-02",
@@ -569,14 +592,16 @@ class SignetsApiTest {
         enqueueResponse("liste_seances_error.json")
 
         val apiResponse = api.listeDesSeances(
-                "AM41234",
-                "test!",
-                "MAT472",
-                "É2016",
-                "2018-01-01",
-                "1 avril 2019"
+                ListeDesSeancesRequestBody(
+                        "AM41234",
+                        "test!",
+                        "MAT472",
+                        "É2016",
+                        "2018-01-01",
+                        "1 avril 2019"
+                )
         )
-        val wrapper: SignetsModel<ListeDesSeances> = getValue(apiResponse).body!!
+        val wrapper: ApiSignetsModel<ApiListeDesSeances> = getValue(apiResponse).body!!
 
         val errorStr = wrapper.data!!.erreur
         assertEquals("Date de fin. Date invalide, format attendu: aaaa-mm-jj. 1 avril 2019", errorStr)

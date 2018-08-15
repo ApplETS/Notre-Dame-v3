@@ -2,45 +2,45 @@ package ca.etsmtl.repository.data.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import ca.etsmtl.repository.data.db.dao.ActiviteDao
-import ca.etsmtl.repository.data.db.dao.CoursDao
-import ca.etsmtl.repository.data.db.dao.EnseignantDao
-import ca.etsmtl.repository.data.db.dao.EtudiantDao
-import ca.etsmtl.repository.data.db.dao.EvaluationDao
-import ca.etsmtl.repository.data.db.dao.HoraireExamenFinalDao
-import ca.etsmtl.repository.data.db.dao.JourRemplaceDao
-import ca.etsmtl.repository.data.db.dao.ProgrammeDao
-import ca.etsmtl.repository.data.db.dao.SeanceDao
-import ca.etsmtl.repository.data.db.dao.SessionDao
-import ca.etsmtl.repository.data.db.dao.SommaireElementsEvaluationDao
-import ca.etsmtl.repository.data.model.signets.Activite
-import ca.etsmtl.repository.data.model.signets.Cours
-import ca.etsmtl.repository.data.model.signets.Enseignant
-import ca.etsmtl.repository.data.model.signets.Etudiant
-import ca.etsmtl.repository.data.model.signets.Evaluation
-import ca.etsmtl.repository.data.model.signets.HoraireExamenFinal
-import ca.etsmtl.repository.data.model.signets.JourRemplace
-import ca.etsmtl.repository.data.model.signets.Programme
-import ca.etsmtl.repository.data.model.signets.Seance
-import ca.etsmtl.repository.data.model.signets.Session
-import ca.etsmtl.repository.data.model.signets.SommaireElementsEvaluation
+import ca.etsmtl.repository.data.db.dao.signets.ActiviteDao
+import ca.etsmtl.repository.data.db.dao.signets.CoursDao
+import ca.etsmtl.repository.data.db.dao.signets.EnseignantDao
+import ca.etsmtl.repository.data.db.dao.signets.EtudiantDao
+import ca.etsmtl.repository.data.db.dao.signets.EvaluationDao
+import ca.etsmtl.repository.data.db.dao.signets.HoraireExamenFinalDao
+import ca.etsmtl.repository.data.db.dao.signets.JourRemplaceDao
+import ca.etsmtl.repository.data.db.dao.signets.ProgrammeDao
+import ca.etsmtl.repository.data.db.dao.signets.SeanceDao
+import ca.etsmtl.repository.data.db.dao.signets.SessionDao
+import ca.etsmtl.repository.data.db.dao.signets.SommaireElementsEvaluationDao
+import ca.etsmtl.repository.data.db.entity.signets.ActiviteEntity
+import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
+import ca.etsmtl.repository.data.db.entity.signets.EnseignantEntity
+import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
+import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
+import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
+import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
+import ca.etsmtl.repository.data.db.entity.signets.ProgrammeEntity
+import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
+import ca.etsmtl.repository.data.db.entity.signets.SessionEntity
+import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 
 /**
  * Created by Sonphil on 13-03-18.
  */
 @Database(
         entities = [
-            Programme::class,
-            HoraireExamenFinal::class,
-            Cours::class,
-            Activite::class,
-            Enseignant::class,
-            Etudiant::class,
-            JourRemplace::class,
-            Evaluation::class,
-            Session::class,
-            SommaireElementsEvaluation::class,
-            Seance::class
+            ProgrammeEntity::class,
+            HoraireExamenFinalEntity::class,
+            CoursEntity::class,
+            ActiviteEntity::class,
+            EnseignantEntity::class,
+            EtudiantEntity::class,
+            JourRemplaceEntity::class,
+            EvaluationEntity::class,
+            SessionEntity::class,
+            SommaireElementsEvaluationEntity::class,
+            SeanceEntity::class
         ],
         version = 1
 )

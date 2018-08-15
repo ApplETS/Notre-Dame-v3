@@ -25,7 +25,7 @@ import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.util.ApiUtil
 import ca.etsmtl.repository.util.CountingAppExecutors
 import ca.etsmtl.repository.util.InstantAppExecutors
-import ca.etsmtl.repository.util.mock
+import com.nhaarman.mockito_kotlin.mock
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import org.hamcrest.CoreMatchers.`is`

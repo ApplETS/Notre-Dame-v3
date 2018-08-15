@@ -3,9 +3,11 @@ package ca.etsmtl.repository.data.db.signets
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
-import ca.etsmtl.repository.data.db.dao.EvaluationDao
-import ca.etsmtl.repository.data.model.signets.Evaluation
+import ca.etsmtl.repository.data.db.dao.signets.EvaluationDao
+import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
 import junit.framework.Assert
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,10 +17,12 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class EvaluationDaoTest : DbTest() {
-    private val entity = Evaluation(
-            "INF111-01",
-            "TP03",
+    private val entity = EvaluationEntity(
+            "INF111",
             "01",
+            "E2018",
+            "TP03",
+            "",
             "",
             "89,0",
             "100",
@@ -27,9 +31,9 @@ class EvaluationDaoTest : DbTest() {
             "18,4",
             "68,0",
             "91",
-            "Oui",
+            true,
             "",
-            "Non"
+            false
     )
     private lateinit var dao: EvaluationDao
 
@@ -42,16 +46,18 @@ class EvaluationDaoTest : DbTest() {
     @Test
     fun testInsert() {
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())
-        Assert.assertNotNull(fromDb)
-        Assert.assertEquals(entity, fromDb[0])
+        assertNotNull(fromDb)
+        assertEquals(entity, fromDb[0])
     }
 
     @Test
     fun testInsertSame() {
-        val same = Evaluation(
-                "INF111-01",
-                "TP03",
+        val same = EvaluationEntity(
+                "INF111",
                 "01",
+                "E2018",
+                "TP03",
+                "",
                 "",
                 "99,0",
                 "100",
@@ -60,12 +66,107 @@ class EvaluationDaoTest : DbTest() {
                 "18,4",
                 "68,0",
                 "99",
-                "Oui",
+                true,
                 "",
-                "Non"
+                false
         )
         dao.insert(same)
         val fromDb = LiveDataTestUtil.getValue(dao.getAll())
-        Assert.assertEquals(same, fromDb[0])
+        assertEquals(same, fromDb[0])
+    }
+
+    @Test
+    fun testGetByCoursGroupeAndSession() {
+        val expectedEvaluation = EvaluationEntity(
+                "LOG123",
+                "01",
+                "E2018",
+                "TP03",
+                "",
+                "",
+                "89,0",
+                "100",
+                "20",
+                "65,1",
+                "18,4",
+                "68,0",
+                "91",
+                true,
+                "",
+                false
+        )
+        dao.insert(expectedEvaluation)
+
+        val unexpectedEvaluation1 = EvaluationEntity(
+                "LOG123",
+                "01",
+                "H2018",
+                "TP03",
+                "",
+                "",
+                "89,0",
+                "100",
+                "20",
+                "65,1",
+                "18,4",
+                "68,0",
+                "91",
+                true,
+                "",
+                false
+        )
+        dao.insert(unexpectedEvaluation1)
+
+        val unexpectedEvaluation2 = EvaluationEntity(
+                "LOG123",
+                "02",
+                "E2018",
+                "TP03",
+                "",
+                "",
+                "89,0",
+                "100",
+                "20",
+                "65,1",
+                "18,4",
+                "68,0",
+                "91",
+                true,
+                "",
+                false
+        )
+        dao.insert(unexpectedEvaluation2)
+
+        assertEquals(4, LiveDataTestUtil.getValue(dao.getAll()).size)
+
+        val evaluations = LiveDataTestUtil.getValue(dao.getByCoursGroupeAndSession(
+                expectedEvaluation.cours,
+                expectedEvaluation.groupe,
+                expectedEvaluation.session
+        ))
+        assertEquals(1, evaluations.size)
+        assertEquals(expectedEvaluation, evaluations[0])
+    }
+
+    @Test
+    fun deleteByCoursGroupeAndSession() {
+        var evaluations = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(1, evaluations.size)
+
+        dao.deleteByCoursGroupeAndSession("LOG123", entity.groupe, entity.session)
+        evaluations = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(1, evaluations.size)
+
+        dao.deleteByCoursGroupeAndSession(entity.cours, "02", entity.session)
+        evaluations = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(1, evaluations.size)
+
+        dao.deleteByCoursGroupeAndSession(entity.cours, entity.groupe, "A2018")
+        evaluations = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(1, evaluations.size)
+
+        dao.deleteByCoursGroupeAndSession(entity.cours, entity.groupe, entity.session)
+        evaluations = LiveDataTestUtil.getValue(dao.getAll())
+        Assert.assertEquals(0, evaluations.size)
     }
 }

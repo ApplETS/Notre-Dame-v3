@@ -8,11 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.Etudiant
+import ca.etsmtl.repository.data.model.Etudiant
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_profile.progressBarInfoEtudiant
 import kotlinx.android.synthetic.main.fragment_profile.recyclerViewInfoEtudiant
+import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutInfoEtudiant
 import javax.inject.Inject
 
 /**
@@ -28,7 +27,9 @@ class ProfileFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var adapter: ProfileAdapter
+    val adapter: ProfileAdapter by lazy {
+        ProfileAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,12 +43,17 @@ class ProfileFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpSwipeRefresh()
         setUpRecyclerView()
         subscribeUI()
     }
 
+    private fun setUpSwipeRefresh() {
+        swipeRefreshLayoutInfoEtudiant.setColorSchemeResources(R.color.colorPrimary)
+        swipeRefreshLayoutInfoEtudiant.setOnRefreshListener { profileViewModel.refresh() }
+    }
+
     private fun setUpRecyclerView() {
-        adapter = ProfileAdapter()
         recyclerViewInfoEtudiant.adapter = adapter
         recyclerViewInfoEtudiant.setHasFixedSize(true)
     }
@@ -57,20 +63,12 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        profileViewModel.getInfoEtudiant().observe(this, Observer<Resource<Etudiant>> { res ->
-            when (res?.status) {
-                Resource.SUCCESS -> {
-                    progressBarInfoEtudiant.visibility = View.GONE
-                    res.data?.let { adapter.setEtudiant(it) }
-                }
-                Resource.ERROR -> {
-                    progressBarInfoEtudiant.visibility = View.GONE
-                    res.data?.let { adapter.setEtudiant(it) }
-                }
-                Resource.LOADING -> {
-                    progressBarInfoEtudiant.visibility = View.VISIBLE
-                }
-            }
+        profileViewModel.getEtudiant().observe(this, Observer<Etudiant> {
+            it?.let { adapter.setEtudiant(it) }
         })
+        profileViewModel.getLoading().observe(this, Observer<Boolean> {
+            it?.let { swipeRefreshLayoutInfoEtudiant.isRefreshing = it }
+        })
+        this.lifecycle.addObserver(profileViewModel)
     }
 }

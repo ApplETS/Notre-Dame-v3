@@ -49,8 +49,9 @@ class MoreRecyclerViewAdapter(
         /**
          * Callback method to be invoked when an item of the recycler view is clicked
          *
-         * @param index : position of the clicked view
+         * @param index position of the clicked view
+         * @param holder the view holder of the clicked item
          */
-        fun onItemClick(index: Int, viewHolder: ViewHolder)
+        fun onItemClick(index: Int, holder: ViewHolder)
     }
 }

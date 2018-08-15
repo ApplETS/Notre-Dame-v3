@@ -1,10 +1,15 @@
 package ca.etsmtl.etsmobile.presentation.profile
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.OnLifecycleEvent
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.signets.Etudiant
-import ca.etsmtl.repository.data.model.signets.SignetsUserCredentials
+import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
 import javax.inject.Inject
 
@@ -14,14 +19,30 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val repository: InfoEtudiantRepository,
     private var userCredentials: SignetsUserCredentials
-) : ViewModel() {
+) : ViewModel(), LifecycleObserver {
 
-    private var etudiant: LiveData<Resource<Etudiant>>? = null
+    private val etudiantMediatorLiveData: MediatorLiveData<Resource<Etudiant>> by lazy {
+        MediatorLiveData<Resource<Etudiant>>()
+    }
+    private var etudiantRes: LiveData<Resource<Etudiant>>? = null
+    fun getEtudiant(): LiveData<Etudiant> = Transformations.map(etudiantMediatorLiveData) { it.data }
+    fun getLoading(): LiveData<Boolean> = Transformations.map(etudiantMediatorLiveData) { it.status == Resource.LOADING }
+    fun getErrorMessage(): LiveData<String> = Transformations.map(etudiantMediatorLiveData) {
+        it.message
+    }
 
-    fun getInfoEtudiant(): LiveData<Resource<Etudiant>> {
-        if (etudiant == null)
-            etudiant = repository.getInfoEtudiant(userCredentials, true)
+    private fun load() {
+        etudiantRes = repository.getInfoEtudiant(userCredentials, true).apply {
+            etudiantMediatorLiveData.addSource<Resource<Etudiant>>(this) {
+                etudiantMediatorLiveData.value = it
+            }
+        }
+    }
 
-        return etudiant as LiveData<Resource<Etudiant>>
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun refresh() {
+        etudiantRes?.let { etudiantMediatorLiveData.removeSource(it) }
+        etudiantRes = null
+        load()
     }
 }

@@ -3,7 +3,7 @@ package ca.etsmtl.repository.data.db.signets
 import android.support.test.runner.AndroidJUnit4
 import ca.etsmtl.repository.LiveDataTestUtil
 import ca.etsmtl.repository.data.db.DbTest
-import ca.etsmtl.repository.data.model.signets.Activite
+import ca.etsmtl.repository.data.db.entity.signets.ActiviteEntity
 import junit.framework.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
 class ActiviteDaoTest : DbTest() {
     @Test
     fun testInsert() {
-        val entity = Activite(
+        val entity = ActiviteEntity(
                 "LOG210",
                 "02",
                 1,
@@ -36,7 +36,7 @@ class ActiviteDaoTest : DbTest() {
 
     @Test
     fun testInsertSame() {
-        val entity = Activite(
+        val entity = ActiviteEntity(
                 "LOG210",
                 "02",
                 1,
@@ -50,7 +50,7 @@ class ActiviteDaoTest : DbTest() {
                 "Analyse et conception de logiciels"
         )
         db.activiteDao().insert(entity)
-        val same = Activite(
+        val same = ActiviteEntity(
                 "LOG210",
                 "02",
                 1,
