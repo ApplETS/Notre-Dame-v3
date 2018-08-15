@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/containerItemContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_grey_200"
-    android:orientation="vertical"
     tools:context="ca.etsmtl.etsmobile.presentation.about.AboutActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:theme="@style/AppTheme.Toolbar"
-            app:titleTextAppearance="@style/AppTheme.Toolbar.Title" />
-    </android.support.design.widget.AppBarLayout>
-
-    <fragment
-        android:id="@+id/fragmentAbout"
-        android:name="ca.etsmtl.etsmobile.presentation.about.AboutFragment"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@null"
+        tools:background="@color/appletsBg"
+        app:titleTextAppearance="@style/AppTheme.Toolbar.Title" />
+</android.support.constraint.ConstraintLayout>
