@@ -30,6 +30,18 @@ fun View.fadeTo(
 }
 
 /**
+ * Shows or hides the view
+ *
+ * @param show True if the view should be shown or false if the view should be gone
+ */
+fun View.show(show: Boolean) {
+    visibility = when {
+        show -> View.VISIBLE
+        else -> View.GONE
+    }
+}
+
+/**
  * Tries to hide the keyboard
  *
  * @return True if it worked
