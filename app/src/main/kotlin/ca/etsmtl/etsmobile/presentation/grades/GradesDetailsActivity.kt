@@ -46,6 +46,13 @@ class GradesDetailsActivity : BaseActivity() {
                     addFragment(this)
                 }
             }
+            with (this?.getParcelable(EXTRA_COURS) as Cours) {
+                if (savedInstanceState == null) {
+                    addFragment(this)
+                }
+
+                supportActionBar?.title = this.sigle
+            }
         }
     }
 
@@ -64,8 +71,6 @@ class GradesDetailsActivity : BaseActivity() {
     }
 
     private fun addFragment(cours: Cours) {
-        supportActionBar?.title = cours.sigle
-
         val fragment = GradesDetailsFragment.newInstance(cours)
 
         with(supportFragmentManager.beginTransaction()) {
