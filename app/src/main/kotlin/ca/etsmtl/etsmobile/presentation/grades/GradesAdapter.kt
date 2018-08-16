@@ -1,5 +1,6 @@
 package ca.etsmtl.etsmobile.presentation.grades
 
+import android.support.v4.view.ViewCompat
 import android.support.v7.recyclerview.extensions.AsyncListDiffer
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
  * Created by Sonphil on 12-08-18.
  */
 
-class GradesAdapter : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>() {
+class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>() {
 
     val differ = AsyncListDiffer<Any>(this, object : DiffUtil.ItemCallback<Any>() {
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
@@ -90,6 +91,10 @@ class GradesAdapter : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>(
                     }
 
                     holder.sigleTextView.text = this.sigle
+
+                    ViewCompat.setTransitionName(holder.gradeTextView, this.sigle)
+
+                    holder.itemView.setOnClickListener { onCourseClickListener.onCourseClick(this@with, holder) }
                 }
             }
             is HeaderViewHolder -> {
@@ -107,5 +112,18 @@ class GradesAdapter : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>(
         class HeaderViewHolder(override val containerView: View) : CourseGradeViewHolder(containerView) {
             val sessionGradesTextView: TextView = tvSessionGrades
         }
+    }
+
+    /**
+     * Interface definition for a callback to be invoked when a course of the recycler view is clicked
+     */
+    interface OnCourseClickListener {
+        /**
+         * Callback method to be invoked when an item of the recycler view is clicked
+         *
+         * @param cours The [Cours] clicked
+         * @param holder The holder of clicked course
+         */
+        fun onCourseClick(cours: Cours, holder: CourseGradeViewHolder)
     }
 }

@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.include_toolbar.toolbar
 class AboutActivity : BaseActivity() {
 
     companion object {
-        const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
+        private const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
 
         /**
          * Starts the activity without a shared element transition animation

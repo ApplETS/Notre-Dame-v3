@@ -3,12 +3,19 @@ package ca.etsmtl.etsmobile.presentation.grades
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Rect
 import android.os.Bundle
+import android.support.v4.util.Pair
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.util.EventObserver
+import ca.etsmtl.repository.data.model.Cours
 import com.xiaofeng.flowlayoutmanager.Alignment
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
 import dagger.android.support.DaggerFragment
@@ -30,7 +37,13 @@ class GradesFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val adapter: GradesAdapter by lazy {
-        GradesAdapter()
+        GradesAdapter(object : GradesAdapter.OnCourseClickListener {
+            override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
+                this@GradesFragment.activity?.let {
+                    GradesDetailsActivity.start(it as AppCompatActivity, Pair(holder.itemView, cours.sigle), cours)
+                }
+            }
+        })
     }
 
     override fun onCreateView(
@@ -57,6 +70,19 @@ class GradesFragment : DaggerFragment() {
 
     private fun setUpRecyclerView() {
         recyclerViewCoursesGrades.adapter = adapter
+        // Set items margins as an ItemDecoration because margins don't works with FlowLayoutManager
+        // library
+        recyclerViewCoursesGrades.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                super.getItemOffsets(outRect, view, parent, state)
+                with (resources) {
+                    outRect.bottom = 0
+                    outRect.right = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f, this.displayMetrics).toInt()
+                    outRect.left = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f, this.displayMetrics).toInt()
+                    outRect.top = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20f, this.displayMetrics).toInt()
+                }
+            }
+        })
         recyclerViewCoursesGrades.layoutManager = FlowLayoutManager().apply {
             this.isAutoMeasureEnabled = true
             setAlignment(Alignment.LEFT)
@@ -72,8 +98,8 @@ class GradesFragment : DaggerFragment() {
         gradesViewModel.getLoading().observe(this, Observer {
             it?.let { swipeRefreshLayoutCoursesGrades.isRefreshing = it }
         })
-        gradesViewModel.getErrorMessage().observe(this, Observer {
-            it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+        gradesViewModel.errorMessage.observe(this, EventObserver {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
         this.lifecycle.addObserver(gradesViewModel)
     }
