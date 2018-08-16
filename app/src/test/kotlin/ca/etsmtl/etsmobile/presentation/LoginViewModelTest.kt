@@ -4,12 +4,10 @@ import android.app.Activity
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
+import ca.etsmtl.etsmobile.util.mockNetwork
 import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.SignetsUserCredentials
@@ -55,19 +53,11 @@ class LoginViewModelTest {
     @Captor
     private lateinit var booleanArgumentCaptor: ArgumentCaptor<Boolean>
 
-    private fun mockNetwork(connected: Boolean) {
-        val connectivityManager = mock(ConnectivityManager::class.java)
-        `when`(app.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(connectivityManager)
-        val activeNetworkInfo = mock(NetworkInfo::class.java)
-        `when`(connectivityManager.activeNetworkInfo).thenReturn(activeNetworkInfo)
-        `when`(activeNetworkInfo.isConnected).thenReturn(connected)
-    }
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        mockNetwork(true)
+        app.mockNetwork()
     }
 
     private fun setAndSubmitCredentials(userCredentials: SignetsUserCredentials) {
@@ -86,7 +76,7 @@ class LoginViewModelTest {
         assertEquals(userCredentials, userCredentialsArgumentCaptor.value)
         assertTrue(booleanArgumentCaptor.value)
 
-        mockNetwork(false)
+        app.mockNetwork(false)
         val userCredentials2 = SignetsUserCredentials("test2", "test2")
         `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials2, false)).thenReturn(liveData)
         loginViewModel.getShowLoading().observeForever(mock())

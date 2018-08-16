@@ -99,7 +99,7 @@ class GradesFragment : DaggerFragment() {
             it?.let { swipeRefreshLayoutCoursesGrades.isRefreshing = it }
         })
         gradesViewModel.errorMessage.observe(this, EventObserver {
-            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
         this.lifecycle.addObserver(gradesViewModel)
     }

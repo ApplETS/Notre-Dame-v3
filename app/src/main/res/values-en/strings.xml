@@ -4,6 +4,10 @@
     <string name="error_no_internet_connection">No internet connection</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="session_fall">Fall</string>
+    <string name="session_winter">Winter</string>
+    <string name="session_summer">Summer</string>
+    <string name="session_without">Without Session</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Schedule</string>

@@ -5,6 +5,10 @@
     <string name="error_no_internet_connection">Absence de connexion internet</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="session_fall">Automne</string>
+    <string name="session_winter">Hiver</string>
+    <string name="session_summer">Été</string>
+    <string name="session_without">Sans trimestre</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Horaire</string>

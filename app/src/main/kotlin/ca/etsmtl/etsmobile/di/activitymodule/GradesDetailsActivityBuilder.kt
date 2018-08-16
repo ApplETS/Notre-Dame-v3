@@ -9,6 +9,6 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 interface GradesDetailsActivityBuilder {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [GradesDetailsModule::class])
     fun contributeGradesDetailsActivity(): GradesDetailsActivity
 }

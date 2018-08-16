@@ -10,7 +10,8 @@ import android.view.View
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.BaseActivity
 import ca.etsmtl.repository.data.model.Cours
-import kotlinx.android.synthetic.main.activity_grades_details.layoutGradesDetails
+import kotlinx.android.synthetic.main.activity_grades_details.containerGradesDetails
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**
  * Created by Sonphil on 15-08-18.
@@ -35,10 +36,23 @@ class GradesDetailsActivity : BaseActivity() {
 
         setContentView(R.layout.activity_grades_details)
 
-        layoutGradesDetails.transitionName = intent?.extras?.getString(EXTRA_TRANSITION_NAME)
-//
-//        if (savedInstanceState == null)
-//            addFragment()
+        setUpToolbar()
+
+        with (intent?.extras) {
+            containerGradesDetails.transitionName = this?.getString(EXTRA_TRANSITION_NAME)
+
+            if (savedInstanceState == null) {
+                with (this?.getParcelable(EXTRA_COURS) as Cours) {
+                    addFragment(this)
+                }
+            }
+        }
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -49,13 +63,14 @@ class GradesDetailsActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-//
-//    private fun addFragment() {
-//        val fragment = GradesDetailsFragment.newInstance()
-//
-//        with(supportFragmentManager.beginTransaction()) {
-//            replace(R.id.container, fragment, AboutFragment.TAG)
-//            commit()
-//        }
-//    }
+    private fun addFragment(cours: Cours) {
+        supportActionBar?.title = cours.sigle
+
+        val fragment = GradesDetailsFragment.newInstance(cours)
+
+        with(supportFragmentManager.beginTransaction()) {
+            replace(R.id.containerGradesDetails, fragment, GradesDetailsFragment.TAG)
+            commit()
+        }
+    }
 }

@@ -7,6 +7,8 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.Event
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Resource
@@ -20,22 +22,30 @@ import javax.inject.Inject
 
 class GradesViewModel @Inject constructor(
     private val repository: CoursRepository,
-    private var userCredentials: SignetsUserCredentials
+    private var userCredentials: SignetsUserCredentials,
+    private val app: App
 ) : ViewModel(), LifecycleObserver {
     private val coursMediatorLiveData: MediatorLiveData<Resource<List<Cours>>> by lazy {
         MediatorLiveData<Resource<List<Cours>>>()
     }
     private var coursRes: LiveData<Resource<List<Cours>>>? = null
-    val errorMessage by lazy {
-        MediatorLiveData<Event<String>>().apply {
-            addSource(coursMediatorLiveData) {
-                it?.let { Event(it.message) }
-            }
+    val errorMessage: LiveData<Event<String?>> by lazy {
+        Transformations.map(coursMediatorLiveData) {
+            Event(it.message)
         }
     }
 
     fun getCours(): LiveData<Map<String, List<Cours>>> = Transformations.map(coursMediatorLiveData) {
-        it.data?.asReversed()?.groupBy { it.session }
+        it.data?.asReversed()?.groupBy {
+            it.run {
+                when {
+                    it.session.startsWith("A") -> it.session.replaceFirst("A", app.getString(R.string.session_fall) + " ")
+                    it.session.startsWith("H") -> it.session.replaceFirst("H", app.getString(R.string.session_winter) + " ")
+                    it.session.startsWith("É") -> it.session.replaceFirst("É", app.getString(R.string.session_summer) + " ")
+                    else -> app.getString(R.string.session_without)
+                }
+            }
+        }
     }
     fun getLoading(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         it.status == Resource.LOADING
