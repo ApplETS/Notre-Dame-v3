@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.BaseActivity
+import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.show
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_welcome.iVBackground
@@ -47,8 +48,8 @@ class WelcomeActivity : BaseActivity() {
                 progressBarWelcome.show(it == true)
             })
 
-            getErrorMessage().observe(this@WelcomeActivity, Observer {
-                it?.let { Toast.makeText(this@WelcomeActivity, it, Toast.LENGTH_LONG).show() }
+            errorMessage.observe(this@WelcomeActivity, EventObserver {
+                Toast.makeText(this@WelcomeActivity, it, Toast.LENGTH_LONG).show()
             })
 
             getShowLoginFragment().observe(this@WelcomeActivity, Observer {

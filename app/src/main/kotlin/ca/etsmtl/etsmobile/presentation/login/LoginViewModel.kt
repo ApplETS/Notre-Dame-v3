@@ -13,6 +13,7 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
+import ca.etsmtl.etsmobile.util.Event
 import ca.etsmtl.etsmobile.util.call
 import ca.etsmtl.etsmobile.util.isDeviceConnected
 import ca.etsmtl.repository.data.model.Etudiant
@@ -49,13 +50,24 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+    /** An error message to be displayed to the user **/
+    val errorMessage: LiveData<Event<String>> by lazy {
+        MediatorLiveData<Event<String>>().apply {
+            this.addSource(userCredentialsValid) {
+                if (it != null && it.status == Resource.ERROR) {
+                    this.value = Event(it.message ?: app.getString(R.string.error))
+                }
+            }
+        }
+    }
 
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered when [userCredentials] is called. The new
      * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If
      * an instance can be fetched, it means that the user's credentials are valid. As a result, the
-     * new [SignetsUserCredentials] are saved and stored in [LoginRepository].
+     * new [SignetsUserCredentials] are saved and stored in [LoginRepository]. Moreover, a
+     * navigation to [MainActivity] will be triggered.
      */
     private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentials) { userCredentials ->
@@ -80,18 +92,6 @@ class LoginViewModel @Inject constructor(
      * @return A [LiveData] which is called when the [LoginFragment] needs to be displayed
      */
     fun getShowLoginFragment(): LiveData<Void> = showLoginFragment
-
-    /**
-     * Returns an error message to be displayed to the user.
-     *
-     * @return A [LiveData] containing an error message to be displayed to the user
-     */
-    fun getErrorMessage(): LiveData<String> = Transformations.map(userCredentialsValid) {
-        when {
-            it.status == Resource.ERROR -> it.message
-            else -> null
-        }
-    }
 
     /**
      * Returns whether or not a loading animation should be displayed.

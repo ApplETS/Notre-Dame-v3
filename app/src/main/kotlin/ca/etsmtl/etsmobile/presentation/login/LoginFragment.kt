@@ -19,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
 import ca.etsmtl.etsmobile.util.openWithChromeCustomTabs
@@ -118,7 +119,7 @@ class LoginFragment : DaggerFragment() {
             val fontValue = TypedValue()
             it.theme.resolveAttribute(R.attr.fontFamily, fontValue, true)
             val passwordLayoutTypeFace = ResourcesCompat.getFont(it, fontValue.resourceId)
-            layoutPassword.setTypeface(passwordLayoutTypeFace)
+            layoutPassword.typeface = passwordLayoutTypeFace
         }
     }
 
@@ -132,8 +133,8 @@ class LoginFragment : DaggerFragment() {
                 showProgress(it == true)
             })
 
-            getErrorMessage().observe(this@LoginFragment, Observer {
-                it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+            errorMessage.observe(this@LoginFragment, EventObserver {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
             getUniversalCodeError().observe(this@LoginFragment, Observer {
