@@ -69,6 +69,22 @@ class LoginFragment : DaggerFragment() {
             builder.create()
         }
     }
+    /**
+     * A focus listener used to submit the universal code or password to [LoginViewModel] when the
+     * focus is lost. When a value is submitted, [LoginViewModel] will perform a validity check.
+     */
+    private val credentialsFieldsOnFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+        if (!hasFocus) {
+            when (view.id) {
+                R.id.universalCode -> {
+                    loginViewModel.setUniversalCode(universalCode.text.toString())
+                }
+                R.id.password -> {
+                    loginViewModel.setPassword(password.text.toString())
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,21 +121,8 @@ class LoginFragment : DaggerFragment() {
     }
 
     private fun setUpFields() {
-        val onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus) {
-                when (view.id) {
-                    R.id.universalCode -> {
-                        loginViewModel.setUniversalCode(universalCode.text.toString())
-                    }
-                    R.id.password -> {
-                        loginViewModel.setPassword(password.text.toString())
-                    }
-                }
-            }
-        }
-
-        universalCode.onFocusChangeListener = onFocusChangeListener
-        password.onFocusChangeListener = onFocusChangeListener
+        universalCode.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
+        password.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
 
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -224,6 +227,15 @@ class LoginFragment : DaggerFragment() {
         universalCode.clearFocus()
         password.clearFocus()
         loginViewModel.submitCredentials()
+    }
+
+    override fun onDestroyView() {
+        // The focus will be lost. However, we don't want to submit the credentials, so we must
+        // remove the focus change listener to prevent it from submitting the credentials.
+        universalCode.onFocusChangeListener = null
+        password.onFocusChangeListener = null
+
+        super.onDestroyView()
     }
 
     companion object {
