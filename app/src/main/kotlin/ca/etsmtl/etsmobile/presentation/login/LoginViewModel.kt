@@ -61,6 +61,10 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    private val displayUniversalCodeDialog: MediatorLiveData<Boolean> by lazy {
+        MediatorLiveData<Boolean>()
+    }
+
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered when [userCredentials] is called. The new
@@ -269,4 +273,20 @@ class LoginViewModel @Inject constructor(
     fun clickOnAppletsLogo() {
         activityToGoTo.value = AboutActivity::class.java
     }
+
+    /**
+     * Displays the information about the universal code or hides the information
+     *
+     * @param shouldShow True if the information should be shown or false is the information should
+     * be hidden
+     */
+    fun displayUniversalCodeInfo(shouldShow: Boolean) {
+        displayUniversalCodeDialog.value = shouldShow
+    }
+
+    /**
+     * Returns a [LiveData] indicating whether the universal code info dialog should be displayed or
+     * not
+     */
+    fun getDisplayUniversalCodeDialog(): LiveData<Boolean> = displayUniversalCodeDialog
 }

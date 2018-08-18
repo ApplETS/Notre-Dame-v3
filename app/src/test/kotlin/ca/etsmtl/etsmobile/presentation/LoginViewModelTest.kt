@@ -272,4 +272,16 @@ class LoginViewModelTest {
         liveData.value = Resource.error("foo", null)
         verify(observer).onChanged(null)
     }
+
+    @Test
+    fun testUniversalCodeInfoButton() {
+        val observer: Observer<Boolean> = mock()
+        loginViewModel.getDisplayUniversalCodeDialog().observeForever(observer)
+
+        loginViewModel.displayUniversalCodeInfo(true)
+        verify(observer).onChanged(true)
+
+        loginViewModel.displayUniversalCodeInfo(false)
+        verify(observer).onChanged(false)
+    }
 }

@@ -52,6 +52,23 @@ class LoginFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val universalCodeInfoDialog by lazy {
+        context?.let {
+            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
+
+            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_white_24dp)!!
+                    .mutate()
+            icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
+
+            builder.setMessage(R.string.info_universal_code)
+                    .setTitle(getString(R.string.prompt_universal_code))
+                    .setIcon(icon)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> loginViewModel.displayUniversalCodeInfo(false) }
+                    .setOnCancelListener { loginViewModel.displayUniversalCodeInfo(false) }
+
+            builder.create()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +86,7 @@ class LoginFragment : DaggerFragment() {
         View.OnClickListener {
             when (it.id) {
                 R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
-                R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
+                R.id.btnUniversalCodeInfo -> loginViewModel.displayUniversalCodeInfo(true)
                 R.id.btnForgotPassword -> {
                     context?.let {
                         Uri.parse(getString(R.string.uri_password_forgotten)).openWithChromeCustomTabs(it)
@@ -158,6 +175,14 @@ class LoginFragment : DaggerFragment() {
                 btnSignIn.hideKeyboard()
             })
 
+            getDisplayUniversalCodeDialog().observe(this@LoginFragment, Observer {
+                if (it == true) {
+                    universalCodeInfoDialog?.show()
+                } else {
+                    universalCodeInfoDialog?.dismiss()
+                }
+            })
+
             lifecycle.addObserver(this)
         }
     }
@@ -186,23 +211,6 @@ class LoginFragment : DaggerFragment() {
             iVETSLogo.visibility = View.VISIBLE
             tvMadeBy.visibility = View.VISIBLE
             btnApplets.visibility = View.VISIBLE
-        }
-    }
-
-    private fun displayUniversalCodeDialog() {
-        context?.let {
-            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
-
-            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_white_24dp)!!
-                    .mutate()
-            icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
-
-            builder.setMessage(R.string.info_universal_code)
-                    .setTitle(getString(R.string.prompt_universal_code))
-                    .setIcon(icon)
-                    .setPositiveButton(android.R.string.ok) { dialog, which -> dialog?.dismiss() }
-
-            builder.create().show()
         }
     }
 
