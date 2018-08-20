@@ -11,7 +11,6 @@ import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.login.WelcomeActivity
 import ca.etsmtl.etsmobile.util.Event
-import ca.etsmtl.etsmobile.util.call
 import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
@@ -28,12 +27,12 @@ class MoreViewModel @Inject constructor(
         FAQ, ABOUT, LOGOUT
     }
 
-    private val displayLogoutConfirmationDialog by lazy { MutableLiveData<Void>() }
+    private val displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
     private val displayMessage by lazy { MutableLiveData<Event<String>>() }
     private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
     private val activityToGoTo by lazy { MutableLiveData<Event<Class<out Activity>>>() }
 
-    fun getDisplayLogoutDialog(): LiveData<Void> = displayLogoutConfirmationDialog
+    fun getDisplayLogoutDialog(): LiveData<Boolean> = displayLogoutConfirmationDialog
     fun getDisplayMessage(): LiveData<Event<String>> = displayMessage
     fun getActivityToGoTo(): LiveData<Event<Class<out Activity>>> = activityToGoTo
     fun getLoading(): LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
@@ -43,7 +42,7 @@ class MoreViewModel @Inject constructor(
      *
      * This function should be called when the user want to log out.
      */
-    fun logout() {
+    private fun logout() {
         with(loginRepository.clearUserData()) {
             logoutMediatorLiveData.addSource(this) { finished ->
                 finished?.let {
@@ -76,11 +75,18 @@ class MoreViewModel @Inject constructor(
         return moreItems
     }
 
+    fun clickLogoutConfirmationDialogButton(confirmedLogout: Boolean) {
+        displayLogoutConfirmationDialog.value = false
+
+        if (confirmedLogout)
+            logout()
+    }
+
     fun selectItem(index: Int) {
         when (index) {
             ItemsIndex.FAQ.ordinal -> TODO()
             ItemsIndex.ABOUT.ordinal -> activityToGoTo.value = Event(AboutActivity::class.java)
-            ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog.call()
+            ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog.value = true
         }
     }
 }

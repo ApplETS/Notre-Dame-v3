@@ -3,7 +3,6 @@ package ca.etsmtl.etsmobile.presentation.more
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.util.Pair
@@ -36,6 +35,21 @@ class MoreFragment : MainFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val logoutConfirmationDialog: AlertDialog? by lazy {
+        context?.let {
+            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
+
+            builder.setMessage(R.string.prompt_log_out_confirmation)
+                    .setTitle(getString(R.string.more_item_label_log_out))
+                    .setPositiveButton(R.string.yes) { dialog, _ ->
+                        moreViewModel.clickLogoutConfirmationDialogButton(true)
+                    }
+                    .setNegativeButton(R.string.no) { dialog, _ -> moreViewModel.clickLogoutConfirmationDialogButton(false) }
+                    .setOnCancelListener { moreViewModel.clickLogoutConfirmationDialogButton(false) }
+
+            builder.create()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,20 +81,6 @@ class MoreFragment : MainFragment() {
         view.setHasFixedSize(true)
     }
 
-    private fun displayLogoutConfirmationDialog(context: Context) {
-        val builder = AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle)
-
-        builder.setMessage(R.string.prompt_log_out_confirmation)
-                .setTitle(getString(R.string.more_item_label_log_out))
-                .setPositiveButton(R.string.yes) { dialog, which ->
-                    dialog.dismiss()
-                    moreViewModel.logout()
-                }
-                .setNegativeButton(R.string.no) { dialog, which -> dialog.dismiss() }
-
-        builder.create().show()
-    }
-
     private fun goToAbout(iconView: View, label: String) {
         activity?.let {
             AboutActivity.start(it as AppCompatActivity, Pair(iconView, label))
@@ -89,7 +89,13 @@ class MoreFragment : MainFragment() {
 
     private fun subscribeUI() {
         moreViewModel.getDisplayLogoutDialog().observe(this, Observer {
-            context?.let { context -> displayLogoutConfirmationDialog(context) }
+            logoutConfirmationDialog.takeIf { it != null && !it.isShowing }?.let { dialog ->
+                if (it == true) {
+                    dialog.show()
+                } else {
+                    dialog.dismiss()
+                }
+            }
         })
 
         moreViewModel.getDisplayMessage().observe(this, EventObserver {
