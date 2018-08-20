@@ -230,8 +230,10 @@ class LoginFragment : DaggerFragment() {
     }
 
     override fun onDestroyView() {
-        // The focus will be lost. However, we don't want to submit the credentials, so we must
-        // remove the focus change listener to prevent it from submitting the credentials.
+        /*
+        The focus will be lost. However, we don't want to submit the credentials, so we must remove
+        the focus change listener to prevent it from submitting the credentials.
+         */
         universalCode.onFocusChangeListener = null
         password.onFocusChangeListener = null
 
