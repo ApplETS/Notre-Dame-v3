@@ -19,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
 import ca.etsmtl.etsmobile.util.openWithChromeCustomTabs
@@ -51,6 +52,39 @@ class LoginFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val universalCodeInfoDialog by lazy {
+        context?.let {
+            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
+
+            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_white_24dp)!!
+                    .mutate()
+            icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
+
+            builder.setMessage(R.string.info_universal_code)
+                    .setTitle(getString(R.string.prompt_universal_code))
+                    .setIcon(icon)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> loginViewModel.displayUniversalCodeInfo(false) }
+                    .setOnCancelListener { loginViewModel.displayUniversalCodeInfo(false) }
+
+            builder.create()
+        }
+    }
+    /**
+     * A focus listener used to submit the universal code or password to [LoginViewModel] when the
+     * focus is lost. When a value is submitted, [LoginViewModel] will perform a validity check.
+     */
+    private val credentialsFieldsOnFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+        if (!hasFocus) {
+            when (view.id) {
+                R.id.universalCode -> {
+                    loginViewModel.setUniversalCode(universalCode.text.toString())
+                }
+                R.id.password -> {
+                    loginViewModel.setPassword(password.text.toString())
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,7 +102,7 @@ class LoginFragment : DaggerFragment() {
         View.OnClickListener {
             when (it.id) {
                 R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
-                R.id.btnUniversalCodeInfo -> displayUniversalCodeDialog()
+                R.id.btnUniversalCodeInfo -> loginViewModel.displayUniversalCodeInfo(true)
                 R.id.btnForgotPassword -> {
                     context?.let {
                         Uri.parse(getString(R.string.uri_password_forgotten)).openWithChromeCustomTabs(it)
@@ -87,21 +121,8 @@ class LoginFragment : DaggerFragment() {
     }
 
     private fun setUpFields() {
-        val onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus) {
-                when (view.id) {
-                    R.id.universalCode -> {
-                        loginViewModel.setUniversalCode(universalCode.text.toString())
-                    }
-                    R.id.password -> {
-                        loginViewModel.setPassword(password.text.toString())
-                    }
-                }
-            }
-        }
-
-        universalCode.onFocusChangeListener = onFocusChangeListener
-        password.onFocusChangeListener = onFocusChangeListener
+        universalCode.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
+        password.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
 
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -118,7 +139,7 @@ class LoginFragment : DaggerFragment() {
             val fontValue = TypedValue()
             it.theme.resolveAttribute(R.attr.fontFamily, fontValue, true)
             val passwordLayoutTypeFace = ResourcesCompat.getFont(it, fontValue.resourceId)
-            layoutPassword.setTypeface(passwordLayoutTypeFace)
+            layoutPassword.typeface = passwordLayoutTypeFace
         }
     }
 
@@ -132,8 +153,8 @@ class LoginFragment : DaggerFragment() {
                 showProgress(it == true)
             })
 
-            getErrorMessage().observe(this@LoginFragment, Observer {
-                it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+            errorMessage.observe(this@LoginFragment, EventObserver {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
             getUniversalCodeError().observe(this@LoginFragment, Observer {
@@ -155,6 +176,14 @@ class LoginFragment : DaggerFragment() {
 
             getHideKeyboard().observe(this@LoginFragment, Observer {
                 btnSignIn.hideKeyboard()
+            })
+
+            getDisplayUniversalCodeDialog().observe(this@LoginFragment, Observer {
+                if (it == true) {
+                    universalCodeInfoDialog?.show()
+                } else {
+                    universalCodeInfoDialog?.dismiss()
+                }
             })
 
             lifecycle.addObserver(this)
@@ -188,23 +217,6 @@ class LoginFragment : DaggerFragment() {
         }
     }
 
-    private fun displayUniversalCodeDialog() {
-        context?.let {
-            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
-
-            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_white_24dp)!!
-                    .mutate()
-            icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
-
-            builder.setMessage(R.string.info_universal_code)
-                    .setTitle(getString(R.string.prompt_universal_code))
-                    .setIcon(icon)
-                    .setPositiveButton(android.R.string.ok) { dialog, which -> dialog?.dismiss() }
-
-            builder.create().show()
-        }
-    }
-
     /**
      * Clears the focus on each field and submit the credentials
      *
@@ -215,6 +227,17 @@ class LoginFragment : DaggerFragment() {
         universalCode.clearFocus()
         password.clearFocus()
         loginViewModel.submitCredentials()
+    }
+
+    override fun onDestroyView() {
+        /*
+        The focus will be lost. However, we don't want to submit the credentials, so we must remove
+        the focus change listener to prevent it from submitting the credentials.
+         */
+        universalCode.onFocusChangeListener = null
+        password.onFocusChangeListener = null
+
+        super.onDestroyView()
     }
 
     companion object {

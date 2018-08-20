@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.repository.data.model.Etudiant
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_profile.recyclerViewInfoEtudiant
-import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutInfoEtudiant
+import kotlinx.android.synthetic.main.fragment_profile.recyclerViewProfile
+import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutProfile
 import javax.inject.Inject
 
 /**
@@ -51,13 +51,13 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun setUpSwipeRefresh() {
-        swipeRefreshLayoutInfoEtudiant.setColorSchemeResources(R.color.colorPrimary)
-        swipeRefreshLayoutInfoEtudiant.setOnRefreshListener { profileViewModel.refresh() }
+        swipeRefreshLayoutProfile.setColorSchemeResources(R.color.colorPrimary)
+        swipeRefreshLayoutProfile.setOnRefreshListener { profileViewModel.refresh() }
     }
 
     private fun setUpRecyclerView() {
-        recyclerViewInfoEtudiant.adapter = adapter
-        recyclerViewInfoEtudiant.setHasFixedSize(true)
+        recyclerViewProfile.adapter = adapter
+        recyclerViewProfile.setHasFixedSize(true)
     }
 
     private fun subscribeUI() {
@@ -65,7 +65,7 @@ class ProfileFragment : DaggerFragment() {
             it?.let { adapter.setEtudiant(it) }
         })
         profileViewModel.getLoading().observe(this, Observer<Boolean> {
-            it?.let { swipeRefreshLayoutInfoEtudiant.isRefreshing = it }
+            it?.let { swipeRefreshLayoutProfile.isRefreshing = it }
         })
         this.lifecycle.addObserver(profileViewModel)
     }

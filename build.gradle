@@ -23,7 +23,7 @@ buildscript {
     ext.moshi = '1.5.0'
     ext.okhttp = '3.8.0'
     ext.retrofit = '2.3.0'
-    ext.room = '1.1.0'
+    ext.room = '1.1.1'
     ext.support = '28.0.0-rc01'
 
     repositories {

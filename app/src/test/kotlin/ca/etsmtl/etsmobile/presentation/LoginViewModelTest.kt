@@ -7,6 +7,7 @@ import android.arch.lifecycle.Observer
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.login.LoginViewModel
+import ca.etsmtl.etsmobile.util.Event
 import ca.etsmtl.etsmobile.util.mockNetwork
 import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Resource
@@ -52,6 +53,8 @@ class LoginViewModelTest {
     private lateinit var userCredentialsArgumentCaptor: ArgumentCaptor<SignetsUserCredentials>
     @Captor
     private lateinit var booleanArgumentCaptor: ArgumentCaptor<Boolean>
+    @Captor
+    private lateinit var stringEventArgumentCaptor: ArgumentCaptor<Event<String>>
 
     @Before
     fun setUp() {
@@ -112,13 +115,14 @@ class LoginViewModelTest {
 
         val message = "Test msg"
         liveData.value = Resource.error(message, null)
-        val observer: Observer<String> = mock()
-        loginViewModel.getErrorMessage().observeForever(observer)
+        val observer: Observer<Event<String>> = mock()
+        loginViewModel.errorMessage.observeForever(observer)
         loginViewModel.setUniversalCode(userCredentials.codeAccesUniversel)
         loginViewModel.setPassword(userCredentials.motPasse)
         verify(observer, never()).onChanged(any())
         loginViewModel.submitCredentials()
-        verify(observer).onChanged(message)
+        verify(observer).onChanged(capture(stringEventArgumentCaptor))
+        assertEquals(message, stringEventArgumentCaptor.value.getContentIfNotHandled())
     }
 
     @Test
@@ -267,5 +271,17 @@ class LoginViewModelTest {
 
         liveData.value = Resource.error("foo", null)
         verify(observer).onChanged(null)
+    }
+
+    @Test
+    fun testUniversalCodeInfoButton() {
+        val observer: Observer<Boolean> = mock()
+        loginViewModel.getDisplayUniversalCodeDialog().observeForever(observer)
+
+        loginViewModel.displayUniversalCodeInfo(true)
+        verify(observer).onChanged(true)
+
+        loginViewModel.displayUniversalCodeInfo(false)
+        verify(observer).onChanged(false)
     }
 }
