@@ -15,10 +15,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.EventObserver
+import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
 import com.xiaofeng.flowlayoutmanager.Alignment
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
 import javax.inject.Inject
@@ -91,16 +93,22 @@ class GradesFragment : DaggerFragment() {
 
     private fun subscribeUI() {
         gradesViewModel.getCours().observe(this, Observer {
-            it?.let {
-                adapter.items = it
-            }
+            it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
+
+        gradesViewModel.getShowEmptyView().observe(this, Observer {
+            recyclerViewCoursesGrades.show(it == false)
+            emptyViewCoursesGrades.show(it == true)
+        })
+
         gradesViewModel.getLoading().observe(this, Observer {
             it?.let { swipeRefreshLayoutCoursesGrades.isRefreshing = it }
         })
+
         gradesViewModel.errorMessage.observe(this, EventObserver {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
+
         this.lifecycle.addObserver(gradesViewModel)
     }
 

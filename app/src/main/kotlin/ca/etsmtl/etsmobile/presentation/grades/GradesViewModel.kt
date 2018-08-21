@@ -51,6 +51,14 @@ class GradesViewModel @Inject constructor(
         it.status == Resource.LOADING
     }
 
+    /**
+     * @return A [LiveData] containing the value true if the empty view should be shown instead of
+     * the list
+     */
+    fun getShowEmptyView(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
+        (it.status != Resource.LOADING && (it?.data == null || it.data?.isEmpty() == true))
+    }
+
     private fun load() {
         coursRes = repository.getCours(userCredentials, true).apply {
             coursMediatorLiveData.addSource(this) {

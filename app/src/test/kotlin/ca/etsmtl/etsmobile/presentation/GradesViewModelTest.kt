@@ -159,4 +159,33 @@ class GradesViewModelTest {
         verify(observer).onChanged(capture(messageEventArgumentCaptor))
         assertEquals(errorMsg, messageEventArgumentCaptor.value.getContentIfNotHandled())
     }
+
+    @Test
+    fun testShowEmptyView() {
+        val liveData = MutableLiveData<Resource<List<Cours>>>()
+        `when`(coursRepository.getCours(userCredentials, true)).thenReturn(liveData)
+
+        gradesViewModel.refresh()
+
+        val observer: Observer<Boolean> = mock()
+        gradesViewModel.getShowEmptyView().observeForever(observer)
+
+        liveData.value = Resource.success(emptyList())
+        verify(observer).onChanged(true)
+
+        liveData.value = Resource.loading(null)
+        verify(observer).onChanged(false)
+
+        liveData.value = Resource.success(listOf(Cours(
+                "MAT123",
+                "01",
+                "s.o",
+                "7365",
+                "K",
+                "91",
+                3,
+                "Math"
+        )))
+        verify(observer, times(2)).onChanged(false)
+    }
 }
