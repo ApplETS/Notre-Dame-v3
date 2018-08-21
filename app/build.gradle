@@ -119,6 +119,9 @@ dependencies {
     // FlowLayoutManager
     implementation "com.xiaofeng.android:flowlayoutmanager:$flowlayoutmanager"
 
+    // RecyclerView Animators
+    implementation "jp.wasabeef:recyclerview-animators:$recyclerviewanimators"
+
     implementation project(':repository')
 }
 
