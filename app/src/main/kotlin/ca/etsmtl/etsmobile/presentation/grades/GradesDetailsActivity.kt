@@ -41,11 +41,6 @@ class GradesDetailsActivity : BaseActivity() {
         with (intent?.extras) {
             containerGradesDetails.transitionName = this?.getString(EXTRA_TRANSITION_NAME)
 
-            if (savedInstanceState == null) {
-                with (this?.getParcelable(EXTRA_COURS) as Cours) {
-                    addFragment(this)
-                }
-            }
             with (this?.getParcelable(EXTRA_COURS) as Cours) {
                 if (savedInstanceState == null) {
                     addFragment(this)
