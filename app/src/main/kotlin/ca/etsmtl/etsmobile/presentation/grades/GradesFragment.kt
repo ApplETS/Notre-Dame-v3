@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
@@ -43,7 +42,7 @@ class GradesFragment : DaggerFragment() {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
                 this@GradesFragment.activity?.let {
-                    GradesDetailsActivity.start(it as AppCompatActivity, Pair(holder.itemView, cours.sigle), cours)
+                    GradesDetailsActivity.start(it as AppCompatActivity, cours)
                 }
             }
         })

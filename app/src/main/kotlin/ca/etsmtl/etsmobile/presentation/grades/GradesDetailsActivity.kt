@@ -22,12 +22,31 @@ class GradesDetailsActivity : BaseActivity() {
         private const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
         private const val EXTRA_COURS = "ExtraCours"
 
+        /**
+         * Starts [GradesDetailsActivity] with a shared element transition
+         *
+         * @param activity
+         * @param sharedElement
+         * @param cours The course selected by the user
+         */
         fun start(activity: AppCompatActivity, sharedElement: Pair<View, String>, cours: Cours) {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElement)
             activity.startActivity(Intent(activity, GradesDetailsActivity::class.java).apply {
                 putExtra(EXTRA_TRANSITION_NAME, sharedElement.second)
                 putExtra(EXTRA_COURS, cours)
             }, options.toBundle())
+        }
+
+        /**
+         * Starts [GradesDetailsActivity] without a shared element transition
+         *
+         * @param activity
+         * @param cours The course selected by the user
+         */
+        fun start(activity: AppCompatActivity, cours: Cours) {
+            activity.startActivity(Intent(activity, GradesDetailsActivity::class.java).apply {
+                putExtra(EXTRA_COURS, cours)
+            })
         }
     }
 
