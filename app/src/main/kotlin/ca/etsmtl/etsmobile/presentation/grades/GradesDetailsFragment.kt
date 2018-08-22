@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.repository.data.model.Cours
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
 
 /**
@@ -29,12 +30,21 @@ class GradesDetailsFragment : DaggerFragment() {
 
         progressViewGrade.setEndProgress(100f)
         progressViewGrade.startProgressAnimation()
+
+        setUpSwipeRefresh()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(COURS_KEY, cours)
 
         super.onSaveInstanceState(outState)
+    }
+
+    private fun setUpSwipeRefresh() {
+        swipeRefreshLayoutCoursesGrades.setColorSchemeResources(R.color.colorPrimary)
+        swipeRefreshLayoutCoursesGrades.setOnRefreshListener {
+            // TODO
+        }
     }
 
     companion object {

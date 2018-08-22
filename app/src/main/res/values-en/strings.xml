@@ -33,6 +33,8 @@
     <!-- Grades -->
     <string name="title_grades">Grades</string>
     <string name="msg_no_grades">No grades</string>
+    <string name="label_current_rating">Current rating</string>
+    <string name="label_average">Average</string>
 
     <!-- Profile -->
     <string name="title_profile">Profile</string>

@@ -1,48 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:materialprogressview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.moos.library.CircleProgressView
-        android:id="@+id/progressViewGrade"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        materialprogressview:circleBroken="true"
-        materialprogressview:end_color="@android:color/holo_green_light"
-        materialprogressview:end_progress="100"
-        materialprogressview:isFilled="false"
-        materialprogressview:isTracked="true"
-        materialprogressview:layout_constraintEnd_toStartOf="@+id/progressViewAverage"
-        materialprogressview:layout_constraintHorizontal_bias="0.5"
-        materialprogressview:layout_constraintStart_toStartOf="parent"
-        materialprogressview:layout_constraintTop_toTopOf="parent"
-        materialprogressview:progressTextColor="@color/colorAccent"
-        materialprogressview:progressTextSize="20sp"
-        materialprogressview:start_color="@android:color/holo_red_light"
-        materialprogressview:start_progress="0"
-        materialprogressview:track_width="15dp" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.moos.library.CircleProgressView
+            android:id="@+id/progressViewGrade"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            materialprogressview:circleBroken="true"
+            materialprogressview:end_color="@android:color/holo_green_light"
+            materialprogressview:end_progress="100"
+            materialprogressview:isFilled="false"
+            materialprogressview:isTracked="true"
+            materialprogressview:layout_constraintEnd_toStartOf="@+id/progressViewAverage"
+            materialprogressview:layout_constraintHorizontal_bias="0.5"
+            materialprogressview:layout_constraintStart_toStartOf="parent"
+            materialprogressview:layout_constraintTop_toTopOf="parent"
+            materialprogressview:progressTextColor="@color/colorAccent"
+            materialprogressview:progressTextSize="20sp"
+            materialprogressview:start_color="@android:color/holo_red_light"
+            materialprogressview:start_progress="0"
+            materialprogressview:track_width="15dp" />
 
-    <com.moos.library.CircleProgressView
-        android:id="@+id/progressViewAverage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        materialprogressview:circleBroken="true"
-        materialprogressview:end_color="@android:color/holo_green_light"
-        materialprogressview:end_progress="100"
-        materialprogressview:isFilled="false"
-        materialprogressview:isTracked="true"
-        materialprogressview:layout_constraintEnd_toEndOf="parent"
-        materialprogressview:layout_constraintHorizontal_bias="0.5"
-        materialprogressview:layout_constraintStart_toEndOf="@+id/progressViewGrade"
-        materialprogressview:layout_constraintTop_toTopOf="parent"
-        materialprogressview:progressTextColor="@color/colorAccent"
-        materialprogressview:progressTextSize="20sp"
-        materialprogressview:start_color="@android:color/holo_red_light"
-        materialprogressview:start_progress="0"
-        materialprogressview:track_width="15dp" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/label_current_rating"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            materialprogressview:layout_constraintEnd_toEndOf="@+id/progressViewGrade"
+            materialprogressview:layout_constraintStart_toStartOf="@+id/progressViewGrade"
+            materialprogressview:layout_constraintTop_toBottomOf="@+id/progressViewGrade" />
+
+        <com.moos.library.CircleProgressView
+            android:id="@+id/progressViewAverage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            materialprogressview:circleBroken="true"
+            materialprogressview:end_color="@android:color/holo_green_light"
+            materialprogressview:end_progress="100"
+            materialprogressview:isFilled="false"
+            materialprogressview:isTracked="true"
+            materialprogressview:layout_constraintEnd_toEndOf="parent"
+            materialprogressview:layout_constraintHorizontal_bias="0.5"
+            materialprogressview:layout_constraintStart_toEndOf="@+id/progressViewGrade"
+            materialprogressview:layout_constraintTop_toTopOf="parent"
+            materialprogressview:progressTextColor="@color/colorAccent"
+            materialprogressview:progressTextSize="20sp"
+            materialprogressview:start_color="@android:color/holo_red_light"
+            materialprogressview:start_progress="0"
+            materialprogressview:track_width="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/label_average"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            materialprogressview:layout_constraintEnd_toEndOf="@+id/progressViewAverage"
+            materialprogressview:layout_constraintStart_toStartOf="@+id/progressViewAverage"
+            materialprogressview:layout_constraintTop_toBottomOf="@+id/progressViewAverage" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
