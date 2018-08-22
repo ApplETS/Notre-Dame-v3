@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.repository.data.model.Cours
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_grades_details.tvCourse
+import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
 
 /**
  * Created by Sonphil on 15-08-18.
@@ -27,7 +27,8 @@ class GradesDetailsFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvCourse.text = cours.toString()
+        progressViewGrade.setEndProgress(100f)
+        progressViewGrade.startProgressAnimation()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

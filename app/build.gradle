@@ -122,6 +122,9 @@ dependencies {
     // RecyclerView Animators
     implementation "jp.wasabeef:recyclerview-animators:$recyclerviewanimators"
 
+    // Material-ProgressView
+    implementation "com.moos:Material-ProgressView:$materialprogressview"
+
     implementation project(':repository')
 }
 
