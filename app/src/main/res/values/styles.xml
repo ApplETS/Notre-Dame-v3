@@ -20,6 +20,11 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="AppTheme.Toolbar.SubTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <!-- Set subtitle color -->
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
     <style name="WindowAnimationTransition">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>

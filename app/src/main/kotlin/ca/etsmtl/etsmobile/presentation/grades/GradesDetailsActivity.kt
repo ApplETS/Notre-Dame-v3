@@ -70,6 +70,7 @@ class GradesDetailsActivity : BaseActivity() {
                 }
 
                 supportActionBar?.title = this.sigle
+                supportActionBar?.subtitle = this.titreCours
             }
         }
     }
