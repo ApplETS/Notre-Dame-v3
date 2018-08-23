@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- transition shared elements -->
+    <string name="transition_grades_details_toolbar" translatable="false">GradesDetailsToolbar</string>
+    <string name="transition_grades_details_content" translatable="false">GradesDetailsContent</string>
+</resources>

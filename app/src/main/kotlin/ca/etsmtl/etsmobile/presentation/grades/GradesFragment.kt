@@ -23,6 +23,8 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
+import kotlinx.android.synthetic.main.item_grade_course.tvCourseGrade
+import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 import javax.inject.Inject
 
 /**
@@ -42,7 +44,12 @@ class GradesFragment : DaggerFragment() {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
                 this@GradesFragment.activity?.let {
-                    GradesDetailsActivity.start(it as AppCompatActivity, cours)
+                    GradesDetailsActivity.start(
+                            it as AppCompatActivity,
+                            holder.tvCourseGrade,
+                            holder.tvCourseSigle,
+                            cours
+                    )
                 }
             }
         })

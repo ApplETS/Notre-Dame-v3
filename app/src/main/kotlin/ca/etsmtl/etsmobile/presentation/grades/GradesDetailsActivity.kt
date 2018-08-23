@@ -10,7 +10,6 @@ import android.view.View
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.BaseActivity
 import ca.etsmtl.repository.data.model.Cours
-import kotlinx.android.synthetic.main.activity_grades_details.containerGradesDetails
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**
@@ -25,14 +24,21 @@ class GradesDetailsActivity : BaseActivity() {
         /**
          * Starts [GradesDetailsActivity] with a shared element transition
          *
-         * @param activity
-         * @param sharedElement
+         * @param activity The host activity
+         * @param content View used to for the shared element transition of the background
+         * @param toolBar View used for the shared element transition of the toolbar
          * @param cours The course selected by the user
          */
-        fun start(activity: AppCompatActivity, sharedElement: Pair<View, String>, cours: Cours) {
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElement)
+        fun start(activity: AppCompatActivity, content: View, toolBar: View, cours: Cours) {
+            val options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            activity,
+                            Pair.create(content, activity.getString(R.string
+                                    .transition_grades_details_content)),
+                            Pair.create(toolBar, activity.getString(R.string
+                                    .transition_grades_details_toolbar))
+                    )
             activity.startActivity(Intent(activity, GradesDetailsActivity::class.java).apply {
-                putExtra(EXTRA_TRANSITION_NAME, sharedElement.second)
                 putExtra(EXTRA_COURS, cours)
             }, options.toBundle())
         }
@@ -58,8 +64,6 @@ class GradesDetailsActivity : BaseActivity() {
         setUpToolbar()
 
         with (intent?.extras) {
-            containerGradesDetails.transitionName = this?.getString(EXTRA_TRANSITION_NAME)
-
             with (this?.getParcelable(EXTRA_COURS) as Cours) {
                 if (savedInstanceState == null) {
                     addFragment(this)

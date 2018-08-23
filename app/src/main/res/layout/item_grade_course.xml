@@ -6,6 +6,15 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tvCourseSigle"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        tools:text="LOG121" />
+
+    <TextView
         android:id="@+id/tvCourseGrade"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -14,13 +23,4 @@
         android:gravity="center"
         android:textSize="25sp"
         tools:text="A+" />
-
-    <TextView
-        android:id="@+id/tvCourseSigle"
-        android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        tools:text="LOG121" />
 </LinearLayout>
