@@ -2,6 +2,7 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:constraintlayout="http://schemas.android.com/apk/res-auto"
     xmlns:materialprogressview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayoutGradesDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,11 +13,10 @@
 
         <com.moos.library.CircleProgressView
             android:id="@+id/progressViewGrade"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            constraintlayout:layout_constraintEnd_toStartOf="@+id/view"
             constraintlayout:layout_constraintStart_toStartOf="parent"
             constraintlayout:layout_constraintTop_toTopOf="parent"
             materialprogressview:circleBroken="false"
@@ -26,80 +26,86 @@
             materialprogressview:isTracked="true"
             materialprogressview:progressTextColor="@color/colorPrimary"
             materialprogressview:progressTextSize="20sp"
+            materialprogressview:progressTextVisibility="false"
             materialprogressview:start_color="@color/colorPrimary"
             materialprogressview:start_progress="0"
-            materialprogressview:track_width="15dp" />
+            materialprogressview:track_width="10dp" />
 
         <com.moos.library.CircleProgressView
             android:id="@+id/progressViewAverage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintEnd_toEndOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintStart_toStartOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewGrade"
+            constraintlayout:layout_constraintStart_toEndOf="@+id/barrierTvRating"
+            constraintlayout:layout_constraintTop_toTopOf="parent"
             materialprogressview:circleBroken="false"
-            materialprogressview:end_color="@color/colorAccent"
+            materialprogressview:end_color="@color/colorPrimaryDark"
             materialprogressview:end_progress="100"
             materialprogressview:isFilled="false"
             materialprogressview:isTracked="true"
-            materialprogressview:progressTextColor="@color/colorAccent"
+            materialprogressview:progressTextColor="@color/colorPrimaryDark"
             materialprogressview:progressTextSize="20sp"
             materialprogressview:progressTextVisibility="false"
             materialprogressview:start_color="@color/colorAccent"
             materialprogressview:start_progress="0"
-            materialprogressview:track_width="15dp" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorPrimary"
-            constraintlayout:layout_constraintBottom_toBottomOf="@+id/tvLabelGrade"
-            constraintlayout:layout_constraintEnd_toStartOf="@+id/tvLabelGrade"
-            constraintlayout:layout_constraintTop_toTopOf="@+id/tvLabelGrade" />
+            materialprogressview:track_width="10dp" />
 
         <TextView
             android:id="@+id/tvLabelGrade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:text="@string/label_current_rating"
             android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            constraintlayout:layout_constraintBottom_toTopOf="@+id/tvLabelAverage"
-            constraintlayout:layout_constraintEnd_toEndOf="parent"
-            constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewGrade" />
+            android:textSize="15sp"
+            constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewGrade"
+            constraintlayout:layout_constraintStart_toEndOf="@+id/progressViewGrade"
+            constraintlayout:layout_constraintTop_toBottomOf="@+id/tvRating" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginBottom="8dp"
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@color/colorAccent"
-            constraintlayout:layout_constraintBottom_toBottomOf="@+id/tvLabelAverage"
-            constraintlayout:layout_constraintStart_toStartOf="@+id/view"
-            constraintlayout:layout_constraintTop_toTopOf="@+id/tvLabelAverage" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            constraintlayout:layout_constraintBottom_toTopOf="@+id/tvLabelGrade"
+            constraintlayout:layout_constraintStart_toStartOf="@+id/tvLabelGrade"
+            constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewGrade"
+            tools:text="98 %" />
 
         <TextView
             android:id="@+id/tvLabelAverage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:text="@string/label_average"
             android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewAverage"
+            constraintlayout:layout_constraintStart_toEndOf="@+id/progressViewAverage"
+            constraintlayout:layout_constraintTop_toBottomOf="@+id/tvAverage" />
+
+        <TextView
+            android:id="@+id/tvAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
-            constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintStart_toEndOf="@+id/view2"
-            constraintlayout:layout_constraintTop_toBottomOf="@+id/tvLabelGrade" />
+            constraintlayout:layout_constraintBottom_toTopOf="@+id/tvLabelAverage"
+            constraintlayout:layout_constraintStart_toStartOf="@+id/tvLabelAverage"
+            constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewAverage"
+            tools:text="98 %" />
+
+        <android.support.constraint.Barrier
+            android:id="@+id/barrierTvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            constraintlayout:barrierDirection="right"
+            constraintlayout:constraint_referenced_ids="tvRating,tvLabelGrade"
+            tools:layout_editor_absoluteX="131dp" />
+
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

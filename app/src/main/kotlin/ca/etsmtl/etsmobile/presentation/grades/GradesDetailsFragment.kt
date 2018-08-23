@@ -16,6 +16,8 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewAverage
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
 import kotlinx.android.synthetic.main.fragment_grades_details.swipeRefreshLayoutGradesDetails
+import kotlinx.android.synthetic.main.fragment_grades_details.tvAverage
+import kotlinx.android.synthetic.main.fragment_grades_details.tvRating
 import javax.inject.Inject
 
 /**
@@ -65,11 +67,21 @@ class GradesDetailsFragment : DaggerFragment() {
         })
 
         gradesDetailsViewModel.getGradePercentage().observe(this, Observer {
-            setCircleProgressViewProgress(progressViewGrade, it)
+            it?.let {
+                setCircleProgressViewProgress(progressViewGrade, it.replace(",", ".").toFloat())
+                val cote = gradesDetailsViewModel.cours.value?.cote
+                tvRating.text = when {
+                    !cote.isNullOrEmpty() -> String.format(getString(R.string.text_grade_with_rating), cote, it)
+                    else -> String.format(getString(R.string.text_grade_without_rating), it)
+                }
+            }
         })
 
         gradesDetailsViewModel.getAveragePercentage().observe(this, Observer {
-            setCircleProgressViewProgress(progressViewAverage, it)
+            it?.let {
+                setCircleProgressViewProgress(progressViewAverage, it.replace(",", ".").toFloat())
+                tvAverage.text = String.format(getString(R.string.text_average), it)
+            }
         })
 
         lifecycle.addObserver(gradesDetailsViewModel)

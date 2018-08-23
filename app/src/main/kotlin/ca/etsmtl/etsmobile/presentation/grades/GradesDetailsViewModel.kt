@@ -51,20 +51,12 @@ class GradesDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getGradePercentage(): LiveData<Float> = Transformations.map(summaryMediatorLiveData) {
-        it.takeIf { it.status != Resource.LOADING }
-                ?.data
-                ?.scoreFinalSur100
-                ?.replace(",", ".")
-                ?.toFloat()
+    fun getGradePercentage(): LiveData<String> = Transformations.map(summaryMediatorLiveData) {
+        it.takeIf { it.status != Resource.LOADING }?.data?.scoreFinalSur100
     }
 
-    fun getAveragePercentage(): LiveData<Float> = Transformations.map(summaryMediatorLiveData) {
-        it.takeIf { it.status != Resource.LOADING }
-                ?.data
-                ?.moyenneClasse
-                ?.replace(",", ".")
-                ?.toFloat()
+    fun getAveragePercentage(): LiveData<String> = Transformations.map(summaryMediatorLiveData) {
+        it.takeIf { it.status != Resource.LOADING }?.data?.moyenneClasse
     }
 
     private fun load() {

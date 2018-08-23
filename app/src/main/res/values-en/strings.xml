@@ -33,8 +33,11 @@
     <!-- Grades -->
     <string name="title_grades">Grades</string>
     <string name="msg_no_grades">No grades</string>
-    <string name="label_current_rating">Current rating</string>
+    <string name="label_current_rating">Your rating</string>
     <string name="label_average">Average</string>
+    <string name="text_grade_without_rating">%1$s%%</string>
+    <string name="text_grade_with_rating">%1$s (%2$s%%)</string>
+    <string name="text_average">%1$s%%</string>
 
     <!-- Profile -->
     <string name="title_profile">Profile</string>
