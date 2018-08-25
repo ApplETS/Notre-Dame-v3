@@ -7,19 +7,13 @@
     android:orientation="vertical"
     tools:context=".presentation.grades.GradesDetailsActivity">
 
-    <FrameLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize">
-
-        <!-- Background for toolbar's shared element transition -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:transitionName="@string/transition_grades_details_toolbar" />
+        android:layout_height="?android:attr/actionBarSize"
+        android:transitionName="@string/transition_grades_details_toolbar">
 
         <include layout="@layout/include_toolbar" />
-    </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/containerGradesDetails"
