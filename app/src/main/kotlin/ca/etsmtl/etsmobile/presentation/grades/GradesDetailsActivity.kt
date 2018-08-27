@@ -70,16 +70,21 @@ class GradesDetailsActivity : BaseActivity() {
                     addFragment(this)
                 }
 
-                supportActionBar?.title = this.sigle
-                supportActionBar?.subtitle = this.titreCours
+                supportActionBar?.let {
+                    it.title = this.sigle
+                    it.subtitle = this.titreCours
+                }
             }
         }
     }
 
     private fun setUpToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowHomeEnabled(true)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
