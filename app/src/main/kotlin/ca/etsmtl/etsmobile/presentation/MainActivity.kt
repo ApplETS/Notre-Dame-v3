@@ -86,28 +86,13 @@ class MainActivity : BaseActivity() {
      * @param selectedItemId the id of the item selected in the bottom navigation view
      * @return the fragment corresponding to the selected item
      */
-    private fun getNewFragment(selectedItemId: Int): Fragment? {
-        var fragment: Fragment? = null
-
-        when (selectedItemId) {
-            R.id.navigation_dashboard -> {
-                fragment = DashboardFragment.newInstance()
-            }
-            R.id.navigation_schedule -> {
-                fragment = ScheduleFragment.newInstance()
-            }
-            R.id.navigation_profile -> {
-                fragment = StudentFragment.newInstance()
-            }
-            R.id.navigation_ets -> {
-                fragment = EtsFragment.newInstance()
-            }
-            R.id.navigation_more -> {
-                fragment = MoreFragment.newInstance()
-            }
-        }
-
-        return fragment
+    private fun getNewFragment(selectedItemId: Int): Fragment? = when (selectedItemId) {
+        R.id.navigation_dashboard -> DashboardFragment.newInstance()
+        R.id.navigation_schedule -> ScheduleFragment.newInstance()
+        R.id.navigation_profile -> StudentFragment.newInstance()
+        R.id.navigation_ets -> EtsFragment.newInstance()
+        R.id.navigation_more -> MoreFragment.newInstance()
+        else -> null
     }
 
     /**
@@ -135,4 +120,6 @@ class MainActivity : BaseActivity() {
         homeMenuItem.isChecked = true
         onNavigationItemSelectedListener.onNavigationItemSelected(homeMenuItem)
     }
+
+    fun getBottomNavigationView(): BottomNavigationView = navigation
 }

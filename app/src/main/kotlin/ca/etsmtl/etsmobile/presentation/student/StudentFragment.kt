@@ -63,17 +63,18 @@ class StudentFragment : MainFragment() {
                     toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
                     toolbar.setNavigationOnClickListener { onBackPressed() }
                 }
-                tabsStudent.visibility = it.getInt(TAB_LAYOUT_VISIBILITY)
+                tabsStudent.show(it.getBoolean(SHOW_TAB_LAYOUT))
             }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         with (outState) {
-            putCharSequence(TITLE_KEY, toolbar.title)
-            putCharSequence(SUBTITLE_KEY, toolbar.subtitle)
-            putBoolean(SHOW_BACK_ICON_KEY, toolbar.navigationIcon != null)
-            putInt(TAB_LAYOUT_VISIBILITY, tabsStudent.visibility)
+            val cours = studentViewModel.getCourse()
+            putCharSequence(TITLE_KEY, cours?.sigle)
+            putCharSequence(SUBTITLE_KEY, cours?.titreCours)
+            putBoolean(SHOW_BACK_ICON_KEY, cours != null)
+            putBoolean(SHOW_TAB_LAYOUT, cours != null)
         }
 
         super.onSaveInstanceState(outState)
@@ -109,16 +110,17 @@ class StudentFragment : MainFragment() {
             if (it) {
                 studentViewModel.getCourse()?.let {
                     showGradesDetailsFragment(it)
-                    tabsStudent.show(false)
                     appBarLayoutStudent.setExpanded(true)
                     toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
                     toolbar.setNavigationOnClickListener { onBackPressed() }
                 }
             } else {
                 removeGradesDetailsFragment()
-                tabsStudent.show(true)
                 toolbar.navigationIcon = null
             }
+
+            tabsStudent.show(!it)
+            toggleBottomNavigationView(!it)
         })
 
         studentViewModel.getTitle().observe(this, Observer {
@@ -133,7 +135,7 @@ class StudentFragment : MainFragment() {
         private const val TITLE_KEY = "StudentTitle"
         private const val SUBTITLE_KEY = "StudentSubtitle"
         private const val SHOW_BACK_ICON_KEY = "StudentBackIcon"
-        private const val TAB_LAYOUT_VISIBILITY = "StudentTabLayout"
+        private const val SHOW_TAB_LAYOUT = "StudentTabLayout"
 
         fun newInstance() = StudentFragment()
     }
