@@ -107,6 +107,9 @@ class StudentFragment : MainFragment() {
                 }
             }
 
+            toggleBottomNavigationView(!it)
+            tabsStudent.show(!it)
+
             if (it) {
                 studentViewModel.getCourse()?.let {
                     showGradesDetailsFragment(it)
@@ -118,9 +121,6 @@ class StudentFragment : MainFragment() {
                 removeGradesDetailsFragment()
                 toolbar.navigationIcon = null
             }
-
-            tabsStudent.show(!it)
-            toggleBottomNavigationView(!it)
         })
 
         studentViewModel.getTitle().observe(this, Observer {
