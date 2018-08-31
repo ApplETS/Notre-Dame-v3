@@ -18,6 +18,7 @@
             android:id="@+id/recyclerViewCoursesGrades"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
             android:scrollbars="vertical"
             tools:listitem="@layout/item_grade_course" />
     </FrameLayout>

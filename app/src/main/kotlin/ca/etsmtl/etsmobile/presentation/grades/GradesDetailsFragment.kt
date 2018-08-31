@@ -80,9 +80,10 @@ class GradesDetailsFragment : DaggerFragment() {
         })
 
         gradesDetailsViewModel.getGradePercentage().observe(this, Observer {
+            tvRating.text = gradesDetailsViewModel.cours.value?.cote
+
             it?.let {
                 setCircleProgressViewProgress(progressViewGrade, it.replace(",", ".").toFloat())
-                tvRating.text = gradesDetailsViewModel.cours.value?.cote
                 tvGrade.text = String.format(getString(R.string.text_grade), it)
             }
         })

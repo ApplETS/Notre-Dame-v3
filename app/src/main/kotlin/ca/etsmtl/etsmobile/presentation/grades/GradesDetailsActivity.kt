@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 class GradesDetailsActivity : BaseActivity() {
     companion object {
-        private const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
         private const val EXTRA_COURS = "ExtraCours"
 
         /**

@@ -85,10 +85,15 @@ class GradesFragment : DaggerFragment() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
                 with (resources) {
-                    outRect.bottom = 0
-                    outRect.right = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f, this.displayMetrics).toInt()
-                    outRect.left = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f, this.displayMetrics).toInt()
-                    outRect.top = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20f, this.displayMetrics).toInt()
+                    outRect.apply {
+                        bottom = 0
+                        right = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f,
+                                this@with.displayMetrics).toInt()
+                        left = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f,
+                                this@with.displayMetrics).toInt()
+                        top = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20f,
+                                this@with.displayMetrics).toInt()
+                    }
                 }
             }
         })
@@ -121,7 +126,7 @@ class GradesFragment : DaggerFragment() {
     }
 
     companion object {
-        private const val GRADES_FRAGMENT_TAG = "GradesFragment"
+        private const val TAG = "GradesFragment"
         fun newInstance() = GradesFragment()
     }
 }
