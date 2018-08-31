@@ -6,6 +6,7 @@
     tools:context="ca.etsmtl.etsmobile.presentation.student.StudentFragment">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayoutStudent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -28,9 +29,14 @@
             app:tabTextColor="@color/material_grey_200" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPagerStudent"
+    <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerStudent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

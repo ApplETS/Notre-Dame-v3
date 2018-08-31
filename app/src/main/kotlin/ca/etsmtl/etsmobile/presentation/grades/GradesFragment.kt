@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.student.StudentFragment
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
@@ -23,8 +23,6 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
-import kotlinx.android.synthetic.main.item_grade_course.tvCourseGrade
-import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 import javax.inject.Inject
 
 /**
@@ -43,13 +41,8 @@ class GradesFragment : DaggerFragment() {
     private val adapter: GradesAdapter by lazy {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
-                this@GradesFragment.activity?.let {
-                    GradesDetailsActivity.start(
-                            it as AppCompatActivity,
-                            holder.tvCourseGrade,
-                            holder.tvCourseSigle,
-                            cours
-                    )
+                (parentFragment as? StudentFragment)?.let {
+                    it.displayGradesDetailsFragment(cours)
                 }
             }
         })

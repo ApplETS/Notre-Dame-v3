@@ -2,12 +2,15 @@ package ca.etsmtl.etsmobile.di.activitymodule
 
 import android.arch.lifecycle.ViewModel
 import ca.etsmtl.etsmobile.di.ViewModelKey
+import ca.etsmtl.etsmobile.presentation.grades.GradesDetailsFragment
+import ca.etsmtl.etsmobile.presentation.grades.GradesDetailsViewModel
 import ca.etsmtl.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreViewModel
 import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.etsmobile.presentation.profile.ProfileViewModel
+import ca.etsmtl.etsmobile.presentation.student.StudentFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -19,6 +22,9 @@ import dagger.multibindings.IntoMap
 @Module
 interface MainActivityModule {
     @ContributesAndroidInjector
+    fun contributeStudentFragment(): StudentFragment
+
+    @ContributesAndroidInjector
     fun contributeGradesFragment(): GradesFragment
 
     @Binds
@@ -26,6 +32,16 @@ interface MainActivityModule {
     @ViewModelKey(GradesViewModel::class)
     fun bindGradesViewModel(
         gradesViewModel: GradesViewModel
+    ): ViewModel
+
+    @ContributesAndroidInjector
+    fun contributeGradesDetailsFragment(): GradesDetailsFragment
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GradesDetailsViewModel::class)
+    fun bindGradesDetailsViewModel(
+        gradesDetailsViewModel: GradesDetailsViewModel
     ): ViewModel
 
     @ContributesAndroidInjector
