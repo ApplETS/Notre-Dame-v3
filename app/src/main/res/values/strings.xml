@@ -37,8 +37,7 @@
     <string name="msg_no_grades">Aucune note</string>
     <string name="label_current_rating">Votre note</string>
     <string name="label_average">Moyenne</string>
-    <string name="text_grade_without_rating">%1$s %%</string>
-    <string name="text_grade_with_rating">%1$s (%2$s %%)</string>
+    <string name="text_grade">%1$s %%</string>
     <string name="text_average">%1$s %%</string>
 
     <!-- Profile -->

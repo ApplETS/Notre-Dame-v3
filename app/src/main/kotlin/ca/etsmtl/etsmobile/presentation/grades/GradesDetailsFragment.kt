@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
 import kotlinx.android.synthetic.main.fragment_grades_details.recyclerViewEvaluation
 import kotlinx.android.synthetic.main.fragment_grades_details.swipeRefreshLayoutGradesDetails
 import kotlinx.android.synthetic.main.fragment_grades_details.tvAverage
+import kotlinx.android.synthetic.main.fragment_grades_details.tvGrade
 import kotlinx.android.synthetic.main.fragment_grades_details.tvRating
 import javax.inject.Inject
 
@@ -81,11 +82,8 @@ class GradesDetailsFragment : DaggerFragment() {
         gradesDetailsViewModel.getGradePercentage().observe(this, Observer {
             it?.let {
                 setCircleProgressViewProgress(progressViewGrade, it.replace(",", ".").toFloat())
-                val cote = gradesDetailsViewModel.cours.value?.cote
-                tvRating.text = when {
-                    !cote.isNullOrEmpty() -> String.format(getString(R.string.text_grade_with_rating), cote, it)
-                    else -> String.format(getString(R.string.text_grade_without_rating), it)
-                }
+                tvRating.text = gradesDetailsViewModel.cours.value?.cote
+                tvGrade.text = String.format(getString(R.string.text_grade), it)
             }
         })
 
