@@ -59,6 +59,10 @@ class GradesDetailsViewModel @Inject constructor(
         it.takeIf { it.status != Resource.LOADING }?.data?.moyenneClasse
     }
 
+    fun getEvaluations(): LiveData<List<Evaluation>> = Transformations.map(evaluationsMediatorLiveData) {
+        it.data
+    }
+
     private fun load() {
         cours.value?.let {
             summaryRes = repository.getEvaluationsSummary(userCredentials, it, true).apply {

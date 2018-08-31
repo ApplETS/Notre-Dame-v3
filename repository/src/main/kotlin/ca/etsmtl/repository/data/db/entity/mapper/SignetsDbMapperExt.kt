@@ -46,6 +46,7 @@ fun EtudiantEntity.toEtudiant() = Etudiant(
 fun EvaluationEntity.toEvaluation() = Evaluation(
         this.cours,
         this.groupe,
+        this.session,
         this.nom,
         this.equipe,
         this.dateCible,

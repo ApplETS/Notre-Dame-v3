@@ -12,9 +12,12 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.repository.data.model.Cours
 import com.moos.library.CircleProgressView
+import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
 import dagger.android.support.DaggerFragment
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewAverage
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
+import kotlinx.android.synthetic.main.fragment_grades_details.recyclerViewEvaluation
 import kotlinx.android.synthetic.main.fragment_grades_details.swipeRefreshLayoutGradesDetails
 import kotlinx.android.synthetic.main.fragment_grades_details.tvAverage
 import kotlinx.android.synthetic.main.fragment_grades_details.tvRating
@@ -31,6 +34,7 @@ class GradesDetailsFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val adapter by lazy { EvaluationAdapter() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_grades_details, container, false)
@@ -40,6 +44,8 @@ class GradesDetailsFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpSwipeRefresh()
+
+        setUpRecyclerView()
 
         subscribeUI()
 
@@ -55,6 +61,12 @@ class GradesDetailsFragment : DaggerFragment() {
     private fun setUpSwipeRefresh() {
         swipeRefreshLayoutGradesDetails.setColorSchemeResources(R.color.colorPrimary)
         swipeRefreshLayoutGradesDetails.setOnRefreshListener { gradesDetailsViewModel.refresh() }
+    }
+
+    private fun setUpRecyclerView() {
+        recyclerViewEvaluation.adapter = adapter
+        recyclerViewEvaluation.layoutManager = FlowLayoutManager()
+        recyclerViewEvaluation.itemAnimator = SlideInUpAnimator()
     }
 
     private fun subscribeUI() {
@@ -84,12 +96,18 @@ class GradesDetailsFragment : DaggerFragment() {
             }
         })
 
+        gradesDetailsViewModel.getEvaluations().observe(this, Observer {
+            it?.let {
+                adapter.differ.submitList(it)
+            }
+        })
+
         lifecycle.addObserver(gradesDetailsViewModel)
     }
 
     private fun setCircleProgressViewProgress(circleProgressView: CircleProgressView, progress: Float?) {
         progress?.let {
-            with (circleProgressView) {
+            with(circleProgressView) {
                 setEndProgress(it)
                 startProgressAnimation()
             }
