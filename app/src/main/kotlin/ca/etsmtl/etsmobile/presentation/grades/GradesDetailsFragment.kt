@@ -50,7 +50,9 @@ class GradesDetailsFragment : DaggerFragment() {
 
         subscribeUI()
 
-        arguments?.let { gradesDetailsViewModel.cours.value = it.getParcelable(COURS_KEY) }
+        arguments?.getParcelable<Cours>(COURS_KEY)?.let { course ->
+            gradesDetailsViewModel.cours.value = course
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

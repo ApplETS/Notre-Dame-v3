@@ -1,5 +1,8 @@
 package ca.etsmtl.etsmobile.presentation.student
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,27 +10,33 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainFragment
 import ca.etsmtl.etsmobile.presentation.grades.GradesDetailsFragment
+import ca.etsmtl.etsmobile.presentation.grades.StudentViewModel
+import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
 import kotlinx.android.synthetic.main.fragment_student.appBarLayoutStudent
 import kotlinx.android.synthetic.main.fragment_student.tabsStudent
 import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
+import javax.inject.Inject
 
 /**
  * This fragment contains a [TabLayout] and a [ViewPager] that let the user switch between
  * [GradesFragment] and [ProfileFragment].
  *
  * The fragment can also display [GradesDetailsFragment] by calling [displayGradesDetailsFragment].
- * By doing so, [GradesDetailsFragment] would be displayed instead of the [ViewPager]
+ * If so, [GradesDetailsFragment] would be displayed instead of the [ViewPager]
  *
  * Created by Sonphil on 24-02-18.
  */
 
 class StudentFragment : MainFragment() {
 
-    /** The current course displayed in [GradesDetailsFragment] **/
-    private var currentCourse: Cours? = null
+    val studentViewModel: StudentViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(StudentViewModel::class.java)
+    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,83 +51,89 @@ class StudentFragment : MainFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         context?.let {
-            savedInstanceState?.getParcelable<Cours>(CURRENT_COURSE_GRADES_DETAILS_KEY)?.let {
-                currentCourse = it
-                setUpToolBarForDisplayingCourseGradesDetails(it)
-            }
-
-            if (currentCourse == null) {
-                setUpToolbar()
-            }
-
             viewPagerStudent.adapter = StudentPagerAdapter(it, childFragmentManager)
             tabsStudent.setupWithViewPager(viewPagerStudent)
+
+            subscribeUI()
+
+            savedInstanceState?.let {
+                toolbar.title = it.getCharSequence(TITLE_KEY)
+                toolbar.subtitle = it.getCharSequence(SUBTITLE_KEY)
+                if (it.getBoolean(SHOW_BACK_ICON_KEY)) {
+                    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+                    toolbar.setNavigationOnClickListener { onBackPressed() }
+                }
+                tabsStudent.visibility = it.getInt(TAB_LAYOUT_VISIBILITY)
+            }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(CURRENT_COURSE_GRADES_DETAILS_KEY, currentCourse)
+        with (outState) {
+            putCharSequence(TITLE_KEY, toolbar.title)
+            putCharSequence(SUBTITLE_KEY, toolbar.subtitle)
+            putBoolean(SHOW_BACK_ICON_KEY, toolbar.navigationIcon != null)
+            putInt(TAB_LAYOUT_VISIBILITY, tabsStudent.visibility)
+        }
 
         super.onSaveInstanceState(outState)
     }
 
     /**
-     * Display grades details for a given course
-     *
-     * @param cours
-     */
-    fun displayGradesDetailsFragment(cours: Cours) {
-        with(childFragmentManager.beginTransaction()) {
-            replace(R.id.content, GradesDetailsFragment.newInstance(cours), GradesDetailsFragment.TAG)
-
-            commit()
-        }
-
-        currentCourse = cours
-        setUpToolBarForDisplayingCourseGradesDetails(cours)
-    }
-
-    private fun setUpToolbar() {
-        toolbar.setTitle(R.string.title_student)
-        toolbar.subtitle = null
-        tabsStudent.show(true)
-        toolbar.navigationIcon = null
-    }
-
-    private fun setUpToolBarForDisplayingCourseGradesDetails(cours: Cours) {
-        toolbar.title = cours.sigle
-        toolbar.subtitle = cours.titreCours
-        tabsStudent.show(false)
-        appBarLayoutStudent.setExpanded(true)
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
-    }
-
-    /**
      * If the [GradesDetailsFragment] is shown, the event is consumed by hiding the
      * [GradesDetailsFragment] is hidden and the toolbar state is restored.
+     *
+     * @return True if the listener has consumed the event, false otherwise
      */
-    override fun onBackPressed(): Boolean {
-        return if (tabsStudent.visibility != View.VISIBLE) {
-            with(childFragmentManager.beginTransaction()) {
-                childFragmentManager.findFragmentByTag(GradesDetailsFragment.TAG)?.let {
-                    remove(it)
-                    currentCourse = null
+    override fun onBackPressed() = studentViewModel.back()
+
+    private fun subscribeUI() {
+        studentViewModel.displayCourseGradesDetails.observe(this, EventObserver {
+            fun removeGradesDetailsFragment() {
+                with(childFragmentManager.beginTransaction()) {
+                    childFragmentManager.findFragmentByTag(GradesDetailsFragment.TAG)?.let {
+                        remove(it)
+                    }
+                    commit()
                 }
-                commit()
             }
 
-            setUpToolbar()
+            fun showGradesDetailsFragment(cours: Cours) {
+                with(childFragmentManager.beginTransaction()) {
+                    replace(R.id.content, GradesDetailsFragment.newInstance(cours), GradesDetailsFragment.TAG)
 
-            true
-        } else {
-            super.onBackPressed()
-        }
+                    commit()
+                }
+            }
+
+            if (it) {
+                studentViewModel.getCourse()?.let {
+                    showGradesDetailsFragment(it)
+                    tabsStudent.show(false)
+                    appBarLayoutStudent.setExpanded(true)
+                    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+                    toolbar.setNavigationOnClickListener { onBackPressed() }
+                }
+            } else {
+                removeGradesDetailsFragment()
+                tabsStudent.show(true)
+                toolbar.navigationIcon = null
+            }
+        })
+
+        studentViewModel.getTitle().observe(this, Observer {
+            toolbar.title = it
+        })
+
+        studentViewModel.getSubtitle().observe(this, Observer { toolbar.subtitle = it })
     }
 
     companion object {
         private const val TAG = "StudentFragment"
-        private const val CURRENT_COURSE_GRADES_DETAILS_KEY = "CurrentCourseGradesDetails"
+        private const val TITLE_KEY = "StudentTitle"
+        private const val SUBTITLE_KEY = "StudentSubtitle"
+        private const val SHOW_BACK_ICON_KEY = "StudentBackIcon"
+        private const val TAB_LAYOUT_VISIBILITY = "StudentTabLayout"
 
         fun newInstance() = StudentFragment()
     }

@@ -33,6 +33,7 @@ import javax.inject.Inject
 
 class GradesFragment : DaggerFragment() {
 
+    private var currentCourseShown: Cours? = null
     private val gradesViewModel: GradesViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(GradesViewModel::class.java)
     }
@@ -41,8 +42,9 @@ class GradesFragment : DaggerFragment() {
     private val adapter: GradesAdapter by lazy {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
+                currentCourseShown = cours
                 (parentFragment as? StudentFragment)?.let {
-                    it.displayGradesDetailsFragment(cours)
+                    it.studentViewModel.setCourse(cours)
                 }
             }
         })
@@ -63,6 +65,18 @@ class GradesFragment : DaggerFragment() {
         setUpSwipeRefresh()
         setUpRecyclerView()
         subscribeUI()
+
+        savedInstanceState?.getParcelable<Cours>(CURRENT_COURSE_SHOWN_KEY)?.let { course ->
+            (parentFragment as? StudentFragment)?.let {
+                it.studentViewModel.setCourse(course)
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(CURRENT_COURSE_SHOWN_KEY, currentCourseShown)
+
+        super.onSaveInstanceState(outState)
     }
 
     private fun setUpSwipeRefresh() {
@@ -120,6 +134,8 @@ class GradesFragment : DaggerFragment() {
 
     companion object {
         private const val TAG = "GradesFragment"
+        private const val CURRENT_COURSE_SHOWN_KEY = "CurrentCourseShown"
+
         fun newInstance() = GradesFragment()
     }
 }
