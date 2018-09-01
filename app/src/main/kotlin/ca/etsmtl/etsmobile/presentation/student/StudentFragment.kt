@@ -33,7 +33,7 @@ import javax.inject.Inject
 
 class StudentFragment : MainFragment() {
 
-    val studentViewModel: StudentViewModel by lazy {
+    private val studentViewModel: StudentViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(StudentViewModel::class.java)
     }
     @Inject

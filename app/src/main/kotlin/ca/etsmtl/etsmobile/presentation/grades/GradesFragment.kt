@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.student.StudentFragment
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
@@ -37,15 +36,16 @@ class GradesFragment : DaggerFragment() {
     private val gradesViewModel: GradesViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(GradesViewModel::class.java)
     }
+    private val studentViewModel: StudentViewModel? by lazy {
+        parentFragment?.let { ViewModelProviders.of(it, viewModelFactory).get(StudentViewModel::class.java) }
+    }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val adapter: GradesAdapter by lazy {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
                 currentCourseShown = cours
-                (parentFragment as? StudentFragment)?.let {
-                    it.studentViewModel.setCourse(cours)
-                }
+                studentViewModel?.setCourse(cours)
             }
         })
     }
@@ -67,9 +67,7 @@ class GradesFragment : DaggerFragment() {
         subscribeUI()
 
         savedInstanceState?.getParcelable<Cours>(CURRENT_COURSE_SHOWN_KEY)?.let { course ->
-            (parentFragment as? StudentFragment)?.let {
-                it.studentViewModel.setCourse(course)
-            }
+            studentViewModel?.setCourse(course)
         }
     }
 
