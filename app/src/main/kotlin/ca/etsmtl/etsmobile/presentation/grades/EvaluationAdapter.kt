@@ -9,8 +9,14 @@ import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.repository.data.model.Evaluation
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_evaluation.textViewEvaluationGrade
-import kotlinx.android.synthetic.main.item_evaluation.textViewEvaluationName
+import kotlinx.android.synthetic.main.item_evaluation.tvAverage
+import kotlinx.android.synthetic.main.item_evaluation.tvEvaluationGrade
+import kotlinx.android.synthetic.main.item_evaluation.tvEvaluationName
+import kotlinx.android.synthetic.main.item_evaluation.tvMedian
+import kotlinx.android.synthetic.main.item_evaluation.tvPercentileRank
+import kotlinx.android.synthetic.main.item_evaluation.tvSD
+import kotlinx.android.synthetic.main.item_evaluation.tvTargetDate
+import kotlinx.android.synthetic.main.item_evaluation.tvWeight
 
 /**
  * Created by Sonphil on 29-08-18.
@@ -37,14 +43,30 @@ class EvaluationAdapter : RecyclerView.Adapter<EvaluationAdapter.EvaluationViewH
     override fun getItemCount() = differ.currentList.size
 
     override fun onBindViewHolder(holder: EvaluationViewHolder, position: Int) {
-        with (differ.currentList[position]) {
-            holder.nameTv.text = this.nom
-            holder.gradeTv.text = this.note + " / " + this.corrigeSur
-        }
+        holder.bindEvaluation(differ.currentList[position])
     }
 
     class EvaluationViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        val nameTv = textViewEvaluationName
-        val gradeTv = textViewEvaluationGrade
+        val nameTv = tvEvaluationName
+        val weightTv = tvWeight
+        val gradeTv = tvEvaluationGrade
+        val averageTv = tvAverage
+        val medianTv = tvMedian
+        val standardDeviationTv = tvSD
+        val percentileRankTv = tvPercentileRank
+        val targetDateTv = tvTargetDate
+
+        fun bindEvaluation(evaluation: Evaluation) {
+            val context = nameTv.context
+
+            nameTv.text = evaluation.nom
+            weightTv.text = String.format(context.getString(R.string.text_weight), evaluation.ponderation)
+            gradeTv.text = evaluation.note + " / " + evaluation.corrigeSur // TODO: Replace with graph
+            averageTv.text = evaluation.moyenne
+            medianTv.text = evaluation.mediane
+            standardDeviationTv.text = evaluation.ecartType
+            percentileRankTv.text = evaluation.rangCentile
+            targetDateTv.text = evaluation.dateCible
+        }
     }
 }

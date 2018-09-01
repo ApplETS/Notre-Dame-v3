@@ -35,8 +35,14 @@
     <string name="msg_no_grades">No grades</string>
     <string name="label_current_rating">Your rating</string>
     <string name="label_average">Average</string>
-    <string name="text_grade">%1$s%%</string>
-    <string name="text_average">%1$s%%</string>
+    <string name="text_grade_in_percentage">%1$s%%</string>
+    <string name="text_grade_with_percentage">%1$s/%2$s (%3$s%%)</string>
+    <string name="text_weight">Weight: %1$s%%</string>
+    <string name="label_grade">Grade</string>
+    <string name="label_median">Median</string>
+    <string name="label_standard_deviation">Standard Deviation</string>
+    <string name="label_percentile_rank">Percentile Rank</string>
+    <string name="label_target_date">Target Date</string>
 
     <!-- Profile -->
     <string name="title_profile">Profile</string>

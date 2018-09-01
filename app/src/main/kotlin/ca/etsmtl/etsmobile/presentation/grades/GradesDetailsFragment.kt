@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,6 @@ import ca.etsmtl.repository.data.model.Cours
 import com.moos.library.CircleProgressView
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
 import dagger.android.support.DaggerFragment
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewAverage
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
 import kotlinx.android.synthetic.main.fragment_grades_details.recyclerViewEvaluation
@@ -68,8 +68,11 @@ class GradesDetailsFragment : DaggerFragment() {
 
     private fun setUpRecyclerView() {
         recyclerViewEvaluation.adapter = adapter
+        recyclerViewEvaluation.addItemDecoration(DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+        ))
         recyclerViewEvaluation.layoutManager = FlowLayoutManager()
-        recyclerViewEvaluation.itemAnimator = SlideInUpAnimator()
     }
 
     private fun subscribeUI() {
@@ -86,14 +89,14 @@ class GradesDetailsFragment : DaggerFragment() {
 
             it?.takeIf { it.isNotBlank() }?.let {
                 setCircleProgressViewProgress(progressViewGrade, it.replace(",", ".").toFloat())
-                tvGrade.text = String.format(getString(R.string.text_grade), it)
+                tvGrade.text = String.format(getString(R.string.text_grade_in_percentage), it)
             }
         })
 
         gradesDetailsViewModel.getAveragePercentage().observe(this, Observer {
             it?.takeIf { it.isNotBlank() }?.let {
                 setCircleProgressViewProgress(progressViewAverage, it.replace(",", ".").toFloat())
-                tvAverage.text = String.format(getString(R.string.text_average), it)
+                tvAverage.text = String.format(getString(R.string.text_grade_in_percentage), it)
             }
         })
 
