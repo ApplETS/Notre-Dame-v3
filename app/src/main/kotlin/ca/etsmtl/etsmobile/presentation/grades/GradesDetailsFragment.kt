@@ -84,23 +84,21 @@ class GradesDetailsFragment : DaggerFragment() {
         gradesDetailsViewModel.getGradePercentage().observe(this, Observer {
             tvRating.text = gradesDetailsViewModel.cours.value?.cote
 
-            it?.let {
+            it?.takeIf { it.isNotBlank() }?.let {
                 setCircleProgressViewProgress(progressViewGrade, it.replace(",", ".").toFloat())
                 tvGrade.text = String.format(getString(R.string.text_grade), it)
             }
         })
 
         gradesDetailsViewModel.getAveragePercentage().observe(this, Observer {
-            it?.let {
+            it?.takeIf { it.isNotBlank() }?.let {
                 setCircleProgressViewProgress(progressViewAverage, it.replace(",", ".").toFloat())
                 tvAverage.text = String.format(getString(R.string.text_average), it)
             }
         })
 
         gradesDetailsViewModel.getEvaluations().observe(this, Observer {
-            it?.let {
-                adapter.differ.submitList(it)
-            }
+            it?.let { adapter.differ.submitList(it) }
         })
 
         lifecycle.addObserver(gradesDetailsViewModel)
