@@ -11,8 +11,8 @@ import ca.etsmtl.etsmobile.presentation.profile.ProfileFragment
 class StudentPagerAdapter : FragmentPagerAdapter {
 
     companion object {
-        private const val GRADES = 0
-        private const val PROFILE = 1
+        const val GRADES = 0
+        const val PROFILE = 1
     }
 
     private var context: Context

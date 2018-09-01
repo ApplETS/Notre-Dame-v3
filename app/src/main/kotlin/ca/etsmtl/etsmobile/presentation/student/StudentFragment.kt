@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,39 +54,20 @@ class StudentFragment : MainFragment() {
         context?.let {
             viewPagerStudent.adapter = StudentPagerAdapter(it, childFragmentManager)
             tabsStudent.setupWithViewPager(viewPagerStudent)
+            tabsStudent.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab) {}
+
+                override fun onTabUnselected(tab: TabLayout.Tab) {}
+
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    studentViewModel.selectTab(tab.position)
+                }
+            })
 
             subscribeUI()
-
-            savedInstanceState?.let {
-                toolbar.title = it.getCharSequence(TITLE_KEY)
-                toolbar.subtitle = it.getCharSequence(SUBTITLE_KEY)
-                if (it.getBoolean(SHOW_BACK_ICON_KEY)) {
-                    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
-                    toolbar.setNavigationOnClickListener { onBackPressed() }
-                }
-                tabsStudent.show(it.getBoolean(SHOW_TAB_LAYOUT))
-            }
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        with (outState) {
-            val cours = studentViewModel.getCourse()
-            putCharSequence(TITLE_KEY, cours?.sigle)
-            putCharSequence(SUBTITLE_KEY, cours?.titreCours)
-            putBoolean(SHOW_BACK_ICON_KEY, cours != null)
-            putBoolean(SHOW_TAB_LAYOUT, cours != null)
-        }
-
-        super.onSaveInstanceState(outState)
-    }
-
-    /**
-     * If the [GradesDetailsFragment] is shown, the event is consumed by hiding the
-     * [GradesDetailsFragment] is hidden and the toolbar state is restored.
-     *
-     * @return True if the listener has consumed the event, false otherwise
-     */
     override fun onBackPressed() = studentViewModel.back()
 
     private fun subscribeUI() {
@@ -107,35 +89,40 @@ class StudentFragment : MainFragment() {
                 }
             }
 
-            toggleBottomNavigationView(!it)
-            tabsStudent.show(!it)
-
             if (it) {
                 studentViewModel.getCourse()?.let {
-                    showGradesDetailsFragment(it)
                     appBarLayoutStudent.setExpanded(true)
-                    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
-                    toolbar.setNavigationOnClickListener { onBackPressed() }
+                    showGradesDetailsFragment(it)
                 }
             } else {
                 removeGradesDetailsFragment()
+            }
+        })
+
+        studentViewModel.title.observe(this, Observer { toolbar.title = it })
+
+        studentViewModel.subtitle.observe(this, Observer { toolbar.subtitle = it })
+
+        studentViewModel.showBackIcon.observe(this, Observer {
+            if (it == true) {
+                toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+                toolbar.setNavigationOnClickListener { onBackPressed() }
+            } else {
                 toolbar.navigationIcon = null
             }
         })
 
-        studentViewModel.getTitle().observe(this, Observer {
-            toolbar.title = it
+        studentViewModel.showTabs.observe(this, Observer {
+            tabsStudent.show(it == true)
         })
 
-        studentViewModel.getSubtitle().observe(this, Observer { toolbar.subtitle = it })
+        studentViewModel.showBottomNavigationView.observe(this, Observer {
+            toggleBottomNavigationView(it == true)
+        })
     }
 
     companion object {
         private const val TAG = "StudentFragment"
-        private const val TITLE_KEY = "StudentTitle"
-        private const val SUBTITLE_KEY = "StudentSubtitle"
-        private const val SHOW_BACK_ICON_KEY = "StudentBackIcon"
-        private const val SHOW_TAB_LAYOUT = "StudentTabLayout"
 
         fun newInstance() = StudentFragment()
     }
