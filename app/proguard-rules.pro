@@ -38,3 +38,8 @@
 -keep class com.google.firebase.provider.** { *; }
 
 -keep class android.arch.lifecycle.ProcessLifecycleOwnerInitializer
+
+-dontwarn retrofit2.Platform$Java8
+
+# Okio
+-dontwarn okio.**
