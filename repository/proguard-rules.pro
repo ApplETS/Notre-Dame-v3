@@ -19,3 +19,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Keep the names of our api models so that Moshi can use them
+-keepnames class ca.etsmtl.repository.data.api.response.** { *; }
+
+# For stack traces
+-keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*
+-keep public class * extends java.lang.Exception
+
+-dontwarn javax.annotation.**
+
+# Moshi
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keep @com.squareup.moshi.JsonQualifier interface *
