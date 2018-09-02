@@ -61,8 +61,18 @@ class EvaluationAdapter : RecyclerView.Adapter<EvaluationAdapter.EvaluationViewH
 
             nameTv.text = evaluation.nom
             weightTv.text = String.format(context.getString(R.string.text_weight), evaluation.ponderation)
-            gradeTv.text = evaluation.note + " / " + evaluation.corrigeSur // TODO: Replace with graph
-            averageTv.text = evaluation.moyenne
+            gradeTv.text = String.format(
+                    context.getString(R.string.text_grade_with_percentage),
+                    evaluation.note,
+                    evaluation.corrigeSur,
+                    evaluation.notePourcentage
+            ) // TODO: Replace with graph
+            averageTv.text = String.format(
+                    context.getString(R.string.text_grade_with_percentage),
+                    evaluation.moyenne,
+                    evaluation.corrigeSur,
+                    evaluation.moyennePourcentage
+            )
             medianTv.text = evaluation.mediane
             standardDeviationTv.text = evaluation.ecartType
             percentileRankTv.text = evaluation.rangCentile
