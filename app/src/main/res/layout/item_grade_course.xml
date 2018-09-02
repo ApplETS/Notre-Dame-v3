@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="85dp"
     android:layout_height="85dp"
+    android:background="@android:color/white"
+    android:stateListAnimator="@animator/selector_elevation_grade_course_item"
+    android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
     <TextView
@@ -19,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@android:color/white"
         android:gravity="center"
         android:textSize="25sp"
         tools:text="A+" />
