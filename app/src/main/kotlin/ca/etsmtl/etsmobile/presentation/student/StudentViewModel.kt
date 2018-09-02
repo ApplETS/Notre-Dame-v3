@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.presentation.grades
+package ca.etsmtl.etsmobile.presentation.student
 
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleObserver
@@ -7,7 +7,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.etsmobile.presentation.student.StudentPagerAdapter
 import ca.etsmtl.etsmobile.util.Event
 import ca.etsmtl.repository.data.model.Cours
 import javax.inject.Inject

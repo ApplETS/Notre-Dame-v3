@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.student.StudentViewModel
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
