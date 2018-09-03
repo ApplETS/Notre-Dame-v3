@@ -82,7 +82,8 @@ class StudentFragment : MainFragment() {
 
             fun showGradesDetailsFragment(cours: Cours) {
                 with(childFragmentManager.beginTransaction()) {
-                    replace(R.id.content, GradesDetailsFragment.newInstance(cours), GradesDetailsFragment.TAG)
+                    replace(R.id.content, GradesDetailsFragment.newInstance(cours),
+                            GradesDetailsFragment.TAG)
 
                     commit()
                 }
@@ -90,7 +91,7 @@ class StudentFragment : MainFragment() {
 
             if (it) {
                 studentViewModel.getCourse()?.let {
-                    appBarLayoutStudent.setExpanded(true)
+                    appBarLayoutStudent.setExpanded(true, false)
                     showGradesDetailsFragment(it)
                 }
             } else {
@@ -116,7 +117,10 @@ class StudentFragment : MainFragment() {
         })
 
         studentViewModel.showBottomNavigationView.observe(this, Observer {
-            toggleBottomNavigationView(it == true)
+            toggleBottomNavigationView(it == true, when (it) {
+                true -> 200
+                else -> 0
+            })
         })
     }
 

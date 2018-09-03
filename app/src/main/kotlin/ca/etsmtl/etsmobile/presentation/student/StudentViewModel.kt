@@ -36,7 +36,7 @@ class StudentViewModel @Inject constructor(private val app: App) : AndroidViewMo
      *
      * @param course The current course for which details are displayed
      */
-    fun setCourse(course: Cours) {
+    fun setCourseGradesDetails(course: Cours) {
         this.courseGradesDetails.value = course
     }
 

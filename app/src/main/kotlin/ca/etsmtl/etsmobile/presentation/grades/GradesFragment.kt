@@ -46,7 +46,7 @@ class GradesFragment : DaggerFragment() {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
                 currentCourseShown = cours
-                studentViewModel?.setCourse(cours)
+                studentViewModel?.setCourseGradesDetails(cours)
             }
         })
     }
@@ -68,7 +68,7 @@ class GradesFragment : DaggerFragment() {
         subscribeUI()
 
         savedInstanceState?.getParcelable<Cours>(CURRENT_COURSE_SHOWN_KEY)?.let { course ->
-            studentViewModel?.setCourse(course)
+            studentViewModel?.setCourseGradesDetails(course)
         }
     }
 
