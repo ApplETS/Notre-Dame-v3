@@ -12,6 +12,7 @@ buildscript {
     ext.firebase_crashlytics = '2.9.4'
     ext.flowlayoutmanager = '1.2.3.2'
     ext.glide = '4.6.1'
+    ext.groupie = '2.1.0'
     ext.junit = '4.12'
     ext.kotlin_version = '1.2.61'
     ext.kotshi = '1.0.2'

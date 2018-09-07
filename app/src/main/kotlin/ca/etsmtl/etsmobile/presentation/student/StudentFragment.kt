@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.MainFragment
-import ca.etsmtl.etsmobile.presentation.grades.GradesDetailsFragment
+import ca.etsmtl.etsmobile.presentation.gradesdetails.GradesDetailsFragment
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours

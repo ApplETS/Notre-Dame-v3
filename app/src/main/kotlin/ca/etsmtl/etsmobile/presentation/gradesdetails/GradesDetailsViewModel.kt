@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.presentation.grades
+package ca.etsmtl.etsmobile.presentation.gradesdetails
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver

@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.BaseActivity
+import ca.etsmtl.etsmobile.presentation.gradesdetails.GradesDetailsFragment
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
 import kotlinx.android.synthetic.main.include_toolbar.toolbar

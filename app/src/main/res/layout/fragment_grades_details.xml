@@ -131,7 +131,6 @@
             constraintlayout:layout_constraintBottom_toBottomOf="parent"
             constraintlayout:layout_constraintEnd_toEndOf="parent"
             constraintlayout:layout_constraintStart_toStartOf="parent"
-            constraintlayout:layout_constraintTop_toBottomOf="@+id/progressViewGrade"
-            tools:listitem="@layout/item_evaluation" />
+            constraintlayout:layout_constraintTop_toBottomOf="@+id/progressViewGrade" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

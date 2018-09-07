@@ -126,6 +126,10 @@ dependencies {
     // Material-ProgressView
     implementation "com.moos:Material-ProgressView:$materialprogressview"
 
+    // Groupie
+    implementation "com.xwray:groupie:$groupie"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$groupie"
+
     implementation project(':repository')
 }
 

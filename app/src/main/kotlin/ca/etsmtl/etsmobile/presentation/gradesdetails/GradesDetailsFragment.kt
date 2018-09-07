@@ -1,10 +1,10 @@
-package ca.etsmtl.etsmobile.presentation.grades
+package ca.etsmtl.etsmobile.presentation.gradesdetails
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,10 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.repository.data.model.Cours
 import com.moos.library.CircleProgressView
-import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
+import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.ViewHolder
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewAverage
 import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
@@ -35,9 +38,9 @@ class GradesDetailsFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val adapter by lazy { EvaluationAdapter() }
+    private val groupAdapter by lazy { GroupAdapter<ViewHolder>() }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_grades_details, container, false)
     }
 
@@ -67,12 +70,8 @@ class GradesDetailsFragment : DaggerFragment() {
     }
 
     private fun setUpRecyclerView() {
-        recyclerViewEvaluation.adapter = adapter
-        recyclerViewEvaluation.addItemDecoration(DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-        ))
-        recyclerViewEvaluation.layoutManager = FlowLayoutManager()
+        recyclerViewEvaluation.adapter = groupAdapter
+        recyclerViewEvaluation.layoutManager = LinearLayoutManager(context)
     }
 
     private fun subscribeUI() {
@@ -101,7 +100,43 @@ class GradesDetailsFragment : DaggerFragment() {
         })
 
         gradesDetailsViewModel.getEvaluations().observe(this, Observer {
-            it?.let { adapter.differ.submitList(it) }
+            it?.forEach {
+                ExpandableGroup(EvaluationHeaderItem(it)).apply {
+                    val averageStr = String.format(
+                            getString(R.string.text_grade_with_percentage),
+                            it.moyenne,
+                            it.corrigeSur,
+                            it.moyennePourcentage
+                    )
+
+                    add(Section(
+                            listOf(
+                                    EvaluationDetailItem(
+                                            getString(R.string.label_average),
+                                            averageStr
+                                    ),
+                                    EvaluationDetailItem(
+                                            getString(R.string.label_median),
+                                            it.mediane ?: ""
+                                    ),
+                                    EvaluationDetailItem(
+                                            getString(R.string.label_standard_deviation),
+                                            it.ecartType ?: ""
+                                    ),
+                                    EvaluationDetailItem(
+                                            getString(R.string.label_percentile_rank),
+                                            it.rangCentile ?: ""
+                                    ),
+                                    EvaluationDetailItem(
+                                            getString(R.string.label_target_date),
+                                            it.dateCible ?: ""
+                                    )
+                            )
+                    ))
+
+                    groupAdapter.add(this)
+                }
+            }
         })
 
         lifecycle.addObserver(gradesDetailsViewModel)
