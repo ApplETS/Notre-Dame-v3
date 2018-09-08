@@ -6,6 +6,7 @@ import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import kotlinx.android.synthetic.main.item_evaluation_header.circleProgressViewGrade
 import kotlinx.android.synthetic.main.item_evaluation_header.tvGrade
 import kotlinx.android.synthetic.main.item_evaluation_header.tvName
 import kotlinx.android.synthetic.main.item_evaluation_header.tvWeight
@@ -29,11 +30,13 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
             }
             tvGrade.apply {
                 text = String.format(
-                        context.getString(R.string.text_grade_with_percentage),
-                        evaluation.note,
-                        evaluation.corrigeSur,
+                        context.getString(R.string.text_grade_in_percentage),
                         evaluation.notePourcentage
-                ) // TODO: Replace with graph
+                )
+            }
+            circleProgressViewGrade.apply {
+                setEndProgress(evaluation.notePourcentage?.replace(",", ".")?.toFloat() ?: 0f)
+                startProgressAnimation()
             }
             itemView.setOnClickListener { expandableGroup.onToggleExpanded() }
         }

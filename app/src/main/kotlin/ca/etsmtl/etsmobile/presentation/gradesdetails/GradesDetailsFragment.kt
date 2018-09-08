@@ -102,6 +102,13 @@ class GradesDetailsFragment : DaggerFragment() {
         gradesDetailsViewModel.getEvaluations().observe(this, Observer {
             it?.forEach {
                 ExpandableGroup(EvaluationHeaderItem(it)).apply {
+                    val grade = String.format(
+                            getString(R.string.text_grade_with_percentage),
+                            it.note,
+                            it.corrigeSur,
+                            it.notePourcentage
+                    )
+
                     val averageStr = String.format(
                             getString(R.string.text_grade_with_percentage),
                             it.moyenne,
@@ -111,6 +118,10 @@ class GradesDetailsFragment : DaggerFragment() {
 
                     add(Section(
                             listOf(
+                                    EvaluationDetailItem(
+                                            getString(R.string.label_grade),
+                                            grade
+                                    ),
                                     EvaluationDetailItem(
                                             getString(R.string.label_average),
                                             averageStr
