@@ -1,6 +1,7 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.animation.Animation
@@ -8,6 +9,7 @@ import android.view.animation.RotateAnimation
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Evaluation
+import com.moos.library.CircleProgressView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -52,18 +54,21 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     override fun bind(viewHolder: ViewHolder, position: Int) {
         with (viewHolder) {
             tvName.text = evaluation.nom
+
             tvWeight.apply {
                 text = String.format(
                         context.getString(R.string.text_weight),
                         evaluation.ponderation
                 )
             }
+
             tvGrade.apply {
                 text = String.format(
                         context.getString(R.string.text_grade_in_percentage),
                         evaluation.notePourcentage
                 )
             }
+
             progressViewGrade.apply {
                 var grade = evaluation.notePourcentage
                         .replaceFirst(",", ".")
@@ -72,17 +77,23 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                 if (grade > 100) {
                     grade = 100f
                 }
-                this.setEndProgress(grade)
-                this.startProgressAnimation()
-            }
-            itemView.setOnClickListener {
-                expandableGroup.onToggleExpanded()
 
-                when {
-                    expandableGroup.isExpanded -> arrow.startAnimation(rotateArrowToTop)
-                    else -> arrow.startAnimation(rotateArrowToBottom)
-                }
+                setTrackWidth(15)
+                setEndProgress(grade)
+                setProgressViewUpdateListener(object : CircleProgressView.CircleProgressUpdateListener {
+                    override fun onCircleProgressFinished(view: View?) {}
+
+                    override fun onCircleProgressStart(view: View?) {}
+
+                    override fun onCircleProgressUpdate(view: View?, progress: Float) {
+                        val color = progressColor(context, progress)
+                        setStartColor(color)
+                        setEndColor(color)
+                    }
+                })
+                startProgressAnimation()
             }
+
             tvIgnoredEvaluation.show(evaluation.ignoreDuCalcul)
             btnIgnoredEvaluation.show(evaluation.ignoreDuCalcul)
             if (evaluation.ignoreDuCalcul) {
@@ -93,8 +104,26 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                     btnIgnoredEvaluation.setOnClickListener(this)
                 }
             }
+
+            itemView.setOnClickListener {
+                expandableGroup.onToggleExpanded()
+
+                when {
+                    expandableGroup.isExpanded -> arrow.startAnimation(rotateArrowToTop)
+                    else -> arrow.startAnimation(rotateArrowToBottom)
+                }
+            }
         }
     }
+
+    private fun progressColor(context: Context, grade: Float) = ContextCompat.getColor(
+            context,
+            when {
+                grade < 50 -> R.color.colorPrimary
+                grade in 50..84 -> R.color.material_yellow_600
+                else -> R.color.material_green_600
+            }
+    )
 
     override fun setExpandableGroup(onToggleListener: ExpandableGroup) {
         this.expandableGroup = onToggleListener
@@ -102,12 +131,11 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
 
     private fun showIgnoredEvaluationDialog(context: Context) {
         if (ignoredEvaluationDialog == null) {
-            with (AlertDialog.Builder(context)) {
-                setTitle(R.string.title_ignored_evaluation)
-                setMessage(R.string.text_ignored_evaluation)
-                setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
-                ignoredEvaluationDialog = this.create()
-            }
+            ignoredEvaluationDialog = AlertDialog.Builder(context)
+                    .setTitle(R.string.title_ignored_evaluation)
+                    .setMessage(R.string.text_ignored_evaluation)
+                    .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
+                    .create()
         }
 
         ignoredEvaluationDialog?.show()
