@@ -126,7 +126,7 @@ class AboutFragment : Fragment() {
                                     else -> R.string.uri_applets_yt
                                 }
                         )
-                ).openWithChromeCustomTabs(it, R.color.appletsBg)
+                ).openWithChromeCustomTabs(it, R.color.bgApplets)
             }
         }) {
             btnGithub.setOnClickListener(this)

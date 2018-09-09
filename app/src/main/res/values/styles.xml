@@ -61,8 +61,8 @@
 
     <!-- About screen theme -->
     <style name="AboutTheme" parent="AppTheme">
-        <item name="colorPrimary">@color/appletsBg</item>
-        <item name="colorPrimaryDark">@color/appletsBg</item>
+        <item name="colorPrimary">@color/bgApplets</item>
+        <item name="colorPrimaryDark">@color/bgApplets</item>
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/white</item>
         <item name="colorControlHighlight">@android:color/white</item>
