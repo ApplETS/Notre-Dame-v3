@@ -77,4 +77,15 @@
         materialprogressview:start_color="@color/colorPrimary"
         materialprogressview:start_progress="0"
         materialprogressview:track_width="10dp" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_keyboard_arrow_down_white_24dp"
+        android:tint="@color/colorAccent"
+        constraintlayout:layout_constraintEnd_toEndOf="parent"
+        constraintlayout:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

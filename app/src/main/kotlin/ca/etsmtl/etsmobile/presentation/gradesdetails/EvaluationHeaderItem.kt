@@ -1,11 +1,14 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.repository.data.model.Evaluation
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import kotlinx.android.synthetic.main.item_evaluation_header.arrow
 import kotlinx.android.synthetic.main.item_evaluation_header.progressViewGrade
 import kotlinx.android.synthetic.main.item_evaluation_header.tvGrade
 import kotlinx.android.synthetic.main.item_evaluation_header.tvName
@@ -16,6 +19,26 @@ import kotlinx.android.synthetic.main.item_evaluation_header.tvWeight
  */
 class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), ExpandableItem {
     private lateinit var expandableGroup: ExpandableGroup
+    private val rotateArrowToTop by lazy {
+        RotateAnimation(
+            0f, 180f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            duration = 300
+            fillAfter = true
+        }
+    }
+    private val rotateArrowToBottom by lazy {
+        RotateAnimation(
+                180f, 0f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            duration = 300
+            fillAfter = true
+        }
+    }
 
     override fun getLayout() = R.layout.item_evaluation_header
 
@@ -45,7 +68,14 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                 this.setEndProgress(grade)
                 this.startProgressAnimation()
             }
-            itemView.setOnClickListener { expandableGroup.onToggleExpanded() }
+            itemView.setOnClickListener {
+                expandableGroup.onToggleExpanded()
+
+                when {
+                    expandableGroup.isExpanded -> arrow.startAnimation(rotateArrowToTop)
+                    else -> arrow.startAnimation(rotateArrowToBottom)
+                }
+            }
         }
     }
 

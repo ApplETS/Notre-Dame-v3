@@ -1,7 +1,6 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -13,7 +12,6 @@ import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.repository.data.model.Cours
-import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import dagger.android.support.DaggerFragment
@@ -33,7 +31,6 @@ class GradesDetailsFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val groupAdapter by lazy { GroupAdapter<ViewHolder>() }
-    private var gradeAverageItem: GradeAverageItem? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_grades_details, container, false)
@@ -78,15 +75,9 @@ class GradesDetailsFragment : DaggerFragment() {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
         })
 
-        Transformations.switchMap(gradesDetailsViewModel.gradeAverageItem) {
-            gradeAverageItem = it
-            gradesDetailsViewModel.evaluationGroups
-        }.observe(this, Observer { evaluations ->
-            (gradeAverageItem as? Group)?.let {
-                mutableListOf(it).apply {
-                    evaluations?.let { addAll(evaluations) }
-                    groupAdapter.update(this)
-                }
+        gradesDetailsViewModel.recyclerViewItems.observe(this, Observer {
+            it?.let {
+                groupAdapter.update(it)
             }
         })
 

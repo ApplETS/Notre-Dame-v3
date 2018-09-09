@@ -18,6 +18,7 @@ import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.repository.data.repository.signets.EvaluationRepository
 import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.Group
 import com.xwray.groupie.Section
 import javax.inject.Inject
 
@@ -45,12 +46,12 @@ class GradesDetailsViewModel @Inject constructor(
             addSource(evaluationsMediatorLiveData) { this.value = Event(it?.message) }
         }
     }
-    val gradeAverageItem: LiveData<GradeAverageItem> = Transformations.map(summaryMediatorLiveData) {
+    private val gradeAverageItem: LiveData<GradeAverageItem> = Transformations.map(summaryMediatorLiveData) {
         it?.takeIf { it.status != Resource.LOADING }?.data?.let {
             GradeAverageItem(cours.value?.cote, it.scoreFinalSur100, it.moyenneClasse)
         }
     }
-    val evaluationGroups: LiveData<List<ExpandableGroup>> = Transformations.map(evaluationsMediatorLiveData) {
+    private val evaluationGroups: LiveData<List<ExpandableGroup>> = Transformations.map(evaluationsMediatorLiveData) {
         it?.takeIf { it.status != Resource.LOADING }?.data?.map {
             ExpandableGroup(EvaluationHeaderItem(it)).apply {
                 val grade = String.format(
@@ -79,22 +80,39 @@ class GradesDetailsViewModel @Inject constructor(
                                 ),
                                 EvaluationDetailItem(
                                         app.getString(R.string.label_median),
-                                        it.mediane ?: ""
+                                        it.mediane
                                 ),
                                 EvaluationDetailItem(
                                         app.getString(R.string.label_standard_deviation),
-                                        it.ecartType ?: ""
+                                        it.ecartType
                                 ),
                                 EvaluationDetailItem(
                                         app.getString(R.string.label_percentile_rank),
-                                        it.rangCentile ?: ""
+                                        it.rangCentile
                                 ),
                                 EvaluationDetailItem(
                                         app.getString(R.string.label_target_date),
-                                        it.dateCible ?: ""
+                                        it.dateCible
                                 )
                         )
                 ))
+            }
+        }
+    }
+    val recyclerViewItems: LiveData<List<Group>> = MediatorLiveData<List<Group>>().apply {
+        fun createItemsList(gradeAverageItem: GradeAverageItem, evaluationGroups: List<ExpandableGroup>): List<Group> {
+            return mutableListOf(gradeAverageItem as Group).apply { addAll(evaluationGroups) }
+        }
+
+        addSource(gradeAverageItem) {
+            it?.let { gradeAverageItem ->
+                evaluationGroups.value?.let { this.value = createItemsList(gradeAverageItem, it) }
+            }
+        }
+
+        addSource(evaluationGroups) {
+            it?.let { expandableGroupList ->
+                gradeAverageItem.value?.let { this.value = createItemsList(it, expandableGroupList) }
             }
         }
     }
