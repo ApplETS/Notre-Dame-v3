@@ -78,11 +78,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:text="@string/title_ignored_evaluation"
         android:textColor="@color/colorPrimary"
         constraintlayout:layout_constraintBottom_toBottomOf="parent"
         constraintlayout:layout_constraintStart_toStartOf="@+id/tvWeight"
-        constraintlayout:layout_constraintTop_toBottomOf="@+id/tvWeight"
-        android:text="@string/title_ignored_evaluation" />
+        constraintlayout:layout_constraintTop_toBottomOf="@+id/tvWeight" />
 
     <ImageButton
         android:id="@+id/btnIgnoredEvaluation"
@@ -100,10 +100,12 @@
         android:id="@+id/arrow"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_keyboard_arrow_down_white_24dp"
         android:tint="@color/colorAccent"
+        constraintlayout:layout_constraintBottom_toBottomOf="parent"
         constraintlayout:layout_constraintEnd_toEndOf="parent"
         constraintlayout:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
