@@ -135,7 +135,7 @@ class GradesDetailsViewModel @Inject constructor(
 
             evaluationsRes = repository.getEvaluations(userCredentials, it, true).apply {
                 evaluationsMediatorLiveData.addSource(this) {
-                    evaluationsMediatorLiveData.value = it
+                    evaluationsMediatorLiveData.value = it?.apply { data?.filter { it.publie } }
                 }
             }
         }
