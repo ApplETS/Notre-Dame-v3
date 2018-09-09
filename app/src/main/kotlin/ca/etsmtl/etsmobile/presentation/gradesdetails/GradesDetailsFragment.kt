@@ -1,6 +1,7 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -12,19 +13,12 @@ import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.repository.data.model.Cours
-import com.moos.library.CircleProgressView
-import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_grades_details.progressViewAverage
-import kotlinx.android.synthetic.main.fragment_grades_details.progressViewGrade
-import kotlinx.android.synthetic.main.fragment_grades_details.recyclerViewEvaluation
+import kotlinx.android.synthetic.main.fragment_grades_details.recyclerGradesDetails
 import kotlinx.android.synthetic.main.fragment_grades_details.swipeRefreshLayoutGradesDetails
-import kotlinx.android.synthetic.main.fragment_grades_details.tvAverage
-import kotlinx.android.synthetic.main.fragment_grades_details.tvGrade
-import kotlinx.android.synthetic.main.fragment_grades_details.tvRating
 import javax.inject.Inject
 
 /**
@@ -39,6 +33,7 @@ class GradesDetailsFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val groupAdapter by lazy { GroupAdapter<ViewHolder>() }
+    private var gradeAverageItem: GradeAverageItem? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_grades_details, container, false)
@@ -70,8 +65,8 @@ class GradesDetailsFragment : DaggerFragment() {
     }
 
     private fun setUpRecyclerView() {
-        recyclerViewEvaluation.adapter = groupAdapter
-        recyclerViewEvaluation.layoutManager = LinearLayoutManager(context)
+        recyclerGradesDetails.adapter = groupAdapter
+        recyclerGradesDetails.layoutManager = LinearLayoutManager(context)
     }
 
     private fun subscribeUI() {
@@ -83,83 +78,19 @@ class GradesDetailsFragment : DaggerFragment() {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
         })
 
-        gradesDetailsViewModel.getGradePercentage().observe(this, Observer {
-            tvRating.text = gradesDetailsViewModel.cours.value?.cote
-
-            it?.takeIf { it.isNotBlank() }?.let {
-                setCircleProgressViewProgress(progressViewGrade, it.replace(",", ".").toFloat())
-                tvGrade.text = String.format(getString(R.string.text_grade_in_percentage), it)
-            }
-        })
-
-        gradesDetailsViewModel.getAveragePercentage().observe(this, Observer {
-            it?.takeIf { it.isNotBlank() }?.let {
-                setCircleProgressViewProgress(progressViewAverage, it.replace(",", ".").toFloat())
-                tvAverage.text = String.format(getString(R.string.text_grade_in_percentage), it)
-            }
-        })
-
-        gradesDetailsViewModel.getEvaluations().observe(this, Observer {
-            it?.forEach {
-                ExpandableGroup(EvaluationHeaderItem(it)).apply {
-                    val grade = String.format(
-                            getString(R.string.text_grade_with_percentage),
-                            it.note,
-                            it.corrigeSur,
-                            it.notePourcentage
-                    )
-
-                    val averageStr = String.format(
-                            getString(R.string.text_grade_with_percentage),
-                            it.moyenne,
-                            it.corrigeSur,
-                            it.moyennePourcentage
-                    )
-
-                    add(Section(
-                            listOf(
-                                    EvaluationDetailItem(
-                                            getString(R.string.label_grade),
-                                            grade
-                                    ),
-                                    EvaluationDetailItem(
-                                            getString(R.string.label_average),
-                                            averageStr
-                                    ),
-                                    EvaluationDetailItem(
-                                            getString(R.string.label_median),
-                                            it.mediane ?: ""
-                                    ),
-                                    EvaluationDetailItem(
-                                            getString(R.string.label_standard_deviation),
-                                            it.ecartType ?: ""
-                                    ),
-                                    EvaluationDetailItem(
-                                            getString(R.string.label_percentile_rank),
-                                            it.rangCentile ?: ""
-                                    ),
-                                    EvaluationDetailItem(
-                                            getString(R.string.label_target_date),
-                                            it.dateCible ?: ""
-                                    )
-                            )
-                    ))
-
-                    groupAdapter.add(this)
+        Transformations.switchMap(gradesDetailsViewModel.gradeAverageItem) {
+            gradeAverageItem = it
+            gradesDetailsViewModel.evaluationGroups
+        }.observe(this, Observer { evaluations ->
+            (gradeAverageItem as? Group)?.let {
+                mutableListOf(it).apply {
+                    evaluations?.let { addAll(evaluations) }
+                    groupAdapter.update(this)
                 }
             }
         })
 
         lifecycle.addObserver(gradesDetailsViewModel)
-    }
-
-    private fun setCircleProgressViewProgress(circleProgressView: CircleProgressView, progress: Float?) {
-        progress?.let {
-            with(circleProgressView) {
-                setEndProgress(it)
-                startProgressAnimation()
-            }
-        }
     }
 
     companion object {

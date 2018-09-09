@@ -1,136 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:constraintlayout="http://schemas.android.com/apk/res-auto"
-    xmlns:materialprogressview="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayoutGradesDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/material_grey_200">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerGradesDetails"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tvRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="40sp"
-            constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewAverage"
-            constraintlayout:layout_constraintEnd_toEndOf="@+id/progressViewAverage"
-            constraintlayout:layout_constraintStart_toStartOf="@+id/progressViewAverage"
-            constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewAverage"
-            tools:text="A+" />
-
-        <com.moos.library.CircleProgressView
-            android:id="@+id/progressViewGrade"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            constraintlayout:layout_constraintEnd_toStartOf="@+id/tvLabelGrade"
-            constraintlayout:layout_constraintHorizontal_bias="0.5"
-            constraintlayout:layout_constraintStart_toStartOf="parent"
-            constraintlayout:layout_constraintTop_toTopOf="parent"
-            materialprogressview:circleBroken="false"
-            materialprogressview:end_color="@color/colorPrimary"
-            materialprogressview:end_progress="100"
-            materialprogressview:isFilled="false"
-            materialprogressview:isTracked="true"
-            materialprogressview:progressTextColor="@color/colorPrimary"
-            materialprogressview:progressTextSize="20sp"
-            materialprogressview:progressTextVisibility="false"
-            materialprogressview:start_color="@color/colorPrimary"
-            materialprogressview:start_progress="0"
-            materialprogressview:track_width="10dp" />
-
-        <com.moos.library.CircleProgressView
-            android:id="@+id/progressViewAverage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintEnd_toEndOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintStart_toStartOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewGrade"
-            materialprogressview:circleBroken="false"
-            materialprogressview:end_color="@color/colorPrimaryDark"
-            materialprogressview:end_progress="100"
-            materialprogressview:isFilled="false"
-            materialprogressview:isTracked="true"
-            materialprogressview:progressTextColor="@color/colorPrimaryDark"
-            materialprogressview:progressTextSize="20sp"
-            materialprogressview:progressTextVisibility="false"
-            materialprogressview:start_color="@color/colorAccent"
-            materialprogressview:start_progress="0"
-            materialprogressview:track_width="10dp" />
-
-        <TextView
-            android:id="@+id/tvLabelGrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/label_current_rating"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15sp"
-            constraintlayout:layout_constraintBottom_toTopOf="@+id/tvAverage"
-            constraintlayout:layout_constraintEnd_toEndOf="parent"
-            constraintlayout:layout_constraintHorizontal_bias="0.5"
-            constraintlayout:layout_constraintStart_toEndOf="@+id/progressViewGrade"
-            constraintlayout:layout_constraintTop_toBottomOf="@+id/tvGrade" />
-
-        <TextView
-            android:id="@+id/tvGrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            constraintlayout:layout_constraintBottom_toTopOf="@+id/tvLabelGrade"
-            constraintlayout:layout_constraintStart_toStartOf="@+id/tvLabelGrade"
-            constraintlayout:layout_constraintTop_toTopOf="parent"
-            constraintlayout:layout_constraintVertical_chainStyle="packed"
-            tools:text="98 %" />
-
-        <TextView
-            android:id="@+id/tvLabelAverage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_average"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp"
-            constraintlayout:layout_constraintBottom_toTopOf="@+id/recyclerViewEvaluation"
-            constraintlayout:layout_constraintStart_toStartOf="@+id/tvAverage"
-            constraintlayout:layout_constraintTop_toBottomOf="@+id/tvAverage" />
-
-        <TextView
-            android:id="@+id/tvAverage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            constraintlayout:layout_constraintBottom_toTopOf="@+id/tvLabelAverage"
-            constraintlayout:layout_constraintStart_toStartOf="@+id/tvLabelGrade"
-            constraintlayout:layout_constraintTop_toBottomOf="@+id/tvLabelGrade"
-            tools:text="98 %" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewEvaluation"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            constraintlayout:layout_constraintBottom_toBottomOf="parent"
-            constraintlayout:layout_constraintEnd_toEndOf="parent"
-            constraintlayout:layout_constraintStart_toStartOf="parent"
-            constraintlayout:layout_constraintTop_toBottomOf="@+id/progressViewGrade" />
-    </android.support.constraint.ConstraintLayout>
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        constraintlayout:layout_constraintBottom_toBottomOf="parent"
+        constraintlayout:layout_constraintEnd_toEndOf="parent"
+        constraintlayout:layout_constraintStart_toStartOf="parent"
+        constraintlayout:layout_constraintTop_toBottomOf="@+id/progressViewGrade" />
 </android.support.v4.widget.SwipeRefreshLayout>

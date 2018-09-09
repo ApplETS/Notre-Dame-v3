@@ -14,8 +14,6 @@ import ca.etsmtl.repository.data.model.HoraireExamenFinal
 import ca.etsmtl.repository.data.model.JourRemplace
 import ca.etsmtl.repository.data.model.Seance
 import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
-import java.text.NumberFormat
-import java.util.Locale
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -45,39 +43,26 @@ fun EtudiantEntity.toEtudiant() = Etudiant(
         this.masculin
 )
 
-fun EvaluationEntity.toEvaluation(): Evaluation {
-    val formatter = NumberFormat.getNumberInstance(Locale.getDefault())
-    val note = this.note.replace(",", ".").toDoubleOrNull() ?: 0.0
-    val moyenne = this.moyenne.replace(",", ".").toDoubleOrNull() ?: 0.0
-    var notePourcentage = 0.0
-    var moyennePourcentage = 0.0
-
-    this.corrigeSur.substringBefore("+").toDoubleOrNull()?.let {
-        notePourcentage = note / it * 100
-        moyennePourcentage = moyenne / it * 100
-    }
-
-    return Evaluation(
-            this.cours,
-            this.groupe,
-            this.session,
-            this.nom,
-            this.equipe,
-            this.dateCible,
-            formatter.format(note),
-            this.corrigeSur,
-            formatter.format(notePourcentage),
-            this.ponderation,
-            formatter.format(moyenne),
-            formatter.format(moyennePourcentage),
-            this.ecartType,
-            this.mediane,
-            this.rangCentile,
-            this.publie,
-            this.messageDuProf,
-            this.ignoreDuCalcul
-    )
-}
+fun EvaluationEntity.toEvaluation() = Evaluation(
+        this.cours,
+        this.groupe,
+        this.session,
+        this.nom,
+        this.equipe,
+        this.dateCible,
+        this.note,
+        this.corrigeSur,
+        this.notePourcentage,
+        this.ponderation,
+        this.moyenne,
+        this.moyennePourcentage,
+        this.ecartType,
+        this.mediane,
+        this.rangCentile,
+        this.publie,
+        this.messageDuProf,
+        this.ignoreDuCalcul
+)
 
 fun List<EvaluationEntity>.toEvaluations() = ArrayList<Evaluation>().apply {
     this@toEvaluations.forEach { add(it.toEvaluation()) }

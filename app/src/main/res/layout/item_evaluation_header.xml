@@ -6,19 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="horizontal"
-    android:paddingEnd="@dimen/material_component_lists_right_padding"
-    android:paddingStart="@dimen/material_component_lists_icon_left_padding">
+    android:orientation="horizontal">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/dividerVertical"
+        constraintlayout:layout_constraintEnd_toEndOf="parent"
+        constraintlayout:layout_constraintStart_toStartOf="parent"
+        constraintlayout:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:textSize="@dimen/material_component_lists_two_line_text_size"
         constraintlayout:layout_constraintBottom_toTopOf="@+id/tvWeight"
-        constraintlayout:layout_constraintStart_toStartOf="parent"
+        constraintlayout:layout_constraintStart_toEndOf="@+id/progressViewGrade"
         constraintlayout:layout_constraintTop_toTopOf="parent"
         constraintlayout:layout_constraintVertical_chainStyle="packed"
         tools:text="Intra" />
@@ -43,21 +51,22 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="@dimen/material_component_lists_two_line_text_size"
-        constraintlayout:layout_constraintBottom_toBottomOf="@+id/circleProgressViewGrade"
-        constraintlayout:layout_constraintEnd_toEndOf="@+id/circleProgressViewGrade"
-        constraintlayout:layout_constraintStart_toStartOf="@+id/circleProgressViewGrade"
-        constraintlayout:layout_constraintTop_toTopOf="@+id/circleProgressViewGrade"
+        android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
+        constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewGrade"
+        constraintlayout:layout_constraintEnd_toEndOf="@+id/progressViewGrade"
+        constraintlayout:layout_constraintStart_toStartOf="@+id/progressViewGrade"
+        constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewGrade"
         tools:text="@string/text_grade_in_percentage" />
 
     <com.moos.library.CircleProgressView
-        android:id="@+id/circleProgressViewGrade"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/progressViewGrade"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         constraintlayout:layout_constraintBottom_toBottomOf="parent"
-        constraintlayout:layout_constraintEnd_toEndOf="parent"
+        constraintlayout:layout_constraintStart_toStartOf="parent"
         constraintlayout:layout_constraintTop_toTopOf="parent"
         materialprogressview:circleBroken="false"
         materialprogressview:end_color="@color/colorPrimary"
