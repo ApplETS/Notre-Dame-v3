@@ -11,6 +11,7 @@ import android.arch.lifecycle.ViewModel
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.Event
+import ca.etsmtl.etsmobile.util.zeroIfNullOrBlank
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Evaluation
 import ca.etsmtl.repository.data.model.Resource
@@ -48,54 +49,57 @@ class GradesDetailsViewModel @Inject constructor(
     }
     private val gradeAverageItem: LiveData<GradeAverageItem> = Transformations.map(summaryMediatorLiveData) {
         it?.takeIf { it.status != Resource.LOADING }?.data?.let {
-            GradeAverageItem(cours.value?.cote, it.scoreFinalSur100, it.moyenneClasse)
+            GradeAverageItem(
+                    cours.value?.cote.zeroIfNullOrBlank(),
+                    it.scoreFinalSur100.zeroIfNullOrBlank(),
+                    it.moyenneClasse.zeroIfNullOrBlank()
+            )
         }
     }
     private val evaluationGroups: LiveData<List<ExpandableGroup>> = Transformations.map(evaluationsMediatorLiveData) {
+        fun getEvaluationDetailItems(grade: String, average: String, evaluation: Evaluation) = listOf(
+                EvaluationDetailItem(
+                        app.getString(R.string.label_grade),
+                        grade
+                ),
+                EvaluationDetailItem(
+                        app.getString(R.string.label_average),
+                        average
+                ),
+                EvaluationDetailItem(
+                        app.getString(R.string.label_median),
+                        evaluation.mediane
+                ),
+                EvaluationDetailItem(
+                        app.getString(R.string.label_standard_deviation),
+                        evaluation.ecartType
+                ),
+                EvaluationDetailItem(
+                        app.getString(R.string.label_percentile_rank),
+                        evaluation.rangCentile
+                ),
+                EvaluationDetailItem(
+                        app.getString(R.string.label_target_date),
+                        evaluation.dateCible
+                )
+        )
         it?.takeIf { it.status != Resource.LOADING }?.data?.map {
             ExpandableGroup(EvaluationHeaderItem(it)).apply {
                 val grade = String.format(
                         app.getString(R.string.text_grade_with_percentage),
-                        it.note,
-                        it.corrigeSur,
-                        it.notePourcentage
+                        it.note.zeroIfNullOrBlank(),
+                        it.corrigeSur.zeroIfNullOrBlank(),
+                        it.notePourcentage.zeroIfNullOrBlank()
                 )
 
                 val averageStr = String.format(
                         app.getString(R.string.text_grade_with_percentage),
-                        it.moyenne,
-                        it.corrigeSur,
-                        it.moyennePourcentage
+                        it.moyenne.zeroIfNullOrBlank(),
+                        it.corrigeSur.zeroIfNullOrBlank(),
+                        it.moyennePourcentage.zeroIfNullOrBlank()
                 )
 
-                add(Section(
-                        listOf(
-                                EvaluationDetailItem(
-                                        app.getString(R.string.label_grade),
-                                        grade
-                                ),
-                                EvaluationDetailItem(
-                                        app.getString(R.string.label_average),
-                                        averageStr
-                                ),
-                                EvaluationDetailItem(
-                                        app.getString(R.string.label_median),
-                                        it.mediane
-                                ),
-                                EvaluationDetailItem(
-                                        app.getString(R.string.label_standard_deviation),
-                                        it.ecartType
-                                ),
-                                EvaluationDetailItem(
-                                        app.getString(R.string.label_percentile_rank),
-                                        it.rangCentile
-                                ),
-                                EvaluationDetailItem(
-                                        app.getString(R.string.label_target_date),
-                                        it.dateCible
-                                )
-                        )
-                ))
+                add(Section(getEvaluationDetailItems(grade, averageStr, it)))
             }
         }
     }
