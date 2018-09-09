@@ -101,7 +101,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_keyboard_arrow_down_white_24dp"
         android:tint="@color/colorAccent"
