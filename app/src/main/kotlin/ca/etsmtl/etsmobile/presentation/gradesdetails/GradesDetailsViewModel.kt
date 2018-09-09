@@ -50,7 +50,7 @@ class GradesDetailsViewModel @Inject constructor(
     private val gradeAverageItem: LiveData<GradeAverageItem> = Transformations.map(summaryMediatorLiveData) {
         it?.takeIf { it.status != Resource.LOADING }?.data?.let {
             GradeAverageItem(
-                    cours.value?.cote.zeroIfNullOrBlank(),
+                    cours.value?.cote,
                     it.scoreFinalSur100.zeroIfNullOrBlank(),
                     it.moyenneClasse.zeroIfNullOrBlank()
             )
