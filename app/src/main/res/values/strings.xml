@@ -45,6 +45,8 @@
     <string name="label_standard_deviation">Écart-type</string>
     <string name="label_percentile_rank">Rang centile</string>
     <string name="label_target_date">Date cible</string>
+    <string name="title_ignored_evaluation">Évaluation ignorée</string>
+    <string name="text_ignored_evaluation">Cette évaluation est ignorée dans le calcul de la note finale. Cette situation se produit quand l\'enseignant a décidé de conserver, par exemple, les trois meilleures notes des six devoirs qu\'il a demandés. Les trois notes les plus faibles seront alors ignorées.</string>
 
     <!-- Profile -->
     <string name="title_profile">Profil</string>
