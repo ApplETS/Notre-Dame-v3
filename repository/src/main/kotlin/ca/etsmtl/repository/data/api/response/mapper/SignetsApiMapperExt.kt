@@ -81,8 +81,13 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     var moyennePourcentage = 0.0
 
     this.corrigeSur.substringBefore("+").replace(",", ".").toDoubleOrNull()?.let {
-        notePourcentage = note / it * 100
-        moyennePourcentage = moyenne / it * 100
+        if (it == 0.0) {
+            notePourcentage = 0.0
+            moyennePourcentage = 0.0
+        } else {
+            notePourcentage = note / it * 100
+            moyennePourcentage = moyenne / it * 100
+        }
     }
 
     return EvaluationEntity(
