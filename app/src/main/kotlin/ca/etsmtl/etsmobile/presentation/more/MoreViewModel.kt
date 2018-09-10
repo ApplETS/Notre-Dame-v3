@@ -24,7 +24,7 @@ class MoreViewModel @Inject constructor(
 ) : AndroidViewModel(app) {
 
     enum class ItemsIndex {
-        FAQ, ABOUT, LOGOUT
+        ABOUT, LOGOUT
     }
 
     private val displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
@@ -84,7 +84,6 @@ class MoreViewModel @Inject constructor(
 
     fun selectItem(index: Int) {
         when (index) {
-            ItemsIndex.FAQ.ordinal -> TODO()
             ItemsIndex.ABOUT.ordinal -> activityToGoTo.value = Event(AboutActivity::class.java)
             ItemsIndex.LOGOUT.ordinal -> displayLogoutConfirmationDialog.value = true
         }

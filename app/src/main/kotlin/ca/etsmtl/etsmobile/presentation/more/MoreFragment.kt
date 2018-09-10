@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.support.v4.util.Pair
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +23,6 @@ import kotlinx.android.synthetic.main.include_toolbar.toolbar
 import javax.inject.Inject
 
 class MoreFragment : MainFragment() {
-
-    companion object {
-        const val TAG = "MoreFragment"
-        fun newInstance() = MoreFragment()
-    }
 
     private val moreViewModel: MoreViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MoreViewModel::class.java)
@@ -62,13 +56,13 @@ class MoreFragment : MainFragment() {
 
         toolbar.setTitle(R.string.title_more)
 
-        setUpRecyclerView(recyclerViewMore)
+        setUpRecyclerView()
 
         subscribeUI()
     }
 
-    private fun setUpRecyclerView(view: RecyclerView) {
-        with(view) {
+    private fun setUpRecyclerView() {
+        with (recyclerViewMore) {
             val itemsList = moreViewModel.itemsList()
 
             adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
@@ -76,9 +70,9 @@ class MoreFragment : MainFragment() {
                     moreViewModel.selectItem(index)
                 }
             })
-        }
 
-        view.setHasFixedSize(true)
+            setHasFixedSize(true)
+        }
     }
 
     private fun goToAbout(iconView: View, label: String) {
@@ -127,5 +121,10 @@ class MoreFragment : MainFragment() {
                 }
             }
         })
+    }
+
+    companion object {
+        const val TAG = "MoreFragment"
+        fun newInstance() = MoreFragment()
     }
 }
