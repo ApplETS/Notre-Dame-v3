@@ -29,7 +29,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     private lateinit var expandableGroup: ExpandableGroup
     private val rotateArrowToTop by lazy {
         RotateAnimation(
-            0f, 180f,
+            0f, -180f,
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
         ).apply {
@@ -39,7 +39,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     }
     private val rotateArrowToBottom by lazy {
         RotateAnimation(
-                180f, 0f,
+                -180f, 0f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f
         ).apply {
