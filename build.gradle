@@ -18,7 +18,7 @@ buildscript {
     ext.kotshi = '1.0.2'
     ext.leakcanary = '1.5.4'
     ext.lifecycle = '1.1.1'
-    ext.materialprogressview = '1.0.5'
+    ext.materialprogressview = '1.0.6'
     ext.mockito = '2.10.0'
     ext.mockito_inline = '2.18.3'
     ext.mockito_kotlin = '1.6.0'

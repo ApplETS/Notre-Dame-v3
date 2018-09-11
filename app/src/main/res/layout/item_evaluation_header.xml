@@ -64,6 +64,7 @@
         constraintlayout:layout_constraintBottom_toBottomOf="parent"
         constraintlayout:layout_constraintStart_toStartOf="parent"
         constraintlayout:layout_constraintTop_toTopOf="parent"
+        constraintlayout:track_width="8dp"
         materialprogressview:circleBroken="false"
         materialprogressview:end_color="@color/colorPrimary"
         materialprogressview:end_progress="100"

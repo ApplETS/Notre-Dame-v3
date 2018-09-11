@@ -78,7 +78,6 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                     grade = 100f
                 }
 
-                setTrackWidth(15)
                 setEndProgress(grade)
                 setProgressViewUpdateListener(object : CircleProgressView.CircleProgressUpdateListener {
                     override fun onCircleProgressFinished(view: View?) {}
