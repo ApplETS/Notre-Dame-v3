@@ -11,6 +11,7 @@ import android.arch.lifecycle.ViewModel
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.Event
+import ca.etsmtl.etsmobile.util.isDeviceConnected
 import ca.etsmtl.etsmobile.util.zeroIfNullOrBlank
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Evaluation
@@ -43,8 +44,19 @@ class GradesDetailsViewModel @Inject constructor(
     private var evaluationsRes: LiveData<Resource<List<Evaluation>>>? = null
     val errorMessage: LiveData<Event<String?>> by lazy {
         MediatorLiveData<Event<String?>>().apply {
-            addSource(summaryMediatorLiveData) { this.value = Event(it?.message) }
-            addSource(evaluationsMediatorLiveData) { this.value = Event(it?.message) }
+            fun displayErrorMessage(res: Resource<*>?) {
+                if (res?.status == Resource.ERROR) {
+                    this.value = when {
+                        !app.isDeviceConnected() -> {
+                            Event(app.getString(R.string.error_no_internet_connection))
+                        }
+                        else -> Event(app.getString(R.string.error_failed_to_retrieve_data_course))
+                    }
+                }
+            }
+
+            addSource(summaryMediatorLiveData) { displayErrorMessage(it) }
+            addSource(evaluationsMediatorLiveData) { displayErrorMessage(it) }
         }
     }
     private val gradeAverageItem: LiveData<GradeAverageItem> = Transformations.map(summaryMediatorLiveData) {
