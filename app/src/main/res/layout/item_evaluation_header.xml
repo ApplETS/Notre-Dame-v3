@@ -8,15 +8,6 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/dividerVertical"
-        constraintlayout:layout_constraintEnd_toEndOf="parent"
-        constraintlayout:layout_constraintStart_toStartOf="parent"
-        constraintlayout:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
@@ -27,7 +18,7 @@
         android:textSize="@dimen/material_component_lists_two_line_text_size"
         constraintlayout:layout_constraintBottom_toTopOf="@+id/tvWeight"
         constraintlayout:layout_constraintStart_toEndOf="@+id/progressViewGrade"
-        constraintlayout:layout_constraintTop_toBottomOf="@+id/divider"
+        constraintlayout:layout_constraintTop_toTopOf="parent"
         constraintlayout:layout_constraintVertical_chainStyle="packed"
         tools:text="Intra" />
 

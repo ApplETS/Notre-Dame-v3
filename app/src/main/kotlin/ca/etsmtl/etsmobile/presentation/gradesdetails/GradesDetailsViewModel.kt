@@ -130,16 +130,16 @@ class GradesDetailsViewModel @Inject constructor(
             summaryDetailsItems: List<EvaluationDetailItem>?,
             evaluationGroups: List<ExpandableGroup>?
         ): List<Group> {
-            return ArrayList<Group>().apply {
+            return mutableListOf<Group>().apply {
                 (gradeAverageItem as? Group)?.let { add(it) }
 
                 summaryDetailsItems?.let {
-                    SectionTitleItem(app.getString(R.string.title_section_summary))
+                    add(SectionTitleItem(app.getString(R.string.title_section_summary)))
                     addAll(summaryDetailsItems)
                 }
 
                 evaluationGroups?.let {
-                    SectionTitleItem(app.getString(R.string.title_section_evaluations))
+                    add(SectionTitleItem(app.getString(R.string.title_section_evaluations)))
                     addAll(it)
                 }
             }
