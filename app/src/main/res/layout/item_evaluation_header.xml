@@ -59,8 +59,8 @@
 
     <com.moos.library.CircleProgressView
         android:id="@+id/progressViewGrade"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         constraintlayout:layout_constraintBottom_toBottomOf="parent"
         constraintlayout:layout_constraintStart_toStartOf="parent"
         constraintlayout:layout_constraintTop_toTopOf="parent"

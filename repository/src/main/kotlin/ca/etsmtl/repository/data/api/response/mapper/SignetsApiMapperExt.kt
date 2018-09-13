@@ -74,7 +74,9 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
 )
 
 fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
-    val formatter = NumberFormat.getNumberInstance(Locale.getDefault())
+    val formatter = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+        maximumFractionDigits = 1
+    }
     val note = this.note.replace(",", ".").toDoubleOrNull() ?: 0.0
     val moyenne = this.moyenne.replace(",", ".").toDoubleOrNull() ?: 0.0
     var notePourcentage = 0.0
