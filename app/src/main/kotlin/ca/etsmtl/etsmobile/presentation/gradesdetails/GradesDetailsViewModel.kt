@@ -68,6 +68,15 @@ class GradesDetailsViewModel @Inject constructor(
             )
         }
     }
+    private val summaryDetailsItems: LiveData<List<EvaluationDetailItem>> = Transformations.map(summaryMediatorLiveData) {
+        it?.takeIf { it.status != Resource.LOADING }?.data?.let {
+            listOf(
+                    EvaluationDetailItem(app.getString(R.string.label_median), it.medianeClasse),
+                    EvaluationDetailItem(app.getString(R.string.label_standard_deviation), it.ecartTypeClasse),
+                    EvaluationDetailItem(app.getString(R.string.label_percentile_rank), it.rangCentileClasse)
+            )
+        }
+    }
     private val evaluationGroups: LiveData<List<ExpandableGroup>> = Transformations.map(evaluationsMediatorLiveData) {
         fun getEvaluationDetailItems(grade: String, average: String, evaluation: Evaluation) = listOf(
                 EvaluationDetailItem(
@@ -116,20 +125,36 @@ class GradesDetailsViewModel @Inject constructor(
         }
     }
     val recyclerViewItems: LiveData<List<Group>> = MediatorLiveData<List<Group>>().apply {
-        fun createItemsList(gradeAverageItem: GradeAverageItem, evaluationGroups: List<ExpandableGroup>): List<Group> {
-            return mutableListOf(gradeAverageItem as Group).apply { addAll(evaluationGroups) }
+        fun createItemsList(
+            gradeAverageItem: GradeAverageItem?,
+            summaryDetailsItems: List<EvaluationDetailItem>?,
+            evaluationGroups: List<ExpandableGroup>?
+        ): List<Group> {
+            return ArrayList<Group>().apply {
+                (gradeAverageItem as? Group)?.let { add(it) }
+
+                summaryDetailsItems?.let {
+                    SectionTitleItem(app.getString(R.string.title_section_summary))
+                    addAll(summaryDetailsItems)
+                }
+
+                evaluationGroups?.let {
+                    SectionTitleItem(app.getString(R.string.title_section_evaluations))
+                    addAll(it)
+                }
+            }
         }
 
         addSource(gradeAverageItem) {
-            it?.let { gradeAverageItem ->
-                evaluationGroups.value?.let { this.value = createItemsList(gradeAverageItem, it) }
-            }
+            this.value = createItemsList(it, summaryDetailsItems.value, evaluationGroups.value)
+        }
+
+        addSource(summaryDetailsItems) {
+            this.value = createItemsList(gradeAverageItem.value, it, evaluationGroups.value)
         }
 
         addSource(evaluationGroups) {
-            it?.let { expandableGroupList ->
-                gradeAverageItem.value?.let { this.value = createItemsList(it, expandableGroupList) }
-            }
+            this.value = createItemsList(gradeAverageItem.value, summaryDetailsItems.value, it)
         }
     }
 

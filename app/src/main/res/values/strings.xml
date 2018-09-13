@@ -49,6 +49,8 @@
     <string name="title_ignored_evaluation">Évaluation ignorée</string>
     <string name="text_ignored_evaluation">Cette évaluation est ignorée dans le calcul de la note finale. Cette situation se produit quand l\'enseignant a décidé de conserver, par exemple, les trois meilleures notes des six devoirs qu\'il a demandés. Les trois notes les plus faibles seront alors ignorées.</string>
     <string name="error_failed_to_retrieve_data_course">Échec de la récupération des données de ce cours</string>
+    <string name="title_section_summary">Sommaire</string>
+    <string name="title_section_evaluations">Évaluations</string>
 
     <!-- Profile -->
     <string name="title_profile">Profil</string>
