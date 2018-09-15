@@ -5,6 +5,7 @@
     <string name="error_no_internet_connection">Absence de connexion internet</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="retry">Réessayer</string>
     <string name="abbreviation_not_available">ND</string>
     <string name="session_fall">Automne</string>
     <string name="session_winter">Hiver</string>

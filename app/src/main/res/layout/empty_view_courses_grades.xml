@@ -17,4 +17,11 @@
         android:layout_height="wrap_content"
         android:text="@string/msg_no_grades"
         android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        android:textColor="@android:color/white" />
 </LinearLayout>

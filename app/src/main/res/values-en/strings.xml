@@ -4,6 +4,7 @@
     <string name="error_no_internet_connection">No internet connection</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="retry">Retry</string>
     <string name="abbreviation_not_available">N/A</string>
     <string name="session_fall">Fall</string>
     <string name="session_winter">Winter</string>

@@ -16,6 +16,7 @@ import ca.etsmtl.repository.data.model.Cours
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades_details.recyclerGradesDetails
 import kotlinx.android.synthetic.main.fragment_grades_details.swipeRefreshLayoutGradesDetails
@@ -44,6 +45,8 @@ class GradesDetailsFragment : DaggerFragment() {
         setUpSwipeRefresh()
 
         setUpRecyclerView()
+
+        btnRetry.setOnClickListener { gradesDetailsViewModel.refresh() }
 
         subscribeUI()
 

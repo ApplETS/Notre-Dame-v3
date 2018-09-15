@@ -20,6 +20,7 @@ import com.xiaofeng.flowlayoutmanager.Alignment
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
+import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
@@ -65,6 +66,7 @@ class GradesFragment : DaggerFragment() {
 
         setUpSwipeRefresh()
         setUpRecyclerView()
+        btnRetry.setOnClickListener { gradesViewModel.refresh() }
         subscribeUI()
 
         savedInstanceState?.getParcelable<Cours>(CURRENT_COURSE_SHOWN_KEY)?.let { course ->
