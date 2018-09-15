@@ -1,5 +1,6 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
+import android.animation.ArgbEvaluator
 import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
@@ -85,11 +86,11 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
 
                 setEndProgress(grade)
                 setProgressViewUpdateListener(object : CircleProgressView.CircleProgressUpdateListener {
-                    override fun onCircleProgressFinished(view: View?) {}
+                    override fun onCircleProgressFinished(view: View) {}
 
-                    override fun onCircleProgressStart(view: View?) {}
+                    override fun onCircleProgressStart(view: View) {}
 
-                    override fun onCircleProgressUpdate(view: View?, progress: Float) {
+                    override fun onCircleProgressUpdate(view: View, progress: Float) {
                         val color = progressColor(context, progress)
                         setStartColor(color)
                         setEndColor(color)
@@ -122,14 +123,37 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
         }
     }
 
-    private fun progressColor(context: Context, grade: Float) = ContextCompat.getColor(
-            context,
-            when {
-                grade < 50 -> R.color.colorPrimary
-                grade in 50..84 -> R.color.material_yellow_600
-                else -> R.color.material_green_600
+    private fun progressColor(context: Context, grade: Float): Int {
+        val startColor: Int
+        val endColor: Int
+        var colorProportion = grade
+        when (grade) {
+            in 0 until PASSING_GRADE -> {
+                startColor = ContextCompat.getColor(context, R.color.failureGradeMinColor)
+                endColor = ContextCompat.getColor(context, R.color.failureGradeMaxColor)
+                colorProportion /= PASSING_GRADE
             }
-    )
+            in PASSING_GRADE until MIN_GOOD_GRADE -> {
+                startColor = ContextCompat.getColor(context, R.color.passingGradeColor)
+                endColor = ContextCompat.getColor(context, R.color.goodGradeMinColor)
+                colorProportion -= PASSING_GRADE
+                colorProportion /= MIN_GOOD_GRADE - PASSING_GRADE
+            }
+            else -> {
+                startColor = ContextCompat.getColor(context, R.color.goodGradeMinColor)
+                endColor = ContextCompat.getColor(context, R.color.goodGradeMaxColor)
+
+                if (colorProportion >= MAX_GRADE) {
+                    colorProportion = 1f
+                } else {
+                    colorProportion -= MIN_GOOD_GRADE
+                    colorProportion /= MAX_GRADE - MIN_GOOD_GRADE
+                }
+            }
+        }
+
+        return ArgbEvaluator().evaluate(colorProportion, startColor, endColor) as Int
+    }
 
     override fun setExpandableGroup(onToggleListener: ExpandableGroup) {
         this.expandableGroup = onToggleListener
@@ -145,5 +169,11 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
         }
 
         ignoredEvaluationDialog?.show()
+    }
+
+    companion object {
+        private const val PASSING_GRADE = 50
+        private const val MIN_GOOD_GRADE = 80
+        private const val MAX_GRADE = 100
     }
 }
