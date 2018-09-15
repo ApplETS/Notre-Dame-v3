@@ -41,6 +41,7 @@
     <string name="text_grade_in_percentage">%1$s %%</string>
     <string name="text_grade_with_percentage">%1$s/%2$s (%3$s %%)</string>
     <string name="text_weight">Pondération : %1$s %%</string>
+    <string name="label_group">Groupe</string>
     <string name="label_grade">Note</string>
     <string name="label_median">Médiane</string>
     <string name="label_standard_deviation">Écart-type</string>

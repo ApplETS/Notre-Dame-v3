@@ -39,6 +39,7 @@
     <string name="text_grade_in_percentage">%1$s%%</string>
     <string name="text_grade_with_percentage">%1$s/%2$s (%3$s%%)</string>
     <string name="text_weight">Weight: %1$s%%</string>
+    <string name="label_group">Group</string>
     <string name="label_grade">Grade</string>
     <string name="label_median">Median</string>
     <string name="label_standard_deviation">Standard Deviation</string>

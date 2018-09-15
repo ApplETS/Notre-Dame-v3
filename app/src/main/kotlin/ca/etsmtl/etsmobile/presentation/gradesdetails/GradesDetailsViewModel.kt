@@ -18,6 +18,7 @@ import ca.etsmtl.repository.data.model.Evaluation
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
+import ca.etsmtl.repository.data.model.SommaireEtEvaluations
 import ca.etsmtl.repository.data.repository.signets.EvaluationRepository
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Group
@@ -34,50 +35,32 @@ class GradesDetailsViewModel @Inject constructor(
     private val app: App
 ) : ViewModel(), LifecycleObserver {
     val cours = MutableLiveData<Cours>()
-    private val summaryMediatorLiveData: MediatorLiveData<Resource<SommaireElementsEvaluation>> by lazy {
-        MediatorLiveData<Resource<SommaireElementsEvaluation>>()
+    private var summaryAndEvaluationsRes: LiveData<Resource<SommaireEtEvaluations>>? = null
+    private val summaryAndEvaluationsMediatorLiveData: MediatorLiveData<Resource<SommaireEtEvaluations>> by lazy {
+        MediatorLiveData<Resource<SommaireEtEvaluations>>()
     }
-    private var summaryRes: LiveData<Resource<SommaireElementsEvaluation>>? = null
-    private val evaluationsMediatorLiveData: MediatorLiveData<Resource<List<Evaluation>>> by lazy {
-        MediatorLiveData<Resource<List<Evaluation>>>()
-    }
-    private var evaluationsRes: LiveData<Resource<List<Evaluation>>>? = null
     val errorMessage: LiveData<Event<String?>> by lazy {
-        MediatorLiveData<Event<String?>>().apply {
-            fun displayErrorMessage(res: Resource<*>?) {
-                if (res?.status == Resource.ERROR) {
-                    this.value = when {
-                        !app.isDeviceConnected() -> {
-                            Event(app.getString(R.string.error_no_internet_connection))
-                        }
-                        else -> Event(app.getString(R.string.error_failed_to_retrieve_data_course))
+        Transformations.map(summaryAndEvaluationsMediatorLiveData) {
+            if (it.status == Resource.ERROR) {
+                when {
+                    !app.isDeviceConnected() -> {
+                        Event(app.getString(R.string.error_no_internet_connection))
                     }
+                    else -> Event(app.getString(R.string.error_failed_to_retrieve_data_course))
                 }
+            } else {
+                Event(it.message)
             }
+        }
+    }
+    val recyclerViewItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
+        fun getSummaryItems(sommaireElementsEvaluation: SommaireElementsEvaluation) = listOf(
+                EvaluationDetailItem(app.getString(R.string.label_group), cours.value?.groupe ?: ""),
+                EvaluationDetailItem(app.getString(R.string.label_median), sommaireElementsEvaluation.medianeClasse),
+                EvaluationDetailItem(app.getString(R.string.label_standard_deviation), sommaireElementsEvaluation.ecartTypeClasse),
+                EvaluationDetailItem(app.getString(R.string.label_percentile_rank), sommaireElementsEvaluation.rangCentileClasse)
+        )
 
-            addSource(summaryMediatorLiveData) { displayErrorMessage(it) }
-            addSource(evaluationsMediatorLiveData) { displayErrorMessage(it) }
-        }
-    }
-    private val gradeAverageItem: LiveData<GradeAverageItem> = Transformations.map(summaryMediatorLiveData) {
-        it?.takeIf { it.status != Resource.LOADING }?.data?.let {
-            GradeAverageItem(
-                    cours.value?.cote,
-                    it.scoreFinalSur100.zeroIfNullOrBlank(),
-                    it.moyenneClasse.zeroIfNullOrBlank()
-            )
-        }
-    }
-    private val summaryDetailsItems: LiveData<List<EvaluationDetailItem>> = Transformations.map(summaryMediatorLiveData) {
-        it?.takeIf { it.status != Resource.LOADING }?.data?.let {
-            listOf(
-                    EvaluationDetailItem(app.getString(R.string.label_median), it.medianeClasse),
-                    EvaluationDetailItem(app.getString(R.string.label_standard_deviation), it.ecartTypeClasse),
-                    EvaluationDetailItem(app.getString(R.string.label_percentile_rank), it.rangCentileClasse)
-            )
-        }
-    }
-    private val evaluationGroups: LiveData<List<ExpandableGroup>> = Transformations.map(evaluationsMediatorLiveData) {
         fun getEvaluationDetailItems(grade: String, average: String, evaluation: Evaluation) = listOf(
                 EvaluationDetailItem(
                         app.getString(R.string.label_grade),
@@ -104,79 +87,59 @@ class GradesDetailsViewModel @Inject constructor(
                         evaluation.dateCible
                 )
         )
-        it?.takeIf { it.status != Resource.LOADING }?.data?.map {
-            ExpandableGroup(EvaluationHeaderItem(it)).apply {
-                val grade = String.format(
-                        app.getString(R.string.text_grade_with_percentage),
-                        it.note.zeroIfNullOrBlank(),
-                        it.corrigeSur.zeroIfNullOrBlank(),
-                        it.notePourcentage.zeroIfNullOrBlank()
-                )
 
-                val averageStr = String.format(
-                        app.getString(R.string.text_grade_with_percentage),
-                        it.moyenne.zeroIfNullOrBlank(),
-                        it.corrigeSur.zeroIfNullOrBlank(),
-                        it.moyennePourcentage.zeroIfNullOrBlank()
-                )
+        it?.takeIf { it.status != Resource.LOADING }?.data?.let {
+            val gradeAverageItem = GradeAverageItem(
+                    cours.value?.cote,
+                    it.sommaireElementsEvaluation.scoreFinalSur100.zeroIfNullOrBlank(),
+                    it.sommaireElementsEvaluation.moyenneClasse.zeroIfNullOrBlank()
+            )
 
-                add(Section(getEvaluationDetailItems(grade, averageStr, it)))
+            mutableListOf<Group>(gradeAverageItem).apply {
+                add(SectionTitleItem(app.getString(R.string.title_section_summary)))
+
+                addAll(getSummaryItems(it.sommaireElementsEvaluation))
+
+                add(SectionTitleItem(app.getString(R.string.title_section_evaluations)))
+
+                val evaluationsItems = it.evaluations.map {
+                    ExpandableGroup(EvaluationHeaderItem(it)).apply {
+                        val grade = String.format(
+                                app.getString(R.string.text_grade_with_percentage),
+                                it.note.zeroIfNullOrBlank(),
+                                it.corrigeSur.zeroIfNullOrBlank(),
+                                it.notePourcentage.zeroIfNullOrBlank()
+                        )
+
+                        val averageStr = String.format(
+                                app.getString(R.string.text_grade_with_percentage),
+                                it.moyenne.zeroIfNullOrBlank(),
+                                it.corrigeSur.zeroIfNullOrBlank(),
+                                it.moyennePourcentage.zeroIfNullOrBlank()
+                        )
+
+                        add(Section(getEvaluationDetailItems(grade, averageStr, it)))
+                    }
+                }
+
+                addAll(evaluationsItems)
             }
         }
     }
-    val recyclerViewItems: LiveData<List<Group>> = MediatorLiveData<List<Group>>().apply {
-        fun createItemsList(
-            gradeAverageItem: GradeAverageItem?,
-            summaryDetailsItems: List<EvaluationDetailItem>?,
-            evaluationGroups: List<ExpandableGroup>?
-        ): List<Group> {
-            return mutableListOf<Group>().apply {
-                (gradeAverageItem as? Group)?.let { add(it) }
 
-                summaryDetailsItems?.let {
-                    add(SectionTitleItem(app.getString(R.string.title_section_summary)))
-                    addAll(summaryDetailsItems)
-                }
-
-                evaluationGroups?.let {
-                    add(SectionTitleItem(app.getString(R.string.title_section_evaluations)))
-                    addAll(it)
-                }
-            }
-        }
-
-        addSource(gradeAverageItem) {
-            this.value = createItemsList(it, summaryDetailsItems.value, evaluationGroups.value)
-        }
-
-        addSource(summaryDetailsItems) {
-            this.value = createItemsList(gradeAverageItem.value, it, evaluationGroups.value)
-        }
-
-        addSource(evaluationGroups) {
-            this.value = createItemsList(gradeAverageItem.value, summaryDetailsItems.value, it)
-        }
-    }
-
-    fun getLoading(): LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        fun areSourcesLoading() = evaluationsMediatorLiveData.value?.status == Resource.LOADING
-                || summaryMediatorLiveData.value?.status == Resource.LOADING
-
-        addSource(summaryMediatorLiveData) { this.value = areSourcesLoading() }
-        addSource(evaluationsMediatorLiveData) { this.value = areSourcesLoading() }
+    fun getLoading(): LiveData<Boolean> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
+        it.status == Resource.LOADING
     }
 
     private fun load() {
         cours.value?.let {
-            summaryRes = repository.getEvaluationsSummary(userCredentials, it, true).apply {
-                summaryMediatorLiveData.addSource(this) {
-                    summaryMediatorLiveData.value = it
-                }
-            }
-
-            evaluationsRes = repository.getEvaluations(userCredentials, it, true).apply {
-                evaluationsMediatorLiveData.addSource(this) {
-                    evaluationsMediatorLiveData.value = it?.apply { data?.filter { it.publie } }
+            summaryAndEvaluationsRes = repository.getSummaryAndEvaluations(
+                    userCredentials,
+                    it,
+                    true
+            ).apply {
+                summaryAndEvaluationsMediatorLiveData.addSource(this) {
+                    summaryAndEvaluationsMediatorLiveData.value = it
                 }
             }
         }
@@ -184,11 +147,10 @@ class GradesDetailsViewModel @Inject constructor(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun refresh() {
-        summaryRes?.let { summaryMediatorLiveData.removeSource(it) }
-        summaryRes = null
-
-        evaluationsRes?.let { evaluationsMediatorLiveData.removeSource(it) }
-        evaluationsRes = null
+        summaryAndEvaluationsRes?.let {
+            summaryAndEvaluationsMediatorLiveData.removeSource(it)
+            summaryAndEvaluationsRes = null
+        }
 
         load()
     }
