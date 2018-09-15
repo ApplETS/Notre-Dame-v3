@@ -40,12 +40,14 @@ class ProfileFragment : DaggerFragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
 
-        setUpSwipeRefresh()
-        setUpRecyclerView()
-        subscribeUI()
+        if (isVisibleToUser) {
+            setUpSwipeRefresh()
+            setUpRecyclerView()
+            subscribeUI()
+        }
     }
 
     private fun setUpSwipeRefresh() {
@@ -58,10 +60,6 @@ class ProfileFragment : DaggerFragment() {
         recyclerViewProfile.setHasFixedSize(true)
     }
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
     private fun subscribeUI() {
         profileViewModel.getEtudiant().observe(this, Observer<Etudiant> {
             it?.let { adapter.setEtudiant(it) }
@@ -70,5 +68,9 @@ class ProfileFragment : DaggerFragment() {
             it?.let { swipeRefreshLayoutProfile.isRefreshing = it }
         })
         this.lifecycle.addObserver(profileViewModel)
+    }
+
+    companion object {
+        fun newInstance() = ProfileFragment()
     }
 }

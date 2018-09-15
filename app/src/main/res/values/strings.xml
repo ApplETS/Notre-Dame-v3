@@ -5,6 +5,12 @@
     <string name="error_no_internet_connection">Absence de connexion internet</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="retry">Réessayer</string>
+    <string name="abbreviation_not_available">ND</string>
+    <string name="session_fall">Automne</string>
+    <string name="session_winter">Hiver</string>
+    <string name="session_summer">Été</string>
+    <string name="session_without">Sans trimestre</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Horaire</string>
@@ -30,6 +36,23 @@
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>
+    <string name="msg_no_grades">Aucune note</string>
+    <string name="label_current_rating">Votre note</string>
+    <string name="label_average">Moyenne</string>
+    <string name="text_grade_in_percentage">%1$s %%</string>
+    <string name="text_grade_with_percentage">%1$s/%2$s (%3$s %%)</string>
+    <string name="text_weight">Pondération : %1$s %%</string>
+    <string name="label_group">Groupe</string>
+    <string name="label_grade">Note</string>
+    <string name="label_median">Médiane</string>
+    <string name="label_standard_deviation">Écart-type</string>
+    <string name="label_percentile_rank">Rang centile</string>
+    <string name="label_target_date">Date cible</string>
+    <string name="title_ignored_evaluation">Évaluation ignorée</string>
+    <string name="text_ignored_evaluation">Cette évaluation est ignorée dans le calcul de la note finale. Cette situation se produit quand l\'enseignant a décidé de conserver, par exemple, les trois meilleures notes des six devoirs qu\'il a demandés. Les trois notes les plus faibles seront alors ignorées.</string>
+    <string name="error_failed_to_retrieve_data_course">Échec de la récupération des données de ce cours</string>
+    <string name="title_section_summary">Sommaire</string>
+    <string name="title_section_evaluations">Évaluations</string>
 
     <!-- Profile -->
     <string name="title_profile">Profil</string>

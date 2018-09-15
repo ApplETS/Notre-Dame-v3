@@ -25,6 +25,7 @@ class ProfileViewModel @Inject constructor(
         MediatorLiveData<Resource<Etudiant>>()
     }
     private var etudiantRes: LiveData<Resource<Etudiant>>? = null
+
     fun getEtudiant(): LiveData<Etudiant> = Transformations.map(etudiantMediatorLiveData) { it.data }
     fun getLoading(): LiveData<Boolean> = Transformations.map(etudiantMediatorLiveData) { it.status == Resource.LOADING }
     fun getErrorMessage(): LiveData<String> = Transformations.map(etudiantMediatorLiveData) {

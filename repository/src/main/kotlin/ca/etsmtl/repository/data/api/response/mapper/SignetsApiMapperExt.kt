@@ -23,7 +23,8 @@ import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Session
-import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
+import java.text.NumberFormat
+import java.util.Locale
 
 /**
  * Created by Sonphil on 08-07-18.
@@ -43,13 +44,13 @@ fun ApiActivite.toActiviteEntity() = ActiviteEntity(
         this.titreCours
 )
 
-fun ApiCours.toCoursEntity(sommaireElementsEvaluation: SommaireElementsEvaluation) = CoursEntity(
+fun ApiCours.toCoursEntity(scoreFinalSur100: String) = CoursEntity(
         this.sigle,
         this.groupe,
         this.session,
         this.programmeEtudes,
         this.cote,
-        sommaireElementsEvaluation.scoreFinalSur100,
+        scoreFinalSur100,
         this.nbCredits,
         this.titreCours
 )
@@ -72,24 +73,46 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
         this.masculin
 )
 
-fun ApiEvaluation.toEvaluationEntity(cours: Cours) = EvaluationEntity(
-        cours.sigle,
-        cours.groupe,
-        cours.session,
-        this.nom,
-        this.equipe,
-        this.dateCible,
-        this.note,
-        this.corrigeSur,
-        this.ponderation,
-        this.moyenne,
-        this.ecartType,
-        this.mediane,
-        this.rangCentile,
-        this.publie == "Oui",
-        this.messageDuProf,
-        this.ignoreDuCalcul == "Oui"
-)
+fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
+    val formatter = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+        maximumFractionDigits = 1
+    }
+    val note = this.note.replace(",", ".").toDoubleOrNull() ?: 0.0
+    val moyenne = this.moyenne.replace(",", ".").toDoubleOrNull() ?: 0.0
+    var notePourcentage = 0.0
+    var moyennePourcentage = 0.0
+
+    this.corrigeSur.substringBefore("+").replace(",", ".").toDoubleOrNull()?.let {
+        if (it == 0.0) {
+            notePourcentage = 0.0
+            moyennePourcentage = 0.0
+        } else {
+            notePourcentage = note / it * 100
+            moyennePourcentage = moyenne / it * 100
+        }
+    }
+
+    return EvaluationEntity(
+            cours.sigle,
+            cours.groupe,
+            cours.session,
+            this.nom,
+            this.equipe,
+            this.dateCible,
+            formatter.format(note),
+            this.corrigeSur,
+            formatter.format(notePourcentage),
+            this.ponderation,
+            formatter.format(moyenne),
+            formatter.format(moyennePourcentage),
+            this.ecartType,
+            this.mediane,
+            this.rangCentile,
+            this.publie == "Oui",
+            this.messageDuProf,
+            this.ignoreDuCalcul == "Oui"
+    )
+}
 
 fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = ArrayList<EvaluationEntity>().apply {
     this@toEvaluationEntities.liste.forEach {

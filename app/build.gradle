@@ -117,6 +117,19 @@ dependencies {
     // Mockito-Kotlin
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
 
+    // FlowLayoutManager
+    implementation "com.xiaofeng.android:flowlayoutmanager:$flowlayoutmanager"
+
+    // RecyclerView Animators
+    implementation "jp.wasabeef:recyclerview-animators:$recyclerviewanimators"
+
+    // Material-ProgressView
+    implementation "com.moos:Material-ProgressView:$materialprogressview"
+
+    // Groupie
+    implementation "com.xwray:groupie:$groupie"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$groupie"
+
     implementation project(':repository')
 }
 

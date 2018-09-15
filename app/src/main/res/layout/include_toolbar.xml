@@ -10,5 +10,6 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/AppTheme.Toolbar"
-        app:titleTextAppearance="@style/AppTheme.Toolbar.Title" />
+        app:titleTextAppearance="@style/AppTheme.Toolbar.Title"
+        app:subtitleTextAppearance="@style/AppTheme.Toolbar.SubTitle"/>
 </merge>
