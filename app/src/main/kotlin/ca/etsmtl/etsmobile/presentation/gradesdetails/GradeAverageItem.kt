@@ -18,13 +18,9 @@ class GradeAverageItem(
     private val gradePercentage: String?,
     private val average: String?
 ) : Item() {
-    private var dataSet = false
+    private var animatedProgress = false
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        if (dataSet) {
-            return
-        }
-
         with (viewHolder) {
             tvRating.text = rating
 
@@ -34,7 +30,7 @@ class GradeAverageItem(
                         gradePercentage
                 )
             }
-            setCircleProgressViewProgress(progressViewGrade, gradePercentage)
+            setCircleProgressViewProgress(progressViewGrade, gradePercentage, !animatedProgress)
 
             tvAverage.apply {
                 text = String.format(
@@ -42,19 +38,29 @@ class GradeAverageItem(
                         average
                 )
             }
-            setCircleProgressViewProgress(progressViewAverage, average)
+            setCircleProgressViewProgress(progressViewAverage, average, !animatedProgress)
 
-            dataSet = true
+            animatedProgress = true
         }
     }
 
     override fun getLayout() = R.layout.item_grade_average
 
-    private fun setCircleProgressViewProgress(circleProgressView: CircleProgressView, progress: String?) {
+    private fun setCircleProgressViewProgress(
+        circleProgressView: CircleProgressView,
+        progress: String?,
+        animate: Boolean
+    ) {
         progress?.let {
             with(circleProgressView) {
-                setEndProgress(it.replace(",", ".").toFloat())
-                startProgressAnimation()
+                val progressFloat = it.replace(",", ".").toFloat()
+                setEndProgress(progressFloat)
+
+                if (animate) {
+                    startProgressAnimation()
+                } else {
+                    this.progress = progressFloat
+                }
             }
         }
     }
