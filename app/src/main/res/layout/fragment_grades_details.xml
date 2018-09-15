@@ -16,7 +16,6 @@
             android:id="@+id/recyclerGradesDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
             tools:listitem="@layout/item_evaluation_header"/>
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
