@@ -126,6 +126,9 @@ class GradesDetailsViewModel @Inject constructor(
             }
         }
     }
+    val showEmptyView: LiveData<Boolean> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
+        (it.status != Resource.LOADING && (it?.data?.evaluations == null || it.data?.evaluations?.isEmpty() == true))
+    }
 
     fun getLoading(): LiveData<Boolean> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
         it.status == Resource.LOADING

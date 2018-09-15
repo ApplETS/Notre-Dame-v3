@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:constraintlayout="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayoutGradesDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerGradesDetails"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        constraintlayout:layout_constraintBottom_toBottomOf="parent"
-        constraintlayout:layout_constraintEnd_toEndOf="parent"
-        constraintlayout:layout_constraintStart_toStartOf="parent"
-        constraintlayout:layout_constraintTop_toBottomOf="@+id/progressViewGrade" />
+        android:layout_height="match_parent">
+        <include
+            layout="@layout/empty_view_courses_grades"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerGradesDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            tools:listitem="@layout/item_evaluation_header"/>
+    </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

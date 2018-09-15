@@ -11,10 +11,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.util.EventObserver
+import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades_details.recyclerGradesDetails
 import kotlinx.android.synthetic.main.fragment_grades_details.swipeRefreshLayoutGradesDetails
 import javax.inject.Inject
@@ -76,9 +78,12 @@ class GradesDetailsFragment : DaggerFragment() {
         })
 
         gradesDetailsViewModel.recyclerViewItems.observe(this, Observer {
-            it?.let {
-                groupAdapter.update(it)
-            }
+            it?.let { groupAdapter.update(it) }
+        })
+
+        gradesDetailsViewModel.showEmptyView.observe(this, Observer {
+            emptyViewCoursesGrades.show(it == true)
+            recyclerGradesDetails.show(it == false)
         })
 
         lifecycle.addObserver(gradesDetailsViewModel)
