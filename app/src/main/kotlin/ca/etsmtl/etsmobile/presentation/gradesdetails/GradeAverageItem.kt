@@ -18,9 +18,16 @@ class GradeAverageItem(
     private val gradePercentage: String?,
     private val average: String?
 ) : Item() {
+    private var dataSet = false
+
     override fun bind(viewHolder: ViewHolder, position: Int) {
+        if (dataSet) {
+            return
+        }
+
         with (viewHolder) {
             tvRating.text = rating
+
             tvGrade.apply {
                 text = String.format(
                         context.getString(R.string.text_grade_in_percentage),
@@ -28,6 +35,7 @@ class GradeAverageItem(
                 )
             }
             setCircleProgressViewProgress(progressViewGrade, gradePercentage)
+
             tvAverage.apply {
                 text = String.format(
                         context.getString(R.string.text_grade_in_percentage),
@@ -35,6 +43,8 @@ class GradeAverageItem(
                 )
             }
             setCircleProgressViewProgress(progressViewAverage, average)
+
+            dataSet = true
         }
     }
 

@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.item_evaluation_header.tvWeight
  */
 class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), ExpandableItem {
     private lateinit var expandableGroup: ExpandableGroup
+    private var dataSet = false
     private val rotateArrowToTop by lazy {
         RotateAnimation(
             0f, -180f,
@@ -52,6 +53,10 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     override fun getLayout() = R.layout.item_evaluation_header
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
+        if (dataSet) {
+            return
+        }
+
         with (viewHolder) {
             tvName.text = evaluation.nom
 
@@ -112,6 +117,8 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                     else -> arrow.startAnimation(rotateArrowToBottom)
                 }
             }
+
+            dataSet = true
         }
     }
 
