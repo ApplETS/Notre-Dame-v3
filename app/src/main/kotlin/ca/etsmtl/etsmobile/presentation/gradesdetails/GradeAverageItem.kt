@@ -46,7 +46,7 @@ class GradeAverageItem(
                         averagePercentage
                 )
             }
-            setCircleProgressViewProgress(progressViewAverage, average, !animatedProgress)
+            setCircleProgressViewProgress(progressViewAverage, averagePercentage, !animatedProgress)
 
             animatedProgress = true
         }
