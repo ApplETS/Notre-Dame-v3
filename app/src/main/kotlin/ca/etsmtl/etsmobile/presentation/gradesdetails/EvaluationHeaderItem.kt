@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.item_evaluation_header.tvWeight
  */
 class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), ExpandableItem {
     private lateinit var expandableGroup: ExpandableGroup
-    private var dataSet = false
+    private var animatedProgress = false
     private val rotateArrowToTop by lazy {
         RotateAnimation(
             0f, -180f,
@@ -54,8 +54,12 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     override fun getLayout() = R.layout.item_evaluation_header
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        if (dataSet) {
-            return
+        fun setProgressColor(progress: Float) {
+            with (viewHolder.progressViewGrade) {
+                val color = progressColor(context, progress)
+                setStartColor(color)
+                setEndColor(color)
+            }
         }
 
         with (viewHolder) {
@@ -85,18 +89,23 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                 }
 
                 setEndProgress(grade)
-                setProgressViewUpdateListener(object : CircleProgressView.CircleProgressUpdateListener {
-                    override fun onCircleProgressFinished(view: View) {}
 
-                    override fun onCircleProgressStart(view: View) {}
+                if (animatedProgress) {
+                    progress = grade
+                    setProgressColor(grade)
+                } else {
+                    setProgressViewUpdateListener(object : CircleProgressView.CircleProgressUpdateListener {
+                        override fun onCircleProgressFinished(view: View) {}
 
-                    override fun onCircleProgressUpdate(view: View, progress: Float) {
-                        val color = progressColor(context, progress)
-                        setStartColor(color)
-                        setEndColor(color)
-                    }
-                })
-                startProgressAnimation()
+                        override fun onCircleProgressStart(view: View) {}
+
+                        override fun onCircleProgressUpdate(view: View, progress: Float) {
+                            setProgressColor(progress)
+                        }
+                    })
+                    startProgressAnimation()
+                    animatedProgress = true
+                }
             }
 
             tvIgnoredEvaluation.show(evaluation.ignoreDuCalcul)
@@ -118,8 +127,6 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                     else -> arrow.startAnimation(rotateArrowToBottom)
                 }
             }
-
-            dataSet = true
         }
     }
 
