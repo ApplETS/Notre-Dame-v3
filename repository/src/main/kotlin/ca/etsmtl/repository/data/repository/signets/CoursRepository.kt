@@ -82,7 +82,7 @@ class CoursRepository @Inject constructor(
                                     )) {
                                         mediatorLiveData.addSource(this) {
                                             if (it?.status == Resource.SUCCESS && it.data != null) {
-                                                coursEntity.noteSur100 = it.data?.scoreFinalSur100
+                                                coursEntity.noteSur100 = it.data.noteSur100
                                             }
 
                                             if (it?.status != Resource.LOADING) {

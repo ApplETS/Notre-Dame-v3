@@ -15,8 +15,11 @@ import kotlinx.android.synthetic.main.item_grade_average.tvRating
  */
 class GradeAverageItem(
     private val rating: String?,
+    private val grade: String?,
+    private val gradeOn: String?,
     private val gradePercentage: String?,
-    private val average: String?
+    private val average: String?,
+    private val averagePercentage: String?
 ) : Item() {
     private var animatedProgress = false
 
@@ -26,7 +29,9 @@ class GradeAverageItem(
 
             tvGrade.apply {
                 text = String.format(
-                        context.getString(R.string.text_grade_in_percentage),
+                        context.getString(R.string.text_grade_with_percentage),
+                        grade,
+                        gradeOn,
                         gradePercentage
                 )
             }
@@ -34,8 +39,10 @@ class GradeAverageItem(
 
             tvAverage.apply {
                 text = String.format(
-                        context.getString(R.string.text_grade_in_percentage),
-                        average
+                        context.getString(R.string.text_grade_with_percentage),
+                        average,
+                        gradeOn,
+                        averagePercentage
                 )
             }
             setCircleProgressViewProgress(progressViewAverage, average, !animatedProgress)

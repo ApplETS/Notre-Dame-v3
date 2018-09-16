@@ -120,18 +120,32 @@ fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = ArrayList
     }
 }
 
-fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours) = SommaireElementsEvaluationEntity(
-        cours.sigle,
-        cours.session,
-        this.noteACeJour,
-        this.scoreFinalSur100,
-        this.moyenneClasse,
-        this.ecartTypeClasse,
-        this.medianeClasse,
-        this.rangCentileClasse,
-        this.noteACeJourElementsIndividuels,
-        this.noteSur100PourElementsIndividuels
-)
+fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
+    val noteSur = liste.asSequence()
+            .filter { it.note.isNotBlank() && it.ignoreDuCalcul == "Non" }
+            .map { it.ponderation.replace(",", ".").toFloatOrNull() ?: 0f }
+            .sum()
+            .coerceAtMost(100f)
+
+    val moyenneClassePourcentage = (this.moyenneClasse
+            .replace(",", ".")
+            .toFloatOrNull() ?: 0f) / noteSur * 100
+
+    return SommaireElementsEvaluationEntity(
+            cours.sigle,
+            cours.session,
+            this.scoreFinalSur100,
+            noteSur.toString(),
+            noteACeJour,
+            this.moyenneClasse,
+            moyenneClassePourcentage.toString(),
+            this.ecartTypeClasse,
+            this.medianeClasse,
+            this.rangCentileClasse,
+            this.noteACeJourElementsIndividuels,
+            this.noteSur100PourElementsIndividuels
+    )
+}
 
 fun ApiHoraireExamenFinal.toHoraireExemanFinalEntity(session: Session) = HoraireExamenFinalEntity(
         this.sigle,

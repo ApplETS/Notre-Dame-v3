@@ -89,11 +89,16 @@ class GradesDetailsViewModel @Inject constructor(
         )
 
         it?.takeIf { it.status != Resource.LOADING }?.data?.let {
-            val gradeAverageItem = GradeAverageItem(
-                    cours.value?.cote,
-                    it.sommaireElementsEvaluation.scoreFinalSur100.zeroIfNullOrBlank(),
-                    it.sommaireElementsEvaluation.moyenneClasse.zeroIfNullOrBlank()
-            )
+            val gradeAverageItem = it.sommaireElementsEvaluation.run {
+                GradeAverageItem(
+                        cours.value?.cote,
+                        note.zeroIfNullOrBlank(),
+                        noteSur.zeroIfNullOrBlank(),
+                        noteSur100.zeroIfNullOrBlank(),
+                        moyenneClasse.zeroIfNullOrBlank(),
+                        moyenneClassePourcentage.zeroIfNullOrBlank()
+                )
+            }
 
             mutableListOf<Group>(gradeAverageItem).apply {
                 add(SectionTitleItem(app.getString(R.string.title_section_summary)))
