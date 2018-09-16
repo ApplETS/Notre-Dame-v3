@@ -14,14 +14,14 @@ import android.view.inputmethod.InputMethodManager
  * Fades a [View] to the provided visibility state
  *
  * @param visibility [View.VISIBLE], [View.GONE] or [View.INVISIBLE]
- * @param shortAnimTime Fade duration
+ * @param animTime Fade duration
  */
 fun View.fadeTo(
     visibility: Int,
-    shortAnimTime: Long = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+    animTime: Long = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 ) {
-    animate().setDuration(shortAnimTime)
-            .alpha((if (visibility == View.VISIBLE) 1 else 0).toFloat())
+    animate().setDuration(animTime)
+            .alpha((if (visibility == View.VISIBLE) 1f else 0f))
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     this@fadeTo.visibility = visibility
