@@ -1,6 +1,7 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.repository.util.replaceCommaAndParseToFloat
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -60,7 +61,7 @@ class GradeAverageItem(
     ) {
         progress?.let {
             with(circleProgressView) {
-                val progressFloat = it.replace(",", ".").toFloat()
+                val progressFloat = it.replaceCommaAndParseToFloat()
                 setEndProgress(progressFloat)
 
                 if (animate) {

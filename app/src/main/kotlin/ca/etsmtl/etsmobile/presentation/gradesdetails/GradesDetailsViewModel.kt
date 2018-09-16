@@ -12,7 +12,7 @@ import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.Event
 import ca.etsmtl.etsmobile.util.isDeviceConnected
-import ca.etsmtl.etsmobile.util.zeroIfNullOrBlank
+import ca.etsmtl.repository.util.zeroIfNullOrBlank
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Evaluation
 import ca.etsmtl.repository.data.model.Resource
