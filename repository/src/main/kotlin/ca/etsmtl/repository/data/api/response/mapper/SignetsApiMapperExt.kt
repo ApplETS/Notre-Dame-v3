@@ -25,6 +25,7 @@ import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Session
 import ca.etsmtl.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.repository.util.replaceCommaAndParseToFloat
+import ca.etsmtl.repository.util.toLocaleDate
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -99,7 +100,7 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             cours.session,
             this.nom,
             this.equipe,
-            this.dateCible,
+            dateCible.toLocaleDate(),
             formatter.format(note),
             formatter.format(corrigeSur.replaceCommaAndParseToFloat()),
             formatter.format(notePourcentage),
