@@ -39,56 +39,6 @@ class EvaluationRepository @Inject constructor(
 ) : SignetsRepository(appExecutors) {
 
     /**
-     * Returns a [List] of the the student's [Evaluation]s (exams, assignments, etc.) for a given
-     * [Cours]
-     *
-     * @param userCredentials The user's credentials
-     * @param cours The course
-     * @param shouldFetch True if the data should be fetched from the network. False if the the data
-     * should only be fetched from the DB.
-     */
-    fun getEvaluations(
-        userCredentials: SignetsUserCredentials,
-        cours: Cours,
-        shouldFetch: Boolean
-    ): LiveData<Resource<List<Evaluation>>> = object : NetworkBoundResource<List<Evaluation>, ApiSignetsModel<ApiListeDesElementsEvaluation>>(appExecutors) {
-        override fun saveCallResult(item: ApiSignetsModel<ApiListeDesElementsEvaluation>) {
-            item.data?.let {
-                evaluationDao.clearAndInsertByCoursGroupeAndSession(
-                        cours.sigle,
-                        cours.groupe,
-                        cours.session,
-                        it.toEvaluationEntities(cours)
-                )
-            }
-        }
-
-        override fun shouldFetch(data: List<Evaluation>?) = shouldFetch
-
-        override fun loadFromDb(): LiveData<List<Evaluation>> {
-            return Transformations.map(evaluationDao.getByCoursGroupeAndSession(
-                    cours.sigle,
-                    cours.groupe,
-                    cours.session
-            )) {
-                it.toEvaluations()
-            }
-        }
-
-        override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>> {
-            return transformApiLiveData(api.listeDesElementsEvaluation(
-                    ListeDesElementsEvaluationRequestBody(
-                            userCredentials.codeAccesUniversel,
-                            userCredentials.motPasse,
-                            cours.sigle,
-                            cours.groupe,
-                            cours.session
-                    )
-            ))
-        }
-    }.asLiveData()
-
-    /**
      * Returns a summary of the [Evaluation]s for a given [Cours]
      *
      * @param userCredentials The user's credentials

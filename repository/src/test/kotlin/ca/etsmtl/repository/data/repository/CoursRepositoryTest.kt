@@ -105,16 +105,18 @@ class CoursRepositoryTest {
         val sommaireElementsEvaluation = SommaireElementsEvaluation(
                 "",
                 "",
-                "94,6",
-                "",
-                "65,9",
+                "25",
+                "50",
+                "50",
+                "10",
+                "20",
                 "18,2",
                 "70,6",
                 "99,0",
                 "96,4",
                 "65,5"
         )
-        val scoreFinalSur100Cours2 = ThreadLocalRandom.current().nextDouble(0.0, 100.0)
+        val noteSur100Cours2 = ThreadLocalRandom.current().nextDouble(0.0, 100.0)
         `when`(evaluationRepository.getEvaluationsSummary(eq(userCredentials), any(), eq(true)))
                 .thenAnswer(Answer<LiveData<Resource<SommaireElementsEvaluation>>> {
                     with(it.getArgument(1) as Cours) {
@@ -123,7 +125,7 @@ class CoursRepositoryTest {
                                 this.sigleCours = this@with.sigle
                                 this.session = this@with.session
 
-                                this.scoreFinalSur100 = scoreFinalSur100Cours2.toString()
+                                this.noteSur100 = noteSur100Cours2.toString()
                             })
                         }
                     }
@@ -173,7 +175,7 @@ class CoursRepositoryTest {
                 apiCours2.session,
                 apiCours2.programmeEtudes,
                 apiCours2.cote,
-                scoreFinalSur100Cours2.toString(),
+                noteSur100Cours2.toString(),
                 apiCours2.nbCredits,
                 apiCours2.titreCours
         )

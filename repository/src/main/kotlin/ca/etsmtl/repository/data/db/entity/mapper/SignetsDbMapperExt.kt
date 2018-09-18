@@ -109,9 +109,11 @@ fun List<SeanceEntity>.toSeances(): List<Seance> = ArrayList<Seance>().apply {
 fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEvaluation(
         this.sigleCours,
         this.session,
-        this.noteACeJour,
-        this.scoreFinalSur100,
+        this.note,
+        this.noteSur,
+        this.noteSur100,
         this.moyenneClasse,
+        this.moyenneClassePourcentage,
         this.ecartTypeClasse,
         this.medianeClasse,
         this.rangCentileClasse,

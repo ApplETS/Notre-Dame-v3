@@ -23,6 +23,9 @@ import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Session
+import ca.etsmtl.repository.util.replaceCommaAndParseToDouble
+import ca.etsmtl.repository.util.replaceCommaAndParseToFloat
+import ca.etsmtl.repository.util.toLocaleDate
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -74,11 +77,8 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
 )
 
 fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
-    val formatter = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
-        maximumFractionDigits = 1
-    }
-    val note = this.note.replace(",", ".").toDoubleOrNull() ?: 0.0
-    val moyenne = this.moyenne.replace(",", ".").toDoubleOrNull() ?: 0.0
+    val note = this.note.replaceCommaAndParseToDouble()
+    val moyenne = this.moyenne.replaceCommaAndParseToDouble()
     var notePourcentage = 0.0
     var moyennePourcentage = 0.0
 
@@ -92,22 +92,24 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
         }
     }
 
+    val formatter = formatter()
+
     return EvaluationEntity(
             cours.sigle,
             cours.groupe,
             cours.session,
             this.nom,
             this.equipe,
-            this.dateCible,
+            dateCible.toLocaleDate(),
             formatter.format(note),
-            this.corrigeSur,
+            formatter.format(corrigeSur.replaceCommaAndParseToFloat()),
             formatter.format(notePourcentage),
-            this.ponderation,
+            formatter.format(ponderation.replaceCommaAndParseToFloat()),
             formatter.format(moyenne),
             formatter.format(moyennePourcentage),
-            this.ecartType,
-            this.mediane,
-            this.rangCentile,
+            formatter.format(ecartType.replaceCommaAndParseToFloat()),
+            formatter.format(mediane.replaceCommaAndParseToFloat()),
+            formatter.format(rangCentile.replaceCommaAndParseToFloat()),
             this.publie == "Oui",
             this.messageDuProf,
             this.ignoreDuCalcul == "Oui"
@@ -120,18 +122,32 @@ fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = ArrayList
     }
 }
 
-fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours) = SommaireElementsEvaluationEntity(
-        cours.sigle,
-        cours.session,
-        this.noteACeJour,
-        this.scoreFinalSur100,
-        this.moyenneClasse,
-        this.ecartTypeClasse,
-        this.medianeClasse,
-        this.rangCentileClasse,
-        this.noteACeJourElementsIndividuels,
-        this.noteSur100PourElementsIndividuels
-)
+fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
+    val formatter = formatter()
+
+    val noteSur = liste.asSequence()
+            .filter { it.note.isNotBlank() && it.ignoreDuCalcul == "Non" }
+            .map { it.ponderation.replaceCommaAndParseToFloat() }
+            .sum()
+            .coerceAtMost(100f)
+
+    val moyenneClassePourcentage = this.moyenneClasse.replaceCommaAndParseToFloat() / noteSur * 100
+
+    return SommaireElementsEvaluationEntity(
+            cours.sigle,
+            cours.session,
+            formatter.format(scoreFinalSur100.replaceCommaAndParseToFloat()),
+            formatter.format(noteSur),
+            formatter.format(noteACeJour.replaceCommaAndParseToFloat()),
+            formatter.format(moyenneClasse.replaceCommaAndParseToFloat()),
+            formatter.format(moyenneClassePourcentage),
+            formatter.format(ecartTypeClasse.replaceCommaAndParseToFloat()),
+            formatter.format(medianeClasse.replaceCommaAndParseToFloat()),
+            formatter.format(rangCentileClasse.replaceCommaAndParseToFloat()),
+            formatter.format(noteACeJourElementsIndividuels.replaceCommaAndParseToFloat()),
+            formatter.format(noteSur100PourElementsIndividuels.replaceCommaAndParseToFloat())
+    )
+}
 
 fun ApiHoraireExamenFinal.toHoraireExemanFinalEntity(session: Session) = HoraireExamenFinalEntity(
         this.sigle,
@@ -183,4 +199,8 @@ fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = Arr
     this@toSeancesEntities.liste.forEach {
         add(it.toSeanceEntity(cours))
     }
+}
+
+fun formatter() = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+    maximumFractionDigits = 1
 }

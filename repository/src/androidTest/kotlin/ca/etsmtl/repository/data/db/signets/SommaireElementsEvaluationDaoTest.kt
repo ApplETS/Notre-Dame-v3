@@ -20,13 +20,15 @@ class SommaireElementsEvaluationDaoTest : DbTest() {
             "INF111",
             "E2018",
             "65,9",
-            "18,2",
+            "100",
+            "65,9",
             "70,6",
+            "70,6",
+            "18,2",
             "99,0",
             "96,4",
             "99,0",
-            "96,4",
-            "65,5"
+            "96,4"
     )
     private lateinit var dao: SommaireElementsEvaluationDao
 
@@ -49,7 +51,9 @@ class SommaireElementsEvaluationDaoTest : DbTest() {
                 "INF111",
                 "E2018",
                 "65,9",
+                "100",
                 "65,9",
+                "70,6",
                 "70,6",
                 "65,9",
                 "96,4",
@@ -69,26 +73,30 @@ class SommaireElementsEvaluationDaoTest : DbTest() {
                 "INF111",
                 "E2018",
                 "65,9",
-                "18,2",
+                "100",
+                "65,9",
                 "70,6",
+                "70,6",
+                "18,2",
                 "99,0",
                 "96,4",
                 "99,0",
-                "96,4",
-                "65,5"
+                "96,4"
         )
 
         val unexpectedSommaire1 = SommaireElementsEvaluationEntity(
                 "LOG123",
                 expectedSommaire.session,
                 "65,9",
-                "18,2",
+                "100",
+                "65,9",
                 "70,6",
+                "70,6",
+                "18,2",
                 "99,0",
                 "96,4",
                 "99,0",
-                "96,4",
-                "65,5"
+                "96,4"
         )
         dao.insert(unexpectedSommaire1)
 
@@ -96,13 +104,15 @@ class SommaireElementsEvaluationDaoTest : DbTest() {
                 expectedSommaire.sigleCours,
                 "A2018",
                 "65,9",
-                "18,2",
+                "100",
+                "65,9",
                 "70,6",
+                "70,6",
+                "18,2",
                 "99,0",
                 "96,4",
                 "99,0",
-                "96,4",
-                "65,5"
+                "96,4"
         )
         dao.insert(unexpectedSommaire2)
 

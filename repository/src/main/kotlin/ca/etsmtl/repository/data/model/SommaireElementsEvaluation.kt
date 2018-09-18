@@ -3,9 +3,11 @@ package ca.etsmtl.repository.data.model
 data class SommaireElementsEvaluation(
     var sigleCours: String,
     var session: String,
-    var noteACeJour: String,
-    var scoreFinalSur100: String,
+    var note: String,
+    var noteSur: String,
+    var noteSur100: String,
     var moyenneClasse: String,
+    var moyenneClassePourcentage: String,
     var ecartTypeClasse: String,
     var medianeClasse: String,
     var rangCentileClasse: String,
