@@ -4,9 +4,9 @@
     android:layout_width="85dp"
     android:layout_height="85dp"
     android:background="@android:color/white"
-    android:stateListAnimator="@animator/selector_elevation_grade_course_item"
     android:foreground="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:stateListAnimator="@animator/selector_elevation_grade_course_item">
 
     <TextView
         android:id="@+id/tvCourseSigle"
