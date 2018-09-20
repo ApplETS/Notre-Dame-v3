@@ -10,6 +10,7 @@ import android.arch.lifecycle.ViewModel
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
 import ca.etsmtl.etsmobile.util.Event
+import ca.etsmtl.etsmobile.util.isDeviceConnected
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.SignetsUserCredentials
@@ -31,7 +32,16 @@ class GradesViewModel @Inject constructor(
     private var coursRes: LiveData<Resource<List<Cours>>>? = null
     val errorMessage: LiveData<Event<String?>> by lazy {
         Transformations.map(coursMediatorLiveData) {
-            Event(it.message)
+            if (it.status == Resource.ERROR) {
+                when {
+                    !app.isDeviceConnected() -> {
+                        Event(app.getString(R.string.error_no_internet_connection))
+                    }
+                    else -> Event(app.getString(R.string.error))
+                }
+            } else {
+                Event(it.message)
+            }
         }
     }
 

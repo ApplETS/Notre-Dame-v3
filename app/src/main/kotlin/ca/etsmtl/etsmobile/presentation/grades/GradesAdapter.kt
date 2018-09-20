@@ -87,7 +87,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
                     holder.gradeTextView.apply {
                         text = when {
                             !this@with.cote.isNullOrEmpty() -> this@with.cote
-                            !this@with.noteSur100.isNullOrEmpty() -> {
+                            !this@with.noteSur100.isEmpty() -> {
                                 String.format(
                                         context.getString(R.string.text_grade_in_percentage),
                                         this@with.noteSur100

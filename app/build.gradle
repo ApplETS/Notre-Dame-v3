@@ -117,9 +117,6 @@ dependencies {
     // Mockito-Kotlin
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
 
-    // FlowLayoutManager
-    implementation "com.xiaofeng.android:flowlayoutmanager:$flowlayoutmanager"
-
     // RecyclerView Animators
     implementation "jp.wasabeef:recyclerview-animators:$recyclerviewanimators"
 
@@ -129,6 +126,9 @@ dependencies {
     // Groupie
     implementation "com.xwray:groupie:$groupie"
     implementation "com.xwray:groupie-kotlin-android-extensions:$groupie"
+
+    // FlexboxLayout
+    implementation "com.google.android:flexbox:$flexbox"
 
     implementation project(':repository')
 }

@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Rect
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -12,18 +13,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.student.StudentViewModel
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Cours
-import com.xiaofeng.flowlayoutmanager.Alignment
-import com.xiaofeng.flowlayoutmanager.FlowLayoutManager
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import dagger.android.support.DaggerFragment
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
+import kotlinx.android.synthetic.main.item_grade_course.tvCourseGrade
+import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 import javax.inject.Inject
 
 /**
@@ -38,16 +40,20 @@ class GradesFragment : DaggerFragment() {
     private val gradesViewModel: GradesViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(GradesViewModel::class.java)
     }
-    private val studentViewModel: StudentViewModel? by lazy {
-        parentFragment?.let { ViewModelProviders.of(it, viewModelFactory).get(StudentViewModel::class.java) }
-    }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val adapter: GradesAdapter by lazy {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
                 currentCourseShown = cours
-                studentViewModel?.setCourseGradesDetails(cours)
+                this@GradesFragment.activity?.let {
+                    GradesDetailsActivity.start(
+                            it as AppCompatActivity,
+                            holder.tvCourseGrade,
+                            holder.tvCourseSigle,
+                            cours
+                    )
+                }
             }
         })
     }
@@ -68,16 +74,6 @@ class GradesFragment : DaggerFragment() {
         setUpRecyclerView()
         btnRetry.setOnClickListener { gradesViewModel.refresh() }
         subscribeUI()
-
-        savedInstanceState?.getParcelable<Cours>(CURRENT_COURSE_SHOWN_KEY)?.let { course ->
-            studentViewModel?.setCourseGradesDetails(course)
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(CURRENT_COURSE_SHOWN_KEY, currentCourseShown)
-
-        super.onSaveInstanceState(outState)
     }
 
     private fun setUpSwipeRefresh() {
@@ -105,11 +101,9 @@ class GradesFragment : DaggerFragment() {
                 }
             }
         })
-        recyclerViewCoursesGrades.layoutManager = FlowLayoutManager().apply {
-            this.isAutoMeasureEnabled = true
-            setAlignment(Alignment.LEFT)
+        recyclerViewCoursesGrades.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW).apply {
+            justifyContent = JustifyContent.FLEX_START
         }
-        recyclerViewCoursesGrades.itemAnimator = FadeInUpAnimator()
     }
 
     private fun subscribeUI() {
@@ -135,7 +129,6 @@ class GradesFragment : DaggerFragment() {
 
     companion object {
         private const val TAG = "GradesFragment"
-        private const val CURRENT_COURSE_SHOWN_KEY = "CurrentCourseShown"
 
         fun newInstance() = GradesFragment()
     }
