@@ -4,6 +4,8 @@
     android:id="@+id/tvSessionGrades"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
     android:textColor="@color/colorPrimary"
     android:textSize="25sp"
     tools:text="Automne 2018" />
