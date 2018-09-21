@@ -1,14 +1,19 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
+import android.animation.ArgbEvaluator
+import android.view.View
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.util.gradePercentageColor
+import ca.etsmtl.etsmobile.util.setGradePercentageColor
 import ca.etsmtl.repository.util.replaceCommaAndParseToFloat
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.item_grade_average.progressViewAverage
-import kotlinx.android.synthetic.main.item_grade_average.progressViewGrade
+import kotlinx.android.synthetic.main.item_grade_average.progressViewCourseAverage
+import kotlinx.android.synthetic.main.item_grade_average.progressViewCourseGrade
 import kotlinx.android.synthetic.main.item_grade_average.tvAverage
 import kotlinx.android.synthetic.main.item_grade_average.tvGrade
+import kotlinx.android.synthetic.main.item_grade_average.tvLabelGrade
 import kotlinx.android.synthetic.main.item_grade_average.tvRating
 
 /**
@@ -28,25 +33,62 @@ class GradeAverageItem(
         with (viewHolder) {
             tvRating.text = rating
 
-            tvGrade.apply {
-                text = String.format(
-                        context.getString(R.string.text_grade_with_percentage),
-                        grade,
-                        gradeOn,
-                        gradePercentage
-                )
-            }
-            setCircleProgressViewProgress(progressViewGrade, gradePercentage, !animatedProgress)
+            fun setGrade() {
+                tvGrade.apply {
+                    text = String.format(
+                            context.getString(R.string.text_grade_with_percentage),
+                            grade,
+                            gradeOn,
+                            gradePercentage
+                    )
+                }
 
-            tvAverage.apply {
-                text = String.format(
-                        context.getString(R.string.text_grade_with_percentage),
-                        average,
-                        gradeOn,
-                        averagePercentage
-                )
+                gradePercentage?.replaceCommaAndParseToFloat()?.let {
+                    setCircleProgressViewProgress(progressViewCourseGrade, it, !animatedProgress)
+                    progressViewCourseGrade.setGradePercentageColor(it)
+                    if (!animatedProgress) {
+                        progressViewCourseGrade.setProgressViewUpdateListener(object : CircleProgressView.CircleProgressUpdateListener {
+                            override fun onCircleProgressFinished(view: View) { }
+
+                            override fun onCircleProgressStart(view: View) { }
+
+                            override fun onCircleProgressUpdate(view: View, progress: Float) {
+                                val progressColor = ArgbEvaluator().gradePercentageColor(view.context, progress)
+                                progressViewCourseGrade.setStartColor(progressColor)
+                                progressViewCourseGrade.setEndColor(progressColor)
+                                tvGrade.setTextColor(progressColor)
+                                tvLabelGrade.setTextColor(progressColor)
+                            }
+                        })
+                    } else {
+                        val gradeColor = ArgbEvaluator().gradePercentageColor(
+                                progressViewCourseAverage.context,
+                                it
+                        )
+
+                        progressViewCourseGrade.setStartColor(gradeColor)
+                        progressViewCourseGrade.setEndColor(gradeColor)
+                        tvGrade.setTextColor(gradeColor)
+                        tvLabelGrade.setTextColor(gradeColor)
+                    }
+                }
             }
-            setCircleProgressViewProgress(progressViewAverage, averagePercentage, !animatedProgress)
+            setGrade()
+
+            fun setAvarage() {
+                tvAverage.apply {
+                    text = String.format(
+                            context.getString(R.string.text_grade_with_percentage),
+                            average,
+                            gradeOn,
+                            averagePercentage
+                    )
+                }
+                averagePercentage?.replaceCommaAndParseToFloat()?.let {
+                    setCircleProgressViewProgress(progressViewCourseAverage, it, !animatedProgress)
+                }
+            }
+            setAvarage()
 
             animatedProgress = true
         }
@@ -56,19 +98,16 @@ class GradeAverageItem(
 
     private fun setCircleProgressViewProgress(
         circleProgressView: CircleProgressView,
-        progress: String?,
+        progress: Float,
         animate: Boolean
     ) {
-        progress?.let {
-            with(circleProgressView) {
-                val progressFloat = it.replaceCommaAndParseToFloat()
-                setEndProgress(progressFloat)
+        with(circleProgressView) {
+            setEndProgress(progress)
 
-                if (animate) {
-                    startProgressAnimation()
-                } else {
-                    this.progress = progressFloat
-                }
+            if (animate) {
+                startProgressAnimation()
+            } else {
+                this.progress = progress
             }
         }
     }

@@ -1,13 +1,12 @@
 package ca.etsmtl.etsmobile.presentation.gradesdetails
 
-import android.animation.ArgbEvaluator
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.util.setGradePercentageColor
 import ca.etsmtl.etsmobile.util.show
 import ca.etsmtl.repository.data.model.Evaluation
 import com.moos.library.CircleProgressView
@@ -54,14 +53,6 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     override fun getLayout() = R.layout.item_evaluation_header
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        fun setProgressColor(progress: Float) {
-            with (viewHolder.progressViewGrade) {
-                val color = progressColor(context, progress)
-                setStartColor(color)
-                setEndColor(color)
-            }
-        }
-
         with (viewHolder) {
             tvName.text = evaluation.nom
 
@@ -92,7 +83,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
 
                 if (animatedProgress) {
                     progress = grade
-                    setProgressColor(grade)
+                    setGradePercentageColor(grade)
                 } else {
                     setProgressViewUpdateListener(object : CircleProgressView.CircleProgressUpdateListener {
                         override fun onCircleProgressFinished(view: View) {}
@@ -100,7 +91,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                         override fun onCircleProgressStart(view: View) {}
 
                         override fun onCircleProgressUpdate(view: View, progress: Float) {
-                            setProgressColor(progress)
+                            setGradePercentageColor(progress)
                         }
                     })
                     startProgressAnimation()
@@ -130,38 +121,6 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
         }
     }
 
-    private fun progressColor(context: Context, grade: Float): Int {
-        val startColor: Int
-        val endColor: Int
-        var colorProportion = grade
-        when (grade) {
-            in 0 until PASSING_GRADE -> {
-                startColor = ContextCompat.getColor(context, R.color.failureGradeMinColor)
-                endColor = ContextCompat.getColor(context, R.color.failureGradeMaxColor)
-                colorProportion /= PASSING_GRADE
-            }
-            in PASSING_GRADE until MIN_GOOD_GRADE -> {
-                startColor = ContextCompat.getColor(context, R.color.passingGradeColor)
-                endColor = ContextCompat.getColor(context, R.color.goodGradeMinColor)
-                colorProportion -= PASSING_GRADE
-                colorProportion /= MIN_GOOD_GRADE - PASSING_GRADE
-            }
-            else -> {
-                startColor = ContextCompat.getColor(context, R.color.goodGradeMinColor)
-                endColor = ContextCompat.getColor(context, R.color.goodGradeMaxColor)
-
-                if (colorProportion >= MAX_GRADE) {
-                    colorProportion = 1f
-                } else {
-                    colorProportion -= MIN_GOOD_GRADE
-                    colorProportion /= MAX_GRADE - MIN_GOOD_GRADE
-                }
-            }
-        }
-
-        return ArgbEvaluator().evaluate(colorProportion, startColor, endColor) as Int
-    }
-
     override fun setExpandableGroup(onToggleListener: ExpandableGroup) {
         this.expandableGroup = onToggleListener
     }
@@ -176,11 +135,5 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
         }
 
         ignoredEvaluationDialog?.show()
-    }
-
-    companion object {
-        private const val PASSING_GRADE = 50
-        private const val MIN_GOOD_GRADE = 80
-        private const val MAX_GRADE = 100
     }
 }
