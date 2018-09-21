@@ -3,11 +3,8 @@ package ca.etsmtl.etsmobile.presentation.grades
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.graphics.Rect
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +17,7 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import dagger.android.support.DaggerFragment
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
@@ -83,27 +81,10 @@ class GradesFragment : DaggerFragment() {
 
     private fun setUpRecyclerView() {
         recyclerViewCoursesGrades.adapter = adapter
-        // Set items margins as an ItemDecoration because margins don't works with FlowLayoutManager
-        // library
-        recyclerViewCoursesGrades.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                super.getItemOffsets(outRect, view, parent, state)
-                with (resources) {
-                    outRect.apply {
-                        bottom = 0
-                        right = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f,
-                                this@with.displayMetrics).toInt()
-                        left = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f,
-                                this@with.displayMetrics).toInt()
-                        top = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20f,
-                                this@with.displayMetrics).toInt()
-                    }
-                }
-            }
-        })
         recyclerViewCoursesGrades.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW).apply {
             justifyContent = JustifyContent.FLEX_START
         }
+        recyclerViewCoursesGrades.itemAnimator = FadeInUpAnimator()
     }
 
     private fun subscribeUI() {
