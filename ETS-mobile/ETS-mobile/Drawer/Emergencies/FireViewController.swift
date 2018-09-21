@@ -20,7 +20,7 @@ class FireViewController: UIViewController {
         if let phoneCallUrl = URL(string : "tel://514-396-8900") {
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallUrl)) {
-                application.open(phoneCallUrl, options: [:], completionHandler: nil)
+                application.open(phoneCallUrl, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             }
         }
     }
@@ -33,7 +33,7 @@ class FireViewController: UIViewController {
         titleLabel.title = NSLocalizedString("fire", comment: "Title for fire")
         
         emergencyCallButtonOutlet.layer.cornerRadius = 5
-        emergencyCallButtonOutlet.setTitle(NSLocalizedString("emergencyCall", comment: "Emergency call"), for: UIControlState.normal)
+        emergencyCallButtonOutlet.setTitle(NSLocalizedString("emergencyCall", comment: "Emergency call"), for: UIControl.State.normal)
         // Do any additional setup after loading the view.
     }
 
@@ -56,4 +56,9 @@ class FireViewController: UIViewController {
     }
     */
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
