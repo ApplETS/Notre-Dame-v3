@@ -63,7 +63,6 @@ dependencies {
     // Architecture components
     implementation "android.arch.lifecycle:extensions:$lifecycle"
     kapt "android.arch.lifecycle:compiler:$lifecycle"
-    testImplementation "android.arch.persistence.room:testing:$room"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
