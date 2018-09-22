@@ -162,11 +162,9 @@ fun ApiHoraireExamenFinal.toHoraireExemanFinalEntity(session: Session) = Horaire
         session.abrege
 )
 
-fun ApiListeHoraireExamensFinaux.toHoraireExamensFinauxEntities(session: Session) = ArrayList<HoraireExamenFinalEntity>().apply {
-    this@toHoraireExamensFinauxEntities.listeHoraire?.forEach {
-        add(it.toHoraireExemanFinalEntity(session))
-    }
-}
+fun ApiListeHoraireExamensFinaux.toHoraireExamensFinauxEntities(session: Session) = listeHoraire?.map {
+    it.toHoraireExemanFinalEntity(session)
+} ?: emptyList()
 
 fun ApiJourRemplace.toJourRemplaceEntity(session: Session) = JourRemplaceEntity(
         this.dateOrigine,
@@ -176,13 +174,7 @@ fun ApiJourRemplace.toJourRemplaceEntity(session: Session) = JourRemplaceEntity(
 )
 
 fun ApiListeJoursRemplaces.toJourRemplaceEntities(session: Session): List<JourRemplaceEntity>? {
-    this.listeJours?.let {
-        return ArrayList<JourRemplaceEntity>().apply {
-            it.forEach {
-                this.add(it.toJourRemplaceEntity(session))
-            }
-        }
-    }
+    this.listeJours?.let { return it.map { it.toJourRemplaceEntity(session) } }
 
     return null
 }
@@ -198,11 +190,7 @@ fun ApiSeance.toSeanceEntity(cours: Cours) = SeanceEntity(
         cours.session
 )
 
-fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = ArrayList<SeanceEntity>().apply {
-    this@toSeancesEntities.liste.forEach {
-        add(it.toSeanceEntity(cours))
-    }
-}
+fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = liste.map { it.toSeanceEntity(cours) }
 
 fun ApiSession.toSessionEntity() = SessionEntity(
         abrege,

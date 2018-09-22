@@ -32,9 +32,7 @@ fun CoursEntity.toCours() = Cours(
         this.titreCours
 )
 
-fun List<CoursEntity>.toCours() = ArrayList<Cours>().apply {
-    this@toCours.forEach { add(it.toCours()) }
-}
+fun List<CoursEntity>.toCours() = map { it.toCours() }
 
 fun EtudiantEntity.toEtudiant() = Etudiant(
         this.type,
@@ -66,9 +64,7 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.ignoreDuCalcul
 )
 
-fun List<EvaluationEntity>.toEvaluations() = ArrayList<Evaluation>().apply {
-    this@toEvaluations.forEach { add(it.toEvaluation()) }
-}
+fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
 
 fun HoraireExamenFinalEntity.toHoraireExamenFinal() = HoraireExamenFinal(
         this.sigle,
@@ -79,9 +75,7 @@ fun HoraireExamenFinalEntity.toHoraireExamenFinal() = HoraireExamenFinal(
         this.local
 )
 
-fun List<HoraireExamenFinalEntity>.toHorairesExamensFinaux() = ArrayList<HoraireExamenFinal>().apply {
-    this@toHorairesExamensFinaux.forEach { add(it.toHoraireExamenFinal()) }
-}
+fun List<HoraireExamenFinalEntity>.toHorairesExamensFinaux() = map { it.toHoraireExamenFinal() }
 
 fun JourRemplaceEntity.toJourRemplace() = JourRemplace(
         this.dateOrigine,
@@ -89,9 +83,7 @@ fun JourRemplaceEntity.toJourRemplace() = JourRemplace(
         this.description
 )
 
-fun List<JourRemplaceEntity>.toJoursRemplaces() = ArrayList<JourRemplace>().apply {
-    this@toJoursRemplaces.forEach { add(it.toJourRemplace()) }
-}
+fun List<JourRemplaceEntity>.toJoursRemplaces() = map { it.toJourRemplace() }
 
 fun SeanceEntity.toSeance() = Seance(
         this.dateDebut,
@@ -104,9 +96,7 @@ fun SeanceEntity.toSeance() = Seance(
         this.session
 )
 
-fun List<SeanceEntity>.toSeances(): List<Seance> = ArrayList<Seance>().apply {
-    this@toSeances.forEach { add(it.toSeance()) }
-}
+fun List<SeanceEntity>.toSeances(): List<Seance> = map { it.toSeance() }
 
 fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEvaluation(
         this.sigleCours,

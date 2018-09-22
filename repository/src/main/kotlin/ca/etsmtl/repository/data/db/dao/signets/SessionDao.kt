@@ -14,5 +14,5 @@ abstract class SessionDao : SignetsDao<SessionEntity> {
     abstract fun getAll(): LiveData<List<SessionEntity>>
 
     @Query("DELETE FROM sessionentity")
-    abstract fun deleteAll(): LiveData<List<SessionEntity>>
+    abstract fun deleteAll()
 }
