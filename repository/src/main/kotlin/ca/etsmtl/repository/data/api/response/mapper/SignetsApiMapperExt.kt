@@ -12,6 +12,8 @@ import ca.etsmtl.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.repository.data.api.response.signets.ApiListeJoursRemplaces
 import ca.etsmtl.repository.data.api.response.signets.ApiSeance
+import ca.etsmtl.repository.data.api.response.signets.ApiSession
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDeSessions
 import ca.etsmtl.repository.data.db.entity.signets.ActiviteEntity
 import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.repository.data.db.entity.signets.EnseignantEntity
@@ -21,6 +23,7 @@ import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
+import ca.etsmtl.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Session
 import ca.etsmtl.repository.util.replaceCommaAndParseToDouble
@@ -201,6 +204,24 @@ fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = Arr
     }
 }
 
-fun formatter() = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+fun ApiSession.toSessionEntity() = SessionEntity(
+        abrege,
+        auLong,
+        dateDebut,
+        dateFin,
+        dateFinCours,
+        dateDebutChemiNot,
+        dateFinChemiNot,
+        dateDebutAnnulationAvecRemboursement,
+        dateFinAnnulationAvecRemboursement,
+        dateFinAnnulationAvecRemboursementNouveauxEtudiants,
+        dateDebutAnnulationSansRemboursementNouveauxEtudiants,
+        dateFinAnnulationSansRemboursementNouveauxEtudiants,
+        dateLimitePourAnnulerASEQ
+)
+
+fun ApiListeDeSessions.toSessionEntities(): List<SessionEntity> = liste.map { it.toSessionEntity() }
+
+fun formatter(): NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
     maximumFractionDigits = 1
 }
