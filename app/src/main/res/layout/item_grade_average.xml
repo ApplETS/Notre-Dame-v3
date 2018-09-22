@@ -30,8 +30,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         constraintlayout:layout_constraintBottom_toBottomOf="parent"
-        constraintlayout:layout_constraintEnd_toStartOf="@+id/tvGrade"
-        constraintlayout:layout_constraintHorizontal_bias="0.5"
         constraintlayout:layout_constraintHorizontal_chainStyle="spread_inside"
         constraintlayout:layout_constraintStart_toStartOf="parent"
         constraintlayout:layout_constraintTop_toTopOf="parent"
@@ -86,13 +84,11 @@
         android:id="@+id/tvGrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         constraintlayout:layout_constraintBottom_toTopOf="@+id/tvLabelGrade"
-        constraintlayout:layout_constraintEnd_toEndOf="parent"
-        constraintlayout:layout_constraintHorizontal_bias="0.5"
+        constraintlayout:layout_constraintEnd_toEndOf="@+id/barrierGradeAverage"
         constraintlayout:layout_constraintStart_toEndOf="@+id/progressViewCourseGrade"
         constraintlayout:layout_constraintTop_toTopOf="parent"
         constraintlayout:layout_constraintVertical_chainStyle="packed"
@@ -118,7 +114,17 @@
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         constraintlayout:layout_constraintBottom_toTopOf="@+id/tvLabelAverage"
+        constraintlayout:layout_constraintEnd_toEndOf="@+id/barrierGradeAverage"
         constraintlayout:layout_constraintStart_toStartOf="@+id/tvGrade"
         constraintlayout:layout_constraintTop_toBottomOf="@+id/tvLabelGrade"
         tools:text="37,6/50 (75,2 %)" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrierGradeAverage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        constraintlayout:barrierDirection="right"
+        constraintlayout:constraint_referenced_ids="tvGrade,tvAverage"
+        tools:layout_editor_absoluteX="306dp" />
+
 </android.support.constraint.ConstraintLayout>
