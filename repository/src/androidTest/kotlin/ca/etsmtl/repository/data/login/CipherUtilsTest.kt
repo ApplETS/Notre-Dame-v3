@@ -92,7 +92,7 @@ class CipherUtilsTest : KeyStoreCipherTest() {
     private fun convertStringToPublicKey(publicKeyContent: String): PublicKey {
         val publicBytes = Base64.decode(publicKeyContent, Base64.DEFAULT)
         val keySpec = X509EncodedKeySpec(publicBytes)
-        val keyFactory = KeyFactory.getInstance("RSA", "BC")
+        val keyFactory = KeyFactory.getInstance("RSA")
 
         return keyFactory.generatePublic(keySpec)
     }
@@ -100,7 +100,7 @@ class CipherUtilsTest : KeyStoreCipherTest() {
     private fun convertStringToPrivateKey(privateKeyContent: String): PrivateKey {
         val clear = Base64.decode(privateKeyContent, Base64.DEFAULT)
         val keySpec = PKCS8EncodedKeySpec(clear)
-        val fact = KeyFactory.getInstance("RSA", "BC")
+        val fact = KeyFactory.getInstance("RSA")
         val privateKey = fact.generatePrivate(keySpec)
         Arrays.fill(clear, 0.toByte())
         return privateKey
