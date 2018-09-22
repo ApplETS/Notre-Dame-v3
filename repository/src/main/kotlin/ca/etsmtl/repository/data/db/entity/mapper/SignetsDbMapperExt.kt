@@ -7,6 +7,7 @@ import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
+import ca.etsmtl.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Etudiant
 import ca.etsmtl.repository.data.model.Evaluation
@@ -14,6 +15,7 @@ import ca.etsmtl.repository.data.model.HoraireExamenFinal
 import ca.etsmtl.repository.data.model.JourRemplace
 import ca.etsmtl.repository.data.model.Seance
 import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
+import ca.etsmtl.repository.data.model.Session
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -120,3 +122,21 @@ fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEv
         this.noteACeJourElementsIndividuels,
         this.noteSur100PourElementsIndividuels
 )
+
+fun SessionEntity.toSession() = Session(
+        abrege,
+        auLong,
+        dateDebut,
+        dateFin,
+        dateFinCours,
+        dateDebutChemiNot,
+        dateFinChemiNot,
+        dateDebutAnnulationAvecRemboursement,
+        dateFinAnnulationAvecRemboursement,
+        dateFinAnnulationAvecRemboursementNouveauxEtudiants,
+        dateDebutAnnulationSansRemboursementNouveauxEtudiants,
+        dateFinAnnulationSansRemboursementNouveauxEtudiants,
+        dateLimitePourAnnulerASEQ
+)
+
+fun List<SessionEntity>.toSessions(): List<Session> = map { it.toSession() }

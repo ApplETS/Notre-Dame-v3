@@ -12,4 +12,7 @@ import ca.etsmtl.repository.data.db.entity.signets.SessionEntity
 abstract class SessionDao : SignetsDao<SessionEntity> {
     @Query("SELECT * FROM sessionentity")
     abstract fun getAll(): LiveData<List<SessionEntity>>
+
+    @Query("DELETE FROM sessionentity")
+    abstract fun deleteAll(): LiveData<List<SessionEntity>>
 }
