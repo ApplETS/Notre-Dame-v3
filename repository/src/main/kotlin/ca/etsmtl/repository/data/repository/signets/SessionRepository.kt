@@ -22,6 +22,14 @@ class SessionRepository @Inject constructor(
     private val api: SignetsApi,
     private val dao: SessionDao
 ) : SignetsRepository(appExecutors) {
+    
+    /**
+     * Returns the user's sessions
+     *
+     * @param userCredentials The user's credentials
+     * @param shouldFetch This function is called to determine whether the data should be fetched
+     * from the network or only from the DB
+     */
     fun getSessions(
         userCredentials: SignetsUserCredentials,
         shouldFetch: (data: List<Session>?) -> Boolean
