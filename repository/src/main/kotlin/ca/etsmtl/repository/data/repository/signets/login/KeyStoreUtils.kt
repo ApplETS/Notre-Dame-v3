@@ -43,6 +43,7 @@ class KeyStoreUtils @Inject constructor(
 ) {
     companion object {
         const val KEYSTORE_PROVIDER_ANDROID_KEYSTORE = "AndroidKeyStore"
+        const val RSA_KEY_SIZE = 2048 // 4096 is too slow!
     }
 
     private val keyStore: KeyStore = getAndroidKeyStore()
@@ -110,6 +111,7 @@ class KeyStoreUtils @Inject constructor(
         val builder = KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
                 .setBlockModes(KeyProperties.BLOCK_MODE_ECB)
                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_PKCS1)
+                .setKeySize(RSA_KEY_SIZE)
 
         return builder.build()
     }
@@ -130,6 +132,7 @@ class KeyStoreUtils @Inject constructor(
                 .setAlias(alias)
                 // The subject used for the self-signed certificate of the generated pair
                 .setSubject(X500Principal("CN=$alias"))
+                .setKeySize(RSA_KEY_SIZE)
                 // The serial number used for the self-signed certificate of the
                 // generated pair.
                 .setSerialNumber(BigInteger.valueOf(1337))
