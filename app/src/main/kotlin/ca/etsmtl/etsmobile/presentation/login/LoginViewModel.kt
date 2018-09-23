@@ -68,15 +68,17 @@ class LoginViewModel @Inject constructor(
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered when [userCredentials] is called. The new
-     * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. If
-     * an instance can be fetched, it means that the user's credentials are valid. As a result, the
-     * new [SignetsUserCredentials] are saved and stored in [LoginRepository]. Moreover, a
-     * navigation to [MainActivity] will be triggered.
+     * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. The
+     * instance is fetched only from the DB. However, if it doesn't exists in the DB, the instance
+     * if fetched from the network. If the response doesn't contain an error, the
+     * [SignetsUserCredentials] are considered valid and are saved and stored in [LoginRepository].
+     * Moreover, a navigation to [MainActivity] will be triggered.
      */
     private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentials) { userCredentials ->
             // Fetch [Etudiant] instance
-            Transformations.map(repository.getInfoEtudiant(userCredentials, app.isDeviceConnected())) { res ->
+            val shouldFetch: (data: Etudiant?) -> Boolean = { it == null }
+            Transformations.map(repository.getInfoEtudiant(userCredentials, shouldFetch)) { res ->
                 transformEtudiantResToBooleanRes(res).apply {
                     if (userCredentialsValid(this)) {
                         loginRepository.saveUserCredentialsIfNeeded(userCredentials)

@@ -14,16 +14,16 @@ import ca.etsmtl.repository.data.model.Resource
 import ca.etsmtl.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
 import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
-import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers.any
 import org.mockito.Captor
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
@@ -32,7 +32,7 @@ import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyZeroInteractions
 import org.mockito.MockitoAnnotations
-import kotlin.test.assertFalse
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
@@ -52,7 +52,7 @@ class LoginViewModelTest {
     @Captor
     private lateinit var userCredentialsArgumentCaptor: ArgumentCaptor<SignetsUserCredentials>
     @Captor
-    private lateinit var booleanArgumentCaptor: ArgumentCaptor<Boolean>
+    private lateinit var booleanFunctionArgumentCaptor: ArgumentCaptor<(data: Etudiant?) -> Boolean>
     @Captor
     private lateinit var stringEventArgumentCaptor: ArgumentCaptor<Event<String>>
 
@@ -72,27 +72,18 @@ class LoginViewModelTest {
     @Test
     fun testCallRepo() {
         val liveData = MutableLiveData<Resource<Etudiant>>()
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        `when`(infoEtudiantRepository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(liveData)
         loginViewModel.getShowLoading().observeForever(mock())
         setAndSubmitCredentials(userCredentials)
-        verify(infoEtudiantRepository).getInfoEtudiant(capture(userCredentialsArgumentCaptor), capture(booleanArgumentCaptor))
+        verify(infoEtudiantRepository).getInfoEtudiant(capture(userCredentialsArgumentCaptor), capture(booleanFunctionArgumentCaptor))
         assertEquals(userCredentials, userCredentialsArgumentCaptor.value)
-        assertTrue(booleanArgumentCaptor.value)
-
-        app.mockNetwork(false)
-        val userCredentials2 = SignetsUserCredentials("test2", "test2")
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials2, false)).thenReturn(liveData)
-        loginViewModel.getShowLoading().observeForever(mock())
-        setAndSubmitCredentials(userCredentials2)
-        verify(infoEtudiantRepository, times(2)).getInfoEtudiant(capture(userCredentialsArgumentCaptor), capture(booleanArgumentCaptor))
-        assertEquals(userCredentials2, userCredentialsArgumentCaptor.value)
-        assertFalse(booleanArgumentCaptor.value)
+        assertTrue(booleanFunctionArgumentCaptor.value.invoke(null))
     }
 
     @Test
     fun testNoCallToRepoIfCredentialIsNull() {
         val liveData = MutableLiveData<Resource<Etudiant>>()
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        `when`(infoEtudiantRepository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(liveData)
         loginViewModel.getShowLoading().observeForever(mock())
         loginViewModel.submitCredentials()
         verifyZeroInteractions(infoEtudiantRepository)
@@ -103,15 +94,15 @@ class LoginViewModelTest {
 
         loginViewModel.setPassword(userCredentials.motPasse)
         loginViewModel.submitCredentials()
-        verify(infoEtudiantRepository).getInfoEtudiant(capture(userCredentialsArgumentCaptor), capture(booleanArgumentCaptor))
+        verify(infoEtudiantRepository).getInfoEtudiant(capture(userCredentialsArgumentCaptor), capture(booleanFunctionArgumentCaptor))
         assertEquals(userCredentials, userCredentialsArgumentCaptor.value)
-        assertTrue(booleanArgumentCaptor.value)
+        assertTrue(booleanFunctionArgumentCaptor.value.invoke(null))
     }
 
     @Test
     fun testErrorMessage() {
         val liveData = MutableLiveData<Resource<Etudiant>>()
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        `when`(infoEtudiantRepository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(liveData)
 
         val message = "Test msg"
         liveData.value = Resource.error(message, null)
@@ -129,7 +120,7 @@ class LoginViewModelTest {
     fun testShowLoading() {
         val liveData = MutableLiveData<Resource<Etudiant>>()
         liveData.value = Resource.loading(null)
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        `when`(infoEtudiantRepository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(liveData)
 
         val observer: Observer<Boolean> = mock()
         loginViewModel.getShowLoading().observeForever(observer)
@@ -217,7 +208,7 @@ class LoginViewModelTest {
 
         val liveData = MutableLiveData<Resource<Etudiant>>()
         liveData.value = Resource.loading(null)
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        `when`(infoEtudiantRepository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(liveData)
         loginViewModel.getShowLoading().observeForever(mock())
 
         setAndSubmitCredentials(userCredentials)
@@ -257,7 +248,7 @@ class LoginViewModelTest {
         loginViewModel.getShowLoginFragment().observeForever(observer)
 
         val liveData = MutableLiveData<Resource<Etudiant>>()
-        `when`(infoEtudiantRepository.getInfoEtudiant(userCredentials, true)).thenReturn(liveData)
+        `when`(infoEtudiantRepository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(liveData)
         setAndSubmitCredentials(userCredentials)
         liveData.value = Resource.success(Etudiant(
                 "fooType",

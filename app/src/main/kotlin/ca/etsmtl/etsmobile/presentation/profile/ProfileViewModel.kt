@@ -33,7 +33,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun load() {
-        etudiantRes = repository.getInfoEtudiant(userCredentials, true).apply {
+        etudiantRes = repository.getInfoEtudiant(userCredentials) { true }.apply {
             etudiantMediatorLiveData.addSource<Resource<Etudiant>>(this) {
                 etudiantMediatorLiveData.value = it
             }
