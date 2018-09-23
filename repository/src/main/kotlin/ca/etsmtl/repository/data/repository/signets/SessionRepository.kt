@@ -22,7 +22,7 @@ class SessionRepository @Inject constructor(
     private val api: SignetsApi,
     private val dao: SessionDao
 ) : SignetsRepository(appExecutors) {
-    
+
     /**
      * Returns the user's sessions
      *
