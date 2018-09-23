@@ -50,6 +50,10 @@ class CipherUtilsTest : KeyStoreCipherTest() {
                 ENCRYPTED_TXT.length,
                 encryptedTxt.trim().replace("\n", "").length
         )
+
+        val privateKey = convertStringToPrivateKey(PRIVATE_KEY_CONTENT)
+        val decryptedText = cipherUtils.decrypt(encryptedTxt, privateKey)
+        assertEquals(decryptedText, SECRET_TXT)
     }
 
     @Test
@@ -69,6 +73,9 @@ class CipherUtilsTest : KeyStoreCipherTest() {
                 ENCRYPTED_TXT.length,
                 encryptedTxt.trim().replace("\n", "").length
         )
+
+        val decryptedText = cipherUtils.decrypt(encryptedTxt, keyPair.private)
+        assertEquals(decryptedText, SECRET_TXT)
     }
 
     @Test
