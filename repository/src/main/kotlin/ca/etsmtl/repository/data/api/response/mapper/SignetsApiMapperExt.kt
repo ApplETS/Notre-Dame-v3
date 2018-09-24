@@ -12,6 +12,8 @@ import ca.etsmtl.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.repository.data.api.response.signets.ApiListeJoursRemplaces
 import ca.etsmtl.repository.data.api.response.signets.ApiSeance
+import ca.etsmtl.repository.data.api.response.signets.ApiSession
+import ca.etsmtl.repository.data.api.response.signets.ApiListeDeSessions
 import ca.etsmtl.repository.data.db.entity.signets.ActiviteEntity
 import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.repository.data.db.entity.signets.EnseignantEntity
@@ -21,6 +23,7 @@ import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
+import ca.etsmtl.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.repository.data.model.Cours
 import ca.etsmtl.repository.data.model.Session
 import ca.etsmtl.repository.util.replaceCommaAndParseToDouble
@@ -159,11 +162,9 @@ fun ApiHoraireExamenFinal.toHoraireExemanFinalEntity(session: Session) = Horaire
         session.abrege
 )
 
-fun ApiListeHoraireExamensFinaux.toHoraireExamensFinauxEntities(session: Session) = ArrayList<HoraireExamenFinalEntity>().apply {
-    this@toHoraireExamensFinauxEntities.listeHoraire?.forEach {
-        add(it.toHoraireExemanFinalEntity(session))
-    }
-}
+fun ApiListeHoraireExamensFinaux.toHoraireExamensFinauxEntities(session: Session) = listeHoraire?.map {
+    it.toHoraireExemanFinalEntity(session)
+} ?: emptyList()
 
 fun ApiJourRemplace.toJourRemplaceEntity(session: Session) = JourRemplaceEntity(
         this.dateOrigine,
@@ -173,13 +174,7 @@ fun ApiJourRemplace.toJourRemplaceEntity(session: Session) = JourRemplaceEntity(
 )
 
 fun ApiListeJoursRemplaces.toJourRemplaceEntities(session: Session): List<JourRemplaceEntity>? {
-    this.listeJours?.let {
-        return ArrayList<JourRemplaceEntity>().apply {
-            it.forEach {
-                this.add(it.toJourRemplaceEntity(session))
-            }
-        }
-    }
+    this.listeJours?.let { return it.map { it.toJourRemplaceEntity(session) } }
 
     return null
 }
@@ -195,12 +190,26 @@ fun ApiSeance.toSeanceEntity(cours: Cours) = SeanceEntity(
         cours.session
 )
 
-fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = ArrayList<SeanceEntity>().apply {
-    this@toSeancesEntities.liste.forEach {
-        add(it.toSeanceEntity(cours))
-    }
-}
+fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = liste.map { it.toSeanceEntity(cours) }
 
-fun formatter() = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+fun ApiSession.toSessionEntity() = SessionEntity(
+        abrege,
+        auLong,
+        dateDebut,
+        dateFin,
+        dateFinCours,
+        dateDebutChemiNot,
+        dateFinChemiNot,
+        dateDebutAnnulationAvecRemboursement,
+        dateFinAnnulationAvecRemboursement,
+        dateFinAnnulationAvecRemboursementNouveauxEtudiants,
+        dateDebutAnnulationSansRemboursementNouveauxEtudiants,
+        dateFinAnnulationSansRemboursementNouveauxEtudiants,
+        dateLimitePourAnnulerASEQ
+)
+
+fun ApiListeDeSessions.toSessionEntities(): List<SessionEntity> = liste.map { it.toSessionEntity() }
+
+fun formatter(): NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
     maximumFractionDigits = 1
 }
