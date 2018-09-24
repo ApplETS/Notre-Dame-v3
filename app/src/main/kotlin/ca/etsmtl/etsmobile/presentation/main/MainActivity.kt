@@ -1,10 +1,11 @@
-package ca.etsmtl.etsmobile.presentation
+package ca.etsmtl.etsmobile.presentation.main
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.MenuItem
 import ca.etsmtl.etsmobile.R
+import ca.etsmtl.etsmobile.presentation.BaseActivity
 import ca.etsmtl.etsmobile.presentation.dashboard.DashboardFragment
 import ca.etsmtl.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.etsmobile.presentation.more.MoreFragment
@@ -45,7 +46,7 @@ class MainActivity : BaseActivity() {
         if (savedInstanceState == null) {
             selectDashboard()
         } else { // Another fragment is being displayed
-            currentFragmentTag = savedInstanceState.getString(CURRENT_FRAGMENT_TAG_KEY)
+            currentFragmentTag = savedInstanceState.getString(CURRENT_FRAGMENT_TAG_KEY) ?: ""
         }
     }
 

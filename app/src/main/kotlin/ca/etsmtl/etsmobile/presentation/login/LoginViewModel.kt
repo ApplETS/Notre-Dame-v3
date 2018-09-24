@@ -11,8 +11,8 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
 import ca.etsmtl.etsmobile.R
 import ca.etsmtl.etsmobile.presentation.App
-import ca.etsmtl.etsmobile.presentation.MainActivity
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
+import ca.etsmtl.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.etsmobile.util.Event
 import ca.etsmtl.etsmobile.util.call
 import ca.etsmtl.etsmobile.util.isDeviceConnected
@@ -38,8 +38,8 @@ class LoginViewModel @Inject constructor(
     private val userCredentials: MutableLiveData<SignetsUserCredentials> by lazy {
         MutableLiveData<SignetsUserCredentials>()
     }
-    private val activityToGoTo by lazy { MutableLiveData<Class<out Activity>>() }
-    private val showLoginFragment by lazy {
+    private val _activityToGoTo by lazy { MutableLiveData<Class<out Activity>>() }
+    private val showLoginFragmentMediator by lazy {
         MediatorLiveData<Void>().apply {
             addSource(userCredentialsValid) {
                 it?.let {
@@ -61,7 +61,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private val displayUniversalCodeDialog: MediatorLiveData<Boolean> by lazy {
+    private val displayUniversalCodeDialogMediator: MediatorLiveData<Boolean> by lazy {
         MediatorLiveData<Boolean>()
     }
 
@@ -82,7 +82,7 @@ class LoginViewModel @Inject constructor(
                 transformEtudiantResToBooleanRes(res).apply {
                     if (userCredentialsValid(this)) {
                         loginRepository.saveUserCredentialsIfNeeded(userCredentials)
-                        activityToGoTo.value = MainActivity::class.java
+                        _activityToGoTo.value = MainActivity::class.java
                     }
                 }
             }
@@ -90,36 +90,30 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
-     * Returns a [LiveData] which is called when the [LoginFragment] needs to be displayed
+     * A [LiveData] which is called when the [LoginFragment] needs to be displayed
      *
      * The [LoginFragment] needs to be displayed when the user needs to login for the first time or
      * if his credentials are no longer valid.
-     *
-     * @return A [LiveData] which is called when the [LoginFragment] needs to be displayed
      */
-    fun getShowLoginFragment(): LiveData<Void> = showLoginFragment
+    val showLoginFragment: LiveData<Void> = showLoginFragmentMediator
 
     /**
-     * Returns whether or not a loading animation should be displayed.
+     * A [LiveData] with a [Boolean] which would be set to true a loading animation should
+     * be displayed
      *
      * This is triggered after the user's credentials have been submitted.
-     *
-     * @return A [LiveData] with a [Boolean] which would be set to true a loading animation should
-     * be displayed
      */
-    fun getShowLoading(): LiveData<Boolean> = Transformations.map(userCredentialsValid) {
+    val showLoading: LiveData<Boolean> = Transformations.map(userCredentialsValid) {
         it.status == Resource.SUCCESS || it.status == Resource.LOADING
     }
 
     /**
-     * Returns an error message related to the universal code field.
+     * A [LiveData] containing an error message related to the universal code field. The
+     * error message is null if there is not error in the universal code.
      *
      * This is triggered after the universal code has been submitted.
-     *
-     * @return A [LiveData] containing an error message related to the universal code field. The
-     * error message is null if there is not error in the universal code.
      */
-    fun getUniversalCodeError(): LiveData<String> = Transformations.map(universalCode) {
+    val universalCodeError: LiveData<String> = Transformations.map(universalCode) {
         when {
             it.isEmpty() -> app.getString(R.string.error_field_required)
             !it.matches(Regex("[a-zA-Z]{2}\\d{5}")) -> app.getString(R.string.error_invalid_universal_code)
@@ -128,14 +122,12 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
-     * Returns an error message related to the password field.
+     * A [LiveData] containing an error message related to the password field. The
+     * error message is null if there is not error in the password.
      *
      * This is triggered after the password has been submitted.
-     *
-     * @return A [LiveData] containing an error message related to the password field. The
-     * error message is null if there is not error in the password.
      */
-    fun getPasswordError(): LiveData<String> = Transformations.map(password) {
+    val passwordError: LiveData<String> = Transformations.map(password) {
         when {
             it.isEmpty() -> app.getString(R.string.error_field_required)
             else -> null
@@ -143,20 +135,22 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
-     * Returns the activity to navigate to.
-     *
-     * @return A [LiveData] containing an [Activity] to navigate to.
+     * A [LiveData] containing the class of an [Activity] to navigate to.
      */
-    fun getActivityToGoTo(): LiveData<Class<out Activity>> = activityToGoTo
+    val activityToGoTo: LiveData<Class<out Activity>> = _activityToGoTo
 
     /**
-     * Returns a [LiveData] which is called when the keyboard needs to be hidden
+     * A [LiveData] which is called when the keyboard needs to be hidden
      *
-     * The keyboard needs to be hidden when the user's credentials is submitted.
-     *
-     * @return A [LiveData] which is called when the keyboard needs to be hidden
+     * The keyboard needs to be hidden when the user's credentials are submitted.
      */
-    fun getHideKeyboard(): LiveData<Void> = Transformations.map(userCredentials) { null }
+    val hideKeyboard: LiveData<Void> = Transformations.map(userCredentials) { null }
+
+    /**
+     * A [LiveData] indicating whether the universal code info dialog should be displayed or
+     * not
+     */
+    val displayUniversalCodeDialog: LiveData<Boolean> = displayUniversalCodeDialogMediator
 
     /**
      * Verifies that a given resource is not null and that his status is [Resource.SUCCESS]
@@ -260,7 +254,7 @@ class LoginViewModel @Inject constructor(
     fun submitSavedCredentials() {
         with(loginRepository.getSavedUserCredentials()) {
             if (this == null) {
-                showLoginFragment.call()
+                showLoginFragmentMediator.call()
             } else {
                 universalCode.value = this.codeAccesUniversel
                 password.value = this.motPasse
@@ -273,7 +267,7 @@ class LoginViewModel @Inject constructor(
      * Triggers a navigation to [AboutActivity]
      */
     fun clickOnAppletsLogo() {
-        activityToGoTo.value = AboutActivity::class.java
+        _activityToGoTo.value = AboutActivity::class.java
     }
 
     /**
@@ -283,12 +277,6 @@ class LoginViewModel @Inject constructor(
      * be hidden
      */
     fun displayUniversalCodeInfo(shouldShow: Boolean) {
-        displayUniversalCodeDialog.value = shouldShow
+        displayUniversalCodeDialogMediator.value = shouldShow
     }
-
-    /**
-     * Returns a [LiveData] indicating whether the universal code info dialog should be displayed or
-     * not
-     */
-    fun getDisplayUniversalCodeDialog(): LiveData<Boolean> = displayUniversalCodeDialog
 }

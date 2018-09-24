@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.MainFragment
+import ca.etsmtl.etsmobile.presentation.main.MainFragment
 import kotlinx.android.synthetic.main.fragment_student.tabsStudent
 import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
