@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:errorEnabled="true"
-        app:errorTextAppearance="@style/LoginErrorTextAppearance"
+        app:errorTextAppearance="@style/TextAppearance.Login.Error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -51,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:errorEnabled="true"
-        app:errorTextAppearance="@style/LoginErrorTextAppearance"
+        app:errorTextAppearance="@style/TextAppearance.Login.Error"
         app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
