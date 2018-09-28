@@ -3,7 +3,7 @@
     android:id="@+id/layoutRootWelcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.etsmtl.etsmobile.presentation.login.WelcomeActivity"
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.login.WelcomeActivity"
     tools:theme="@style/LoginTheme">
 
     <!-- Background -->

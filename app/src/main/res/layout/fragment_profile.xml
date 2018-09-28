@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="ca.etsmtl.etsmobile.presentation.profile.ProfileFragment">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewProfile"
         android:layout_width="match_parent"

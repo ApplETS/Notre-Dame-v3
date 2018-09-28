@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AboutTheme"
-    tools:context="ca.etsmtl.etsmobile.presentation.about.AboutFragment">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.about.AboutFragment">
 
     <View
         android:id="@+id/backgroundAbout"

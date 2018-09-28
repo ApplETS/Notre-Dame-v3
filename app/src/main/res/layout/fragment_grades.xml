@@ -4,7 +4,7 @@
     android:id="@+id/swipeRefreshLayoutCoursesGrades"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.etsmtl.etsmobile.presentation.grades.GradesFragment">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
