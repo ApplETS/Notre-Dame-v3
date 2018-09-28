@@ -1,4 +1,4 @@
-package ca.etsmtl.etsmobile.presentation
+package ca.etsmtl.etsmobile.presentation.main
 
 import android.animation.Animator
 import android.support.design.widget.BottomNavigationView

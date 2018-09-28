@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.MainFragment
+import ca.etsmtl.etsmobile.presentation.main.MainFragment
 import ca.etsmtl.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import ca.etsmtl.etsmobile.util.EventObserver

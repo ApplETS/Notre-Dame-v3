@@ -33,17 +33,20 @@ class InfoEtudiantRepository @Inject constructor(
      * Returns the user's information
      *
      * @param userCredentials The user's credentials
-     * @param shouldFetch True if the data should be fetched from the network. False if the the data
-     * should only be fetched from the DB.
+     * @param shouldFetch shouldFetch This function is called to determine whether the data should
+     * be fetched rom the network or only from the DB
      */
-    fun getInfoEtudiant(userCredentials: SignetsUserCredentials, shouldFetch: Boolean): LiveData<Resource<Etudiant>> {
+    fun getInfoEtudiant(
+        userCredentials: SignetsUserCredentials,
+        shouldFetch: (data: Etudiant?) -> Boolean
+    ): LiveData<Resource<Etudiant>> {
 
         return object : NetworkBoundResource<Etudiant, ApiSignetsModel<ApiEtudiant>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiEtudiant>) {
                 item.data?.let { dao.insert(it.toEtudiantEntity()) }
             }
 
-            override fun shouldFetch(data: Etudiant?): Boolean = shouldFetch
+            override fun shouldFetch(data: Etudiant?): Boolean = shouldFetch(data)
 
             override fun loadFromDb(): LiveData<Etudiant> {
                 return Transformations.map(getFirstItemLiveData(dao.getAll())) {

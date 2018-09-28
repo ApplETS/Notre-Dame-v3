@@ -44,7 +44,7 @@ class WelcomeActivity : BaseActivity() {
 
     private fun subscribeUI() {
         with(loginViewModel) {
-            getShowLoading().observe(this@WelcomeActivity, Observer {
+            showLoading.observe(this@WelcomeActivity, Observer {
                 progressBarWelcome.show(it == true)
             })
 
@@ -52,7 +52,7 @@ class WelcomeActivity : BaseActivity() {
                 Toast.makeText(this@WelcomeActivity, it, Toast.LENGTH_LONG).show()
             })
 
-            getShowLoginFragment().observe(this@WelcomeActivity, Observer {
+            showLoginFragment.observe(this@WelcomeActivity, Observer {
                 with(supportFragmentManager.beginTransaction()) {
                     replace(
                             R.id.layoutRootWelcome,
@@ -64,7 +64,7 @@ class WelcomeActivity : BaseActivity() {
                 }
             })
 
-            getActivityToGoTo().observe(this@WelcomeActivity, Observer {
+            activityToGoTo.observe(this@WelcomeActivity, Observer {
                 with(Intent(this@WelcomeActivity, it)) {
                     startActivity(this)
                     finish()

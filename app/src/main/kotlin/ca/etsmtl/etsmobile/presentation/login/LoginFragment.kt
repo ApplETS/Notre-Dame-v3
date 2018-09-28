@@ -18,7 +18,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import ca.etsmtl.etsmobile.R
-import ca.etsmtl.etsmobile.presentation.MainActivity
+import ca.etsmtl.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.etsmobile.util.EventObserver
 import ca.etsmtl.etsmobile.util.fadeTo
 import ca.etsmtl.etsmobile.util.hideKeyboard
@@ -149,7 +149,7 @@ class LoginFragment : DaggerFragment() {
      */
     private fun subscribeUI() {
         with (loginViewModel) {
-            getShowLoading().observe(this@LoginFragment, Observer {
+            showLoading.observe(this@LoginFragment, Observer {
                 showProgress(it == true)
             })
 
@@ -157,15 +157,15 @@ class LoginFragment : DaggerFragment() {
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
-            getUniversalCodeError().observe(this@LoginFragment, Observer {
+            universalCodeError.observe(this@LoginFragment, Observer {
                 setFieldError(layoutUniversalCode, it)
             })
 
-            getPasswordError().observe(this@LoginFragment, Observer {
+            passwordError.observe(this@LoginFragment, Observer {
                 setFieldError(layoutPassword, it)
             })
 
-            getActivityToGoTo().observe(this@LoginFragment, Observer {
+            activityToGoTo.observe(this@LoginFragment, Observer {
                 with(Intent(context, it)) {
                     startActivity(this)
                     if (it == MainActivity::class.java) {
@@ -174,11 +174,11 @@ class LoginFragment : DaggerFragment() {
                 }
             })
 
-            getHideKeyboard().observe(this@LoginFragment, Observer {
+            hideKeyboard.observe(this@LoginFragment, Observer {
                 btnSignIn.hideKeyboard()
             })
 
-            getDisplayUniversalCodeDialog().observe(this@LoginFragment, Observer {
+            displayUniversalCodeDialog.observe(this@LoginFragment, Observer {
                 if (it == true) {
                     universalCodeInfoDialog?.show()
                 } else {
