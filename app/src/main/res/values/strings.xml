@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ÉTSMobile</string>
-    <string name="preference_file_key">ETSMobilePrefs</string>
+    <string name="preference_file_key" translatable="false">ETSMobilePrefs</string>
     <string name="error">Une erreur est survenue</string>
     <string name="error_no_internet_connection">Absence de connexion internet</string>
     <string name="yes">Oui</string>
@@ -15,7 +15,7 @@
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Horaire</string>
     <string name="title_student">Étudiant</string>
-    <string name="title_dashboard">Tableau de bord</string>
+    <string name="title_dashboard">Accueil</string>
     <string name="title_ets">ÉTS</string>
     <string name="title_more">Plus</string>
 
@@ -32,7 +32,7 @@
     <string name="msg_logout_success">Vous vous êtes déconnecté</string>
     <string name="label_login_applets_logo">Conçue par</string>
     <string name="password_forgotten">Mot de passe oublié?</string>
-    <string name="uri_password_forgotten">https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx</string>
+    <string name="uri_password_forgotten" translatable="false">https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx</string>
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>
@@ -72,8 +72,8 @@
     <!-- About -->
     <string name="applets_about">ÉTSMobile a été réalisée par le club scientifique ApplETS de l\'École de technologie supérieure.\n\nApplETS se veut, avant tout, un regroupement d’étudiants qui partagent un intérêt commun pour le domaine des télécommunications et des applications mobiles.
         La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nPour en savoir plus, n\'hésitez pas à consulter notre site web : http://clubapplets.ca</string>
-    <string name="uri_applets_gh">https://github.com/orgs/ApplETS/</string>
-    <string name="uri_applets_fb">https://www.facebook.com/ClubApplETS</string>
-    <string name="uri_applets_twitter">https://twitter.com/ClubApplETS</string>
-    <string name="uri_applets_yt">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
+    <string name="uri_applets_gh" translatable="false">https://github.com/orgs/ApplETS/</string>
+    <string name="uri_applets_fb" translatable="false">https://www.facebook.com/ClubApplETS</string>
+    <string name="uri_applets_twitter" translatable="false">https://twitter.com/ClubApplETS</string>
+    <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
 </resources>
