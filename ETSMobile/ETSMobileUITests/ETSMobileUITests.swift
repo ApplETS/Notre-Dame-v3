@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ETS_mobileUITests: XCTestCase {
+class ETSMobileUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

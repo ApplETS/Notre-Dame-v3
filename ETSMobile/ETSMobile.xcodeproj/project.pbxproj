@@ -23,8 +23,8 @@
 		25553FAC20545D42009897F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAA20545D42009897F7 /* Main.storyboard */; };
 		25553FAE20545D42009897F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAD20545D42009897F7 /* Assets.xcassets */; };
 		25553FB120545D42009897F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAF20545D42009897F7 /* LaunchScreen.storyboard */; };
-		25553FBC20545D42009897F7 /* ETS_mobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FBB20545D42009897F7 /* ETS_mobileTests.swift */; };
-		25553FC720545D42009897F7 /* ETS_mobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FC620545D42009897F7 /* ETS_mobileUITests.swift */; };
+		25553FBC20545D42009897F7 /* ETSMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FBB20545D42009897F7 /* ETSMobileTests.swift */; };
+		25553FC720545D42009897F7 /* ETSMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FC620545D42009897F7 /* ETSMobileUITests.swift */; };
 		846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */; };
 		84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
@@ -80,10 +80,10 @@
 		25553FB020545D42009897F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25553FB220545D42009897F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25553FB720545D42009897F7 /* ETSMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ETSMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		25553FBB20545D42009897F7 /* ETS_mobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETS_mobileTests.swift; sourceTree = "<group>"; };
+		25553FBB20545D42009897F7 /* ETSMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSMobileTests.swift; sourceTree = "<group>"; };
 		25553FBD20545D42009897F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25553FC220545D42009897F7 /* ETSMobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ETSMobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		25553FC620545D42009897F7 /* ETS_mobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETS_mobileUITests.swift; sourceTree = "<group>"; };
+		25553FC620545D42009897F7 /* ETSMobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSMobileUITests.swift; sourceTree = "<group>"; };
 		25553FC820545D42009897F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmedPersonViewController.swift; sourceTree = "<group>"; };
 		84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalEmergencyViewController.swift; sourceTree = "<group>"; };
@@ -182,8 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				25553FA320545D42009897F7 /* ETSMobile */,
-				25553FBA20545D42009897F7 /* ETS-mobileTests */,
-				25553FC520545D42009897F7 /* ETS-mobileUITests */,
+				25553FBA20545D42009897F7 /* ETSMobileTests */,
+				25553FC520545D42009897F7 /* ETSMobileUITests */,
 				25553FA220545D42009897F7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -217,22 +217,22 @@
 			path = ETSMobile;
 			sourceTree = "<group>";
 		};
-		25553FBA20545D42009897F7 /* ETS-mobileTests */ = {
+		25553FBA20545D42009897F7 /* ETSMobileTests */ = {
 			isa = PBXGroup;
 			children = (
-				25553FBB20545D42009897F7 /* ETS_mobileTests.swift */,
+				25553FBB20545D42009897F7 /* ETSMobileTests.swift */,
 				25553FBD20545D42009897F7 /* Info.plist */,
 			);
-			path = "ETS-mobileTests";
+			path = ETSMobileTests;
 			sourceTree = "<group>";
 		};
-		25553FC520545D42009897F7 /* ETS-mobileUITests */ = {
+		25553FC520545D42009897F7 /* ETSMobileUITests */ = {
 			isa = PBXGroup;
 			children = (
-				25553FC620545D42009897F7 /* ETS_mobileUITests.swift */,
+				25553FC620545D42009897F7 /* ETSMobileUITests.swift */,
 				25553FC820545D42009897F7 /* Info.plist */,
 			);
-			path = "ETS-mobileUITests";
+			path = ETSMobileUITests;
 			sourceTree = "<group>";
 		};
 		958F2F002106ADB30074DBF5 /* Login */ = {
@@ -424,7 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25553FBC20545D42009897F7 /* ETS_mobileTests.swift in Sources */,
+				25553FBC20545D42009897F7 /* ETSMobileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25553FC720545D42009897F7 /* ETS_mobileUITests.swift in Sources */,
+				25553FC720545D42009897F7 /* ETSMobileUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,7 +602,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N742HF354K;
-				INFOPLIST_FILE = "ETS-mobile/Info.plist";
+				INFOPLIST_FILE = ETSMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.applets.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

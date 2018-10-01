@@ -9,7 +9,7 @@
 import XCTest
 @testable import ETS_mobile
 
-class ETS_mobileTests: XCTestCase {
+class ETSMobileTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
