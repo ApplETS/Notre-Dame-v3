@@ -29,6 +29,14 @@
 		84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* LoginModel.swift */; };
+		C8C49A7C2162D31E006CCBED /* Emergencies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A7B2162D31E006CCBED /* Emergencies.storyboard */; };
+		C8C49A7E2162D3AC006CCBED /* Drawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A7D2162D3AC006CCBED /* Drawer.storyboard */; };
+		C8C49A802162D3F6006CCBED /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A7F2162D3F6006CCBED /* Login.storyboard */; };
+		C8C49A822162D46A006CCBED /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A812162D46A006CCBED /* Home.storyboard */; };
+		C8C49A842162D4B7006CCBED /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A832162D4B7006CCBED /* Profile.storyboard */; };
+		C8C49A862162D553006CCBED /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A852162D553006CCBED /* Schedule.storyboard */; };
+		C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C49A882162D60D006CCBED /* SchoolViewController.swift */; };
+		C8C49A8B2162D641006CCBED /* School.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A8A2162D641006CCBED /* School.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +89,14 @@
 		84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalEmergencyViewController.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		C8C49A7B2162D31E006CCBED /* Emergencies.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Emergencies.storyboard; sourceTree = "<group>"; };
+		C8C49A7D2162D3AC006CCBED /* Drawer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawer.storyboard; sourceTree = "<group>"; };
+		C8C49A7F2162D3F6006CCBED /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		C8C49A812162D46A006CCBED /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		C8C49A832162D4B7006CCBED /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		C8C49A852162D553006CCBED /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
+		C8C49A882162D60D006CCBED /* SchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolViewController.swift; sourceTree = "<group>"; };
+		C8C49A8A2162D641006CCBED /* School.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = School.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +127,8 @@
 		142FC841208B90E400C58563 /* Emergencies */ = {
 			isa = PBXGroup;
 			children = (
+				C8C49A7B2162D31E006CCBED /* Emergencies.storyboard */,
+				146F3B0B208B883400275F71 /* EmergencyTableViewController.swift */,
 				846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */,
 				142FC845208B9B6600C58563 /* BombThreatViewController.swift */,
 				14487BEE20C4808000769881 /* SuspiciousPackageViewController.swift */,
@@ -121,18 +139,20 @@
 			path = Emergencies;
 			sourceTree = "<group>";
 		};
-		146F3AFF208B84FE00275F71 /* Dashboard */ = {
+		146F3AFF208B84FE00275F71 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C8C49A812162D46A006CCBED /* Home.storyboard */,
 				146F3B03208B878900275F71 /* HomeViewController.swift */,
 				146F3B0D208B89AA00275F71 /* HomeView.swift */,
 			);
-			path = Dashboard;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		146F3B00208B850F00275F71 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				C8C49A832162D4B7006CCBED /* Profile.storyboard */,
 				146F3B05208B87AD00275F71 /* ProfileViewController.swift */,
 				146F3B0F208B89E100275F71 /* ProfileView.swift */,
 			);
@@ -142,6 +162,7 @@
 		146F3B01208B853100275F71 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				C8C49A852162D553006CCBED /* Schedule.storyboard */,
 				146F3B07208B87C900275F71 /* ScheduleViewController.swift */,
 				146F3B11208B89EB00275F71 /* ScheduleView.swift */,
 			);
@@ -151,8 +172,8 @@
 		146F3B02208B867500275F71 /* Drawer */ = {
 			isa = PBXGroup;
 			children = (
+				C8C49A7D2162D3AC006CCBED /* Drawer.storyboard */,
 				142FC841208B90E400C58563 /* Emergencies */,
-				146F3B0B208B883400275F71 /* EmergencyTableViewController.swift */,
 			);
 			path = Drawer;
 			sourceTree = "<group>";
@@ -180,13 +201,14 @@
 		25553FA320545D42009897F7 /* ETSMobile */ = {
 			isa = PBXGroup;
 			children = (
-				958F2F002106ADB30074DBF5 /* Login Screen */,
-				146F3AFF208B84FE00275F71 /* Dashboard */,
-				146F3B00208B850F00275F71 /* Profile */,
-				146F3B01208B853100275F71 /* Schedule */,
-				146F3B02208B867500275F71 /* Drawer */,
 				25553FA420545D42009897F7 /* AppDelegate.swift */,
 				25553FAA20545D42009897F7 /* Main.storyboard */,
+				958F2F002106ADB30074DBF5 /* Login */,
+				146F3AFF208B84FE00275F71 /* Home */,
+				146F3B00208B850F00275F71 /* Profile */,
+				146F3B01208B853100275F71 /* Schedule */,
+				C8C49A872162D5F6006CCBED /* School */,
+				146F3B02208B867500275F71 /* Drawer */,
 				25553FAD20545D42009897F7 /* Assets.xcassets */,
 				25553FAF20545D42009897F7 /* LaunchScreen.storyboard */,
 				25553FB220545D42009897F7 /* Info.plist */,
@@ -213,13 +235,23 @@
 			path = "ETS-mobileUITests";
 			sourceTree = "<group>";
 		};
-		958F2F002106ADB30074DBF5 /* Login Screen */ = {
+		958F2F002106ADB30074DBF5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				C8C49A7F2162D3F6006CCBED /* Login.storyboard */,
 				958F2F012106ADF70074DBF5 /* LoginModel.swift */,
 				958AD36D210E069200A5D5B0 /* LoginViewController.swift */,
 			);
-			path = "Login Screen";
+			path = Login;
+			sourceTree = "<group>";
+		};
+		C8C49A872162D5F6006CCBED /* School */ = {
+			isa = PBXGroup;
+			children = (
+				C8C49A8A2162D641006CCBED /* School.storyboard */,
+				C8C49A882162D60D006CCBED /* SchoolViewController.swift */,
+			);
+			path = School;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,8 +367,15 @@
 			files = (
 				25553FB120545D42009897F7 /* LaunchScreen.storyboard in Resources */,
 				1454550520B3647000EB7682 /* Localizable.strings in Resources */,
+				C8C49A802162D3F6006CCBED /* Login.storyboard in Resources */,
+				C8C49A8B2162D641006CCBED /* School.storyboard in Resources */,
 				25553FAE20545D42009897F7 /* Assets.xcassets in Resources */,
 				25553FAC20545D42009897F7 /* Main.storyboard in Resources */,
+				C8C49A7C2162D31E006CCBED /* Emergencies.storyboard in Resources */,
+				C8C49A842162D4B7006CCBED /* Profile.storyboard in Resources */,
+				C8C49A7E2162D3AC006CCBED /* Drawer.storyboard in Resources */,
+				C8C49A822162D46A006CCBED /* Home.storyboard in Resources */,
+				C8C49A862162D553006CCBED /* Schedule.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +407,7 @@
 				146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */,
 				14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */,
 				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
+				C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */,
 				146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */,
 				142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */,
 				84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */,
