@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ETS-mobile.xcodeproj">
+      location = "self:/Users/antoinelamy/Workspace/Notre-Dame-iOS/ETS-mobile/ETSMobile.xcodeproj">
    </FileRef>
 </Workspace>
