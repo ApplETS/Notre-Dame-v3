@@ -77,7 +77,7 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$lifecycle"
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:${junit}"

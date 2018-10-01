@@ -60,7 +60,7 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room"
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:${junit}"
