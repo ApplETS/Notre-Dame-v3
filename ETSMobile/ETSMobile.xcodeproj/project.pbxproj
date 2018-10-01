@@ -28,7 +28,9 @@
 		846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */; };
 		84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
-		958F2F022106ADF70074DBF5 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* LoginModel.swift */; };
+		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
+		C8B61D042162D9100040A732 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D032162D9100040A732 /* UserType.swift */; };
+		C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D072162DB1D0040A732 /* MonETSClient.swift */; };
 		C8C49A7C2162D31E006CCBED /* Emergencies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A7B2162D31E006CCBED /* Emergencies.storyboard */; };
 		C8C49A7E2162D3AC006CCBED /* Drawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A7D2162D3AC006CCBED /* Drawer.storyboard */; };
 		C8C49A802162D3F6006CCBED /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A7F2162D3F6006CCBED /* Login.storyboard */; };
@@ -88,7 +90,9 @@
 		846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmedPersonViewController.swift; sourceTree = "<group>"; };
 		84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalEmergencyViewController.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		958F2F012106ADF70074DBF5 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		C8B61D032162D9100040A732 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		C8B61D072162DB1D0040A732 /* MonETSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonETSClient.swift; sourceTree = "<group>"; };
 		C8C49A7B2162D31E006CCBED /* Emergencies.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Emergencies.storyboard; sourceTree = "<group>"; };
 		C8C49A7D2162D3AC006CCBED /* Drawer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawer.storyboard; sourceTree = "<group>"; };
 		C8C49A7F2162D3F6006CCBED /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -202,13 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				25553FA420545D42009897F7 /* AppDelegate.swift */,
-				25553FAA20545D42009897F7 /* Main.storyboard */,
-				958F2F002106ADB30074DBF5 /* Login */,
-				146F3AFF208B84FE00275F71 /* Home */,
-				146F3B00208B850F00275F71 /* Profile */,
-				146F3B01208B853100275F71 /* Schedule */,
-				C8C49A872162D5F6006CCBED /* School */,
-				146F3B02208B867500275F71 /* Drawer */,
+				C8B61D052162DA920040A732 /* UI */,
+				C8B61D062162DAFB0040A732 /* Service */,
+				C8B61D022162D8B50040A732 /* Model */,
 				25553FAD20545D42009897F7 /* Assets.xcassets */,
 				25553FAF20545D42009897F7 /* LaunchScreen.storyboard */,
 				25553FB220545D42009897F7 /* Info.plist */,
@@ -239,10 +239,40 @@
 			isa = PBXGroup;
 			children = (
 				C8C49A7F2162D3F6006CCBED /* Login.storyboard */,
-				958F2F012106ADF70074DBF5 /* LoginModel.swift */,
 				958AD36D210E069200A5D5B0 /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		C8B61D022162D8B50040A732 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				958F2F012106ADF70074DBF5 /* UserInfo.swift */,
+				C8B61D032162D9100040A732 /* UserType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8B61D052162DA920040A732 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				25553FAA20545D42009897F7 /* Main.storyboard */,
+				958F2F002106ADB30074DBF5 /* Login */,
+				146F3AFF208B84FE00275F71 /* Home */,
+				146F3B00208B850F00275F71 /* Profile */,
+				146F3B01208B853100275F71 /* Schedule */,
+				C8C49A872162D5F6006CCBED /* School */,
+				146F3B02208B867500275F71 /* Drawer */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C8B61D062162DAFB0040A732 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C8B61D072162DB1D0040A732 /* MonETSClient.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		C8C49A872162D5F6006CCBED /* School */ = {
@@ -406,14 +436,16 @@
 				25553FA520545D42009897F7 /* AppDelegate.swift in Sources */,
 				146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */,
 				14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */,
+				C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */,
 				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
 				C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */,
 				146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */,
 				142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */,
 				84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */,
-				958F2F022106ADF70074DBF5 /* LoginModel.swift in Sources */,
+				958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */,
 				146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */,
 				958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */,
+				C8B61D042162D9100040A732 /* UserType.swift in Sources */,
 				146F3B12208B89EB00275F71 /* ScheduleView.swift in Sources */,
 				146F3B10208B89E100275F71 /* ProfileView.swift in Sources */,
 				146F3B04208B878900275F71 /* HomeViewController.swift in Sources */,
