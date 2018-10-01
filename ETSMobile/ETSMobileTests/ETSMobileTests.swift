@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ETS_mobile
+@testable import ETSMobile
 
 class ETSMobileTests: XCTestCase {
     
