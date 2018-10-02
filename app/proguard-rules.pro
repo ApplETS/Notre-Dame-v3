@@ -33,6 +33,7 @@
 # Crashlytics
 -keep class com.crashlytics.** { *; }
 -dontwarn com.crashlytics.**
+-printmapping mapping.txt
 
 # Firebase
 -keep class com.google.firebase.provider.** { *; }

@@ -8,14 +8,12 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: "org.jlleitschuh.gradle.ktlint"
 
-apply plugin: 'com.akaita.android.easylauncher'
-
 //apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "ca.etsmtl.etsmobile"
+        applicationId "ca.etsmtl.applets.etsmobile"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -30,6 +28,20 @@ android {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        beta {
+            dimension "version"
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            resValue "string", "app_name", "ÉTSMobile bêta"
+        }
+        finale {
+            dimension "version"
+            resValue "string", "app_name", "ÉTSMobile"
         }
     }
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ca.etsmtl.etsmobile.presentation.dashboard.DashboardFragment">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardFragment">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ca.etsmtl.etsmobile.presentation.main.MainActivity">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.main.MainActivity">
 
     <FrameLayout
         android:id="@+id/content"
