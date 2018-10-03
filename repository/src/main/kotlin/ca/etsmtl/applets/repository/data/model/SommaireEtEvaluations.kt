@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.model
+package ca.etsmtl.applets.repository.data.model
 
 /**
  * Created by Sonphil on 14-09-18.

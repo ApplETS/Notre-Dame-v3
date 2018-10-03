@@ -11,10 +11,10 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.repository.data.model.Cours
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.repository.data.repository.signets.CoursRepository
+import ca.etsmtl.applets.repository.data.model.Cours
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import javax.inject.Inject
 
 /**

@@ -1,9 +1,9 @@
-package ca.etsmtl.repository.data.db.dao.signets
+package ca.etsmtl.applets.repository.data.db.dao.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
-import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
 
 /**
  * Created by Sonphil on 13-03-18.

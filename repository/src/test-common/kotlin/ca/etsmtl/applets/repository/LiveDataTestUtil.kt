@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repository
+package ca.etsmtl.applets.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer

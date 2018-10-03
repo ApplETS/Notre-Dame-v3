@@ -1,7 +1,7 @@
-package ca.etsmtl.repository.data.api.response.mapper
+package ca.etsmtl.applets.repository.data.api.response.mapper
 
-import ca.etsmtl.repository.data.api.response.signets.ApiSignetsData
-import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsData
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter

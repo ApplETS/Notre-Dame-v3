@@ -1,29 +1,29 @@
-package ca.etsmtl.repository.data.db
+package ca.etsmtl.applets.repository.data.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import ca.etsmtl.repository.data.db.dao.signets.ActiviteDao
-import ca.etsmtl.repository.data.db.dao.signets.CoursDao
-import ca.etsmtl.repository.data.db.dao.signets.EnseignantDao
-import ca.etsmtl.repository.data.db.dao.signets.EtudiantDao
-import ca.etsmtl.repository.data.db.dao.signets.EvaluationDao
-import ca.etsmtl.repository.data.db.dao.signets.HoraireExamenFinalDao
-import ca.etsmtl.repository.data.db.dao.signets.JourRemplaceDao
-import ca.etsmtl.repository.data.db.dao.signets.ProgrammeDao
-import ca.etsmtl.repository.data.db.dao.signets.SeanceDao
-import ca.etsmtl.repository.data.db.dao.signets.SessionDao
-import ca.etsmtl.repository.data.db.dao.signets.SommaireElementsEvaluationDao
-import ca.etsmtl.repository.data.db.entity.signets.ActiviteEntity
-import ca.etsmtl.repository.data.db.entity.signets.CoursEntity
-import ca.etsmtl.repository.data.db.entity.signets.EnseignantEntity
-import ca.etsmtl.repository.data.db.entity.signets.EtudiantEntity
-import ca.etsmtl.repository.data.db.entity.signets.EvaluationEntity
-import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
-import ca.etsmtl.repository.data.db.entity.signets.JourRemplaceEntity
-import ca.etsmtl.repository.data.db.entity.signets.ProgrammeEntity
-import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
-import ca.etsmtl.repository.data.db.entity.signets.SessionEntity
-import ca.etsmtl.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
+import ca.etsmtl.applets.repository.data.db.dao.signets.ActiviteDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.EnseignantDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.EtudiantDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.HoraireExamenFinalDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.JourRemplaceDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.ProgrammeDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.SeanceDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.SessionDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.SommaireElementsEvaluationDao
+import ca.etsmtl.applets.repository.data.db.entity.signets.ActiviteEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.EnseignantEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.JourRemplaceEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 
 /**
  * Created by Sonphil on 13-03-18.

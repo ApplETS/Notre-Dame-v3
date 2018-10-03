@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.di
+package ca.etsmtl.applets.repository.di
 
 import dagger.Module
 

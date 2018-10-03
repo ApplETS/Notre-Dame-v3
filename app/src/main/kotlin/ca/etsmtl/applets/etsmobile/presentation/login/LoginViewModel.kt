@@ -16,11 +16,11 @@ import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.call
 import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.repository.data.model.Etudiant
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
-import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
+import ca.etsmtl.applets.repository.data.model.Etudiant
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
 /**

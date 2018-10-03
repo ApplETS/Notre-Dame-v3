@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repository.util
+package ca.etsmtl.applets.repository.util
 
-import ca.etsmtl.repository.AppExecutors
+import ca.etsmtl.applets.repository.AppExecutors
 import java.util.concurrent.Executor
 
 class InstantAppExecutors : AppExecutors(instant, instant, instant) {

@@ -21,7 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 # Keep the names of our api models so that Moshi can use them
--keepnames class ca.etsmtl.repository.data.api.response.** { *; }
+-keepnames class ca.etsmtl.applets.repository.data.api.response.** { *; }
 
 # For stack traces
 -keepattributes SourceFile,LineNumberTable

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.repository.data.model.Etudiant
+import ca.etsmtl.applets.repository.data.model.Etudiant
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.recyclerViewProfile
 import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutProfile

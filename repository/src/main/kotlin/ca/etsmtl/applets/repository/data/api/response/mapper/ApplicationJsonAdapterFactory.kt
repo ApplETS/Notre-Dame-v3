@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.api.response.mapper
+package ca.etsmtl.applets.repository.data.api.response.mapper
 
 import com.squareup.moshi.JsonAdapter
 import se.ansman.kotshi.KotshiJsonAdapterFactory

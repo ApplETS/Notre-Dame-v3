@@ -12,7 +12,7 @@ import android.widget.Toast
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.show
-import ca.etsmtl.repository.data.model.Cours
+import ca.etsmtl.applets.repository.data.model.Cours
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import dagger.android.support.DaggerFragment

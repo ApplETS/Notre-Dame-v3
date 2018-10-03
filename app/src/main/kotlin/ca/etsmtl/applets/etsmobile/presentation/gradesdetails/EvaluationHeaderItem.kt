@@ -8,7 +8,7 @@ import android.view.animation.RotateAnimation
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
 import ca.etsmtl.applets.etsmobile.util.show
-import ca.etsmtl.repository.data.model.Evaluation
+import ca.etsmtl.applets.repository.data.model.Evaluation
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem

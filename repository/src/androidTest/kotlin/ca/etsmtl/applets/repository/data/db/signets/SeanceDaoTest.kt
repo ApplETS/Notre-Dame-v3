@@ -1,9 +1,9 @@
-package ca.etsmtl.repository.data.db.signets
+package ca.etsmtl.applets.repository.data.db.signets
 
-import ca.etsmtl.repository.LiveDataTestUtil
-import ca.etsmtl.repository.data.db.DbTest
-import ca.etsmtl.repository.data.db.dao.signets.SeanceDao
-import ca.etsmtl.repository.data.db.entity.signets.SeanceEntity
+import ca.etsmtl.applets.repository.LiveDataTestUtil
+import ca.etsmtl.applets.repository.data.db.DbTest
+import ca.etsmtl.applets.repository.data.db.dao.signets.SeanceDao
+import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Before

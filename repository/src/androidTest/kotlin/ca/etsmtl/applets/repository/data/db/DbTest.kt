@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repository.data.db
+package ca.etsmtl.applets.repository.data.db
 
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry

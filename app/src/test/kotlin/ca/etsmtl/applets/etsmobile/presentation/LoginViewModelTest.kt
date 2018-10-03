@@ -10,11 +10,11 @@ import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.mockNetwork
-import ca.etsmtl.repository.data.model.Etudiant
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
-import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
+import ca.etsmtl.applets.repository.data.model.Etudiant
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.eq

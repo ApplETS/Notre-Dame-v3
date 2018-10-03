@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.model
+package ca.etsmtl.applets.repository.data.model
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -11,7 +11,7 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.presentation.login.WelcomeActivity
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
+import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
 /**

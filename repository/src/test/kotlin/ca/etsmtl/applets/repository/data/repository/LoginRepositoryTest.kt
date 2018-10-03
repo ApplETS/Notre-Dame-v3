@@ -1,15 +1,15 @@
-package ca.etsmtl.repository.data.repository
+package ca.etsmtl.applets.repository.data.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.content.SharedPreferences
-import ca.etsmtl.repository.AppExecutors
-import ca.etsmtl.repository.LiveDataTestUtil
-import ca.etsmtl.repository.data.db.AppDatabase
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.repository.data.repository.signets.login.CipherUtils
-import ca.etsmtl.repository.data.repository.signets.login.KeyStoreUtils
-import ca.etsmtl.repository.data.repository.signets.login.LoginRepository
-import ca.etsmtl.repository.util.InstantAppExecutors
+import ca.etsmtl.applets.repository.AppExecutors
+import ca.etsmtl.applets.repository.LiveDataTestUtil
+import ca.etsmtl.applets.repository.data.db.AppDatabase
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.repository.signets.login.CipherUtils
+import ca.etsmtl.applets.repository.data.repository.signets.login.KeyStoreUtils
+import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
+import ca.etsmtl.applets.repository.util.InstantAppExecutors
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

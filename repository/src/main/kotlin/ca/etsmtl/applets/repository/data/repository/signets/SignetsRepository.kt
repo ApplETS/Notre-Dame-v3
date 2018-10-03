@@ -1,13 +1,13 @@
-package ca.etsmtl.repository.data.repository.signets
+package ca.etsmtl.applets.repository.data.repository.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.Transformations
 import android.support.annotation.VisibleForTesting
-import ca.etsmtl.repository.AppExecutors
-import ca.etsmtl.repository.data.api.ApiResponse
-import ca.etsmtl.repository.data.api.response.signets.ApiSignetsData
-import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
+import ca.etsmtl.applets.repository.AppExecutors
+import ca.etsmtl.applets.repository.data.api.ApiResponse
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsData
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 
 /**
  * On a request, Signets's web service will return a 200 status code. If an error has occurred, it's

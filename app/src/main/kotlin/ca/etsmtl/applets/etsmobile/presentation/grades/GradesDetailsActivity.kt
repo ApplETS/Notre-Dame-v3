@@ -11,7 +11,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsFragment
 import ca.etsmtl.applets.etsmobile.util.show
-import ca.etsmtl.repository.data.model.Cours
+import ca.etsmtl.applets.repository.data.model.Cours
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**

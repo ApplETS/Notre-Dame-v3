@@ -6,7 +6,7 @@ import ca.etsmtl.applets.etsmobile.di.activitymodule.GradesDetailsActivityBuilde
 import ca.etsmtl.applets.etsmobile.di.activitymodule.MainActivityBuilder
 import ca.etsmtl.applets.etsmobile.di.activitymodule.WelcomeActivityBuilder
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.repository.di.RepositoryModule
+import ca.etsmtl.applets.repository.di.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

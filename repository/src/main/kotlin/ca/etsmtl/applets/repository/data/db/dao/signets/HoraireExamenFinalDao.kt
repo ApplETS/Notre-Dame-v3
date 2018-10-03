@@ -1,10 +1,10 @@
-package ca.etsmtl.repository.data.db.dao.signets
+package ca.etsmtl.applets.repository.data.db.dao.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Transaction
-import ca.etsmtl.repository.data.db.entity.signets.HoraireExamenFinalEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
 
 /**
  * Created by Sonphil on 23-05-18.

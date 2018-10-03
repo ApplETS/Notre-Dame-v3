@@ -1,27 +1,27 @@
-package ca.etsmtl.repository.data.repository.signets
+package ca.etsmtl.applets.repository.data.repository.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
-import ca.etsmtl.repository.AppExecutors
-import ca.etsmtl.repository.data.api.ApiResponse
-import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.api.requestbody.signets.ListeDesElementsEvaluationRequestBody
-import ca.etsmtl.repository.data.api.response.mapper.toEvaluationEntities
-import ca.etsmtl.repository.data.api.response.mapper.toSommaireEvaluationEntity
-import ca.etsmtl.repository.data.api.response.signets.ApiListeDesElementsEvaluation
-import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
-import ca.etsmtl.repository.data.db.dao.signets.EvaluationDao
-import ca.etsmtl.repository.data.db.dao.signets.SommaireElementsEvaluationDao
-import ca.etsmtl.repository.data.db.entity.mapper.toEvaluations
-import ca.etsmtl.repository.data.db.entity.mapper.toSommaireEvaluation
-import ca.etsmtl.repository.data.model.Cours
-import ca.etsmtl.repository.data.model.Evaluation
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.repository.data.model.SommaireElementsEvaluation
-import ca.etsmtl.repository.data.model.SommaireEtEvaluations
-import ca.etsmtl.repository.data.repository.NetworkBoundResource
+import ca.etsmtl.applets.repository.AppExecutors
+import ca.etsmtl.applets.repository.data.api.ApiResponse
+import ca.etsmtl.applets.repository.data.api.SignetsApi
+import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesElementsEvaluationRequestBody
+import ca.etsmtl.applets.repository.data.api.response.mapper.toEvaluationEntities
+import ca.etsmtl.applets.repository.data.api.response.mapper.toSommaireEvaluationEntity
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesElementsEvaluation
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
+import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.SommaireElementsEvaluationDao
+import ca.etsmtl.applets.repository.data.db.entity.mapper.toEvaluations
+import ca.etsmtl.applets.repository.data.db.entity.mapper.toSommaireEvaluation
+import ca.etsmtl.applets.repository.data.model.Cours
+import ca.etsmtl.applets.repository.data.model.Evaluation
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
+import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
+import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**

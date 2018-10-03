@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.model
+package ca.etsmtl.applets.repository.data.model
 
 data class HoraireExamenFinal(
     var sigle: String,

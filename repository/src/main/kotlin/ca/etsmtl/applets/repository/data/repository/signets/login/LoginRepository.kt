@@ -1,12 +1,12 @@
-package ca.etsmtl.repository.data.repository.signets.login
+package ca.etsmtl.applets.repository.data.repository.signets.login
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.SharedPreferences
 import android.support.annotation.VisibleForTesting
-import ca.etsmtl.repository.AppExecutors
-import ca.etsmtl.repository.data.db.AppDatabase
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.AppExecutors
+import ca.etsmtl.applets.repository.data.db.AppDatabase
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**

@@ -1,7 +1,7 @@
-package ca.etsmtl.repository.data.model
+package ca.etsmtl.applets.repository.data.model
 
 import android.os.Parcelable
-import ca.etsmtl.repository.data.model.SignetsUserCredentials.Companion.INSTANCE
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials.Companion.INSTANCE
 import kotlinx.android.parcel.Parcelize
 import java.util.concurrent.atomic.AtomicReference
 

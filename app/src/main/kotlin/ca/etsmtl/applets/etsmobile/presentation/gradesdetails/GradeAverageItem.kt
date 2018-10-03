@@ -5,7 +5,7 @@ import android.view.View
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.gradePercentageColor
 import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
-import ca.etsmtl.repository.util.replaceCommaAndParseToFloat
+import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder

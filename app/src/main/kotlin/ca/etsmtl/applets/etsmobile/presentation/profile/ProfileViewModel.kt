@@ -7,10 +7,10 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import ca.etsmtl.repository.data.model.Etudiant
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.repository.data.repository.signets.InfoEtudiantRepository
+import ca.etsmtl.applets.repository.data.model.Etudiant
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
 import javax.inject.Inject
 
 /**

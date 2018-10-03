@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation
 
 import ca.etsmtl.applets.etsmobile.di.DaggerAppComponent
-import ca.etsmtl.repository.di.RepositoryModule
+import ca.etsmtl.applets.repository.di.RepositoryModule
 import com.crashlytics.android.BuildConfig
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore

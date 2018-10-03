@@ -1,10 +1,10 @@
-package ca.etsmtl.repository.di
+package ca.etsmtl.applets.repository.di
 
 import android.content.Context
-import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
-import ca.etsmtl.repository.util.LiveDataCallAdapterFactory
-import ca.etsmtl.repository.util.SignetsTrust
+import ca.etsmtl.applets.repository.data.api.SignetsApi
+import ca.etsmtl.applets.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
+import ca.etsmtl.applets.repository.util.LiveDataCallAdapterFactory
+import ca.etsmtl.applets.repository.util.SignetsTrust
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

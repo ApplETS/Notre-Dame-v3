@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repository.data.repository
+package ca.etsmtl.applets.repository.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
-import ca.etsmtl.repository.AppExecutors
-import ca.etsmtl.repository.data.api.ApiResponse
-import ca.etsmtl.repository.data.model.Resource
+import ca.etsmtl.applets.repository.AppExecutors
+import ca.etsmtl.applets.repository.data.api.ApiResponse
+import ca.etsmtl.applets.repository.data.model.Resource
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.

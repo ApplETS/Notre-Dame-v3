@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.db.entity.signets
+package ca.etsmtl.applets.repository.data.db.entity.signets
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

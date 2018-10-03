@@ -1,20 +1,20 @@
-package ca.etsmtl.repository.data.repository.signets
+package ca.etsmtl.applets.repository.data.repository.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
-import ca.etsmtl.repository.AppExecutors
-import ca.etsmtl.repository.data.api.ApiResponse
-import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.api.requestbody.signets.EtudiantRequestBody
-import ca.etsmtl.repository.data.api.response.mapper.toEtudiantEntity
-import ca.etsmtl.repository.data.api.response.signets.ApiEtudiant
-import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
-import ca.etsmtl.repository.data.db.dao.signets.EtudiantDao
-import ca.etsmtl.repository.data.db.entity.mapper.toEtudiant
-import ca.etsmtl.repository.data.model.Etudiant
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.repository.data.repository.NetworkBoundResource
+import ca.etsmtl.applets.repository.AppExecutors
+import ca.etsmtl.applets.repository.data.api.ApiResponse
+import ca.etsmtl.applets.repository.data.api.SignetsApi
+import ca.etsmtl.applets.repository.data.api.requestbody.signets.EtudiantRequestBody
+import ca.etsmtl.applets.repository.data.api.response.mapper.toEtudiantEntity
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
+import ca.etsmtl.applets.repository.data.db.dao.signets.EtudiantDao
+import ca.etsmtl.applets.repository.data.db.entity.mapper.toEtudiant
+import ca.etsmtl.applets.repository.data.model.Etudiant
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**

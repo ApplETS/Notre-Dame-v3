@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.api.response.signets
+package ca.etsmtl.applets.repository.data.api.response.signets
 
 /**
  * Created by Sonphil on 17-03-18.

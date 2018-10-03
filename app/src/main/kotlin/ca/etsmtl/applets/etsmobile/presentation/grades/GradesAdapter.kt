@@ -11,7 +11,7 @@ import android.widget.TextView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.GradeViewHolder
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.HeaderViewHolder
-import ca.etsmtl.repository.data.model.Cours
+import ca.etsmtl.applets.repository.data.model.Cours
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.header_grade_course.tvSessionGrades
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseGrade

@@ -1,19 +1,19 @@
-package ca.etsmtl.repository.data.repository.signets
+package ca.etsmtl.applets.repository.data.repository.signets
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
-import ca.etsmtl.repository.AppExecutors
-import ca.etsmtl.repository.data.api.ApiResponse
-import ca.etsmtl.repository.data.api.SignetsApi
-import ca.etsmtl.repository.data.api.response.mapper.toJourRemplaceEntities
-import ca.etsmtl.repository.data.api.response.signets.ApiListeJoursRemplaces
-import ca.etsmtl.repository.data.api.response.signets.ApiSignetsModel
-import ca.etsmtl.repository.data.db.dao.signets.JourRemplaceDao
-import ca.etsmtl.repository.data.db.entity.mapper.toJoursRemplaces
-import ca.etsmtl.repository.data.model.JourRemplace
-import ca.etsmtl.repository.data.model.Resource
-import ca.etsmtl.repository.data.model.Session
-import ca.etsmtl.repository.data.repository.NetworkBoundResource
+import ca.etsmtl.applets.repository.AppExecutors
+import ca.etsmtl.applets.repository.data.api.ApiResponse
+import ca.etsmtl.applets.repository.data.api.SignetsApi
+import ca.etsmtl.applets.repository.data.api.response.mapper.toJourRemplaceEntities
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeJoursRemplaces
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
+import ca.etsmtl.applets.repository.data.db.dao.signets.JourRemplaceDao
+import ca.etsmtl.applets.repository.data.db.entity.mapper.toJoursRemplaces
+import ca.etsmtl.applets.repository.data.model.JourRemplace
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.Session
+import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**

@@ -1,4 +1,4 @@
-package ca.etsmtl.repository.data.api
+package ca.etsmtl.applets.repository.data.api
 
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue

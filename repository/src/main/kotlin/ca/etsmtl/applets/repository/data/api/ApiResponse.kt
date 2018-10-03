@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.repository.data.api
+package ca.etsmtl.applets.repository.data.api
 
 import retrofit2.Response
 import java.io.IOException

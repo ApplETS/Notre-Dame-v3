@@ -1,6 +1,6 @@
-package ca.etsmtl.repository.data.api
+package ca.etsmtl.applets.repository.data.api
 
-import ca.etsmtl.repository.data.api.response.signets.ApiCours
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiCours
 import junit.framework.Assert.assertFalse
 import org.junit.Test
 import org.junit.runner.RunWith
