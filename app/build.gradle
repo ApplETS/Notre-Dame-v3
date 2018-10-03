@@ -141,18 +141,6 @@ dependencies {
     // FlexboxLayout
     implementation "com.google.android:flexbox:$flexbox"
 
-    // Hyperion
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-core:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-core:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-attr:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-measurement:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-disk:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-recorder:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-phoenix:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-crash:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-shared-preferences:$hyperion"
-    debugImplementation "com.willowtreeapps.hyperion:hyperion-geiger-counter:$hyperion"
-
     implementation project(':repository')
 }
 
