@@ -8,13 +8,14 @@ buildscript {
     ext.dagger = '2.17'
     ext.dimens = '1.4'
     ext.espresso = '3.0.1'
-    ext.firebase = '16.0.3'
+    ext.firebase = '16.0.4'
     ext.firebase_crashlytics = '2.9.5'
     ext.flexbox = '1.0.0'
     ext.glide = '4.8.0'
     ext.groupie = '2.1.0'
+    ext.hyperion = '0.9.24'
     ext.junit = '4.12'
-    ext.kotlin_version = '1.2.70'
+    ext.kotlin_version = '1.2.71'
     ext.kotshi = '1.0.2'
     ext.leakcanary = '1.5.4'
     ext.lifecycle = '1.1.1'
@@ -40,7 +41,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:3.2.0"
         classpath 'io.fabric.tools:gradle:1.25.4'
