@@ -90,7 +90,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
             }
 
             if (expandableGroup.isExpanded) {
-                arrow.rotate(0f, -180f)
+                arrow.rotate(0f, -180f, duration = 0)
             }
 
             itemView.setOnClickListener {
