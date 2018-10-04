@@ -8,9 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +54,7 @@ class LoginFragment : DaggerFragment() {
         context?.let {
             val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
 
-            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_white_24dp)!!
+            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_outline_white_24dp)!!
                     .mutate()
             icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
 
@@ -133,14 +131,6 @@ class LoginFragment : DaggerFragment() {
             }
             false
         })
-
-        // Set the password layout font
-        activity?.let {
-            val fontValue = TypedValue()
-            it.theme.resolveAttribute(R.attr.fontFamily, fontValue, true)
-            val passwordLayoutTypeFace = ResourcesCompat.getFont(it, fontValue.resourceId)
-            layoutPassword.typeface = passwordLayoutTypeFace
-        }
     }
 
     /**

@@ -18,5 +18,5 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="@null"
         tools:background="@color/bgApplets"
-        app:titleTextAppearance="@style/AppTheme.Toolbar.Title" />
+        android:theme="@style/AppTheme.Toolbar"/>
 </android.support.constraint.ConstraintLayout>
