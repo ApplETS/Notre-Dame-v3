@@ -10,12 +10,12 @@ import Foundation
 
 struct UserInfo: Codable {
     var username: String
-    var password: String
+    var domain: String
     var userType: UserType
 
     enum CodingKeys: String, CodingKey {
-        case username
-        case password
-        case userType = "userTypeId"
+        case username = "Username"
+        case domain = "Domaine"
+        case userType = "typeUsagerId"
     }
 }
