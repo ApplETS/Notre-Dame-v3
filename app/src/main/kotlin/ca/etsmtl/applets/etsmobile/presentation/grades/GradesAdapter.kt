@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 
 class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>() {
 
-    val differ = AsyncListDiffer<Any>(this, object : DiffUtil.ItemCallback<Any>() {
+    private val differ = AsyncListDiffer<Any>(this, object : DiffUtil.ItemCallback<Any>() {
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
             return when {
                 oldItem is String && newItem is String ->

@@ -3,9 +3,8 @@ package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 import android.content.Context
 import android.support.v7.app.AlertDialog
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.RotateAnimation
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.util.rotate
 import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
 import ca.etsmtl.applets.etsmobile.util.show
 import ca.etsmtl.applets.repository.data.model.Evaluation
@@ -28,26 +27,6 @@ import kotlinx.android.synthetic.main.item_evaluation_header.tvWeight
 class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), ExpandableItem {
     private lateinit var expandableGroup: ExpandableGroup
     private var animatedProgress = false
-    private val rotateArrowToTop by lazy {
-        RotateAnimation(
-            0f, -180f,
-            Animation.RELATIVE_TO_SELF, 0.5f,
-            Animation.RELATIVE_TO_SELF, 0.5f
-        ).apply {
-            duration = 300
-            fillAfter = true
-        }
-    }
-    private val rotateArrowToBottom by lazy {
-        RotateAnimation(
-                -180f, 0f,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f
-        ).apply {
-            duration = 300
-            fillAfter = true
-        }
-    }
     private var ignoredEvaluationDialog: AlertDialog? = null
 
     override fun getLayout() = R.layout.item_evaluation_header
@@ -110,12 +89,16 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                 }
             }
 
+            if (expandableGroup.isExpanded) {
+                arrow.rotate(0f, -180f, duration = 0)
+            }
+
             itemView.setOnClickListener {
                 expandableGroup.onToggleExpanded()
 
                 when {
-                    expandableGroup.isExpanded -> arrow.startAnimation(rotateArrowToTop)
-                    else -> arrow.startAnimation(rotateArrowToBottom)
+                    expandableGroup.isExpanded -> arrow.rotate(0f, -180f)
+                    else -> arrow.rotate(-180f, 0f)
                 }
             }
         }
