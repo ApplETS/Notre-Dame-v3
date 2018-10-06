@@ -16,7 +16,7 @@ import ca.etsmtl.applets.repository.data.model.JourRemplace
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.data.model.Session
-import java.util.*
+import java.util.Date
 
 /**
  * Created by Sonphil on 09-07-18.
