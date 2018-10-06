@@ -35,3 +35,16 @@
     @com.squareup.moshi.* <methods>;
 }
 -keep @com.squareup.moshi.JsonQualifier interface *
+-keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
+    <fields>;
+}
+-keepnames @com.squareup.moshi.JsonClass class *
+-if @com.squareup.moshi.JsonClass class *
+-keep class <1>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-keep class kotlin.reflect.jvm.internal.impl.builtins.BuiltInsLoaderImpl
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}

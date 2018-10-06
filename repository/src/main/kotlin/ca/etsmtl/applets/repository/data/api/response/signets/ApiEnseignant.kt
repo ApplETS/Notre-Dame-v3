@@ -1,9 +1,9 @@
 package ca.etsmtl.applets.repository.data.api.response.signets
 
 import com.squareup.moshi.Json
-import se.ansman.kotshi.JsonSerializable
+import com.squareup.moshi.JsonClass
 
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class ApiEnseignant(
     @Json(name = "localBureau") var localBureau: String?,
     @Json(name = "telephone") var telephone: String?,

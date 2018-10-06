@@ -1,9 +1,9 @@
 package ca.etsmtl.applets.repository.data.api.response.signets
 
 import com.squareup.moshi.Json
-import se.ansman.kotshi.JsonSerializable
+import com.squareup.moshi.JsonClass
 
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class ApiListeDesActivitesEtProf(
     @Json(name = "__type") val type: String? = "",
     @Json(name = "listeActivites") val listeActivites: List<ApiActivite>? = listOf(),

@@ -10,7 +10,6 @@ import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesActivit
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesElementsEvaluationRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesSeancesRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeHoraireExamensFinauxRequestBody
-import ca.etsmtl.applets.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiActivite
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEnseignant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
@@ -65,7 +64,7 @@ class SignetsApiTest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var api: SignetsApi
-    private val moshi = Moshi.Builder().add(ApplicationJsonAdapterFactory.INSTANCE).build()
+    private val moshi = Moshi.Builder().build()
 
     @Before
     @Throws(IOException::class)
