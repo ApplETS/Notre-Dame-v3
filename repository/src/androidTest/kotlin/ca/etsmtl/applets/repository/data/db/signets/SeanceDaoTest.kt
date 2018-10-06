@@ -116,7 +116,7 @@ class SeanceDaoTest : DbTest() {
         dao.insert(expected)
 
         val expected2 = SeanceEntity(
-                1525093200000,
+                1525093300000,
                 1527950896000,
                 "Cours",
                 "B-0904",
