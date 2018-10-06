@@ -32,27 +32,45 @@ class SeanceRepository @Inject constructor(
      * Returns the schedule of the sessions for a given course and a given session
      *
      * @param userCredentials The user's credentials
-     * @param cours The course
+     * @param cours The course. If null, the [Seance]s will be fetched by [session].
      * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      * @return The schedule of the sessions
      */
     fun getSeancesSession(
         userCredentials: SignetsUserCredentials,
-        cours: Cours,
+        cours: Cours?,
         session: Session,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<Seance>>> {
         return object : NetworkBoundResource<List<Seance>, ApiSignetsModel<ApiListeDesSeances>>(appExecutors) {
             override fun saveCallResult(item: ApiSignetsModel<ApiListeDesSeances>) {
-                item.data?.let { dao.clearAndInsertByCoursAndSession(cours.sigle, cours.session, it.toSeancesEntities(cours)) }
+                item.data?.let {
+                    when (cours) {
+                        null -> dao.clearAndInsertBySession(
+                                session.abrege,
+                                it.toSeancesEntities(session.abrege)
+                        )
+                        else -> dao.clearAndInsertByCoursAndSession(
+                                cours.sigle,
+                                session.abrege,
+                                it.toSeancesEntities(session.abrege)
+                        )
+                    }
+                }
             }
 
             override fun shouldFetch(data: List<Seance>?): Boolean = shouldFetch
 
             override fun loadFromDb(): LiveData<List<Seance>> {
-                return Transformations.map(dao.getByCoursAndSession(cours.sigle, cours.session)) {
-                    it?.toSeances()
+                cours?.let {
+                    return Transformations.map(dao.getByCoursAndSession(it.sigle, it.session)) {
+                        it.toSeances()
+                    }
+                }
+
+                return Transformations.map(dao.getBySession(session.abrege)) {
+                    it.toSeances()
                 }
             }
 
@@ -61,7 +79,7 @@ class SeanceRepository @Inject constructor(
                         ListeDesSeancesRequestBody(
                                 userCredentials.codeAccesUniversel,
                                 userCredentials.motPasse,
-                                cours.sigle,
+                                cours?.sigle ?: "",
                                 session.abrege,
                                 session.dateDebut,
                                 session.dateFin

@@ -51,3 +51,8 @@ fun String.toLocaleDate(): String {
         }
     }
 }
+
+/**
+ * Formats Microsoft JSON date (e.g. /Date(1525093200000)/) to Unix time (e.g. 1525093200000)
+ */
+fun String.msDateToUnix() = substringAfter('(').substringBefore(')').toLong()
