@@ -26,6 +26,7 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvalu
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Session
+import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import ca.etsmtl.applets.repository.util.toLocaleDate
@@ -179,18 +180,18 @@ fun ApiListeJoursRemplaces.toJourRemplaceEntities(session: Session): List<JourRe
     return null
 }
 
-fun ApiSeance.toSeanceEntity(cours: Cours) = SeanceEntity(
-        this.dateDebut,
-        this.dateFin,
-        this.nomActivite,
-        this.local,
-        this.descriptionActivite,
-        this.libelleCours,
-        cours.sigle,
-        cours.session
+fun ApiSeance.toSeanceEntity(session: String) = SeanceEntity(
+        dateDebut.msDateToUnix(),
+        dateFin.msDateToUnix(),
+        nomActivite,
+        local,
+        descriptionActivite,
+        libelleCours,
+        coursGroupe.substringBefore("-"),
+        session
 )
 
-fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = liste.map { it.toSeanceEntity(cours) }
+fun ApiListeDesSeances.toSeancesEntities(session: String): List<SeanceEntity> = liste.map { it.toSeanceEntity(session) }
 
 fun ApiSession.toSessionEntity() = SessionEntity(
         abrege,

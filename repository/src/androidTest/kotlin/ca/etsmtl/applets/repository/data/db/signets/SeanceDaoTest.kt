@@ -14,8 +14,8 @@ import org.junit.Test
  */
 class SeanceDaoTest : DbTest() {
     private val entity = SeanceEntity(
-            "/Date(1525093200000)/",
-            "/Date(1525105800000)/",
+            1525093200000,
+            1525105800000,
             "Cours",
             "B-0904",
             "Activité de cours",
@@ -41,8 +41,8 @@ class SeanceDaoTest : DbTest() {
     @Test
     fun testInsertSame() {
         val same = SeanceEntity(
-                "/Date(1525093200000)/",
-                "/Date(1527950896000)/",
+                1525093200000,
+                1527950896000,
                 "Cours",
                 "B-0904",
                 "Activité de cours",
@@ -58,8 +58,8 @@ class SeanceDaoTest : DbTest() {
     @Test
     fun testByCoursAndSession() {
         val expected = SeanceEntity(
-                "/Date(1525093200123)/",
-                "/Date(1527950896022)/",
+                1525093200123,
+                1527950896022,
                 "Cours",
                 "B-0904",
                 "Activité de cours",
@@ -70,8 +70,8 @@ class SeanceDaoTest : DbTest() {
         dao.insert(expected)
 
         val unexpected1 = SeanceEntity(
-                "/Date(1525093200000)/",
-                "/Date(1527950896000)/",
+                1525093200000,
+                1527950896000,
                 "Cours",
                 "B-0904",
                 "Activité de cours",
@@ -82,8 +82,8 @@ class SeanceDaoTest : DbTest() {
         dao.insert(unexpected1)
 
         val unexpected2 = SeanceEntity(
-                "/Date(1525093200000)/",
-                "/Date(1527950896000)/",
+                1525093200000,
+                1527950896000,
                 "Cours",
                 "B-0904",
                 "Activité de cours",
@@ -102,11 +102,64 @@ class SeanceDaoTest : DbTest() {
     }
 
     @Test
+    fun testBySession() {
+        val expected = SeanceEntity(
+                1525093200123,
+                1527950896022,
+                "Cours",
+                "B-0904",
+                "Activité de cours",
+                "Algèbre linéaire et géométrie de l'espace",
+                "MAT472",
+                "A2018"
+        )
+        dao.insert(expected)
+
+        val expected2 = SeanceEntity(
+                1525093200000,
+                1527950896000,
+                "Cours",
+                "B-0904",
+                "Activité de cours",
+                "Foo",
+                "LOG123",
+                expected.session
+        )
+        dao.insert(expected2)
+
+        val unexpected1 = SeanceEntity(
+                1525093200000,
+                1527950896000,
+                "Cours",
+                "B-0904",
+                "Activité de cours",
+                "Foo",
+                expected.sigleCours,
+                "E2018"
+        )
+        dao.insert(unexpected1)
+
+        val seances = LiveDataTestUtil.getValue(dao.getBySession(expected.session))
+        assertEquals(2, seances.size)
+        assertEquals(expected, seances[0])
+        assertEquals(expected2, seances[1])
+    }
+
+    @Test
     fun testDeleteByCoursAndSession() {
         dao.deleteByCoursAndSession(entity.sigleCours, "A2018")
         assertEquals(1, LiveDataTestUtil.getValue(dao.getAll()).size)
 
         dao.deleteByCoursAndSession("LOG123", entity.session)
+        assertEquals(1, LiveDataTestUtil.getValue(dao.getAll()).size)
+
+        dao.deleteByCoursAndSession(entity.sigleCours, entity.session)
+        assertEquals(0, LiveDataTestUtil.getValue(dao.getAll()).size)
+    }
+
+    @Test
+    fun testDeleteBySession() {
+        dao.deleteByCoursAndSession(entity.sigleCours, "A2018")
         assertEquals(1, LiveDataTestUtil.getValue(dao.getAll()).size)
 
         dao.deleteByCoursAndSession(entity.sigleCours, entity.session)
