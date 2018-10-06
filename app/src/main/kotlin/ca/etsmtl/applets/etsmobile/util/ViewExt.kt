@@ -12,6 +12,18 @@ import android.view.inputmethod.InputMethodManager
  * Created by Sonphil on 23-06-18.
  */
 
+var View.endX: Float
+    get() = x + width
+    set(value) {
+        x = value - width
+    }
+
+var View.endY: Float
+    get() = y + height
+    set(value) {
+        y = value - height
+    }
+
 /**
  * Fades a [View] to the provided visibility state
  *
