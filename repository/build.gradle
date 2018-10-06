@@ -87,12 +87,9 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:${dagger}"
 
     // Moshi
-    implementation "com.squareup.moshi:moshi:${moshi}"
-    implementation "com.squareup.moshi:moshi-kotlin:${moshi}"
-
-    // Kotshi
-    implementation "se.ansman.kotshi:api:${kotshi}"
-    kapt "se.ansman.kotshi:compiler:${kotshi}"
+    implementation "com.squareup.moshi:moshi:$moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"

@@ -1,11 +1,9 @@
 package ca.etsmtl.applets.repository.data.api.response.signets
 
-import android.arch.persistence.room.Entity
 import com.squareup.moshi.Json
-import se.ansman.kotshi.JsonSerializable
+import com.squareup.moshi.JsonClass
 
-@Entity
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class ApiSession(
     @Json(name = "abrege") var abrege: String,
     @Json(name = "auLong") var auLong: String,
