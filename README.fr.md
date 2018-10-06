@@ -47,7 +47,6 @@ Ce projet utilise une variété de bibliothèques et d'outils.
 * [Glide](https://bumptech.github.io/glide/) Librairie permettant le chargement et la mise en cache d'images 
 * [Dagger2](https://google.github.io/dagger/) Framework d'injection de dépendances
 * [Moshi](https://github.com/square/moshi/) Librairie permettant la conversion de JSON en objets Java et vice-versa
-* [Kotshi](https://github.com/ansman/kotshi) Processeur d'annotations qui génèrent des adaptateurs Moshi pour des classes Kotlin
 * [Retrofit2](http://square.github.io/retrofit/) Client HTTP offrant le bénéfice de sûreté du typage
 * [Material Design Dimens](https://github.com/DmitryMalkovich/material-design-dimens) Librairie contenant les couleurs et les dimensions spécifiées par les directives du [Material Design](https://material.io/guidelines/)
 * [LeakCanary](https://github.com/square/leakcanary) Librairie de détection de fuites de mémoire
