@@ -30,7 +30,6 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsData
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.Okio
@@ -65,7 +64,7 @@ class SignetsApiTest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var api: SignetsApi
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val moshi = Moshi.Builder().build()
 
     @Before
     @Throws(IOException::class)
