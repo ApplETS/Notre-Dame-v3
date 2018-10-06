@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.ets
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
@@ -8,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.applets.etsmobile.R
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.fragment_ets.appBarLayoutEts
 import kotlinx.android.synthetic.main.fragment_ets.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_ets.ivEtsAppBar
@@ -36,20 +41,31 @@ class EtsFragment : Fragment() {
     }
 
     private fun setUpToolBar() {
-        appBarLayoutEts.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            val maxScroll = appBarLayout.totalScrollRange
-            val ratio = Math.abs(verticalOffset) / maxScroll.toFloat()
-
-            iVETSLogo.alpha = when {
-                ratio >= MIN_VERTICAL_OFFSET_BEFORE_SHOWING_LOGO -> {
-                    (ratio - MIN_VERTICAL_OFFSET_BEFORE_SHOWING_LOGO) / (1 - MIN_VERTICAL_OFFSET_BEFORE_SHOWING_LOGO)
-                }
-                else -> 0f
-            }
-        })
-
         Glide.with(this)
                 .load("https://etsmtl.ca/ETS/media/Prive/Accueil/slideshow/entete1-1.jpg")
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        appBarLayoutEts.setExpanded(false)
+
+                        return false
+                    }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any, target: Target<Drawable>, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        appBarLayoutEts.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                            val maxScroll = appBarLayout.totalScrollRange
+                            val ratio = Math.abs(verticalOffset) / maxScroll.toFloat()
+
+                            iVETSLogo.alpha = when {
+                                ratio >= MIN_VERTICAL_OFFSET_BEFORE_SHOWING_LOGO -> {
+                                    (ratio - MIN_VERTICAL_OFFSET_BEFORE_SHOWING_LOGO) / (1 - MIN_VERTICAL_OFFSET_BEFORE_SHOWING_LOGO)
+                                }
+                                else -> 0f
+                            }
+                        })
+
+                        return false
+                    }
+                })
                 .into(ivEtsAppBar)
     }
 
