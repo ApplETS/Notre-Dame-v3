@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Result<Value> {
+enum RequestResult<Value> {
     enum ResultError: Error {
         case missingData
     }
@@ -16,7 +16,7 @@ enum Result<Value> {
     case success(Value)
     case failure(Error)
 
-    static func fromValue(data: Value?, error: Error?) -> Result<Value> {
+    static func fromValue(data: Value?, error: Error?) -> RequestResult<Value> {
         if let data = data {
             return .success(data)
         } else if let error = error {
@@ -27,7 +27,7 @@ enum Result<Value> {
     }
 }
 
-extension Result {
+extension RequestResult {
     func resolve() throws -> Value {
         switch self {
         case .success(let value):
@@ -38,7 +38,7 @@ extension Result {
     }
 }
 
-extension Result where Value == Data {
+extension RequestResult where Value == Data {
     func decoded<T: Decodable>(as: T.Type) throws -> T {
         let decoder = JSONDecoder()
         let data = try resolve()
