@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: "org.jlleitschuh.gradle.ktlint"
 
-//apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -21,9 +21,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug {
-            ext.enableCrashlytics = false
-        }
         release {
             shrinkResources true
             minifyEnabled true
@@ -39,7 +36,7 @@ android {
             versionNameSuffix "-beta"
             resValue "string", "app_name", "ÉTSMobile bêta"
         }
-        finale {
+        production {
             dimension "version"
             resValue "string", "app_name", "ÉTSMobile"
         }
@@ -118,8 +115,9 @@ dependencies {
     implementation "com.dmitrymalkovich.android:material-design-dimens:${dimens}"
 
     // LeakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakcanary}"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakcanary"
 
     // Firebase
     implementation "com.google.firebase:firebase-core:$firebase"
@@ -144,5 +142,5 @@ dependencies {
     implementation project(':repository')
 }
 
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 

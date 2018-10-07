@@ -15,7 +15,7 @@ buildscript {
     ext.groupie = '2.1.0'
     ext.junit = '4.12'
     ext.kotlin_version = '1.2.71'
-    ext.leakcanary = '1.5.4'
+    ext.leakcanary = '1.6.1'
     ext.lifecycle = '1.1.1'
     ext.materialprogressview = '1.0.6'
     ext.mockito = '2.10.0'
