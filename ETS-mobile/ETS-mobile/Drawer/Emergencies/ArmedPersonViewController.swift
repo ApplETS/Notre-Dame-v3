@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 class ArmedPersonViewController: UIViewController {
 
@@ -15,7 +16,8 @@ class ArmedPersonViewController: UIViewController {
     @IBOutlet weak var emergencyCallButtonOutlet: UIButton!
     
     @IBAction func emergencyCallButtonAction(_ sender: Any) {
-        
+        // crash test - I'll move this into a test scene [howard]
+       // Crashlytics.sharedInstance().crash()
         if let phoneCallUrl = URL(string : "tel://514-396-8900"){
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallUrl)){
