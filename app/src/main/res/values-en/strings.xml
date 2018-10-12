@@ -51,6 +51,7 @@
     <string name="error_failed_to_retrieve_data_course">Failed to retrieve data for this course</string>
     <string name="title_section_summary">Summary</string>
     <string name="title_section_evaluations">Evaluations</string>
+    <string name="text_group">Group %1$s</string>
 
     <!-- Profile -->
     <string name="title_profile">Profile</string>

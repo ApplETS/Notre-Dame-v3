@@ -2,7 +2,9 @@
 <resources>
     <color name="colorPrimary">@color/etsRougeClair</color>
     <color name="colorPrimaryDark">@color/etsRougeFonce</color>
-    <color name="colorAccent">@color/etsGrisFonce</color>
+    <color name="colorAccent">@color/etsRougeClair</color>
+    <color name="colorToolbarText">@android:color/white</color>
+
 
     // Couleurs de l'École de technologie supérieure
     <color name="etsRougeClair">#EF3E45</color>

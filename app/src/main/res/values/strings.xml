@@ -52,6 +52,7 @@
     <string name="error_failed_to_retrieve_data_course">Échec de la récupération des données de ce cours</string>
     <string name="title_section_summary">Sommaire</string>
     <string name="title_section_evaluations">Évaluations</string>
+    <string name="text_group">Groupe %1$s</string>
 
     <!-- Profile -->
     <string name="title_profile">Profil</string>
