@@ -108,3 +108,10 @@ fun View.rotate(
         startAnimation(this)
     }
 }
+
+fun View.scale(factor: Float, pivotX: Float = width / 2f, pivotY: Float = height / 2f) {
+    this.pivotX = pivotX
+    this.pivotY = pivotY
+    scaleX = factor
+    scaleY = factor
+}

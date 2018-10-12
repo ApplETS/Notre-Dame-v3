@@ -12,7 +12,6 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.Resource
@@ -20,6 +19,7 @@ import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
+import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Group
 import com.xwray.groupie.Section
@@ -55,7 +55,6 @@ class GradesDetailsViewModel @Inject constructor(
     }
     val recyclerViewItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
         fun getSummaryItems(sommaireElementsEvaluation: SommaireElementsEvaluation) = listOf(
-                EvaluationDetailItem(app.getString(R.string.label_group), cours.value?.groupe ?: ""),
                 EvaluationDetailItem(app.getString(R.string.label_median), sommaireElementsEvaluation.medianeClasse),
                 EvaluationDetailItem(app.getString(R.string.label_standard_deviation), sommaireElementsEvaluation.ecartTypeClasse),
                 EvaluationDetailItem(app.getString(R.string.label_percentile_rank), sommaireElementsEvaluation.rangCentileClasse)

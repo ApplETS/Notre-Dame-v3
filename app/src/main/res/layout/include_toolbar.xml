@@ -10,5 +10,9 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/AppTheme.Toolbar"
-        app:layout_collapseMode="parallax" />
+        app:layout_collapseMode="parallax"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:subtitleTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        app:subtitleTextColor="@color/colorToolbarText"
+        app:titleTextColor="@color/colorToolbarText" />
 </merge>
