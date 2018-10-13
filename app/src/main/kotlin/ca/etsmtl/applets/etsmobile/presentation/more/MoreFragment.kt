@@ -13,8 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.main.MainFragment
 import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
+import ca.etsmtl.applets.etsmobile.presentation.main.MainFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import kotlinx.android.synthetic.main.fragment_more.progressMore
@@ -35,10 +35,10 @@ class MoreFragment : MainFragment() {
 
             builder.setMessage(R.string.prompt_log_out_confirmation)
                     .setTitle(getString(R.string.more_item_label_log_out))
-                    .setPositiveButton(R.string.yes) { dialog, _ ->
+                    .setPositiveButton(R.string.yes) { _, _ ->
                         moreViewModel.clickLogoutConfirmationDialogButton(true)
                     }
-                    .setNegativeButton(R.string.no) { dialog, _ -> moreViewModel.clickLogoutConfirmationDialogButton(false) }
+                    .setNegativeButton(R.string.no) { _, _ -> moreViewModel.clickLogoutConfirmationDialogButton(false) }
                     .setOnCancelListener { moreViewModel.clickLogoutConfirmationDialogButton(false) }
 
             builder.create()
