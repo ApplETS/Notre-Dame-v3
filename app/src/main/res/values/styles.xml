@@ -60,7 +60,7 @@
     </style>
 
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
