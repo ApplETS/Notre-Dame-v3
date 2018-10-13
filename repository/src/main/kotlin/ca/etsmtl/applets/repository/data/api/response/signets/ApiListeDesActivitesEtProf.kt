@@ -8,7 +8,5 @@ data class ApiListeDesActivitesEtProf(
     @Json(name = "__type") val type: String? = "",
     @Json(name = "listeActivites") val listeActivites: List<ApiActivite>? = listOf(),
     @Json(name = "listeEnseignants") val listeEnseignants: List<ApiEnseignant>? = listOf(),
-    @Json(name = "erreur") val erreur: String? = ""
-) : ApiSignetsData() {
-    override fun getError() = erreur
-}
+    @Json(name = "erreur") override val erreur: String? = ""
+) : ApiSignetsData()

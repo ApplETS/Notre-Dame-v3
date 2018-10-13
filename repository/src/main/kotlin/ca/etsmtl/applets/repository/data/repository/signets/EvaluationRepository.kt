@@ -21,7 +21,6 @@ import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
@@ -50,15 +49,13 @@ class EvaluationRepository @Inject constructor(
         userCredentials: SignetsUserCredentials,
         cours: Cours,
         shouldFetch: Boolean = true
-    ): LiveData<Resource<SommaireElementsEvaluation>> = object : NetworkBoundResource<SommaireElementsEvaluation, ApiSignetsModel<ApiListeDesElementsEvaluation>>(appExecutors) {
-        override fun saveCallResult(item: ApiSignetsModel<ApiListeDesElementsEvaluation>) {
-            item.data?.let {
-                sommaireElementsEvaluationDao.clearAndInsertBySigleCoursAndSession(
-                        cours.sigle,
-                        cours.session,
-                        it.toSommaireEvaluationEntity(cours)
-                )
-            }
+    ): LiveData<Resource<SommaireElementsEvaluation>> = object : SignetsNetworkBoundResource<SommaireElementsEvaluation, ApiListeDesElementsEvaluation>(appExecutors) {
+        override fun saveSignetsData(item: ApiListeDesElementsEvaluation) {
+            sommaireElementsEvaluationDao.clearAndInsertBySigleCoursAndSession(
+                    cours.sigle,
+                    cours.session,
+                    item.toSommaireEvaluationEntity(cours)
+            )
         }
 
         override fun shouldFetch(data: SommaireElementsEvaluation?): Boolean = shouldFetch
@@ -70,7 +67,7 @@ class EvaluationRepository @Inject constructor(
         }
 
         override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>> {
-            return transformApiLiveData(api.listeDesElementsEvaluation(
+            return api.listeDesElementsEvaluation(
                     ListeDesElementsEvaluationRequestBody(
                             userCredentials.codeAccesUniversel,
                             userCredentials.motPasse,
@@ -78,7 +75,7 @@ class EvaluationRepository @Inject constructor(
                             cours.groupe,
                             cours.session
                     )
-            ))
+            )
         }
     }.asLiveData()
 
@@ -97,22 +94,20 @@ class EvaluationRepository @Inject constructor(
         userCredentials: SignetsUserCredentials,
         cours: Cours,
         shouldFetch: Boolean = true
-    ): LiveData<Resource<SommaireEtEvaluations>> = object : NetworkBoundResource<SommaireEtEvaluations, ApiSignetsModel<ApiListeDesElementsEvaluation>>(appExecutors) {
-        override fun saveCallResult(item: ApiSignetsModel<ApiListeDesElementsEvaluation>) {
-            item.data?.let {
-                sommaireElementsEvaluationDao.clearAndInsertBySigleCoursAndSession(
-                        cours.sigle,
-                        cours.session,
-                        it.toSommaireEvaluationEntity(cours)
-                )
+    ): LiveData<Resource<SommaireEtEvaluations>> = object : SignetsNetworkBoundResource<SommaireEtEvaluations, ApiListeDesElementsEvaluation>(appExecutors) {
+        override fun saveSignetsData(item: ApiListeDesElementsEvaluation) {
+            sommaireElementsEvaluationDao.clearAndInsertBySigleCoursAndSession(
+                    cours.sigle,
+                    cours.session,
+                    item.toSommaireEvaluationEntity(cours)
+            )
 
-                evaluationDao.clearAndInsertByCoursGroupeAndSession(
-                        cours.sigle,
-                        cours.groupe,
-                        cours.session,
-                        it.toEvaluationEntities(cours)
-                )
-            }
+            evaluationDao.clearAndInsertByCoursGroupeAndSession(
+                    cours.sigle,
+                    cours.groupe,
+                    cours.session,
+                    item.toEvaluationEntities(cours)
+            )
         }
 
         override fun shouldFetch(data: SommaireEtEvaluations?) = shouldFetch
@@ -134,7 +129,7 @@ class EvaluationRepository @Inject constructor(
         }
 
         override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>> {
-            return transformApiLiveData(api.listeDesElementsEvaluation(
+            return api.listeDesElementsEvaluation(
                     ListeDesElementsEvaluationRequestBody(
                             userCredentials.codeAccesUniversel,
                             userCredentials.motPasse,
@@ -142,7 +137,7 @@ class EvaluationRepository @Inject constructor(
                             cours.groupe,
                             cours.session
                     )
-            ))
+            )
         }
     }.asLiveData()
 }

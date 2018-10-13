@@ -18,7 +18,5 @@ data class ApiEtudiant(
     @Json(name = "masculin")
     var masculin: Boolean,
     @Json(name = "erreur")
-    var erreur: String? = null
-) : ApiSignetsData() {
-    override fun getError() = erreur
-}
+    override var erreur: String? = null
+) : ApiSignetsData()

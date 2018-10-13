@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.presentation.grades
+package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
-import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsFragment
 import ca.etsmtl.applets.etsmobile.util.show
 import ca.etsmtl.applets.repository.data.model.Cours
 import kotlinx.android.synthetic.main.activity_grades_details.containerTvGradesDetailsSubtitle

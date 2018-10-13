@@ -7,7 +7,5 @@ import com.squareup.moshi.JsonClass
 data class ApiListeJoursRemplaces(
     @Json(name = "__type") val type: String? = "",
     @Json(name = "listeJours") val listeJours: List<ApiJourRemplace>? = listOf(),
-    @Json(name = "erreur") val erreur: String? = ""
-) : ApiSignetsData() {
-    override fun getError() = erreur
-}
+    @Json(name = "erreur") override val erreur: String? = ""
+) : ApiSignetsData()

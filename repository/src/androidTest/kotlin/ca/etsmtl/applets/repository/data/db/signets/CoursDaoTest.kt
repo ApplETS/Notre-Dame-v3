@@ -23,7 +23,6 @@ class CoursDaoTest : DbTest() {
             "H2018",
             "7365",
             "A",
-            "90",
             3,
             "Réingénierie du logiciel"
     )
@@ -50,7 +49,6 @@ class CoursDaoTest : DbTest() {
                 "E2018",
                 "7365",
                 "B+",
-                "89",
                 3,
                 "Réingénierie du logiciel"
         )
@@ -69,7 +67,6 @@ class CoursDaoTest : DbTest() {
                 "H2018",
                 "7365",
                 "B+",
-                "89",
                 3,
                 "Titre"
         )
@@ -88,7 +85,6 @@ class CoursDaoTest : DbTest() {
                 "H2018",
                 "7365",
                 "B+",
-                "89",
                 3,
                 "Foo"
         )
@@ -109,7 +105,6 @@ class CoursDaoTest : DbTest() {
                 sessionAbrege,
                 "7365",
                 "B+",
-                "89",
                 3,
                 "Réingénierie du logiciel"
         )
@@ -121,7 +116,6 @@ class CoursDaoTest : DbTest() {
                 sessionAbrege,
                 "7365",
                 "B+",
-                "89",
                 3,
                 "Foo"
         )
@@ -133,7 +127,6 @@ class CoursDaoTest : DbTest() {
                 "H2018",
                 "7365",
                 "B+",
-                "89",
                 3,
                 "Foo"
         )
@@ -145,7 +138,6 @@ class CoursDaoTest : DbTest() {
                 sessionAbrege,
                 "7365",
                 "B+",
-                "89",
                 3,
                 "Test"
         )

@@ -28,7 +28,7 @@ fun CoursEntity.toCours() = Cours(
         this.session,
         this.programmeEtudes,
         this.cote,
-        this.noteSur100,
+        null,
         this.nbCredits,
         this.titreCours
 )

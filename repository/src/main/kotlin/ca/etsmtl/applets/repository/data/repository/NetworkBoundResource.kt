@@ -64,7 +64,7 @@ protected constructor(private val appExecutors: AppExecutors) {
     }
 
     private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
-        val apiResponse = createCall()
+        val apiResponse = processCall(createCall())
         // we re-attach dbSource as a new source,
         // it will dispatch its latest value quickly
         result.addSource(dbSource) { newData -> result.setValue(Resource.loading(newData)) }
@@ -100,10 +100,12 @@ protected constructor(private val appExecutors: AppExecutors) {
         }
     }
 
+    protected open fun processCall(call: LiveData<ApiResponse<RequestType>>): LiveData<ApiResponse<RequestType>> = call
+
     /**
      * Called when the fetch to the network has failed
      */
-    protected fun onFetchFailed() {}
+    protected open fun onFetchFailed() {}
 
     fun asLiveData(): LiveData<Resource<ResultType>> {
         return result

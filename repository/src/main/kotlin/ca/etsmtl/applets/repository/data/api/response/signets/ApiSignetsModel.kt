@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
  */
 
 @JsonClass(generateAdapter = true)
-class ApiSignetsModel<T : ApiSignetsData> {
+data class ApiSignetsModel<T : ApiSignetsData>(
     @Json(name = "d")
     var data: T? = null
-}
+)

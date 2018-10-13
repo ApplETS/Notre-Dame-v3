@@ -28,13 +28,13 @@ import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
-import kotlinx.android.synthetic.main.layout_login_form.btnForgotPassword
-import kotlinx.android.synthetic.main.layout_login_form.btnSignIn
-import kotlinx.android.synthetic.main.layout_login_form.btnUniversalCodeInfo
-import kotlinx.android.synthetic.main.layout_login_form.layoutPassword
-import kotlinx.android.synthetic.main.layout_login_form.layoutUniversalCode
-import kotlinx.android.synthetic.main.layout_login_form.password
-import kotlinx.android.synthetic.main.layout_login_form.universalCode
+import kotlinx.android.synthetic.main.include_login_form.btnForgotPassword
+import kotlinx.android.synthetic.main.include_login_form.btnSignIn
+import kotlinx.android.synthetic.main.include_login_form.btnUniversalCodeInfo
+import kotlinx.android.synthetic.main.include_login_form.layoutPassword
+import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
+import kotlinx.android.synthetic.main.include_login_form.password
+import kotlinx.android.synthetic.main.include_login_form.universalCode
 import javax.inject.Inject
 
 /**

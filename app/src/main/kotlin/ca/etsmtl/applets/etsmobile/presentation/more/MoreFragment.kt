@@ -82,7 +82,7 @@ class MoreFragment : MainFragment() {
     }
 
     private fun subscribeUI() {
-        moreViewModel.getDisplayLogoutDialog().observe(this, Observer {
+        moreViewModel.displayLogoutDialog.observe(this, Observer {
             logoutConfirmationDialog.takeIf { it != null && !it.isShowing }?.let { dialog ->
                 if (it == true) {
                     dialog.show()
@@ -92,11 +92,11 @@ class MoreFragment : MainFragment() {
             }
         })
 
-        moreViewModel.getDisplayMessage().observe(this, EventObserver {
+        moreViewModel.displayMessage.observe(this, EventObserver {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
 
-        moreViewModel.getActivityToGoTo().observe(this, EventObserver {
+        moreViewModel.activityToGoTo.observe(this, EventObserver {
             if (it == AboutActivity::class.java) {
                 val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
                 with (recyclerViewMore.getChildViewHolder(aboutItemView) as MoreRecyclerViewAdapter.ViewHolder) {
@@ -110,7 +110,7 @@ class MoreFragment : MainFragment() {
             }
         })
 
-        moreViewModel.getLoading().observe(this, Observer {
+        moreViewModel.loading.observe(this, Observer {
             it?.let {
                 if (it) {
                     recyclerViewMore.visibility = View.GONE

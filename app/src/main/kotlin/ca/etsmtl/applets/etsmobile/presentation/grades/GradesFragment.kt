@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.show
 import ca.etsmtl.applets.repository.data.model.Cours
@@ -88,7 +89,7 @@ class GradesFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        gradesViewModel.getCours().observe(this, Observer {
+        gradesViewModel.cours.observe(this, Observer {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
 

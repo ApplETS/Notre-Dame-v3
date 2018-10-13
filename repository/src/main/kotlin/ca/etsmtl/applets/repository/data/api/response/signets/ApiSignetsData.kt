@@ -13,5 +13,5 @@ package ca.etsmtl.applets.repository.data.api.response.signets
  * Created by Sonphil on 17-03-18.
  */
 abstract class ApiSignetsData {
-    abstract fun getError(): String?
+    abstract val erreur: String?
 }

@@ -16,7 +16,6 @@ import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
@@ -43,20 +42,18 @@ class SeanceRepository @Inject constructor(
         session: Session,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<Seance>>> {
-        return object : NetworkBoundResource<List<Seance>, ApiSignetsModel<ApiListeDesSeances>>(appExecutors) {
-            override fun saveCallResult(item: ApiSignetsModel<ApiListeDesSeances>) {
-                item.data?.let {
-                    when (cours) {
-                        null -> dao.clearAndInsertBySession(
-                                session.abrege,
-                                it.toSeancesEntities(session.abrege)
-                        )
-                        else -> dao.clearAndInsertByCoursAndSession(
-                                cours.sigle,
-                                session.abrege,
-                                it.toSeancesEntities(session.abrege)
-                        )
-                    }
+        return object : SignetsNetworkBoundResource<List<Seance>, ApiListeDesSeances>(appExecutors) {
+            override fun saveSignetsData(item: ApiListeDesSeances) {
+                when (cours) {
+                    null -> dao.clearAndInsertBySession(
+                            session.abrege,
+                            item.toSeancesEntities(session.abrege)
+                    )
+                    else -> dao.clearAndInsertByCoursAndSession(
+                            cours.sigle,
+                            session.abrege,
+                            item.toSeancesEntities(session.abrege)
+                    )
                 }
             }
 
@@ -75,7 +72,7 @@ class SeanceRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>> {
-                return transformApiLiveData(api.listeDesSeances(
+                return api.listeDesSeances(
                         ListeDesSeancesRequestBody(
                                 userCredentials.codeAccesUniversel,
                                 userCredentials.motPasse,
@@ -84,7 +81,7 @@ class SeanceRepository @Inject constructor(
                                 session.dateDebut,
                                 session.dateFin
                         )
-                ))
+                )
             }
         }.asLiveData()
     }

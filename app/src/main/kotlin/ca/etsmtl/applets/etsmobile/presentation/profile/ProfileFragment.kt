@@ -61,10 +61,10 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        profileViewModel.getEtudiant().observe(this, Observer<Etudiant> {
+        profileViewModel.etudiant.observe(this, Observer<Etudiant> {
             it?.let { adapter.setEtudiant(it) }
         })
-        profileViewModel.getLoading().observe(this, Observer<Boolean> {
+        profileViewModel.loading.observe(this, Observer<Boolean> {
             it?.let { swipeRefreshLayoutProfile.isRefreshing = it }
         })
         this.lifecycle.addObserver(profileViewModel)

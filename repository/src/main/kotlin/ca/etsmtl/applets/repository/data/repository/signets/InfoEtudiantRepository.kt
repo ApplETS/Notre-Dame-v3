@@ -14,7 +14,6 @@ import ca.etsmtl.applets.repository.data.db.entity.mapper.toEtudiant
 import ca.etsmtl.applets.repository.data.model.Etudiant
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
@@ -40,22 +39,21 @@ class InfoEtudiantRepository @Inject constructor(
         userCredentials: SignetsUserCredentials,
         shouldFetch: (data: Etudiant?) -> Boolean
     ): LiveData<Resource<Etudiant>> {
-
-        return object : NetworkBoundResource<Etudiant, ApiSignetsModel<ApiEtudiant>>(appExecutors) {
-            override fun saveCallResult(item: ApiSignetsModel<ApiEtudiant>) {
-                item.data?.let { dao.insert(it.toEtudiantEntity()) }
+        return object : SignetsNetworkBoundResource<Etudiant, ApiEtudiant>(appExecutors) {
+            override fun saveSignetsData(item: ApiEtudiant) {
+                dao.insert(item.toEtudiantEntity())
             }
 
             override fun shouldFetch(data: Etudiant?): Boolean = shouldFetch(data)
 
             override fun loadFromDb(): LiveData<Etudiant> {
-                return Transformations.map(getFirstItemLiveData(dao.getAll())) {
+                return Transformations.map(dao.getAll().transformToFirstItemLiveData()) {
                     it?.toEtudiant()
                 }
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiEtudiant>>> {
-                return transformApiLiveData(api.infoEtudiant(EtudiantRequestBody(userCredentials)))
+                return api.infoEtudiant(EtudiantRequestBody(userCredentials))
             }
         }.asLiveData()
     }

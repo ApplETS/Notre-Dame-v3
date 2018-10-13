@@ -10,17 +10,16 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
+import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.call
-import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.applets.repository.data.model.Etudiant
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
-import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 
 /**
@@ -28,8 +27,9 @@ import javax.inject.Inject
  */
 
 class LoginViewModel @Inject constructor(
-    private val repository: InfoEtudiantRepository,
-    private val loginRepository: LoginRepository,
+    private val fetchSavedSignetsUserCredentialsUserCase: FetchSavedSignetsUserCredentialsUserCase,
+    private val checkUserCredentialsValidUseCase: CheckUserCredentialsValidUseCase,
+    private val saveSignetsUserCredentialsUseCase: SaveSignetsUserCredentialsUseCase,
     private val app: App
 ) : AndroidViewModel(app), LifecycleObserver {
 
@@ -43,7 +43,7 @@ class LoginViewModel @Inject constructor(
         MediatorLiveData<Void>().apply {
             addSource(userCredentialsValid) {
                 it?.let {
-                    if (it.status != Resource.LOADING && it.data == false) {
+                    if (it.status != Resource.Status.LOADING && it.data == false) {
                         this.call()
                     }
                 }
@@ -54,7 +54,7 @@ class LoginViewModel @Inject constructor(
     val errorMessage: LiveData<Event<String>> by lazy {
         MediatorLiveData<Event<String>>().apply {
             this.addSource(userCredentialsValid) {
-                if (it != null && it.status == Resource.ERROR) {
+                if (it != null && it.status == Resource.Status.ERROR) {
                     this.value = Event(it.message ?: app.getString(R.string.error))
                 }
             }
@@ -67,24 +67,19 @@ class LoginViewModel @Inject constructor(
 
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
-     * [Transformations.switchMap] which is triggered when [userCredentials] is called. The new
-     * [SignetsUserCredentials] are used to check if an instance of [Etudiant] can be fetched. The
-     * instance is fetched only from the DB. However, if it doesn't exists in the DB, the instance
-     * if fetched from the network. If the response doesn't contain an error, the
-     * [SignetsUserCredentials] are considered valid and are saved and stored in [LoginRepository].
-     * Moreover, a navigation to [MainActivity] will be triggered.
+     * [Transformations.switchMap] which is triggered when [userCredentials] is called. If the
+     * response doesn't contain an error, the [SignetsUserCredentials] are considered valid and are
+     * saved. Moreover, a navigation to [MainActivity] will be triggered.
      */
     private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentials) { userCredentials ->
-            // Fetch [Etudiant] instance
-            val shouldFetch: (data: Etudiant?) -> Boolean = { it == null }
-            Transformations.map(repository.getInfoEtudiant(userCredentials, shouldFetch)) { res ->
-                transformEtudiantResToBooleanRes(res).apply {
-                    if (userCredentialsValid(this)) {
-                        loginRepository.saveUserCredentialsIfNeeded(userCredentials)
-                        _activityToGoTo.value = MainActivity::class.java
-                    }
+            Transformations.map(checkUserCredentialsValidUseCase(userCredentials)) {
+                if (it.status != Resource.Status.LOADING && it.data == true) {
+                    saveSignetsUserCredentialsUseCase(userCredentials)
+                    _activityToGoTo.value = MainActivity::class.java
                 }
+
+                it
             }
         }
     }
@@ -104,7 +99,7 @@ class LoginViewModel @Inject constructor(
      * This is triggered after the user's credentials have been submitted.
      */
     val showLoading: LiveData<Boolean> = Transformations.map(userCredentialsValid) {
-        it.status == Resource.SUCCESS || it.status == Resource.LOADING
+        it.status == Resource.Status.SUCCESS || it.status == Resource.Status.LOADING
     }
 
     /**
@@ -153,65 +148,6 @@ class LoginViewModel @Inject constructor(
     val displayUniversalCodeDialog: LiveData<Boolean> = displayUniversalCodeDialogMediator
 
     /**
-     * Verifies that a given resource is not null and that his status is [Resource.SUCCESS]
-     *
-     * @param blnResource The [Resource] to verify
-     * @return true if the resource is not null and that his status is [Resource.SUCCESS]
-     */
-    private fun userCredentialsValid(blnResource: Resource<Boolean>?): Boolean {
-        if (blnResource != null && blnResource.status == Resource.SUCCESS) {
-            return blnResource.data!!
-        }
-
-        return false
-    }
-
-    /**
-     * Transforms a [Resource<Etudiant>] to a [Resource<Boolean>]. The result [Resource] contains
-     * an [Boolean] which indicates whether the credentials used to fetch the [Etudiant] of the
-     * original [Resource] is valid or not.
-     *
-     * @param res The Resource<Etudiant>
-     * @return The transformed [Resource]
-     */
-    private fun transformEtudiantResToBooleanRes(res: Resource<Etudiant>?): Resource<Boolean> {
-        if (res != null) {
-            when (res.status) {
-                Resource.SUCCESS -> {
-                    return Resource.success(true)
-                }
-                Resource.ERROR -> {
-                    val errorStr = getErrorMessage(res)
-                    return Resource.error(errorStr, false)
-                }
-                Resource.LOADING -> {
-                    return Resource.loading(null)
-                }
-            }
-        }
-
-        val errorStr = getApplication<App>().getString(R.string.error)
-        return Resource.error(errorStr, false)
-    }
-
-    /**
-     * Generates an error for the given [Resource<Etudiant]
-     *
-     * If the device isn't connected, [R.string.error_no_internet_connection] is returned. If the
-     * the device is connected, the [Resource<Etudiant]'s error message is returned. However, if its
-     * error message is null, [R.string.error] is returned.
-     *
-     * @return error message
-     */
-    private fun getErrorMessage(res: Resource<Etudiant>): String {
-        return if (app.isDeviceConnected()) {
-            res.message ?: getApplication<App>().getString(R.string.error)
-        } else {
-            app.getString(R.string.error_no_internet_connection)
-        }
-    }
-
-    /**
      * Set the user's universal code
      *
      * This will trigger a validity check for the given universal code.
@@ -252,7 +188,7 @@ class LoginViewModel @Inject constructor(
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun submitSavedCredentials() {
-        with(loginRepository.getSavedUserCredentials()) {
+        with(fetchSavedSignetsUserCredentialsUserCase()) {
             if (this == null) {
                 showLoginFragmentMediator.call()
             } else {

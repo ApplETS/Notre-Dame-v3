@@ -3,13 +3,11 @@ package ca.etsmtl.applets.etsmobile.presentation
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
+import ca.etsmtl.applets.etsmobile.domain.FetchEtudiantUseCase
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileViewModel
 import ca.etsmtl.applets.repository.data.model.Etudiant
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
 import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import org.junit.Rule
 import org.junit.Test
@@ -28,24 +26,23 @@ class ProfileViewModelTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private var repository: InfoEtudiantRepository = mock(InfoEtudiantRepository::class.java)
-    private val userCredentials: SignetsUserCredentials = SignetsUserCredentials("test", "test")
-    private val profileViewModel = ProfileViewModel(repository, userCredentials)
+    private val fetchEtudiantUseCase: FetchEtudiantUseCase = mock(FetchEtudiantUseCase::class.java)
+    private val profileViewModel = ProfileViewModel(fetchEtudiantUseCase)
 
     @Test
-    fun testCallRepo() {
+    fun testCallUseCase() {
         val foo = MutableLiveData<Resource<Etudiant>>()
-        `when`(repository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(foo)
+        `when`(fetchEtudiantUseCase(any())).thenReturn(foo)
 
         profileViewModel.refresh()
 
-        verify(repository).getInfoEtudiant(eq(userCredentials), any())
+        verify(fetchEtudiantUseCase).invoke(any())
     }
 
     @Test
     fun testSendResultToUI() {
         val foo = MutableLiveData<Resource<Etudiant>>()
-        `when`(repository.getInfoEtudiant(eq(userCredentials), any())).thenReturn(foo)
+        `when`(fetchEtudiantUseCase(any())).thenReturn(foo)
 
         val etudiantObserver = mock<Observer<Etudiant>>()
         verify(etudiantObserver, Mockito.never()).onChanged(ArgumentMatchers.any())
@@ -54,9 +51,9 @@ class ProfileViewModelTest {
         val errorMsgObserver = mock<Observer<String>>()
         verify(errorMsgObserver, Mockito.never()).onChanged(ArgumentMatchers.any())
 
-        profileViewModel.getEtudiant().observeForever(etudiantObserver)
-        profileViewModel.getLoading().observeForever(loadingObserver)
-        profileViewModel.getErrorMessage().observeForever(errorMsgObserver)
+        profileViewModel.etudiant.observeForever(etudiantObserver)
+        profileViewModel.loading.observeForever(loadingObserver)
+        profileViewModel.errorMessage.observeForever(errorMsgObserver)
 
         profileViewModel.refresh()
 

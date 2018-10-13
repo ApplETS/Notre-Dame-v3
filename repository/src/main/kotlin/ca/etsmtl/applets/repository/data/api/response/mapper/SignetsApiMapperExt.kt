@@ -2,6 +2,7 @@ package ca.etsmtl.applets.repository.data.api.response.mapper
 
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiActivite
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiCours
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeCours
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEnseignant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEvaluation
@@ -51,16 +52,17 @@ fun ApiActivite.toActiviteEntity() = ActiviteEntity(
         this.titreCours
 )
 
-fun ApiCours.toCoursEntity(scoreFinalSur100: String) = CoursEntity(
+fun ApiCours.toCoursEntity() = CoursEntity(
         this.sigle,
         this.groupe,
         this.session,
         this.programmeEtudes,
         this.cote,
-        scoreFinalSur100,
         this.nbCredits,
         this.titreCours
 )
+
+fun ApiListeDeCours.toCoursEntities() = liste.map { it.toCoursEntity() }
 
 fun ApiEnseignant.toEnseignantEntity() = EnseignantEntity(
         this.localBureau,
@@ -120,11 +122,7 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     )
 }
 
-fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = ArrayList<EvaluationEntity>().apply {
-    this@toEvaluationEntities.liste.forEach {
-        add(it.toEvaluationEntity(cours))
-    }
-}
+fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map { it.toEvaluationEntity(cours) }
 
 fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
     val formatter = formatter()

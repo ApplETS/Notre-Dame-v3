@@ -15,7 +15,5 @@ data class ApiListeDesElementsEvaluation(
     @Json(name = "noteACeJourElementsIndividuels") var noteACeJourElementsIndividuels: String,
     @Json(name = "noteSur100PourElementsIndividuels") var noteSur100PourElementsIndividuels: String,
     @Json(name = "liste") var liste: List<ApiEvaluation> = listOf(),
-    @Json(name = "erreur") var erreur: String
-) : ApiSignetsData() {
-    override fun getError() = erreur
-}
+    @Json(name = "erreur") override var erreur: String
+) : ApiSignetsData()

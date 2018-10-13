@@ -88,7 +88,7 @@
             app:layout_constraintWidth_max="500dp"
             app:layout_constraintWidth_percent="0.6">
 
-            <include layout="@layout/layout_login_form" />
+            <include layout="@layout/include_login_form" />
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

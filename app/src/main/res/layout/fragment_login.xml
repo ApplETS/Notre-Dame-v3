@@ -51,7 +51,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="500dp">
 
-            <include layout="@layout/layout_login_form" />
+            <include layout="@layout/include_login_form" />
         </android.support.constraint.ConstraintLayout>
 
         <TextView

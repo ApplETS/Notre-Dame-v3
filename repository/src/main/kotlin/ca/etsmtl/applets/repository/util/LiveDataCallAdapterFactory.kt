@@ -40,6 +40,7 @@ internal class LiveDataCallAdapterFactory : CallAdapter.Factory() {
         }
         val observableType = CallAdapter.Factory.getParameterUpperBound(0, returnType as ParameterizedType)
         val rawObservableType = CallAdapter.Factory.getRawType(observableType)
+
         if (rawObservableType != ApiResponse::class.java) {
             throw IllegalArgumentException("type must be a resource")
         }
