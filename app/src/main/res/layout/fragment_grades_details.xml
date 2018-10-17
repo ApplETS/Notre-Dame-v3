@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <include
             layout="@layout/empty_view_courses_grades"
             android:visibility="gone" />
@@ -16,6 +18,6 @@
             android:id="@+id/recyclerGradesDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_evaluation_header"/>
+            tools:listitem="@layout/item_evaluation_header" />
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
