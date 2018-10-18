@@ -5,9 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import ca.etsmtl.applets.etsmobile.R
-import kotlinx.android.synthetic.main.include_toolbar.*
+import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**
  * Created by Sonphil on 25-02-18.

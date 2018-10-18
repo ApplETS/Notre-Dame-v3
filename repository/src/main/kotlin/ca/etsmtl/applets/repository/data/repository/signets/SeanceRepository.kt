@@ -78,8 +78,8 @@ class SeanceRepository @Inject constructor(
                                 userCredentials.motPasse,
                                 cours?.sigle ?: "",
                                 session.abrege,
-                                session.dateDebut,
-                                session.dateFin
+                                session.dateDebut.toString(),
+                                session.dateFin.toString()
                         )
                 )
             }
