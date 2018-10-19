@@ -78,6 +78,7 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$test"
     androidTestImplementation "androidx.test:rules:$test"
     androidTestImplementation "androidx.room:room-testing:$room"
+    androidTestImplementation "androidx.arch.core:core-testing:$lifecycle"
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger"

@@ -16,10 +16,12 @@
 
 package ca.etsmtl.applets.repository.data.db
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
+import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 
 /**
  * Created by Sonphil on 22-04-18.
@@ -28,9 +30,12 @@ import org.junit.Before
 abstract class DbTest {
     protected lateinit var db: AppDatabase
 
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
     @Before
     fun initDb() {
-        db = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
+        db = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context,
                 AppDatabase::class.java).build()
     }
 
