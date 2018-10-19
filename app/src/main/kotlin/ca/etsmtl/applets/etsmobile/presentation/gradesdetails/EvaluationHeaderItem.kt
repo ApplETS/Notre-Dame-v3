@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
 import android.content.Context
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.rotate

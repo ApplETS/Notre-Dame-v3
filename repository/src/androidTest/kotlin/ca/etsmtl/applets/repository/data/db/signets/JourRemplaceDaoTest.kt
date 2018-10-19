@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.data.db.signets
 
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import ca.etsmtl.applets.repository.LiveDataTestUtil
 import ca.etsmtl.applets.repository.data.db.DbTest
 import ca.etsmtl.applets.repository.data.db.dao.signets.JourRemplaceDao

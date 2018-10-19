@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.db.dao.signets
 
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 
 /**
  * Created by Sonphil on 17-05-18.

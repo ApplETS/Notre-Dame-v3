@@ -2,9 +2,9 @@ package ca.etsmtl.applets.etsmobile.util
 
 import android.content.Context
 import android.net.Uri
-import android.support.annotation.ColorRes
-import android.support.customtabs.CustomTabsIntent
-import android.support.v4.content.ContextCompat
+import androidx.annotation.ColorRes
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import ca.etsmtl.applets.etsmobile.R
 
 /**

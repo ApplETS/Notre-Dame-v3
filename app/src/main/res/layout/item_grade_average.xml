@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:constraintlayout="http://schemas.android.com/apk/res-auto"
     xmlns:materialprogressview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -119,4 +119,4 @@
         constraintlayout:layout_constraintTop_toBottomOf="@+id/tvLabelGrade"
         tools:text="37,6/50 (75,2 %)" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

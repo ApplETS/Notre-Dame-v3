@@ -3,7 +3,7 @@ package ca.etsmtl.applets.etsmobile.util
 import android.Manifest
 import android.content.Context
 import android.net.ConnectivityManager
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 
 /**
  * Created by Sonphil on 18-05-18.

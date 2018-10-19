@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         kapt {
             arguments {
@@ -54,37 +54,37 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Architecture components
-    implementation "android.arch.lifecycle:extensions:${lifecycle}"
-    kapt "android.arch.lifecycle:compiler:${lifecycle}"
-    api "android.arch.persistence.room:runtime:$room"
-    kapt "android.arch.persistence.room:compiler:$room"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
+    api "androidx.room:room-runtime:$room"
+    kapt "androidx.room:room-compiler:$room"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:${junit}"
-    testImplementation "android.arch.persistence.room:testing:$room"
+    testImplementation "androidx.room:room-testing:$room"
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testImplementation "android.arch.core:core-testing:${lifecycle}"
+    testImplementation "androidx.arch.core:core-testing:$lifecycle"
     testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
     testImplementation "org.mockito:mockito-inline:$mockito_inline"
 
     // Android Testing Support Library's runner and rules
-    androidTestImplementation "com.android.support.test:runner:${astl}"
-    androidTestImplementation "com.android.support.test:rules:${astl}"
-    androidTestImplementation "android.arch.persistence.room:testing:$room"
+    androidTestImplementation "androidx.test:runner:$test"
+    androidTestImplementation "androidx.test:rules:$test"
+    androidTestImplementation "androidx.room:room-testing:$room"
 
     // Dagger
-    implementation "com.google.dagger:dagger:${dagger}"
-    implementation "com.google.dagger:dagger-android:${dagger}"
-    implementation "com.google.dagger:dagger-android-support:${dagger}"
-    kapt "com.google.dagger:dagger-compiler:${dagger}"
-    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+    implementation "com.google.dagger:dagger:$dagger"
+    implementation "com.google.dagger:dagger-android:$dagger"
+    implementation "com.google.dagger:dagger-android-support:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    kapt "com.google.dagger:dagger-android-processor:$dagger"
 
     // Moshi
     implementation "com.squareup.moshi:moshi:$moshi"
@@ -99,6 +99,6 @@ dependencies {
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
 
     // Chuck
-    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
-    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+    debugImplementation "com.readystatesoftware.chuck:library:$chuck"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck"
 }
