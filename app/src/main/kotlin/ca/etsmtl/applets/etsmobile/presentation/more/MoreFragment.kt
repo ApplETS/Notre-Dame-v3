@@ -1,13 +1,13 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.util.Pair
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.core.util.Pair
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

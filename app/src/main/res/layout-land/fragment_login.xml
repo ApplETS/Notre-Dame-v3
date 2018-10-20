@@ -6,7 +6,7 @@
     android:theme="@style/LoginTheme"
     tools:background="@drawable/bg_ets_red">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -75,7 +75,7 @@
                 android:tint="@color/material_light_white" />
         </LinearLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginForm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -89,6 +89,6 @@
             app:layout_constraintWidth_percent="0.6">
 
             <include layout="@layout/include_login_form" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

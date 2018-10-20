@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.data.db.entity.signets
 
-import android.arch.persistence.room.Entity
+import androidx.room.Entity
 
 @Entity(primaryKeys = ["sigleCours", "session"])
 data class SommaireElementsEvaluationEntity(

@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.etsmobile.di.activitymodule
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.di.ViewModelKey
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsFragment
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsViewModel

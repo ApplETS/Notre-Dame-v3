@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.util
 
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsData
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel

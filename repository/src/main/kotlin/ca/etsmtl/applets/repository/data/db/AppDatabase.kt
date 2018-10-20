@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.db
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import ca.etsmtl.applets.repository.data.db.dao.signets.ActiviteDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.EnseignantDao

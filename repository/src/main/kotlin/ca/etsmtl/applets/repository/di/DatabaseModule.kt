@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.di
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import ca.etsmtl.applets.repository.data.db.dao.signets.ActiviteDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao

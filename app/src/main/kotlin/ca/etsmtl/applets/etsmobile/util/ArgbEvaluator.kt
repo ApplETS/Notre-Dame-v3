@@ -2,7 +2,7 @@ package ca.etsmtl.applets.etsmobile.util
 
 import android.animation.ArgbEvaluator
 import android.content.Context
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import ca.etsmtl.applets.etsmobile.R
 
 /**

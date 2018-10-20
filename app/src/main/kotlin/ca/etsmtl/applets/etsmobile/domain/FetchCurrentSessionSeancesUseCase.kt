@@ -1,8 +1,8 @@
 package ca.etsmtl.applets.etsmobile.domain
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.Resource

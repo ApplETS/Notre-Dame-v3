@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.data.api
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.EtudiantRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeCoursIntervalleSessionsRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesActivitesEtProfRequestBody

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutGradesDetails"
@@ -8,13 +8,13 @@
     android:orientation="vertical"
     tools:context=".presentation.gradesdetails.GradesDetailsActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutGradesDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="@string/transition_grades_details_toolbar">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:collapsedTitleTextAppearance="@style/TextAppearance.AppTheme.CollapsingToolbar.Collapsed"
@@ -57,13 +57,13 @@
                     tools:text="Groupe 01" />
             </LinearLayout>
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:layout_collapseMode="pin" />
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/containerGradesDetails"
@@ -79,4 +79,4 @@
             android:background="@android:color/white"
             android:transitionName="@string/transition_grades_details_content" />
     </FrameLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
