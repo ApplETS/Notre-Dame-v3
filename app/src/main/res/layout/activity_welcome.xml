@@ -1,13 +1,25 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRootWelcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.etsmtl.etsmobile.presentation.WelcomeActivity">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.login.WelcomeActivity"
+    tools:theme="@style/LoginTheme">
 
-    <fragment
-        android:id="@+id/fragmentLogin"
-        android:name="ca.etsmtl.etsmobile.presentation.login.LoginFragment"
+    <!-- Background -->
+    <ImageView
+        android:id="@+id/iVBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_login" />
+        android:scaleType="centerCrop"
+        tools:src="@drawable/bg_ets_red" />
+
+    <ProgressBar
+        android:id="@+id/progressBarWelcome"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
 </FrameLayout>

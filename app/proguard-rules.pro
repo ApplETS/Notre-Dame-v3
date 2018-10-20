@@ -19,3 +19,28 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# For stack traces
+-keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*
+-keep public class * extends java.lang.Exception
+
+# Dagger
+-dontwarn com.google.errorprone.annotations.*
+
+-dontwarn org.jetbrains.annotations.**
+
+# Crashlytics
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+-printmapping mapping.txt
+
+# Firebase
+-keep class com.google.firebase.provider.** { *; }
+
+-keep class android.arch.lifecycle.ProcessLifecycleOwnerInitializer
+
+-dontwarn retrofit2.Platform$Java8
+
+# Okio
+-dontwarn okio.**

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="85dp"
+    android:layout_height="85dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="8dp"
+    android:stateListAnimator="@animator/selector_elevation_grade_course_item">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCourseSigle"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            tools:text="LOG121" />
+
+        <TextView
+            android:id="@+id/tvCourseGrade"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="25sp"
+            tools:text="A+" />
+    </LinearLayout>
+</android.support.design.card.MaterialCardView>

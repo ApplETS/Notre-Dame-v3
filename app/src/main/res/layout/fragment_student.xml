@@ -3,16 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.etsmtl.etsmobile.presentation.student.StudentFragment">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayoutStudent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll|snap"
             app:titleEnabled="false">
 
             <include layout="@layout/include_toolbar" />
@@ -23,14 +24,20 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
             app:tabIndicatorColor="@android:color/white"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@color/material_grey_200" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPagerStudent"
+    <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerStudent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

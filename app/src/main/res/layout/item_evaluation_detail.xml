@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/material_component_lists_single_line_height"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/material_component_lists_single_line_height"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/material_component_lists_single_line_text_size"
+        tools:text="@string/label_average" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tvValue"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/material_component_lists_single_line_height"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/material_component_lists_single_line_text_size"
+        tools:text="@string/text_grade_with_percentage" />
+</LinearLayout>

@@ -1,12 +1,12 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipeRefreshLayoutInfoEtudiant"
+    android:id="@+id/swipeRefreshLayoutProfile"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="ca.etsmtl.etsmobile.presentation.profile.ProfileFragment">
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewInfoEtudiant"
+        android:id="@+id/recyclerViewProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"

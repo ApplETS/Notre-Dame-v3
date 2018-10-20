@@ -4,6 +4,12 @@
     <string name="error_no_internet_connection">No internet connection</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="retry">Retry</string>
+    <string name="abbreviation_not_available">N/A</string>
+    <string name="session_fall">Fall</string>
+    <string name="session_winter">Winter</string>
+    <string name="session_summer">Summer</string>
+    <string name="session_without">Without Session</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Schedule</string>
@@ -21,12 +27,31 @@
     <string name="error_invalid_password">This password is incorrect</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="infos_universal_code">The format of your universal code is AB12345. It was sent to you by the Bureau du registraire upon your admission.</string>
+    <string name="info_universal_code">The format of your universal code is AB12345. It was sent to you by the Bureau du registraire upon your admission.</string>
     <string name="msg_logout_success">You have logged out</string>
     <string name="label_login_applets_logo">Made by</string>
+    <string name="password_forgotten">Forgot your password?</string>
 
     <!-- Grades -->
     <string name="title_grades">Grades</string>
+    <string name="msg_no_grades">No grades</string>
+    <string name="label_current_rating">Your grade</string>
+    <string name="label_average">Average</string>
+    <string name="text_grade_in_percentage">%1$s%%</string>
+    <string name="text_grade_with_percentage">%1$s/%2$s (%3$s%%)</string>
+    <string name="text_weight">Weight: %1$s%%</string>
+    <string name="label_group">Group</string>
+    <string name="label_grade">Grade</string>
+    <string name="label_median">Median</string>
+    <string name="label_standard_deviation">Standard Deviation</string>
+    <string name="label_percentile_rank">Percentile Rank</string>
+    <string name="label_target_date">Target Date</string>
+    <string name="title_ignored_evaluation">Ignored evaluation</string>
+    <string name="text_ignored_evaluation">This evaluation is ignored in the calculation of the final grade. This situation occurs when the teacher has decided to keep, for example, the top three grades of the six assignments he has asked for. The three lowest notes would then be ignored.</string>
+    <string name="error_failed_to_retrieve_data_course">Failed to retrieve data for this course</string>
+    <string name="title_section_summary">Summary</string>
+    <string name="title_section_evaluations">Evaluations</string>
+    <string name="text_group">Group %1$s</string>
 
     <!-- Profile -->
     <string name="title_profile">Profile</string>
@@ -45,5 +70,5 @@
 
     <!-- About -->
     <string name="applets_about">ÉTSMobile was conceived by the ApplETS scientific club from the École de technologie supérieure.\n\nApplets is, most importantly, a gathering of students who share a typical enthusiasm for the field of telecommunications and mobile applications.
-        The mission of ApplETS is to train students in mobile development and promote the production of mobile applications within the student community.\n\nFor more information, please consult our website : \n\n </string>
+        The mission of ApplETS is to train students in mobile development and promote the production of mobile applications within the student community.\n\nFor more information, please consult our website : http://clubapplets.ca</string>
 </resources>

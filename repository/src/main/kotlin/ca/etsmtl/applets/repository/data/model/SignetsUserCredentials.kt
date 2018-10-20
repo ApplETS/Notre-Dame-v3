@@ -1,0 +1,23 @@
+package ca.etsmtl.applets.repository.data.model
+
+import android.os.Parcelable
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials.Companion.INSTANCE
+import kotlinx.android.parcel.Parcelize
+import java.util.concurrent.atomic.AtomicReference
+
+/**
+ * User's credentials for accessing Signets' webservice
+ * An instance of this class is stored in the [INSTANCE] AtomicReference.
+ *
+ * Created by Sonphil on 28-02-18.
+ */
+@Parcelize
+data class SignetsUserCredentials(
+    val codeAccesUniversel: String,
+    val motPasse: String
+) : Parcelable {
+    companion object {
+        @JvmStatic
+        var INSTANCE: AtomicReference<SignetsUserCredentials> = AtomicReference()
+    }
+}

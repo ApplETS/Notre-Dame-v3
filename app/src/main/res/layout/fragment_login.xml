@@ -3,15 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/LoginTheme">
-
-    <!-- Background -->
-    <ImageView
-        android:id="@+id/iVBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/bg_ets_red" />
+    android:theme="@style/LoginTheme"
+    tools:background="@drawable/bg_ets_red">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,12 +34,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerInside"
-            tools:src="@drawable/ets_blanc_impr_fond_transparent"
             app:layout_constraintBottom_toTopOf="@+id/loginForm"
             app:layout_constraintDimensionRatio="W,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ets_blanc_impr_fond_transparent" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/loginForm"
@@ -58,7 +51,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="500dp">
 
-            <include layout="@layout/layout_login_form" />
+            <include layout="@layout/include_login_form" />
         </android.support.constraint.ConstraintLayout>
 
         <TextView

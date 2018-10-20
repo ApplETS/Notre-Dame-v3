@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "TO-DO",
+    "firebase_url": "TO-DO",
+    "project_id": "TO-DO",
+    "storage_bucket": "TO-DO"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234567890123:android:1234567890123456", // TO-DO
+        "android_client_info": {
+          "package_name": "ca.etsmtl.applets.etsmobile"
+        }
+      },
+      "oauth_client": [
+        // TO-DO
+      ],
+      "api_key": [
+        {
+          "current_key": "TO-DO"
+        }
+      ],
+      "services": {
+        // TO-DO
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234567890123:android:1234567890123456", // TO-DO
+        "android_client_info": {
+          "package_name": "ca.etsmtl.applets.etsmobile.beta"
+        }
+      },
+      "oauth_client": [
+        // TO-DO
+      ],
+      "api_key": [
+        {
+          "current_key": "TO-DO"
+        }
+      ],
+      "services": {
+        // TO-DO
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
