@@ -2,8 +2,13 @@ package ca.etsmtl.applets.etsmobile.util
 
 import android.Manifest
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresPermission
+import androidx.core.content.ContextCompat
 
 /**
  * Created by Sonphil on 18-05-18.
@@ -21,4 +26,19 @@ fun Context.isDeviceConnected(): Boolean {
     val activeNetwork = cm.activeNetworkInfo
 
     return activeNetwork != null && activeNetwork.isConnected
+}
+
+/**
+ * Uses [ContextCompat] to return a color associated with a particular resource ID
+ */
+@ColorInt
+fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
+    return ContextCompat.getColor(this, colorRes)
+}
+
+/**
+ * Uses [ContextCompat] to return a [Drawable] associated with a particular resource ID
+ */
+fun Context.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable? {
+    return ContextCompat.getDrawable(this, drawableRes)
 }
