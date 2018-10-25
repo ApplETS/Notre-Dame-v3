@@ -10,21 +10,28 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    
-    @IBAction func sendLoginInfo(_ sender: Any) {
-        print(username.text!,password.text!)
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
-    
-    
+
+    @IBAction func sendLoginInfo(_ sender: Any) {
+
+    }
+
     @IBOutlet weak var username: UITextField!
-    
     @IBOutlet weak var password: UITextField!
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.hideKeyboard)
+        )
+        self.view.addGestureRecognizer(tap)
+    }
 
-        // Do any additional setup after loading the view.
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
