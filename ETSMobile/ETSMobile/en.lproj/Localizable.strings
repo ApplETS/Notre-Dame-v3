@@ -49,3 +49,9 @@
 "password" = "Password";
 
 "login" = "Login";
+
+"madeBy" = "Made by";
+
+"universalAccessCode" = "Universal access code";
+
+"universalAccessCodeInfo" = "Your universal access code is in the form AB12345. It was sent to you by the Registrar's Office upon your admission.";

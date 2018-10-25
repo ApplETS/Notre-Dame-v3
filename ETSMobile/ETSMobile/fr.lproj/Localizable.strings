@@ -49,3 +49,9 @@
 "password" = "Mot de passe";
 
 "login" = "Se connecter";
+
+"madeBy" = "Réalisé par";
+
+"universalAccessCode" = "Code d'accès universel";
+
+"universalAccessCodeInfo" = "Votre code d'accès universel est sous la forme AB 12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.";

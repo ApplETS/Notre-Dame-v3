@@ -31,6 +31,7 @@
 		8F2994442163C2DB00747A21 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2994432163C2DB00747A21 /* Request.swift */; };
 		8F83BEE62180E501006294B0 /* ETSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F83BEE52180E501006294B0 /* ETSTextField.swift */; };
 		8F9F71152182265A0052D16C /* ETSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F71142182265A0052D16C /* ETSButton.swift */; };
+		95097715218286710007AD32 /* ETSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95097714218286710007AD32 /* ETSLabel.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
 		BF29541F05FF7E010C882F67 /* Pods_ETSMobileUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20E2A449C1A66503422404A /* Pods_ETSMobileUITests.framework */; };
@@ -108,6 +109,7 @@
 		8F83BEE52180E501006294B0 /* ETSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSTextField.swift; sourceTree = "<group>"; };
 		8F9F71142182265A0052D16C /* ETSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSButton.swift; sourceTree = "<group>"; };
 		920D23B9C13E5CCDC97FB3E5 /* Pods_ETSMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95097714218286710007AD32 /* ETSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSLabel.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		C20E2A449C1A66503422404A /* Pods_ETSMobileUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobileUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +302,7 @@
 			children = (
 				8F83BEE52180E501006294B0 /* ETSTextField.swift */,
 				8F9F71142182265A0052D16C /* ETSButton.swift */,
+				95097714218286710007AD32 /* ETSLabel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */,
 				C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */,
 				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
+				95097715218286710007AD32 /* ETSLabel.swift in Sources */,
 				C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */,
 				C8B61D0A2162E8660040A732 /* Environment.swift in Sources */,
 				8F9F71152182265A0052D16C /* ETSButton.swift in Sources */,

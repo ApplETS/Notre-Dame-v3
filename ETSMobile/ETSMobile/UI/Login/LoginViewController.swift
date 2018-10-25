@@ -18,8 +18,9 @@ class LoginViewController: UIViewController {
 
     }
 
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var madeBy: ETSLabel!
+    @IBOutlet weak var username: ETSTextField!
+    @IBOutlet weak var password: ETSTextField!
     @IBOutlet weak var loginButtonContent: ETSButton!
     
     override func viewDidLoad() {
@@ -31,7 +32,22 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
         username!.placeholder = NSLocalizedString("username", comment: "Access code")
         password!.placeholder = NSLocalizedString("password", comment: "Password")
-        loginButtonContent!.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
+        let rightSideButton = UIButton(type: .custom)
+        
+        rightSideButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        rightSideButton.frame = CGRect(x: CGFloat(username!.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
+        let disclosure = UITableViewCell()
+        disclosure.frame = rightSideButton.bounds
+        disclosure.accessoryType = .detailButton
+        disclosure.isUserInteractionEnabled = false
+        rightSideButton.addSubview(disclosure)
+        rightSideButton.addTarget(self, action: #selector(UsernameInfo), for: .touchUpInside)
+        username!.rightView = rightSideButton
+        username!.rightViewMode = .always
+        
+        
+        madeBy!.text = NSLocalizedString("madeBy", comment: "Réalisé par")
+    loginButtonContent!.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
     }
 
     @objc private func hideKeyboard() {
@@ -43,6 +59,13 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func UsernameInfo(sender: UIButton!) {
+        let alert = UIAlertController(title: NSLocalizedString("universalAccessCode", comment: "universalAccessCode"), message: NSLocalizedString("universalAccessCodeInfo", comment: "universalAccessCodeInfo"), preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
 
     /*
     // MARK: - Navigation
