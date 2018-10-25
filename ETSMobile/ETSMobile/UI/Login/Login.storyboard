@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-xc-5Gc">
-                                <rect key="frame" x="32" y="192" width="311" height="283"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-xc-5Gc">
+                                <rect key="frame" x="32" y="166.5" width="311" height="334"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoETS" translatesAutoresizingMaskIntoConstraints="NO" id="4Uf-CW-PEM">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="129"/>
@@ -27,32 +27,47 @@
                                             <constraint firstAttribute="height" constant="129" id="bLU-Hn-52w"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Vf-b1-jIv">
-                                        <rect key="frame" x="0.0" y="161" width="311" height="122"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="2Vf-b1-jIv">
+                                        <rect key="frame" x="0.0" y="169" width="311" height="165"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-F9-a6D" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="30"/>
-                                                <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="username"/>
-                                                <connections>
-                                                    <action selector="usernameEdit:" destination="rZ2-F1-RyF" eventType="editingDidEnd" id="jA5-Kl-BZP"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LnW-EQ-E8e" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="46" width="311" height="30"/>
-                                                <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="f3C-yq-3on">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="75"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Code d'accès universel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-F9-a6D" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="30"/>
+                                                        <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="username"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="usernameEdit:" destination="rZ2-F1-RyF" eventType="editingDidEnd" id="jA5-Kl-BZP"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mot de passe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LnW-EQ-E8e" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="45" width="311" height="30"/>
+                                                        <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ5-ax-fLV" customClass="ETSButton" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="92" width="311" height="30"/>
+                                                <rect key="frame" x="0.0" y="135" width="311" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
                                                 <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Login">
+                                                <state key="normal" title="Se connecter">
                                                     <color key="titleColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -85,6 +100,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="loginButtonContent" destination="bQ5-ax-fLV" id="xZn-tf-EVW"/>
                         <outlet property="password" destination="LnW-EQ-E8e" id="gWQ-Ct-W5h"/>
                         <outlet property="username" destination="iOr-F9-a6D" id="d6H-ha-Jj0"/>
                     </connections>

@@ -20,7 +20,8 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
-
+    @IBOutlet weak var loginButtonContent: ETSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
@@ -28,6 +29,9 @@ class LoginViewController: UIViewController {
             action: #selector(self.hideKeyboard)
         )
         self.view.addGestureRecognizer(tap)
+        username!.placeholder = NSLocalizedString("username", comment: "Access code")
+        password!.placeholder = NSLocalizedString("password", comment: "Password")
+        loginButtonContent!.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
     }
 
     @objc private func hideKeyboard() {

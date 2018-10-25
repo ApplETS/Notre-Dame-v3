@@ -23,8 +23,8 @@ class ETSButton: UIButton {
     }
 
     private func style() {
-        self.layer.cornerRadius = 15.0
+        self.layer.cornerRadius = 8.0
         self.heightAnchor.constraint(equalToConstant: CGFloat(ETSButton.height)).isActive = true
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.heavy)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
     }
 }
