@@ -2,16 +2,16 @@ package ca.etsmtl.applets.etsmobile.presentation.about
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.core.view.ViewCompat
 import android.transition.Transition
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.openWithChromeCustomTabs
+import ca.etsmtl.applets.etsmobile.util.open
 import ca.etsmtl.applets.etsmobile.util.show
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
@@ -126,7 +126,7 @@ class AboutFragment : Fragment() {
                                     else -> R.string.uri_applets_yt
                                 }
                         )
-                ).openWithChromeCustomTabs(it, R.color.bgApplets)
+                ).open(it, R.color.bgApplets)
             }
         }) {
             btnGithub.setOnClickListener(this)
