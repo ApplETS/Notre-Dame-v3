@@ -53,6 +53,7 @@ class LoginViewController: UIViewController {
         // just for testing, we would do that after the auth request resolved
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             self.loading = false
+            self.performSegue(withIdentifier: "goToHome", sender: self)
         }
         // TODO : Send server request for authentification
     }

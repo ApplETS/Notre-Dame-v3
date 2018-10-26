@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-xc-5Gc">
-                                <rect key="frame" x="32" y="144.5" width="311" height="378"/>
+                                <rect key="frame" x="32" y="171.5" width="311" height="324"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoETS" translatesAutoresizingMaskIntoConstraints="NO" id="4Uf-CW-PEM">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="129"/>
@@ -28,13 +28,13 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="2Vf-b1-jIv">
-                                        <rect key="frame" x="0.0" y="169" width="311" height="209"/>
+                                        <rect key="frame" x="0.0" y="169" width="311" height="155"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="f3C-yq-3on">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="111"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="75"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Code d'accès universel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-F9-a6D" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="30"/>
                                                         <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -44,7 +44,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mot de passe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LnW-EQ-E8e" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="63" width="311" height="48"/>
+                                                        <rect key="frame" x="0.0" y="45" width="311" height="30"/>
                                                         <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -53,7 +53,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ5-ax-fLV" customClass="ETSButton" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="161" width="311" height="48"/>
+                                                <rect key="frame" x="0.0" y="125" width="311" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
                                                 <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,12 +119,21 @@
                         <outlet property="madeBy" destination="p86-g7-MAn" id="354-b5-7WB"/>
                         <outlet property="password" destination="LnW-EQ-E8e" id="gWQ-Ct-W5h"/>
                         <outlet property="username" destination="iOr-F9-a6D" id="d6H-ha-Jj0"/>
+                        <segue destination="FqV-Ws-Tpj" kind="showDetail" identifier="goToHome" id="sG4-JY-JYF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wvE-a0-bKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="rZ2-F1-RyF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1255.2" y="-0.44977511244377816"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="DaP-Vs-edi">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="FqV-Ws-Tpj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FMT-7W-eSn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-546" y="-1"/>
         </scene>
     </scenes>
     <resources>
