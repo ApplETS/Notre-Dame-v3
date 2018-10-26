@@ -41,12 +41,12 @@ import UIKit
 
     private func style() {
         self.layer.borderColor = UIColor.white.cgColor
-        self.layer.cornerRadius = 15.0
+        self.layer.cornerRadius = 8.0
         self.layer.borderWidth = 0.0
         // width constraint that will be used when loading
         self.widthConstraint = self.widthAnchor.constraint(equalToConstant: ETSButton.loadingWidth)
         self.heightAnchor.constraint(equalToConstant: CGFloat(ETSButton.height)).isActive = true
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.heavy)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         self.loadingIndicator = ETSLoadingIndicator(frame: CGRect(x: 0, y: 0, width: ETSButton.loadingWidth, height: self.frame.height))
         self.addSubview(self.loadingIndicator!)
         self.loadingIndicator?.isHidden = true

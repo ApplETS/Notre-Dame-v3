@@ -43,3 +43,15 @@
 "medicalEmergencyInstructions" = "Si la vie d’une personne est en danger, composez le 911\n\n\U2022 Si la personne est consciente, demandez-lui :\n\t\U2022 Son nom\n\t\U2022 Des détails sur l’incident\n\t\U2022 Des détails sur ses blessures\n\t\U2022 Des questions sur ses allergies et ses problèmes de santé\n\n\U2022 Communiquez avec la sécurité, au poste 55 (système téléphonique interne);\n\n\U2022 Ne raccrochez pas tant que le répartiteur vous dit de le faire;\n\n\U2022 Prodiguez les premiers soins si vous avez été formé pour le faire;\n\n\U2022 Demandez aux personnes présentes de trouver un secouriste sur l’étage;\n\n\U2022 Restez sur place pour aider  les secouristes et leur fournir de l’information sur la victime;\n\n\U2022 Demandez aux personnes sur place de vous aider en attendant les secours;\n\n\U2022 Éloignez les personnes de la victime afin de lui faire de la place et de faciliter la tâche des secouristes;\n\n\U2022 Ne déplacez pas la victime sauf si la situation représente un danger pour elle;\n\n\U2022 Ne lui donner ni à boire ni à manger même si la victime l’exige;\n\n\U2022 Restez en communication avec la sécurité, si cela est possible;\n\n\U2022 Si l’état de la victime se détériore, en informer la sécurité.";
 
 "suspiciousSmellInstructions" = "La découverte d'une odeur ou fuite de gaz :\n\n\U2022 Quitter le secteur\n\U2022 Communiquer avec la sécurité au : 514-396-8900 poste 55.\n\U2022 Ne jamais activer une station manuelle d’incendie (sa station rouge).\n\nL’évacuation :\n\n\U2022 Demeurer calme.\n\U2022 Quitter les lieux sans faire de détour pour aller à son casier ou ramasser des effets personnels.\n\U2022 Évacuer l’endroit par les escaliers de secours les plus prêts et ne pas utiliser l’ascenseur.\n\U2022 Aider, si nécessaire, les personnes à quitter les lieux.\n\U2022 S’éloigner de l’immeuble et se rendre au point de rassemblement.\n\U2022 Ne jamais entrer ou retourner dans l’établissement pendant la situation d’urgence.\n\U2022 Attendre d’avoir obtenu l’autorisation des responsables des équipes d’évacuation avant de quitter le point de rassemblement.";
+
+"username" = "Code d'accès universel";
+
+"password" = "Mot de passe";
+
+"login" = "Se connecter";
+
+"madeBy" = "Réalisé par";
+
+"universalAccessCode" = "Code d'accès universel";
+
+"universalAccessCodeInfo" = "Votre code d'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.";

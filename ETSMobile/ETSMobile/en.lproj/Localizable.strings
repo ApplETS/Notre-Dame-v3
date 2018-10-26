@@ -44,3 +44,14 @@
 
 "suspiciousSmellInstructions" = "The discovery of a smell or gas leak:\n\n\U2022 Leave the sector\n\U2022 Reach security at : 514-396-8900 extension 55.\n\U2022 Never activate a manual fire station (red station).\n\nEvacuation :\n\n\U2022 Remain calm.\n\U2022 Leave the sector without any detour to go to your locker or to go pick up personal belongings.\n\U2022 Evacuate the area by the nearest fire escape stairs and do not use the elevator.\n\U2022 Help, if necessary, people to leave the location.\n\U2022 Move away from the building and go to the meeting point.\n\U2022 Never enter or return to the facility during an emergency.\n\U2022 Wait for permission from evacuation crew leaders before leaving the assembly point.";
 
+"username" = "Username";
+
+"password" = "Password";
+
+"login" = "Login";
+
+"madeBy" = "Made by";
+
+"universalAccessCode" = "Universal access code";
+
+"universalAccessCodeInfo" = "Your universal access code is in the form AB12345. It was sent to you by the Registrar's Office upon your admission.";
