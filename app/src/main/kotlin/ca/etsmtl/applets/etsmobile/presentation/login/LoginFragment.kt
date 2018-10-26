@@ -18,7 +18,6 @@ import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.fadeTo
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
-import ca.etsmtl.applets.etsmobile.util.getDrawableCompat
 import ca.etsmtl.applets.etsmobile.util.hideKeyboard
 import ca.etsmtl.applets.etsmobile.util.open
 import com.bumptech.glide.Glide
@@ -55,7 +54,7 @@ class LoginFragment : DaggerFragment() {
         context?.let {
             val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
 
-            val icon = it.getDrawableCompat(R.drawable.ic_info_outline_white_24dp)?.mutate()
+            val icon = it.getDrawable(R.drawable.ic_info_outline_white_24dp)?.mutate()
             icon?.setTint(it.getColorCompat(R.color.colorPrimary))
 
             builder.setMessage(R.string.info_universal_code)
