@@ -17,16 +17,42 @@ class LoginViewController: UIViewController {
     let passwordRightSideButton = UIButton(type: .custom)
     var passwordHidden = true
     var isSecureTextEntry = true
+
+    // whether we are waiting on a server response, disables fields and login button
+    private var _loading = false
+    var loading: Bool {
+        get { return self._loading }
+        set {
+            if self._loading != newValue {
+                self._loading = newValue
+                self.username.isEnabled = !self._loading
+                self.password.isEnabled = !self._loading
+                self.loginButton.loading = self._loading
+            }
+        }
+    }
+
+    // whether the fields are valid, controls if we can push the login button
+    private var _valid = true
+    var valid: Bool {
+        get { return self._valid }
+        set {
+            if self._valid != newValue {
+                self._valid = newValue
+                self.loginButton.isEnabled = self._valid
+            }
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     @IBAction func sendLoginInfo(_ sender: Any) {
-        self.loginButton.loading = true
+        self.loading = true
         // just for testing, we would do that after the auth request resolved
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            self.loginButton.loading = false
+            self.loading = false
         }
         // TODO : Send server request for authentification
     }
@@ -42,7 +68,9 @@ class LoginViewController: UIViewController {
 
         username!.placeholder = NSLocalizedString("username", comment: "Access code")
         password!.placeholder = NSLocalizedString("password", comment: "Password")
-        
+        username.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        password.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
         let usernameRightSideButton = UIButton(type: .custom)
         usernameRightSideButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         usernameRightSideButton.frame = CGRect(x: CGFloat(username!.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
@@ -65,6 +93,15 @@ class LoginViewController: UIViewController {
         
         madeBy!.text = NSLocalizedString("madeBy", comment: "Réalisé par")
         loginButton!.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
+
+        self.valid = false
+    }
+
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        self.valid = LoginValidation.validate(
+            code: username!.text ?? "",
+            password: password!.text ?? ""
+        )
     }
 
     @objc private func hideKeyboard() {
@@ -94,7 +131,6 @@ class LoginViewController: UIViewController {
         }
         
     }
-    
 
     /*
     // MARK: - Navigation

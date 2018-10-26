@@ -12,8 +12,10 @@ import UIKit
 @IBDesignable class ETSButton: UIButton {
     static let height = 48
     static let loadingWidth = CGFloat(100)
+
     private var widthConstraint: NSLayoutConstraint?
     private var loadingIndicator: ETSLoadingIndicator?
+
     private var _loading = false
     var loading: Bool {
         get { return self._loading }
@@ -25,6 +27,14 @@ import UIKit
                 } else {
                     self.stopLoadingAnimation()
                 }
+            }
+        }
+    }
+
+    override var isEnabled: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = self.isEnabled || self.loading ? 1.0 : 0.3
             }
         }
     }

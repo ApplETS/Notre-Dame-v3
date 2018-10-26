@@ -12,6 +12,14 @@ import UIKit;
 @IBDesignable class ETSTextField: UITextField {
     static let height = 48
 
+    override var isEnabled: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = self.isEnabled ? 1.0 : 0.3
+            }
+        }
+    }
+
     override var placeholder: String? {
         didSet {
             if let placeholder = self.placeholder {

@@ -29,6 +29,8 @@
 		537C74027EAA181B866337DC /* Pods_ETSMobileUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC130CD8DCA158FBFD808B1 /* Pods_ETSMobileUITests.framework */; };
 		846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */; };
 		84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */; };
+		8F1C750421835CE1002CE21F /* LoginValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C750321835CE1002CE21F /* LoginValidation.swift */; };
+		8F1C750621835F47002CE21F /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C750521835F47002CE21F /* Regex.swift */; };
 		8F2994442163C2DB00747A21 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2994432163C2DB00747A21 /* Request.swift */; };
 		8F4CAF2921825178009ADDEF /* ETSLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */; };
 		8F83BEE62180E501006294B0 /* ETSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F83BEE52180E501006294B0 /* ETSTextField.swift */; };
@@ -103,6 +105,8 @@
 		846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmedPersonViewController.swift; sourceTree = "<group>"; };
 		84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalEmergencyViewController.swift; sourceTree = "<group>"; };
 		885D3958B39BB8CAB1AD5E78 /* Pods-ETSMobileUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileUITests/Pods-ETSMobileUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8F1C750321835CE1002CE21F /* LoginValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginValidation.swift; sourceTree = "<group>"; };
+		8F1C750521835F47002CE21F /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		8F2994432163C2DB00747A21 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSLoadingIndicator.swift; sourceTree = "<group>"; };
 		8F83BEE52180E501006294B0 /* ETSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSTextField.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 			children = (
 				C8B61D0B2162E99A0040A732 /* RequestResult.swift */,
 				8F2994432163C2DB00747A21 /* Request.swift */,
+				8F1C750521835F47002CE21F /* Regex.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 			children = (
 				C8C49A7F2162D3F6006CCBED /* Login.storyboard */,
 				958AD36D210E069200A5D5B0 /* LoginViewController.swift */,
+				8F1C750321835CE1002CE21F /* LoginValidation.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -603,11 +609,13 @@
 				142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */,
 				84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */,
 				958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */,
+				8F1C750621835F47002CE21F /* Regex.swift in Sources */,
 				8F4CAF2921825178009ADDEF /* ETSLoadingIndicator.swift in Sources */,
 				146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */,
 				958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */,
 				C8B61D042162D9100040A732 /* UserType.swift in Sources */,
 				146F3B12208B89EB00275F71 /* ScheduleView.swift in Sources */,
+				8F1C750421835CE1002CE21F /* LoginValidation.swift in Sources */,
 				8F2994442163C2DB00747A21 /* Request.swift in Sources */,
 				C8B61D0C2162E99A0040A732 /* RequestResult.swift in Sources */,
 				146F3B10208B89E100275F71 /* ProfileView.swift in Sources */,
