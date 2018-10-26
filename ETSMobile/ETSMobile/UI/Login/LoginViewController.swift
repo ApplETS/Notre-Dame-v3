@@ -17,7 +17,13 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func sendLoginInfo(_ sender: Any) {
-
+        // TODO : Send server request for authentification
+        
+        //Uncomment the next line to start the loading spinner
+        //let loadingSpinner = UIViewController.displaySpinner(onView: self.view)
+        
+        //Uncomment the next line to stop the loading spinner
+        //UIViewController.removeSpinner(spinner: loadingSpinner)
     }
 
     @IBOutlet weak var madeBy: ETSLabel!
@@ -108,4 +114,25 @@ class LoginViewController: UIViewController {
 
 }
 
-
+extension UIViewController {
+    class func displaySpinner(onView : UIView) -> UIView {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+        let activityIndicator = UIActivityIndicatorView.init(style: .whiteLarge)
+        activityIndicator.startAnimating()
+        activityIndicator.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(activityIndicator)
+            onView.addSubview(spinnerView)
+        }
+        
+        return spinnerView
+    }
+    
+    class func removeSpinner(spinner :UIView) {
+        DispatchQueue.main.async {
+            spinner.removeFromSuperview()
+        }
+    }
+}
