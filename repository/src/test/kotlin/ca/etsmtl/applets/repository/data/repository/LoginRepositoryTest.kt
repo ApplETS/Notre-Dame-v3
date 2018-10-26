@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.data.repository
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import android.content.SharedPreferences
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.LiveDataTestUtil

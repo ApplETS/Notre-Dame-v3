@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.data.db.entity.signets
 
-import android.arch.persistence.room.Entity
+import androidx.room.Entity
 
 @Entity(primaryKeys = ["sigle", "session"])
 data class CoursEntity(
@@ -9,7 +9,6 @@ data class CoursEntity(
     var session: String,
     var programmeEtudes: String,
     var cote: String?,
-    var noteSur100: String,
     var nbCredits: Int = 0,
     var titreCours: String
 )

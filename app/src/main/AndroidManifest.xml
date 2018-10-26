@@ -35,7 +35,7 @@
             android:label="@string/more_item_label_about_applets"
             android:theme="@style/AboutTheme" />
         <activity
-            android:name=".presentation.grades.GradesDetailsActivity"
+            android:name=".presentation.gradesdetails.GradesDetailsActivity"
             android:parentActivityName=".presentation.main.MainActivity"
             android:theme="@style/AppTheme" />
     </application>

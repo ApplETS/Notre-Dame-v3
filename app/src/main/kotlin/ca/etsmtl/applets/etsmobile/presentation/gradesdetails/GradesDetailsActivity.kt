@@ -1,18 +1,20 @@
-package ca.etsmtl.applets.etsmobile.presentation.grades
+package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.util.Pair
-import android.support.v7.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
-import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsFragment
 import ca.etsmtl.applets.etsmobile.util.show
 import ca.etsmtl.applets.repository.data.model.Cours
-import kotlinx.android.synthetic.main.include_toolbar.toolbar
+import kotlinx.android.synthetic.main.activity_grades_details.containerTvGradesDetailsSubtitle
+import kotlinx.android.synthetic.main.activity_grades_details.toolbar
+import kotlinx.android.synthetic.main.activity_grades_details.tvGradesDetailsCourseName
+import kotlinx.android.synthetic.main.activity_grades_details.tvGradesDetailsGroup
 
 /**
  * Created by Sonphil on 15-08-18.
@@ -71,9 +73,10 @@ class GradesDetailsActivity : BaseActivity() {
                 }
 
                 supportActionBar?.let {
-                    it.title = this.sigle
-                    it.subtitle = this.titreCours
+                    it.title = sigle
                 }
+                tvGradesDetailsCourseName.text = titreCours
+                tvGradesDetailsGroup.text = String.format(getString(R.string.text_group), groupe)
             }
         }
     }
@@ -106,6 +109,7 @@ class GradesDetailsActivity : BaseActivity() {
 
     override fun onBackPressed() {
         // Don't show the toolbar's content during the shared element transition
+        containerTvGradesDetailsSubtitle.show(false)
         toolbar.show(false)
 
         super.onBackPressed()

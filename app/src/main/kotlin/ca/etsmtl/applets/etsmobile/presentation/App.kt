@@ -2,13 +2,9 @@ package ca.etsmtl.applets.etsmobile.presentation
 
 import ca.etsmtl.applets.etsmobile.di.DaggerAppComponent
 import ca.etsmtl.applets.repository.di.RepositoryModule
-import com.crashlytics.android.BuildConfig
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.core.CrashlyticsCore
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
-import io.fabric.sdk.android.Fabric
 
 /**
  * Created by Sonphil on 28-02-18.
@@ -24,13 +20,6 @@ class App : DaggerApplication() {
             return
         }
         LeakCanary.install(this)
-
-        // Initializes Fabric for builds that don't use the debug build type.
-        val crashlyticsKit = Crashlytics.Builder()
-                .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
-                .build()
-
-        Fabric.with(this, crashlyticsKit)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

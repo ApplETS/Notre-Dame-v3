@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.etsmobile.di.activitymodule
 
-import ca.etsmtl.applets.etsmobile.presentation.grades.GradesDetailsActivity
+import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

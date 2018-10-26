@@ -7,13 +7,14 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEvaluation
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiHoraireExamenFinal
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiJourRemplace
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeCours
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeSessions
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesElementsEvaluation
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeJoursRemplaces
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSeance
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSession
-import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeSessions
 import ca.etsmtl.applets.repository.data.db.entity.signets.ActiviteEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EnseignantEntity
@@ -22,10 +23,12 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.JourRemplaceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Session
+import ca.etsmtl.applets.repository.util.dateToUnix
+import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import ca.etsmtl.applets.repository.util.toLocaleDate
@@ -50,16 +53,17 @@ fun ApiActivite.toActiviteEntity() = ActiviteEntity(
         this.titreCours
 )
 
-fun ApiCours.toCoursEntity(scoreFinalSur100: String) = CoursEntity(
+fun ApiCours.toCoursEntity() = CoursEntity(
         this.sigle,
         this.groupe,
         this.session,
         this.programmeEtudes,
         this.cote,
-        scoreFinalSur100,
         this.nbCredits,
         this.titreCours
 )
+
+fun ApiListeDeCours.toCoursEntities() = liste.map { it.toCoursEntity() }
 
 fun ApiEnseignant.toEnseignantEntity() = EnseignantEntity(
         this.localBureau,
@@ -119,11 +123,7 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     )
 }
 
-fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = ArrayList<EvaluationEntity>().apply {
-    this@toEvaluationEntities.liste.forEach {
-        add(it.toEvaluationEntity(cours))
-    }
-}
+fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map { it.toEvaluationEntity(cours) }
 
 fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
     val formatter = formatter()
@@ -179,33 +179,33 @@ fun ApiListeJoursRemplaces.toJourRemplaceEntities(session: Session): List<JourRe
     return null
 }
 
-fun ApiSeance.toSeanceEntity(cours: Cours) = SeanceEntity(
-        this.dateDebut,
-        this.dateFin,
-        this.nomActivite,
-        this.local,
-        this.descriptionActivite,
-        this.libelleCours,
-        cours.sigle,
-        cours.session
+fun ApiSeance.toSeanceEntity(session: String) = SeanceEntity(
+        dateDebut.msDateToUnix(),
+        dateFin.msDateToUnix(),
+        nomActivite,
+        local,
+        descriptionActivite,
+        libelleCours,
+        coursGroupe.substringBefore("-"),
+        session
 )
 
-fun ApiListeDesSeances.toSeancesEntities(cours: Cours): List<SeanceEntity> = liste.map { it.toSeanceEntity(cours) }
+fun ApiListeDesSeances.toSeancesEntities(session: String): List<SeanceEntity> = liste.map { it.toSeanceEntity(session) }
 
 fun ApiSession.toSessionEntity() = SessionEntity(
         abrege,
         auLong,
-        dateDebut,
-        dateFin,
-        dateFinCours,
-        dateDebutChemiNot,
-        dateFinChemiNot,
-        dateDebutAnnulationAvecRemboursement,
-        dateFinAnnulationAvecRemboursement,
-        dateFinAnnulationAvecRemboursementNouveauxEtudiants,
-        dateDebutAnnulationSansRemboursementNouveauxEtudiants,
-        dateFinAnnulationSansRemboursementNouveauxEtudiants,
-        dateLimitePourAnnulerASEQ
+        dateDebut.dateToUnix("yyyy-MM-dd"),
+        dateFin.dateToUnix("yyyy-MM-dd"),
+        dateFinCours.dateToUnix("yyyy-MM-dd"),
+        dateDebutChemiNot.dateToUnix("yyyy-MM-dd"),
+        dateFinChemiNot.dateToUnix("yyyy-MM-dd"),
+        dateDebutAnnulationAvecRemboursement.dateToUnix("yyyy-MM-dd"),
+        dateFinAnnulationAvecRemboursement.dateToUnix("yyyy-MM-dd"),
+        dateFinAnnulationAvecRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
+        dateDebutAnnulationSansRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
+        dateFinAnnulationSansRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
+        dateLimitePourAnnulerASEQ.dateToUnix("yyyy-MM-dd")
 )
 
 fun ApiListeDeSessions.toSessionEntities(): List<SessionEntity> = liste.map { it.toSessionEntity() }

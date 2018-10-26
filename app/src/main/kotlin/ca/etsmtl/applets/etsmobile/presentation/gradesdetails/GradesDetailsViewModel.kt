@@ -1,25 +1,24 @@
 package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.OnLifecycleEvent
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.domain.FetchGradesDetailsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
-import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
+import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Group
 import com.xwray.groupie.Section
@@ -30,8 +29,7 @@ import javax.inject.Inject
  */
 
 class GradesDetailsViewModel @Inject constructor(
-    private var userCredentials: SignetsUserCredentials,
-    private val repository: EvaluationRepository,
+    private val fetchGradesDetailsUseCase: FetchGradesDetailsUseCase,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
     val cours = MutableLiveData<Cours>()
@@ -41,7 +39,7 @@ class GradesDetailsViewModel @Inject constructor(
     }
     val errorMessage: LiveData<Event<String?>> by lazy {
         Transformations.map(summaryAndEvaluationsMediatorLiveData) {
-            if (it.status == Resource.ERROR) {
+            if (it.status == Resource.Status.ERROR) {
                 when {
                     !app.isDeviceConnected() -> {
                         Event(app.getString(R.string.error_no_internet_connection))
@@ -55,7 +53,6 @@ class GradesDetailsViewModel @Inject constructor(
     }
     val recyclerViewItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
         fun getSummaryItems(sommaireElementsEvaluation: SommaireElementsEvaluation) = listOf(
-                EvaluationDetailItem(app.getString(R.string.label_group), cours.value?.groupe ?: ""),
                 EvaluationDetailItem(app.getString(R.string.label_median), sommaireElementsEvaluation.medianeClasse),
                 EvaluationDetailItem(app.getString(R.string.label_standard_deviation), sommaireElementsEvaluation.ecartTypeClasse),
                 EvaluationDetailItem(app.getString(R.string.label_percentile_rank), sommaireElementsEvaluation.rangCentileClasse)
@@ -88,7 +85,7 @@ class GradesDetailsViewModel @Inject constructor(
                 )
         )
 
-        it?.takeIf { it.status != Resource.LOADING }?.data?.let {
+        it?.takeIf { it.status != Resource.Status.LOADING }?.data?.let {
             val gradeAverageItem = it.sommaireElementsEvaluation.run {
                 GradeAverageItem(
                         cours.value?.cote,
@@ -132,20 +129,16 @@ class GradesDetailsViewModel @Inject constructor(
         }
     }
     val showEmptyView: LiveData<Boolean> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
-        (it.status != Resource.LOADING && (it?.data?.evaluations == null || it.data?.evaluations?.isEmpty() == true))
+        (it.status != Resource.Status.LOADING && (it?.data?.evaluations == null || it.data?.evaluations?.isEmpty() == true))
     }
 
     fun getLoading(): LiveData<Boolean> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
-        it.status == Resource.LOADING
+        it.status == Resource.Status.LOADING
     }
 
     private fun load() {
         cours.value?.let {
-            summaryAndEvaluationsRes = repository.getSummaryAndEvaluations(
-                    userCredentials,
-                    it,
-                    true
-            ).apply {
+            summaryAndEvaluationsRes = fetchGradesDetailsUseCase(it).apply {
                 summaryAndEvaluationsMediatorLiveData.addSource(this) {
                     summaryAndEvaluationsMediatorLiveData.value = it
                 }

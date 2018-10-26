@@ -49,7 +49,6 @@ This project uses a variety of libraries and tools.
 * [Glide](https://bumptech.github.io/glide/) : Library for loading and caching images
 * [Dagger2](https://google.github.io/dagger/) : Dependency injection framework
 * [Moshi](https://github.com/square/moshi/) : Library for parsing JSON into Java objects
-* [Kotshi](https://github.com/ansman/kotshi) : Annotations processor that generates Moshi adapters from Kotlin classes
 * [Retrofit2](http://square.github.io/retrofit/) : Type-safe HTTP client
 * [Material Design Dimens](https://github.com/DmitryMalkovich/material-design-dimens) : Library containing default colors and dimensions per Material Design guidelines and Android Design guidelines
 * [LeakCanary](https://github.com/square/leakcanary) : A memory leak detection library

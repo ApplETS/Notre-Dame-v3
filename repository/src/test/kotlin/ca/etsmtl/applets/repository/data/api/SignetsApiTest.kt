@@ -1,16 +1,15 @@
 package ca.etsmtl.applets.repository.data.api
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.support.annotation.NonNull
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.annotation.NonNull
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.EtudiantRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeCoursIntervalleSessionsRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesActivitesEtProfRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesElementsEvaluationRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesSeancesRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeHoraireExamensFinauxRequestBody
-import ca.etsmtl.applets.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiActivite
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEnseignant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
@@ -65,7 +64,7 @@ class SignetsApiTest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var api: SignetsApi
-    private val moshi = Moshi.Builder().add(ApplicationJsonAdapterFactory.INSTANCE).build()
+    private val moshi = Moshi.Builder().build()
 
     @Before
     @Throws(IOException::class)

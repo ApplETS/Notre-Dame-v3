@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <include layout="@layout/include_toolbar" />
-
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayoutSchedule"

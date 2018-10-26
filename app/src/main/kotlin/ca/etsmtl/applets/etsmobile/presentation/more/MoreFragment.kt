@@ -1,20 +1,20 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.util.Pair
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.core.util.Pair
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.main.MainFragment
 import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
+import ca.etsmtl.applets.etsmobile.presentation.main.MainFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import kotlinx.android.synthetic.main.fragment_more.progressMore
@@ -35,10 +35,10 @@ class MoreFragment : MainFragment() {
 
             builder.setMessage(R.string.prompt_log_out_confirmation)
                     .setTitle(getString(R.string.more_item_label_log_out))
-                    .setPositiveButton(R.string.yes) { dialog, _ ->
+                    .setPositiveButton(R.string.yes) { _, _ ->
                         moreViewModel.clickLogoutConfirmationDialogButton(true)
                     }
-                    .setNegativeButton(R.string.no) { dialog, _ -> moreViewModel.clickLogoutConfirmationDialogButton(false) }
+                    .setNegativeButton(R.string.no) { _, _ -> moreViewModel.clickLogoutConfirmationDialogButton(false) }
                     .setOnCancelListener { moreViewModel.clickLogoutConfirmationDialogButton(false) }
 
             builder.create()
@@ -82,7 +82,7 @@ class MoreFragment : MainFragment() {
     }
 
     private fun subscribeUI() {
-        moreViewModel.getDisplayLogoutDialog().observe(this, Observer {
+        moreViewModel.displayLogoutDialog.observe(this, Observer {
             logoutConfirmationDialog.takeIf { it != null && !it.isShowing }?.let { dialog ->
                 if (it == true) {
                     dialog.show()
@@ -92,11 +92,11 @@ class MoreFragment : MainFragment() {
             }
         })
 
-        moreViewModel.getDisplayMessage().observe(this, EventObserver {
+        moreViewModel.displayMessage.observe(this, EventObserver {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
 
-        moreViewModel.getActivityToGoTo().observe(this, EventObserver {
+        moreViewModel.activityToGoTo.observe(this, EventObserver {
             if (it == AboutActivity::class.java) {
                 val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
                 with (recyclerViewMore.getChildViewHolder(aboutItemView) as MoreRecyclerViewAdapter.ViewHolder) {
@@ -110,7 +110,7 @@ class MoreFragment : MainFragment() {
             }
         })
 
-        moreViewModel.getLoading().observe(this, Observer {
+        moreViewModel.loading.observe(this, Observer {
             it?.let {
                 if (it) {
                     recyclerViewMore.visibility = View.GONE

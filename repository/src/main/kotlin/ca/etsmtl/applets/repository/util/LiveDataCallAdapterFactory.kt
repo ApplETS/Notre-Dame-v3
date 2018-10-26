@@ -17,7 +17,7 @@
 
 package ca.etsmtl.applets.repository.util
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
@@ -40,6 +40,7 @@ internal class LiveDataCallAdapterFactory : CallAdapter.Factory() {
         }
         val observableType = CallAdapter.Factory.getParameterUpperBound(0, returnType as ParameterizedType)
         val rawObservableType = CallAdapter.Factory.getRawType(observableType)
+
         if (rawObservableType != ApiResponse::class.java) {
             throw IllegalArgumentException("type must be a resource")
         }

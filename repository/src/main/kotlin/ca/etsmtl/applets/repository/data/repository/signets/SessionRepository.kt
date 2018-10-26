@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.repository.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
@@ -14,7 +14,6 @@ import ca.etsmtl.applets.repository.data.db.entity.mapper.toSessions
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 class SessionRepository @Inject constructor(
@@ -34,10 +33,10 @@ class SessionRepository @Inject constructor(
         userCredentials: SignetsUserCredentials,
         shouldFetch: (data: List<Session>?) -> Boolean
     ): LiveData<Resource<List<Session>>> {
-        return object : NetworkBoundResource<List<Session>, ApiSignetsModel<ApiListeDeSessions>>(appExecutors) {
-            override fun saveCallResult(item: ApiSignetsModel<ApiListeDeSessions>) {
+        return object : SignetsNetworkBoundResource<List<Session>, ApiListeDeSessions>(appExecutors) {
+            override fun saveSignetsData(item: ApiListeDeSessions) {
                 dao.deleteAll()
-                item.data?.toSessionEntities()?.let { dao.insertAll(it) }
+                dao.insertAll(item.toSessionEntities())
             }
 
             override fun shouldFetch(data: List<Session>?) = shouldFetch(data)
@@ -47,7 +46,7 @@ class SessionRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDeSessions>>> {
-                return transformApiLiveData(api.listeSessions(EtudiantRequestBody(userCredentials)))
+                return api.listeSessions(EtudiantRequestBody(userCredentials))
             }
         }.asLiveData()
     }

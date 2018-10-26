@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.repository.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
@@ -15,7 +15,6 @@ import ca.etsmtl.applets.repository.data.model.HoraireExamenFinal
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
@@ -43,9 +42,9 @@ class HoraireExamenFinalRepository @Inject constructor(
         session: Session,
         shouldFetch: Boolean
     ): LiveData<Resource<List<HoraireExamenFinal>>> {
-        return object : NetworkBoundResource<List<HoraireExamenFinal>, ApiSignetsModel<ApiListeHoraireExamensFinaux>>(appExecutors) {
-            override fun saveCallResult(item: ApiSignetsModel<ApiListeHoraireExamensFinaux>) {
-                item.data?.let { dao.clearAndInsertBySession(session.abrege, it.toHoraireExamensFinauxEntities(session)) }
+        return object : SignetsNetworkBoundResource<List<HoraireExamenFinal>, ApiListeHoraireExamensFinaux>(appExecutors) {
+            override fun saveSignetsData(item: ApiListeHoraireExamensFinaux) {
+                dao.clearAndInsertBySession(session.abrege, item.toHoraireExamensFinauxEntities(session))
             }
 
             override fun shouldFetch(data: List<HoraireExamenFinal>?) = shouldFetch
@@ -57,13 +56,13 @@ class HoraireExamenFinalRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeHoraireExamensFinaux>>> {
-                return transformApiLiveData(api.listeHoraireExamensFinaux(
+                return api.listeHoraireExamensFinaux(
                         ListeHoraireExamensFinauxRequestBody(
                                 userCredentials.codeAccesUniversel,
                                 userCredentials.motPasse,
                                 session.abrege
                         )
-                ))
+                )
             }
         }.asLiveData()
     }

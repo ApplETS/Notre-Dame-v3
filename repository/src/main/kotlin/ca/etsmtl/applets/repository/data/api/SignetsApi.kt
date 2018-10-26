@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.data.api
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.EtudiantRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeCoursIntervalleSessionsRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesActivitesEtProfRequestBody
@@ -25,6 +25,11 @@ import javax.inject.Singleton
 /**
  * This interface is implemented by Retrofit. It's used to fetch data from Signets web service.
  * https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx
+ *
+ * The webService uses .Net technology from Microsoft. All services offered that return personal or
+ * sensitive information require the universal access code and password.
+ *
+ * For more information, see the "SignetsMobile" document.
  *
  * Created by Sonphil on 02-03-18.
  */

@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.repository.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
@@ -13,7 +13,6 @@ import ca.etsmtl.applets.repository.data.db.entity.mapper.toJoursRemplaces
 import ca.etsmtl.applets.repository.data.model.JourRemplace
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
@@ -34,11 +33,9 @@ class JourRemplaceRepository @Inject constructor(
      * @return A list of the user's sessions
      */
     fun getJoursRemplaces(session: Session, shouldFetch: Boolean = true): LiveData<Resource<List<JourRemplace>>> {
-        return object : NetworkBoundResource<List<JourRemplace>, ApiSignetsModel<ApiListeJoursRemplaces>>(appExecutors) {
-            override fun saveCallResult(item: ApiSignetsModel<ApiListeJoursRemplaces>) {
-                item.data?.toJourRemplaceEntities(session)?.let {
-                    dao.clearAndInsertBySession(session.abrege, it)
-                }
+        return object : SignetsNetworkBoundResource<List<JourRemplace>, ApiListeJoursRemplaces>(appExecutors) {
+            override fun saveSignetsData(item: ApiListeJoursRemplaces) {
+                item.toJourRemplaceEntities(session)?.let { dao.clearAndInsertBySession(session.abrege, it) }
             }
 
             override fun shouldFetch(data: List<JourRemplace>?): Boolean = shouldFetch
@@ -50,7 +47,7 @@ class JourRemplaceRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeJoursRemplaces>>> {
-                return transformApiLiveData(api.listeJoursRemplaces(session.abrege))
+                return api.listeJoursRemplaces(session.abrege)
             }
         }.asLiveData()
     }

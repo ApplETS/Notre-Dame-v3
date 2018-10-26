@@ -2,7 +2,6 @@ package ca.etsmtl.applets.repository.di
 
 import android.content.Context
 import ca.etsmtl.applets.repository.data.api.SignetsApi
-import ca.etsmtl.applets.repository.data.api.response.mapper.ApplicationJsonAdapterFactory
 import ca.etsmtl.applets.repository.util.LiveDataCallAdapterFactory
 import ca.etsmtl.applets.repository.util.SignetsTrust
 import com.squareup.moshi.Moshi
@@ -30,9 +29,7 @@ internal open class NetworkModule {
     }
 
     @Singleton @Provides
-    fun provideMoshi(): Moshi {
-        return Moshi.Builder().add(ApplicationJsonAdapterFactory.INSTANCE).build()
-    }
+    fun provideMoshi(): Moshi = Moshi.Builder().build()
 
     @Singleton @Provides
     fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit {

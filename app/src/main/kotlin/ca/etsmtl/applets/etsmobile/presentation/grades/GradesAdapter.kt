@@ -1,9 +1,9 @@
 package ca.etsmtl.applets.etsmobile.presentation.grades
 
-import android.support.v4.view.ViewCompat
-import android.support.v7.recyclerview.extensions.AsyncListDiffer
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,7 +87,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
                     holder.gradeTextView.apply {
                         text = when {
                             !this@with.cote.isNullOrEmpty() -> this@with.cote
-                            !this@with.noteSur100.isEmpty() -> {
+                            !this@with.noteSur100.isNullOrEmpty() -> {
                                 String.format(
                                         context.getString(R.string.text_grade_in_percentage),
                                         this@with.noteSur100

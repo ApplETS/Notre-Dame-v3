@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
 import android.animation.Animator
-import android.support.design.widget.BottomNavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import ca.etsmtl.applets.etsmobile.util.show
 import dagger.android.support.DaggerFragment
 

@@ -17,8 +17,8 @@
 
 package ca.etsmtl.applets.repository.util
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import retrofit2.Response
 

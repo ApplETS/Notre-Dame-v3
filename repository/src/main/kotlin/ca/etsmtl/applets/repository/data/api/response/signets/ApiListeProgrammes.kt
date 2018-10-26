@@ -1,13 +1,11 @@
 package ca.etsmtl.applets.repository.data.api.response.signets
 
 import com.squareup.moshi.Json
-import se.ansman.kotshi.JsonSerializable
+import com.squareup.moshi.JsonClass
 
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class ApiListeProgrammes(
     @Json(name = "__type") var type: String? = "",
     @Json(name = "liste") var liste: List<ApiProgramme> = listOf(),
-    @Json(name = "erreur") var erreur: String? = ""
-) : ApiSignetsData() {
-    override fun getError() = erreur
-}
+    @Json(name = "erreur") override var erreur: String? = ""
+) : ApiSignetsData()

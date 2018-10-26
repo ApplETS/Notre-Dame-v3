@@ -1,40 +1,40 @@
 package ca.etsmtl.applets.etsmobile.presentation.login
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.fadeTo
+import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.hideKeyboard
-import ca.etsmtl.applets.etsmobile.util.openWithChromeCustomTabs
+import ca.etsmtl.applets.etsmobile.util.open
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
 import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
-import kotlinx.android.synthetic.main.layout_login_form.btnForgotPassword
-import kotlinx.android.synthetic.main.layout_login_form.btnSignIn
-import kotlinx.android.synthetic.main.layout_login_form.btnUniversalCodeInfo
-import kotlinx.android.synthetic.main.layout_login_form.layoutPassword
-import kotlinx.android.synthetic.main.layout_login_form.layoutUniversalCode
-import kotlinx.android.synthetic.main.layout_login_form.password
-import kotlinx.android.synthetic.main.layout_login_form.universalCode
+import kotlinx.android.synthetic.main.include_login_form.btnForgotPassword
+import kotlinx.android.synthetic.main.include_login_form.btnSignIn
+import kotlinx.android.synthetic.main.include_login_form.btnUniversalCodeInfo
+import kotlinx.android.synthetic.main.include_login_form.layoutPassword
+import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
+import kotlinx.android.synthetic.main.include_login_form.password
+import kotlinx.android.synthetic.main.include_login_form.universalCode
 import javax.inject.Inject
 
 /**
@@ -54,9 +54,8 @@ class LoginFragment : DaggerFragment() {
         context?.let {
             val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
 
-            val icon = ContextCompat.getDrawable(it, R.drawable.ic_info_outline_white_24dp)!!
-                    .mutate()
-            icon.setTint(ContextCompat.getColor(it, R.color.colorPrimary))
+            val icon = it.getDrawable(R.drawable.ic_info_outline_white_24dp)?.mutate()
+            icon?.setTint(it.getColorCompat(R.color.colorPrimary))
 
             builder.setMessage(R.string.info_universal_code)
                     .setTitle(getString(R.string.prompt_universal_code))
@@ -103,7 +102,7 @@ class LoginFragment : DaggerFragment() {
                 R.id.btnUniversalCodeInfo -> loginViewModel.displayUniversalCodeInfo(true)
                 R.id.btnForgotPassword -> {
                     context?.let {
-                        Uri.parse(getString(R.string.uri_password_forgotten)).openWithChromeCustomTabs(it)
+                        Uri.parse(getString(R.string.uri_password_forgotten)).open(it)
                     }
                 }
                 R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()

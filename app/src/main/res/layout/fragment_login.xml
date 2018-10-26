@@ -6,7 +6,7 @@
     android:theme="@style/LoginTheme"
     tools:background="@drawable/bg_ets_red">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ets_blanc_impr_fond_transparent" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginForm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -51,8 +51,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="500dp">
 
-            <include layout="@layout/layout_login_form" />
-        </android.support.constraint.ConstraintLayout>
+            <include layout="@layout/include_login_form" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tvMadeBy"
@@ -77,5 +77,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

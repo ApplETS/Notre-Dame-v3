@@ -16,10 +16,10 @@
 
 package ca.etsmtl.applets.repository.data.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.support.annotation.MainThread
-import android.support.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.annotation.MainThread
+import androidx.annotation.WorkerThread
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.model.Resource
@@ -64,7 +64,7 @@ protected constructor(private val appExecutors: AppExecutors) {
     }
 
     private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
-        val apiResponse = createCall()
+        val apiResponse = processCall(createCall())
         // we re-attach dbSource as a new source,
         // it will dispatch its latest value quickly
         result.addSource(dbSource) { newData -> result.setValue(Resource.loading(newData)) }
@@ -100,10 +100,12 @@ protected constructor(private val appExecutors: AppExecutors) {
         }
     }
 
+    protected open fun processCall(call: LiveData<ApiResponse<RequestType>>): LiveData<ApiResponse<RequestType>> = call
+
     /**
      * Called when the fetch to the network has failed
      */
-    protected fun onFetchFailed() {}
+    protected open fun onFetchFailed() {}
 
     fun asLiveData(): LiveData<Resource<ResultType>> {
         return result

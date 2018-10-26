@@ -16,6 +16,7 @@ import ca.etsmtl.applets.repository.data.model.JourRemplace
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.data.model.Session
+import java.util.Date
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -27,7 +28,7 @@ fun CoursEntity.toCours() = Cours(
         this.session,
         this.programmeEtudes,
         this.cote,
-        this.noteSur100,
+        null,
         this.nbCredits,
         this.titreCours
 )
@@ -86,8 +87,8 @@ fun JourRemplaceEntity.toJourRemplace() = JourRemplace(
 fun List<JourRemplaceEntity>.toJoursRemplaces() = map { it.toJourRemplace() }
 
 fun SeanceEntity.toSeance() = Seance(
-        this.dateDebut,
-        this.dateFin,
+        Date(dateDebut),
+        Date(dateFin),
         this.nomActivite,
         this.local,
         this.descriptionActivite,

@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.repository.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
@@ -16,7 +16,6 @@ import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
 import javax.inject.Inject
 
 /**
@@ -32,41 +31,57 @@ class SeanceRepository @Inject constructor(
      * Returns the schedule of the sessions for a given course and a given session
      *
      * @param userCredentials The user's credentials
-     * @param cours The course
+     * @param cours The course. If null, the [Seance]s will be fetched by [session].
      * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
      * @return The schedule of the sessions
      */
     fun getSeancesSession(
         userCredentials: SignetsUserCredentials,
-        cours: Cours,
+        cours: Cours?,
         session: Session,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<Seance>>> {
-        return object : NetworkBoundResource<List<Seance>, ApiSignetsModel<ApiListeDesSeances>>(appExecutors) {
-            override fun saveCallResult(item: ApiSignetsModel<ApiListeDesSeances>) {
-                item.data?.let { dao.clearAndInsertByCoursAndSession(cours.sigle, cours.session, it.toSeancesEntities(cours)) }
+        return object : SignetsNetworkBoundResource<List<Seance>, ApiListeDesSeances>(appExecutors) {
+            override fun saveSignetsData(item: ApiListeDesSeances) {
+                when (cours) {
+                    null -> dao.clearAndInsertBySession(
+                            session.abrege,
+                            item.toSeancesEntities(session.abrege)
+                    )
+                    else -> dao.clearAndInsertByCoursAndSession(
+                            cours.sigle,
+                            session.abrege,
+                            item.toSeancesEntities(session.abrege)
+                    )
+                }
             }
 
             override fun shouldFetch(data: List<Seance>?): Boolean = shouldFetch
 
             override fun loadFromDb(): LiveData<List<Seance>> {
-                return Transformations.map(dao.getByCoursAndSession(cours.sigle, cours.session)) {
-                    it?.toSeances()
+                cours?.let {
+                    return Transformations.map(dao.getByCoursAndSession(it.sigle, it.session)) {
+                        it.toSeances()
+                    }
+                }
+
+                return Transformations.map(dao.getBySession(session.abrege)) {
+                    it.toSeances()
                 }
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>> {
-                return transformApiLiveData(api.listeDesSeances(
+                return api.listeDesSeances(
                         ListeDesSeancesRequestBody(
                                 userCredentials.codeAccesUniversel,
                                 userCredentials.motPasse,
-                                cours.sigle,
+                                cours?.sigle ?: "",
                                 session.abrege,
-                                session.dateDebut,
-                                session.dateFin
+                                session.dateDebut.toString(),
+                                session.dateFin.toString()
                         )
-                ))
+                )
             }
         }.asLiveData()
     }

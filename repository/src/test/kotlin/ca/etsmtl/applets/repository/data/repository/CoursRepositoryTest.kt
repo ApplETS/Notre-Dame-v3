@@ -1,9 +1,9 @@
 package ca.etsmtl.applets.repository.data.repository
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.EtudiantRequestBody
@@ -94,7 +94,7 @@ class CoursRepositoryTest {
         dao = mock(CoursDao::class.java)
         `when`(dao.getAll()).thenReturn(dbData)
         evaluationRepository = mock(EvaluationRepository::class.java)
-        repo = CoursRepository(InstantAppExecutors(), signetsApi, dao, evaluationRepository)
+        repo = CoursRepository(InstantAppExecutors(), signetsApi, dao)
     }
 
     @Test
@@ -164,7 +164,6 @@ class CoursRepositoryTest {
                 apiCours1.session,
                 apiCours1.programmeEtudes,
                 apiCours1.cote,
-                "",
                 apiCours1.nbCredits,
                 apiCours1.titreCours
         )
@@ -175,7 +174,6 @@ class CoursRepositoryTest {
                 apiCours2.session,
                 apiCours2.programmeEtudes,
                 apiCours2.cote,
-                noteSur100Cours2.toString(),
                 apiCours2.nbCredits,
                 apiCours2.titreCours
         )
@@ -214,7 +212,6 @@ class CoursRepositoryTest {
                 "H2018",
                 "7365",
                 "A",
-                "91",
                 3,
                 "Réingénierie du logiciel"
         )
@@ -254,7 +251,6 @@ class CoursRepositoryTest {
                 "H2018",
                 "7365",
                 "A",
-                "91",
                 3,
                 "Réingénierie du logiciel"
         )

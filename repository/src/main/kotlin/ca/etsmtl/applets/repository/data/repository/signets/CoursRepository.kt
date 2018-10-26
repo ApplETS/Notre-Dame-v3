@@ -1,21 +1,19 @@
 package ca.etsmtl.applets.repository.data.repository.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.EtudiantRequestBody
-import ca.etsmtl.applets.repository.data.api.response.mapper.toCoursEntity
+import ca.etsmtl.applets.repository.data.api.response.mapper.toCoursEntities
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeCours
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toCours
-import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.NetworkBoundResource
-import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -24,8 +22,7 @@ import javax.inject.Inject
 class CoursRepository @Inject constructor(
     appExecutors: AppExecutors,
     private val api: SignetsApi,
-    private val coursDao: CoursDao,
-    private val evaluationRepository: EvaluationRepository
+    private val coursDao: CoursDao
 ) : SignetsRepository(appExecutors) {
     /**
      * Returns the user's courses
@@ -42,10 +39,10 @@ class CoursRepository @Inject constructor(
         userCredentials: SignetsUserCredentials,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<Cours>>> {
-        return object : NetworkBoundResource<List<Cours>, List<CoursEntity>>(appExecutors) {
-            override fun saveCallResult(item: List<CoursEntity>) {
+        return object : SignetsNetworkBoundResource<List<Cours>, ApiListeDeCours>(appExecutors) {
+            override fun saveSignetsData(item: ApiListeDeCours) {
                 coursDao.deleteAll()
-                coursDao.insertAll(item)
+                coursDao.insertAll(item.toCoursEntities())
             }
 
             override fun shouldFetch(data: List<Cours>?) = shouldFetch
@@ -56,57 +53,8 @@ class CoursRepository @Inject constructor(
                 }
             }
 
-            override fun createCall(): LiveData<ApiResponse<List<CoursEntity>>> {
-                return Transformations.switchMap(transformApiLiveData(api.listeCours(EtudiantRequestBody(userCredentials)))) {
-
-                    val mediatorLiveData = MediatorLiveData<ApiResponse<List<CoursEntity>>>()
-
-                    if (it.isSuccessful) {
-                        val list: MutableList<CoursEntity> = mutableListOf()
-
-                        with(it.body?.data?.liste) {
-                            var nbCalls = 0
-
-                            this?.forEach { apiCours ->
-                                val coursEntity = apiCours.toCoursEntity("")
-
-                                list.add(coursEntity)
-
-                                if (apiCours.cote.isNullOrEmpty() && apiCours.hasValidSession()) {
-                                    nbCalls++
-
-                                    with(evaluationRepository.getEvaluationsSummary(
-                                            userCredentials,
-                                            coursEntity.toCours(),
-                                            shouldFetch
-                                    )) {
-                                        mediatorLiveData.addSource(this) {
-                                            if (it?.status == Resource.SUCCESS && it.data != null) {
-                                                coursEntity.noteSur100 = it.data.noteSur100
-                                            }
-
-                                            if (it?.status != Resource.LOADING) {
-                                                if (--nbCalls == 0) { // If this is the last call...
-                                                    mediatorLiveData.value = ApiResponse(Response.success(list as List<CoursEntity>))
-                                                }
-
-                                                mediatorLiveData.removeSource(this)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (nbCalls == 0) { // If there is no call to be made...
-                                mediatorLiveData.value = ApiResponse(Response.success(list as List<CoursEntity>))
-                            }
-                        }
-                    } else {
-                        mediatorLiveData.value = ApiResponse(Throwable(it.errorMessage))
-                    }
-
-                    mediatorLiveData
-                }
+            override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDeCours>>> {
+                return api.listeCours(EtudiantRequestBody(userCredentials))
             }
         }.asLiveData()
     }

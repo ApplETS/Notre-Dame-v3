@@ -1,9 +1,9 @@
 package ca.etsmtl.applets.repository.data.api.response.signets
 
 import com.squareup.moshi.Json
-import se.ansman.kotshi.JsonSerializable
+import com.squareup.moshi.JsonClass
 
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class ApiEtudiant(
     @Json(name = "__type")
     var type: String,
@@ -18,7 +18,5 @@ data class ApiEtudiant(
     @Json(name = "masculin")
     var masculin: Boolean,
     @Json(name = "erreur")
-    var erreur: String? = null
-) : ApiSignetsData() {
-    override fun getError() = erreur
-}
+    override var erreur: String? = null
+) : ApiSignetsData()
