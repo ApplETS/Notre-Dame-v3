@@ -10,7 +10,7 @@ import Foundation
 
 class LoginValidation {
     static func validateAccessCode(_ code: String) -> Bool {
-        return code =~ "^[A-Z]{2}\\d{5}$"
+        return code.uppercased() =~ "^[A-Z]{2}\\d{5}$"
     }
 
     static func validatePassword(_ password: String) -> Bool {

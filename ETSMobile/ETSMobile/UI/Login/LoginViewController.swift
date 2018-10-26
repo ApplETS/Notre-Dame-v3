@@ -86,8 +86,8 @@ class LoginViewController: UIViewController {
         passwordRightSideButton.setImage(UIImage(named: "eyeClosed"), for: .normal)
         passwordRightSideButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         passwordRightSideButton.frame = CGRect(x: CGFloat(username!.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
-        
         passwordRightSideButton.addTarget(self, action: #selector(passwordToggle), for: .touchUpInside)
+        
         password!.rightView = passwordRightSideButton
         password!.rightViewMode = .always
         
@@ -144,25 +144,3 @@ class LoginViewController: UIViewController {
 
 }
 
-extension UIViewController {
-    class func displaySpinner(onView : UIView) -> UIView {
-        let spinnerView = UIView.init(frame: onView.bounds)
-        spinnerView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-        let activityIndicator = UIActivityIndicatorView.init(style: .whiteLarge)
-        activityIndicator.startAnimating()
-        activityIndicator.center = spinnerView.center
-        
-        DispatchQueue.main.async {
-            spinnerView.addSubview(activityIndicator)
-            onView.addSubview(spinnerView)
-        }
-        
-        return spinnerView
-    }
-    
-    class func removeSpinner(spinner :UIView) {
-        DispatchQueue.main.async {
-            spinner.removeFromSuperview()
-        }
-    }
-}
