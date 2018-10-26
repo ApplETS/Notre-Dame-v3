@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-xc-5Gc">
-                                <rect key="frame" x="32" y="192" width="311" height="283"/>
+                                <rect key="frame" x="32" y="165" width="311" height="337"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoETS" translatesAutoresizingMaskIntoConstraints="NO" id="4Uf-CW-PEM">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="129"/>
@@ -27,11 +27,11 @@
                                             <constraint firstAttribute="height" constant="129" id="bLU-Hn-52w"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Vf-b1-jIv">
-                                        <rect key="frame" x="0.0" y="161" width="311" height="122"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Vf-b1-jIv">
+                                        <rect key="frame" x="0.0" y="161" width="311" height="176"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-F9-a6D" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
                                                 <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -41,14 +41,14 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LnW-EQ-E8e" customClass="ETSTextField" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="46" width="311" height="30"/>
+                                                <rect key="frame" x="0.0" y="64" width="311" height="48"/>
                                                 <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ5-ax-fLV" customClass="ETSButton" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="92" width="311" height="30"/>
+                                                <rect key="frame" x="0.0" y="128" width="311" height="48"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
                                                 <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -61,6 +61,14 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="bQ5-ax-fLV" secondAttribute="trailing" priority="750" id="0xa-bM-qjI"/>
+                                            <constraint firstAttribute="trailing" secondItem="LnW-EQ-E8e" secondAttribute="trailing" id="10h-OX-MjE"/>
+                                            <constraint firstItem="iOr-F9-a6D" firstAttribute="leading" secondItem="2Vf-b1-jIv" secondAttribute="leading" id="4PV-Cj-ejE"/>
+                                            <constraint firstAttribute="trailing" secondItem="iOr-F9-a6D" secondAttribute="trailing" id="7z0-W1-DeE"/>
+                                            <constraint firstItem="LnW-EQ-E8e" firstAttribute="leading" secondItem="2Vf-b1-jIv" secondAttribute="leading" id="FMz-qh-TbZ"/>
+                                            <constraint firstItem="bQ5-ax-fLV" firstAttribute="leading" secondItem="2Vf-b1-jIv" secondAttribute="leading" priority="750" id="fd1-cS-TQp"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -85,6 +93,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="bQ5-ax-fLV" id="yrj-7x-OCg"/>
                         <outlet property="password" destination="LnW-EQ-E8e" id="gWQ-Ct-W5h"/>
                         <outlet property="username" destination="iOr-F9-a6D" id="d6H-ha-Jj0"/>
                     </connections>

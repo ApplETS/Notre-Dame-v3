@@ -9,20 +9,25 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var loginButton: ETSButton!
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     @IBAction func sendLoginInfo(_ sender: Any) {
-
+        self.loginButton.loading = true
+        // just for testing, we would do that after the auth request resolved
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            self.loginButton.loading = false
+        }
     }
-
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // enables tapping outside fields to dismiss keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(self.hideKeyboard)

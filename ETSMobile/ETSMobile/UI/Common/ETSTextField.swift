@@ -9,7 +9,7 @@
 import Foundation
 import UIKit;
 
-class ETSTextField: UITextField {
+@IBDesignable class ETSTextField: UITextField {
     static let height = 48
 
     override init(frame: CGRect) {

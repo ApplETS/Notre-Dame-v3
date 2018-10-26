@@ -29,6 +29,7 @@
 		846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */; };
 		84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */; };
 		8F2994442163C2DB00747A21 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2994432163C2DB00747A21 /* Request.swift */; };
+		8F4CAF2921825178009ADDEF /* ETSLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */; };
 		8F83BEE62180E501006294B0 /* ETSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F83BEE52180E501006294B0 /* ETSTextField.swift */; };
 		8F9F71152182265A0052D16C /* ETSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F71142182265A0052D16C /* ETSButton.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
@@ -105,6 +106,7 @@
 		846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmedPersonViewController.swift; sourceTree = "<group>"; };
 		84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalEmergencyViewController.swift; sourceTree = "<group>"; };
 		8F2994432163C2DB00747A21 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSLoadingIndicator.swift; sourceTree = "<group>"; };
 		8F83BEE52180E501006294B0 /* ETSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSTextField.swift; sourceTree = "<group>"; };
 		8F9F71142182265A0052D16C /* ETSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSButton.swift; sourceTree = "<group>"; };
 		920D23B9C13E5CCDC97FB3E5 /* Pods_ETSMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +302,7 @@
 			children = (
 				8F83BEE52180E501006294B0 /* ETSTextField.swift */,
 				8F9F71142182265A0052D16C /* ETSButton.swift */,
+				8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				142FC846208B9B6600C58563 /* BombThreatViewController.swift in Sources */,
 				84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */,
 				958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */,
+				8F4CAF2921825178009ADDEF /* ETSLoadingIndicator.swift in Sources */,
 				146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */,
 				958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */,
 				C8B61D042162D9100040A732 /* UserType.swift in Sources */,
