@@ -4,6 +4,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -29,7 +30,8 @@ class ProfileViewModel @Inject constructor(
     val profile: LiveData<List<Section>> = Transformations.map(profileMediatorLiveData) {
         it.data
     }
-    val loading: LiveData<Boolean> = Transformations.map(profileMediatorLiveData) { it.status == Resource.Status.LOADING }
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
     val errorMessage: LiveData<String> = Transformations.map(profileMediatorLiveData) {
         it.message
     }
@@ -41,22 +43,26 @@ class ProfileViewModel @Inject constructor(
                 val sections = mutableListOf<Section>()
                 val etudiant = res.data
 
-                etudiant?.takeIf { res.status != Resource.Status.LOADING }?.let {
-                    sections.add(
-                            Section().apply {
-                                setHeader(ProfileHeaderItem(app.getString(R.string.title_student_status_profile)))
-                                add(ProfileItem(app.getString(R.string.label_balance_profile), it.soldeTotal))
-                            }
-                    )
+                _loading.value = res.status == Resource.Status.LOADING
 
-                    sections.add(
-                            Section().apply {
-                                setHeader(ProfileHeaderItem(app.getString(R.string.title_personal_information_profile)))
-                                add(ProfileItem(app.getString(R.string.label_first_name_profile), it.prenom))
-                                add(ProfileItem(app.getString(R.string.label_last_name_profile), it.nom))
-                                add(ProfileItem(app.getString(R.string.label_permanent_code_profile), it.codePerm))
-                            }
-                    )
+                if (res.status != Resource.Status.LOADING) {
+                    etudiant?.let {
+                        sections.add(
+                                Section().apply {
+                                    setHeader(ProfileHeaderItem(app.getString(R.string.title_student_status_profile)))
+                                    add(ProfileItem(app.getString(R.string.label_balance_profile), it.soldeTotal))
+                                }
+                        )
+
+                        sections.add(
+                                Section().apply {
+                                    setHeader(ProfileHeaderItem(app.getString(R.string.title_personal_information_profile)))
+                                    add(ProfileItem(app.getString(R.string.label_first_name_profile), it.prenom))
+                                    add(ProfileItem(app.getString(R.string.label_last_name_profile), it.nom))
+                                    add(ProfileItem(app.getString(R.string.label_permanent_code_profile), it.codePerm))
+                                }
+                        )
+                    }
 
                     profileMediatorLiveData.value = res.copyStatusAndMessage(sections)
                 }

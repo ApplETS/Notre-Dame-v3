@@ -22,4 +22,22 @@ class ProfileItem(
     }
 
     override fun getLayout() = R.layout.item_profile
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return if (other !is ProfileItem) {
+            false
+        } else {
+            label == other.label && value == other.value
+        }
+    }
+
+    override fun hashCode(): Int {
+        var result = label.hashCode()
+        result = 31 * result + value.hashCode()
+        return result
+    }
 }

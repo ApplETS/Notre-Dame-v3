@@ -18,4 +18,16 @@ class ProfileHeaderItem(val title: String) : Item() {
     }
 
     override fun getLayout() = R.layout.item_profile_header
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return title == (other as? ProfileHeaderItem)?.title
+    }
+
+    override fun hashCode(): Int {
+        return title.hashCode()
+    }
 }
