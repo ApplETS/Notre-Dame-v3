@@ -51,7 +51,7 @@ class ProfileViewModelTest {
         val errorMsgObserver = mock<Observer<String>>()
         verify(errorMsgObserver, Mockito.never()).onChanged(ArgumentMatchers.any())
 
-        profileViewModel.etudiant.observeForever(etudiantObserver)
+        profileViewModel.profile.observeForever(etudiantObserver)
         profileViewModel.loading.observeForever(loadingObserver)
         profileViewModel.errorMessage.observeForever(errorMsgObserver)
 

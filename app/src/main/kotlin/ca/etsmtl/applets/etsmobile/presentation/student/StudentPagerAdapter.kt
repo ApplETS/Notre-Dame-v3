@@ -8,18 +8,17 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment
 
-class StudentPagerAdapter : FragmentPagerAdapter {
+class StudentPagerAdapter(
+    context: Context,
+    fragmentManager: FragmentManager
+) : FragmentPagerAdapter(fragmentManager) {
 
     companion object {
         const val GRADES = 0
         const val PROFILE = 1
     }
 
-    private var context: Context
-
-    constructor(context: Context, fragmentManager: FragmentManager) : super(fragmentManager) {
-        this.context = context.applicationContext
-    }
+    private var context: Context = context.applicationContext
 
     override fun getCount() = 2
 

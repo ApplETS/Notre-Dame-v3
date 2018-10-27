@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/material_component_lists_icon_left_padding"
+    android:paddingEnd="@dimen/material_component_lists_right_padding">
+
+    <View
+        android:id="@+id/dividerProfile"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/dividerVertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitleProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/material_component_lists_single_line_height"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/material_component_lists_single_line_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerProfile"
+        tools:text="Title" />
+</androidx.constraintlayout.widget.ConstraintLayout>
