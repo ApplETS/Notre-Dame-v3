@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @IBDesignable class ETSButton: UIButton {
-    static let height = 48
+    static let height = CGFloat(48)
     static let loadingWidth = CGFloat(100)
 
     private var widthConstraint: NSLayoutConstraint?
@@ -57,7 +57,7 @@ import UIKit
         self.widthConstraint = self.widthAnchor.constraint(equalToConstant: ETSButton.loadingWidth)
         self.heightAnchor.constraint(equalToConstant: CGFloat(ETSButton.height)).isActive = true
         self.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
-        self.loadingIndicator = ETSLoadingIndicator(frame: CGRect(x: 0, y: 0, width: ETSButton.loadingWidth, height: self.frame.height))
+        self.loadingIndicator = ETSLoadingIndicator(frame: CGRect(x: 0, y: 0, width: ETSButton.loadingWidth, height: ETSButton.height))
         self.addSubview(self.loadingIndicator!)
         self.loadingIndicator?.isHidden = true
     }
