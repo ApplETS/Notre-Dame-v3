@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-xc-5Gc">
-                                <rect key="frame" x="32" y="171.5" width="311" height="324"/>
+                                <rect key="frame" x="32" y="153" width="311" height="361"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoETS" translatesAutoresizingMaskIntoConstraints="NO" id="4Uf-CW-PEM">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="129"/>
@@ -27,8 +27,8 @@
                                             <constraint firstAttribute="height" constant="129" id="bLU-Hn-52w"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="2Vf-b1-jIv">
-                                        <rect key="frame" x="0.0" y="169" width="311" height="155"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="2Vf-b1-jIv">
+                                        <rect key="frame" x="0.0" y="169" width="311" height="192"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="f3C-yq-3on">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="75"/>
@@ -52,25 +52,38 @@
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ5-ax-fLV" customClass="ETSButton" customModule="ETSMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="125" width="311" height="30"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
-                                                <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Se connecter">
-                                                    <color key="titleColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="sendLoginInfo:" destination="rZ2-F1-RyF" eventType="touchUpInside" id="beO-3i-aqk"/>
-                                                    <action selector="sendLoginInfo:" destination="2L0-E1-6zU" eventType="touchUpInside" id="hNF-1a-hlv"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-G3-yqL">
+                                                <rect key="frame" x="0.0" y="125" width="311" height="67"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ5-ax-fLV" customClass="ETSButton" customModule="ETSMobile" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="30"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                                        <color key="tintColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Se connecter">
+                                                            <color key="titleColor" red="0.95686274510000002" green="0.2274509804" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="sendLoginInfo:" destination="rZ2-F1-RyF" eventType="touchUpInside" id="beO-3i-aqk"/>
+                                                            <action selector="sendLoginInfo:" destination="2L0-E1-6zU" eventType="touchUpInside" id="hNF-1a-hlv"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCx-ng-KCp">
+                                                        <rect key="frame" x="81.5" y="38" width="148" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <state key="normal" title="Forgot your password?">
+                                                            <color key="titleColor" white="1" alpha="0.90036311619718312" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onPasswordForgot:" destination="2L0-E1-6zU" eventType="touchUpInside" id="lQR-fn-wRa"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="bQ5-ax-fLV" firstAttribute="width" secondItem="Uum-G3-yqL" secondAttribute="width" priority="750" id="07I-0M-CvE"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="f3C-yq-3on" secondAttribute="trailing" id="Oto-oR-kRb"/>
-                                            <constraint firstItem="bQ5-ax-fLV" firstAttribute="width" secondItem="2Vf-b1-jIv" secondAttribute="width" priority="750" id="cZR-J3-dKn"/>
-                                            <constraint firstItem="f3C-yq-3on" firstAttribute="leading" secondItem="2Vf-b1-jIv" secondAttribute="leading" id="haA-5s-1xg"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -86,7 +99,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoApp|ETS" translatesAutoresizingMaskIntoConstraints="NO" id="Uxy-y8-B6b">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoApp|ETS" translatesAutoresizingMaskIntoConstraints="NO" id="Uxy-y8-B6b">
                                         <rect key="frame" x="76.5" y="0.0" width="100" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="A4b-ns-cqf"/>
@@ -117,6 +130,7 @@
                     <connections>
                         <outlet property="loginButton" destination="bQ5-ax-fLV" id="xZn-tf-EVW"/>
                         <outlet property="madeBy" destination="p86-g7-MAn" id="354-b5-7WB"/>
+                        <outlet property="madeByLogo" destination="Uxy-y8-B6b" id="Qo4-W9-7dW"/>
                         <outlet property="password" destination="LnW-EQ-E8e" id="gWQ-Ct-W5h"/>
                         <outlet property="username" destination="iOr-F9-a6D" id="d6H-ha-Jj0"/>
                         <segue destination="FqV-Ws-Tpj" kind="showDetail" identifier="goToHome" id="sG4-JY-JYF"/>

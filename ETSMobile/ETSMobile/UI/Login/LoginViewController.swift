@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var password: ETSTextField!
     @IBOutlet weak var loginButton: ETSButton!
     @IBOutlet weak var madeBy: ETSLabel!
+    @IBOutlet weak var madeByLogo: UIImageView!
 
     let passwordRightSideButton = UIButton(type: .custom)
     var passwordHidden = true
@@ -67,6 +68,13 @@ class LoginViewController: UIViewController {
         )
         self.view.addGestureRecognizer(tap)
 
+        // logo click redirect to club homepage
+        let logoTap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.onLogoClick)
+        )
+        self.madeByLogo.addGestureRecognizer(logoTap)
+
         username!.placeholder = NSLocalizedString("username", comment: "Access code")
         password!.placeholder = NSLocalizedString("password", comment: "Password")
         username.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -96,6 +104,14 @@ class LoginViewController: UIViewController {
         loginButton!.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
 
         self.valid = false
+    }
+
+    @IBAction func onPasswordForgot(_ sender: UIButton) {
+        UIApplication.shared.open(Environment.current.passwordReset())
+    }
+
+    @objc func onLogoClick() {
+        UIApplication.shared.open(Environment.current.clubHomepage())
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {

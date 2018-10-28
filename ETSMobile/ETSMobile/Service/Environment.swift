@@ -17,6 +17,14 @@ enum Environment {
         return Environment.preproduction
     }
 
+    func clubHomepage() -> URL {
+        return URL(string: "https://clubapplets.ca")!
+    }
+
+    func passwordReset() -> URL {
+        return URL(string: "https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx")!
+    }
+
     func monETS() -> URL {
         switch self {
         case .production:
