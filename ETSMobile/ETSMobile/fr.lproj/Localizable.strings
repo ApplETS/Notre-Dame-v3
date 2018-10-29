@@ -55,3 +55,5 @@
 "universalAccessCode" = "Code d'accès universel";
 
 "universalAccessCodeInfo" = "Votre code d'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.";
+
+"forgotPassword" = "Mot de passe oublié?";

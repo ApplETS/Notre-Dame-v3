@@ -14,7 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: ETSButton!
     @IBOutlet weak var madeBy: ETSLabel!
     @IBOutlet weak var madeByLogo: UIImageView!
-
+    @IBOutlet weak var forgotPasswordLink: UIButton!
+    
     let passwordRightSideButton = UIButton(type: .custom)
     var passwordHidden = true
     var isSecureTextEntry = true
@@ -102,6 +103,8 @@ class LoginViewController: UIViewController {
         
         madeBy!.text = NSLocalizedString("madeBy", comment: "Réalisé par")
         loginButton!.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
+        
+        forgotPasswordLink!.setTitle(NSLocalizedString("forgotPassword", comment: "Forgot password"), for: .normal)
 
         self.valid = false
     }
