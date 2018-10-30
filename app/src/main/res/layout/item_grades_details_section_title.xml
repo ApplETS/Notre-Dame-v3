@@ -2,15 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/material_component_lists_single_line_height"
-    android:gravity="center_vertical"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="16dp">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <View
+        android:id="@+id/dividerProfile"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/dividerVertical" />
 
     <TextView
         android:id="@+id/tvSectionTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/material_component_lists_single_line_height"
+        android:gravity="center_vertical"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/material_component_lists_single_line_text_size"
         tools:text="@string/title_section_summary" />
