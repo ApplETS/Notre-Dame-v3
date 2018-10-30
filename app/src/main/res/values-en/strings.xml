@@ -55,6 +55,7 @@
 
     <!-- Profile -->
     <string name="title_profile">Profile</string>
+    <string name="title_student_status_profile">Student Status</string>
     <string name="title_personal_information_profile">Personal Information</string>
     <string name="label_first_name_profile">First Name</string>
     <string name="label_last_name_profile">Last Name</string>
