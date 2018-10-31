@@ -57,7 +57,7 @@ class GradesViewModelTest {
         gradesViewModel.refresh()
 
         val observer: Observer<Boolean> = mock()
-        gradesViewModel.getLoading().observeForever(observer)
+        gradesViewModel.loading.observeForever(observer)
         verify(observer).onChanged(true)
 
         liveData.postValue(Resource.error("test error", null))
@@ -95,7 +95,7 @@ class GradesViewModelTest {
         gradesViewModel.refresh()
 
         val observer: Observer<Boolean> = mock()
-        gradesViewModel.getShowEmptyView().observeForever(observer)
+        gradesViewModel.showEmptyView.observeForever(observer)
 
         liveData.value = Resource.success(emptyMap())
         verify(observer).onChanged(true)
