@@ -47,15 +47,15 @@ class GradesViewModel @Inject constructor(
         it.data
     }
 
-    fun getLoading(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
+    val loading: LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         it.status == Resource.Status.LOADING
     }
 
     /**
-     * @return A [LiveData] containing the value true if the empty view should be shown instead of
+     * A [LiveData] containing the value true if the empty view should be shown instead of
      * the list
      */
-    fun getShowEmptyView(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
+    val showEmptyView: LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         (it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true))
     }
 
