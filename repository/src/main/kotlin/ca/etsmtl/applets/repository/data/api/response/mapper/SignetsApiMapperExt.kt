@@ -13,6 +13,8 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesElement
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeJoursRemplaces
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeProgrammes
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiProgramme
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSeance
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSession
 import ca.etsmtl.applets.repository.data.db.entity.signets.ActiviteEntity
@@ -22,6 +24,7 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.JourRemplaceEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
@@ -82,6 +85,10 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
         this.soldeTotal,
         this.masculin
 )
+
+fun formatter(): NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+    maximumFractionDigits = 1
+}
 
 fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     val note = this.note.replaceCommaAndParseToDouble()
@@ -179,6 +186,25 @@ fun ApiListeJoursRemplaces.toJourRemplaceEntities(session: Session): List<JourRe
     return null
 }
 
+fun ApiProgramme.toProgrammeEntity() = ProgrammeEntity(
+        code,
+        libelle,
+        profil,
+        statut,
+        sessionDebut,
+        sessionFin,
+        moyenne,
+        nbEquivalences,
+        nbCrsReussis,
+        nbCrsEchoues,
+        nbCreditsInscrits,
+        nbCreditsCompletes,
+        nbCreditsPotentiels,
+        nbCreditsRecherche
+)
+
+fun ApiListeProgrammes.toProgrammesEntities(): List<ProgrammeEntity> = liste.map { it.toProgrammeEntity() }
+
 fun ApiSeance.toSeanceEntity(session: String) = SeanceEntity(
         dateDebut.msDateToUnix(),
         dateFin.msDateToUnix(),
@@ -209,7 +235,3 @@ fun ApiSession.toSessionEntity() = SessionEntity(
 )
 
 fun ApiListeDeSessions.toSessionEntities(): List<SessionEntity> = liste.map { it.toSessionEntity() }
-
-fun formatter(): NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
-    maximumFractionDigits = 1
-}

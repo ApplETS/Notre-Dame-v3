@@ -32,8 +32,8 @@ class InfoEtudiantRepository @Inject constructor(
      * Returns the user's information
      *
      * @param userCredentials The user's credentials
-     * @param shouldFetch shouldFetch This function is called to determine whether the data should
-     * be fetched rom the network or only from the DB
+     * @param shouldFetch This function is called to determine whether the data should
+     * be fetched from the network or only from the DB
      */
     fun getInfoEtudiant(
         userCredentials: SignetsUserCredentials,
