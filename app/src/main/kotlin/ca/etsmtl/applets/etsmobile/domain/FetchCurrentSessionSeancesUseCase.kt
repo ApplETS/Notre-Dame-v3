@@ -21,18 +21,18 @@ class FetchCurrentSessionSeancesUseCase @Inject constructor(
     private val app: App
 ) {
     operator fun invoke(userCredentials: SignetsUserCredentials): LiveData<Resource<List<Seance>>> {
-        return Transformations.switchMap(fetchCurrentSessionUseCase(userCredentials)) {
+        return Transformations.switchMap(fetchCurrentSessionUseCase(userCredentials)) { res ->
             MediatorLiveData<Resource<List<Seance>>>().apply {
-                val session = it.data
+                val session = res.data
 
-                if (it.status == Resource.Status.ERROR || session == null) {
+                if (res.status == Resource.Status.LOADING) {
+                    value = Resource.loading(null)
+                } else if (res.status == Resource.Status.ERROR || session == null) {
                     value = Resource.error(
-                            it.message ?: app.getString(R.string.error),
+                            res.message ?: app.getString(R.string.error),
                             null
                     )
-                } else if (it.status == Resource.Status.LOADING) {
-                    value = Resource.loading(null)
-                } else {
+                }  else {
                     val seances = seanceRepository.getSeancesSession(
                             userCredentials,
                             null,
@@ -40,12 +40,18 @@ class FetchCurrentSessionSeancesUseCase @Inject constructor(
                             true
                     )
 
-                    addSource(seances) {
-                        value = it
-
-                        it?.let {
-                            removeSource(seances)
+                    this.addSource(seances) {
+                        if (it == null){
+                            this.value = Resource.error(app.getString(R.string.error), it)
+                        } else {
+                            if (it.status == Resource.Status.LOADING){
+                                Resource.loading(it)
+                            } else {
+                                /*this.value = */Resource.success(seances)
+                            }
                         }
+
+
                     }
                 }
             }

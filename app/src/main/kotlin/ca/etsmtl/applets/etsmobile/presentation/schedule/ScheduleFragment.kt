@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.show
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.include_toolbar.toolbar
@@ -45,6 +44,7 @@ class ScheduleFragment : DaggerFragment() {
         setUpSwipeRefresh()
         setUpRecyclerView()
         subscribeUI()
+
         toolbar.setTitle(R.string.title_schedule)
     }
     private fun setUpSwipeRefresh(){
@@ -60,12 +60,12 @@ class ScheduleFragment : DaggerFragment() {
         scheduleViewModel.seances.observe(this, Observer {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
-        scheduleViewModel.getShowEmptyView().observe(this, Observer {
-            recyclerViewSchedule.show(false)
-            //TODO: Create/show emptyView
-        })
+//        scheduleViewModel.getShowEmptyView().observe(this, Observer {
+//            recyclerViewSchedule.show(false)
+//            //TODO: Create/show emptyView
+//        })
         scheduleViewModel.getLoading().observe(this, Observer {
-            it?.let { swipeRefreshLayoutSchedule.isRefreshing = true }
+            it?.let { swipeRefreshLayoutSchedule.isRefreshing = it }
         })
 
         scheduleViewModel.errorMessage.observe(this, EventObserver{
@@ -76,8 +76,7 @@ class ScheduleFragment : DaggerFragment() {
     }
 
     companion object {
-        fun newInstance(): ScheduleFragment {
-            return ScheduleFragment()
-        }
+        private const val TAG="ScheduleFragment"
+        fun newInstance(): ScheduleFragment = ScheduleFragment()
     }
 }
