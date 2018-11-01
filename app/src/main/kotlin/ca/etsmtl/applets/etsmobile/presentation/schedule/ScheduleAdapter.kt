@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_schedule.*
 /**
  * Created by mykaelll87 on 2018-10-28
  */
-class ScheduleAdapter(): RecyclerView.Adapter<ScheduleAdapter.SeanceViewHolder>(){
+class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.SeanceViewHolder>(){
 
     private val differ = AsyncListDiffer<Seance>(this, object :DiffUtil.ItemCallback<Seance>(){
         override fun areContentsTheSame(oldItem: Seance, newItem: Seance): Boolean = oldItem==newItem
@@ -26,6 +26,10 @@ class ScheduleAdapter(): RecyclerView.Adapter<ScheduleAdapter.SeanceViewHolder>(
         }
 
     })
+
+    init {
+        differ.submitList(emptyList())
+    }
 
     var items: List<Seance> = emptyList()
         set(value){

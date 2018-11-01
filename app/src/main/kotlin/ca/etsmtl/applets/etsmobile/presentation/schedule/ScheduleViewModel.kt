@@ -45,7 +45,7 @@ class ScheduleViewModel @Inject constructor(
     fun getLoading(): LiveData<Boolean> = Transformations.map(seancesMediatorLiveData){
         it.status == Resource.Status.LOADING
     }
-    //TODO comments & tests
+
     fun getShowEmptyView():LiveData<Boolean> = Transformations.map(seancesMediatorLiveData){
         it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
     }
