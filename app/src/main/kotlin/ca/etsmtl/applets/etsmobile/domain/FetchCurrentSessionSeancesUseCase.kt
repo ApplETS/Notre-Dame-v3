@@ -38,7 +38,7 @@ class FetchCurrentSessionSeancesUseCase @Inject constructor(
                             Resource.Status.ERROR->
                                 mediatorLiveData.value = Resource.error(app.getString(R.string.error), seances)
                             Resource.Status.SUCCESS->
-                                mediatorLiveData.value = Resource.success(seances!!.asReversed())
+                                mediatorLiveData.value = Resource.success(seances!!)
                         }
 
                 }

@@ -71,4 +71,5 @@
     <!-- About -->
     <string name="applets_about">ÉTSMobile was conceived by the ApplETS scientific club from the École de technologie supérieure.\n\nApplets is, most importantly, a gathering of students who share a typical enthusiasm for the field of telecommunications and mobile applications.
         The mission of ApplETS is to train students in mobile development and promote the production of mobile applications within the student community.\n\nFor more information, please consult our website : http://clubapplets.ca</string>
+    <string name="msg_no_seances">No class period for this semester</string>
 </resources>

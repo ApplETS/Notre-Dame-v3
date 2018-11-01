@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,22 +47,23 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.SeanceViewHolder>(){
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: SeanceViewHolder, position: Int) {
+
         with(differ.currentList[position]){
             holder.titreTextView.text = this.libelleCours
-            holder.sigleTextView.text = this.sigleCours
+            holder.sigleGroupeTextView.text = this.sigleCours//TODO add group
             holder.localTextView.text = this.local
-            holder.startTextView.text = this.dateDebut.toString()
-            holder.endTextView.text = this.dateFin.toString()
-            holder.groupeTextView.text = "Allo"
+            holder.dayOfWeekTextView.text = DateUtils.formatDateTime(holder.containerView.context, this.dateDebut.time, DateUtils.FORMAT_SHOW_WEEKDAY)
+            holder.startTextView.text = DateUtils.formatDateTime(holder.containerView.context, this.dateDebut.time, DateUtils.FORMAT_SHOW_TIME)
+            holder.endTextView.text = DateUtils.formatDateTime(holder.containerView.context, this.dateFin.time, DateUtils.FORMAT_SHOW_TIME)
         }
     }
 
     class SeanceViewHolder(override val containerView:View): RecyclerView.ViewHolder(containerView), LayoutContainer{
         val titreTextView = textViewScheduleTitreCours
-        val sigleTextView = textViewScheduleSigle
-        val groupeTextView = textViewScheduleGroupe
+        val sigleGroupeTextView = textViewScheduleSigleGroup
         val localTextView = textViewScheduleLocal
         val startTextView = textViewScheduleStartTime
         val endTextView = textViewScheduleEndTime
+        val dayOfWeekTextView = textViewScheduleDayOfWeek
     }
 }
