@@ -16,6 +16,8 @@ import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -72,14 +74,15 @@ class SeanceRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>> {
+                val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 return api.listeDesSeances(
                         ListeDesSeancesRequestBody(
                                 userCredentials.codeAccesUniversel,
                                 userCredentials.motPasse,
                                 cours?.sigle ?: "",
                                 session.abrege,
-                                session.dateDebut.toString(),
-                                session.dateFin.toString()
+                                formatter.format(session.dateDebut*1000),
+                                formatter.format(session.dateFin*1000)
                         )
                 )
             }
