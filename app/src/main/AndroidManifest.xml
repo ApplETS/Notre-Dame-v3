@@ -37,6 +37,6 @@
         <activity
             android:name=".presentation.gradesdetails.GradesDetailsActivity"
             android:parentActivityName=".presentation.main.MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.Transparent" />
     </application>
 </manifest>

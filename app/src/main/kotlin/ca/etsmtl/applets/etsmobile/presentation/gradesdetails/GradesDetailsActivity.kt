@@ -2,11 +2,12 @@ package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
-import androidx.appcompat.app.AppCompatActivity
+import android.transition.TransitionInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.util.show
@@ -61,6 +62,10 @@ class GradesDetailsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val transition = TransitionInflater.from(this).inflateTransition(R.transition.expand_grade_transition)
+        window.sharedElementEnterTransition = transition
+        window.sharedElementExitTransition = transition
 
         setContentView(R.layout.activity_grades_details)
 
