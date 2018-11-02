@@ -27,9 +27,9 @@ class FetchCurrentSessionUseCase @Inject constructor(
                 Date().time in (it.dateDebut*1000)..(it.dateFin*1000)
             }
 
-            if (it.status == Resource.Status.LOADING){
+            if (it.status == Resource.Status.LOADING) {
                 Resource.loading(currentSession)
-            }else if (it.status == Resource.Status.ERROR || currentSession == null) {
+            } else if (it.status == Resource.Status.ERROR || currentSession == null) {
                 Resource.error(it.message ?: app.getString(R.string.error), currentSession)
             } else {
                 Resource.success(currentSession)

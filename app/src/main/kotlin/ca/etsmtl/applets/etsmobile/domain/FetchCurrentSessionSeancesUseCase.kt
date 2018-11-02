@@ -25,32 +25,31 @@ class FetchCurrentSessionSeancesUseCase @Inject constructor(
             val session = res.data
             val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
 
-            fun fetchSeancesFromSession(){
+            fun fetchSeancesFromSession() {
                 mediatorLiveData.addSource(seanceRepository.getSeancesSession(
                         userCredentials,
                         null,
                         session!!,
-                        true)){
+                        true)) {
                     val seances = it.data
-                        when (it.status){
-                            Resource.Status.LOADING->
+                        when (it.status) {
+                            Resource.Status.LOADING ->
                                 mediatorLiveData.value = Resource.loading(seances)
-                            Resource.Status.ERROR->
+                            Resource.Status.ERROR ->
                                 mediatorLiveData.value = Resource.error(app.getString(R.string.error), seances)
-                            Resource.Status.SUCCESS->
+                            Resource.Status.SUCCESS ->
                                 mediatorLiveData.value = Resource.success(seances!!)
                         }
-
                 }
             }
 
-            when (res.status){
-                Resource.Status.ERROR->
-                    mediatorLiveData.value = Resource.error(res.message?:app.getString(R.string.error), null)
-                Resource.Status.SUCCESS-> fetchSeancesFromSession()
-                Resource.Status.LOADING-> mediatorLiveData.value = Resource.loading(null)
+            when (res.status) {
+                Resource.Status.ERROR ->
+                    mediatorLiveData.value = Resource.error(res.message ?: app.getString(R.string.error), null)
+                Resource.Status.SUCCESS -> fetchSeancesFromSession()
+                Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(null)
             }
-             mediatorLiveData
+            mediatorLiveData
         }
     }
 }

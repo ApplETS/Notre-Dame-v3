@@ -1,6 +1,12 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchCurrentSessionSeancesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
@@ -17,12 +23,12 @@ import javax.inject.Inject
 class ScheduleViewModel @Inject constructor(
     private var userCredentials: SignetsUserCredentials,
     private val fetchCurrentSessionSeancesUseCase: FetchCurrentSessionSeancesUseCase,
-    private val app:App
-) : ViewModel(), LifecycleObserver{
+    private val app: App
+) : ViewModel(), LifecycleObserver {
     private val seancesMediatorLiveData: MediatorLiveData<Resource<List<Seance>>> by lazy {
         MediatorLiveData<Resource<List<Seance>>>()
     }
-    private var seancesLiveData: LiveData<Resource<List<Seance>>>? =null
+    private var seancesLiveData: LiveData<Resource<List<Seance>>>? = null
 
     val errorMessage: LiveData<Event<String?>> by lazy {
         Transformations.map(seancesMediatorLiveData) {
@@ -38,28 +44,28 @@ class ScheduleViewModel @Inject constructor(
             }
         }
     }
-    val seances: LiveData<List<Seance>> = Transformations.map(seancesMediatorLiveData){
+    val seances: LiveData<List<Seance>> = Transformations.map(seancesMediatorLiveData) {
         it.data
     }
 
-    fun getLoading(): LiveData<Boolean> = Transformations.map(seancesMediatorLiveData){
+    fun getLoading(): LiveData<Boolean> = Transformations.map(seancesMediatorLiveData) {
         it.status == Resource.Status.LOADING
     }
 
-    fun getShowEmptyView():LiveData<Boolean> = Transformations.map(seancesMediatorLiveData){
+    fun getShowEmptyView(): LiveData<Boolean> = Transformations.map(seancesMediatorLiveData) {
         it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
     }
 
-    private fun load(){
+    private fun load() {
         seancesLiveData = fetchCurrentSessionSeancesUseCase(userCredentials).apply {
-            seancesMediatorLiveData.addSource(this){
+            seancesMediatorLiveData.addSource(this) {
                 seancesMediatorLiveData.value = it
             }
         }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun refresh(){
+    fun refresh() {
         seancesLiveData?.let { seancesMediatorLiveData.removeSource(it) }
         seancesLiveData = null
         load()

@@ -31,7 +31,7 @@ interface MainActivityModule {
     @IntoMap
     @ViewModelKey(ScheduleViewModel::class)
     fun bindScheduleViewModel(
-            scheduleViewModel: ScheduleViewModel
+        scheduleViewModel: ScheduleViewModel
     ): ViewModel
 
     @ContributesAndroidInjector

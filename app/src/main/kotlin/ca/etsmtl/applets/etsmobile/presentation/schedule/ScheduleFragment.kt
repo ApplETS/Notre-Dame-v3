@@ -49,16 +49,16 @@ class ScheduleFragment : DaggerFragment() {
 
         toolbar.setTitle(R.string.title_schedule)
     }
-    private fun setUpSwipeRefresh(){
+    private fun setUpSwipeRefresh() {
         swipeRefreshLayoutSchedule.setColorSchemeResources(R.color.colorPrimary)
         swipeRefreshLayoutSchedule.setOnRefreshListener { scheduleViewModel.refresh() }
     }
 
-    private fun setUpRecyclerView(){
+    private fun setUpRecyclerView() {
         recyclerViewSchedule.adapter = adapter
-        recyclerViewSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
+        recyclerViewSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
     }
-    private fun subscribeUI(){
+    private fun subscribeUI() {
         scheduleViewModel.seances.observe(this, Observer {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
@@ -70,15 +70,15 @@ class ScheduleFragment : DaggerFragment() {
             it?.let { swipeRefreshLayoutSchedule.isRefreshing = it }
         })
 
-        scheduleViewModel.errorMessage.observe(this, EventObserver{
-            it?.let { Toast.makeText(context,it, Toast.LENGTH_LONG).show() }
+        scheduleViewModel.errorMessage.observe(this, EventObserver {
+            it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
 
         this.lifecycle.addObserver(scheduleViewModel)
     }
 
     companion object {
-        private const val TAG="ScheduleFragment"
+        private const val TAG = "ScheduleFragment"
         fun newInstance(): ScheduleFragment = ScheduleFragment()
     }
 }

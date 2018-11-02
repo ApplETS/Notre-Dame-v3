@@ -17,7 +17,7 @@ import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 /**
