@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 import java.util.concurrent.atomic.AtomicReference
 
 /**
- * User's credentials for accessing Signets' webservice
+ * User's credentials needed to access Signets' webservice
  * An instance of this class is stored in the [INSTANCE] AtomicReference.
  *
  * Created by Sonphil on 28-02-18.

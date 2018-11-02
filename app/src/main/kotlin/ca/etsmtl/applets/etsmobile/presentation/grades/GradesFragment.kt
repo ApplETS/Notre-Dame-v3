@@ -1,14 +1,14 @@
 package ca.etsmtl.applets.etsmobile.presentation.grades
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
@@ -93,12 +93,12 @@ class GradesFragment : DaggerFragment() {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
 
-        gradesViewModel.getShowEmptyView().observe(this, Observer {
+        gradesViewModel.showEmptyView.observe(this, Observer {
             recyclerViewCoursesGrades.show(it == false)
             emptyViewCoursesGrades.show(it == true)
         })
 
-        gradesViewModel.getLoading().observe(this, Observer {
+        gradesViewModel.loading.observe(this, Observer {
             it?.let { swipeRefreshLayoutCoursesGrades.isRefreshing = it }
         })
 
