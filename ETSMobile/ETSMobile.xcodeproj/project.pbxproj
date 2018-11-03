@@ -36,6 +36,7 @@
 		8F83BEE62180E501006294B0 /* ETSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F83BEE52180E501006294B0 /* ETSTextField.swift */; };
 		8F9F71152182265A0052D16C /* ETSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F71142182265A0052D16C /* ETSButton.swift */; };
 		95097715218286710007AD32 /* ETSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95097714218286710007AD32 /* ETSLabel.swift */; };
+		95186718218E0650009DDD47 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95186717218E0650009DDD47 /* GradientView.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
 		B6D2C0C1F41F5A744715A147 /* Pods_ETSMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C47FBC9D32E951F0CF7689 /* Pods_ETSMobile.framework */; };
@@ -113,6 +114,7 @@
 		8F83BEE52180E501006294B0 /* ETSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSTextField.swift; sourceTree = "<group>"; };
 		8F9F71142182265A0052D16C /* ETSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSButton.swift; sourceTree = "<group>"; };
 		95097714218286710007AD32 /* ETSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSLabel.swift; sourceTree = "<group>"; };
+		95186717218E0650009DDD47 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		BDF2469E7134D6E5966A13B9 /* Pods-ETSMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileTests/Pods-ETSMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				8F9F71142182265A0052D16C /* ETSButton.swift */,
 				8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */,
 				95097714218286710007AD32 /* ETSLabel.swift */,
+				95186717218E0650009DDD47 /* GradientView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 				8F1C750421835CE1002CE21F /* LoginValidation.swift in Sources */,
 				8F2994442163C2DB00747A21 /* Request.swift in Sources */,
 				C8B61D0C2162E99A0040A732 /* RequestResult.swift in Sources */,
+				95186718218E0650009DDD47 /* GradientView.swift in Sources */,
 				146F3B10208B89E100275F71 /* ProfileView.swift in Sources */,
 				146F3B04208B878900275F71 /* HomeViewController.swift in Sources */,
 			);
