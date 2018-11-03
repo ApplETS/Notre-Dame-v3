@@ -21,6 +21,7 @@ class SeanceDaoTest : DbTest() {
             "Activité de cours",
             "Algèbre linéaire et géométrie de l'espace",
             "MAT472",
+        "01",
             "E2018"
     )
     private lateinit var dao: SeanceDao
@@ -48,6 +49,7 @@ class SeanceDaoTest : DbTest() {
                 "Activité de cours",
                 "Algèbre linéaire et géométrie de l'espace",
                 "MAT472",
+            "01",
                 "E2018"
         )
         dao.insert(same)
@@ -65,6 +67,7 @@ class SeanceDaoTest : DbTest() {
                 "Activité de cours",
                 "Algèbre linéaire et géométrie de l'espace",
                 "MAT472",
+            "01",
                 "A2018"
         )
         dao.insert(expected)
@@ -77,6 +80,7 @@ class SeanceDaoTest : DbTest() {
                 "Activité de cours",
                 "Foo",
                 "LOG123",
+            "02",
                 expected.session
         )
         dao.insert(unexpected1)
@@ -89,6 +93,7 @@ class SeanceDaoTest : DbTest() {
                 "Activité de cours",
                 "Foo",
                 expected.sigleCours,
+            "01",
                 "E2018"
         )
         dao.insert(unexpected2)
@@ -111,6 +116,7 @@ class SeanceDaoTest : DbTest() {
                 "Activité de cours",
                 "Algèbre linéaire et géométrie de l'espace",
                 "MAT472",
+            "01",
                 "A2018"
         )
         dao.insert(expected)
@@ -123,6 +129,7 @@ class SeanceDaoTest : DbTest() {
                 "Activité de cours",
                 "Foo",
                 "LOG123",
+            "01",
                 expected.session
         )
         dao.insert(expected2)
@@ -135,6 +142,7 @@ class SeanceDaoTest : DbTest() {
                 "Activité de cours",
                 "Foo",
                 expected.sigleCours,
+            "02",
                 "E2018"
         )
         dao.insert(unexpected1)

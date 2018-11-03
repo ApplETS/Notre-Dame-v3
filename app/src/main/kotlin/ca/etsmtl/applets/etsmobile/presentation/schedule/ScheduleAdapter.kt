@@ -49,7 +49,7 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.SeanceViewHolder>()
 
         with(differ.currentList[position]) {
             holder.textViewScheduleTitreCours.text = this.libelleCours
-            holder.textViewScheduleSigleGroup.text = "$sigleCours-G$groupe"
+            holder.textViewScheduleSigleGroup.text = "$sigleCours-$groupe"
             holder.textViewScheduleLocal.text = this.local
             holder.textViewScheduleDayOfWeek.text = DateUtils
                 .formatDateTime(
