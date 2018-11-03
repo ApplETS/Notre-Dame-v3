@@ -30,7 +30,7 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.util.dateToUnix
+import ca.etsmtl.applets.repository.util.dateToUnixms
 import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
@@ -221,17 +221,17 @@ fun ApiListeDesSeances.toSeancesEntities(session: String): List<SeanceEntity> = 
 fun ApiSession.toSessionEntity() = SessionEntity(
         abrege,
         auLong,
-        dateDebut.dateToUnix("yyyy-MM-dd"),
-        dateFin.dateToUnix("yyyy-MM-dd"),
-        dateFinCours.dateToUnix("yyyy-MM-dd"),
-        dateDebutChemiNot.dateToUnix("yyyy-MM-dd"),
-        dateFinChemiNot.dateToUnix("yyyy-MM-dd"),
-        dateDebutAnnulationAvecRemboursement.dateToUnix("yyyy-MM-dd"),
-        dateFinAnnulationAvecRemboursement.dateToUnix("yyyy-MM-dd"),
-        dateFinAnnulationAvecRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
-        dateDebutAnnulationSansRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
-        dateFinAnnulationSansRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
-        dateLimitePourAnnulerASEQ.dateToUnix("yyyy-MM-dd")
+        dateDebut.dateToUnixms("yyyy-MM-dd") ,
+        dateFin.dateToUnixms("yyyy-MM-dd") ,
+        dateFinCours.dateToUnixms("yyyy-MM-dd"),
+        dateDebutChemiNot.dateToUnixms("yyyy-MM-dd"),
+        dateFinChemiNot.dateToUnixms("yyyy-MM-dd"),
+        dateDebutAnnulationAvecRemboursement.dateToUnixms("yyyy-MM-dd"),
+        dateFinAnnulationAvecRemboursement.dateToUnixms("yyyy-MM-dd"),
+        dateFinAnnulationAvecRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
+        dateDebutAnnulationSansRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
+        dateFinAnnulationSansRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
+        dateLimitePourAnnulerASEQ.dateToUnixms("yyyy-MM-dd")
 )
 
 fun ApiListeDeSessions.toSessionEntities(): List<SessionEntity> = liste.map { it.toSessionEntity() }
