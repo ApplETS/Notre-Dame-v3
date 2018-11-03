@@ -22,7 +22,7 @@ import UIKit
         set {
             if self._loading != newValue {
                 self._loading = newValue
-                if (self._loading) {
+                if self._loading {
                     self.startLoadingAnimation()
                 } else {
                     self.stopLoadingAnimation()
@@ -57,7 +57,14 @@ import UIKit
         self.widthConstraint = self.widthAnchor.constraint(equalToConstant: ETSButton.loadingWidth)
         self.heightAnchor.constraint(equalToConstant: CGFloat(ETSButton.height)).isActive = true
         self.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
-        self.loadingIndicator = ETSLoadingIndicator(frame: CGRect(x: 0, y: 0, width: ETSButton.loadingWidth, height: ETSButton.height))
+        self.loadingIndicator = ETSLoadingIndicator(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: ETSButton.loadingWidth,
+                height: ETSButton.height
+            )
+        )
         self.addSubview(self.loadingIndicator!)
         self.loadingIndicator?.isHidden = true
     }

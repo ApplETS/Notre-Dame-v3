@@ -10,14 +10,15 @@ import Foundation
 
 class Request {
     static let shared = Request()
-
     private let session: URLSession
 
     private init() {
         self.session = URLSession(configuration: .default)
     }
 
-    func buildCallback<DataType: Decodable>(callback: @escaping (RequestResult<DataType>) -> Void) -> ((Data?, URLResponse?, Error?) -> Void) {
+    func buildCallback<DataType: Decodable>(
+        callback: @escaping (RequestResult<DataType>) -> Void
+    ) -> ((Data?, URLResponse?, Error?) -> Void) {
         return { data, response, error in
             DispatchQueue.main.async {
                 let result = RequestResult<Data>.fromValue(data: data, error: error)
@@ -26,7 +27,7 @@ class Request {
                 case .failure(let resultError):
                     callback(RequestResult<DataType>.failure(resultError))
                     return
-                case .success(_):
+                case .success:
                     do {
                         callback(RequestResult.success(try result.decoded(as: DataType.self)))
                     } catch {
@@ -44,10 +45,12 @@ class Request {
     ///   - method: The HTTP method to use.
     ///   - callback: The callback to execute when the request finishes.
     /// - Returns: A URLSessionTask that can be used to cancel the request.
-    func request<DataType: Decodable>(url: String,
-                                      method: RequestMethod,
-                                      headers: [String: String]? = nil,
-                                      callback: @escaping (RequestResult<DataType>) -> Void) -> URLSessionTask? {
+    func request<DataType: Decodable>(
+        url: String,
+        method: RequestMethod,
+        headers: [String: String]? = nil,
+        callback: @escaping (RequestResult<DataType>) -> Void
+    ) -> URLSessionTask? {
         let completionHandler = buildCallback(callback: callback)
         guard let request = createURLRequest(url: url, method: method) else {
             return nil
@@ -65,11 +68,13 @@ class Request {
     ///   - data: The data to send to this URL.
     ///   - callback: The callback to execute when the request finishes.
     /// - Returns: A URLSessionTask that can be used to cancel the request.
-    func request<DataType: Decodable, SentDataType: Encodable>(url: String,
-                                      method: RequestMethod,
-                                      data: SentDataType? = nil,
-                                      headers: [String: String]? = nil,
-                                      callback: @escaping (RequestResult<DataType>) -> Void) -> URLSessionTask? {
+    func request<DataType: Decodable, SentDataType: Encodable>(
+        url: String,
+        method: RequestMethod,
+        data: SentDataType? = nil,
+        headers: [String: String]? = nil,
+        callback: @escaping (RequestResult<DataType>) -> Void
+    ) -> URLSessionTask? {
         let completionHandler = buildCallback(callback: callback)
         guard let request = createURLRequest(url: url, method: method),
               let uploadData = try? JSONEncoder().encode(data) else {
@@ -93,16 +98,18 @@ class Request {
         }
         return request
     }
-    
+
     /// Sends a GET HTTP request.
     ///
     /// - Parameters:
     ///   - url: The URL to request.
     ///   - callback: The callback to execute when the request finishes.
     /// - Returns: A URLSessionTask that can be used to cancel the request.
-    func get<DataType: Decodable>(url: String,
-                                  headers: [String: String]? = nil,
-                                  callback: @escaping (RequestResult<DataType>) -> Void) -> URLSessionTask? {
+    func get<DataType: Decodable>(
+        url: String,
+        headers: [String: String]? = nil,
+        callback: @escaping (RequestResult<DataType>) -> Void
+    ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.GET, callback: callback)
     }
 
@@ -112,9 +119,11 @@ class Request {
     ///   - url: The URL to request.
     ///   - callback: The callback to execute when the request finishes.
     /// - Returns: A URLSessionTask that can be used to cancel the request.
-    func delete<DataType: Decodable>(url: String,
-                                     headers: [String: String]? = nil,
-                                     callback: @escaping (RequestResult<DataType>) -> Void) -> URLSessionTask? {
+    func delete<DataType: Decodable>(
+        url: String,
+        headers: [String: String]? = nil,
+        callback: @escaping (RequestResult<DataType>) -> Void
+    ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.DELETE, callback: callback)
     }
 
@@ -125,10 +134,12 @@ class Request {
     ///   - data: The data to send to this URL.
     ///   - callback: The callback to execute when the request finishes.
     /// - Returns: A URLSessionTask that can be used to cancel the request.
-    func post<DataType: Decodable, SentDataType: Encodable>(url: String,
-                                   data: SentDataType,
-                                   headers: [String: String]? = nil,
-                                   callback: @escaping (RequestResult<DataType>) -> Void) -> URLSessionTask? {
+    func post<DataType: Decodable, SentDataType: Encodable>(
+        url: String,
+        data: SentDataType,
+        headers: [String: String]? = nil,
+        callback: @escaping (RequestResult<DataType>) -> Void
+    ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.POST, data: data, callback: callback)
     }
 
@@ -139,19 +150,21 @@ class Request {
     ///   - data: The data to send to this URL.
     ///   - callback: The callback to execute when the request finishes.
     /// - Returns: A URLSessionTask that can be used to cancel the request.
-    func put<DataType: Decodable, SentDataType: Encodable>(url: String,
-             data: SentDataType,
-             headers: [String: String]? = nil,
-             callback: @escaping (RequestResult<DataType>) -> Void) -> URLSessionTask? {
+    func put<DataType: Decodable, SentDataType: Encodable>(
+        url: String,
+        data: SentDataType,
+        headers: [String: String]? = nil,
+        callback: @escaping (RequestResult<DataType>) -> Void
+    ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.PUT, data: data, callback: callback)
     }
 }
 
 enum RequestMethod: String {
-    case GET = "GET"
-    case POST = "POST"
-    case PUT = "PUT"
-    case DELETE = "DELETE"
+    case GET
+    case POST
+    case PUT
+    case DELETE
 }
 
 enum RequestError: Error {

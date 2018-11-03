@@ -20,7 +20,7 @@ class Regex {
         return self.pattern!.numberOfMatches(
             in: str,
             options: [],
-            range: NSMakeRange(0, str.count)
+            range: NSRange(location: 0, length: str.count)
         ) > 0
     }
 }

@@ -7,6 +7,7 @@ target 'ETSMobile' do
 
   # Pods for ETSMobile
   pod 'IQKeyboardManagerSwift'
+  pod 'SwiftLint'
 
   target 'ETSMobileTests' do
     inherit! :search_paths

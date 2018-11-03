@@ -34,6 +34,7 @@
 		8F2994442163C2DB00747A21 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2994432163C2DB00747A21 /* Request.swift */; };
 		8F4CAF2921825178009ADDEF /* ETSLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */; };
 		8F83BEE62180E501006294B0 /* ETSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F83BEE52180E501006294B0 /* ETSTextField.swift */; };
+		8F91DFA4218E07CA00472BE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */; };
 		8F9F71152182265A0052D16C /* ETSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F71142182265A0052D16C /* ETSButton.swift */; };
 		95097715218286710007AD32 /* ETSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95097714218286710007AD32 /* ETSLabel.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
@@ -111,6 +112,7 @@
 		8F2994432163C2DB00747A21 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSLoadingIndicator.swift; sourceTree = "<group>"; };
 		8F83BEE52180E501006294B0 /* ETSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSTextField.swift; sourceTree = "<group>"; };
+		8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8F9F71142182265A0052D16C /* ETSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSButton.swift; sourceTree = "<group>"; };
 		95097714218286710007AD32 /* ETSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSLabel.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		25553F9820545D42009897F7 = {
 			isa = PBXGroup;
 			children = (
+				8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */,
 				25553FA320545D42009897F7 /* ETSMobile */,
 				25553FBA20545D42009897F7 /* ETSMobileTests */,
 				25553FC520545D42009897F7 /* ETSMobileUITests */,
@@ -379,6 +382,7 @@
 				25553F9E20545D42009897F7 /* Frameworks */,
 				25553F9F20545D42009897F7 /* Resources */,
 				2C1BB3868ED0EEE31E21924B /* [CP] Embed Pods Frameworks */,
+				8F91DFA2218DE83800472BE7 /* Lint */,
 			);
 			buildRules = (
 			);
@@ -487,6 +491,7 @@
 				C8C49A802162D3F6006CCBED /* Login.storyboard in Resources */,
 				C8C49A8B2162D641006CCBED /* School.storyboard in Resources */,
 				25553FAE20545D42009897F7 /* Assets.xcassets in Resources */,
+				8F91DFA4218E07CA00472BE7 /* Default-568h@2x.png in Resources */,
 				25553FAC20545D42009897F7 /* Main.storyboard in Resources */,
 				C8C49A7C2162D31E006CCBED /* Emergencies.storyboard in Resources */,
 				C8C49A842162D4B7006CCBED /* Profile.storyboard in Resources */,
@@ -548,6 +553,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8F91DFA2218DE83800472BE7 /* Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Lint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		A7BF884272D44738E35D8A7C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

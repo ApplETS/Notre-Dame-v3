@@ -17,6 +17,10 @@ enum Environment {
         return Environment.preproduction
     }
 
+    func emergencyNumber() -> URL {
+        return URL(string: "tel://514-396-8900")!
+    }
+
     func clubHomepage() -> URL {
         return URL(string: "https://clubapplets.ca")!
     }
