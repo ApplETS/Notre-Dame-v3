@@ -16,7 +16,7 @@ import ca.etsmtl.applets.etsmobile.util.show
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.empty_view_schedule.*
 import kotlinx.android.synthetic.main.fragment_schedule.*
-import kotlinx.android.synthetic.main.include_toolbar.toolbar
+import kotlinx.android.synthetic.main.include_toolbar.*
 import javax.inject.Inject
 
 /**
@@ -66,7 +66,7 @@ class ScheduleFragment : DaggerFragment() {
             recyclerViewSchedule.show(!it)
             emptyViewSchedule.show(it)
         })
-        scheduleViewModel.getLoading().observe(this, Observer {
+        scheduleViewModel.loading.observe(this, Observer {
             it?.let { swipeRefreshLayoutSchedule.isRefreshing = it }
         })
 

@@ -48,7 +48,7 @@ class ScheduleViewModel @Inject constructor(
         it.data
     }
 
-    fun getLoading(): LiveData<Boolean> = Transformations.map(seancesMediatorLiveData) {
+    val loading: LiveData<Boolean> = Transformations.map(seancesMediatorLiveData) {
         it.status == Resource.Status.LOADING
     }
 
