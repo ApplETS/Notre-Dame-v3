@@ -81,8 +81,8 @@ class SeanceRepository @Inject constructor(
                                 userCredentials.motPasse,
                                 cours?.sigle ?: "",
                                 session.abrege,
-                                formatter.format(session.dateDebut*1000),
-                                formatter.format(session.dateFin*1000)
+                            formatter.format(session.dateDebut),
+                            formatter.format(session.dateFin)
                         )
                 )
             }

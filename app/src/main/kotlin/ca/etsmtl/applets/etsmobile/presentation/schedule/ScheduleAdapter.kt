@@ -48,21 +48,30 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.SeanceViewHolder>()
     override fun onBindViewHolder(holder: SeanceViewHolder, position: Int) {
 
         with(differ.currentList[position]) {
-            holder.titreTextView.text = this.libelleCours
-            holder.sigleGroupeTextView.text = this.sigleCours//TODO add group
-            holder.localTextView.text = this.local
-            holder.dayOfWeekTextView.text = DateUtils.formatDateTime(holder.containerView.context, this.dateDebut.time, DateUtils.FORMAT_SHOW_WEEKDAY)
-            holder.startTextView.text = DateUtils.formatDateTime(holder.containerView.context, this.dateDebut.time, DateUtils.FORMAT_SHOW_TIME)
-            holder.endTextView.text = DateUtils.formatDateTime(holder.containerView.context, this.dateFin.time, DateUtils.FORMAT_SHOW_TIME)
+            holder.textViewScheduleTitreCours.text = this.libelleCours
+            holder.textViewScheduleSigleGroup.text = "$sigleCours-G$groupe"
+            holder.textViewScheduleLocal.text = this.local
+            holder.textViewScheduleDayOfWeek.text = DateUtils
+                .formatDateTime(
+                    holder.containerView.context,
+                    this.dateDebut.time,
+                    DateUtils.FORMAT_SHOW_WEEKDAY
+                )
+            holder.textViewScheduleStartTime.text = DateUtils
+                .formatDateTime(
+                    holder.containerView.context,
+                    this.dateDebut.time,
+                    DateUtils.FORMAT_SHOW_TIME
+                )
+            holder.textViewScheduleEndTime.text = DateUtils
+                .formatDateTime(
+                    holder.containerView.context,
+                    this.dateFin.time,
+                    DateUtils.FORMAT_SHOW_TIME
+                )
         }
     }
 
-    class SeanceViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        val titreTextView = textViewScheduleTitreCours
-        val sigleGroupeTextView = textViewScheduleSigleGroup
-        val localTextView = textViewScheduleLocal
-        val startTextView = textViewScheduleStartTime
-        val endTextView = textViewScheduleEndTime
-        val dayOfWeekTextView = textViewScheduleDayOfWeek
-    }
+    class SeanceViewHolder(override val containerView: View) :
+        RecyclerView.ViewHolder(containerView), LayoutContainer
 }

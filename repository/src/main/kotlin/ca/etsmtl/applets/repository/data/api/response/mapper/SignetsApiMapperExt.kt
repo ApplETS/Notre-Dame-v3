@@ -213,6 +213,7 @@ fun ApiSeance.toSeanceEntity(session: String) = SeanceEntity(
         descriptionActivite,
         libelleCours,
         coursGroupe.substringBefore("-"),
+    coursGroupe.substringAfter("-"),
         session
 )
 

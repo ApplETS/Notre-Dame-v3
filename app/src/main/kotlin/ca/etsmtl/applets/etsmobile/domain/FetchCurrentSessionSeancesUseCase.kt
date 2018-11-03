@@ -25,41 +25,44 @@ class FetchCurrentSessionSeancesUseCase @Inject constructor(
             val session = res.data
             val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
 
-            if (session == null) {
-                mediatorLiveData.value = Resource.error(app.getString(R.string.error), session)
-            } else {
-                fun fetchSeancesFromSession() {
+            fun fetchSeancesFromSession() {
+                if (session == null) {
+                    mediatorLiveData.value = Resource.error(app.getString(R.string.error), session)
+                } else {
                     mediatorLiveData.addSource(
                         seanceRepository.getSeancesSession(
-                        userCredentials,
-                        null,
+                            userCredentials,
+                            null,
                             session,
-                        true)) {
+                            true
+                        )
+                    ) {
                         val seances = it.data
-                        if (seances == null) {
-                            mediatorLiveData.value =
-                                Resource.error(app.getString(R.string.error), seances)
-                        } else {
-                            when (it.status) {
-                                Resource.Status.LOADING ->
-                                    mediatorLiveData.value = Resource.loading(seances)
-                                Resource.Status.ERROR ->
+
+                        when (it.status) {
+                            Resource.Status.LOADING ->
+                                mediatorLiveData.value = Resource.loading(seances)
+                            Resource.Status.ERROR ->
+                                mediatorLiveData.value =
+                                    Resource.error(app.getString(R.string.error), seances)
+                            Resource.Status.SUCCESS -> {
+                                if (seances == null) {
                                     mediatorLiveData.value =
                                         Resource.error(app.getString(R.string.error), seances)
-                                Resource.Status.SUCCESS ->
+                                } else {
                                     mediatorLiveData.value = Resource.success(seances)
+                                }
                             }
                         }
                     }
                 }
+            }
 
-                when (res.status) {
-                    Resource.Status.ERROR ->
-                        mediatorLiveData.value =
-                            Resource.error(res.message ?: app.getString(R.string.error), null)
-                    Resource.Status.SUCCESS -> fetchSeancesFromSession()
-                    Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(null)
-                }
+            when (res.status) {
+                Resource.Status.ERROR -> mediatorLiveData.value =
+                    Resource.error(res.message ?: app.getString(R.string.error), null)
+                Resource.Status.SUCCESS -> fetchSeancesFromSession()
+                Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(null)
             }
             mediatorLiveData
         }
