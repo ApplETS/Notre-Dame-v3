@@ -190,7 +190,7 @@ fun ApiProgramme.toProgrammeEntity() = ProgrammeEntity(
         code,
         libelle,
         profil,
-        statut,
+        statut.capitalize(),
         sessionDebut,
         sessionFin,
         moyenne,
