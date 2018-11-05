@@ -8,9 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
+import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.toast
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.recyclerViewProfile
 import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutProfile
@@ -29,7 +28,7 @@ class ProfileFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val adapter: GroupAdapter<ViewHolder> = GroupAdapter()
+    private val adapter = ProfileAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,11 +57,14 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        profileViewModel.profile.observe(this, Observer<List<Section>> {
-            it?.let { adapter.update(it) }
+        profileViewModel.profile.observe(this, Observer {
+            it?.let { adapter.items = it }
         })
         profileViewModel.loading.observe(this, Observer<Boolean> {
             it?.let { swipeRefreshLayoutProfile.isRefreshing = it }
+        })
+        profileViewModel.errorMessage.observe(this, EventObserver { errorMessage ->
+            errorMessage?.let { it -> context?.toast(it) }
         })
         this.lifecycle.addObserver(profileViewModel)
     }

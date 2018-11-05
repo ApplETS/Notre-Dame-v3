@@ -12,7 +12,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesDetailsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
+import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.Resource
@@ -38,18 +38,7 @@ class GradesDetailsViewModel @Inject constructor(
         MediatorLiveData<Resource<SommaireEtEvaluations>>()
     }
     val errorMessage: LiveData<Event<String?>> by lazy {
-        Transformations.map(summaryAndEvaluationsMediatorLiveData) {
-            if (it.status == Resource.Status.ERROR) {
-                when {
-                    !app.isDeviceConnected() -> {
-                        Event(app.getString(R.string.error_no_internet_connection))
-                    }
-                    else -> Event(app.getString(R.string.error_failed_to_retrieve_data_course))
-                }
-            } else {
-                Event(it.message)
-            }
-        }
+        Transformations.map(summaryAndEvaluationsMediatorLiveData) { it.getGenericErrorMessage(app) }
     }
     val recyclerViewItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
         fun getSummaryItems(sommaireElementsEvaluation: SommaireElementsEvaluation) = listOf(

@@ -5,26 +5,30 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchEtudiantUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchProgrammesUseCase
+import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileAdapter
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileHeaderItem
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileItem
+import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileValueItem
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileViewModel
+import ca.etsmtl.applets.etsmobile.util.Event
+import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.mockNetwork
 import ca.etsmtl.applets.repository.data.model.Etudiant
+import ca.etsmtl.applets.repository.data.model.Programme
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verifyZeroInteractions
-import com.xwray.groupie.Section
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers
 import org.mockito.Captor
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.reset
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import kotlin.test.assertEquals
@@ -39,9 +43,17 @@ class ProfileViewModelTest {
 
     private val app: App = mock()
     private val fetchEtudiantUseCase: FetchEtudiantUseCase = mock(FetchEtudiantUseCase::class.java)
-    private val profileViewModel = ProfileViewModel(fetchEtudiantUseCase, app)
+    private val fetchProgrammesUseCase: FetchProgrammesUseCase = mock(FetchProgrammesUseCase::class.java)
+    private val profileViewModel = ProfileViewModel(fetchEtudiantUseCase, fetchProgrammesUseCase, app)
+    private val etudiantLiveData = MutableLiveData<Resource<Etudiant>>()
+    private val programmesLiveData = MutableLiveData<Resource<List<Programme>>>()
+    private val profileObserver = mock<Observer<List<ProfileItem<out ProfileAdapter.ProfileViewHolder>>>>()
+    private val loadingObserver = mock<Observer<Boolean>>()
+    private val errorMsgObserver = mock<EventObserver<String?>>()
     @Captor
-    private lateinit var sectionsArgumentCaptor: ArgumentCaptor<List<Section>>
+    private lateinit var sectionsArgumentCaptor: ArgumentCaptor<List<ProfileItem<out ProfileAdapter.ProfileViewHolder>>>
+    @Captor
+    private lateinit var stringEventArgumentCaptor: ArgumentCaptor<Event<String?>>
 
     @Before
     fun setUp() {
@@ -53,96 +65,89 @@ class ProfileViewModelTest {
         `when`(app.getString(R.string.label_first_name_profile)).thenReturn("fooItem4")
         `when`(app.getString(R.string.label_last_name_profile)).thenReturn("fooItem5")
         `when`(app.getString(R.string.label_permanent_code_profile)).thenReturn("fooItem6")
+
+        `when`(fetchEtudiantUseCase(any())).thenReturn(etudiantLiveData)
+        `when`(fetchProgrammesUseCase()).thenReturn(programmesLiveData)
+
+        profileViewModel.profile.observeForever(profileObserver)
+        profileViewModel.loading.observeForever(loadingObserver)
+        profileViewModel.errorMessage.observeForever(errorMsgObserver)
     }
 
     @Test
-    fun testCallUseCase() {
-        val foo = MutableLiveData<Resource<Etudiant>>()
-        `when`(fetchEtudiantUseCase(any())).thenReturn(foo)
-
+    fun testCallUseCases() {
         profileViewModel.refresh()
 
         verify(fetchEtudiantUseCase).invoke(any())
+        verify(fetchProgrammesUseCase).invoke()
     }
 
     @Test
     fun testSendResultToUI() {
-        val foo = MutableLiveData<Resource<Etudiant>>()
-        `when`(fetchEtudiantUseCase(any())).thenReturn(foo)
-
-        val etudiantObserver = mock<Observer<List<Section>>>()
-        verify(etudiantObserver, Mockito.never()).onChanged(ArgumentMatchers.any())
-        val loadingObserver = mock<Observer<Boolean>>()
-        verify(loadingObserver, Mockito.never()).onChanged(ArgumentMatchers.any())
-        val errorMsgObserver = mock<Observer<String>>()
-        verify(errorMsgObserver, Mockito.never()).onChanged(ArgumentMatchers.any())
-
-        profileViewModel.profile.observeForever(etudiantObserver)
-        profileViewModel.loading.observeForever(loadingObserver)
-        profileViewModel.errorMessage.observeForever(errorMsgObserver)
-
         profileViewModel.refresh()
 
-        var fooRes: Resource<Etudiant> = Resource.loading(null)
-        foo.value = fooRes
-        verifyZeroInteractions(etudiantObserver)
         verify(loadingObserver).onChanged(true)
 
-        reset(etudiantObserver)
+        var fooRes: Resource<Etudiant> = Resource.loading(null)
+        etudiantLiveData.value = fooRes
+        verify(profileObserver, times(2)).onChanged(emptyList())
+        verify(loadingObserver, times(2)).onChanged(true)
+
+        reset(profileObserver)
         reset(loadingObserver)
 
         val fooEtudiant = Etudiant("testFoo", "foo", "foo", "foo", "123,00", true)
         fooRes = Resource.success(fooEtudiant)
-        foo.value = fooRes
-        val expectedSections = mutableListOf<Section>()
+        etudiantLiveData.value = fooRes
+        verify(profileObserver).onChanged(capture(sectionsArgumentCaptor))
+        assertEquals(0, sectionsArgumentCaptor.value.size)
+
+        val fooProgrammes = emptyList<Programme>()
+        programmesLiveData.value = Resource.success(fooProgrammes)
+        val expectedSections = mutableListOf<ProfileItem<out ProfileAdapter.ProfileViewHolder>>()
 
         val expectedSection0Header = ProfileHeaderItem("fooItem1")
-        val expectedSection0Item0 = ProfileItem("fooItem2", fooEtudiant.soldeTotal)
-        expectedSections.add(
-                Section().apply {
-                    setHeader(expectedSection0Header)
-                    add(expectedSection0Item0)
-                }
-        )
+        val expectedSection0Item0 = ProfileValueItem("fooItem2", fooEtudiant.soldeTotal)
+        expectedSections.add(expectedSection0Header)
+        expectedSections.add(expectedSection0Item0)
 
         val expectedSection1Header = ProfileHeaderItem("fooItem3")
-        val expectedSection1Item0 = ProfileItem("fooItem4", fooEtudiant.prenom)
-        val expectedSection1Item1 = ProfileItem("fooItem5", fooEtudiant.nom)
-        val expectedSection1Item2 = ProfileItem("fooItem6", fooEtudiant.codePerm)
-        expectedSections.add(
-                Section().apply {
-                    setHeader(expectedSection1Header)
-                    add(expectedSection1Item0)
-                    add(expectedSection1Item1)
-                    add(expectedSection1Item2)
-                }
-        )
+        val expectedSection1Item0 = ProfileValueItem("fooItem4", fooEtudiant.prenom)
+        val expectedSection1Item1 = ProfileValueItem("fooItem5", fooEtudiant.nom)
+        val expectedSection1Item2 = ProfileValueItem("fooItem6", fooEtudiant.codePerm)
+        expectedSections.add(expectedSection1Header)
+        expectedSections.add(expectedSection1Item0)
+        expectedSections.add(expectedSection1Item1)
+        expectedSections.add(expectedSection1Item2)
 
-        verify(etudiantObserver).onChanged(capture(sectionsArgumentCaptor))
+        verify(profileObserver, times(2)).onChanged(capture(sectionsArgumentCaptor))
         assertEquals(expectedSections.size, sectionsArgumentCaptor.value.size)
-        sectionsArgumentCaptor.value.forEachIndexed { index, section ->
-            if (index == 0) {
-                assertEquals(expectedSection0Header, section.getItem(0))
-                assertEquals(expectedSection0Item0, section.getItem(1))
-            } else {
-                assertEquals(expectedSection1Header, section.getItem(0))
-                assertEquals(expectedSection1Item0, section.getItem(1))
-                assertEquals(expectedSection1Item1, section.getItem(2))
-                assertEquals(expectedSection1Item2, section.getItem(3))
-            }
-        }
+        assertEquals(expectedSection0Header, sectionsArgumentCaptor.value[0])
+        assertEquals(expectedSection0Item0, sectionsArgumentCaptor.value[1])
+        assertEquals(expectedSection1Header, sectionsArgumentCaptor.value[2])
+        assertEquals(expectedSection1Item0, sectionsArgumentCaptor.value[3])
+        assertEquals(expectedSection1Item1, sectionsArgumentCaptor.value[4])
+        assertEquals(expectedSection1Item2, sectionsArgumentCaptor.value[5])
         verify(loadingObserver).onChanged(false)
-        verify(errorMsgObserver).onChanged(null)
+        verify(errorMsgObserver, times(4)).onChanged(capture(stringEventArgumentCaptor))
+        assertEquals(null, stringEventArgumentCaptor.value.peekContent())
+    }
 
-        reset(etudiantObserver)
-        reset(loadingObserver)
-        reset(errorMsgObserver)
+    @Test
+    fun testSendErrorToUI() {
+        app.mockNetwork(true)
 
+        profileViewModel.refresh()
+
+        val expectedError = "Test error"
+        `when`(app.getString(R.string.error)).thenReturn(expectedError)
         val errorMsg = "Test error"
-        fooRes = Resource.error(errorMsg, null)
-        foo.value = fooRes
-        verify(etudiantObserver).onChanged(emptyList())
-        verify(loadingObserver).onChanged(false)
-        verify(errorMsgObserver).onChanged(errorMsg)
+        etudiantLiveData.value = Resource.error(errorMsg, null)
+        verify(errorMsgObserver, times(2)).onChanged(capture(stringEventArgumentCaptor))
+        assertEquals(null, stringEventArgumentCaptor.value.peekContent())
+
+        programmesLiveData.value = Resource.error(errorMsg, null)
+        verify(errorMsgObserver, times(3)).onChanged(capture(stringEventArgumentCaptor))
+        assertEquals(errorMsg, stringEventArgumentCaptor.value.peekContent())
     }
 }

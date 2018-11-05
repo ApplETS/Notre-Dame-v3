@@ -30,9 +30,7 @@ class Resource<T> private constructor(val status: Status, val data: T?, val mess
         fun <T> loading(data: T?): Resource<T> = Resource(Status.LOADING, data, null)
     }
 
-    fun <T> copyStatusAndMessage(data: T?): Resource<T> {
-        return Resource(status, data, message)
-    }
+    fun <T> copyStatusAndMessage(data: T?): Resource<T> = Resource(status, data, message)
 
     override fun equals(other: Any?): Boolean {
         // If this and other point to the same object ...

@@ -62,6 +62,14 @@
     <string name="label_last_name_profile">Nom de famille</string>
     <string name="label_permanent_code_profile">Code permanent</string>
     <string name="label_balance_profile">Solde</string>
+    <string name="label_code_program_profile">Code</string>
+    <string name="label_average_program_profile">Moyenne</string>
+    <string name="label_number_accumulated_credits_program_profile">Crédits complétés</string>
+    <string name="label_number_registered_credits_program_profile">Crédits inscrits</string>
+    <string name="label_number_completed_courses_program_profile">Cours réussis</string>
+    <string name="label_number_failed_courses_program_profile">Cours échoués</string>
+    <string name="label_number_equivalent_courses_program_profile">Cours d\'équivalence</string>
+    <string name="label_status_program_profile">Statut</string>
 
     <!-- More -->
     <string name="more_item_label_faq">FAQ</string>

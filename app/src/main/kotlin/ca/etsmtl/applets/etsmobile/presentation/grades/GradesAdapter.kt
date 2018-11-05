@@ -1,13 +1,12 @@
 package ca.etsmtl.applets.etsmobile.presentation.grades
 
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.GradeViewHolder
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.HeaderViewHolder
@@ -84,7 +83,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
         when (holder) {
             is GradeViewHolder -> {
                 with(differ.currentList[position] as Cours) {
-                    holder.gradeTextView.apply {
+                    holder.tvCourseGrade.apply {
                         text = when {
                             !this@with.cote.isNullOrEmpty() -> this@with.cote
                             !this@with.noteSur100.isNullOrEmpty() -> {
@@ -97,28 +96,23 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
                         }
                     }
 
-                    holder.sigleTextView.text = this.sigle
+                    holder.tvCourseSigle.text = this.sigle
 
-                    ViewCompat.setTransitionName(holder.gradeTextView, this.sigle)
+                    ViewCompat.setTransitionName(holder.tvCourseGrade, this.sigle)
 
                     holder.itemView.setOnClickListener { onCourseClickListener.onCourseClick(this@with, holder) }
                 }
             }
             is HeaderViewHolder -> {
-                holder.sessionGradesTextView.text = differ.currentList[position] as String
+                holder.tvSessionGrades.text = differ.currentList[position] as String
             }
         }
     }
 
     sealed class CourseGradeViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        class GradeViewHolder(override val containerView: View) : CourseGradeViewHolder(containerView) {
-            val gradeTextView: TextView = tvCourseGrade
-            val sigleTextView: TextView = tvCourseSigle
-        }
+        class GradeViewHolder(override val containerView: View) : CourseGradeViewHolder(containerView)
 
-        class HeaderViewHolder(override val containerView: View) : CourseGradeViewHolder(containerView) {
-            val sessionGradesTextView: TextView = tvSessionGrades
-        }
+        class HeaderViewHolder(override val containerView: View) : CourseGradeViewHolder(containerView)
     }
 
     /**
