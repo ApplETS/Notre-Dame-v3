@@ -85,4 +85,5 @@
     <string name="uri_applets_fb" translatable="false">https://www.facebook.com/ClubApplETS</string>
     <string name="uri_applets_twitter" translatable="false">https://twitter.com/ClubApplETS</string>
     <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
+    <string name="msg_no_seances">Aucune séance de cours pour la session actuelle</string>
 </resources>

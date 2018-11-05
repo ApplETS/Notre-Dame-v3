@@ -115,6 +115,7 @@ fun SeanceEntity.toSeance() = Seance(
         this.descriptionActivite,
         this.libelleCours,
         this.sigleCours,
+        this.groupe,
         this.session
 )
 

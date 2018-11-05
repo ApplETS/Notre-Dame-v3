@@ -13,5 +13,6 @@ data class SeanceEntity(
     var descriptionActivite: String,
     var libelleCours: String,
     var sigleCours: String,
+    var groupe: String,
     var session: String
 )

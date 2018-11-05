@@ -63,8 +63,17 @@ fun String.msDateToUnix() = substringAfter('(').substringBefore(')').toLong()
  * @param format The current format of the date (e.g. dd-MM-yyyy)
  */
 fun String.dateToUnix(format: String): Long {
+    return this@dateToUnix.dateToUnixms(format) / 1000
+}
+
+/**
+ * Convert date [String] to Unix time, in miliseconds
+ *
+ * @param format The current format of the date (e.g. dd-MM-yyyy)
+ */
+fun String.dateToUnixms(format: String): Long {
     return try {
-        SimpleDateFormat(format).parse(this@dateToUnix).time / 1000
+        SimpleDateFormat(format).parse(this@dateToUnixms).time
     } catch (e: Exception) {
         e.printStackTrace()
         0
