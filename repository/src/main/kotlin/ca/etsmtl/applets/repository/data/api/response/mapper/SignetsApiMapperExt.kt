@@ -114,7 +114,7 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             cours.session,
             this.nom,
             this.equipe,
-            dateCible.toLocaleDate(),
+            dateCible.apply { if (isNotBlank()) { toLocaleDate() } },
             formatter.format(note),
             formatter.format(corrigeSur.replaceCommaAndParseToFloat()),
             formatter.format(notePourcentage),

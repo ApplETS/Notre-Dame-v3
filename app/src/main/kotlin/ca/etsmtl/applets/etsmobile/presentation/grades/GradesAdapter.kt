@@ -23,7 +23,13 @@ import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>() {
 
     private val differ = AsyncListDiffer<Any>(this, object : DiffUtil.ItemCallback<Any>() {
-        override fun areItemsTheSame(oldItem: Any, newItem: Any) = oldItem == newItem
+        override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+            return if (oldItem is Cours && newItem is Cours) {
+                oldItem.sigle == newItem.sigle && oldItem.groupe == newItem.groupe && oldItem.session == newItem.session
+            } else {
+                oldItem == newItem
+            }
+        }
 
         override fun areContentsTheSame(oldItem: Any, newItem: Any) = oldItem == newItem
     })
