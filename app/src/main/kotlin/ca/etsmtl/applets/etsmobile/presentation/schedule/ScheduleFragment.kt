@@ -14,9 +14,9 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.show
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.empty_view_schedule.*
-import kotlinx.android.synthetic.main.fragment_schedule.*
-import kotlinx.android.synthetic.main.include_toolbar.*
+import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.recyclerViewSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.swipeRefreshLayoutSchedule
 import javax.inject.Inject
 
 /**
@@ -46,9 +46,8 @@ class ScheduleFragment : DaggerFragment() {
         setUpSwipeRefresh()
         setUpRecyclerView()
         subscribeUI()
-
-        toolbar.setTitle(R.string.title_schedule)
     }
+
     private fun setUpSwipeRefresh() {
         swipeRefreshLayoutSchedule.setColorSchemeResources(R.color.colorPrimary)
         swipeRefreshLayoutSchedule.setOnRefreshListener { scheduleViewModel.refresh() }
@@ -62,7 +61,7 @@ class ScheduleFragment : DaggerFragment() {
         scheduleViewModel.seances.observe(this, Observer {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
-        scheduleViewModel.getShowEmptyView().observe(this, Observer {
+        scheduleViewModel.showEmptyView.observe(this, Observer {
             recyclerViewSchedule.show(!it)
             emptyViewSchedule.show(it)
         })

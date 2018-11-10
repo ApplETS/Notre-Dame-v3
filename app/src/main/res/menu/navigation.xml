@@ -15,7 +15,7 @@
         app:showAsAction="always|withText" />
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_student"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/title_student"
         app:showAsAction="always|withText" />

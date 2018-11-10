@@ -4,6 +4,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -31,9 +32,8 @@ class GradesViewModel @Inject constructor(
         Transformations.map(coursMediatorLiveData) { it.getGenericErrorMessage(app) }
     }
 
-    val cours: LiveData<Map<String, List<Cours>>> = Transformations.map(coursMediatorLiveData) {
-        it.data
-    }
+    private val _cours: MutableLiveData<Map<String, List<Cours>>> = MutableLiveData()
+    val cours: LiveData<Map<String, List<Cours>>> = _cours
 
     val loading: LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         it.status == Resource.Status.LOADING
@@ -51,6 +51,9 @@ class GradesViewModel @Inject constructor(
         coursLiveData = fetchGradesCoursesUseCase().apply {
             coursMediatorLiveData.addSource(this) {
                 coursMediatorLiveData.value = it
+                if (it.status != Resource.Status.LOADING) {
+                    _cours.value = it.data
+                }
             }
         }
     }

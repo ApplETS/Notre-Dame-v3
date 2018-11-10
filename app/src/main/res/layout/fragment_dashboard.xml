@@ -5,13 +5,6 @@
     android:orientation="vertical"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include layout="@layout/include_toolbar" />
-    </com.google.android.material.appbar.AppBarLayout>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

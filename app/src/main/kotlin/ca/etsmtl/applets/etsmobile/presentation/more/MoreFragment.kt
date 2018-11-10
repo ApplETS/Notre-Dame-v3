@@ -1,28 +1,27 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.util.Pair
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.util.Pair
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
-import ca.etsmtl.applets.etsmobile.presentation.main.MainFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import ca.etsmtl.applets.etsmobile.util.EventObserver
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
-import kotlinx.android.synthetic.main.include_toolbar.toolbar
 import javax.inject.Inject
 
-class MoreFragment : MainFragment() {
+class MoreFragment : DaggerFragment() {
 
     private val moreViewModel: MoreViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MoreViewModel::class.java)
@@ -53,8 +52,6 @@ class MoreFragment : MainFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        toolbar.setTitle(R.string.title_more)
 
         setUpRecyclerView()
 

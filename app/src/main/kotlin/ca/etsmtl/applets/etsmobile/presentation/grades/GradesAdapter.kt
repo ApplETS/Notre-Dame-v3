@@ -23,17 +23,9 @@ import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>() {
 
     private val differ = AsyncListDiffer<Any>(this, object : DiffUtil.ItemCallback<Any>() {
-        override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            return when {
-                oldItem is String && newItem is String ->
-                    oldItem == newItem
-                oldItem is Cours && newItem is Cours ->
-                    oldItem.sigle == newItem.sigle && oldItem.groupe == newItem.groupe && oldItem.session == newItem.session
-                else -> false
-            }
-        }
+        override fun areItemsTheSame(oldItem: Any, newItem: Any) = oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean = oldItem == newItem
+        override fun areContentsTheSame(oldItem: Any, newItem: Any) = oldItem == newItem
     })
 
     var items: Map<String, List<Cours>> = emptyMap()
@@ -55,17 +47,12 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseGradeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(viewType, parent, false)
 
         return when (viewType) {
-            R.layout.item_grade_course -> GradeViewHolder(
-                    inflater.inflate(viewType, parent, false)
-            )
-            R.layout.header_grade_course -> HeaderViewHolder(
-                    inflater.inflate(viewType, parent, false)
-            )
-            else -> {
-                throw IllegalStateException("Unknown viewType $viewType")
-            }
+            R.layout.item_grade_course -> GradeViewHolder(view)
+            R.layout.header_grade_course -> HeaderViewHolder(view)
+            else -> throw IllegalStateException("Unknown viewType $viewType")
         }
     }
 

@@ -10,6 +10,8 @@ apply plugin: "org.jlleitschuh.gradle.ktlint"
 
 apply plugin: 'io.fabric'
 
+apply plugin: "androidx.navigation.safeargs"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -72,6 +74,8 @@ dependencies {
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -85,6 +89,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$lifecycle"
     testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation "org.mockito:mockito-inline:$mockito_inline"
+    androidTestImplementation "android.arch.navigation:navigation-testing:$navigation"
 
     // Android Testing Support Library's runner and rules
     androidTestImplementation "androidx.test:runner:$test"
