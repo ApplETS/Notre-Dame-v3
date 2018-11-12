@@ -39,7 +39,7 @@ class ProfileFragment : DaggerFragment() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
 
-        if (isVisibleToUser) {
+        if (isVisibleToUser && view != null) {
             setUpSwipeRefresh()
             setUpRecyclerView()
             subscribeUI()
