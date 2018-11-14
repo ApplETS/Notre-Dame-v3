@@ -26,8 +26,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                app:title="Title"
-                app:titleTextColor="@android:color/white" />
+                app:titleTextColor="@android:color/white"
+                tools:title="Title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <com.google.android.material.tabs.TabLayout
