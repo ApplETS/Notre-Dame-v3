@@ -51,9 +51,7 @@ class GradesViewModel @Inject constructor(
         coursLiveData = fetchGradesCoursesUseCase().apply {
             coursMediatorLiveData.addSource(this) {
                 coursMediatorLiveData.value = it
-                if (it.status != Resource.Status.LOADING) {
-                    _cours.value = it.data
-                }
+                _cours.value = it.data
             }
         }
     }

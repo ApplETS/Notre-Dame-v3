@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
@@ -22,34 +21,47 @@ import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 
 class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : RecyclerView.Adapter<GradesAdapter.CourseGradeViewHolder>() {
 
-    private val differ = AsyncListDiffer<Any>(this, object : DiffUtil.ItemCallback<Any>() {
-        override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            return if (oldItem is Cours && newItem is Cours) {
-                oldItem.sigle == newItem.sigle && oldItem.groupe == newItem.groupe && oldItem.session == newItem.session
-            } else {
-                oldItem == newItem
-            }
-        }
-
-        override fun areContentsTheSame(oldItem: Any, newItem: Any) = oldItem == newItem
-    })
-
+    private var itemsList: List<Any> = emptyList()
     var items: Map<String, List<Cours>> = emptyMap()
         set(value) {
             field = value
-            differ.submitList(mutableListOf<Any>().apply {
+
+            val newItemsList = mutableListOf<Any>().apply {
                 value.forEach {
                     this.add(it.key)
                     it.value.forEach { cours ->
                         this.add(cours)
                     }
                 }
-            })
-        }
+            }
+            val diffCallback = object : DiffUtil.Callback() {
+                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                    val oldItem = itemsList[oldItemPosition]
+                    val newItem = newItemsList[newItemPosition]
 
-    init {
-        differ.submitList(emptyList())
-    }
+                    return if (oldItem is Cours && newItem is Cours) {
+                        oldItem.sigle == newItem.sigle && oldItem.groupe == newItem.groupe && oldItem.session == newItem.session
+                    } else {
+                        oldItem == newItem
+                    }
+                }
+
+                override fun getOldListSize() = itemsList.count()
+
+                override fun getNewListSize() = newItemsList.count()
+
+                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                    val oldItem = itemsList[oldItemPosition]
+                    val newItem = newItemsList[newItemPosition]
+
+                    return oldItem == newItem
+                }
+            }
+
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
+            itemsList = newItemsList
+            diffResult.dispatchUpdatesTo(this)
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseGradeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -62,10 +74,10 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
         }
     }
 
-    override fun getItemCount() = differ.currentList.size
+    override fun getItemCount() = itemsList.count()
 
     override fun getItemViewType(position: Int): Int {
-        return when (differ.currentList[position]) {
+        return when (itemsList[position]) {
             is String -> R.layout.header_grade_course
             is Cours -> R.layout.item_grade_course
             else -> throw IllegalStateException("Unknown view type at position $position")
@@ -75,7 +87,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
     override fun onBindViewHolder(holder: CourseGradeViewHolder, position: Int) {
         when (holder) {
             is GradeViewHolder -> {
-                with(differ.currentList[position] as Cours) {
+                with(itemsList[position] as Cours) {
                     holder.tvCourseGrade.apply {
                         text = when {
                             !this@with.cote.isNullOrEmpty() -> this@with.cote
@@ -97,7 +109,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
                 }
             }
             is HeaderViewHolder -> {
-                holder.tvSessionGrades.text = differ.currentList[position] as String
+                holder.tvSessionGrades.text = itemsList[position] as String
             }
         }
     }

@@ -38,9 +38,10 @@ class StudentFragment : DaggerFragment() {
                 viewPagerStudent.adapter = StudentPagerAdapter(context, childFragmentManager)
                 it.setupWithViewPager(viewPagerStudent)
 
-                view.postDelayed({
-                    it.show(true)
-                }, resources.getInteger(android.R.integer.config_shortAnimTime).toLong())
+                view.postDelayed(
+                        { it.show(true) },
+                        resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+                )
             }
         }
     }
