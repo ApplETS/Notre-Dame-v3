@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.student
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,9 @@ import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
 
 class StudentFragment : DaggerFragment() {
 
+    private val showTabsHandler = Handler()
+    private var showTabsRunnable: Runnable? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,8 +42,9 @@ class StudentFragment : DaggerFragment() {
                 viewPagerStudent.adapter = StudentPagerAdapter(context, childFragmentManager)
                 it.setupWithViewPager(viewPagerStudent)
 
-                view.postDelayed(
-                        { it.show(true) },
+                showTabsRunnable = Runnable { it.show(true) }
+                showTabsHandler.postDelayed(
+                        showTabsRunnable,
                         resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
                 )
             }
@@ -49,6 +54,7 @@ class StudentFragment : DaggerFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
+        showTabsHandler.removeCallbacks(showTabsRunnable)
         (activity as? MainActivity)?.tabLayout?.show(false)
     }
 
