@@ -70,6 +70,7 @@ import UIKit
     }
 
     private func startLoadingAnimation() {
+        self.setTitle("", for: .normal)
         self.titleLabel?.textColor = self.titleLabel?.textColor.withAlphaComponent(0.0)
         self.layer.borderWidth = 2.0
         self.isEnabled = false

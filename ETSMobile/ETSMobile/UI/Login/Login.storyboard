@@ -123,10 +123,10 @@
                         <viewLayoutGuide key="safeArea" id="Pr4-eR-UOA"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                <color key="value" red="0.90890935955918983" green="0.31011104141883084" blue="0.28457545513659394" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="value" red="0.88166475300000002" green="0.30081544640000002" blue="0.2760452907" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                <color key="value" red="0.66983264593908631" green="0.22854038989019099" blue="0.20972160543699528" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="value" red="0.66983264590000002" green="0.2285403899" blue="0.20972160540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <variation key="default">
