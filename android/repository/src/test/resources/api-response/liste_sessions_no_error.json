@@ -1,0 +1,98 @@
+﻿{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+ListeDeSessions",
+        "liste": [
+            {
+                "abrege": "A2016",
+                "auLong": "Automne 2016",
+                "dateDebut": "2016-08-31",
+                "dateFin": "2016-12-20",
+                "dateFinCours": "2016-12-06",
+                "dateDebutChemiNot": "2016-05-29",
+                "dateFinChemiNot": "2016-06-14",
+                "dateDebutAnnulationAvecRemboursement": "2016-08-31",
+                "dateFinAnnulationAvecRemboursement": "2016-09-15",
+                "dateFinAnnulationAvecRemboursementNouveauxEtudiants": "2016-09-29",
+                "dateDebutAnnulationSansRemboursementNouveauxEtudiants": "2016-09-30",
+                "dateFinAnnulationSansRemboursementNouveauxEtudiants": "2016-11-09",
+                "dateLimitePourAnnulerASEQ": "2016-09-30"
+            },
+            {
+                "abrege": "H2017",
+                "auLong": "Hiver 2017",
+                "dateDebut": "2017-01-04",
+                "dateFin": "2017-04-22",
+                "dateFinCours": "2017-04-07",
+                "dateDebutChemiNot": "2016-10-30",
+                "dateFinChemiNot": "2016-11-15",
+                "dateDebutAnnulationAvecRemboursement": "2017-01-04",
+                "dateFinAnnulationAvecRemboursement": "2017-01-17",
+                "dateFinAnnulationAvecRemboursementNouveauxEtudiants": "2017-01-31",
+                "dateDebutAnnulationSansRemboursementNouveauxEtudiants": "2017-02-01",
+                "dateFinAnnulationSansRemboursementNouveauxEtudiants": "2017-03-11",
+                "dateLimitePourAnnulerASEQ": "2017-01-31"
+            },
+            {
+                "abrege": "É2017",
+                "auLong": "Été 2017",
+                "dateDebut": "2017-05-01",
+                "dateFin": "2017-08-12",
+                "dateFinCours": "2017-08-02",
+                "dateDebutChemiNot": "2017-02-27",
+                "dateFinChemiNot": "2017-03-14",
+                "dateDebutAnnulationAvecRemboursement": "2017-05-01",
+                "dateFinAnnulationAvecRemboursement": "2017-05-12",
+                "dateFinAnnulationAvecRemboursementNouveauxEtudiants": "2017-05-12",
+                "dateDebutAnnulationSansRemboursementNouveauxEtudiants": "2017-05-23",
+                "dateFinAnnulationSansRemboursementNouveauxEtudiants": "2017-07-06",
+                "dateLimitePourAnnulerASEQ": "2017-01-31"
+            },
+            {
+                "abrege": "A2017",
+                "auLong": "Automne 2017",
+                "dateDebut": "2017-09-05",
+                "dateFin": "2017-12-22",
+                "dateFinCours": "2017-12-09",
+                "dateDebutChemiNot": "2017-05-29",
+                "dateFinChemiNot": "2017-06-13",
+                "dateDebutAnnulationAvecRemboursement": "2017-09-05",
+                "dateFinAnnulationAvecRemboursement": "2017-09-18",
+                "dateFinAnnulationAvecRemboursementNouveauxEtudiants": "2017-09-30",
+                "dateDebutAnnulationSansRemboursementNouveauxEtudiants": "2017-10-01",
+                "dateFinAnnulationSansRemboursementNouveauxEtudiants": "2017-11-13",
+                "dateLimitePourAnnulerASEQ": "2017-09-30"
+            },
+            {
+                "abrege": "H2018",
+                "auLong": "Hiver 2018",
+                "dateDebut": "2018-01-04",
+                "dateFin": "2018-04-23",
+                "dateFinCours": "2018-04-11",
+                "dateDebutChemiNot": "2017-10-30",
+                "dateFinChemiNot": "2017-11-14",
+                "dateDebutAnnulationAvecRemboursement": "2018-01-04",
+                "dateFinAnnulationAvecRemboursement": "2018-01-17",
+                "dateFinAnnulationAvecRemboursementNouveauxEtudiants": "2018-01-31",
+                "dateDebutAnnulationSansRemboursementNouveauxEtudiants": "2018-02-01",
+                "dateFinAnnulationSansRemboursementNouveauxEtudiants": "2018-03-14",
+                "dateLimitePourAnnulerASEQ": "2018-01-31"
+            },
+            {
+                "abrege": "É2018",
+                "auLong": "Été 2018",
+                "dateDebut": "2018-04-30",
+                "dateFin": "2018-08-11",
+                "dateFinCours": "2018-08-01",
+                "dateDebutChemiNot": "2018-02-26",
+                "dateFinChemiNot": "2018-03-13",
+                "dateDebutAnnulationAvecRemboursement": "2018-04-30",
+                "dateFinAnnulationAvecRemboursement": "2018-05-11",
+                "dateFinAnnulationAvecRemboursementNouveauxEtudiants": "2018-05-11",
+                "dateDebutAnnulationSansRemboursementNouveauxEtudiants": "2018-05-22",
+                "dateFinAnnulationSansRemboursementNouveauxEtudiants": "2018-07-04",
+                "dateLimitePourAnnulerASEQ": "1964-01-01"
+            }
+        ],
+        "erreur": ""
+    }
+}

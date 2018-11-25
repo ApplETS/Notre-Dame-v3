@@ -1,0 +1,89 @@
+<resources>
+    <string name="preference_file_key" translatable="false">ETSMobilePrefs</string>
+    <string name="error">Une erreur est survenue</string>
+    <string name="error_no_internet_connection">Absence de connexion internet</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="retry">Réessayer</string>
+    <string name="abbreviation_not_available">ND</string>
+    <string name="session_fall">Automne</string>
+    <string name="session_winter">Hiver</string>
+    <string name="session_summer">Été</string>
+    <string name="session_without">Sans trimestre</string>
+
+    <!-- Bottom navigation titles -->
+    <string name="title_schedule">Horaire</string>
+    <string name="title_student">Étudiant</string>
+    <string name="title_dashboard">Accueil</string>
+    <string name="title_ets">ÉTS</string>
+    <string name="title_more">Plus</string>
+
+    <!-- Login -->
+    <string name="title_activity_login">Connexion</string>
+    <string name="prompt_universal_code">Code universel</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Se connecter</string>
+    <string name="error_invalid_universal_code">Le code universel est invalide</string>
+    <string name="error_invalid_password">Ce mot de passe est erroné</string>
+    <string name="error_incorrect_password">Le mot de passe est erroné</string>
+    <string name="error_field_required">Ce champ est requis</string>
+    <string name="info_universal_code">Votre code d\'accès universel est sous la forme AB12345. Celui-ci vous a été transmis par le Bureau du registraire lors de votre admission.</string>
+    <string name="msg_logout_success">Vous vous êtes déconnecté</string>
+    <string name="label_login_applets_logo">Conçue par</string>
+    <string name="password_forgotten">Mot de passe oublié?</string>
+    <string name="uri_password_forgotten" translatable="false">https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx</string>
+
+    <!-- Grades -->
+    <string name="title_grades">Notes</string>
+    <string name="msg_no_grades">Aucune note</string>
+    <string name="label_current_rating">Votre note</string>
+    <string name="label_average">Moyenne</string>
+    <string name="text_grade_in_percentage">%1$s %%</string>
+    <string name="text_grade_with_percentage">%1$s/%2$s (%3$s %%)</string>
+    <string name="text_weight">Pondération : %1$s %%</string>
+    <string name="label_group">Groupe</string>
+    <string name="label_grade">Note</string>
+    <string name="label_median">Médiane</string>
+    <string name="label_standard_deviation">Écart-type</string>
+    <string name="label_percentile_rank">Rang centile</string>
+    <string name="label_target_date">Date cible</string>
+    <string name="title_ignored_evaluation">Évaluation ignorée</string>
+    <string name="text_ignored_evaluation">Cette évaluation est ignorée dans le calcul de la note finale. Cette situation se produit quand l\'enseignant a décidé de conserver, par exemple, les trois meilleures notes des six devoirs qu\'il a demandés. Les trois notes les plus faibles seront alors ignorées.</string>
+    <string name="error_failed_to_retrieve_data_course">Échec de la récupération des données de ce cours</string>
+    <string name="title_section_summary">Sommaire</string>
+    <string name="title_section_evaluations">Évaluations</string>
+    <string name="text_group">Groupe %1$s</string>
+
+    <!-- Profile -->
+    <string name="title_profile">Profil</string>
+    <string name="title_student_status_profile">État du dossier étudiant</string>
+    <string name="title_personal_information_profile">Informations personnelles</string>
+    <string name="label_first_name_profile">Prénom</string>
+    <string name="label_last_name_profile">Nom de famille</string>
+    <string name="label_permanent_code_profile">Code permanent</string>
+    <string name="label_balance_profile">Solde</string>
+    <string name="label_code_program_profile">Code</string>
+    <string name="label_average_program_profile">Moyenne</string>
+    <string name="label_number_accumulated_credits_program_profile">Crédits complétés</string>
+    <string name="label_number_registered_credits_program_profile">Crédits inscrits</string>
+    <string name="label_number_completed_courses_program_profile">Cours réussis</string>
+    <string name="label_number_failed_courses_program_profile">Cours échoués</string>
+    <string name="label_number_equivalent_courses_program_profile">Cours d\'équivalence</string>
+    <string name="label_status_program_profile">Statut</string>
+
+    <!-- More -->
+    <string name="more_item_label_faq">FAQ</string>
+    <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
+    <string name="more_item_label_log_out">Se déconnecter</string>
+    <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>
+    <string name="more_label_log_out_progress">Déconnexion en cours</string>
+
+    <!-- About -->
+    <string name="applets_about">ÉTSMobile a été réalisée par le club scientifique ApplETS de l\'École de technologie supérieure.\n\nApplETS se veut, avant tout, un regroupement d’étudiants qui partagent un intérêt commun pour le domaine des télécommunications et des applications mobiles.
+        La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nPour en savoir plus, n\'hésitez pas à consulter notre site web : http://clubapplets.ca</string>
+    <string name="uri_applets_gh" translatable="false">https://github.com/orgs/ApplETS/</string>
+    <string name="uri_applets_fb" translatable="false">https://www.facebook.com/ClubApplETS</string>
+    <string name="uri_applets_twitter" translatable="false">https://twitter.com/ClubApplETS</string>
+    <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
+    <string name="msg_no_seances">Aucune séance de cours pour la session actuelle</string>
+</resources>

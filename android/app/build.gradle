@@ -1,0 +1,151 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+apply plugin: 'io.fabric'
+
+apply plugin: "androidx.navigation.safeargs"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "ca.etsmtl.applets.etsmobile"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        beta {
+            dimension "version"
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            resValue "string", "app_name", "ÉTSMobile bêta"
+        }
+        production {
+            dimension "version"
+            resValue "string", "app_name", "ÉTSMobile"
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test {
+            java.srcDirs += 'src/test/kotlin'
+        }
+        androidTest {
+            java.srcDirs += 'src/androidTest/kotlin'
+        }
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Support libraries
+    implementation "androidx.appcompat:appcompat:$support"
+    implementation "com.google.android.material:material:$support"
+    implementation "androidx.legacy:legacy-support-v4:$support"
+    implementation "androidx.cardview:cardview:$support"
+    implementation "androidx.recyclerview:recyclerview:$support"
+    implementation "androidx.browser:browser:$support"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+
+    // Architecture components
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:${junit}"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "androidx.arch.core:core-testing:$lifecycle"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "org.mockito:mockito-inline:$mockito_inline"
+    androidTestImplementation "android.arch.navigation:navigation-testing:$navigation"
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation "androidx.test:runner:$test"
+    androidTestImplementation "androidx.test:rules:$test"
+
+    // Espresso UI Testing
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso"
+    androidTestImplementation "org.mockito:mockito-core:${mockito}"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${glide}"
+    kapt "com.github.bumptech.glide:compiler:${glide}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${dagger}"
+    implementation "com.google.dagger:dagger-android:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
+    implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
+
+    // Material Design Dimensions
+    implementation "com.dmitrymalkovich.android:material-design-dimens:${dimens}"
+
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakcanary"
+
+    // Firebase
+    implementation "com.google.firebase:firebase-core:$firebase"
+    implementation "com.crashlytics.sdk.android:crashlytics:$firebase_crashlytics"
+
+    // Mockito-Kotlin
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
+
+    // RecyclerView Animators
+    implementation "jp.wasabeef:recyclerview-animators:$recyclerviewanimators"
+
+    // Material-ProgressView
+    implementation "com.moos:Material-ProgressView:$materialprogressview"
+
+    // Groupie
+    implementation "com.xwray:groupie:$groupie"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$groupie"
+
+    // FlexboxLayout
+    implementation "com.google.android:flexbox:$flexbox"
+
+    implementation project(':repository')
+}
+
+apply plugin: 'com.google.gms.google-services'
+

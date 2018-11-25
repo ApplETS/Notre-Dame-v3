@@ -1,0 +1,242 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeSeances",
+        "ListeDesSeances": [
+            {
+                "dateDebut": "/Date(1525093200000)/",
+                "dateFin": "/Date(1525105800000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1525266000000)/",
+                "dateFin": "/Date(1525276800000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1525698000000)/",
+                "dateFin": "/Date(1525710600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1525870800000)/",
+                "dateFin": "/Date(1525881600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1526302800000)/",
+                "dateFin": "/Date(1526315400000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1526475600000)/",
+                "dateFin": "/Date(1526486400000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1526994000000)/",
+                "dateFin": "/Date(1527006600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1527080400000)/",
+                "dateFin": "/Date(1527091200000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1527512400000)/",
+                "dateFin": "/Date(1527525000000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1527685200000)/",
+                "dateFin": "/Date(1527696000000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1528117200000)/",
+                "dateFin": "/Date(1528129800000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1528290000000)/",
+                "dateFin": "/Date(1528300800000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1528722000000)/",
+                "dateFin": "/Date(1528734600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1528894800000)/",
+                "dateFin": "/Date(1528905600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1529326800000)/",
+                "dateFin": "/Date(1529339400000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1529499600000)/",
+                "dateFin": "/Date(1529510400000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1530018000000)/",
+                "dateFin": "/Date(1530030600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1530709200000)/",
+                "dateFin": "/Date(1530720000000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1531141200000)/",
+                "dateFin": "/Date(1531153800000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1531314000000)/",
+                "dateFin": "/Date(1531324800000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1531746000000)/",
+                "dateFin": "/Date(1531758600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1531918800000)/",
+                "dateFin": "/Date(1531929600000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1532350800000)/",
+                "dateFin": "/Date(1532363400000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1532523600000)/",
+                "dateFin": "/Date(1532534400000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1532955600000)/",
+                "dateFin": "/Date(1532968200000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "Cours",
+                "local": "B-0904",
+                "descriptionActivite": "Activité de cours",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            },
+            {
+                "dateDebut": "/Date(1533128400000)/",
+                "dateFin": "/Date(1533139200000)/",
+                "coursGroupe": "MAT472-02",
+                "nomActivite": "TP",
+                "local": "B-0904",
+                "descriptionActivite": "Travaux pratiques",
+                "libelleCours": "Algèbre linéaire et géométrie de l'espace"
+            }
+        ],
+        "erreur": ""
+    }
+}

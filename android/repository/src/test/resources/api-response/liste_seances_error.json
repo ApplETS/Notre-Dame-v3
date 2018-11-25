@@ -1,0 +1,7 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeSeances",
+        "ListeDesSeances": [],
+        "erreur": "Date de fin. Date invalide, format attendu: aaaa-mm-jj. 1 avril 2019"
+    }
+}

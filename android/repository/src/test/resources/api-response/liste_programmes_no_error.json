@@ -1,0 +1,72 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeDesProgrammes",
+        "liste": [
+            {
+                "code": "0725",
+                "libelle": "Microprogramme de 1er cycle en enseignement coopératif I",
+                "profil": "",
+                "statut": "diplômé",
+                "sessionDebut": "É2016",
+                "sessionFin": "É2016",
+                "moyenne": "",
+                "nbEquivalences": "0",
+                "nbCrsReussis": "1",
+                "nbCrsEchoues": "0",
+                "nbCreditsInscrits": "0",
+                "nbCreditsCompletes": "9",
+                "nbCreditsPotentiels": "9",
+                "nbCreditsRecherche": "0"
+            },
+            {
+                "code": "0726",
+                "libelle": "Microprogramme de 1er cycle en enseignement coopératif II",
+                "profil": "",
+                "statut": "diplômé",
+                "sessionDebut": "É2017",
+                "sessionFin": "É2017",
+                "moyenne": "",
+                "nbEquivalences": "0",
+                "nbCrsReussis": "1",
+                "nbCrsEchoues": "0",
+                "nbCreditsInscrits": "0",
+                "nbCreditsCompletes": "9",
+                "nbCreditsPotentiels": "9",
+                "nbCreditsRecherche": "0"
+            },
+            {
+                "code": "5994",
+                "libelle": "Cheminement universitaire en technologie",
+                "profil": "IL",
+                "statut": "dossier fermé",
+                "sessionDebut": "A2014",
+                "sessionFin": "H2015",
+                "moyenne": "4,03/4,30",
+                "nbEquivalences": "0",
+                "nbCrsReussis": "12",
+                "nbCrsEchoues": "0",
+                "nbCreditsInscrits": "0",
+                "nbCreditsCompletes": "31",
+                "nbCreditsPotentiels": "31",
+                "nbCreditsRecherche": "0"
+            },
+            {
+                "code": "7365",
+                "libelle": "Baccalauréat en génie logiciel",
+                "profil": "",
+                "statut": "actif",
+                "sessionDebut": "A2015",
+                "sessionFin": "É2018",
+                "moyenne": "0,93/4,30",
+                "nbEquivalences": "2",
+                "nbCrsReussis": "22",
+                "nbCrsEchoues": "0",
+                "nbCreditsInscrits": "13",
+                "nbCreditsCompletes": "86",
+                "nbCreditsPotentiels": "99",
+                "nbCreditsRecherche": "0"
+            }
+        ],
+        "erreur": ""
+    }
+}

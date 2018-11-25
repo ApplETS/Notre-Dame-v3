@@ -1,0 +1,11 @@
+﻿{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+Etudiant",
+        "nom": "",
+        "prenom": "",
+        "codePerm": "",
+        "soldeTotal": "",
+        "masculin": true,
+        "erreur": "Code d'accès ou mot de passe invalide"
+    }
+}

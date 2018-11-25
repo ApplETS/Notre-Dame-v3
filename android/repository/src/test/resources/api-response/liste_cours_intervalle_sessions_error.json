@@ -1,0 +1,7 @@
+﻿{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+ListeDeCours",
+        "liste": [],
+        "erreur": "Session de début invalide:H2018g. L'année doit avoir 4 chiffres."
+    }
+}
