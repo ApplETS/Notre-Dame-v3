@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  ETS-mobile
+
+  Created by Emmanuel on 2018-05-21.
+  Copyright © 2018 applETS. All rights reserved.
+*/
+"emergencies" = "Emergencies";
+"emergencyCall" = "Emergency call";
+
+"internCall" = "From inside campus";
+
+"extension" = "Ext. 55";
+
+"reachSecurity" = "Reach security";
+
+"emergencyProcedures" = "Emergency procedures";
+
+"bombThreat" = "Bomb threat";
+
+"suspiciousPackage" = "Suspicious package";
+
+"fire" = "Fire";
+
+"suspiciousSmell" = "Suspicious smell";
+
+"elevatorMalfunction" = "Elevator malfunction";
+
+"powerOutage" = "Power outage";
+
+"armedPerson" = "Armed person";
+
+"medicalEmergency" = "Medical emergency";
+
+"bombThreatInstructions" = "\U2022 Do not end the phone conversation.\n\n\U2022 Try to get as much information as possible. \n\n\U2022 Repeat or pretend to have some difficulty to understand in order to take more time. \n\n\U2022 Whenever possible and depending on the situation, try to obtain the following information: \n\t\U2022 The time at which the bomb will explode. \n\t\U2022 The type of bomb. \n\t\U2022 The location of the bomb.\n\t\U2022 The caller's name and address. \n\n\U2022 Let the caller hang up first. \n\n\U2022 It is essential to communicate IMMEDIATELY with security at 514-396-8900 extension 55 ";
+
+"suspiciousPackageInstructions" = "\U2022 Never touch, push, hit, lift, or open a suspicious package\n\n\U2022 Never take for granted that it is the only package.\n\n\U2022 Leave the area and if possible restrict access by closing the doors.\n\n\U2022 Notify those you meet not to enter the area.\n\n\U2022 Once outside the area, call security at 514-396-8900 extension 55.\n\n\U2022 Never activate a manual fire station (red station).";
+
+"fireInstructions" = "If you discover a fire outbreak:\n\n\t\U2022 Leave the scene immediately and help evacuate anyone who is in immediate danger without endangering your life.\n\t\U2022 Trigger the fire alarm by firing a manual fire station located near the emergency exits.\n\t\U2022 Use the stairs to exit the building.\n\t\U2022 Close all doors behind you to prevent the fire from spreading.\n\t\U2022 Alert the Montreal Fire Department by dialing 911 in a safe place.\n\n When the alarm signal of the fire alarm system is triggered:\n\n\t\U2022 Leave your location immediately and help evacuate anyone who is in immediate danger without putting your life at risk.\n\t\U2022 Close all doors behind you to prevent the fire from spreading.\n\t\U2022 Move away from the site at a distance of one hundred (100) meters to allow those who follow to come out and to let firefighters extinguish the fire.";
+
+"armedPersonInstructions" = "If you can leave the area without being threatened, evacuate the building.\n\n\U2022 Stay calm.\n\U2022 Never attempt to stop an armed person.\n\U2022 Do not activate the fire alarm.\n\U2022 Go to the nearest emergency exit. \n\U2022 Use the stairs to leave the building (Never use the elevators). \n\U2022 Keep your hands up as you leave the building so police do not perceive you as a threat. \n\U2022 Inform others you encounter to leave the area immediately. \n\U2022 Once you have left the building, do not stay near the area; go to the remote meeting point at the corner of Peel street and St-Jacques street (right in front of the planetarium). \n\U2022 Once safe, call 911.\n\nIf you cannot leave the area without being threatened, confine yourself. \n\n\U2022 Stay calm and silent. \n\U2022 Hide and warn others to do the same. \n\U2022 Lock the doors of the room where you are hiding. \n\U2022 Block the doors with any furniture. \n\U2022 Close all window blinds. \n\U2022 Stay far from the doors and windows (corridors and exterior walls). \n\U2022 If one of your windows leads OUTSIDE the building, signal your presence to police by placing a paper with a note. \n\U2022 Hide under a desk. \n\U2022 Stay silent. \n\U2022 Keep your phones on silent. \n\U2022  If someone knocks on the doors, do not open as it may be a threat. \n\U2022 In the event that the police arrive to check all areas, they will receive access cards and keys. \n\U2022 Do not jump from your hiding place and keep your hands up in plain sight. \n\U2022 Wait for police instructions or the Bureau of prevention and security before leaving the premises. \n\n\In the event of an evacuation \n\n\U2022 Go to the remote meeting point at the corner of Peel street and St-Jacques street (right in front of the planetarium). \n\U2022 Never stay near the building under threat. \n\U2022 Stay silent and attentive to hear the directives given by police or security.\n\n REMEMBER \n\n\U2022 Never jump from your hiding space. \n\U2022 Always keep your hands up and visible.";
+
+"medicalEmergencyInstructions" = "If someone's life is in danger, call 911.\n\n\U2022 If the victim is conscious, ask them the following :\n\t\U2022 Their name.\n\t\U2022 Details of the incident.\n\t\U2022 Details on their injuries.\n\t\U2022 If they have allergies or any health issues.\n\t\U2022 Communicate with security, extention 55 (internal telephone system).\n\n\U2022 Do not hang up until the dispatcher says so.\n\n\U2022 Perform first aid if you have been trained to do so.\n\n\U2022 Ask others around you to find someone who can perform first aid.\n\n\U2022 Stay in place to assist the first-aiders and provide information on the victim.\n\n\U2022 Ask others to assist you while waiting for help to arrive.\n\n\U2022 Once the dispatchers arrives, keep others away from the victim to make room for the dispatchers.\n\n\U2022 Do not move the victim unless they're exposed to danger.\n\n\U2022 Do not give them liquids nor food even if the victim insists.\n\n\U2022 Stay in contact with security if possible. \n\n\U2022 If the victim's state of health is deteriorating, inform security.";
