@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.etsmobile.domain
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.Resource
@@ -25,10 +25,10 @@ class FetchCurrentSessionUseCase @Inject constructor(
                 Date().time in it.dateDebut..it.dateFin
             }
 
-            if (it.status == Resource.Status.ERROR || currentSession == null) {
-                Resource.error(it.message ?: app.getString(R.string.error), currentSession)
-            } else if (it.status == Resource.Status.LOADING) {
+            if (it.status == Resource.Status.LOADING) {
                 Resource.loading(currentSession)
+            } else if (it.status == Resource.Status.ERROR || currentSession == null) {
+                Resource.error(it.message ?: app.getString(R.string.error), currentSession)
             } else {
                 Resource.success(currentSession)
             }

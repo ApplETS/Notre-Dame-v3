@@ -25,18 +25,12 @@ class Resource<T> private constructor(val status: Status, val data: T?, val mess
     }
 
     companion object {
-        fun <T> success(data: T): Resource<T> {
-            return Resource(Status.SUCCESS, data, null)
-        }
-
-        fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(Status.ERROR, data, msg)
-        }
-
-        fun <T> loading(data: T?): Resource<T> {
-            return Resource(Status.LOADING, data, null)
-        }
+        fun <T> success(data: T): Resource<T> = Resource(Status.SUCCESS, data, null)
+        fun <T> error(msg: String, data: T?): Resource<T> = Resource(Status.ERROR, data, msg)
+        fun <T> loading(data: T?): Resource<T> = Resource(Status.LOADING, data, null)
     }
+
+    fun <T> copyStatusAndMessage(data: T?): Resource<T> = Resource(status, data, message)
 
     override fun equals(other: Any?): Boolean {
         // If this and other point to the same object ...

@@ -55,11 +55,20 @@
 
     <!-- Profile -->
     <string name="title_profile">Profile</string>
+    <string name="title_student_status_profile">Student Status</string>
     <string name="title_personal_information_profile">Personal Information</string>
     <string name="label_first_name_profile">First Name</string>
     <string name="label_last_name_profile">Last Name</string>
     <string name="label_permanent_code_profile">Permanent Code</string>
     <string name="label_balance_profile">Balance</string>
+    <string name="label_code_program_profile">Code</string>
+    <string name="label_average_program_profile">Average</string>
+    <string name="label_number_accumulated_credits_program_profile">Accumulated Courses</string>
+    <string name="label_number_registered_credits_program_profile">Registered Courses</string>
+    <string name="label_number_completed_courses_program_profile">Completed Courses</string>
+    <string name="label_number_failed_courses_program_profile">Failed Courses</string>
+    <string name="label_number_equivalent_courses_program_profile">Equivalent Courses</string>
+    <string name="label_status_program_profile">Status</string>
 
     <!-- More -->
     <string name="more_item_label_faq">FAQ</string>
@@ -71,4 +80,5 @@
     <!-- About -->
     <string name="applets_about">ÉTSMobile was conceived by the ApplETS scientific club from the École de technologie supérieure.\n\nApplets is, most importantly, a gathering of students who share a typical enthusiasm for the field of telecommunications and mobile applications.
         The mission of ApplETS is to train students in mobile development and promote the production of mobile applications within the student community.\n\nFor more information, please consult our website : http://clubapplets.ca</string>
+    <string name="msg_no_seances">No class period for this semester</string>
 </resources>

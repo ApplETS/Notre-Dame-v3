@@ -1,8 +1,8 @@
 package ca.etsmtl.applets.etsmobile.presentation
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
@@ -57,7 +57,7 @@ class GradesViewModelTest {
         gradesViewModel.refresh()
 
         val observer: Observer<Boolean> = mock()
-        gradesViewModel.getLoading().observeForever(observer)
+        gradesViewModel.loading.observeForever(observer)
         verify(observer).onChanged(true)
 
         liveData.postValue(Resource.error("test error", null))
@@ -95,7 +95,7 @@ class GradesViewModelTest {
         gradesViewModel.refresh()
 
         val observer: Observer<Boolean> = mock()
-        gradesViewModel.getShowEmptyView().observeForever(observer)
+        gradesViewModel.showEmptyView.observeForever(observer)
 
         liveData.value = Resource.success(emptyMap())
         verify(observer).onChanged(true)

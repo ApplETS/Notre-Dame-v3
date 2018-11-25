@@ -1,8 +1,8 @@
 package ca.etsmtl.applets.repository.data.db.dao.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Query
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 
 /**

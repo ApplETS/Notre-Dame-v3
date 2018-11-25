@@ -1,14 +1,14 @@
 package ca.etsmtl.applets.etsmobile.presentation.grades
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
@@ -18,7 +18,7 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import dagger.android.support.DaggerFragment
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
+import jp.wasabeef.recyclerview.animators.FadeInDownAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
@@ -85,7 +85,7 @@ class GradesFragment : DaggerFragment() {
         recyclerViewCoursesGrades.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW).apply {
             justifyContent = JustifyContent.FLEX_START
         }
-        recyclerViewCoursesGrades.itemAnimator = FadeInUpAnimator()
+        recyclerViewCoursesGrades.itemAnimator = FadeInDownAnimator()
     }
 
     private fun subscribeUI() {
@@ -93,12 +93,12 @@ class GradesFragment : DaggerFragment() {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
 
-        gradesViewModel.getShowEmptyView().observe(this, Observer {
+        gradesViewModel.showEmptyView.observe(this, Observer {
             recyclerViewCoursesGrades.show(it == false)
             emptyViewCoursesGrades.show(it == true)
         })
 
-        gradesViewModel.getLoading().observe(this, Observer {
+        gradesViewModel.loading.observe(this, Observer {
             it?.let { swipeRefreshLayoutCoursesGrades.isRefreshing = it }
         })
 

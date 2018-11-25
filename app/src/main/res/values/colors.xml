@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">@color/etsRougeClair</color>
     <color name="colorPrimaryDark">@color/etsRougeFonce</color>
     <color name="colorAccent">@color/etsRougeClair</color>
     <color name="colorToolbarText">@android:color/white</color>
 
-
-    // Couleurs de l'École de technologie supérieure
+    <!-- Couleurs de l'École de technologie supérieure -->
     <color name="etsRougeClair">#EF3E45</color>
     <color name="etsRougeFonce">#BF311A</color>
     <color name="etsGrisFonce">#636467</color>
@@ -20,4 +19,6 @@
     <color name="passingGradeColor">#FFF176</color>
     <color name="goodGradeMinColor">#AED581</color>
     <color name="goodGradeMaxColor">#43A047</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/white</color>
 </resources>

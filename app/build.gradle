@@ -10,6 +10,8 @@ apply plugin: "org.jlleitschuh.gradle.ktlint"
 
 apply plugin: 'io.fabric'
 
+apply plugin: "androidx.navigation.safeargs"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -18,7 +20,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -61,17 +63,19 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Support libraries
-    implementation "com.android.support:appcompat-v7:$support"
-    implementation "com.android.support:design:$support"
-    implementation "com.android.support:support-v4:$support"
-    implementation "com.android.support:cardview-v7:$support"
-    implementation "com.android.support:recyclerview-v7:$support"
-    implementation "com.android.support:customtabs:$support"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
+    implementation "androidx.appcompat:appcompat:$support"
+    implementation "com.google.android.material:material:$support"
+    implementation "androidx.legacy:legacy-support-v4:$support"
+    implementation "androidx.cardview:cardview:$support"
+    implementation "androidx.recyclerview:recyclerview:$support"
+    implementation "androidx.browser:browser:$support"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
 
     // Architecture components
-    implementation "android.arch.lifecycle:extensions:$lifecycle"
-    kapt "android.arch.lifecycle:compiler:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -82,18 +86,19 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testImplementation "android.arch.core:core-testing:$lifecycle"
+    testImplementation "androidx.arch.core:core-testing:$lifecycle"
     testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation "org.mockito:mockito-inline:$mockito_inline"
+    androidTestImplementation "android.arch.navigation:navigation-testing:$navigation"
 
     // Android Testing Support Library's runner and rules
-    androidTestImplementation "com.android.support.test:runner:${astl}"
-    androidTestImplementation "com.android.support.test:rules:${astl}"
+    androidTestImplementation "androidx.test:runner:$test"
+    androidTestImplementation "androidx.test:rules:$test"
 
     // Espresso UI Testing
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espresso}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espresso}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espresso}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso"
     androidTestImplementation "org.mockito:mockito-core:${mockito}"
 
     // Glide

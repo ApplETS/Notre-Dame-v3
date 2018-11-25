@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.etsmobile.util
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 
 /**
  * Created by Sonphil on 03-08-18.

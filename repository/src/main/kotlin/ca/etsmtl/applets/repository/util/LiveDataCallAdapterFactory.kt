@@ -17,7 +17,7 @@
 
 package ca.etsmtl.applets.repository.util
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

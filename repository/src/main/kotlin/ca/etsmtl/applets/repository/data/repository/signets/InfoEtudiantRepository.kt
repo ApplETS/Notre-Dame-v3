@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.repository.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
@@ -32,8 +32,8 @@ class InfoEtudiantRepository @Inject constructor(
      * Returns the user's information
      *
      * @param userCredentials The user's credentials
-     * @param shouldFetch shouldFetch This function is called to determine whether the data should
-     * be fetched rom the network or only from the DB
+     * @param shouldFetch This function is called to determine whether the data should
+     * be fetched from the network or only from the DB
      */
     fun getInfoEtudiant(
         userCredentials: SignetsUserCredentials,

@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.db.entity.signets
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class SeanceEntity(
@@ -13,5 +13,6 @@ data class SeanceEntity(
     var descriptionActivite: String,
     var libelleCours: String,
     var sigleCours: String,
+    var groupe: String,
     var session: String
 )

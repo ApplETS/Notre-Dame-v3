@@ -10,7 +10,7 @@ data class ListeDesSeancesRequestBody(
     /** The student's password **/
     val motPasse: String,
     /** The group number. Can be empty **/
-    val pCoursGroup: String,
+    val pCoursGroupe: String,
     /** The session **/
     val pSession: String,
     /** The starting date **/

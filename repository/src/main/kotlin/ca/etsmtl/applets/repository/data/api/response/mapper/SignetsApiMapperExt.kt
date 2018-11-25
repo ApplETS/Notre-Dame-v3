@@ -13,6 +13,8 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesElement
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeJoursRemplaces
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeProgrammes
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiProgramme
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSeance
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSession
 import ca.etsmtl.applets.repository.data.db.entity.signets.ActiviteEntity
@@ -22,12 +24,13 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.JourRemplaceEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.util.dateToUnix
+import ca.etsmtl.applets.repository.util.dateToUnixms
 import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
@@ -83,6 +86,10 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
         this.masculin
 )
 
+fun formatter(): NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+    maximumFractionDigits = 1
+}
+
 fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     val note = this.note.replaceCommaAndParseToDouble()
     val moyenne = this.moyenne.replaceCommaAndParseToDouble()
@@ -107,7 +114,7 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             cours.session,
             this.nom,
             this.equipe,
-            dateCible.toLocaleDate(),
+            dateCible.apply { if (isNotBlank()) { toLocaleDate() } },
             formatter.format(note),
             formatter.format(corrigeSur.replaceCommaAndParseToFloat()),
             formatter.format(notePourcentage),
@@ -179,6 +186,25 @@ fun ApiListeJoursRemplaces.toJourRemplaceEntities(session: Session): List<JourRe
     return null
 }
 
+fun ApiProgramme.toProgrammeEntity() = ProgrammeEntity(
+        code,
+        libelle,
+        profil,
+        statut.capitalize(),
+        sessionDebut,
+        sessionFin,
+        moyenne,
+        nbEquivalences,
+        nbCrsReussis,
+        nbCrsEchoues,
+        nbCreditsInscrits,
+        nbCreditsCompletes,
+        nbCreditsPotentiels,
+        nbCreditsRecherche
+)
+
+fun ApiListeProgrammes.toProgrammesEntities(): List<ProgrammeEntity> = liste.map { it.toProgrammeEntity() }
+
 fun ApiSeance.toSeanceEntity(session: String) = SeanceEntity(
         dateDebut.msDateToUnix(),
         dateFin.msDateToUnix(),
@@ -187,6 +213,7 @@ fun ApiSeance.toSeanceEntity(session: String) = SeanceEntity(
         descriptionActivite,
         libelleCours,
         coursGroupe.substringBefore("-"),
+    coursGroupe.substringAfter("-"),
         session
 )
 
@@ -195,21 +222,17 @@ fun ApiListeDesSeances.toSeancesEntities(session: String): List<SeanceEntity> = 
 fun ApiSession.toSessionEntity() = SessionEntity(
         abrege,
         auLong,
-        dateDebut.dateToUnix("yyyy-MM-dd"),
-        dateFin.dateToUnix("yyyy-MM-dd"),
-        dateFinCours.dateToUnix("yyyy-MM-dd"),
-        dateDebutChemiNot.dateToUnix("yyyy-MM-dd"),
-        dateFinChemiNot.dateToUnix("yyyy-MM-dd"),
-        dateDebutAnnulationAvecRemboursement.dateToUnix("yyyy-MM-dd"),
-        dateFinAnnulationAvecRemboursement.dateToUnix("yyyy-MM-dd"),
-        dateFinAnnulationAvecRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
-        dateDebutAnnulationSansRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
-        dateFinAnnulationSansRemboursementNouveauxEtudiants.dateToUnix("yyyy-MM-dd"),
-        dateLimitePourAnnulerASEQ.dateToUnix("yyyy-MM-dd")
+        dateDebut.dateToUnixms("yyyy-MM-dd") ,
+        dateFin.dateToUnixms("yyyy-MM-dd") ,
+        dateFinCours.dateToUnixms("yyyy-MM-dd"),
+        dateDebutChemiNot.dateToUnixms("yyyy-MM-dd"),
+        dateFinChemiNot.dateToUnixms("yyyy-MM-dd"),
+        dateDebutAnnulationAvecRemboursement.dateToUnixms("yyyy-MM-dd"),
+        dateFinAnnulationAvecRemboursement.dateToUnixms("yyyy-MM-dd"),
+        dateFinAnnulationAvecRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
+        dateDebutAnnulationSansRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
+        dateFinAnnulationSansRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
+        dateLimitePourAnnulerASEQ.dateToUnixms("yyyy-MM-dd")
 )
 
 fun ApiListeDeSessions.toSessionEntities(): List<SessionEntity> = liste.map { it.toSessionEntity() }
-
-fun formatter(): NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
-    maximumFractionDigits = 1
-}

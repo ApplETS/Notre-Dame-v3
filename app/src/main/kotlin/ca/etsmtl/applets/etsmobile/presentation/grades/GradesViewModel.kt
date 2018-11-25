@@ -1,17 +1,17 @@
 package ca.etsmtl.applets.etsmobile.presentation.grades
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.OnLifecycleEvent
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
-import ca.etsmtl.applets.etsmobile.R
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
+import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
 import javax.inject.Inject
@@ -29,33 +29,21 @@ class GradesViewModel @Inject constructor(
     }
     private var coursLiveData: LiveData<Resource<Map<String, List<Cours>>>>? = null
     val errorMessage: LiveData<Event<String?>> by lazy {
-        Transformations.map(coursMediatorLiveData) {
-            if (it.status == Resource.Status.ERROR) {
-                when {
-                    !app.isDeviceConnected() -> {
-                        Event(app.getString(R.string.error_no_internet_connection))
-                    }
-                    else -> Event(app.getString(R.string.error))
-                }
-            } else {
-                Event(it.message)
-            }
-        }
+        Transformations.map(coursMediatorLiveData) { it.getGenericErrorMessage(app) }
     }
 
-    val cours: LiveData<Map<String, List<Cours>>> = Transformations.map(coursMediatorLiveData) {
-        it.data
-    }
+    private val _cours: MutableLiveData<Map<String, List<Cours>>> = MutableLiveData()
+    val cours: LiveData<Map<String, List<Cours>>> = _cours
 
-    fun getLoading(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
+    val loading: LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         it.status == Resource.Status.LOADING
     }
 
     /**
-     * @return A [LiveData] containing the value true if the empty view should be shown instead of
+     * A [LiveData] containing the value true if the empty view should be shown instead of
      * the list
      */
-    fun getShowEmptyView(): LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
+    val showEmptyView: LiveData<Boolean> = Transformations.map(coursMediatorLiveData) {
         (it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true))
     }
 
@@ -63,6 +51,7 @@ class GradesViewModel @Inject constructor(
         coursLiveData = fetchGradesCoursesUseCase().apply {
             coursMediatorLiveData.addSource(this) {
                 coursMediatorLiveData.value = it
+                _cours.value = it.data
             }
         }
     }

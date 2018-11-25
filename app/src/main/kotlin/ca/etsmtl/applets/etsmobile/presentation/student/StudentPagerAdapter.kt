@@ -1,25 +1,24 @@
 package ca.etsmtl.applets.etsmobile.presentation.student
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment
 
-class StudentPagerAdapter : FragmentPagerAdapter {
+class StudentPagerAdapter(
+    context: Context,
+    fragmentManager: FragmentManager
+) : FragmentPagerAdapter(fragmentManager) {
 
     companion object {
         const val GRADES = 0
         const val PROFILE = 1
     }
 
-    private var context: Context
-
-    constructor(context: Context, fragmentManager: FragmentManager) : super(fragmentManager) {
-        this.context = context.applicationContext
-    }
+    private var context: Context = context.applicationContext
 
     override fun getCount() = 2
 

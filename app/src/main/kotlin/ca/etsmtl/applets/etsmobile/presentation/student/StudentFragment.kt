@@ -1,15 +1,17 @@
 package ca.etsmtl.applets.etsmobile.presentation.student
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.main.MainFragment
-import kotlinx.android.synthetic.main.fragment_student.tabsStudent
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.util.show
+import com.google.android.material.tabs.TabLayout
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.tabLayout
 import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
-import kotlinx.android.synthetic.main.include_toolbar.toolbar
 
 /**
  * This fragment contains a [TabLayout] and a [ViewPager] that let the user switch between
@@ -18,7 +20,10 @@ import kotlinx.android.synthetic.main.include_toolbar.toolbar
  * Created by Sonphil on 24-02-18.
  */
 
-class StudentFragment : MainFragment() {
+class StudentFragment : DaggerFragment() {
+
+    private val showTabsHandler = Handler()
+    private var showTabsRunnable: Runnable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,12 +37,25 @@ class StudentFragment : MainFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        context?.let {
-            viewPagerStudent.adapter = StudentPagerAdapter(it, childFragmentManager)
-            tabsStudent.setupWithViewPager(viewPagerStudent)
-        }
+        context?.let { context ->
+            (activity as? MainActivity)?.tabLayout?.let {
+                viewPagerStudent.adapter = StudentPagerAdapter(context, childFragmentManager)
+                it.setupWithViewPager(viewPagerStudent)
 
-        toolbar.setTitle(R.string.title_student)
+                showTabsRunnable = Runnable { it.show(true) }
+                showTabsHandler.postDelayed(
+                        showTabsRunnable,
+                        resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+                )
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        showTabsHandler.removeCallbacks(showTabsRunnable)
+        (activity as? MainActivity)?.tabLayout?.show(false)
     }
 
     companion object {

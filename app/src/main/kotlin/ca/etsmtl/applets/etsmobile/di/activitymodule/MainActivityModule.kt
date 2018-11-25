@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.etsmobile.di.activitymodule
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.di.ViewModelKey
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
@@ -8,6 +8,8 @@ import ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreViewModel
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileViewModel
+import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment
+import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleViewModel
 import ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment
 import dagger.Binds
 import dagger.Module
@@ -24,6 +26,16 @@ interface MainActivityModule {
 
     @ContributesAndroidInjector
     fun contributeGradesFragment(): GradesFragment
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ScheduleViewModel::class)
+    fun bindScheduleViewModel(
+        scheduleViewModel: ScheduleViewModel
+    ): ViewModel
+
+    @ContributesAndroidInjector
+    fun contributeScheduleFragment(): ScheduleFragment
 
     @Binds
     @IntoMap

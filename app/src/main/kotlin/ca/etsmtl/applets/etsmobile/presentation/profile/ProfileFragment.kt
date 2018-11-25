@@ -1,14 +1,15 @@
 package ca.etsmtl.applets.etsmobile.presentation.profile
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.repository.data.model.Etudiant
+import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.toast
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.recyclerViewProfile
 import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutProfile
@@ -27,23 +28,18 @@ class ProfileFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    val adapter: ProfileAdapter by lazy {
-        ProfileAdapter()
-    }
+    private val adapter = ProfileAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_profile, container, false)
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
 
-        if (isVisibleToUser) {
+        if (isVisibleToUser && view != null) {
             setUpSwipeRefresh()
             setUpRecyclerView()
             subscribeUI()
@@ -61,11 +57,14 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        profileViewModel.etudiant.observe(this, Observer<Etudiant> {
-            it?.let { adapter.setEtudiant(it) }
+        profileViewModel.profile.observe(this, Observer {
+            it?.let { adapter.items = it }
         })
         profileViewModel.loading.observe(this, Observer<Boolean> {
             it?.let { swipeRefreshLayoutProfile.isRefreshing = it }
+        })
+        profileViewModel.errorMessage.observe(this, EventObserver { errorMessage ->
+            errorMessage?.let { it -> context?.toast(it) }
         })
         this.lifecycle.addObserver(profileViewModel)
     }

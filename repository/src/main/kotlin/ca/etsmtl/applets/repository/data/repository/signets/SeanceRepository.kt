@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.repository.signets
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
 import ca.etsmtl.applets.repository.data.api.SignetsApi
@@ -16,6 +16,8 @@ import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -72,14 +74,15 @@ class SeanceRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>> {
+                val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 return api.listeDesSeances(
                         ListeDesSeancesRequestBody(
                                 userCredentials.codeAccesUniversel,
                                 userCredentials.motPasse,
                                 cours?.sigle ?: "",
                                 session.abrege,
-                                session.dateDebut.toString(),
-                                session.dateFin.toString()
+                            formatter.format(session.dateDebut),
+                            formatter.format(session.dateFin)
                         )
                 )
             }

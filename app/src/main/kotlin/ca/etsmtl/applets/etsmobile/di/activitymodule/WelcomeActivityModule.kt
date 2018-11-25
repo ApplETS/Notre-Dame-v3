@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.etsmobile.di.activitymodule
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.di.ViewModelKey
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel

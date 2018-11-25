@@ -5,17 +5,19 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.JourRemplaceEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Etudiant
 import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.HoraireExamenFinal
 import ca.etsmtl.applets.repository.data.model.JourRemplace
+import ca.etsmtl.applets.repository.data.model.Programme
 import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.data.model.Session
+import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import java.util.Date
 
 /**
@@ -86,6 +88,25 @@ fun JourRemplaceEntity.toJourRemplace() = JourRemplace(
 
 fun List<JourRemplaceEntity>.toJoursRemplaces() = map { it.toJourRemplace() }
 
+fun ProgrammeEntity.toProgramme() = Programme(
+        code,
+        libelle,
+        profil,
+        statut,
+        sessionDebut,
+        sessionFin,
+        moyenne,
+        nbEquivalences,
+        nbCrsReussis,
+        nbCrsEchoues,
+        nbCreditsInscrits,
+        nbCreditsCompletes,
+        nbCreditsPotentiels,
+        nbCreditsRecherche
+)
+
+fun List<ProgrammeEntity>.toProgrammes(): List<Programme> = map { it.toProgramme() }
+
 fun SeanceEntity.toSeance() = Seance(
         Date(dateDebut),
         Date(dateFin),
@@ -94,6 +115,7 @@ fun SeanceEntity.toSeance() = Seance(
         this.descriptionActivite,
         this.libelleCours,
         this.sigleCours,
+        this.groupe,
         this.session
 )
 

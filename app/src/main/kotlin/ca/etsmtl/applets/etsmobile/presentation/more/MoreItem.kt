@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 
 /**
  * Created by Sonphil on 19-04-18.
