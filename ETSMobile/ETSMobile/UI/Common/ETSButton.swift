@@ -49,7 +49,7 @@ import UIKit
         self.style()
     }
 
-    private func style() {
+    public func style() {
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.cornerRadius = 8.0
         self.layer.borderWidth = 0.0
@@ -93,4 +93,5 @@ import UIKit
         }
         self.loadingIndicator?.isHidden = true
     }
+    
 }

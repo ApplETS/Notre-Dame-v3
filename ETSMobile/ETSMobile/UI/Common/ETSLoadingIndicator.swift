@@ -62,7 +62,9 @@ import UIKit
             animationGroup.beginTime = Double(i) * ETSLoadingIndicator.speed / 2 + 0.01
             animationGroup.animations = [animation]
             animationGroup.duration = ETSLoadingIndicator.delay
-            circle.add(animationGroup, forKey: "move")
+            circle.add(animationGroup, forKey: "position")
         }
     }
+    
+
 }

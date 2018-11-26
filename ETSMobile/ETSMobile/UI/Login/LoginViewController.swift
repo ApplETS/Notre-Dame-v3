@@ -60,6 +60,10 @@ class LoginViewController: UIViewController {
         // TODO : Send server request for authentification
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // enables tapping outside fields to dismiss keyboard
@@ -117,6 +121,7 @@ class LoginViewController: UIViewController {
         forgotPasswordLink!.setTitle(NSLocalizedString("forgotPassword", comment: "Forgot password"), for: .normal)
 
         self.valid = false
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
     @IBAction func onPasswordForgot(_ sender: UIButton) {
@@ -171,7 +176,11 @@ class LoginViewController: UIViewController {
         }
 
     }
-
+    
+    @objc func appMovedToForeground() {
+        print("app moved to foreground")
+        loginButton.style()
+    }
     /*
     // MARK: - Navigation
 
