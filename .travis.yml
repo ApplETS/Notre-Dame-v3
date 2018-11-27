@@ -8,20 +8,20 @@ matrix:
         - tools
         - platform-tools
 
-        # The BuildTools version used by the project
+         # The BuildTools version used by the project
         - build-tools-28.0.2
 
-        # The SDK version used to compile the project
+         # The SDK version used to compile the project
         - android-28
         - android-21
 
-        # Additional components
+         # Additional components
         - extra-google-google_play_services
         - extra-google-m2repository
         - extra-android-m2repository
         - addon-google_apis-google-28
 
-        # System images to run emulators
+         # System images to run emulators
         - sys-img-armeabi-v7a-android-28
         - sys-img-armeabi-v7a-android-21
     before_install:
@@ -31,22 +31,22 @@ matrix:
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
     - adb shell input keyevent 82 &
-
     script:
-      - ./android/gradlew assembleDebug -PdisablePreDex
-      - ./android/gradlew ktlintCheck
-      - ./android/gradlew test
-      - ./android/gradlew connectedAndroidTest --info
-        
+    - "./android/gradlew assembleDebug -PdisablePreDex"
+    - "./android/gradlew ktlintCheck"
+    - "./android/gradlew test"
+    - "./android/gradlew connectedAndroidTest --info" 
+      
   - os: osx
     osx_image: xcode10
     language: swift
-    xcode_project: ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj
-    xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
-    before_script:
-    - gem install xcpretty
-    script:
-    - xcodebuild clean -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
-    - xcodebuild build -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
-    notifications:
-      email: false
+    xcode_project: "../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj"
+    xcode_scheme: "../Notre-Dame/ios/ETS-mobile/ETS-mobile"
+
+notifications:
+  email: false
+  slack:
+    rooms:
+      secure: dgky/9nyNFgtrSpM91vTws6YB8STn9n7Lwo3JjzWuEjy5SFTap6M0ZT8c2k2YQ0mSLQ3pnv79wvf5b/AqC5MZKtnG71rc6DzRHq1HJqjNYPk5So7EZaTfrcF2wjqu/GA4eeK5bNU5tqc5J5Z6Sv1JfQNFYLKTGqg9LSKXoY9qu2lseiJVaUClxB6RL9/0nxbD+qV67+smOJ3hTwLBE3HXnu7CgU0fhEZH+tGPLqSNZa1bGGXFXNcjkUqjbikxFQv3pMdDSwgrCMzL0gHSZlGD/fN9cdCKfm8sLptqMlNwExQfyL5SwnM8NE89bkum1T5ssq0ykSl8f9ghAV+9DPSbeL1/5TMtIA2NaIvhwPv8SMcfVMoSpioYlrMnx6Xi3AoERbEU+tpBuIK2CH+vJIemyc4SXcq8RFOSdO572mU4OoOg7+8o02NtQmSZhiFqcJPBXax5jrhlBygHMmsTmdum9kKVMdZL4Fqqct57TzA3xglCyA8liwHb6WHXeicWYElG+gYu77rdTuco6wQIqzxkfKYgSKsVwTWWByOmkzadR9Q7FrpkJB8LBCdVbcrBukGZbTfvgC7EWtLl3U9/qHoIMLmIXSI9hAQo5k150cJzKKNrZ4Po/BeIYThr1PJUbCxoEaqU+BB0nLuTcF8HfgEcHqNg2B41++cJ+3KJM8SkVY=
+      secure: YeNHiy7jy16B40m0yUpmMzTnNu5zou0iIJ3+XWNoj+6qWb/ZWmwub1LpVl8MKrJouz/RzXGrAhhH21FIPH7RpMwZxHZLXZ8Lap0sIJZr0r2FjryhVhxB5qXxj5HO5jpGhW8MbvtKJkYaJjdk7Kz/90G4QfsRrnaZZVBjeYyAGnp+aAviKDvUoVBbB8PhURiOOVn4pac64ccGTJ/pNjnh6GUn/6Ac9bJh/Yf4sIaiKivV2LWgf3a1E4IR8IxknkcAlAMJAVpmsgGV2MBmO5ZoPr1G+5N0fWZDFkLntYgV/kkeDX0hLjF5zerGfAmOumeyqALDf0rFGWM4XUilpEn2UoZFGCJJVHzgkAZ9Xe4kuPm+LR/icNeDjjki6ay8hoIsshzuoOw0Dzm1sy+mJkowfGOY6yiihG0EuX3DopVc/qqwVWI+CJPUQbO2t2s7Wb2ihDpCtJWh3GRAzNPzPwtgsqjC3M4IOMSRtL3y+3HGYtWB2FJrso7vJlP8wBcD/V4Qa0d/87KTflZF0PU+3+TIeomJaJA5U+zGJyPjcKJzSce3qYfAgtqgnA1XG/LlkVYg7NmOAdfrOdgbVcBEUBTVJjUHarmTcsdx3I1wzuA+fUx4JdPy8kpiLd2NheczzqJKYDM3j/uzeg4hEf7AZFlwU9qUdKrOaTbl1n03Quh77Sg=
+    on_success: change           
