@@ -43,7 +43,6 @@ matrix:
     language: swift
     xcode_project: ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj
     xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
-    xcode_sdk: iphonesimulator11.3
     before_script:
     - gem install xcpretty
     script:
