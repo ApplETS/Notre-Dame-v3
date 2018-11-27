@@ -33,21 +33,21 @@ matrix:
     - adb shell input keyevent 82 &
 
     script:
-      - ./gradlew assembleDebug -PdisablePreDex
-      - ./gradlew ktlintCheck
-      - ./gradlew test
-      - ./gradlew connectedAndroidTest --info
+      - ./android/gradlew assembleDebug -PdisablePreDex
+      - ./android/gradlew ktlintCheck
+      - ./android/gradlew test
+      - ./android/gradlew connectedAndroidTest --info
         
   - os: osx
     osx_image: xcode10
     language: swift
-    xcode_project: ../Notre-Dame-iOS/ETS-mobile/ETS-mobile.xcodeproj
-    xcode_scheme: ../Notre-Dame-iOS/ETS-mobile/ETS-mobile
+    xcode_project: ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj
+    xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
     xcode_sdk: iphonesimulator11.3
     before_script:
     - gem install xcpretty
     script:
-    - xcodebuild clean -project ../Notre-Dame-iOS/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
-    - xcodebuild build -project ../Notre-Dame-iOS/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
+    - xcodebuild clean -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
+    - xcodebuild build -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
     notifications:
       email: false
