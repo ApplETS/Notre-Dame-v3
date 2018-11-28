@@ -144,7 +144,7 @@ dependencies {
     // FlexboxLayout
     implementation "com.google.android:flexbox:$flexbox"
 
-    implementation project(':repository')
+    implementation project(':android:repository')
 }
 
 apply plugin: 'com.google.gms.google-services'
