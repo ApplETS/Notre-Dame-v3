@@ -1,3 +1,13 @@
+cache:
+- bundler
+- cocoapods
+- directories:
+  - "$HOME/android-sdk-dl"
+  - "$HOME/android-sdk"
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/.android/build-cache"
+
 matrix:
   include:
   - language: android
