@@ -1,0 +1,40 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+listeHoraireExamensFinaux",
+        "listeHoraire": [
+            {
+                "sigle": "GPE450",
+                "groupe": "01",
+                "dateExamen": "2018-04-13",
+                "heureDebut": "13:30",
+                "heureFin": "16:30",
+                "local": "A-1302"
+            },
+            {
+                "sigle": "LOG530",
+                "groupe": "01",
+                "dateExamen": "2018-04-14",
+                "heureDebut": "13:30",
+                "heureFin": "16:30",
+                "local": "A-4520"
+            },
+            {
+                "sigle": "LOG710",
+                "groupe": "01",
+                "dateExamen": "2018-04-13",
+                "heureDebut": "18:00",
+                "heureFin": "21:00",
+                "local": "A-2330"
+            },
+            {
+                "sigle": "PHY332",
+                "groupe": "08",
+                "dateExamen": "2018-04-17",
+                "heureDebut": "13:30",
+                "heureFin": "16:30",
+                "local": "B-1506"
+            }
+        ],
+        "erreur": ""
+    }
+}

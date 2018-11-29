@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="more_items_icons">
+        <item>@drawable/ic_mini_logo_applets</item>
+        <item>@drawable/ic_exit_to_app_black_24dp</item>
+    </integer-array>
+
+    <string-array name="more_items_labels">
+        <item>@string/more_item_label_about_applets</item>
+        <item>@string/more_item_label_log_out</item>
+    </string-array>
+</resources>

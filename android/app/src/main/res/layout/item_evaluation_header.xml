@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:constraintlayout="http://schemas.android.com/apk/res-auto"
+    xmlns:materialprogressview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/material_component_lists_two_line_text_size"
+        constraintlayout:layout_constraintBottom_toTopOf="@+id/tvWeight"
+        constraintlayout:layout_constraintStart_toStartOf="@+id/tvWeight"
+        constraintlayout:layout_constraintTop_toTopOf="parent"
+        constraintlayout:layout_constraintVertical_chainStyle="packed"
+        tools:text="Intra" />
+
+    <TextView
+        android:id="@+id/tvWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
+        constraintlayout:layout_constraintBottom_toTopOf="@+id/tvIgnoredEvaluation"
+        constraintlayout:layout_constraintStart_toEndOf="@+id/progressViewGrade"
+        constraintlayout:layout_constraintTop_toBottomOf="@+id/tvName"
+        tools:text="@string/text_weight" />
+
+    <TextView
+        android:id="@+id/tvGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
+        constraintlayout:layout_constraintBottom_toBottomOf="@+id/progressViewGrade"
+        constraintlayout:layout_constraintEnd_toEndOf="@+id/progressViewGrade"
+        constraintlayout:layout_constraintStart_toStartOf="@+id/progressViewGrade"
+        constraintlayout:layout_constraintTop_toTopOf="@+id/progressViewGrade"
+        tools:text="@string/text_grade_in_percentage" />
+
+    <com.moos.library.CircleProgressView
+        android:id="@+id/progressViewGrade"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="16dp"
+        constraintlayout:layout_constraintBottom_toBottomOf="parent"
+        constraintlayout:layout_constraintStart_toStartOf="parent"
+        constraintlayout:layout_constraintTop_toTopOf="parent"
+        constraintlayout:track_width="8dp"
+        materialprogressview:circleBroken="false"
+        materialprogressview:end_color="@color/colorPrimary"
+        materialprogressview:end_progress="100"
+        materialprogressview:isFilled="false"
+        materialprogressview:isTracked="true"
+        materialprogressview:progressTextVisibility="false"
+        materialprogressview:start_color="@color/colorPrimary"
+        materialprogressview:start_progress="0" />
+
+    <TextView
+        android:id="@+id/tvIgnoredEvaluation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_ignored_evaluation"
+        android:textColor="@color/colorPrimary"
+        constraintlayout:layout_constraintBottom_toBottomOf="parent"
+        constraintlayout:layout_constraintStart_toStartOf="@+id/tvWeight"
+        constraintlayout:layout_constraintTop_toBottomOf="@+id/tvWeight" />
+
+    <ImageButton
+        android:id="@+id/btnIgnoredEvaluation"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_info_white_24dp"
+        android:tint="@color/colorPrimary"
+        constraintlayout:layout_constraintBottom_toBottomOf="@+id/tvIgnoredEvaluation"
+        constraintlayout:layout_constraintStart_toEndOf="@+id/tvIgnoredEvaluation"
+        constraintlayout:layout_constraintTop_toTopOf="@+id/tvIgnoredEvaluation" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_keyboard_arrow_down_white_24dp"
+        android:tint="@color/colorAccent"
+        constraintlayout:layout_constraintBottom_toBottomOf="parent"
+        constraintlayout:layout_constraintEnd_toEndOf="parent"
+        constraintlayout:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
