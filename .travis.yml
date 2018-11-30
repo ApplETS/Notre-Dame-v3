@@ -51,8 +51,14 @@ matrix:
     osx_image: xcode10
     language: swift
     xcode_project: ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj
-    xcode_scheme: ../Notre-Dame-iOS/ETS-mobile/ETS-mobile
-        
+    xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
+    xcode_sdk : iphonesimulator11.3
+    before_script:
+    - gem install xcpretty
+    script:
+    - xcodebuild clean -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
+    - xcodebuild build -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
+    
 notifications:
   slack:
     rooms:
