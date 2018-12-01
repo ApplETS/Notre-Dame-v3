@@ -1,12 +1,12 @@
 package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
 import android.content.Context
-import androidx.appcompat.app.AlertDialog
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.etsmobile.util.rotate
 import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
-import ca.etsmtl.applets.etsmobile.util.show
 import ca.etsmtl.applets.repository.data.model.Evaluation
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.ExpandableGroup
@@ -78,8 +78,8 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                 }
             }
 
-            tvIgnoredEvaluation.show(evaluation.ignoreDuCalcul)
-            btnIgnoredEvaluation.show(evaluation.ignoreDuCalcul)
+            tvIgnoredEvaluation.isVisible = evaluation.ignoreDuCalcul
+            btnIgnoredEvaluation.isVisible = evaluation.ignoreDuCalcul
             if (evaluation.ignoreDuCalcul) {
                 with (View.OnClickListener {
                     showIgnoredEvaluationDialog(tvIgnoredEvaluation.context)

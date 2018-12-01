@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.util.show
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.tabLayout
@@ -42,7 +42,7 @@ class StudentFragment : DaggerFragment() {
                 viewPagerStudent.adapter = StudentPagerAdapter(context, childFragmentManager)
                 it.setupWithViewPager(viewPagerStudent)
 
-                showTabsRunnable = Runnable { it.show(true) }
+                showTabsRunnable = Runnable { it.isVisible = true }
                 showTabsHandler.postDelayed(
                         showTabsRunnable,
                         resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
@@ -55,7 +55,7 @@ class StudentFragment : DaggerFragment() {
         super.onDestroyView()
 
         showTabsHandler.removeCallbacks(showTabsRunnable)
-        (activity as? MainActivity)?.tabLayout?.show(false)
+        (activity as? MainActivity)?.tabLayout?.isVisible = false
     }
 
     companion object {

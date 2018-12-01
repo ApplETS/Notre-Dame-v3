@@ -10,7 +10,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
-import ca.etsmtl.applets.etsmobile.util.show
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.repository.data.model.Cours
 import kotlinx.android.synthetic.main.activity_grades_details.containerTvGradesDetailsSubtitle
 import kotlinx.android.synthetic.main.activity_grades_details.toolbar
@@ -114,8 +114,8 @@ class GradesDetailsActivity : BaseActivity() {
 
     override fun onBackPressed() {
         // Don't show the toolbar's content during the shared element transition
-        containerTvGradesDetailsSubtitle.show(false)
-        toolbar.show(false)
+        containerTvGradesDetailsSubtitle.isVisible = false
+        toolbar.isVisible = false
         supportFragmentManager.findFragmentByTag(GradesDetailsFragment.TAG)?.let {
             with (supportFragmentManager.beginTransaction()) {
                 remove(it)

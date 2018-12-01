@@ -12,16 +12,22 @@ import android.view.inputmethod.InputMethodManager
  * Created by Sonphil on 23-06-18.
  */
 
-var View.endX: Float
+inline var View.endX: Float
     get() = x + width
     set(value) {
         x = value - width
     }
 
-var View.endY: Float
+inline var View.endY: Float
     get() = y + height
     set(value) {
         y = value - height
+    }
+
+inline var View.isVisible: Boolean
+    get() = visibility == View.VISIBLE
+    set(value) {
+        visibility = if (value) View.VISIBLE else View.GONE
     }
 
 /**
@@ -41,18 +47,6 @@ fun View.fadeTo(
                     this@fadeTo.visibility = visibility
                 }
             })
-}
-
-/**
- * Shows or hides the view
- *
- * @param show True if the view should be shown or false if the view should be gone
- */
-fun View.show(show: Boolean) {
-    visibility = when {
-        show -> View.VISIBLE
-        else -> View.GONE
-    }
 }
 
 /**

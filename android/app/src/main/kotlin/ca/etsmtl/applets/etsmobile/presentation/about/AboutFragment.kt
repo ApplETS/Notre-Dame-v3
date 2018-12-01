@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.etsmobile.util.open
-import ca.etsmtl.applets.etsmobile.util.show
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
 import kotlinx.android.synthetic.main.fragment_about.btnGithub
@@ -88,7 +88,7 @@ class AboutFragment : Fragment() {
                         }
                     })
         } else {
-            backgroundAbout.show(true)
+            backgroundAbout.isVisible = true
         }
 
         activity?.window?.sharedElementReturnTransition = transitionInflater
@@ -103,7 +103,7 @@ class AboutFragment : Fragment() {
         ViewAnimationUtils.createCircularReveal(revealView, centerX, centerY, 0f, endRadius.toFloat())
                 .apply {
                     duration = 444
-                    revealView.show(true)
+                    revealView.isVisible = true
                     start()
                 }
     }

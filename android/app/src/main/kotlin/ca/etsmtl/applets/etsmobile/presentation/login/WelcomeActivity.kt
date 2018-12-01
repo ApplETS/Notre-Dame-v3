@@ -1,15 +1,15 @@
 package ca.etsmtl.applets.etsmobile.presentation.login
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.show
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_welcome.iVBackground
 import kotlinx.android.synthetic.main.activity_welcome.progressBarWelcome
@@ -45,7 +45,7 @@ class WelcomeActivity : BaseActivity() {
     private fun subscribeUI() {
         with(loginViewModel) {
             showLoading.observe(this@WelcomeActivity, Observer {
-                progressBarWelcome.show(it == true)
+                progressBarWelcome.isVisible = it == true
             })
 
             errorMessage.observe(this@WelcomeActivity, EventObserver {

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.show
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
 import kotlinx.android.synthetic.main.fragment_schedule.recyclerViewSchedule
@@ -62,8 +62,8 @@ class ScheduleFragment : DaggerFragment() {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
         scheduleViewModel.showEmptyView.observe(this, Observer {
-            recyclerViewSchedule.show(!it)
-            emptyViewSchedule.show(it)
+            recyclerViewSchedule.isVisible = !it
+            emptyViewSchedule.isVisible = it
         })
         scheduleViewModel.loading.observe(this, Observer {
             it?.let { swipeRefreshLayoutSchedule.isRefreshing = it }

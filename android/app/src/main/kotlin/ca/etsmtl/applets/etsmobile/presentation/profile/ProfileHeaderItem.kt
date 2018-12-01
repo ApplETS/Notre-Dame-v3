@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.profile
 
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.show
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import kotlinx.android.synthetic.main.item_profile_header.dividerProfile
 import kotlinx.android.synthetic.main.item_profile_header.tvTitleProfile
 
@@ -14,6 +14,6 @@ data class ProfileHeaderItem(val title: String) : ProfileItem<ProfileAdapter.Pro
 
     override fun bind(viewHolder: ProfileAdapter.ProfileViewHolder.HeaderViewHolder, position: Int) {
         viewHolder.tvTitleProfile.text = title
-        viewHolder.dividerProfile.show(position != 0)
+        viewHolder.dividerProfile.isVisible = position != 0
     }
 }

@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.show
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.repository.data.model.Cours
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -93,8 +93,8 @@ class GradesFragment : DaggerFragment() {
         })
 
         gradesViewModel.showEmptyView.observe(this, Observer {
-            recyclerViewCoursesGrades.show(it == false)
-            emptyViewCoursesGrades.show(it == true)
+            recyclerViewCoursesGrades.isVisible = it == false
+            emptyViewCoursesGrades.isVisible = it == true
         })
 
         gradesViewModel.loading.observe(this, Observer {
