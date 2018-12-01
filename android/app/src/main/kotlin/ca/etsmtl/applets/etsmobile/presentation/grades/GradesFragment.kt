@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
-import kotlinx.android.synthetic.main.item_grade_course.tvCourseGrade
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 import javax.inject.Inject
 
@@ -48,7 +47,7 @@ class GradesFragment : DaggerFragment() {
                 this@GradesFragment.activity?.let {
                     GradesDetailsActivity.start(
                             it as AppCompatActivity,
-                            holder.tvCourseGrade,
+                            holder.itemView,
                             holder.tvCourseSigle,
                             cours
                     )

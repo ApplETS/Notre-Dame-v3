@@ -116,6 +116,12 @@ class GradesDetailsActivity : BaseActivity() {
         // Don't show the toolbar's content during the shared element transition
         containerTvGradesDetailsSubtitle.show(false)
         toolbar.show(false)
+        supportFragmentManager.findFragmentByTag(GradesDetailsFragment.TAG)?.let {
+            with (supportFragmentManager.beginTransaction()) {
+                remove(it)
+                commit()
+            }
+        }
 
         super.onBackPressed()
     }
