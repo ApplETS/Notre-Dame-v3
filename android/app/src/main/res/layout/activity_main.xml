@@ -47,7 +47,6 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/design_bottom_navigation_height"
         app:defaultNavHost="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:navGraph="@navigation/nav_graph_main"
@@ -63,5 +62,6 @@
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
         app:labelVisibilityMode="labeled"
+        app:layout_behavior="@string/bottom_view_behavior"
         app:menu="@menu/navigation" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
