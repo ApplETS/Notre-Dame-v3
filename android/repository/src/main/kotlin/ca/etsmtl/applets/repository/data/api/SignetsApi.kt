@@ -6,6 +6,7 @@ import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeCoursInter
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesActivitesEtProfRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesElementsEvaluationRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeDesSeancesRequestBody
+import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeEvaluationCoursRequestBody
 import ca.etsmtl.applets.repository.data.api.requestbody.signets.ListeHoraireExamensFinauxRequestBody
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeCours
@@ -13,6 +14,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeSessions
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesActivitesEtProf
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesElementsEvaluation
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeEvaluationCours
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeJoursRemplaces
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeProgrammes
@@ -136,4 +138,14 @@ interface SignetsApi {
     @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
     @POST("lireHoraireDesSeances")
     fun listeDesSeances(@Body body: ListeDesSeancesRequestBody): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>>
+
+    /**
+     * Fetches course evaluations (feedback given to teachers about their courses)
+     *
+     * @param body The request body
+     * @return A list of course evaluations
+     */
+    @Headers("Accept: application/json", "Content-Type: application/json", "Accept-Charset: UTF-8")
+    @POST("lireEvaluationCours")
+    fun listeEvaluationCours(@Body body: ListeEvaluationCoursRequestBody): LiveData<ApiResponse<ApiSignetsModel<ApiListeEvaluationCours>>>
 }
