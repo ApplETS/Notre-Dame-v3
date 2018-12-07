@@ -164,8 +164,8 @@ fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): Somm
 
 fun ApiEvaluationCours.toEvaluationCoursEntity(session: Session) = EvaluationCoursEntity(
     session.abrege,
-    dateDebutEvaluation,
-    dateFinEvaluation,
+    dateDebutEvaluation.msDateToUnix(),
+    dateFinEvaluation.msDateToUnix(),
     enseignant,
     estComplete,
     groupe,
@@ -177,18 +177,18 @@ fun ApiListeEvaluationCours.toEvaluationCoursEntities(session: Session) = listeA
     it.toEvaluationCoursEntity(session)
 }
 
-fun ApiHoraireExamenFinal.toHoraireExemanFinalEntity(session: Session) = HoraireExamenFinalEntity(
-        this.sigle,
-        this.groupe,
-        this.dateExamen,
-        this.heureDebut,
-        this.heureFin,
-        this.local,
+fun ApiHoraireExamenFinal.toHoraireExamenFinalEntity(session: Session) = HoraireExamenFinalEntity(
+        sigle,
+        groupe,
+        dateExamen,
+        heureDebut,
+        heureFin,
+        local,
         session.abrege
 )
 
 fun ApiListeHoraireExamensFinaux.toHoraireExamensFinauxEntities(session: Session) = listeHoraire?.map {
-    it.toHoraireExemanFinalEntity(session)
+    it.toHoraireExamenFinalEntity(session)
 } ?: emptyList()
 
 fun ApiJourRemplace.toJourRemplaceEntity(session: Session) = JourRemplaceEntity(

@@ -9,8 +9,8 @@ import androidx.room.Entity
 @Entity(primaryKeys = ["session", "enseignant", "groupe", "sigle", "typeEvaluation"])
 data class EvaluationCoursEntity(
     var session: String,
-    var dateDebutEvaluation: String,
-    var dateFinEvaluation: String,
+    var dateDebutEvaluation: Long,
+    var dateFinEvaluation: Long,
     var enseignant: String,
     var estComplete: Boolean = false,
     var groupe: String,
