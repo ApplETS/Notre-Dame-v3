@@ -15,7 +15,7 @@ _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-
 * Minimum SDK Version: 21
 * [Architecture](https://github.com/ApplETS/Notre-Dame/wiki/Architecture-(EN))
   #### Getting started
- * Download and install the latest version of [Androis Studio](https://developer.android.com/studio/)
+ * Download and install the latest version of [Android Studio](https://developer.android.com/studio/)
  * Clone the project
  ```bash
 git clone https://github.com/ApplETS/Notre-Dame.git
