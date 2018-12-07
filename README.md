@@ -11,7 +11,7 @@ This project is the placeholder for the third version of ÉTSMobile, a mobile wh
 _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-Dame/blob/master/README.fr.md)_
 
 ## 🤖 [Android Application](https://github.com/ApplETS/Notre-Dame/tree/master/android)
-* Langage: [Kotlin](https://github.com/ApplETS/Notre-Dame/search?l=kotlin)
+* Language: [Kotlin](https://github.com/ApplETS/Notre-Dame/search?l=kotlin)
 * Minimum SDK Version: 21
   #### Getting started
  * Download and install the latest version of [Androis Studio](https://developer.android.com/studio/)
@@ -22,4 +22,4 @@ git clone https://github.com/ApplETS/Notre-Dame.git
  * Open the entire project in Android Studio
 
 ## 🍎 [iOS Application](https://github.com/ApplETS/Notre-Dame/tree/master/ios)
-* Langage: [Swift](https://github.com/ApplETS/Notre-Dame/search?l=swift)
+* Language: [Swift](https://github.com/ApplETS/Notre-Dame/search?l=swift)
