@@ -13,7 +13,7 @@ Ce projet concrétise la troisième version de l'application mobile ÉTSMobile p
 * Minimum SDK Version: 21
 * [Architecture](https://github.com/ApplETS/Notre-Dame/wiki/Architecture-(FR))
   #### Pour commencer
- * Téléchargez et installez la dernière version d'[Androis Studio](https://developer.android.com/studio/)
+ * Téléchargez et installez la dernière version d'[Android Studio](https://developer.android.com/studio/)
  * Clonez le projet
  ```bash
 git clone https://github.com/ApplETS/Notre-Dame.git
