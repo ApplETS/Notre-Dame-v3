@@ -11,6 +11,7 @@ Ce projet concrétise la troisième version de l'application mobile ÉTSMobile p
 ## 🤖 [Application Android](https://github.com/ApplETS/Notre-Dame/tree/master/android)
 * Langage: [Kotlin](https://github.com/ApplETS/Notre-Dame/search?l=kotlin)
 * Minimum SDK Version: 21
+* [Architecture](https://github.com/ApplETS/Notre-Dame/wiki/Architecture-(FR))
   #### Pour commencer
  * Téléchargez et installez la dernière version d'[Androis Studio](https://developer.android.com/studio/)
  * Clonez le projet
