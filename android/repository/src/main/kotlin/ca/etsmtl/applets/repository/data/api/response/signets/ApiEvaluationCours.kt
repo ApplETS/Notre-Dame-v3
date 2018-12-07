@@ -17,6 +17,7 @@ data class ApiEvaluationCours(
     var groupe: String = "",
     @Json(name = "Sigle")
     var sigle: String = "",
+    /** The evaluation type (e.g. "Cours" or "Calculatrice") **/
     @Json(name = "TypeEvaluation")
     var typeEvaluation: String = ""
 )
