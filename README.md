@@ -13,6 +13,7 @@ _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-
 ## 🤖 [Android Application](https://github.com/ApplETS/Notre-Dame/tree/master/android)
 * Language: [Kotlin](https://github.com/ApplETS/Notre-Dame/search?l=kotlin)
 * Minimum SDK Version: 21
+* [Architecture](https://github.com/ApplETS/Notre-Dame/wiki/Architecture-(EN))
   #### Getting started
  * Download and install the latest version of [Androis Studio](https://developer.android.com/studio/)
  * Clone the project
