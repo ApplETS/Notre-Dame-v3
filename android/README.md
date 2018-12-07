@@ -48,6 +48,12 @@ This project uses a variety of libraries and tools.
 * [Ktlint Gradle](https://github.com/JLLeitschuh/ktlint-gradle) : Wrapper plugin over the ktlint project. Ktlint provides rules that enforce coding standards.
 * And more...
 
+## :construction: [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle)
+The project uses [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle), a wrapper over [ktlint](https://ktlint.github.io/). It's a linter and a formatter for Kotlin code. In order to ensure that the code is well formatted, the CI runs the following command:
+```shell
+$ ./gradlew ktlintCheck
+```
+
 ## ⚖️ License
 
 This projet is licensed under the Apache License V2.0. See the [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) file for more info.
