@@ -22,3 +22,6 @@ git clone https://github.com/ApplETS/Notre-Dame.git
 
 ## 🍎 [Application iOS](https://github.com/ApplETS/Notre-Dame/tree/master/ios)
 * Langage: [Swift](https://github.com/ApplETS/Notre-Dame/search?l=swift)
+
+## ⚖️ Licence
+Ce projet est licencié selon la licence Apache V2.0. Veuillez consulter le fichier [LICENSE](https://github.com/ApplETS/Notre-Dame/blob/master/LICENSE) pour plus d'informations.
