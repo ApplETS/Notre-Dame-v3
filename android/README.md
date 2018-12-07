@@ -4,13 +4,13 @@ This project is the placeholder for the next generation of ETSMobile currently a
 
 _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-Dame/blob/master/android/README.fr.md)_
 
-## Prerequisites
+## :rocket: Prerequisites
 
 * Git
 * Java Development Kit (JDK)
 * Android Studio
 
-## Architecture
+## 🏗 Architecture
 
 This application uses an architecture based on the [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Specifically, it uses the following components: 
 * [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData.html)
@@ -21,7 +21,7 @@ This application uses an architecture based on the [Android Architecture Compone
 
 You can find out more by visiting the [wiki](https://github.com/ApplETS/Notre-Dame-Android/wiki/Architecture-(EN)).
 
-## Libraries and tools
+## :hammer: Libraries and tools
 This project uses a variety of libraries and tools.
 * Android Support Libraries : A set of libraries that provide features that are unavailable in the the standard framework as well as backward compatibility classes for newer APIs.
   * AppCompat v7
@@ -48,6 +48,6 @@ This project uses a variety of libraries and tools.
 * [Ktlint Gradle](https://github.com/JLLeitschuh/ktlint-gradle) : Wrapper plugin over the ktlint project. Ktlint provides rules that enforce coding standards.
 * And more...
 
-## License
+## ⚖️ License
 
 This projet is licensed under the Apache License V2.0. See the [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) file for more info.
