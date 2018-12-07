@@ -7,3 +7,17 @@ Ce projet concrétise la troisième version de l'application mobile ÉTSMobile p
 * L'accès aux notes d'évaluations
 * L'accès aux horaires de cours
 * Et bien plus...
+
+## 🤖 [Application Android](https://github.com/ApplETS/Notre-Dame/tree/master/android)
+* Langage: [Kotlin](https://github.com/ApplETS/Notre-Dame/search?l=kotlin)
+* Minimum SDK Version: 21
+  #### Pour commencer
+ * Téléchargez et installez la dernière version d'[Androis Studio](https://developer.android.com/studio/)
+ * Clonez le projet
+ ```bash
+git clone https://github.com/ApplETS/Notre-Dame.git
+```
+ * Ouvez le projet avec Android Studio
+
+## 🍎 [Application iOS](https://github.com/ApplETS/Notre-Dame/tree/master/ios)
+* Langage: [Swift](https://github.com/ApplETS/Notre-Dame/search?l=swift)
