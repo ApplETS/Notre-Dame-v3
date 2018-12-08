@@ -27,6 +27,7 @@ git clone https://github.com/ApplETS/Notre-Dame.git
 * Minimum SDK Version: 12.x
  #### Getting started
  * Download and install the latest version of [Xcode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12)
+ * Clone the project
   ```bash
 git clone https://github.com/ApplETS/Notre-Dame.git
 ```
