@@ -36,7 +36,7 @@
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>
-    <string name="msg_no_grades">Aucune note</string>
+    <string name="msg_no_grades">Aucune note disponible</string>
     <string name="label_current_rating">Votre note</string>
     <string name="label_average">Moyenne</string>
     <string name="text_grade_in_percentage">%1$s %%</string>
@@ -54,6 +54,7 @@
     <string name="title_section_summary">Sommaire</string>
     <string name="title_section_evaluations">Évaluations</string>
     <string name="text_group">Groupe %1$s</string>
+    <string name="error_course_evaluations_not_completed">Vous n\'aurez pas accès à vos notes au cours de la période d\'évaluation tant que vous n\'aurez pas effectue vos évaluations.</string>
 
     <!-- Profile -->
     <string name="title_profile">Profil</string>

@@ -41,11 +41,10 @@ import java.util.Locale
  * Created by Sonphil on 08-07-18.
  */
 
-val numberFormatter by lazy {
-    NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+val numberFormatter: NumberFormat
+    get() = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
         maximumFractionDigits = 1
     }
-}
 
 fun ApiActivite.toActiviteEntity() = ActiviteEntity(
         this.sigle,
@@ -156,8 +155,8 @@ fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): Somm
     )
 }
 
-fun ApiEvaluationCours.toEvaluationCoursEntity(session: Session) = EvaluationCoursEntity(
-    session.abrege,
+fun ApiEvaluationCours.toEvaluationCoursEntity(cours: Cours) = EvaluationCoursEntity(
+    cours.session,
     dateDebutEvaluation.msDateToUnix(),
     dateFinEvaluation.msDateToUnix(),
     enseignant,
@@ -167,8 +166,8 @@ fun ApiEvaluationCours.toEvaluationCoursEntity(session: Session) = EvaluationCou
     typeEvaluation
 )
 
-fun ApiListeEvaluationCours.toEvaluationCoursEntities(session: Session) = listeApiEvaluations.map {
-    it.toEvaluationCoursEntity(session)
+fun ApiListeEvaluationCours.toEvaluationCoursEntities(cours: Cours) = listeApiEvaluations.map {
+    it.toEvaluationCoursEntity(cours)
 }
 
 fun ApiHoraireExamenFinal.toHoraireExamenFinalEntity(session: Session) = HoraireExamenFinalEntity(

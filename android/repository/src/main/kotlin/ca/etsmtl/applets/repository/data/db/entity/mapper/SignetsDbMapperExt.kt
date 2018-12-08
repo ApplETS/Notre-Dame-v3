@@ -1,23 +1,7 @@
 package ca.etsmtl.applets.repository.data.db.entity.mapper
 
-import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.JourRemplaceEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
-import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.Etudiant
-import ca.etsmtl.applets.repository.data.model.Evaluation
-import ca.etsmtl.applets.repository.data.model.HoraireExamenFinal
-import ca.etsmtl.applets.repository.data.model.JourRemplace
-import ca.etsmtl.applets.repository.data.model.Programme
-import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
+import ca.etsmtl.applets.repository.data.db.entity.signets.*
+import ca.etsmtl.applets.repository.data.model.*
 import java.util.Date
 
 /**
@@ -68,6 +52,19 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
 )
 
 fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
+
+fun EvaluationCoursEntity.toEvaluationCours() = EvaluationCours(
+    session,
+    Date(dateDebutEvaluation),
+    Date(dateFinEvaluation),
+    enseignant,
+    estComplete,
+    groupe,
+    sigle,
+    typeEvaluation
+)
+
+fun List<EvaluationCoursEntity>.toEvaluationCours() = map { it.toEvaluationCours() }
 
 fun HoraireExamenFinalEntity.toHoraireExamenFinal() = HoraireExamenFinal(
         this.sigle,

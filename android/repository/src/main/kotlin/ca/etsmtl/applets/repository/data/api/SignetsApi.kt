@@ -28,8 +28,8 @@ import javax.inject.Singleton
  * This interface is implemented by Retrofit. It's used to fetch data from Signets web service.
  * https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx
  *
- * The webService uses .Net technology from Microsoft. All services offered that return personal or
- * sensitive information require the universal access code and password.
+ * The webService uses .Net technology from Microsoft. Every service require the universal
+ * access code and password because they return personal or sensitive information
  *
  * For more information, see the "SignetsMobile" document.
  *
