@@ -11,11 +11,12 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_more_item.iVMoreItemIcon
 import kotlinx.android.synthetic.main.fragment_more_item.textViewMoreItemLabel
 
+typealias ItemClickHandler = (index: Int, holder: MoreRecyclerViewAdapter.ViewHolder) -> Unit
+
 class MoreRecyclerViewAdapter(
     private val items: List<MoreItem>,
-    private val itemClickListener: OnItemClickListener?
-)
-    : RecyclerView.Adapter<MoreRecyclerViewAdapter.ViewHolder>() {
+    private val itemClickHandler: ItemClickHandler
+) : RecyclerView.Adapter<MoreRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
             LayoutInflater.from(parent.context)
@@ -29,29 +30,13 @@ class MoreRecyclerViewAdapter(
 
         holder.iconImageView.setImageResource(item.iconId)
         holder.labelTextView.text = item.label
-
-        itemClickListener?.let {
-            holder.containerView.setOnClickListener {
-                itemClickListener.onItemClick(position, holder)
-            }
+        holder.containerView.setOnClickListener {
+            itemClickHandler.invoke(position, holder)
         }
     }
 
-    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         val iconImageView: ImageView = iVMoreItemIcon
         val labelTextView: TextView = textViewMoreItemLabel
-    }
-
-    /**
-     * Interface definition for a callback to be invoked when an item of the recycler view is clicked
-     */
-    interface OnItemClickListener {
-        /**
-         * Callback method to be invoked when an item of the recycler view is clicked
-         *
-         * @param index position of the clicked view
-         * @param holder the view holder of the clicked item
-         */
-        fun onItemClick(index: Int, holder: ViewHolder)
     }
 }

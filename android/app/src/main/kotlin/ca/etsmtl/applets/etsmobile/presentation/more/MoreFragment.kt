@@ -62,11 +62,9 @@ class MoreFragment : DaggerFragment() {
         with (recyclerViewMore) {
             val itemsList = moreViewModel.itemsList()
 
-            adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
-                override fun onItemClick(index: Int, holder: MoreRecyclerViewAdapter.ViewHolder) {
-                    moreViewModel.selectItem(index)
-                }
-            })
+            adapter = MoreRecyclerViewAdapter(itemsList) { position, holder ->
+                moreViewModel.selectItem(position)
+            }
 
             setHasFixedSize(true)
         }

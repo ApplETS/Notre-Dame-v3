@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollViewEts"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_ets" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
