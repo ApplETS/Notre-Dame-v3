@@ -1,21 +1,18 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_more_item.iVMoreItemIcon
 import kotlinx.android.synthetic.main.fragment_more_item.textViewMoreItemLabel
 
-typealias ItemClickHandler = (index: Int, holder: MoreRecyclerViewAdapter.ViewHolder) -> Unit
-
 class MoreRecyclerViewAdapter(
-    private val items: List<MoreItem>,
-    private val itemClickHandler: ItemClickHandler
+    private val items: List<MoreItem>
 ) : RecyclerView.Adapter<MoreRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
@@ -29,9 +26,9 @@ class MoreRecyclerViewAdapter(
         val item: MoreItem = items[position]
 
         holder.iconImageView.setImageResource(item.iconId)
-        holder.labelTextView.text = item.label
+        holder.labelTextView.setText(item.label)
         holder.containerView.setOnClickListener {
-            itemClickHandler.invoke(position, holder)
+            item.moreItemClickHandler.invoke(position)
         }
     }
 

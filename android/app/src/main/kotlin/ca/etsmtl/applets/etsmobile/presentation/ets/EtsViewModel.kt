@@ -11,8 +11,6 @@ import javax.inject.Inject
  * Created by Sonphil on 09-12-18.
  */
 
-typealias ItemClickHandler = (index: Int) -> Unit
-
 class EtsViewModel @Inject constructor() : ViewModel() {
     private val _navigateToSecurity = MutableLiveData<Event<Unit>>()
     val navigateToSecurity: LiveData<Event<Unit>> = _navigateToSecurity
