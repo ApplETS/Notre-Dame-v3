@@ -11,7 +11,10 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeEvaluation
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationCoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEvaluationCours
-import ca.etsmtl.applets.repository.data.model.*
+import ca.etsmtl.applets.repository.data.model.Cours
+import ca.etsmtl.applets.repository.data.model.EvaluationCours
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -21,7 +24,7 @@ class EvaluationCoursRepository @Inject constructor(
     appExecutors: AppExecutors,
     private val api: SignetsApi,
     private val evaluationCoursDao: EvaluationCoursDao
-): SignetsRepository(appExecutors) {
+) : SignetsRepository(appExecutors) {
     fun getEvaluationCours(
         userCredentials: SignetsUserCredentials,
         cours: Cours,

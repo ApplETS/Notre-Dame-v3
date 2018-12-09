@@ -6,7 +6,11 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.applets.repository.data.model.*
+import ca.etsmtl.applets.repository.data.model.Cours
+import ca.etsmtl.applets.repository.data.model.EvaluationCours
+import ca.etsmtl.applets.repository.data.model.Resource
+import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationCoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import javax.inject.Inject
@@ -29,7 +33,7 @@ class FetchGradesDetailsUseCase @Inject constructor(
         if (it.status == Resource.Status.ERROR) {
             it.handleError(cours)
         } else {
-           MutableLiveData<Resource<SommaireEtEvaluations>>().apply { value = it }
+            MutableLiveData<Resource<SommaireEtEvaluations>>().apply { value = it }
         }
     }
 
@@ -56,16 +60,12 @@ class FetchGradesDetailsUseCase @Inject constructor(
             )) {
                 val genericErrorMsg by lazy { app.getString(R.string.error) }
 
-                if (data == null || it.status == Resource.Status.ERROR) {
-                    Resource.error(genericErrorMsg, data)
-                } else if (it.status == Resource.Status.LOADING) {
+                if (it.status == Resource.Status.LOADING) {
                     Resource.loading(data)
+                } else if (it.status == Resource.Status.ERROR || it.data?.areCourseEvaluationsCompleted() == true) {
+                    Resource.error(genericErrorMsg, data)
                 } else {
-                    if (it.data!!.areCourseEvaluationsCompleted()) {
-                        Resource.success(data!!)
-                    } else {
-                        Resource.error(app.getString(R.string.error_course_evaluations_not_completed), data)
-                    }
+                    Resource.error(app.getString(R.string.error_course_evaluations_not_completed), data)
                 }
             }
         }

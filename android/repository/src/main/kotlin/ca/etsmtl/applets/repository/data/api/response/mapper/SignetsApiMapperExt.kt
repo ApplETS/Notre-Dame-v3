@@ -33,7 +33,11 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.util.*
+import ca.etsmtl.applets.repository.util.msDateToUnix
+import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
+import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
+import ca.etsmtl.applets.repository.util.signetsDefaultDateToUnix
+import ca.etsmtl.applets.repository.util.toLocaleDate
 import java.text.NumberFormat
 import java.util.Locale
 

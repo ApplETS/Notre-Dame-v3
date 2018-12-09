@@ -2,7 +2,7 @@
     <string name="preference_file_key" translatable="false">ETSMobilePrefs</string>
     <string name="bottom_view_behavior" translatable="false">ca.etsmtl.applets.etsmobile.util.BottomNavigationBehavior</string>
     <string name="error">Une erreur est survenue</string>
-    <string name="error_no_internet_connection">Absence de connexion internet</string>
+    <string name="error_no_internet_connection">Aucune connexion Internet</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="retry">Réessayer</string>
