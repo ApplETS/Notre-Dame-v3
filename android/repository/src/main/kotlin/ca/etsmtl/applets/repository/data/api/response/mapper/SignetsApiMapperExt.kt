@@ -5,12 +5,14 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiCours
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEnseignant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiEvaluation
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiEvaluationCours
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiHoraireExamenFinal
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiJourRemplace
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeCours
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeSessions
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesElementsEvaluation
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
+import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeEvaluationCours
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeHoraireExamensFinaux
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeJoursRemplaces
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeProgrammes
@@ -21,6 +23,7 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.ActiviteEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EnseignantEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationCoursEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.HoraireExamenFinalEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.JourRemplaceEntity
@@ -30,10 +33,10 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.util.dateToUnixms
 import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
+import ca.etsmtl.applets.repository.util.signetsDefaultDateToUnix
 import ca.etsmtl.applets.repository.util.toLocaleDate
 import java.text.NumberFormat
 import java.util.Locale
@@ -41,6 +44,11 @@ import java.util.Locale
 /**
  * Created by Sonphil on 08-07-18.
  */
+
+val numberFormatter: NumberFormat
+    get() = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+        maximumFractionDigits = 1
+    }
 
 fun ApiActivite.toActiviteEntity() = ActiviteEntity(
         this.sigle,
@@ -86,10 +94,6 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
         this.masculin
 )
 
-fun formatter(): NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
-    maximumFractionDigits = 1
-}
-
 fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     val note = this.note.replaceCommaAndParseToDouble()
     val moyenne = this.moyenne.replaceCommaAndParseToDouble()
@@ -106,8 +110,6 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
         }
     }
 
-    val formatter = formatter()
-
     return EvaluationEntity(
             cours.sigle,
             cours.groupe,
@@ -115,15 +117,15 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             this.nom,
             this.equipe,
             dateCible.apply { if (isNotBlank()) { toLocaleDate() } },
-            formatter.format(note),
-            formatter.format(corrigeSur.replaceCommaAndParseToFloat()),
-            formatter.format(notePourcentage),
-            formatter.format(ponderation.replaceCommaAndParseToFloat()),
-            formatter.format(moyenne),
-            formatter.format(moyennePourcentage),
-            formatter.format(ecartType.replaceCommaAndParseToFloat()),
-            formatter.format(mediane.replaceCommaAndParseToFloat()),
-            formatter.format(rangCentile.replaceCommaAndParseToFloat()),
+            numberFormatter.format(note),
+            numberFormatter.format(corrigeSur.replaceCommaAndParseToFloat()),
+            numberFormatter.format(notePourcentage),
+            numberFormatter.format(ponderation.replaceCommaAndParseToFloat()),
+            numberFormatter.format(moyenne),
+            numberFormatter.format(moyennePourcentage),
+            numberFormatter.format(ecartType.replaceCommaAndParseToFloat()),
+            numberFormatter.format(mediane.replaceCommaAndParseToFloat()),
+            numberFormatter.format(rangCentile.replaceCommaAndParseToFloat()),
             this.publie == "Oui",
             this.messageDuProf,
             this.ignoreDuCalcul == "Oui"
@@ -133,8 +135,6 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
 fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map { it.toEvaluationEntity(cours) }
 
 fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
-    val formatter = formatter()
-
     val noteSur = liste.asSequence()
             .filter { it.note.isNotBlank() && it.ignoreDuCalcul == "Non" }
             .map { it.ponderation.replaceCommaAndParseToFloat() }
@@ -146,31 +146,46 @@ fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): Somm
     return SommaireElementsEvaluationEntity(
             cours.sigle,
             cours.session,
-            formatter.format(scoreFinalSur100.replaceCommaAndParseToFloat()),
-            formatter.format(noteSur),
-            formatter.format(noteACeJour.replaceCommaAndParseToFloat()),
-            formatter.format(moyenneClasse.replaceCommaAndParseToFloat()),
-            formatter.format(moyenneClassePourcentage),
-            formatter.format(ecartTypeClasse.replaceCommaAndParseToFloat()),
-            formatter.format(medianeClasse.replaceCommaAndParseToFloat()),
-            formatter.format(rangCentileClasse.replaceCommaAndParseToFloat()),
-            formatter.format(noteACeJourElementsIndividuels.replaceCommaAndParseToFloat()),
-            formatter.format(noteSur100PourElementsIndividuels.replaceCommaAndParseToFloat())
+            numberFormatter.format(scoreFinalSur100.replaceCommaAndParseToFloat()),
+            numberFormatter.format(noteSur),
+            numberFormatter.format(noteACeJour.replaceCommaAndParseToFloat()),
+            numberFormatter.format(moyenneClasse.replaceCommaAndParseToFloat()),
+            numberFormatter.format(moyenneClassePourcentage),
+            numberFormatter.format(ecartTypeClasse.replaceCommaAndParseToFloat()),
+            numberFormatter.format(medianeClasse.replaceCommaAndParseToFloat()),
+            numberFormatter.format(rangCentileClasse.replaceCommaAndParseToFloat()),
+            numberFormatter.format(noteACeJourElementsIndividuels.replaceCommaAndParseToFloat()),
+            numberFormatter.format(noteSur100PourElementsIndividuels.replaceCommaAndParseToFloat())
     )
 }
 
-fun ApiHoraireExamenFinal.toHoraireExemanFinalEntity(session: Session) = HoraireExamenFinalEntity(
-        this.sigle,
-        this.groupe,
-        this.dateExamen,
-        this.heureDebut,
-        this.heureFin,
-        this.local,
+fun ApiEvaluationCours.toEvaluationCoursEntity(cours: Cours) = EvaluationCoursEntity(
+    cours.session,
+    dateDebutEvaluation.msDateToUnix(),
+    dateFinEvaluation.msDateToUnix(),
+    enseignant,
+    estComplete,
+    groupe,
+    sigle,
+    typeEvaluation
+)
+
+fun ApiListeEvaluationCours.toEvaluationCoursEntities(cours: Cours) = listeApiEvaluations.map {
+    it.toEvaluationCoursEntity(cours)
+}
+
+fun ApiHoraireExamenFinal.toHoraireExamenFinalEntity(session: Session) = HoraireExamenFinalEntity(
+        sigle,
+        groupe,
+        dateExamen,
+        heureDebut,
+        heureFin,
+        local,
         session.abrege
 )
 
 fun ApiListeHoraireExamensFinaux.toHoraireExamensFinauxEntities(session: Session) = listeHoraire?.map {
-    it.toHoraireExemanFinalEntity(session)
+    it.toHoraireExamenFinalEntity(session)
 } ?: emptyList()
 
 fun ApiJourRemplace.toJourRemplaceEntity(session: Session) = JourRemplaceEntity(
@@ -222,17 +237,17 @@ fun ApiListeDesSeances.toSeancesEntities(session: String): List<SeanceEntity> = 
 fun ApiSession.toSessionEntity() = SessionEntity(
         abrege,
         auLong,
-        dateDebut.dateToUnixms("yyyy-MM-dd") ,
-        dateFin.dateToUnixms("yyyy-MM-dd") ,
-        dateFinCours.dateToUnixms("yyyy-MM-dd"),
-        dateDebutChemiNot.dateToUnixms("yyyy-MM-dd"),
-        dateFinChemiNot.dateToUnixms("yyyy-MM-dd"),
-        dateDebutAnnulationAvecRemboursement.dateToUnixms("yyyy-MM-dd"),
-        dateFinAnnulationAvecRemboursement.dateToUnixms("yyyy-MM-dd"),
-        dateFinAnnulationAvecRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
-        dateDebutAnnulationSansRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
-        dateFinAnnulationSansRemboursementNouveauxEtudiants.dateToUnixms("yyyy-MM-dd"),
-        dateLimitePourAnnulerASEQ.dateToUnixms("yyyy-MM-dd")
+        dateDebut.signetsDefaultDateToUnix(),
+        dateFin.signetsDefaultDateToUnix(),
+        dateFinCours.signetsDefaultDateToUnix(),
+        dateDebutChemiNot.signetsDefaultDateToUnix(),
+        dateFinChemiNot.signetsDefaultDateToUnix(),
+        dateDebutAnnulationAvecRemboursement.signetsDefaultDateToUnix(),
+        dateFinAnnulationAvecRemboursement.signetsDefaultDateToUnix(),
+        dateFinAnnulationAvecRemboursementNouveauxEtudiants.signetsDefaultDateToUnix(),
+        dateDebutAnnulationSansRemboursementNouveauxEtudiants.signetsDefaultDateToUnix(),
+        dateFinAnnulationSansRemboursementNouveauxEtudiants.signetsDefaultDateToUnix(),
+        dateLimitePourAnnulerASEQ.signetsDefaultDateToUnix()
 )
 
 fun ApiListeDeSessions.toSessionEntities(): List<SessionEntity> = liste.map { it.toSessionEntity() }

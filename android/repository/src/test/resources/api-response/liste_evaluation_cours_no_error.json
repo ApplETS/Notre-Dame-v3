@@ -1,0 +1,44 @@
+{
+    "d": {
+        "__type": "SignetsPourEtudiants.SignetsMobile+ListeEvaluationsCours",
+        "listeEvaluations": [
+            {
+                "Sigle": "MAT472",
+                "Groupe": "02",
+                "Enseignant": "Leonhard, Euler",
+                "DateDebutEvaluation": "/Date(1531454400000)/",
+                "DateFinEvaluation": "/Date(1532318340000)/",
+                "TypeEvaluation": "Cours",
+                "EstComplete": true
+            },
+            {
+                "Sigle": "MAT472",
+                "Groupe": "02",
+                "Enseignant": "Leonhard, Euler",
+                "DateDebutEvaluation": "/Date(1531454400000)/",
+                "DateFinEvaluation": "/Date(1532318340000)/",
+                "TypeEvaluation": "Calculatrice",
+                "EstComplete": true
+            },
+            {
+                "Sigle": "GTI785",
+                "Groupe": "01",
+                "Enseignant": "Dupont, Cédric",
+                "DateDebutEvaluation": "/Date(1531454400000)/",
+                "DateFinEvaluation": "/Date(1532318340000)/",
+                "TypeEvaluation": "Cours",
+                "EstComplete": true
+            },
+            {
+                "Sigle": "GTI785",
+                "Groupe": "01",
+                "Enseignant": "Wharton, Jake",
+                "DateDebutEvaluation": "/Date(1527566400000)/",
+                "DateFinEvaluation": "/Date(1528516740000)/",
+                "TypeEvaluation": "Cours",
+                "EstComplete": false
+            }
+        ],
+        "erreur": ""
+    }
+}
