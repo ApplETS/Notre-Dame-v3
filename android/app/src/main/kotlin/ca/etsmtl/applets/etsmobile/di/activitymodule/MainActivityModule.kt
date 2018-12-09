@@ -2,6 +2,8 @@ package ca.etsmtl.applets.etsmobile.di.activitymodule
 
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.di.ViewModelKey
+import ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment
+import ca.etsmtl.applets.etsmobile.presentation.ets.EtsViewModel
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment
@@ -46,6 +48,16 @@ interface MainActivityModule {
 
     @ContributesAndroidInjector
     fun contributeProfileFragment(): ProfileFragment
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EtsViewModel::class)
+    fun bindEtsViewModel(
+        etsViewModel: EtsViewModel
+    ): ViewModel
+
+    @ContributesAndroidInjector
+    fun contributeEtsFragment(): EtsFragment
 
     @Binds
     @IntoMap

@@ -6,9 +6,10 @@
     tools:context="ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_ets"
+        android:id="@+id/rvEts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/item_ets" />
