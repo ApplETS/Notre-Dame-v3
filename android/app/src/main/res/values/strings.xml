@@ -75,6 +75,10 @@
 
     <!-- ÉTS -->
     <string name="title_security">Securité</string>
+    <string name="title_monets">MonÉTS</string>
+    <string name="uri_mon_ets" translatable="false">https://portail.etsmtl.ca/</string>
+    <string name="title_bibliotech">Bibliotech</string>
+    <string name="uri_bibliotech" translatable="false">https://www.etsmtl.ca/Bibliotheque/Accueil</string>
 
     <!-- More -->
     <string name="more_item_label_faq">FAQ</string>

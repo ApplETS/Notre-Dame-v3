@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.ets
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.open
 import ca.etsmtl.applets.etsmobile.util.toast
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -53,6 +55,18 @@ class EtsFragment : DaggerFragment() {
     private fun subscribeUI() {
         etsViewModel.navigateToSecurity.observe(this, EventObserver {
             context?.toast("TODO: Navigate to security")
+        })
+
+        etsViewModel.navigateToMonEts.observe(this, EventObserver {
+            context?.let { context ->
+                Uri.parse(getString(R.string.uri_mon_ets)).open(context)
+            }
+        })
+
+        etsViewModel.navigateToBibliotech.observe(this, EventObserver {
+            context?.let { context ->
+                Uri.parse(getString(R.string.uri_bibliotech)).open(context)
+            }
         })
     }
 

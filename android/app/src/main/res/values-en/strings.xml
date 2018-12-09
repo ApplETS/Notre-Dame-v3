@@ -73,6 +73,8 @@
 
     <!-- ÉTS -->
     <string name="title_security">Security</string>
+    <string name="title_monets">MonÉTS</string>
+    <string name="title_bibliotech">Bibliotech</string>
 
     <!-- More -->
     <string name="more_item_label_faq">FAQ</string>

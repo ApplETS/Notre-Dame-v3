@@ -27,10 +27,17 @@ class EtsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: EtsItem = items[position]
 
-        holder.ivEts.setImageResource(item.iconId)
-        holder.tvEts.text = item.label
-        holder.containerView.setOnClickListener {
-            item.onItemClickHandler.invoke(position)
+        with (holder) {
+            ivEts.setImageResource(item.iconId)
+            if (item.label == null) {
+                tvEts.visibility = View.GONE
+            } else {
+                tvEts.setText(item.label)
+                tvEts.visibility = View.VISIBLE
+            }
+            containerView.setOnClickListener {
+                item.onItemClickHandler.invoke(position)
+            }
         }
     }
 

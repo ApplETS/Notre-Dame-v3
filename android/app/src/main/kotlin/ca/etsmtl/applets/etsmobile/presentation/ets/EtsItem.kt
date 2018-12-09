@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.ets
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
 /**
  * Created by Sonphil on 09-12-18.
@@ -8,6 +9,6 @@ import androidx.annotation.DrawableRes
 
 data class EtsItem(
     @DrawableRes val iconId: Int,
-    val label: String,
+    @StringRes val label: Int?,
     val onItemClickHandler: ItemClickHandler
 )
