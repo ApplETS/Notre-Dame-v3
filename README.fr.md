@@ -37,7 +37,7 @@ git clone https://github.com/ApplETS/Notre-Dame.git
   ```bash
   pod install
   ```
-  * A .xcworkspace file will be generated. You must use this file to open the project.
+  * Un fichier .xcworkspace sera généré. Vous devrez désormais ouvrir le projet avec ce fichier.
 
 ## ⚖️ Licence
 Ce projet est licencié selon la licence Apache V2.0. Veuillez consulter le fichier [LICENSE](https://github.com/ApplETS/Notre-Dame/blob/master/LICENSE) pour plus d'informations.
