@@ -73,6 +73,7 @@ class EvaluationCoursDaoTest : DbTest() {
         var evaluations = LiveDataTestUtil.getValue(dao.getAll())
         assertEquals(1, evaluations.count())
         dao.deleteBySession(entity.session)
+        evaluations = LiveDataTestUtil.getValue(dao.getAll())
         assertEquals(0, evaluations.size)
     }
 }
