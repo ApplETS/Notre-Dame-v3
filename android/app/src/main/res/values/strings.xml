@@ -1,6 +1,5 @@
 <resources>
     <string name="preference_file_key" translatable="false">ETSMobilePrefs</string>
-    <string name="bottom_view_behavior" translatable="false">ca.etsmtl.applets.etsmobile.util.BottomNavigationBehavior</string>
     <string name="error">Une erreur est survenue</string>
     <string name="error_no_internet_connection">Aucune connexion Internet</string>
     <string name="yes">Oui</string>
@@ -95,4 +94,5 @@
     <string name="uri_applets_twitter" translatable="false">https://twitter.com/ClubApplETS</string>
     <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
     <string name="msg_no_seances">Aucune séance de cours pour la session actuelle</string>
+    <string name="APIAucuneSeanceError" translatable="false">"Aucune donnée.  Cela peut être causé parce que l'horaire détaillé n'est pas encore finalisé (il l'est généralement quelques jours avant le début de la session), ou parce que l'horaire est trop ancien (nous ne gardons que 4 sessions), ou que vous n'êtes pas inscrit, ou que vous n'êtes inscrit qu'à des activité sans horaire, comme un stage ou que que vous êtes en rédaction de mémoire ou de thèse."</string>
 </resources>
