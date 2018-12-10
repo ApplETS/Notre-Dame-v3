@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
-import ca.etsmtl.applets.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progressMore
@@ -62,12 +61,7 @@ class MoreFragment : DaggerFragment() {
         with (recyclerViewMore) {
             val itemsList = moreViewModel.itemsList()
 
-            adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
-                override fun onItemClick(index: Int, holder: MoreRecyclerViewAdapter.ViewHolder) {
-                    moreViewModel.selectItem(index)
-                }
-            })
-
+            adapter = MoreRecyclerViewAdapter(itemsList)
             setHasFixedSize(true)
         }
     }

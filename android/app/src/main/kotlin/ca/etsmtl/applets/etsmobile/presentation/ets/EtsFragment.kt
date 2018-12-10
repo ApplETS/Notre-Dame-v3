@@ -1,11 +1,22 @@
 package ca.etsmtl.applets.etsmobile.presentation.ets
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.open
+import ca.etsmtl.applets.etsmobile.util.toast
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_ets.rvEts
+import javax.inject.Inject
 
 /**
  * This fragment shows information related to the university.
@@ -13,15 +24,50 @@ import ca.etsmtl.applets.etsmobile.R
  * Created by Sonphil on 28-06-18.
  */
 
-class EtsFragment : Fragment() {
+class EtsFragment : DaggerFragment() {
+
+    private val etsViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(EtsViewModel::class.java)
+    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ets, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_ets, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
+        subscribeUI()
+    }
+
+    private fun setupRecyclerView() {
+        rvEts.adapter = EtsRecyclerViewAdapter(etsViewModel.itemsList())
+        rvEts.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW).apply {
+            justifyContent = JustifyContent.SPACE_AROUND
+        }
+    }
+
+    private fun subscribeUI() {
+        etsViewModel.navigateToSecurity.observe(this, EventObserver {
+            context?.toast("TODO: Navigate to security")
+        })
+
+        etsViewModel.navigateToMonEts.observe(this, EventObserver {
+            context?.let { context ->
+                Uri.parse(getString(R.string.uri_mon_ets)).open(context)
+            }
+        })
+
+        etsViewModel.navigateToBibliotech.observe(this, EventObserver {
+            context?.let { context ->
+                Uri.parse(getString(R.string.uri_bibliotech)).open(context)
+            }
+        })
     }
 
     companion object {
