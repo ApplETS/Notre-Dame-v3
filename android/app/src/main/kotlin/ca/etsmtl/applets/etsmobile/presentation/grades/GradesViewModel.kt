@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
@@ -51,9 +52,24 @@ class GradesViewModel @Inject constructor(
         coursLiveData = fetchGradesCoursesUseCase().apply {
             coursMediatorLiveData.addSource(this) {
                 coursMediatorLiveData.value = it
-                _cours.value = it.data
+                _cours.value = it.data?.mapValues { it.value.mapCoursesList() }
             }
         }
+    }
+
+    private fun List<Cours>.mapCoursesList() = map { cours ->
+        val grade: String = when {
+            !cours.cote.isNullOrEmpty() -> cours.cote!!
+            !cours.noteSur100.isNullOrEmpty() -> {
+                String.format(
+                    app.getString(R.string.text_grade_in_percentage),
+                    cours.noteSur100
+                )
+            }
+            else -> app.getString(R.string.abbreviation_not_available)
+        }
+
+        cours.copy(cote = grade)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
