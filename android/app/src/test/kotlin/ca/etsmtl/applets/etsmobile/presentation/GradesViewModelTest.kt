@@ -21,7 +21,6 @@ import org.junit.runners.JUnit4
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
 import kotlin.test.assertEquals
 
@@ -39,6 +38,7 @@ class GradesViewModelTest {
     private val gradesViewModel = GradesViewModel(fetchGradesCoursesUseCase, app)
     @Captor
     private lateinit var messageEventArgumentCaptor: ArgumentCaptor<Event<String?>>
+    private val coursLiveData = MutableLiveData<Resource<Map<String, List<Cours>>>>()
 
     @Before
     fun setUp() {
@@ -46,75 +46,177 @@ class GradesViewModelTest {
 
         `when`(app.getString(R.string.error_no_internet_connection)).thenReturn("Absence de connexion internet")
         `when`(app.getString(R.string.error)).thenReturn("Une erreur est survenue")
+
+        `when`(fetchGradesCoursesUseCase()).thenReturn(coursLiveData)
     }
 
     @Test
-    fun testLoading() {
-        val liveData = MutableLiveData<Resource<Map<String, List<Cours>>>>()
-        liveData.value = Resource.loading(null)
-        `when`(fetchGradesCoursesUseCase()).thenReturn(liveData)
-
-        gradesViewModel.refresh()
-
+    fun loading_Loading_EmitsTrue() {
+        // given
         val observer: Observer<Boolean> = mock()
         gradesViewModel.loading.observeForever(observer)
-        verify(observer).onChanged(true)
 
-        liveData.postValue(Resource.error("test error", null))
-        verify(observer).onChanged(false)
+        // when
+        gradesViewModel.refresh()
+        coursLiveData.value = Resource.loading(null)
+
+        // then
+        verify(observer).onChanged(true)
     }
 
     @Test
-    fun testMessage() {
-        val liveData = MutableLiveData<Resource<Map<String, List<Cours>>>>()
-        `when`(fetchGradesCoursesUseCase()).thenReturn(liveData)
-
-        gradesViewModel.refresh()
-
+    fun message_NonNetworkError_IsGenericErrorMessage() {
+        // given
         val observer: Observer<Event<String?>> = mock()
         gradesViewModel.errorMessage.observeForever(observer)
-
         app.mockNetwork()
 
-        liveData.postValue(Resource.error("test error", null))
+        // when
+        gradesViewModel.refresh()
+        coursLiveData.postValue(Resource.error("test error", null))
+
+        // then
         verify(observer).onChanged(capture(messageEventArgumentCaptor))
         assertEquals("Une erreur est survenue", messageEventArgumentCaptor.value.getContentIfNotHandled())
+    }
 
+    @Test
+    fun message_NetworkError_IsNetworkErrorMessage() {
+        // given
+        val observer: Observer<Event<String?>> = mock()
+        gradesViewModel.errorMessage.observeForever(observer)
         app.mockNetwork(false)
 
-        liveData.postValue(Resource.error("test error", null))
-        verify(observer, times(2)).onChanged(capture(messageEventArgumentCaptor))
+        // when
+        gradesViewModel.refresh()
+        coursLiveData.postValue(Resource.error("test error", null))
+
+        // then
+        verify(observer).onChanged(capture(messageEventArgumentCaptor))
         assertEquals("Absence de connexion internet", messageEventArgumentCaptor.value.getContentIfNotHandled())
     }
 
     @Test
-    fun testShowEmptyView() {
-        val liveData = MutableLiveData<Resource<Map<String, List<Cours>>>>()
-        `when`(fetchGradesCoursesUseCase()).thenReturn(liveData)
-
-        gradesViewModel.refresh()
-
+    fun emptyView_LoadedEmptyResult_BecomesVisible() {
+        // given
         val observer: Observer<Boolean> = mock()
         gradesViewModel.showEmptyView.observeForever(observer)
 
-        liveData.value = Resource.success(emptyMap())
+        // when
+        gradesViewModel.refresh()
+        coursLiveData.value = Resource.success(emptyMap())
+
+        // then
         verify(observer).onChanged(true)
+    }
 
-        liveData.value = Resource.loading(null)
+    @Test
+    fun emptyView_Loading_BecomesHidden() {
+        // given
+        val observer: Observer<Boolean> = mock()
+        gradesViewModel.showEmptyView.observeForever(observer)
+
+        // when
+        gradesViewModel.refresh()
+        coursLiveData.value = Resource.loading(null)
+
+        // then
         verify(observer).onChanged(false)
+    }
 
-        liveData.value = Resource.success(mapOf(
-                "Test" to listOf(Cours(
-                        "MAT123",
-                        "01",
-                        "s.o",
-                        "7365",
-                        "K",
-                        "91",
-                        3,
-                        "Math"
-                ))
+    @Test
+    fun emptyView_FinishedLoading_BecomesHidden() {
+        // given
+        val observer: Observer<Boolean> = mock()
+        gradesViewModel.showEmptyView.observeForever(observer)
+
+        // when
+        gradesViewModel.refresh()
+        coursLiveData.value = Resource.success(mapOf(
+            "Test" to listOf(Cours(
+                "MAT123",
+                "01",
+                "s.o",
+                "7365",
+                "K",
+                "91",
+                3,
+                "Math"
+            ))
         ))
-        verify(observer, times(2)).onChanged(false)
+
+        // then
+        verify(observer).onChanged(false)
+    }
+
+    @Test
+    fun cote_NotNullOrEmpty_ReturnsCote() {
+        // given
+        val cours = Cours(
+            "MAT123",
+            "01",
+            "s.o",
+            "7365",
+            "K",
+            "91",
+            3,
+            "Math"
+        )
+
+        // when
+        val resultCours = with (gradesViewModel) {
+            cours.adjustCote()
+        }
+
+        // then
+        assertEquals(cours, resultCours)
+    }
+
+    @Test
+    fun cote_CoteEmptyAndNotSur100NotNullOrEmpty_ReturnsNoteSur100() {
+        // given
+        val cours = Cours(
+            "MAT123",
+            "01",
+            "s.o",
+            "7365",
+            "",
+            "91",
+            3,
+            "Math"
+        )
+        `when`(app.getString(R.string.text_grade_in_percentage)).thenReturn("%1\$s %%")
+
+        // when
+        val resultCours = with (gradesViewModel) {
+            cours.adjustCote()
+        }
+
+        // then
+        assertEquals(cours.copy(cote = cours.noteSur100 + " %"), resultCours)
+    }
+
+    @Test
+    fun cote_CoteEmptyAndNoteSur100NullOrEmpty_ReturnsNotAvailable() {
+        // given
+        val cours = Cours(
+            "MAT123",
+            "01",
+            "s.o",
+            "7365",
+            "",
+            "",
+            3,
+            "Math"
+        )
+        `when`(app.getString(R.string.abbreviation_not_available)).thenReturn("N/A")
+
+        // when
+        val resultCours = with (gradesViewModel) {
+            cours.adjustCote()
+        }
+
+        // then
+        assertEquals(cours.copy(cote = "N/A"), resultCours)
     }
 }
