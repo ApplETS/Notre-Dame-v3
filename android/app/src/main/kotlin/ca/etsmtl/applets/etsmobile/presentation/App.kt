@@ -35,6 +35,8 @@ class App : DaggerApplication() {
         Buglife.setInvocationMethod(InvocationMethod.SHAKE)
 
         val summaryField = TextInputField.summaryInputField()
+        val emailField = TextInputField(getString(R.string.buglife_email))
+        emailField.setMultiline(false)
         val reproducibilityField = PickerInputField(getString(R.string.buglife_reproducibility))
         resources.getStringArray(R.array.buglife_reproducibility_levels).forEach {
             reproducibilityField.addOption(it)
@@ -42,7 +44,7 @@ class App : DaggerApplication() {
         val stepsField = TextInputField(getString(R.string.buglife_steps_to_reproduce))
         stepsField.setMultiline(true)
 
-        Buglife.setInputFields(summaryField, reproducibilityField, stepsField)
+        Buglife.setInputFields(summaryField, emailField, reproducibilityField, stepsField)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
