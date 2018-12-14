@@ -12,6 +12,7 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.presentation.login.WelcomeActivity
 import ca.etsmtl.applets.etsmobile.util.Event
+import com.buglife.sdk.Buglife
 import javax.inject.Inject
 
 /**
@@ -27,13 +28,13 @@ class MoreViewModel @Inject constructor(
         ABOUT, LOGOUT
     }
 
-    private val _displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
-    private val _displayMessage by lazy { MutableLiveData<Event<String>>() }
     private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
-    private val _activityToGoTo by lazy { MutableLiveData<Event<Class<out Activity>>>() }
     val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
-    val displayLogoutDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
+    private val _displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
+    val displayLogoutConfirmationDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
+    private val _displayMessage by lazy { MutableLiveData<Event<String>>() }
     val displayMessage: LiveData<Event<String>> = _displayMessage
+    private val _activityToGoTo by lazy { MutableLiveData<Event<Class<out Activity>>>() }
     val activityToGoTo: LiveData<Event<Class<out Activity>>> = _activityToGoTo
 
     /**
@@ -64,10 +65,20 @@ class MoreViewModel @Inject constructor(
             MoreItem(R.drawable.ic_mini_logo_applets, R.string.more_item_label_about_applets) {
                 _activityToGoTo.value = Event(AboutActivity::class.java)
             },
+            MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_report_bug) {
+                navigateToBuglifeReporter()
+            },
             MoreItem(R.drawable.ic_exit_to_app_black_24dp, R.string.more_item_label_log_out) {
                 _displayLogoutConfirmationDialog.value = true
             }
         )
+    }
+
+    private fun navigateToBuglifeReporter() {
+        val screenShot = Buglife.captureScreenshot() // TODO: Let user attach his own file
+
+        screenShot?.let { Buglife.addAttachment(it) }
+        Buglife.showReporter()
     }
 
     fun clickLogoutConfirmationDialogButton(confirmedLogout: Boolean) {
