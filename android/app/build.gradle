@@ -152,6 +152,9 @@ dependencies {
     // FlexboxLayout
     implementation "com.google.android:flexbox:$flexbox"
 
+    // Buglife
+    implementation "com.buglife.sdk:buglife-android:$buglife"
+
     implementation project(':android:repository')
 }
 

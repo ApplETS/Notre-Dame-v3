@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="error">An error has occurred</string>
     <string name="error_no_internet_connection">No internet connection</string>
     <string name="yes">Yes</string>
@@ -87,4 +87,30 @@
     <string name="applets_about">ÉTSMobile was conceived by the ApplETS scientific club from the École de technologie supérieure.\n\nApplets is, most importantly, a gathering of students who share a typical enthusiasm for the field of telecommunications and mobile applications.
         The mission of ApplETS is to train students in mobile development and promote the production of mobile applications within the student community.\n\nFor more information, please consult our website : http://clubapplets.ca</string>
     <string name="msg_no_seances">No class period for this semester</string>
+
+    <!-- Buglife -->
+    <string name="screenshot_annotator_activity_label" tools:override="true">Screenshot</string>
+    <string name="what_happened_edit_text" tools:override="true">What happened?</string>
+    <string name="sending_toast" tools:override="true">Submitting bug report…</string>
+    <string name="thanks_for_filing_a_bug" tools:override="true">Thanks for filing a bug!</string>
+    <string name="error_unable_to_read_screenshot" tools:override="true">Oops! Buglife was unable to capture your screenshot.</string>
+    <string name="help_us_make_this_app_better" tools:override="true">Help us make this app better!</string>
+    <string name="report_a_bug" tools:override="true">Report a Bug</string>
+    <string name="cancel" tools:override="true">Cancel</string>
+    <string name="next" tools:override="true">Next</string>
+    <string name="send" tools:override="true">Send</string>
+    <string name="error_dialog_title" tools:override="true">Oops!</string>
+    <string name="error_dialog_message" tools:override="true">Something went wrong submitting your bug report. Please try again.</string>
+    <string name="error_dialog_message_check_logs" tools:override="true">Something went wrong submitting your bug report. If you are a developer, please check the application logs.</string>
+    <string name="error_serialize_report" tools:override="true">Failed to serialize bug report!</string>
+    <string name="error_process_report" tools:override="true">There was an error processing bug report!</string>
+    <string name="error_save_screenshot" tools:override="true">There was an error saving screenshot!</string>
+    <string name="buglife_email">Email Address</string>
+    <string name="buglife_reproducibility">Reproducibility</string>
+    <string-array name="buglife_reproducibility_levels">
+        <item>Always</item>
+        <item>Sometimes</item>
+        <item>Rarely</item>
+    </string-array>
+    <string name="buglife_steps_to_reproduce">Steps to reproduce</string>
 </resources>
