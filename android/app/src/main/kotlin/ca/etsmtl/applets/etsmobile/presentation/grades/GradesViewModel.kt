@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.grades
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
@@ -8,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
@@ -51,10 +53,22 @@ class GradesViewModel @Inject constructor(
         coursLiveData = fetchGradesCoursesUseCase().apply {
             coursMediatorLiveData.addSource(this) {
                 coursMediatorLiveData.value = it
-                _cours.value = it.data
+                _cours.value = it.data?.mapValues { it.value.map { it.adjustCote() } }
             }
         }
     }
+
+    @VisibleForTesting
+    fun Cours.adjustCote() = copy(cote = when {
+        !cote.isNullOrEmpty() -> cote!!
+        !noteSur100.isNullOrEmpty() -> {
+            String.format(
+                app.getString(R.string.text_grade_in_percentage),
+                noteSur100
+            )
+        }
+        else -> app.getString(R.string.abbreviation_not_available)
+    })
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun refresh() {
