@@ -8,7 +8,6 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.Event
@@ -197,9 +196,6 @@ class LoginViewModelTest {
     fun testNavigateToActivity() {
         val observer: Observer<Class<out Activity>> = mock()
         loginViewModel.activityToGoTo.observeForever(observer)
-
-        loginViewModel.clickOnAppletsLogo()
-        verify(observer).onChanged(AboutActivity::class.java)
 
         val liveData = MutableLiveData<Resource<Boolean>>()
         liveData.value = Resource.loading(null)

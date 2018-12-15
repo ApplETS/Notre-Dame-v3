@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.about
 
+import android.animation.Animator
 import android.net.Uri
 import android.os.Bundle
 import android.transition.Transition
@@ -8,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.etsmobile.util.open
+import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
 import kotlinx.android.synthetic.main.fragment_about.btnGithub
@@ -23,16 +26,12 @@ import kotlinx.android.synthetic.main.fragment_about.ivAppletsLogo
 class AboutFragment : Fragment() {
     companion object {
         const val TAG = "AboutFragment"
-        const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
-        fun newInstance(transitionName: String?): AboutFragment {
-            val fragment = AboutFragment()
-            val bundle = Bundle().apply { putString(EXTRA_TRANSITION_NAME, transitionName) }
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 
-    private val circularRevealRunnable = Runnable { executeCircularReveal() }
+    private val circularRevealRunnable = Runnable {
+        executeCircularReveal()
+        setActivityState()
+    }
     private var isTransitionCanceled: Boolean = false
 
     override fun onCreateView(
@@ -40,34 +39,29 @@ class AboutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_about, container, false)
+        sharedElementReturnTransition = TransitionInflater.from(activity)
+            .inflateTransition(R.transition.image_shared_element_transition)
 
-        activity?.supportStartPostponedEnterTransition()
-
-        return view
+        return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments?.getString(EXTRA_TRANSITION_NAME).isNullOrEmpty()) {
-            view.post(circularRevealRunnable)
-        } else {
-            initViewTransition(savedInstanceState)
-        }
+        postponeEnterTransition()
+
+        initViewTransition(savedInstanceState)
 
         setSocialButtonsListener()
     }
 
     private fun initViewTransition(savedInstanceState: Bundle?) {
-        val transitionName = arguments!!.getString(EXTRA_TRANSITION_NAME)
-
-        ViewCompat.setTransitionName(ivAppletsLogo, transitionName)
-
         val transitionInflater = TransitionInflater.from(activity)
 
+        startPostponedEnterTransition()
+
         if (savedInstanceState == null) {
-            activity?.window?.sharedElementEnterTransition = transitionInflater
+            sharedElementEnterTransition = transitionInflater
                     .inflateTransition(R.transition.image_shared_element_transition)
                     .addListener(object : Transition.TransitionListener {
                         override fun onTransitionResume(transition: Transition) {}
@@ -89,10 +83,8 @@ class AboutFragment : Fragment() {
                     })
         } else {
             backgroundAbout.isVisible = true
+            setActivityState()
         }
-
-        activity?.window?.sharedElementReturnTransition = transitionInflater
-                .inflateTransition(R.transition.image_shared_element_transition)
     }
 
     private fun executeCircularReveal() {
@@ -104,14 +96,40 @@ class AboutFragment : Fragment() {
                 .apply {
                     duration = 444
                     revealView.isVisible = true
+                    addListener(object : Animator.AnimatorListener {
+                        override fun onAnimationRepeat(animator: Animator) {}
+
+                        override fun onAnimationEnd(animator: Animator) {}
+
+                        override fun onAnimationCancel(animator: Animator) {}
+
+                        override fun onAnimationStart(animator: Animator) {}
+                    })
                     start()
                 }
     }
 
     override fun onDestroyView() {
+        restoreActivityState()
         view?.removeCallbacks(circularRevealRunnable)
 
         super.onDestroyView()
+    }
+
+    private fun setActivityState() {
+        (activity as? MainActivity)?.let {
+            it.toolbar.setBackgroundColor(it.getColorCompat(R.color.bgApplets))
+            it.toggleBottomNavigationView(false)
+            it.window.statusBarColor = it.getColorCompat(R.color.bgApplets)
+        }
+    }
+
+    private fun restoreActivityState() {
+        (activity as? MainActivity)?.let {
+            it.toolbar.setBackgroundColor(it.getColorCompat(R.color.colorPrimary))
+            it.toggleBottomNavigationView(true)
+            it.window.statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
+        }
     }
 
     private fun setSocialButtonsListener() {

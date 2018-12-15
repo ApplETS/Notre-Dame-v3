@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.progressMore
@@ -66,10 +66,13 @@ class MoreFragment : DaggerFragment() {
         }
     }
 
-    private fun goToAbout(iconView: View, label: String) {
-        activity?.let {
-            AboutActivity.start(it as AppCompatActivity, Pair(iconView, label))
-        }
+    private fun goToAbout(iconView: View) {
+        ViewCompat.setTransitionName(iconView, getString(R.string.transition_about_applets_logo))
+        val extras = FragmentNavigatorExtras(
+            iconView to getString(R.string.transition_about_applets_logo)
+        )
+
+        findNavController().navigate(MoreFragmentDirections.ActionFragmentMoreToFragmentAbout(), extras)
     }
 
     private fun subscribeUI() {
@@ -88,16 +91,16 @@ class MoreFragment : DaggerFragment() {
         })
 
         moreViewModel.activityToGoTo.observe(this, EventObserver {
-            if (it == AboutActivity::class.java) {
-                val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
-                with (recyclerViewMore.getChildViewHolder(aboutItemView) as MoreRecyclerViewAdapter.ViewHolder) {
-                    goToAbout(this.iconImageView, this.labelTextView.text.toString())
-                }
-            } else {
-                with(Intent(context, it)) {
-                    startActivity(this)
-                    activity?.finish()
-                }
+            with(Intent(context, it)) {
+                startActivity(this)
+                activity?.finish()
+            }
+        })
+
+        moreViewModel.navigateToAbout.observe(this, EventObserver {
+            val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
+            with (recyclerViewMore.getChildViewHolder(aboutItemView) as MoreRecyclerViewAdapter.ViewHolder) {
+                goToAbout(this.iconImageView)
             }
         })
 

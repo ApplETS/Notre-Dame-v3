@@ -3,31 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/navigation_dashboard">
+    app:startDestination="@id/fragmentDashboard">
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/fragmentDashboard"
         android:name="ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
-        android:id="@+id/navigation_schedule"
+        android:id="@+id/fragmentSchedule"
         android:name="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment"
         android:label="@string/title_schedule"
         tools:layout="@layout/fragment_schedule" />
     <fragment
-        android:id="@+id/navigation_student"
+        android:id="@+id/fragmentStudent"
         android:name="ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment"
         android:label="@string/title_student"
         tools:layout="@layout/fragment_student" />
     <fragment
-        android:id="@+id/navigation_ets"
+        android:id="@+id/fragmentEts"
         android:name="ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment"
         android:label="@string/title_ets"
         tools:layout="@layout/fragment_ets" />
     <fragment
-        android:id="@+id/navigation_more"
+        android:id="@+id/fragmentMore"
         android:name="ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment"
         android:label="@string/title_more"
-        tools:layout="@layout/fragment_more" />
+        tools:layout="@layout/fragment_more">
+        <action
+            android:id="@+id/action_fragmentMore_to_fragmentAbout"
+            app:destination="@id/fragmentAbout" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAbout"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.about.AboutFragment"
+        android:label="@string/more_item_label_about_applets"
+        tools:layout="@layout/fragment_about" />
 </navigation>

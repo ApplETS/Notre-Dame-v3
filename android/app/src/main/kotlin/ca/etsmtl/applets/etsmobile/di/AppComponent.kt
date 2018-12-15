@@ -1,7 +1,6 @@
 package ca.etsmtl.applets.etsmobile.di
 
 import android.app.Application
-import ca.etsmtl.applets.etsmobile.di.activitymodule.AboutActivityBuilder
 import ca.etsmtl.applets.etsmobile.di.activitymodule.GradesDetailsActivityBuilder
 import ca.etsmtl.applets.etsmobile.di.activitymodule.MainActivityBuilder
 import ca.etsmtl.applets.etsmobile.di.activitymodule.WelcomeActivityBuilder
@@ -24,7 +23,6 @@ import javax.inject.Singleton
     ViewModelModule::class,
     WelcomeActivityBuilder::class,
     MainActivityBuilder::class,
-    AboutActivityBuilder::class,
     GradesDetailsActivityBuilder::class
 ])
 interface AppComponent : AndroidInjector<App> {
