@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.about
 
-import android.animation.Animator
 import android.net.Uri
 import android.os.Bundle
 import android.transition.Transition
@@ -97,15 +96,6 @@ class AboutFragment : Fragment() {
                 .apply {
                     duration = 444
                     revealView.isVisible = true
-                    addListener(object : Animator.AnimatorListener {
-                        override fun onAnimationRepeat(animator: Animator) {}
-
-                        override fun onAnimationEnd(animator: Animator) {}
-
-                        override fun onAnimationCancel(animator: Animator) {}
-
-                        override fun onAnimationStart(animator: Animator) {}
-                    })
                     start()
                 }
     }

@@ -18,7 +18,7 @@
     <ScrollView
         android:id="@+id/scrollAbout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_height="56dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="64dp"
                 android:background="?android:selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_website_white_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"

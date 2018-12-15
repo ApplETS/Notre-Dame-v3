@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
 import android.animation.Animator
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -8,6 +9,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
+import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.isVisible
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.navigation
@@ -44,14 +46,24 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.fragmentDashboard,
-                R.id.fragmentSchedule,
-                R.id.fragmentStudent,
-                R.id.fragmentEts,
-                R.id.fragmentMore
-        ))
+        val topLevelDestinations = setOf(
+            R.id.fragmentDashboard,
+            R.id.fragmentSchedule,
+            R.id.fragmentStudent,
+            R.id.fragmentEts,
+            R.id.fragmentMore
+        )
+        val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
         toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (!topLevelDestinations.contains(destination.id)) {
+                toolbar.navigationIcon?.setColorFilter(
+                    getColorCompat(android.R.color.white),
+                    PorterDuff.Mode.SRC_ATOP
+                )
+            }
+        }
     }
 
     fun toggleBottomNavigationView(show: Boolean, duration: Long = 200) {
