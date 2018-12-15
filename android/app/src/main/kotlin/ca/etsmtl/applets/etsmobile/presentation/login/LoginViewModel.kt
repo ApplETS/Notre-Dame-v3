@@ -14,7 +14,6 @@ import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.call
@@ -197,13 +196,6 @@ class LoginViewModel @Inject constructor(
                 submitCredentials()
             }
         }
-    }
-
-    /**
-     * Triggers a navigation to [AboutActivity]
-     */
-    fun clickOnAppletsLogo() {
-        _activityToGoTo.value = AboutActivity::class.java
     }
 
     /**

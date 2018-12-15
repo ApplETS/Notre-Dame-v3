@@ -3,13 +3,13 @@ package ca.etsmtl.applets.etsmobile.presentation.login
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.isVisible
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_welcome.iVBackground
 import kotlinx.android.synthetic.main.activity_welcome.progressBarWelcome

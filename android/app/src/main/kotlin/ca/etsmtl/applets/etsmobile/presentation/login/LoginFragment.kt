@@ -105,7 +105,6 @@ class LoginFragment : DaggerFragment() {
                         Uri.parse(getString(R.string.uri_password_forgotten)).open(it)
                     }
                 }
-                R.id.btnApplets -> loginViewModel.clickOnAppletsLogo()
             }
         }.apply {
             btnSignIn.setOnClickListener(this)

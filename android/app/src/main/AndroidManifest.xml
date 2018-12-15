@@ -31,10 +31,6 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.about.AboutActivity"
-            android:label="@string/more_item_label_about_applets"
-            android:theme="@style/AboutTheme" />
-        <activity
             android:name=".presentation.gradesdetails.GradesDetailsActivity"
             android:parentActivityName=".presentation.main.MainActivity"
             android:theme="@style/AppTheme.Transparent" />

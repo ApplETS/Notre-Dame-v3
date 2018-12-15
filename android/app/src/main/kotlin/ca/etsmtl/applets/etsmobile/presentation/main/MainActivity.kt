@@ -1,12 +1,16 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
+import android.animation.Animator
+import android.graphics.PorterDuff
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
+import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.navigation
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -42,17 +46,51 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_dashboard,
-                R.id.navigation_schedule,
-                R.id.navigation_student,
-                R.id.navigation_ets,
-                R.id.navigation_more
-        ))
+        val topLevelDestinations = setOf(
+            R.id.fragmentDashboard,
+            R.id.fragmentSchedule,
+            R.id.fragmentStudent,
+            R.id.fragmentEts,
+            R.id.fragmentMore
+        )
+        val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
         toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (!topLevelDestinations.contains(destination.id)) {
+                toolbar.navigationIcon?.setColorFilter(
+                    getColorCompat(android.R.color.white),
+                    PorterDuff.Mode.SRC_ATOP
+                )
+            }
+        }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.fragmentNavHostMain).navigateUp()
+    fun toggleBottomNavigationView(show: Boolean, duration: Long = 200) {
+        navigation.let {
+            it.clearAnimation()
+            it.animate()
+                .translationY(when (show) {
+                    true -> 0f
+                    false -> it.height.toFloat()
+                })
+                .setDuration(duration)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationRepeat(animator: Animator) {}
+                    override fun onAnimationEnd(animator: Animator) {
+                        if (!show) { // Need to hide view
+                            // Set visibility to GONE at the end of animation
+                            it.isVisible = false
+                        }
+                    }
+                    override fun onAnimationCancel(animator: Animator) {}
+                    override fun onAnimationStart(animator: Animator) {
+                        if (show) { // Need to reveal view
+                            // Set visibility to VISIBLE at the beginning of animation
+                            it.isVisible = true
+                        }
+                    }
+                })
+        }
     }
 }

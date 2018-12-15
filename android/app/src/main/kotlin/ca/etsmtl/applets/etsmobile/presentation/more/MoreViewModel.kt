@@ -9,7 +9,6 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.presentation.login.WelcomeActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import com.buglife.sdk.Buglife
@@ -24,10 +23,6 @@ class MoreViewModel @Inject constructor(
     private val app: App
 ) : AndroidViewModel(app) {
 
-    enum class ItemsIndex {
-        ABOUT, LOGOUT
-    }
-
     private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
     val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
     private val _displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
@@ -36,6 +31,8 @@ class MoreViewModel @Inject constructor(
     val displayMessage: LiveData<Event<String>> = _displayMessage
     private val _activityToGoTo by lazy { MutableLiveData<Event<Class<out Activity>>>() }
     val activityToGoTo: LiveData<Event<Class<out Activity>>> = _activityToGoTo
+    private val _navigateToAbout by lazy { MutableLiveData<Event<Unit>>() }
+    val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
 
     /**
      * Clears the user's data
@@ -62,9 +59,6 @@ class MoreViewModel @Inject constructor(
 
     fun itemsList(): List<MoreItem> {
         return listOf(
-            MoreItem(R.drawable.ic_mini_logo_applets, R.string.more_item_label_about_applets) {
-                _activityToGoTo.value = Event(AboutActivity::class.java)
-            },
             MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_report_bug) {
                 navigateToBuglifeReporter()
             },
@@ -79,6 +73,10 @@ class MoreViewModel @Inject constructor(
 
         screenShot?.let { Buglife.addAttachment(it) }
         Buglife.showReporter()
+    }
+
+    fun clickAbout() {
+        _navigateToAbout.value = Event(Unit)
     }
 
     fun clickLogoutConfirmationDialogButton(confirmedLogout: Boolean) {

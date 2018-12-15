@@ -2,103 +2,97 @@ package ca.etsmtl.applets.etsmobile.presentation.about
 
 import android.net.Uri
 import android.os.Bundle
-import android.transition.Transition
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
+import androidx.core.transition.addListener
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.isVisible
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.open
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
 import kotlinx.android.synthetic.main.fragment_about.btnGithub
 import kotlinx.android.synthetic.main.fragment_about.btnTwitter
+import kotlinx.android.synthetic.main.fragment_about.btnWebsite
 import kotlinx.android.synthetic.main.fragment_about.btnYoutube
 import kotlinx.android.synthetic.main.fragment_about.ivAppletsLogo
+import kotlinx.android.synthetic.main.fragment_about.toolbarAbout
 
 class AboutFragment : Fragment() {
     companion object {
         const val TAG = "AboutFragment"
-        const val EXTRA_TRANSITION_NAME = "ExtraTransitionName"
-        fun newInstance(transitionName: String?): AboutFragment {
-            val fragment = AboutFragment()
-            val bundle = Bundle().apply { putString(EXTRA_TRANSITION_NAME, transitionName) }
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 
-    private val circularRevealRunnable = Runnable { executeCircularReveal() }
-    private var isTransitionCanceled: Boolean = false
+    private val circularRevealRunnable = Runnable {
+        executeEnterCircularReveal()
+    }
+    private var isEnterTransitionCanceled: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_about, container, false)
-
-        activity?.supportStartPostponedEnterTransition()
-
-        return view
-    }
+    ): View? = inflater.inflate(R.layout.fragment_about, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments?.getString(EXTRA_TRANSITION_NAME).isNullOrEmpty()) {
-            view.post(circularRevealRunnable)
-        } else {
-            initViewTransition(savedInstanceState)
-        }
+        setInitialActivityState()
+
+        postponeEnterTransition()
+
+        setupToolbar()
+
+        initViewTransition(savedInstanceState)
 
         setSocialButtonsListener()
     }
 
     private fun initViewTransition(savedInstanceState: Bundle?) {
-        val transitionName = arguments!!.getString(EXTRA_TRANSITION_NAME)
-
-        ViewCompat.setTransitionName(ivAppletsLogo, transitionName)
-
         val transitionInflater = TransitionInflater.from(activity)
 
+        sharedElementReturnTransition = transitionInflater
+            .inflateTransition(R.transition.image_shared_element_transition)
+
+        startPostponedEnterTransition()
+
         if (savedInstanceState == null) {
-            activity?.window?.sharedElementEnterTransition = transitionInflater
+            sharedElementEnterTransition = transitionInflater
                     .inflateTransition(R.transition.image_shared_element_transition)
-                    .addListener(object : Transition.TransitionListener {
-                        override fun onTransitionResume(transition: Transition) {}
-
-                        override fun onTransitionPause(transition: Transition) {
-                            isTransitionCanceled = true
-                        }
-
-                        override fun onTransitionCancel(transition: Transition) {
-                            isTransitionCanceled = true
-                        }
-
-                        override fun onTransitionStart(transition: Transition) {}
-
-                        override fun onTransitionEnd(transition: Transition) {
-                            if (!isTransitionCanceled)
-                                view?.post(circularRevealRunnable)
-                        }
-                    })
+                    .apply {
+                        addListener(
+                            onPause = { isEnterTransitionCanceled = true },
+                            onCancel = { isEnterTransitionCanceled = true },
+                            onEnd = {
+                                if (!isEnterTransitionCanceled)
+                                    view?.post(circularRevealRunnable)
+                            }
+                        )
+                    }
         } else {
             backgroundAbout.isVisible = true
         }
-
-        activity?.window?.sharedElementReturnTransition = transitionInflater
-                .inflateTransition(R.transition.image_shared_element_transition)
     }
 
-    private fun executeCircularReveal() {
+    private fun setupToolbar() {
+        (activity as? MainActivity)?.let {
+            it.appBarLayout.setExpanded(false, false)
+            toolbarAbout.setupWithNavController(findNavController())
+        }
+    }
+
+    private fun executeEnterCircularReveal() {
         val revealView = backgroundAbout
         val centerX = ivAppletsLogo.run { (x + width / 2).toInt() }
-        val centerY = ivAppletsLogo.run { (y + height / 2).toInt() }
+        val centerY = ivAppletsLogo.run { (y + toolbarAbout.height + height / 2).toInt() }
         val endRadius = revealView.run { Math.max(revealView.width, revealView.height) }
         ViewAnimationUtils.createCircularReveal(revealView, centerX, centerY, 0f, endRadius.toFloat())
                 .apply {
@@ -109,9 +103,26 @@ class AboutFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        restoreActivityState()
         view?.removeCallbacks(circularRevealRunnable)
 
         super.onDestroyView()
+    }
+
+    private fun setInitialActivityState() {
+        (activity as? MainActivity)?.let {
+            it.appBarLayout.setExpanded(false, false)
+            it.toggleBottomNavigationView(false)
+            it.window.statusBarColor = it.getColorCompat(R.color.bgApplets)
+        }
+    }
+
+    private fun restoreActivityState() {
+        (activity as? MainActivity)?.let {
+            it.appBarLayout.setExpanded(true, false)
+            it.toggleBottomNavigationView(true)
+            it.window.statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
+        }
     }
 
     private fun setSocialButtonsListener() {
@@ -120,6 +131,7 @@ class AboutFragment : Fragment() {
                 Uri.parse(
                         getString(
                                 when (view.id) {
+                                    R.id.btnWebsite -> R.string.uri_applets_website
                                     R.id.btnGithub -> R.string.uri_applets_gh
                                     R.id.btnFacebook -> R.string.uri_applets_fb
                                     R.id.btnTwitter -> R.string.uri_applets_twitter
@@ -129,6 +141,7 @@ class AboutFragment : Fragment() {
                 ).open(it, R.color.bgApplets)
             }
         }) {
+            btnWebsite.setOnClickListener(this)
             btnGithub.setOnClickListener(this)
             btnFacebook.setOnClickListener(this)
             btnTwitter.setOnClickListener(this)

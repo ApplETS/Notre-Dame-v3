@@ -70,6 +70,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$support"
     implementation "androidx.browser:browser:$support"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    implementation 'androidx.core:core-ktx:1.0.1'
 
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
