@@ -2,17 +2,17 @@ package ca.etsmtl.applets.etsmobile.presentation.about
 
 import android.net.Uri
 import android.os.Bundle
-import android.transition.Transition
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import androidx.core.transition.addListener
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
-import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.etsmobile.util.open
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -30,10 +30,10 @@ class AboutFragment : Fragment() {
     }
 
     private val circularRevealRunnable = Runnable {
-        executeCircularReveal()
+        executeEnterCircularReveal()
         setActivityState()
     }
-    private var isTransitionCanceled: Boolean = false
+    private var isEnterTransitionCanceled: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,31 +62,23 @@ class AboutFragment : Fragment() {
         if (savedInstanceState == null) {
             sharedElementEnterTransition = transitionInflater
                     .inflateTransition(R.transition.image_shared_element_transition)
-                    .addListener(object : Transition.TransitionListener {
-                        override fun onTransitionResume(transition: Transition) {}
-
-                        override fun onTransitionPause(transition: Transition) {
-                            isTransitionCanceled = true
-                        }
-
-                        override fun onTransitionCancel(transition: Transition) {
-                            isTransitionCanceled = true
-                        }
-
-                        override fun onTransitionStart(transition: Transition) {}
-
-                        override fun onTransitionEnd(transition: Transition) {
-                            if (!isTransitionCanceled)
-                                view?.post(circularRevealRunnable)
-                        }
-                    })
+                    .apply {
+                        addListener(
+                            onPause = { isEnterTransitionCanceled = true },
+                            onCancel = { isEnterTransitionCanceled = true },
+                            onEnd = {
+                                if (!isEnterTransitionCanceled)
+                                    view?.post(circularRevealRunnable)
+                            }
+                        )
+                    }
         } else {
             backgroundAbout.isVisible = true
             setActivityState()
         }
     }
 
-    private fun executeCircularReveal() {
+    private fun executeEnterCircularReveal() {
         val revealView = backgroundAbout
         val centerX = ivAppletsLogo.run { (x + width / 2).toInt() }
         val centerY = ivAppletsLogo.run { (y + height / 2).toInt() }

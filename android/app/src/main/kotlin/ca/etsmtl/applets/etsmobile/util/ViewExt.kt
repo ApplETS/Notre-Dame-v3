@@ -24,12 +24,6 @@ inline var View.endY: Float
         y = value - height
     }
 
-inline var View.isVisible: Boolean
-    get() = visibility == View.VISIBLE
-    set(value) {
-        visibility = if (value) View.VISIBLE else View.GONE
-    }
-
 /**
  * Fades a [View] to the provided visibility state
  *

@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.profile
 
+import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.isVisible
 import kotlinx.android.synthetic.main.item_profile_header.dividerProfile
 import kotlinx.android.synthetic.main.item_profile_header.tvTitleProfile
 

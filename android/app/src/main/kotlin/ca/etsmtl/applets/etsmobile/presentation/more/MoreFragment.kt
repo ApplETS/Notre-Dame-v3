@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -14,7 +15,6 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.isVisible
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_more.bgAppletsItem
 import kotlinx.android.synthetic.main.fragment_more.ivAppletsLogo
