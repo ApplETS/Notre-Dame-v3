@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
 import kotlinx.android.synthetic.main.fragment_about.btnGithub
 import kotlinx.android.synthetic.main.fragment_about.btnTwitter
+import kotlinx.android.synthetic.main.fragment_about.btnWebsite
 import kotlinx.android.synthetic.main.fragment_about.btnYoutube
 import kotlinx.android.synthetic.main.fragment_about.ivAppletsLogo
 
@@ -138,6 +139,7 @@ class AboutFragment : Fragment() {
                 Uri.parse(
                         getString(
                                 when (view.id) {
+                                    R.id.btnWebsite -> R.string.uri_applets_website
                                     R.id.btnGithub -> R.string.uri_applets_gh
                                     R.id.btnFacebook -> R.string.uri_applets_fb
                                     R.id.btnTwitter -> R.string.uri_applets_twitter
@@ -147,6 +149,7 @@ class AboutFragment : Fragment() {
                 ).open(it, R.color.bgApplets)
             }
         }) {
+            btnWebsite.setOnClickListener(this)
             btnGithub.setOnClickListener(this)
             btnFacebook.setOnClickListener(this)
             btnTwitter.setOnClickListener(this)
