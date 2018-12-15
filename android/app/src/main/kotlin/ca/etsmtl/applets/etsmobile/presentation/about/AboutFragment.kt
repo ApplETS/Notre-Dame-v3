@@ -14,6 +14,7 @@ import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.etsmobile.util.open
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
@@ -38,12 +39,7 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        sharedElementReturnTransition = TransitionInflater.from(activity)
-            .inflateTransition(R.transition.image_shared_element_transition)
-
-        return inflater.inflate(R.layout.fragment_about, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_about, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -109,6 +105,7 @@ class AboutFragment : Fragment() {
 
     private fun setActivityState() {
         (activity as? MainActivity)?.let {
+            it.appBarLayout.setExpanded(true, true)
             it.toolbar.setBackgroundColor(it.getColorCompat(R.color.bgApplets))
             it.toggleBottomNavigationView(false)
             it.window.statusBarColor = it.getColorCompat(R.color.bgApplets)
@@ -118,6 +115,7 @@ class AboutFragment : Fragment() {
     private fun restoreActivityState() {
         (activity as? MainActivity)?.let {
             it.toolbar.setBackgroundColor(it.getColorCompat(R.color.colorPrimary))
+            it.appBarLayout.setExpanded(true, true)
             it.toggleBottomNavigationView(true)
             it.window.statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
         }

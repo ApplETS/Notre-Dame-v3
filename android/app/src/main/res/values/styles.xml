@@ -10,6 +10,7 @@
         <item name="android:textColorSecondary">@color/etsGrisClair</item>
         <item name="android:textColorPrimary">@android:color/primary_text_light</item>
         <item name="android:textColorPrimaryInverse">@android:color/primary_text_light</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>
     </style>
 
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.MaterialComponents.ActionBar">
