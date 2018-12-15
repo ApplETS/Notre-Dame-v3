@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="preference_file_key" translatable="false">ETSMobilePrefs</string>
     <string name="bottom_view_behavior" translatable="false">ca.etsmtl.applets.etsmobile.util.BottomNavigationBehavior</string>
     <string name="error">Une erreur est survenue</string>
@@ -83,6 +83,7 @@
     <!-- More -->
     <string name="more_item_label_faq">FAQ</string>
     <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
+    <string name="more_item_report_bug">Rapporter un bogue</string>
     <string name="more_item_label_log_out">Se déconnecter</string>
     <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>
     <string name="more_label_log_out_progress">Déconnexion en cours</string>
@@ -95,4 +96,30 @@
     <string name="uri_applets_twitter" translatable="false">https://twitter.com/ClubApplETS</string>
     <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
     <string name="msg_no_seances">Aucune séance de cours pour la session actuelle</string>
+
+    <!-- Buglife -->
+    <string name="screenshot_annotator_activity_label" tools:override="true">Capture d\'écran</string>
+    <string name="what_happened_edit_text" tools:override="true">Que s\'est-il passé?</string>
+    <string name="sending_toast" tools:override="true">Soumission du rapport de bogue…</string>
+    <string name="thanks_for_filing_a_bug" tools:override="true">Merci d\'avoir rapporté un bogue</string>
+    <string name="error_unable_to_read_screenshot" tools:override="true">Oups! La capture d\'écran n\'a put être effectuée.</string>
+    <string name="help_us_make_this_app_better" tools:override="true">Aidez-nous à améliorer cette application!</string>
+    <string name="report_a_bug" tools:override="true">Rapporter un bogue</string>
+    <string name="cancel" tools:override="true">Annuler</string>
+    <string name="next" tools:override="true">Suivant</string>
+    <string name="send" tools:override="true">Envoyer</string>
+    <string name="error_dialog_title" tools:override="true">Oops!</string>
+    <string name="error_dialog_message" tools:override="true">Une erreur est survenue pendant la soumission de votre rapport de bogue. Veuillez réessayer.</string>
+    <string name="error_dialog_message_check_logs" tools:override="true">Une erreur est survenue pendant la soumission de votre rapport de bogue. Si vous êtes un développeur, veuillez consulter les logs.</string>
+    <string name="error_serialize_report" tools:override="true">Échec de la sérialisation du rapport de bogue.</string>
+    <string name="error_process_report" tools:override="true">Une erreur est survenue lors du traitement du rapport de bogue!</string>
+    <string name="error_save_screenshot" tools:override="true">Une erreur est survenue lors de la sauvegarde du capture d\'écran.</string>
+    <string name="buglife_email">Adresse courriel</string>
+    <string name="buglife_reproducibility">Reproductibilité</string>
+    <string-array name="buglife_reproducibility_levels">
+        <item>Toujours</item>
+        <item>Parfois</item>
+        <item>Rarement</item>
+    </string-array>
+    <string name="buglife_steps_to_reproduce">Étapes pour reproduire</string>
 </resources>

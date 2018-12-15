@@ -73,7 +73,7 @@ class MoreFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        moreViewModel.displayLogoutDialog.observe(this, Observer {
+        moreViewModel.displayLogoutConfirmationDialog.observe(this, Observer {
             logoutConfirmationDialog.takeIf { it != null && !it.isShowing }?.let { dialog ->
                 if (it == true) {
                     dialog.show()

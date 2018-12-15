@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -86,5 +86,12 @@
         <item name="android:textColorLink">@android:color/white</item>
         <item name="colorButtonNormal">@android:color/white</item>
         <item name="android:navigationBarColor">?android:attr/colorPrimary</item>
+    </style>
+
+    <!-- Buglife -->
+    <style name="buglife_alert_dialog" parent="Theme.MaterialComponents.Light.Dialog" tools:override="true">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 </resources>
