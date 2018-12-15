@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:theme="@style/AboutTheme"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.about.AboutFragment">
 
@@ -15,113 +16,128 @@
         android:visibility="invisible"
         tools:visibility="visible" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollAbout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarAbout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent">
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            app:title="@string/more_item_label_about_applets"
+            app:titleTextColor="@android:color/white" />
 
-            <ImageView
-                android:id="@+id/ivAppletsLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="130dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_mini_logo_applets"
-                android:transitionName="@string/transition_about_applets_logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ScrollView
+            android:id="@+id/scrollAbout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/textView"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:autoLink="all"
-                android:text="@string/applets_about"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivAppletsLogo" />
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnWebsite"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="64dp"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_website_white_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnGithub"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <ImageView
+                    android:id="@+id/ivAppletsLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_mini_logo_applets"
+                    android:transitionName="@string/transition_about_applets_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnGithub"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="8dp"
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:autoLink="all"
+                    android:text="@string/applets_about"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivAppletsLogo" />
 
-                android:layout_marginTop="8dp"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_github_white_24dp"
-                app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnWebsite"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnWebsite"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="64dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_website_white_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnGithub"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnFacebook"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_facebook_white_24dp"
-                app:layout_constraintEnd_toStartOf="@+id/btnTwitter"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnGithub"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnGithub"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="8dp"
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnTwitter"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_github_white_24dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btnWebsite"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-                android:layout_marginTop="8dp"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_twitter_white_24dp"
-                app:layout_constraintEnd_toStartOf="@+id/btnYoutube"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnFacebook"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnFacebook"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_facebook_white_24dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnTwitter"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btnGithub"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnYoutube"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_youtube_white_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnTwitter"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnTwitter"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="8dp"
+
+                    android:layout_marginTop="8dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_twitter_white_24dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnYoutube"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btnFacebook"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnYoutube"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_youtube_white_24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btnTwitter"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
 </FrameLayout>

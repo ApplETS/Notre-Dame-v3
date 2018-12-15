@@ -10,12 +10,13 @@ import android.view.ViewGroup
 import androidx.core.transition.addListener
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.open
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
-import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
 import kotlinx.android.synthetic.main.fragment_about.btnFacebook
 import kotlinx.android.synthetic.main.fragment_about.btnGithub
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_about.btnTwitter
 import kotlinx.android.synthetic.main.fragment_about.btnWebsite
 import kotlinx.android.synthetic.main.fragment_about.btnYoutube
 import kotlinx.android.synthetic.main.fragment_about.ivAppletsLogo
+import kotlinx.android.synthetic.main.fragment_about.toolbarAbout
 
 class AboutFragment : Fragment() {
     companion object {
@@ -31,7 +33,6 @@ class AboutFragment : Fragment() {
 
     private val circularRevealRunnable = Runnable {
         executeEnterCircularReveal()
-        setActivityState()
     }
     private var isEnterTransitionCanceled: Boolean = false
 
@@ -44,7 +45,11 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setInitialActivityState()
+
         postponeEnterTransition()
+
+        setupToolbar()
 
         initViewTransition(savedInstanceState)
 
@@ -74,14 +79,20 @@ class AboutFragment : Fragment() {
                     }
         } else {
             backgroundAbout.isVisible = true
-            setActivityState()
+        }
+    }
+
+    private fun setupToolbar() {
+        (activity as? MainActivity)?.let {
+            it.appBarLayout.setExpanded(false, false)
+            toolbarAbout.setupWithNavController(findNavController())
         }
     }
 
     private fun executeEnterCircularReveal() {
         val revealView = backgroundAbout
         val centerX = ivAppletsLogo.run { (x + width / 2).toInt() }
-        val centerY = ivAppletsLogo.run { (y + height / 2).toInt() }
+        val centerY = ivAppletsLogo.run { (y + toolbarAbout.height + height / 2).toInt() }
         val endRadius = revealView.run { Math.max(revealView.width, revealView.height) }
         ViewAnimationUtils.createCircularReveal(revealView, centerX, centerY, 0f, endRadius.toFloat())
                 .apply {
@@ -98,10 +109,9 @@ class AboutFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setActivityState() {
+    private fun setInitialActivityState() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(true, true)
-            it.toolbar.setBackgroundColor(it.getColorCompat(R.color.bgApplets))
+            it.appBarLayout.setExpanded(false, false)
             it.toggleBottomNavigationView(false)
             it.window.statusBarColor = it.getColorCompat(R.color.bgApplets)
         }
@@ -109,8 +119,7 @@ class AboutFragment : Fragment() {
 
     private fun restoreActivityState() {
         (activity as? MainActivity)?.let {
-            it.toolbar.setBackgroundColor(it.getColorCompat(R.color.colorPrimary))
-            it.appBarLayout.setExpanded(true, true)
+            it.appBarLayout.setExpanded(true, false)
             it.toggleBottomNavigationView(true)
             it.window.statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
         }
