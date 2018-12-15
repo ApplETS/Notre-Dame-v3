@@ -23,10 +23,6 @@ class MoreViewModel @Inject constructor(
     private val app: App
 ) : AndroidViewModel(app) {
 
-    enum class ItemsIndex {
-        ABOUT, LOGOUT
-    }
-
     private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
     val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
     private val _displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
@@ -63,9 +59,6 @@ class MoreViewModel @Inject constructor(
 
     fun itemsList(): List<MoreItem> {
         return listOf(
-            MoreItem(R.drawable.ic_mini_logo_applets, R.string.more_item_label_about_applets) {
-                _navigateToAbout.value = Event(Unit)
-            },
             MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_report_bug) {
                 navigateToBuglifeReporter()
             },
@@ -80,6 +73,10 @@ class MoreViewModel @Inject constructor(
 
         screenShot?.let { Buglife.addAttachment(it) }
         Buglife.showReporter()
+    }
+
+    fun clickAbout() {
+        _navigateToAbout.value = Event(Unit)
     }
 
     fun clickLogoutConfirmationDialogButton(confirmedLogout: Boolean) {

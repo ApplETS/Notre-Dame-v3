@@ -54,6 +54,9 @@ class AboutFragment : Fragment() {
     private fun initViewTransition(savedInstanceState: Bundle?) {
         val transitionInflater = TransitionInflater.from(activity)
 
+        sharedElementReturnTransition = transitionInflater
+            .inflateTransition(R.transition.image_shared_element_transition)
+
         startPostponedEnterTransition()
 
         if (savedInstanceState == null) {

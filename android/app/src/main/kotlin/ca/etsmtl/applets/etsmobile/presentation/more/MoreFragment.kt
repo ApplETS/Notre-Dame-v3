@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -15,9 +14,13 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.isVisible
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_more.bgAppletsItem
+import kotlinx.android.synthetic.main.fragment_more.ivAppletsLogo
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
+import kotlinx.android.synthetic.main.fragment_more.svMoreContent
 import javax.inject.Inject
 
 class MoreFragment : DaggerFragment() {
@@ -52,12 +55,16 @@ class MoreFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpRecyclerView()
+        setupRecyclerView()
+
+        bgAppletsItem.setOnClickListener {
+            moreViewModel.clickAbout()
+        }
 
         subscribeUI()
     }
 
-    private fun setUpRecyclerView() {
+    private fun setupRecyclerView() {
         with (recyclerViewMore) {
             val itemsList = moreViewModel.itemsList()
 
@@ -67,7 +74,6 @@ class MoreFragment : DaggerFragment() {
     }
 
     private fun goToAbout(iconView: View) {
-        ViewCompat.setTransitionName(iconView, getString(R.string.transition_about_applets_logo))
         val extras = FragmentNavigatorExtras(
             iconView to getString(R.string.transition_about_applets_logo)
         )
@@ -98,21 +104,13 @@ class MoreFragment : DaggerFragment() {
         })
 
         moreViewModel.navigateToAbout.observe(this, EventObserver {
-            val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
-            with (recyclerViewMore.getChildViewHolder(aboutItemView) as MoreRecyclerViewAdapter.ViewHolder) {
-                goToAbout(this.iconImageView)
-            }
+            goToAbout(ivAppletsLogo)
         })
 
         moreViewModel.loading.observe(this, Observer {
-            it?.let {
-                if (it) {
-                    recyclerViewMore.visibility = View.GONE
-                    progressMore.visibility = View.VISIBLE
-                } else {
-                    recyclerViewMore.visibility = View.VISIBLE
-                    progressMore.visibility = View.GONE
-                }
+            it?.let { loading ->
+                svMoreContent.isVisible = !loading
+                progressMore.isVisible = loading
             }
         })
     }
