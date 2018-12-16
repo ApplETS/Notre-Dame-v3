@@ -37,6 +37,5 @@
     <fragment
         android:id="@+id/fragmentAbout"
         android:name="ca.etsmtl.applets.etsmobile.presentation.about.AboutFragment"
-        android:label="@string/more_item_label_about_applets"
         tools:layout="@layout/fragment_about" />
 </navigation>

@@ -84,7 +84,7 @@ class AboutFragment : Fragment() {
 
     private fun setupToolbar() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(false, false)
+            it.appBarLayout.setExpanded(false, true)
             toolbarAbout.setupWithNavController(findNavController())
         }
     }
@@ -119,7 +119,7 @@ class AboutFragment : Fragment() {
 
     private fun restoreActivityState() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(true, false)
+            it.appBarLayout.setExpanded(true, true)
             it.toggleBottomNavigationView(true)
             it.window.statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
         }
