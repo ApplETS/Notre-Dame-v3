@@ -31,7 +31,7 @@ class MoreViewModel @Inject constructor(
     private val _displayMessage by lazy { MutableLiveData<Event<String>>() }
     private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
     private val _activityToGoTo by lazy { MutableLiveData<Event<Class<out Activity>>>() }
-    val loading = Transformations.map(logoutMediatorLiveData) { it }
+    val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
     val displayLogoutDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
     val displayMessage: LiveData<Event<String>> = _displayMessage
     val activityToGoTo: LiveData<Event<Class<out Activity>>> = _activityToGoTo
@@ -60,18 +60,14 @@ class MoreViewModel @Inject constructor(
     }
 
     fun itemsList(): List<MoreItem> {
-        val moreItems = ArrayList<MoreItem>()
-        val icons = app.resources.obtainTypedArray(R.array.more_items_icons)
-        val labels = app.resources.getStringArray(R.array.more_items_labels)
-
-        labels.forEachIndexed { index, label ->
-            moreItems.add(MoreItem(icons.getResourceId(index,
-                    R.drawable.ic_info_white_24dp), label))
-        }
-
-        icons.recycle()
-
-        return moreItems
+        return listOf(
+            MoreItem(R.drawable.ic_mini_logo_applets, R.string.more_item_label_about_applets) {
+                _activityToGoTo.value = Event(AboutActivity::class.java)
+            },
+            MoreItem(R.drawable.ic_exit_to_app_black_24dp, R.string.more_item_label_log_out) {
+                _displayLogoutConfirmationDialog.value = true
+            }
+        )
     }
 
     fun clickLogoutConfirmationDialogButton(confirmedLogout: Boolean) {
@@ -79,12 +75,5 @@ class MoreViewModel @Inject constructor(
 
         if (confirmedLogout)
             logout()
-    }
-
-    fun selectItem(index: Int) {
-        when (index) {
-            ItemsIndex.ABOUT.ordinal -> _activityToGoTo.value = Event(AboutActivity::class.java)
-            ItemsIndex.LOGOUT.ordinal -> _displayLogoutConfirmationDialog.value = true
-        }
     }
 }

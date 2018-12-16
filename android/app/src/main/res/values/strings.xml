@@ -1,7 +1,7 @@
 <resources>
     <string name="preference_file_key" translatable="false">ETSMobilePrefs</string>
     <string name="error">Une erreur est survenue</string>
-    <string name="error_no_internet_connection">Absence de connexion internet</string>
+    <string name="error_no_internet_connection">Aucune connexion Internet</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="retry">Réessayer</string>
@@ -35,7 +35,7 @@
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>
-    <string name="msg_no_grades">Aucune note</string>
+    <string name="msg_no_grades">Aucune note disponible</string>
     <string name="label_current_rating">Votre note</string>
     <string name="label_average">Moyenne</string>
     <string name="text_grade_in_percentage">%1$s %%</string>
@@ -53,6 +53,7 @@
     <string name="title_section_summary">Sommaire</string>
     <string name="title_section_evaluations">Évaluations</string>
     <string name="text_group">Groupe %1$s</string>
+    <string name="error_course_evaluations_not_completed">Vous n\'aurez pas accès à vos notes au cours de la période d\'évaluation tant que vous n\'aurez pas effectue vos évaluations.</string>
 
     <!-- Profile -->
     <string name="title_profile">Profil</string>
@@ -70,6 +71,13 @@
     <string name="label_number_failed_courses_program_profile">Cours échoués</string>
     <string name="label_number_equivalent_courses_program_profile">Cours d\'équivalence</string>
     <string name="label_status_program_profile">Statut</string>
+
+    <!-- ÉTS -->
+    <string name="title_security">Securité</string>
+    <string name="title_monets">MonÉTS</string>
+    <string name="uri_mon_ets" translatable="false">https://portail.etsmtl.ca/</string>
+    <string name="title_bibliotech">Bibliotech</string>
+    <string name="uri_bibliotech" translatable="false">https://www.etsmtl.ca/Bibliotheque/Accueil</string>
 
     <!-- More -->
     <string name="more_item_label_faq">FAQ</string>

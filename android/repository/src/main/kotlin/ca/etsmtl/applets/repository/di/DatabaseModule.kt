@@ -7,6 +7,7 @@ import ca.etsmtl.applets.repository.data.db.dao.signets.ActiviteDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.EnseignantDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.EtudiantDao
+import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationCoursDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.HoraireExamenFinalDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.JourRemplaceDao
@@ -48,6 +49,9 @@ internal open class DatabaseModule {
 
     @Singleton @Provides
     fun provideEvaluationDao(db: AppDatabase): EvaluationDao = db.evaluationDao()
+
+    @Singleton @Provides
+    fun provideEvaluationCoursDao(db: AppDatabase): EvaluationCoursDao = db.evaluationCoursDao()
 
     @Singleton @Provides
     fun provideHoraireExamenFinalDao(db: AppDatabase): HoraireExamenFinalDao = db.horaireExamenFinalDao()

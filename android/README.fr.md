@@ -8,7 +8,7 @@ Ce projet concrétise la nouvelle génération de l'application ÉTSMobile pour 
 * Java Development Kit (JDK)
 * Android Studio
 
-## Architecture
+## 🏗 Architecture
 
 L'application utilise une architecture se reposant sur les [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) (AAC). Plus précisément, elle utilise les composantes suivantes : 
 * [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData.html)
@@ -19,7 +19,7 @@ L'application utilise une architecture se reposant sur les [Android Architecture
 
 Vous pouvez vous renseigner davantage en consultant le [wiki](https://github.com/ApplETS/Notre-Dame-Android/wiki/Architecture-(FR)).
 
-## Bibliothèques et outils
+## :hammer: Bibliothèques et outils
 Ce projet utilise une variété de bibliothèques et d'outils.
 * [Android Support Libraries](https://developer.android.com/topic/libraries/support-library/) Librairies facilitant le développement en fournisant des classes et des fonctionnalités indisponibles dans l'API standard. En plus de fournir des classes utilitaires, elles fournissent, notamment, une rétrocompatiblité pour les nouvelle versions d'API.
   * AppCompat v7
@@ -47,6 +47,12 @@ Ce projet utilise une variété de bibliothèques et d'outils.
 * [Ktlint Gradle](https://github.com/JLLeitschuh/ktlint-gradle) Plug-in permettant l'intégration de ktlint, une librairie d'analyse du code source Kotlin. Ce dernier contient des règles qui assurent le respect de conventions de codage.
 * Et plus...
 
-## Licence
+## :construction: [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle)
+Le projet utilise [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle), un adaptateur (wrapper) de [ktlint](https://ktlint.github.io/). Il s'agit d'un linter et d'un formatteur pour du code rédigé avec le langage Kotlin. Afin de vérifier que le code soit bien formatté, le logiciel d'intégration continue exécute la commande suivante : 
+```shell
+$ ./gradlew ktlintCheck
+```
 
-Ce projet est licencié selon la licence Apache V2.0. Veuillez consulter le fichier [LICENSE](https://github.com/ApplETS/Notre-Dame-Android/blob/master/LICENSE) pour plus d'informations.
+## ⚖️ Licence
+
+Ce projet est licencié selon la licence Apache V2.0. Veuillez consulter le fichier [LICENSE](https://github.com/ApplETS/Notre-Dame/blob/master/LICENSE) pour plus d'informations.

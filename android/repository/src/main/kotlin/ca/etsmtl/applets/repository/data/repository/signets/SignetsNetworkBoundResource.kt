@@ -16,8 +16,8 @@ import ca.etsmtl.applets.repository.util.networkOrSignetsError
  *
  * Created by Sonphil on 10-10-18.
  */
-abstract class SignetsNetworkBoundResource<ResultType, T : ApiSignetsData>(appExecutors: AppExecutors) : NetworkBoundResource<ResultType, ApiSignetsModel<T>>(appExecutors) {
-    override fun processCall(call: LiveData<ApiResponse<ApiSignetsModel<T>>>): LiveData<ApiResponse<ApiSignetsModel<T>>> {
+abstract class SignetsNetworkBoundResource<ResultType, RequestType : ApiSignetsData>(appExecutors: AppExecutors) : NetworkBoundResource<ResultType, ApiSignetsModel<RequestType>>(appExecutors) {
+    override fun processCall(call: LiveData<ApiResponse<ApiSignetsModel<RequestType>>>): LiveData<ApiResponse<ApiSignetsModel<RequestType>>> {
         return Transformations.map(call) { apiResponse ->
             with (apiResponse.networkOrSignetsError) {
                 when (isNullOrEmpty()) {
@@ -28,9 +28,9 @@ abstract class SignetsNetworkBoundResource<ResultType, T : ApiSignetsData>(appEx
         }
     }
 
-    final override fun saveCallResult(item: ApiSignetsModel<T>) {
+    final override fun saveCallResult(item: ApiSignetsModel<RequestType>) {
         item.data?.let { saveSignetsData(it) }
     }
 
-    abstract fun saveSignetsData(item: T)
+    abstract fun saveSignetsData(item: RequestType)
 }
