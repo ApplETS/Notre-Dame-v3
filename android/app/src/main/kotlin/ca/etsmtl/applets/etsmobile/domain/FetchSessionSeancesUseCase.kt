@@ -28,12 +28,8 @@ class FetchSessionSeancesUseCase @Inject constructor(
 
             when (res.status) {
                 Resource.Status.ERROR -> {
-                    if (res.message == app.applicationContext.getString(R.string.APIAucuneSeanceError)) {
-                        mediatorLiveData.value = Resource.success(emptyList())
-                    } else {
                         mediatorLiveData.value =
-                            Resource.error(res.message ?: app.getString(R.string.error), null)
-                    }
+                            Resource.error(res.message ?: app.getString(R.string.error), emptyList())
                 }
                 Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(null)
                 Resource.Status.SUCCESS -> {

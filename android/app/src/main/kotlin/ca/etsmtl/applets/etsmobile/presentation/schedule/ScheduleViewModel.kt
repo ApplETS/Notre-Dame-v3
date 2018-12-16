@@ -7,6 +7,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchSessionSeancesUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSessionsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
@@ -38,7 +39,7 @@ class ScheduleViewModel @Inject constructor(
     private var sessionsLiveData: LiveData<Resource<List<Session>>>? = null
 
     // TODO binder ça au option menu des sessions
-    val selectedSessionMediatorLiveData: MediatorLiveData<Session> by lazy {
+    private val selectedSessionMediatorLiveData: MediatorLiveData<Session> by lazy {
         MediatorLiveData<Session>()
     }
 
@@ -59,7 +60,11 @@ class ScheduleViewModel @Inject constructor(
             return@lazy sessionMessage
         } else {
             return@lazy Transformations.map(seancesMediatorLiveData) {
-                it.getGenericErrorMessage(app)
+                if (app.getString(R.string.msg_api_no_seance) == it.message) {
+                    Event(null)
+                } else {
+                    it.getGenericErrorMessage(app)
+                }
             }
         }
     }
