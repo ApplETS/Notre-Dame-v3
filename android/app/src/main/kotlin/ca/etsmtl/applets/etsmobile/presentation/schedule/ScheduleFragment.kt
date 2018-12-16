@@ -17,8 +17,6 @@ import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator
 import kotlinx.android.synthetic.main.empty_view_schedule.*
 import kotlinx.android.synthetic.main.fragment_schedule.*
-import java.util.Calendar
-import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -65,28 +63,7 @@ class ScheduleFragment : DaggerFragment() {
         })
         scheduleViewModel.seances.observe(this, Observer {
             it?.takeIf { it.isNotEmpty() }?.let { seances ->
-                val thisWeekCal = Calendar.getInstance()
-                val wantedWeek = thisWeekCal.get(Calendar.WEEK_OF_YEAR)
-                val wantedYear = thisWeekCal.get(Calendar.YEAR)
                 adapter.items = seances
-                    .filter { s ->
-                        val dateCal = Calendar.getInstance()
-                        dateCal.time = s.dateDebut
-                        val dateWeek = dateCal.get(Calendar.WEEK_OF_YEAR)
-                        val dateYear = dateCal.get(Calendar.YEAR)
-
-                        wantedWeek == dateWeek && wantedYear == dateYear
-                    } // todo filter for the selected week
-                    .groupBy { s ->
-                        val cal = Calendar.getInstance()
-                        cal.clear()
-                        cal.time = s.dateDebut
-                        cal.set(Calendar.HOUR, 0)
-                        cal.set(Calendar.MINUTE, 0)
-                        cal.set(Calendar.SECOND, 0)
-                        cal.set(Calendar.AM_PM, 0)
-                        Date(cal.timeInMillis)
-                    }
             }
         })
 
@@ -100,10 +77,6 @@ class ScheduleFragment : DaggerFragment() {
 
         scheduleViewModel.errorMessage.observe(this, EventObserver {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
-        })
-
-        scheduleViewModel.selectedSession.observe(this, Observer {
-            scheduleViewModel.loadSeances()
         })
 
         this.lifecycle.addObserver(scheduleViewModel)

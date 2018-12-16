@@ -16,6 +16,8 @@ import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
+import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -26,12 +28,6 @@ class ScheduleViewModel @Inject constructor(
     private val fetchSessionsUseCase: FetchSessionsUseCase,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
-
-    // Seances
-    private val seancesMediatorLiveData: MediatorLiveData<Resource<List<Seance>>> by lazy {
-        MediatorLiveData<Resource<List<Seance>>>()
-    }
-    private var seancesLiveData: LiveData<Resource<List<Seance>>>? = null
     // Sessions
     private val sessionsMediatorLiveData: MediatorLiveData<Resource<List<Session>>> by lazy {
         MediatorLiveData<Resource<List<Session>>>()
@@ -45,6 +41,16 @@ class ScheduleViewModel @Inject constructor(
 
     val selectedSession: LiveData<Session> = Transformations.map(selectedSessionMediatorLiveData) {
         it
+    }
+
+    // Seances
+    private val seancesMediatorLiveData: MediatorLiveData<Resource<List<Seance>>> by lazy {
+        MediatorLiveData<Resource<List<Seance>>>()
+    }
+    private var seancesLiveData: LiveData<Resource<List<Seance>>> = Transformations.switchMap(selectedSession) {
+        it?.let {
+            return@switchMap fetchSessionSeancesUseCase(it)
+        }
     }
 
     val errorMessage: LiveData<Event<String?>> by lazy {
@@ -68,8 +74,30 @@ class ScheduleViewModel @Inject constructor(
             }
         }
     }
-    val seances: LiveData<List<Seance>> = Transformations.map(seancesMediatorLiveData) {
-        it.data
+    val seances: LiveData<Map<Date, List<Seance>>> = Transformations.map(seancesMediatorLiveData) {
+        it.data.orEmpty().let {
+            val thisWeekCal = Calendar.getInstance()
+            val wantedWeek = thisWeekCal.get(Calendar.WEEK_OF_YEAR)
+            val wantedYear = thisWeekCal.get(Calendar.YEAR)
+            it.filter { s ->
+                val dateCal = Calendar.getInstance()
+                dateCal.time = s.dateDebut
+                val dateWeek = dateCal.get(Calendar.WEEK_OF_YEAR)
+                val dateYear = dateCal.get(Calendar.YEAR)
+
+                wantedWeek == dateWeek && wantedYear == dateYear
+            } // todo filter for the selected week
+                .groupBy { s ->
+                    val cal = Calendar.getInstance()
+                    cal.clear()
+                    cal.time = s.dateDebut
+                    cal.set(Calendar.HOUR, 0)
+                    cal.set(Calendar.MINUTE, 0)
+                    cal.set(Calendar.SECOND, 0)
+                    cal.set(Calendar.AM_PM, 0)
+                    Date(cal.timeInMillis)
+                }
+        }
     }
 
     val sessions: LiveData<List<Session>> = Transformations.map(sessionsMediatorLiveData) {
@@ -85,17 +113,6 @@ class ScheduleViewModel @Inject constructor(
     }
     val showEmptyView: LiveData<Boolean> = Transformations.map(seancesMediatorLiveData) {
         it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
-    }
-
-    fun loadSeances() {
-        seancesLiveData?.let { seancesMediatorLiveData.removeSource(it) }
-        selectedSession.value?.let { s ->
-            seancesLiveData = fetchSessionSeancesUseCase(s).apply {
-                seancesMediatorLiveData.addSource(this) {
-                    seancesMediatorLiveData.value = it
-                }
-            }
-        }
     }
 
     private fun loadSessions() {
@@ -115,18 +132,20 @@ class ScheduleViewModel @Inject constructor(
         }
     }
 
+    init {
+        seancesMediatorLiveData.addSource(seancesLiveData) {
+            seancesMediatorLiveData.value = it
+        }
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun refresh() {
-        // Sessions
         sessionsLiveData?.let {
             sessionsMediatorLiveData.removeSource(it)
             selectedSessionMediatorLiveData.removeSource(it)
         }
         sessionsLiveData = null
 
-        // Seances
-        seancesLiveData?.let { seancesMediatorLiveData.removeSource(it) }
-        seancesLiveData = null
         loadSessions()
     }
 }
