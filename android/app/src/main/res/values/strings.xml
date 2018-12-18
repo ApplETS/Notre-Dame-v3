@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="preference_file_key" translatable="false">ETSMobilePrefs</string>
     <string name="error">Une erreur est survenue</string>
     <string name="error_no_internet_connection">Aucune connexion Internet</string>
     <string name="yes">Oui</string>
@@ -88,7 +87,6 @@
     <string name="applets_about">ÉTSMobile a été réalisée par le club scientifique ApplETS de l\'École de technologie supérieure.\n\nApplETS se veut, avant tout, un regroupement d’étudiants qui partagent un intérêt commun pour le domaine des télécommunications et des applications mobiles.
         La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nSuivez-nous sur : </string>
     <string name="msg_no_seances">Aucune séance de cours pour la session actuelle</string>
-    <string name="msg_api_no_seance" translatable="false">"Aucune donnée.  Cela peut être causé parce que l'horaire détaillé n'est pas encore finalisé (il l'est généralement quelques jours avant le début de la session), ou parce que l'horaire est trop ancien (nous ne gardons que 4 sessions), ou que vous n'êtes pas inscrit, ou que vous n'êtes inscrit qu'à des activité sans horaire, comme un stage ou que que vous êtes en rédaction de mémoire ou de thèse."</string>
 
     <!-- Buglife -->
     <string name="screenshot_annotator_activity_label" tools:override="true">Capture d\'écran</string>
