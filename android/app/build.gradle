@@ -92,17 +92,16 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:$mockito_inline"
 
     // Android Test Core library
-    androidTestImplementation 'androidx.test:core:1.0.0'
+    androidTestImplementation 'androidx.test:core:1.1.0'
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation "androidx.test:runner:1.1.0"
-    androidTestImplementation "androidx.test:rules:1.1.0"
+    androidTestImplementation "androidx.test:rules:1.1.1"
 
     // Android Navigation Test Helpers
     androidTestImplementation "android.arch.navigation:navigation-testing:$navigation"
 
     // Assertions
-    androidTestImplementation "androidx.test.ext:junit:1.0.0"
+    androidTestImplementation "androidx.test.ext:junit:1.1.0"
 
     // Espresso UI Testing
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
