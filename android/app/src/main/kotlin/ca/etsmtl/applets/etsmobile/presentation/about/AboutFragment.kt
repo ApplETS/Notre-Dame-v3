@@ -47,9 +47,9 @@ class AboutFragment : Fragment() {
 
         setInitialActivityState()
 
-        postponeEnterTransition()
-
         setupToolbar()
+
+        postponeEnterTransition()
 
         initViewTransition(savedInstanceState)
 
