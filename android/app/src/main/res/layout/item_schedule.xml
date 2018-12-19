@@ -1,84 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/itemSchedule"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="8dp">
+    <!--Formatter la carte comme du monde-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/scheduleItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textViewScheduleStartTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:textAlignment="textEnd"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/material_component_lists_single_line_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewScheduleTitreCours"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="8:00" />
+        <FrameLayout
+            android:id="@+id/scheduleDayFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/etsRougeClair"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textViewScheduleEndTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:textAlignment="textEnd"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/material_component_lists_single_line_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="12:00" />
+            <TextView
+                android:id="@+id/scheduleDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/material_red_100"
+                android:textSize="@dimen/material_component_text_full_width_single_line_text_field_text_top_and_bottom_padding"
+                tools:text="Lundi" />
+        </FrameLayout>
 
-    <TextView
-        android:id="@+id/textViewScheduleTitreCours"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/material_component_lists_single_line_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/textViewScheduleStartTime"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Nom Cours" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/scheduleInnerList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:headerDividersEnabled="true"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scheduleDayFrame"
+            tools:listitem="@layout/sub_item_schedule" />
 
-    <TextView
-        android:id="@+id/textViewScheduleSigleGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
-        app:layout_constraintStart_toStartOf="@+id/textViewScheduleTitreCours"
-        app:layout_constraintTop_toBottomOf="@+id/textViewScheduleTitreCours"
-        tools:text="Sigle" />
-
-    <TextView
-        android:id="@+id/textViewScheduleLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textViewScheduleDayOfWeek"
-        app:layout_constraintTop_toBottomOf="@+id/textViewScheduleDayOfWeek"
-        tools:text="Groupe" />
-
-    <TextView
-        android:id="@+id/textViewScheduleDayOfWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/textViewScheduleSigleGroup"
-        app:layout_constraintTop_toBottomOf="@+id/textViewScheduleSigleGroup"
-        tools:text="Lundi" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
