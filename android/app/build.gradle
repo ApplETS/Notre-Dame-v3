@@ -12,8 +12,13 @@ apply plugin: 'io.fabric'
 
 apply plugin: "androidx.navigation.safeargs"
 
+def keystorePropertiesFile = rootProject.file("android/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "ca.etsmtl.applets.etsmobile"
         minSdkVersion 21
@@ -22,11 +27,33 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+            keyAlias keystoreProperties['debugKeyAlias']
+            keyPassword keystoreProperties['debugKeyPassword']
+            storeFile rootProject.file('android/' + keystoreProperties['debugKeyStore'])
+            storePassword keystoreProperties['debugStorePassword']
+        }
+        release {
+            keyAlias keystoreProperties['releaseKeyAlias']
+            keyPassword keystoreProperties['releaseKeyPassword']
+            storeFile rootProject.file('android/' + keystoreProperties['releaseKeyStore'])
+            storePassword keystoreProperties['releaseStorePassword']
+        }
+    }
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+
         release {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -63,7 +90,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Support libraries
-    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "com.google.android.material:material:$support"
     implementation "androidx.legacy:legacy-support-v4:$support"
     implementation "androidx.cardview:cardview:$support"
@@ -95,13 +122,13 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.1.0'
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation "androidx.test:rules:1.1.1"
+    androidTestImplementation 'androidx.test:rules:1.1.1'
 
     // Android Navigation Test Helpers
     androidTestImplementation "android.arch.navigation:navigation-testing:$navigation"
 
     // Assertions
-    androidTestImplementation "androidx.test.ext:junit:1.1.0"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
     // Espresso UI Testing
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
@@ -154,7 +181,6 @@ dependencies {
 
     // Buglife
     implementation "com.buglife.sdk:buglife-android:$buglife"
-
     implementation project(':android:repository')
 }
 
