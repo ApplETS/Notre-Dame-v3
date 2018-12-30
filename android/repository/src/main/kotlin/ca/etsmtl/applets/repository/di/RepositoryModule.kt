@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import ca.etsmtl.applets.repository.R
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,7 +14,8 @@ import javax.inject.Singleton
 
 @Module(includes = [
     DatabaseModule::class,
-    NetworkModule::class
+    NetworkModule::class,
+    UserModule::class
 ])
 class RepositoryModule(private val application: Application) {
     @Singleton
@@ -23,8 +23,4 @@ class RepositoryModule(private val application: Application) {
     fun providePrefs(): SharedPreferences = application
         .getSharedPreferences(application.getString(R.string.preference_file_key),
             Context.MODE_PRIVATE)
-
-    @Singleton
-    @Provides
-    fun provideSignetsUserCredentials(): SignetsUserCredentials = SignetsUserCredentials.INSTANCE.get()
 }
