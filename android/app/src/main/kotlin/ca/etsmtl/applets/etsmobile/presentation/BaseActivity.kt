@@ -11,10 +11,8 @@ import dagger.android.support.DaggerAppCompatActivity
  * Created by Sonphil on 20-05-18.
  */
 
+const val STATE_SIGNETS_CREDENTIALS = "SignetsCredentials"
 abstract class BaseActivity : DaggerAppCompatActivity() {
-    companion object {
-        const val STATE_SIGNETS_CREDENTIALS = "SignetsCredentials"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         savedInstanceState?.run {

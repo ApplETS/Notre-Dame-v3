@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.app.Activity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -9,7 +8,6 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.presentation.login.WelcomeActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import com.buglife.sdk.Buglife
 import javax.inject.Inject
@@ -29,8 +27,8 @@ class MoreViewModel @Inject constructor(
     val displayLogoutConfirmationDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
     private val _displayMessage by lazy { MutableLiveData<Event<String>>() }
     val displayMessage: LiveData<Event<String>> = _displayMessage
-    private val _activityToGoTo by lazy { MutableLiveData<Event<Class<out Activity>>>() }
-    val activityToGoTo: LiveData<Event<Class<out Activity>>> = _activityToGoTo
+    private val _navigateToLogin by lazy { MutableLiveData<Event<Unit>>() }
+    val navigateToLogin: LiveData<Event<Unit>> = _navigateToLogin
     private val _navigateToAbout by lazy { MutableLiveData<Event<Unit>>() }
     val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
 
@@ -50,7 +48,7 @@ class MoreViewModel @Inject constructor(
 
                         logoutMediatorLiveData.removeSource(this)
 
-                        _activityToGoTo.value = Event(WelcomeActivity::class.java)
+                        _navigateToLogin.value = Event(Unit)
                     }
                 }
             }

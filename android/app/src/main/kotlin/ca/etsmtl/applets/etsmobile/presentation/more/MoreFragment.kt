@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +13,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.toggle
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
+import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_more.bgAppletsItem
 import kotlinx.android.synthetic.main.fragment_more.ivAppletsLogo
 import kotlinx.android.synthetic.main.fragment_more.progressMore
@@ -96,10 +99,11 @@ class MoreFragment : DaggerFragment() {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
 
-        moreViewModel.activityToGoTo.observe(this, EventObserver {
-            with(Intent(context, it)) {
-                startActivity(this)
-                activity?.finish()
+        moreViewModel.navigateToLogin.observe(this, EventObserver {
+            with (activity as MainActivity) {
+                appBarLayout.setExpanded(false, true)
+                bottomNavigationView.toggle(false)
+                findNavController().navigate(MoreFragmentDirections.ActionFragmentMoreToFragmentLogin())
             }
         })
 

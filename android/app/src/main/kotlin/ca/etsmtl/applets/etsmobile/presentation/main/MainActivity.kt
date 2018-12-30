@@ -1,9 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
-import android.animation.Animator
 import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -11,8 +9,9 @@ import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
+import ca.etsmtl.applets.etsmobile.util.toggle
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
-import kotlinx.android.synthetic.main.activity_main.navigation
+import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 /**
@@ -31,10 +30,16 @@ class MainActivity : BaseActivity() {
 
         setContentView(R.layout.activity_main)
 
+        setupBottomNavigation()
+    }
+
+    private fun setupBottomNavigation() {
+        bottomNavigationView.toggle(false, 0)
+
         val navController = findNavController(R.id.fragmentNavHostMain)
 
-        navigation.setupWithNavController(navController)
-        navigation.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             if (!item.isChecked) {
                 NavigationUI.onNavDestinationSelected(item, navController).apply {
                     if (this) {
@@ -63,34 +68,6 @@ class MainActivity : BaseActivity() {
                     PorterDuff.Mode.SRC_ATOP
                 )
             }
-        }
-    }
-
-    fun toggleBottomNavigationView(show: Boolean, duration: Long = 200) {
-        navigation.let {
-            it.clearAnimation()
-            it.animate()
-                .translationY(when (show) {
-                    true -> 0f
-                    false -> it.height.toFloat()
-                })
-                .setDuration(duration)
-                .setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationRepeat(animator: Animator) {}
-                    override fun onAnimationEnd(animator: Animator) {
-                        if (!show) { // Need to hide view
-                            // Set visibility to GONE at the end of animation
-                            it.isVisible = false
-                        }
-                    }
-                    override fun onAnimationCancel(animator: Animator) {}
-                    override fun onAnimationStart(animator: Animator) {
-                        if (show) { // Need to reveal view
-                            // Set visibility to VISIBLE at the beginning of animation
-                            it.isVisible = true
-                        }
-                    }
-                })
         }
     }
 }

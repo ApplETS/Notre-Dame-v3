@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.login
 
-import android.app.Activity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -14,7 +13,6 @@ import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.call
 import ca.etsmtl.applets.repository.data.model.Resource
@@ -37,7 +35,8 @@ class LoginViewModel @Inject constructor(
     private val userCredentials: MutableLiveData<SignetsUserCredentials> by lazy {
         MutableLiveData<SignetsUserCredentials>()
     }
-    private val _activityToGoTo by lazy { MutableLiveData<Class<out Activity>>() }
+    private val _navigateToDashboard by lazy { MutableLiveData<Event<Unit>>() }
+    val navigateToDashboard: LiveData<Event<Unit>> = _navigateToDashboard
     private val showLoginFragmentMediator by lazy {
         MediatorLiveData<Void>().apply {
             addSource(userCredentialsValid) {
@@ -68,14 +67,14 @@ class LoginViewModel @Inject constructor(
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered when [userCredentials] is called. If the
      * response doesn't contain an error, the [SignetsUserCredentials] are considered valid and are
-     * saved. Moreover, a navigation to [MainActivity] will be triggered.
+     * saved. Moreover, a navigation to the dashboard will be triggered.
      */
     private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
         Transformations.switchMap(userCredentials) { userCredentials ->
             Transformations.map(checkUserCredentialsValidUseCase(userCredentials)) {
                 if (it.status != Resource.Status.LOADING && it.data == true) {
                     saveSignetsUserCredentialsUseCase(userCredentials)
-                    _activityToGoTo.value = MainActivity::class.java
+                    _navigateToDashboard.value = Event(Unit)
                 }
 
                 it
@@ -127,11 +126,6 @@ class LoginViewModel @Inject constructor(
             else -> null
         }
     }
-
-    /**
-     * A [LiveData] containing the class of an [Activity] to navigate to.
-     */
-    val activityToGoTo: LiveData<Class<out Activity>> = _activityToGoTo
 
     /**
      * A [LiveData] which is called when the keyboard needs to be hidden

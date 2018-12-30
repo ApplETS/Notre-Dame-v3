@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.login
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
@@ -20,14 +20,18 @@ import ca.etsmtl.applets.etsmobile.util.fadeTo
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.hideKeyboard
 import ca.etsmtl.applets.etsmobile.util.open
+import ca.etsmtl.applets.etsmobile.util.toggle
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
+import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
 import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
+import kotlinx.android.synthetic.main.fragment_splash.iVBackground
 import kotlinx.android.synthetic.main.include_login_form.btnForgotPassword
 import kotlinx.android.synthetic.main.include_login_form.btnSignIn
 import kotlinx.android.synthetic.main.include_login_form.btnUniversalCodeInfo
@@ -93,6 +97,7 @@ class LoginFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
+        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
         setUpFields()
 
@@ -153,12 +158,11 @@ class LoginFragment : DaggerFragment() {
                 setFieldError(layoutPassword, it)
             })
 
-            activityToGoTo.observe(this@LoginFragment, Observer {
-                with(Intent(context, it)) {
-                    startActivity(this)
-                    if (it == MainActivity::class.java) {
-                        activity?.finish()
-                    }
+            navigateToDashboard.observe(this@LoginFragment, EventObserver {
+                with ((activity as MainActivity)) {
+                    bottomNavigationView.toggle(true)
+                    appBarLayout.setExpanded(true, true)
+                    findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
                 }
             })
 
