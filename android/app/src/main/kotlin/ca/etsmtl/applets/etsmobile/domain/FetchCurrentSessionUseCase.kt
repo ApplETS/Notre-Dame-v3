@@ -16,10 +16,11 @@ import javax.inject.Inject
  */
 
 class FetchCurrentSessionUseCase @Inject constructor(
+    private val userCredentials: SignetsUserCredentials,
     private val sessionRepository: SessionRepository,
     private val app: App
 ) {
-    operator fun invoke(userCredentials: SignetsUserCredentials): LiveData<Resource<Session>> {
+    operator fun invoke(): LiveData<Resource<Session>> {
         return Transformations.map(sessionRepository.getSessions(userCredentials) { true }) {
             val currentSession = it.data.orEmpty().find {
                 Date().time in it.dateDebut..it.dateFin
