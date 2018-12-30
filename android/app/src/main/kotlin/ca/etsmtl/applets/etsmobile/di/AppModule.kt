@@ -2,8 +2,6 @@ package ca.etsmtl.applets.etsmobile.di
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
-import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import dagger.Module
@@ -24,13 +22,6 @@ internal object AppModule {
     @Provides
     @JvmStatic
     fun provideApp(application: Application): App = application as App
-
-    @Singleton
-    @Provides
-    @JvmStatic
-    fun providePrefs(application: Application): SharedPreferences = application
-            .getSharedPreferences(application.getString(R.string.preference_file_key),
-                    Context.MODE_PRIVATE)
 
     @Singleton
     @Provides
