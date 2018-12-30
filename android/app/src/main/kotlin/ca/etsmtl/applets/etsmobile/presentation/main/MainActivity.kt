@@ -9,7 +9,6 @@ import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
-import ca.etsmtl.applets.etsmobile.util.toggle
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -25,6 +24,14 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 
 class MainActivity : BaseActivity() {
 
+    private val topLevelDestinations = setOf(
+        R.id.fragmentDashboard,
+        R.id.fragmentSchedule,
+        R.id.fragmentStudent,
+        R.id.fragmentEts,
+        R.id.fragmentMore
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,8 +41,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupBottomNavigation() {
-        bottomNavigationView.toggle(false, 0)
-
         val navController = findNavController(R.id.fragmentNavHostMain)
 
         bottomNavigationView.setupWithNavController(navController)
@@ -51,13 +56,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        val topLevelDestinations = setOf(
-            R.id.fragmentDashboard,
-            R.id.fragmentSchedule,
-            R.id.fragmentStudent,
-            R.id.fragmentEts,
-            R.id.fragmentMore
-        )
         val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
@@ -68,6 +66,19 @@ class MainActivity : BaseActivity() {
                     PorterDuff.Mode.SRC_ATOP
                 )
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        val navController = findNavController(R.id.fragmentNavHostMain)
+        val currentId = navController.currentDestination?.id
+
+        if (topLevelDestinations.contains(currentId)) {
+            if (currentId != R.id.fragmentDashboard) {
+                navController.navigate(R.id.fragmentDashboard)
+            }
+        } else {
+            super.onBackPressed()
         }
     }
 }

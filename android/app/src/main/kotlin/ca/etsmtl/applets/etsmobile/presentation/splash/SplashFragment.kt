@@ -18,7 +18,6 @@ import ca.etsmtl.applets.etsmobile.util.toast
 import ca.etsmtl.applets.etsmobile.util.toggle
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_splash.iVBackground
 import kotlinx.android.synthetic.main.fragment_splash.progressBarSplash
@@ -47,6 +46,8 @@ class SplashFragment : DaggerFragment() {
 
         Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
+        (activity as MainActivity).bottomNavigationView.toggle(false, 0)
+
         subscribeUI()
     }
 
@@ -65,11 +66,6 @@ class SplashFragment : DaggerFragment() {
             })
 
             navigateToDashboard.observe(this@SplashFragment, EventObserver {
-                with ((activity as MainActivity)) {
-                    bottomNavigationView.toggle(true)
-                    appBarLayout.setExpanded(true, true)
-                }
-
                 findNavController().navigate(SplashFragmentDirections.actionFragmentSplashToFragmentDashboard())
             })
 

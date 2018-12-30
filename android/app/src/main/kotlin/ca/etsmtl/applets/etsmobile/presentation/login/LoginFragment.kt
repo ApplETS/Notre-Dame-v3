@@ -24,7 +24,6 @@ import ca.etsmtl.applets.etsmobile.util.toggle
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_login.btnApplets
 import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
@@ -96,6 +95,8 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).bottomNavigationView.toggle(false, 0)
+
         Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
         Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
@@ -160,8 +161,6 @@ class LoginFragment : DaggerFragment() {
 
             navigateToDashboard.observe(this@LoginFragment, EventObserver {
                 with ((activity as MainActivity)) {
-                    bottomNavigationView.toggle(true)
-                    appBarLayout.setExpanded(true, true)
                     findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
                 }
             })
