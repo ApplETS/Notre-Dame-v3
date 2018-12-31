@@ -101,7 +101,7 @@ class MoreFragment : DaggerFragment() {
 
         moreViewModel.navigateToLogin.observe(this, EventObserver {
             with (activity as MainActivity) {
-                appBarLayout.setExpanded(false, true)
+                appBarLayout.setExpanded(false, false)
                 bottomNavigationView.toggle(false)
                 findNavController().navigate(MoreFragmentDirections.ActionFragmentMoreToFragmentLogin())
             }
