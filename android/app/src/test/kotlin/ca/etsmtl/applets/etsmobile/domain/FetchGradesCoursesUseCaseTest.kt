@@ -9,6 +9,7 @@ import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import com.nhaarman.mockito_kotlin.capture
@@ -36,7 +37,7 @@ class FetchGradesCoursesUseCaseTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private val userCredentials = SignetsUserCredentials("test", "foo")
+    private val userCredentials = SignetsUserCredentials(UniversalCode("test"), "foo")
     private val coursRepository: CoursRepository = mock(CoursRepository::class.java)
     private val evaluationRepository: EvaluationRepository = mock(EvaluationRepository::class.java)
     private val app: App = mock(App::class.java)

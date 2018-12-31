@@ -21,6 +21,7 @@ import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.hideKeyboard
 import ca.etsmtl.applets.etsmobile.util.open
 import ca.etsmtl.applets.etsmobile.util.toggle
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -77,7 +78,7 @@ class LoginFragment : DaggerFragment() {
         if (!hasFocus) {
             when (view.id) {
                 R.id.universalCode -> {
-                    loginViewModel.setUniversalCode(universalCode.text.toString())
+                    loginViewModel.setUniversalCode(UniversalCode(universalCode.text.toString()))
                 }
                 R.id.password -> {
                     loginViewModel.setPassword(password.text.toString())
@@ -128,7 +129,7 @@ class LoginFragment : DaggerFragment() {
 
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                loginViewModel.setUniversalCode(universalCode.text.toString())
+                loginViewModel.setUniversalCode(UniversalCode(universalCode.text.toString()))
                 loginViewModel.setPassword(password.text.toString())
                 clearFocusAndSubmitCredentials()
                 return@OnEditorActionListener true

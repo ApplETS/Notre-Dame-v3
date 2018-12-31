@@ -12,7 +12,7 @@ data class EtudiantRequestBody(
     @Json(name = "motPasse") val motPasse: String
 ) {
     constructor(signetsUserCredentials: SignetsUserCredentials) : this(
-        signetsUserCredentials.codeAccesUniversel,
+        signetsUserCredentials.codeAccesUniversel.value,
         signetsUserCredentials.motPasse
     )
 }

@@ -51,8 +51,6 @@ class AboutFragment : Fragment() {
 
         setupToolbar()
 
-        postponeEnterTransition()
-
         initViewTransition(savedInstanceState)
 
         setSocialButtonsListener()
@@ -60,8 +58,6 @@ class AboutFragment : Fragment() {
 
     private fun initViewTransition(savedInstanceState: Bundle?) {
         val transitionInflater = TransitionInflater.from(activity)
-
-        startPostponedEnterTransition()
 
         sharedElementReturnTransition = transitionInflater
             .inflateTransition(R.transition.image_shared_element_transition)

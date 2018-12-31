@@ -61,7 +61,7 @@ class SplashFragment : DaggerFragment() {
                 context?.toast(it, Toast.LENGTH_LONG)
             })
 
-            showLoginFragment.observe(this@SplashFragment, Observer {
+            navigateToLogin.observe(this@SplashFragment, Observer {
                 findNavController().navigate(SplashFragmentDirections.actionFragmentSplashToFragmentLogin())
             })
 

@@ -17,6 +17,7 @@ import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import ca.etsmtl.applets.repository.util.ApiUtil
@@ -79,7 +80,7 @@ class CoursRepositoryTest {
                 ""
         )
     }
-    private val userCredentials = SignetsUserCredentials("test", "foo")
+    private val userCredentials = SignetsUserCredentials(UniversalCode("test"), "foo")
     @Captor
     private lateinit var coursEntitiesArgumentCaptor: ArgumentCaptor<List<CoursEntity>>
 

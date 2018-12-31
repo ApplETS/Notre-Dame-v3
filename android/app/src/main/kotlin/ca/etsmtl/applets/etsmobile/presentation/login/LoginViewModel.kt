@@ -17,6 +17,7 @@ import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.call
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import javax.inject.Inject
 
 /**
@@ -30,14 +31,14 @@ class LoginViewModel @Inject constructor(
     private val app: App
 ) : AndroidViewModel(app), LifecycleObserver {
 
-    private val universalCode: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    private val universalCode: MutableLiveData<UniversalCode> by lazy { MutableLiveData<UniversalCode>() }
     private val password: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     private val userCredentials: MutableLiveData<SignetsUserCredentials> by lazy {
         MutableLiveData<SignetsUserCredentials>()
     }
     private val _navigateToDashboard by lazy { MutableLiveData<Event<Unit>>() }
     val navigateToDashboard: LiveData<Event<Unit>> = _navigateToDashboard
-    private val showLoginFragmentMediator by lazy {
+    private val _navigateToLogin by lazy {
         MediatorLiveData<Void>().apply {
             addSource(userCredentialsValid) {
                 it?.let {
@@ -88,7 +89,7 @@ class LoginViewModel @Inject constructor(
      * The [LoginFragment] needs to be displayed when the user needs to login for the first time or
      * if his credentials are no longer valid.
      */
-    val showLoginFragment: LiveData<Void> = showLoginFragmentMediator
+    val navigateToLogin: LiveData<Void> = _navigateToLogin
 
     /**
      * A [LiveData] with a [Boolean] which would be set to true a loading animation should
@@ -107,10 +108,10 @@ class LoginViewModel @Inject constructor(
      * This is triggered after the universal code has been submitted.
      */
     val universalCodeError: LiveData<String> = Transformations.map(universalCode) {
-        when {
-            it.isEmpty() -> app.getString(R.string.error_field_required)
-            !it.matches(Regex("[a-zA-Z]{2}\\d{5}")) -> app.getString(R.string.error_invalid_universal_code)
-            else -> null
+        when (it.error) {
+            UniversalCode.Error.EMPTY -> app.getString(R.string.error_field_required)
+            UniversalCode.Error.INVALID -> app.getString(R.string.error_invalid_universal_code)
+            null -> null
         }
     }
 
@@ -147,7 +148,7 @@ class LoginViewModel @Inject constructor(
      *
      * @param universalCode
      */
-    fun setUniversalCode(universalCode: String) {
+    fun setUniversalCode(universalCode: UniversalCode) {
         this.universalCode.value = universalCode
     }
 
@@ -183,7 +184,7 @@ class LoginViewModel @Inject constructor(
     fun submitSavedCredentials() {
         with(fetchSavedSignetsUserCredentialsUserCase()) {
             if (this == null) {
-                showLoginFragmentMediator.call()
+                _navigateToLogin.call()
             } else {
                 universalCode.value = this.codeAccesUniversel
                 password.value = this.motPasse

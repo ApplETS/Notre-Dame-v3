@@ -38,7 +38,8 @@ interface MainActivityModule {
      * Cette clée est associée à un Provider qui aura le rôle d'instancier un LoginViewModel.
      */
     @Binds
-    @IntoMap @ViewModelKey(LoginViewModel::class)
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
     fun bindLoginViewModel(
         loginViewModel: LoginViewModel
     ): ViewModel
