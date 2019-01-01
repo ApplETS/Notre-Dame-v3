@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.repository.di
 
 import android.content.Context
+import ca.etsmtl.applets.repository.R
 import ca.etsmtl.applets.repository.data.api.SignetsApi
 import ca.etsmtl.applets.repository.util.LiveDataCallAdapterFactory
 import ca.etsmtl.applets.repository.util.SignetsTrust
@@ -20,7 +21,6 @@ internal open class NetworkModule {
 
     companion object {
         val instance = NetworkModule()
-        private const val SIGNETS_URL = "https://signets-ens.etsmtl.ca/Secure/WebServices/SignetsMobile.asmx/"
     }
 
     @Singleton @Provides
@@ -32,9 +32,9 @@ internal open class NetworkModule {
     fun provideMoshi(): Moshi = Moshi.Builder().build()
 
     @Singleton @Provides
-    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(context: Context, moshi: Moshi, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(SIGNETS_URL)
+                .baseUrl(context.getString(R.string.url_signets_webservice))
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .client(okHttpClient)

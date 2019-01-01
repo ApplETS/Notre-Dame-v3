@@ -58,7 +58,7 @@ class HoraireExamenFinalRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeHoraireExamensFinaux>>> {
                 return api.listeHoraireExamensFinaux(
                         ListeHoraireExamensFinauxRequestBody(
-                                userCredentials.codeAccesUniversel,
+                                userCredentials.codeAccesUniversel.value,
                                 userCredentials.motPasse,
                                 session.abrege
                         )

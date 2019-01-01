@@ -50,7 +50,7 @@ class App : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.builder()
                 .application(this)
-                .repositoryModule(RepositoryModule.instance)
+                .repositoryModule(RepositoryModule(this))
                 .build()
     }
 }

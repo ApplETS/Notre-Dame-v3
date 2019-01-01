@@ -16,12 +16,13 @@ import javax.inject.Inject
  */
 
 class FetchCurrentSessionSeancesUseCase @Inject constructor(
+    private val userCredentials: SignetsUserCredentials,
     private val fetchCurrentSessionUseCase: FetchCurrentSessionUseCase,
     private val seanceRepository: SeanceRepository,
     private val app: App
 ) {
-    operator fun invoke(userCredentials: SignetsUserCredentials): LiveData<Resource<List<Seance>>> {
-        return Transformations.switchMap(fetchCurrentSessionUseCase(userCredentials)) { res ->
+    operator fun invoke(): LiveData<Resource<List<Seance>>> {
+        return Transformations.switchMap(fetchCurrentSessionUseCase()) { res ->
             val session = res.data
             val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
 

@@ -16,12 +16,12 @@ import javax.inject.Inject
 Created by mykaelll87 on 17/11/18
  */
 class FetchSessionSeancesUseCase @Inject constructor(
-    private val usercredentials: SignetsUserCredentials,
+    private val userCredentials: SignetsUserCredentials,
     private val seanceRepository: SeanceRepository,
     private val app: App
 ) {
     operator fun invoke(session: Session): LiveData<Resource<List<Seance>>> {
-        return Transformations.switchMap(seanceRepository.getSeancesSession(usercredentials,
+        return Transformations.switchMap(seanceRepository.getSeancesSession(userCredentials,
             null, session, true)) { res ->
             val seances = res.data
             val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()

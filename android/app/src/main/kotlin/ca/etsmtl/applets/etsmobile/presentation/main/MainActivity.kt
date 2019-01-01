@@ -1,9 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
-import android.animation.Animator
 import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -12,7 +10,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
-import kotlinx.android.synthetic.main.activity_main.navigation
+import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 /**
@@ -26,15 +24,29 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 
 class MainActivity : BaseActivity() {
 
+    private val topLevelDestinations = setOf(
+        R.id.fragmentDashboard,
+        R.id.fragmentSchedule,
+        R.id.fragmentStudent,
+        R.id.fragmentEts,
+        R.id.fragmentMore
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setTheme(R.style.AppTheme)
+
         setContentView(R.layout.activity_main)
 
+        setupBottomNavigation()
+    }
+
+    private fun setupBottomNavigation() {
         val navController = findNavController(R.id.fragmentNavHostMain)
 
-        navigation.setupWithNavController(navController)
-        navigation.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             if (!item.isChecked) {
                 NavigationUI.onNavDestinationSelected(item, navController).apply {
                     if (this) {
@@ -46,13 +58,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        val topLevelDestinations = setOf(
-            R.id.fragmentDashboard,
-            R.id.fragmentSchedule,
-            R.id.fragmentStudent,
-            R.id.fragmentEts,
-            R.id.fragmentMore
-        )
         val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
@@ -66,31 +71,16 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun toggleBottomNavigationView(show: Boolean, duration: Long = 200) {
-        navigation.let {
-            it.clearAnimation()
-            it.animate()
-                .translationY(when (show) {
-                    true -> 0f
-                    false -> it.height.toFloat()
-                })
-                .setDuration(duration)
-                .setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationRepeat(animator: Animator) {}
-                    override fun onAnimationEnd(animator: Animator) {
-                        if (!show) { // Need to hide view
-                            // Set visibility to GONE at the end of animation
-                            it.isVisible = false
-                        }
-                    }
-                    override fun onAnimationCancel(animator: Animator) {}
-                    override fun onAnimationStart(animator: Animator) {
-                        if (show) { // Need to reveal view
-                            // Set visibility to VISIBLE at the beginning of animation
-                            it.isVisible = true
-                        }
-                    }
-                })
+    override fun onBackPressed() {
+        val navController = findNavController(R.id.fragmentNavHostMain)
+        val currentId = navController.currentDestination?.id
+
+        if (topLevelDestinations.contains(currentId)) {
+            if (currentId != R.id.fragmentDashboard) {
+                navController.navigate(R.id.fragmentDashboard)
+            }
+        } else {
+            super.onBackPressed()
         }
     }
 }

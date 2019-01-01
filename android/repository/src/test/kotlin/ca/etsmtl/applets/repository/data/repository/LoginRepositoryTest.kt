@@ -1,11 +1,12 @@
 package ca.etsmtl.applets.repository.data.repository
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import android.content.SharedPreferences
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.LiveDataTestUtil
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import ca.etsmtl.applets.repository.data.repository.signets.login.CipherUtils
 import ca.etsmtl.applets.repository.data.repository.signets.login.KeyStoreUtils
 import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
@@ -112,7 +113,7 @@ import kotlin.test.assertTrue
 
     @Test
     fun testClearUserData() {
-        SignetsUserCredentials.INSTANCE.set(SignetsUserCredentials("test", "test"))
+        SignetsUserCredentials.INSTANCE.set(SignetsUserCredentials(UniversalCode("test"), "test"))
         `when`(editor.clear()).thenReturn(editor)
         val finishedLD = loginRepository.clearUserData()
         assertTrue(LiveDataTestUtil.getValue(finishedLD))
@@ -128,17 +129,17 @@ import kotlin.test.assertTrue
 
     @Test
     fun testSaveUserCredentialsIfNeeded() {
-        val userCredentials = SignetsUserCredentials("AM12345", "test")
+        val userCredentials = SignetsUserCredentials(UniversalCode("AM12345"), "test")
         val keyPair = mock(KeyPair::class.java)
         val publicKey = mock(PublicKey::class.java)
         `when`(keyPair.public).thenReturn(publicKey)
-        `when`(keyStoreUtils.createAndroidKeyStoreAsymmetricKey(userCredentials.codeAccesUniversel)).thenReturn(keyPair)
+        `when`(keyStoreUtils.createAndroidKeyStoreAsymmetricKey(userCredentials.codeAccesUniversel.value)).thenReturn(keyPair)
         val encryptedPw = "EncryptedPw"
         `when`(cipherUtils.encrypt(userCredentials.motPasse, publicKey)).thenReturn(encryptedPw)
         loginRepository.saveUserCredentialsIfNeeded(userCredentials)
 
         // Check universal code was saved
-        verify(editor, times(1)).putString("UniversalCodePref", userCredentials.codeAccesUniversel)
+        verify(editor, times(1)).putString("UniversalCodePref", userCredentials.codeAccesUniversel.value)
         verify(editor, atLeastOnce()).apply()
 
         // Check password was saved

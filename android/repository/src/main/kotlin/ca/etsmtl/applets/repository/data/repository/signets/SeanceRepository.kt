@@ -77,7 +77,7 @@ class SeanceRepository @Inject constructor(
                 val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 return api.listeDesSeances(
                         ListeDesSeancesRequestBody(
-                                userCredentials.codeAccesUniversel,
+                                userCredentials.codeAccesUniversel.value,
                                 userCredentials.motPasse,
                                 cours?.sigle ?: "",
                                 session.abrege,
