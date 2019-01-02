@@ -76,14 +76,7 @@ class LoginFragment : DaggerFragment() {
      */
     private val credentialsFieldsOnFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
         if (!hasFocus) {
-            when (view.id) {
-                R.id.universalCode -> {
-                    loginViewModel.setUniversalCode(UniversalCode(universalCode.text.toString()))
-                }
-                R.id.password -> {
-                    loginViewModel.setPassword(password.text.toString())
-                }
-            }
+            view.setField()
         }
     }
 
@@ -101,11 +94,11 @@ class LoginFragment : DaggerFragment() {
         Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
         Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
-        setUpFields()
+        setupFields()
 
         View.OnClickListener {
             when (it.id) {
-                R.id.btnSignIn -> { clearFocusAndSubmitCredentials() }
+                R.id.btnSignIn -> { toggleFocusAndSubmitCredentials() }
                 R.id.btnUniversalCodeInfo -> loginViewModel.displayUniversalCodeInfo(true)
                 R.id.btnForgotPassword -> {
                     context?.let {
@@ -123,7 +116,7 @@ class LoginFragment : DaggerFragment() {
         subscribeUI()
     }
 
-    private fun setUpFields() {
+    private fun setupFields() {
         universalCode.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
         password.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
 
@@ -131,11 +124,17 @@ class LoginFragment : DaggerFragment() {
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 loginViewModel.setUniversalCode(UniversalCode(universalCode.text.toString()))
                 loginViewModel.setPassword(password.text.toString())
-                clearFocusAndSubmitCredentials()
+                toggleFocusAndSubmitCredentials()
                 return@OnEditorActionListener true
             }
             false
         })
+    }
+
+    private fun View.setField() = when (id) {
+        R.id.universalCode -> loginViewModel.setUniversalCode(UniversalCode(universalCode.text.toString()))
+        R.id.password -> loginViewModel.setPassword(password.text.toString())
+        else -> Unit
     }
 
     /**
@@ -210,13 +209,15 @@ class LoginFragment : DaggerFragment() {
     }
 
     /**
-     * Clears the focus on each field and submit the credentials
+     * Toggles the focus on each field and submit the credentials
      *
-     * Clearing the focus will set the universal code and password in [loginViewModel] and trigger
+     * Toggling the focus will set the universal code and password in [loginViewModel] and trigger
      * a validity check for each field
      */
-    private fun clearFocusAndSubmitCredentials() {
+    private fun toggleFocusAndSubmitCredentials() {
+        universalCode.requestFocus()
         universalCode.clearFocus()
+        password.requestFocus()
         password.clearFocus()
         loginViewModel.submitCredentials()
     }
