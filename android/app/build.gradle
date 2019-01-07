@@ -116,7 +116,7 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "androidx.arch.core:core-testing:$lifecycle"
     testImplementation "org.mockito:mockito-core:$mockito"
-    testImplementation "org.mockito:mockito-inline:$mockito_inline"
+    testImplementation "org.mockito:mockito-inline:$mockito"
 
     // Android Test Core library
     androidTestImplementation 'androidx.test:core:1.1.0'
