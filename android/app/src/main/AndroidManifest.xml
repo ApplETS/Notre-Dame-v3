@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ca.etsmtl.applets.etsmobile">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -29,5 +30,13 @@
             android:name=".presentation.gradesdetails.GradesDetailsActivity"
             android:parentActivityName=".presentation.main.MainActivity"
             android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:label="@string/more_item_open_source_licenses"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            tools:replace="android:label" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.MaterialComponents.Light" />
     </application>
 </manifest>

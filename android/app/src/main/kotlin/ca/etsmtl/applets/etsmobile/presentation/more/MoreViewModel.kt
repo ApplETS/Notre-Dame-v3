@@ -31,6 +31,8 @@ class MoreViewModel @Inject constructor(
     val navigateToLogin: LiveData<Event<Unit>> = _navigateToLogin
     private val _navigateToAbout by lazy { MutableLiveData<Event<Unit>>() }
     val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
+    private val _navigateToOpenSourceLicenses by lazy { MutableLiveData<Event<Unit>>() }
+    val navigateToOpenSourcesLicenses: LiveData<Event<Unit>> = _navigateToOpenSourceLicenses
 
     /**
      * Clears the user's data
@@ -59,6 +61,9 @@ class MoreViewModel @Inject constructor(
         return listOf(
             MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_report_bug) {
                 navigateToBuglifeReporter()
+            },
+            MoreItem(R.drawable.ic_code_black_24dp, R.string.more_item_open_source_licenses) {
+                _navigateToOpenSourceLicenses.value = Event(Unit)
             },
             MoreItem(R.drawable.ic_exit_to_app_black_24dp, R.string.more_item_label_log_out) {
                 _displayLogoutConfirmationDialog.value = true
