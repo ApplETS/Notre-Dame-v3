@@ -15,11 +15,11 @@ Created by mykaelll87 on 17/11/18
  */
 class FetchSessionsUseCase @Inject constructor(
     private val userCredentials: SignetsUserCredentials,
-    private val sessionRespository: SessionRepository,
+    private val sessionRepository: SessionRepository,
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<List<Session>>> {
-        return Transformations.map(sessionRespository.getSessions(userCredentials) { true }) {
+        return Transformations.map(sessionRepository.getSessions(userCredentials) { true }) {
             when {
                 it.status == Resource.Status.LOADING -> Resource.loading(it.data.orEmpty())
                 it.status == Resource.Status.ERROR -> Resource.error(it.message ?: app.getString(R.string.error), it.data.orEmpty())

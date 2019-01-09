@@ -1,9 +1,5 @@
 package ca.etsmtl.applets.repository.util
 
-import java.text.DateFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
-
 /**
  * Created by Sonphil on 09-09-18.
  */
@@ -35,49 +31,3 @@ fun String.replaceCommaAndParseToFloat() = replaceFirst(",", ".").toFloatOrNull(
  * If the [String] is not a valid representation of a number, then, O.0 is returned.
  */
 fun String.replaceCommaAndParseToDouble() = replaceFirst(",", ".").toDoubleOrNull() ?: 0.0
-
-/**
- * Formats the [String] which must be in the following format: "yyyy-MM-dd"
- *
- * @return The formatted [String] or the [String] (without formatting) if it can't be parsed
- */
-fun String.toLocaleDate(): String {
-    with (SimpleDateFormat("yyyy-MM-dd")) {
-        return try {
-            DateFormat.getDateInstance().format(parse(this@toLocaleDate))
-        } catch (e: ParseException) {
-            e.printStackTrace()
-            this@toLocaleDate
-        }
-    }
-}
-
-/**
- * Formats Microsoft JSON date (e.g. /Date(1525093200000)/) to Unix time (e.g. 1525093200000)
- */
-fun String.msDateToUnix() = substringAfter('(').substringBefore(')').toLong()
-
-/**
- * Convert date [String] to Unix time
- *
- * @param format The current format of the date (e.g. dd-MM-yyyy)
- */
-fun String.dateToUnix(format: String): Long {
-    return this@dateToUnix.dateToUnixInMs(format) / 1000
-}
-
-/**
- * Convert date [String] to Unix time, in miliseconds
- *
- * @param format The current format of the date (e.g. dd-MM-yyyy)
- */
-fun String.dateToUnixInMs(format: String): Long {
-    return try {
-        SimpleDateFormat(format).parse(this@dateToUnixInMs).time
-    } catch (e: Exception) {
-        e.printStackTrace()
-        0
-    }
-}
-
-internal fun String.signetsDefaultDateToUnix(): Long = dateToUnix("dd-MM-yyyy")
