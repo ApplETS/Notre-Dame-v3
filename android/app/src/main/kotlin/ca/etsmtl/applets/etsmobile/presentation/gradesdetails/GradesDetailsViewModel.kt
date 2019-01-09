@@ -33,11 +33,9 @@ class GradesDetailsViewModel @Inject constructor(
 ) : ViewModel(), LifecycleObserver {
     val cours = MutableLiveData<Cours>()
     private var summaryAndEvaluationsRes: LiveData<Resource<SommaireEtEvaluations>>? = null
-    private val summaryAndEvaluationsMediatorLiveData: MediatorLiveData<Resource<SommaireEtEvaluations>> by lazy {
-        MediatorLiveData<Resource<SommaireEtEvaluations>>()
-    }
-    val errorMessage: LiveData<Event<String?>> by lazy {
-        Transformations.map(summaryAndEvaluationsMediatorLiveData) { Event(it.message) }
+    private val summaryAndEvaluationsMediatorLiveData: MediatorLiveData<Resource<SommaireEtEvaluations>> = MediatorLiveData()
+    val errorMessage: LiveData<Event<String?>> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
+        Event(it.message)
     }
     val recyclerViewItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluationsMediatorLiveData) {
         fun getSummaryItems(sommaireElementsEvaluation: SommaireElementsEvaluation) = listOf(

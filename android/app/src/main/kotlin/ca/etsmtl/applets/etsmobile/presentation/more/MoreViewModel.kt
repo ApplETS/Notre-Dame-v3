@@ -21,17 +21,17 @@ class MoreViewModel @Inject constructor(
     private val app: App
 ) : AndroidViewModel(app) {
 
-    private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
+    private val logoutMediatorLiveData = MediatorLiveData<Boolean>()
     val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
-    private val _displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
+    private val _displayLogoutConfirmationDialog = MutableLiveData<Boolean>()
     val displayLogoutConfirmationDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
-    private val _displayMessage by lazy { MutableLiveData<Event<String>>() }
+    private val _displayMessage = MutableLiveData<Event<String>>()
     val displayMessage: LiveData<Event<String>> = _displayMessage
-    private val _navigateToLogin by lazy { MutableLiveData<Event<Unit>>() }
+    private val _navigateToLogin = MutableLiveData<Event<Unit>>()
     val navigateToLogin: LiveData<Event<Unit>> = _navigateToLogin
-    private val _navigateToAbout by lazy { MutableLiveData<Event<Unit>>() }
+    private val _navigateToAbout = MutableLiveData<Event<Unit>>()
     val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
-    private val _navigateToOpenSourceLicenses by lazy { MutableLiveData<Event<Unit>>() }
+    private val _navigateToOpenSourceLicenses = MutableLiveData<Event<Unit>>()
     val navigateToOpenSourcesLicenses: LiveData<Event<Unit>> = _navigateToOpenSourceLicenses
 
     /**

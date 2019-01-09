@@ -29,16 +29,14 @@ class ProfileViewModel @Inject constructor(
     private val app: App
 ) : ViewModel(), LifecycleObserver {
 
-    private val profileMediatorLiveData: MediatorLiveData<Resource<List<ProfileItem<out ProfileAdapter.ProfileViewHolder>>>> by lazy {
-        MediatorLiveData<Resource<List<ProfileItem<out ProfileAdapter.ProfileViewHolder>>>>()
-    }
+    private val profileMediatorLiveData: MediatorLiveData<Resource<List<ProfileItem<out ProfileAdapter.ProfileViewHolder>>>> = MediatorLiveData()
     val profile: LiveData<List<ProfileItem<out ProfileAdapter.ProfileViewHolder>>> = Transformations.map(profileMediatorLiveData) {
         it.data
     }
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
-    val errorMessage: LiveData<Event<String?>> by lazy {
-        Transformations.map(profileMediatorLiveData) { it.getGenericErrorMessage(app) }
+    val errorMessage: LiveData<Event<String?>> = Transformations.map(profileMediatorLiveData) {
+        it.getGenericErrorMessage(app)
     }
     private var etudiantProgrammesPair: LiveData<Resource<Pair<Etudiant?, List<Programme>?>>>? = null
 
