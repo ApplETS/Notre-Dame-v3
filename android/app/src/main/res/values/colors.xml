@@ -21,4 +21,5 @@
     <color name="goodGradeMaxColor">#43A047</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/white</color>
+    <color name="background_material_dark">#ffffff</color>
 </resources>

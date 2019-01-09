@@ -1,16 +1,11 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
-
 apply plugin: "org.jlleitschuh.gradle.ktlint"
-
 apply plugin: 'io.fabric'
-
 apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 def keystorePropertiesFile = rootProject.file("android/keystore.properties")
 def keystoreProperties = new Properties()
@@ -99,6 +94,9 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
     implementation 'androidx.core:core-ktx:1.0.1'
 
+    // Google Play Services
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
+
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
@@ -181,6 +179,7 @@ dependencies {
 
     // Buglife
     implementation "com.buglife.sdk:buglife-android:$buglife"
+
     implementation project(':android:repository')
 }
 

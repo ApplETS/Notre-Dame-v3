@@ -111,6 +111,10 @@ class MoreFragment : DaggerFragment() {
             goToAbout(ivAppletsLogo)
         })
 
+        moreViewModel.navigateToOpenSourcesLicenses.observe(this, EventObserver {
+            findNavController().navigate(R.id.activityOpenSourceLicenses)
+        })
+
         moreViewModel.loading.observe(this, Observer {
             it?.let { loading ->
                 svMoreContent.isVisible = !loading

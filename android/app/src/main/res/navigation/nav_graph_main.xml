@@ -61,4 +61,8 @@
         android:id="@+id/fragmentAbout"
         android:name="ca.etsmtl.applets.etsmobile.presentation.about.AboutFragment"
         tools:layout="@layout/fragment_about" />
+    <activity
+        android:id="@+id/activityOpenSourceLicenses"
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
+    </activity>
 </navigation>
