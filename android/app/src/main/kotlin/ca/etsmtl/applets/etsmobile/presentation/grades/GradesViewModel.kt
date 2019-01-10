@@ -26,13 +26,9 @@ class GradesViewModel @Inject constructor(
     private val fetchGradesCoursesUseCase: FetchGradesCoursesUseCase,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
-    private val coursMediatorLiveData: MediatorLiveData<Resource<Map<String, List<Cours>>>> by lazy {
-        MediatorLiveData<Resource<Map<String, List<Cours>>>>()
-    }
+    private val coursMediatorLiveData: MediatorLiveData<Resource<Map<String, List<Cours>>>> = MediatorLiveData()
     private var coursLiveData: LiveData<Resource<Map<String, List<Cours>>>>? = null
-    val errorMessage: LiveData<Event<String?>> by lazy {
-        Transformations.map(coursMediatorLiveData) { it.getGenericErrorMessage(app) }
-    }
+    val errorMessage: LiveData<Event<String?>> = Transformations.map(coursMediatorLiveData) { it.getGenericErrorMessage(app) }
 
     private val _cours: MutableLiveData<Map<String, List<Cours>>> = MutableLiveData()
     val cours: LiveData<Map<String, List<Cours>>> = _cours

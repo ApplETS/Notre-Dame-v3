@@ -30,58 +30,46 @@ class LoginViewModel @Inject constructor(
     private val saveSignetsUserCredentialsUseCase: SaveSignetsUserCredentialsUseCase,
     private val app: App
 ) : AndroidViewModel(app), LifecycleObserver {
-
-    private val universalCode: MutableLiveData<UniversalCode> by lazy { MutableLiveData<UniversalCode>() }
-    private val password: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    private val userCredentials: MutableLiveData<SignetsUserCredentials> by lazy {
-        MutableLiveData<SignetsUserCredentials>()
-    }
-    private val _navigateToDashboard by lazy { MutableLiveData<Event<Unit>>() }
+    private val universalCode: MutableLiveData<UniversalCode> = MutableLiveData()
+    private val password: MutableLiveData<String> = MutableLiveData()
+    private val userCredentials: MutableLiveData<SignetsUserCredentials> = MutableLiveData()
+    private val _navigateToDashboard = MutableLiveData<Event<Unit>>()
     val navigateToDashboard: LiveData<Event<Unit>> = _navigateToDashboard
-    private val _navigateToLogin by lazy {
-        MediatorLiveData<Void>().apply {
-            addSource(userCredentialsValid) {
-                it?.let {
-                    if (it.status != Resource.Status.LOADING && it.data == false) {
-                        this.call()
-                    }
-                }
-            }
-        }
-    }
-    /** An error message to be displayed to the user **/
-    val errorMessage: LiveData<Event<String>> by lazy {
-        MediatorLiveData<Event<String>>().apply {
-            this.addSource(userCredentialsValid) {
-                if (it != null && it.status == Resource.Status.ERROR) {
-                    this.value = Event(it.message ?: app.getString(R.string.error))
-                }
-            }
-        }
-    }
-
-    private val displayUniversalCodeDialogMediator: MediatorLiveData<Boolean> by lazy {
-        MediatorLiveData<Boolean>()
-    }
-
     /**
      * This [LiveData] indicates whether the user credentials are valid or not. It's a
      * [Transformations.switchMap] which is triggered when [userCredentials] is called. If the
      * response doesn't contain an error, the [SignetsUserCredentials] are considered valid and are
      * saved. Moreover, a navigation to the dashboard will be triggered.
      */
-    private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
-        Transformations.switchMap(userCredentials) { userCredentials ->
-            Transformations.map(checkUserCredentialsValidUseCase(userCredentials)) {
-                if (it.status != Resource.Status.LOADING && it.data == true) {
-                    saveSignetsUserCredentialsUseCase(userCredentials)
-                    _navigateToDashboard.value = Event(Unit)
-                }
+    private val userCredentialsValid: LiveData<Resource<Boolean>> = Transformations.switchMap(userCredentials) { userCredentials ->
+        Transformations.map(checkUserCredentialsValidUseCase(userCredentials)) {
+            if (it.status != Resource.Status.LOADING && it.data == true) {
+                saveSignetsUserCredentialsUseCase(userCredentials)
+                _navigateToDashboard.value = Event(Unit)
+            }
 
-                it
+            it
+        }
+    }
+    private val _navigateToLogin = MediatorLiveData<Void>().apply {
+        addSource(userCredentialsValid) {
+            it?.let {
+                if (it.status != Resource.Status.LOADING && it.data == false) {
+                    this.call()
+                }
             }
         }
     }
+    /** An error message to be displayed to the user **/
+    val errorMessage: LiveData<Event<String>> = MediatorLiveData<Event<String>>().apply {
+        this.addSource(userCredentialsValid) {
+            if (it != null && it.status == Resource.Status.ERROR) {
+                this.value = Event(it.message ?: app.getString(R.string.error))
+            }
+        }
+    }
+
+    private val displayUniversalCodeDialogMediator: MediatorLiveData<Boolean> = MediatorLiveData()
 
     /**
      * A [LiveData] which is called when the [LoginFragment] needs to be displayed
