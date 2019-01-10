@@ -3,7 +3,7 @@
 buildscript {
     // Versions
     ext.astl = '1.0.1'
-    ext.buglife = '1.3.4'
+    ext.buglife = '1.4.0'
     ext.chuck = '1.1.0'
     ext.constraint_layout = '2.0.0-alpha3'
     ext.dagger = '2.16'

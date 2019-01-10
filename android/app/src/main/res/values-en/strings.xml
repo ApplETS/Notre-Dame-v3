@@ -93,6 +93,7 @@
     <!-- Buglife -->
     <string name="screenshot_annotator_activity_label" tools:override="true">Screenshot</string>
     <string name="what_happened_edit_text" tools:override="true">What happened?</string>
+    <string name="summary_field_title" tools:override="true">What happened?</string>
     <string name="sending_toast" tools:override="true">Submitting bug report…</string>
     <string name="thanks_for_filing_a_bug" tools:override="true">Thanks for filing a bug!</string>
     <string name="error_unable_to_read_screenshot" tools:override="true">Oops! Buglife was unable to capture your screenshot.</string>

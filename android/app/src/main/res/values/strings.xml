@@ -93,6 +93,7 @@
     <!-- Buglife -->
     <string name="screenshot_annotator_activity_label" tools:override="true">Capture d\'écran</string>
     <string name="what_happened_edit_text" tools:override="true">Que s\'est-il passé?</string>
+    <string name="summary_field_title" tools:override="true">Que s\'est-il passé?</string>
     <string name="sending_toast" tools:override="true">Soumission du rapport de bogue…</string>
     <string name="thanks_for_filing_a_bug" tools:override="true">Merci d\'avoir rapporté un bogue</string>
     <string name="error_unable_to_read_screenshot" tools:override="true">Oups! La capture d\'écran n\'a put être effectuée.</string>
