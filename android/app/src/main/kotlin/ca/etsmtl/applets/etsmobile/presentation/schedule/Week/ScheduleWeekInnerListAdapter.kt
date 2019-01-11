@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.presentation.schedule
+package ca.etsmtl.applets.etsmobile.presentation.schedule.Week
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.sub_item_schedule.*
 /**
 Created by mykaelll87 on 08/12/18
  */
-class ScheduleInnerListAdapter : RecyclerView.Adapter<ScheduleInnerListAdapter.SeanceViewHolder>() {
+class ScheduleWeekInnerListAdapter : RecyclerView.Adapter<ScheduleWeekInnerListAdapter.SeanceViewHolder>() {
 
     var items: List<Seance> = emptyList()
         set(value) {
@@ -34,9 +34,10 @@ class ScheduleInnerListAdapter : RecyclerView.Adapter<ScheduleInnerListAdapter.S
             diffResult.dispatchUpdatesTo(this)
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeanceViewHolder = SeanceViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.sub_item_schedule, parent, false)
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeanceViewHolder =
+        SeanceViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.sub_item_schedule, parent, false)
+        )
 
     override fun getItemCount(): Int = items.size
 

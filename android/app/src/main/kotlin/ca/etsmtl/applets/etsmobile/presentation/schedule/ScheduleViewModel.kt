@@ -23,6 +23,8 @@ import javax.inject.Inject
 /**
  * Created by mykaelll87 on 2018-10-24
  */
+//TODO: Create a new "FetchSeancesUseCase" that fetch all seances
+//Clean this up
 class ScheduleViewModel @Inject constructor(
     private val fetchSessionSeancesUseCase: FetchSessionSeancesUseCase,
     private val fetchSessionsUseCase: FetchSessionsUseCase,

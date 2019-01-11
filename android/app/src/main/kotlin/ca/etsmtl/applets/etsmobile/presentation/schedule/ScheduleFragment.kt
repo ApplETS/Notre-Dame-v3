@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.schedule.Week.ScheduleWeekAdapter
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator
@@ -29,7 +30,7 @@ class ScheduleFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val adapter: ScheduleAdapter = ScheduleAdapter()
+    private val adapter: ScheduleWeekAdapter = ScheduleWeekAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
