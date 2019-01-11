@@ -17,7 +17,6 @@ import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
-import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import com.xwray.groupie.ExpandableGroup
@@ -84,11 +83,11 @@ class GradesDetailsViewModel @Inject constructor(
             val gradeAverageItem = it.sommaireElementsEvaluation.run {
                 GradeAverageItem(
                     cours.value?.cote,
-                    note.zeroIfNullOrBlank(),
-                    noteSur.zeroIfNullOrBlank(),
-                    noteSur100.zeroIfNullOrBlank(),
-                    moyenneClasse.zeroIfNullOrBlank(),
-                    moyenneClassePourcentage.zeroIfNullOrBlank()
+                    note,
+                    noteSur,
+                    noteSur100,
+                    moyenneClasse,
+                    moyenneClassePourcentage
                 )
             }
 
@@ -103,16 +102,16 @@ class GradesDetailsViewModel @Inject constructor(
                     ExpandableGroup(EvaluationHeaderItem(it)).apply {
                         val grade = String.format(
                             app.getString(R.string.text_grade_with_percentage),
-                            it.note.zeroIfNullOrBlank(),
-                            it.corrigeSur.zeroIfNullOrBlank(),
-                            it.notePourcentage.zeroIfNullOrBlank()
+                            it.note,
+                            it.corrigeSur,
+                            it.notePourcentage
                         )
 
                         val averageStr = String.format(
                             app.getString(R.string.text_grade_with_percentage),
-                            it.moyenne.zeroIfNullOrBlank(),
-                            it.corrigeSur.zeroIfNullOrBlank(),
-                            it.moyennePourcentage.zeroIfNullOrBlank()
+                            it.moyenne,
+                            it.corrigeSur,
+                            it.moyennePourcentage
                         )
 
                         add(Section(getEvaluationDetailItems(grade, averageStr, it)))
