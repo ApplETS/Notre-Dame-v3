@@ -103,4 +103,7 @@ dependencies {
     // Chuck
     debugImplementation "com.readystatesoftware.chuck:library:$chuck"
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck"
+
+    // livedata-ktx
+    api "com.shopify:livedata-ktx:2.0.1"
 }

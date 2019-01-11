@@ -72,7 +72,7 @@ class GradesDetailsFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        gradesDetailsViewModel.getLoading().observe(this, Observer {
+        gradesDetailsViewModel.loading.observe(this, Observer {
             swipeRefreshLayoutGradesDetails.isRefreshing = it == true
         })
 
