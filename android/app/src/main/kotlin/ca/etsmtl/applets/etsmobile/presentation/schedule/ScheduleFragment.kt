@@ -43,6 +43,7 @@ class ScheduleFragment : DaggerFragment() {
 
         setUpSwipeRefresh()
         setUpRecyclerView()
+        btnRetry.setOnClickListener { scheduleViewModel.refresh() }
         subscribeUI()
     }
 
