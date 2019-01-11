@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.login
 
-import android.app.Activity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -14,12 +13,11 @@ import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.call
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import javax.inject.Inject
 
 /**
@@ -32,57 +30,46 @@ class LoginViewModel @Inject constructor(
     private val saveSignetsUserCredentialsUseCase: SaveSignetsUserCredentialsUseCase,
     private val app: App
 ) : AndroidViewModel(app), LifecycleObserver {
+    private val universalCode: MutableLiveData<UniversalCode> = MutableLiveData()
+    private val password: MutableLiveData<String> = MutableLiveData()
+    private val userCredentials: MutableLiveData<SignetsUserCredentials> = MutableLiveData()
+    private val _navigateToDashboard = MutableLiveData<Event<Unit>>()
+    val navigateToDashboard: LiveData<Event<Unit>> = _navigateToDashboard
+    /**
+     * This [LiveData] indicates whether the user credentials are valid or not. It's a
+     * [Transformations.switchMap] which is triggered when [userCredentials] is called. If the
+     * response doesn't contain an error, the [SignetsUserCredentials] are considered valid and are
+     * saved. Moreover, a navigation to the dashboard will be triggered.
+     */
+    private val userCredentialsValid: LiveData<Resource<Boolean>> = Transformations.switchMap(userCredentials) { userCredentials ->
+        Transformations.map(checkUserCredentialsValidUseCase(userCredentials)) {
+            if (it.status != Resource.Status.LOADING && it.data == true) {
+                saveSignetsUserCredentialsUseCase(userCredentials)
+                _navigateToDashboard.value = Event(Unit)
+            }
 
-    private val universalCode: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    private val password: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    private val userCredentials: MutableLiveData<SignetsUserCredentials> by lazy {
-        MutableLiveData<SignetsUserCredentials>()
+            it
+        }
     }
-    private val _activityToGoTo by lazy { MutableLiveData<Class<out Activity>>() }
-    private val showLoginFragmentMediator by lazy {
-        MediatorLiveData<Void>().apply {
-            addSource(userCredentialsValid) {
-                it?.let {
-                    if (it.status != Resource.Status.LOADING && it.data == false) {
-                        this.call()
-                    }
+    private val _navigateToLogin = MediatorLiveData<Void>().apply {
+        addSource(userCredentialsValid) {
+            it?.let {
+                if (it.status != Resource.Status.LOADING && it.data == false) {
+                    this.call()
                 }
             }
         }
     }
     /** An error message to be displayed to the user **/
-    val errorMessage: LiveData<Event<String>> by lazy {
-        MediatorLiveData<Event<String>>().apply {
-            this.addSource(userCredentialsValid) {
-                if (it != null && it.status == Resource.Status.ERROR) {
-                    this.value = Event(it.message ?: app.getString(R.string.error))
-                }
+    val errorMessage: LiveData<Event<String>> = MediatorLiveData<Event<String>>().apply {
+        this.addSource(userCredentialsValid) {
+            if (it != null && it.status == Resource.Status.ERROR) {
+                this.value = Event(it.message ?: app.getString(R.string.error))
             }
         }
     }
 
-    private val displayUniversalCodeDialogMediator: MediatorLiveData<Boolean> by lazy {
-        MediatorLiveData<Boolean>()
-    }
-
-    /**
-     * This [LiveData] indicates whether the user credentials are valid or not. It's a
-     * [Transformations.switchMap] which is triggered when [userCredentials] is called. If the
-     * response doesn't contain an error, the [SignetsUserCredentials] are considered valid and are
-     * saved. Moreover, a navigation to [MainActivity] will be triggered.
-     */
-    private val userCredentialsValid: LiveData<Resource<Boolean>> by lazy {
-        Transformations.switchMap(userCredentials) { userCredentials ->
-            Transformations.map(checkUserCredentialsValidUseCase(userCredentials)) {
-                if (it.status != Resource.Status.LOADING && it.data == true) {
-                    saveSignetsUserCredentialsUseCase(userCredentials)
-                    _activityToGoTo.value = MainActivity::class.java
-                }
-
-                it
-            }
-        }
-    }
+    private val displayUniversalCodeDialogMediator: MediatorLiveData<Boolean> = MediatorLiveData()
 
     /**
      * A [LiveData] which is called when the [LoginFragment] needs to be displayed
@@ -90,7 +77,7 @@ class LoginViewModel @Inject constructor(
      * The [LoginFragment] needs to be displayed when the user needs to login for the first time or
      * if his credentials are no longer valid.
      */
-    val showLoginFragment: LiveData<Void> = showLoginFragmentMediator
+    val navigateToLogin: LiveData<Void> = _navigateToLogin
 
     /**
      * A [LiveData] with a [Boolean] which would be set to true a loading animation should
@@ -109,10 +96,10 @@ class LoginViewModel @Inject constructor(
      * This is triggered after the universal code has been submitted.
      */
     val universalCodeError: LiveData<String> = Transformations.map(universalCode) {
-        when {
-            it.isEmpty() -> app.getString(R.string.error_field_required)
-            !it.matches(Regex("[a-zA-Z]{2}\\d{5}")) -> app.getString(R.string.error_invalid_universal_code)
-            else -> null
+        when (it.error) {
+            UniversalCode.Error.EMPTY -> app.getString(R.string.error_field_required)
+            UniversalCode.Error.INVALID -> app.getString(R.string.error_invalid_universal_code)
+            null -> null
         }
     }
 
@@ -128,11 +115,6 @@ class LoginViewModel @Inject constructor(
             else -> null
         }
     }
-
-    /**
-     * A [LiveData] containing the class of an [Activity] to navigate to.
-     */
-    val activityToGoTo: LiveData<Class<out Activity>> = _activityToGoTo
 
     /**
      * A [LiveData] which is called when the keyboard needs to be hidden
@@ -154,7 +136,7 @@ class LoginViewModel @Inject constructor(
      *
      * @param universalCode
      */
-    fun setUniversalCode(universalCode: String) {
+    fun setUniversalCode(universalCode: UniversalCode) {
         this.universalCode.value = universalCode
     }
 
@@ -190,20 +172,13 @@ class LoginViewModel @Inject constructor(
     fun submitSavedCredentials() {
         with(fetchSavedSignetsUserCredentialsUserCase()) {
             if (this == null) {
-                showLoginFragmentMediator.call()
+                _navigateToLogin.call()
             } else {
                 universalCode.value = this.codeAccesUniversel
                 password.value = this.motPasse
                 submitCredentials()
             }
         }
-    }
-
-    /**
-     * Triggers a navigation to [AboutActivity]
-     */
-    fun clickOnAppletsLogo() {
-        _activityToGoTo.value = AboutActivity::class.java
     }
 
     /**

@@ -8,9 +8,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
-import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.repository.data.model.Cours
 import kotlinx.android.synthetic.main.activity_grades_details.containerTvGradesDetailsSubtitle
 import kotlinx.android.synthetic.main.activity_grades_details.toolbar

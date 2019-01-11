@@ -1,24 +1,29 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
-import ca.etsmtl.applets.etsmobile.presentation.more.MoreRecyclerViewAdapter.OnItemClickListener
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.toggle
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
+import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
+import kotlinx.android.synthetic.main.fragment_more.bgAppletsItem
+import kotlinx.android.synthetic.main.fragment_more.ivAppletsLogo
 import kotlinx.android.synthetic.main.fragment_more.progressMore
 import kotlinx.android.synthetic.main.fragment_more.recyclerViewMore
+import kotlinx.android.synthetic.main.fragment_more.svMoreContent
 import javax.inject.Inject
 
 class MoreFragment : DaggerFragment() {
@@ -53,33 +58,34 @@ class MoreFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpRecyclerView()
+        setupRecyclerView()
+
+        bgAppletsItem.setOnClickListener {
+            moreViewModel.clickAbout()
+        }
 
         subscribeUI()
     }
 
-    private fun setUpRecyclerView() {
+    private fun setupRecyclerView() {
         with (recyclerViewMore) {
             val itemsList = moreViewModel.itemsList()
 
-            adapter = MoreRecyclerViewAdapter(itemsList, object : OnItemClickListener {
-                override fun onItemClick(index: Int, holder: MoreRecyclerViewAdapter.ViewHolder) {
-                    moreViewModel.selectItem(index)
-                }
-            })
-
+            adapter = MoreRecyclerViewAdapter(itemsList)
             setHasFixedSize(true)
         }
     }
 
-    private fun goToAbout(iconView: View, label: String) {
-        activity?.let {
-            AboutActivity.start(it as AppCompatActivity, Pair(iconView, label))
-        }
+    private fun goToAbout(iconView: View) {
+        val extras = FragmentNavigatorExtras(
+            iconView to getString(R.string.transition_about_applets_logo)
+        )
+
+        findNavController().navigate(MoreFragmentDirections.ActionFragmentMoreToFragmentAbout(), extras)
     }
 
     private fun subscribeUI() {
-        moreViewModel.displayLogoutDialog.observe(this, Observer {
+        moreViewModel.displayLogoutConfirmationDialog.observe(this, Observer {
             logoutConfirmationDialog.takeIf { it != null && !it.isShowing }?.let { dialog ->
                 if (it == true) {
                     dialog.show()
@@ -93,29 +99,26 @@ class MoreFragment : DaggerFragment() {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
 
-        moreViewModel.activityToGoTo.observe(this, EventObserver {
-            if (it == AboutActivity::class.java) {
-                val aboutItemView = recyclerViewMore.getChildAt(MoreViewModel.ItemsIndex.ABOUT.ordinal)
-                with (recyclerViewMore.getChildViewHolder(aboutItemView) as MoreRecyclerViewAdapter.ViewHolder) {
-                    goToAbout(this.iconImageView, this.labelTextView.text.toString())
-                }
-            } else {
-                with(Intent(context, it)) {
-                    startActivity(this)
-                    activity?.finish()
-                }
+        moreViewModel.navigateToLogin.observe(this, EventObserver {
+            with (activity as MainActivity) {
+                appBarLayout.setExpanded(false, false)
+                bottomNavigationView.toggle(false)
+                findNavController().navigate(MoreFragmentDirections.ActionFragmentMoreToFragmentLogin())
             }
         })
 
+        moreViewModel.navigateToAbout.observe(this, EventObserver {
+            goToAbout(ivAppletsLogo)
+        })
+
+        moreViewModel.navigateToOpenSourcesLicenses.observe(this, EventObserver {
+            findNavController().navigate(R.id.activityOpenSourceLicenses)
+        })
+
         moreViewModel.loading.observe(this, Observer {
-            it?.let {
-                if (it) {
-                    recyclerViewMore.visibility = View.GONE
-                    progressMore.visibility = View.VISIBLE
-                } else {
-                    recyclerViewMore.visibility = View.VISIBLE
-                    progressMore.visibility = View.GONE
-                }
+            it?.let { loading ->
+                svMoreContent.isVisible = !loading
+                progressMore.isVisible = loading
             }
         })
     }

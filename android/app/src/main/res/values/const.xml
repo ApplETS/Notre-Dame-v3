@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_view_behavior" translatable="false">ca.etsmtl.applets.etsmobile.util.BottomNavigationBehavior</string>
+    <string name="uri_password_forgotten" translatable="false">https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx</string>
+    <string name="uri_mon_ets" translatable="false">https://portail.etsmtl.ca/</string>
+    <string name="uri_bibliotech" translatable="false">https://www.etsmtl.ca/Bibliotheque/Accueil</string>
+    <string name="uri_applets_website" translatable="false">https://clubapplets.ca/</string>
+    <string name="uri_applets_gh" translatable="false">https://github.com/orgs/ApplETS/</string>
+    <string name="uri_applets_fb" translatable="false">https://www.facebook.com/ClubApplETS</string>
+    <string name="uri_applets_twitter" translatable="false">https://twitter.com/ClubApplETS</string>
+    <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
+    <string name="msg_api_no_seance" translatable="false">"Aucune donnée.  Cela peut être causé parce que l'horaire détaillé n'est pas encore finalisé (il l'est généralement quelques jours avant le début de la session), ou parce que l'horaire est trop ancien (nous ne gardons que 4 sessions), ou que vous n'êtes pas inscrit, ou que vous n'êtes inscrit qu'à des activité sans horaire, comme un stage ou que que vous êtes en rédaction de mémoire ou de thèse."</string>
+</resources>

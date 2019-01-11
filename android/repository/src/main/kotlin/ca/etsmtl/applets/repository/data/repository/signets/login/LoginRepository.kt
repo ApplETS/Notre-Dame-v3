@@ -1,12 +1,13 @@
 package ca.etsmtl.applets.repository.data.repository.signets.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import javax.inject.Inject
 
 /**
@@ -41,8 +42,8 @@ class LoginRepository @Inject constructor(
         finishedBlnLD.value = false
 
         appExecutors.diskIO().execute {
-            saveUniversalCode(userCredentials.codeAccesUniversel)
-            savePassword(userCredentials.motPasse, userCredentials.codeAccesUniversel)
+            saveUniversalCode(userCredentials.codeAccesUniversel.value)
+            savePassword(userCredentials.motPasse, userCredentials.codeAccesUniversel.value)
 
             finishedBlnLD.postValue(true)
         }
@@ -83,7 +84,7 @@ class LoginRepository @Inject constructor(
             val motPasse = getSavedPassword(codeAccesUniversel)
 
             if (motPasse != null) {
-                userCredentials = SignetsUserCredentials(codeAccesUniversel, motPasse)
+                userCredentials = SignetsUserCredentials(UniversalCode(codeAccesUniversel), motPasse)
                 SignetsUserCredentials.INSTANCE.set(userCredentials)
             }
         }
@@ -190,7 +191,7 @@ class LoginRepository @Inject constructor(
 
             with(SignetsUserCredentials.INSTANCE.get()) {
                 if (this != null) {
-                    deletePassword(this.codeAccesUniversel)
+                    deletePassword(this.codeAccesUniversel.value)
 
                     SignetsUserCredentials.INSTANCE.set(null)
                 }

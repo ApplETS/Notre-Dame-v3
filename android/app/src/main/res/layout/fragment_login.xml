@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/LoginTheme"
-    tools:background="@drawable/bg_ets_red">
+    android:theme="@style/LoginTheme">
+
+    <ImageView
+        android:id="@+id/iVBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/bg_ets_red" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -58,8 +64,8 @@
             android:id="@+id/tvMadeBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/label_login_applets_logo"
             app:layout_constraintBottom_toTopOf="@+id/btnApplets"
             app:layout_constraintEnd_toEndOf="parent"

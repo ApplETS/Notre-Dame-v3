@@ -1,19 +1,19 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
-
 apply plugin: "org.jlleitschuh.gradle.ktlint"
-
 apply plugin: 'io.fabric'
-
 apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+
+def keystorePropertiesFile = rootProject.file("android/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "ca.etsmtl.applets.etsmobile"
         minSdkVersion 21
@@ -22,11 +22,33 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+            keyAlias keystoreProperties['debugKeyAlias']
+            keyPassword keystoreProperties['debugKeyPassword']
+            storeFile rootProject.file('android/' + keystoreProperties['debugKeyStore'])
+            storePassword keystoreProperties['debugStorePassword']
+        }
+        release {
+            keyAlias keystoreProperties['releaseKeyAlias']
+            keyPassword keystoreProperties['releaseKeyPassword']
+            storeFile rootProject.file('android/' + keystoreProperties['releaseKeyStore'])
+            storePassword keystoreProperties['releaseStorePassword']
+        }
+    }
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+
         release {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -63,13 +85,17 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Support libraries
-    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "com.google.android.material:material:$support"
     implementation "androidx.legacy:legacy-support-v4:$support"
     implementation "androidx.cardview:cardview:$support"
     implementation "androidx.recyclerview:recyclerview:$support"
     implementation "androidx.browser:browser:$support"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    implementation 'androidx.core:core-ktx:1.0.1'
+
+    // Google Play Services
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
 
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
@@ -88,20 +114,19 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "androidx.arch.core:core-testing:$lifecycle"
     testImplementation "org.mockito:mockito-core:$mockito"
-    testImplementation "org.mockito:mockito-inline:$mockito_inline"
+    testImplementation "org.mockito:mockito-inline:$mockito"
 
     // Android Test Core library
-    androidTestImplementation 'androidx.test:core:1.0.0'
+    androidTestImplementation 'androidx.test:core:1.1.0'
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation "androidx.test:runner:1.1.0"
-    androidTestImplementation "androidx.test:rules:1.1.0"
+    androidTestImplementation 'androidx.test:rules:1.1.1'
 
     // Android Navigation Test Helpers
     androidTestImplementation "android.arch.navigation:navigation-testing:$navigation"
 
     // Assertions
-    androidTestImplementation "androidx.test.ext:junit:1.0.0"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
     // Espresso UI Testing
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
@@ -151,6 +176,9 @@ dependencies {
 
     // FlexboxLayout
     implementation "com.google.android:flexbox:$flexbox"
+
+    // Buglife
+    implementation "com.buglife.sdk:buglife-android:$buglife"
 
     implementation project(':android:repository')
 }

@@ -88,18 +88,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
         when (holder) {
             is GradeViewHolder -> {
                 with(itemsList[position] as Cours) {
-                    holder.tvCourseGrade.apply {
-                        text = when {
-                            !this@with.cote.isNullOrEmpty() -> this@with.cote
-                            !this@with.noteSur100.isNullOrEmpty() -> {
-                                String.format(
-                                        context.getString(R.string.text_grade_in_percentage),
-                                        this@with.noteSur100
-                                )
-                            }
-                            else -> context.getString(R.string.abbreviation_not_available)
-                        }
-                    }
+                    holder.tvCourseGrade.text = cote
 
                     holder.tvCourseSigle.text = this.sigle
 

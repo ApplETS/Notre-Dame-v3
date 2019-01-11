@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ca.etsmtl.applets.etsmobile">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,10 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.login.WelcomeActivity"
+            android:name="ca.etsmtl.applets.etsmobile.presentation.main.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="stateHidden|adjustUnspecified">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,16 +27,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ca.etsmtl.applets.etsmobile.presentation.main.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".presentation.about.AboutActivity"
-            android:label="@string/more_item_label_about_applets"
-            android:theme="@style/AboutTheme" />
-        <activity
             android:name=".presentation.gradesdetails.GradesDetailsActivity"
             android:parentActivityName=".presentation.main.MainActivity"
             android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:label="@string/more_item_open_source_licenses"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            tools:replace="android:label" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.MaterialComponents.Light" />
     </application>
 </manifest>

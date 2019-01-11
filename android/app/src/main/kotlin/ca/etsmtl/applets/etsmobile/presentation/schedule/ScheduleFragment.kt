@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -12,31 +13,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.isVisible
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
-import kotlinx.android.synthetic.main.fragment_schedule.recyclerViewSchedule
-import kotlinx.android.synthetic.main.fragment_schedule.swipeRefreshLayoutSchedule
+import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator
+import kotlinx.android.synthetic.main.empty_view_schedule.*
+import kotlinx.android.synthetic.main.fragment_schedule.*
 import javax.inject.Inject
 
 /**
  * Created by Sonphil on 25-02-18.
  */
-
 class ScheduleFragment : DaggerFragment() {
     private val scheduleViewModel: ScheduleViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(ScheduleViewModel::class.java)
     }
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private val adapter: ScheduleAdapter = ScheduleAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_schedule, container, false)
     }
 
@@ -56,11 +54,19 @@ class ScheduleFragment : DaggerFragment() {
     private fun setUpRecyclerView() {
         recyclerViewSchedule.adapter = adapter
         recyclerViewSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recyclerViewSchedule.itemAnimator = FadeInLeftAnimator()
     }
+
     private fun subscribeUI() {
-        scheduleViewModel.seances.observe(this, Observer {
-            it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
+        scheduleViewModel.sessions.observe(this, Observer {
+            // TODO utiliser les sessions dans un option menu
         })
+        scheduleViewModel.seances.observe(this, Observer {
+            it?.takeIf { it.isNotEmpty() }?.let { seances ->
+                adapter.items = seances
+            }
+        })
+
         scheduleViewModel.showEmptyView.observe(this, Observer {
             recyclerViewSchedule.isVisible = !it
             emptyViewSchedule.isVisible = it

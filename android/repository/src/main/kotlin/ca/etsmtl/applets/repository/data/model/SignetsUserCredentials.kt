@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicReference
  */
 @Parcelize
 data class SignetsUserCredentials(
-    val codeAccesUniversel: String,
+    val codeAccesUniversel: UniversalCode,
     val motPasse: String
 ) : Parcelable {
     companion object {

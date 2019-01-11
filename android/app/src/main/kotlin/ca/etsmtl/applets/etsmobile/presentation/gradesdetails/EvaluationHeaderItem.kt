@@ -3,8 +3,8 @@ package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.isVisible
 import ca.etsmtl.applets.etsmobile.util.rotate
 import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
 import ca.etsmtl.applets.repository.data.model.Evaluation

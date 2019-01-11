@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation
 
-import android.app.Activity
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -8,13 +7,13 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.Event
+import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.mockNetwork
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import ca.etsmtl.applets.repository.data.model.UniversalCode
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.mock
@@ -53,15 +52,18 @@ class LoginViewModelTest {
             savedSignetsUserCredentialsUserCase,
             app
     )
-    private val userCredentials = SignetsUserCredentials("test", "test")
+    private val userCredentials = SignetsUserCredentials(UniversalCode("test"), "test")
     @Captor
     private lateinit var userCredentialsArgumentCaptor: ArgumentCaptor<SignetsUserCredentials>
     @Captor
     private lateinit var stringEventArgumentCaptor: ArgumentCaptor<Event<String>>
+    private val liveData = MutableLiveData<Resource<Boolean>>()
 
     @Before
-    fun setUp() {
+    fun setup() {
         MockitoAnnotations.initMocks(this)
+
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
 
         app.mockNetwork()
     }
@@ -73,189 +75,356 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun testCallUseCase() {
-        val liveData = MutableLiveData<Resource<Boolean>>()
-        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
-        // Set an observer
+    fun useCase_setAndSubmitCredentials_CalledWithCredentials() {
+        // given
         loginViewModel.showLoading.observeForever(mock())
+
+        // when
         setAndSubmitCredentials(userCredentials)
+
+        // then
         verify(checkUserCredentialsValidUseCase).invoke(capture(userCredentialsArgumentCaptor))
         assertEquals(userCredentials, userCredentialsArgumentCaptor.value)
     }
 
     @Test
-    fun testNoCallToRepoIfCredentialIsNull() {
+    fun useCase_EmptyCredentialsSubmitted_NotCalled() {
+        // given
         val liveData = MutableLiveData<Resource<Boolean>>()
         `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
         loginViewModel.showLoading.observeForever(mock())
-        loginViewModel.submitCredentials()
-        verifyZeroInteractions(checkUserCredentialsValidUseCase)
 
+        // when
+        loginViewModel.submitCredentials()
+
+        // then
+        verifyZeroInteractions(checkUserCredentialsValidUseCase)
+    }
+
+    @Test
+    fun useCase_CredentialsSubmittedWithEmptyPassword_NotCalled() {
+        // given
+        val liveData = MutableLiveData<Resource<Boolean>>()
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
+        loginViewModel.showLoading.observeForever(mock())
+
+        // when
         loginViewModel.setUniversalCode(userCredentials.codeAccesUniversel)
         loginViewModel.submitCredentials()
-        verifyZeroInteractions(checkUserCredentialsValidUseCase)
 
+        // then
+        verifyZeroInteractions(checkUserCredentialsValidUseCase)
+    }
+
+    @Test
+    fun useCase_CredentialsSubmittedWithNonEmptyFields_Called() {
+        // given
+        val liveData = MutableLiveData<Resource<Boolean>>()
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
+        loginViewModel.showLoading.observeForever(mock())
+
+        // when
+        loginViewModel.setUniversalCode(userCredentials.codeAccesUniversel)
         loginViewModel.setPassword(userCredentials.motPasse)
         loginViewModel.submitCredentials()
+
+        // then
         verify(checkUserCredentialsValidUseCase).invoke(capture(userCredentialsArgumentCaptor))
         assertEquals(userCredentials, userCredentialsArgumentCaptor.value)
     }
 
     @Test
-    fun testErrorMessage() {
+    fun errorMessage_errorOccurredAfterSubmittedCredentials_EmitsErrorMessage() {
+        // given
         val liveData = MutableLiveData<Resource<Boolean>>()
         `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
-
         val message = "Test msg"
         liveData.value = Resource.error(message, null)
         val observer: Observer<Event<String>> = mock()
         loginViewModel.errorMessage.observeForever(observer)
         loginViewModel.setUniversalCode(userCredentials.codeAccesUniversel)
         loginViewModel.setPassword(userCredentials.motPasse)
-        verify(observer, never()).onChanged(any())
+
+        // when
         loginViewModel.submitCredentials()
+
+        // then
         verify(observer).onChanged(capture(stringEventArgumentCaptor))
         assertEquals(message, stringEventArgumentCaptor.value.getContentIfNotHandled())
     }
 
     @Test
-    fun testShowLoading() {
-        val liveData = MutableLiveData<Resource<Boolean>>()
-        liveData.value = Resource.loading(null)
+    fun loading_ProcessingCredentials_EmitsTrue() {
+        // given
+        val liveData = MutableLiveData<Resource<Boolean>>().apply {
+            value = Resource.loading(null)
+        }
         `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
-
         val observer: Observer<Boolean> = mock()
         loginViewModel.showLoading.observeForever(observer)
+
+        // when
         loginViewModel.setUniversalCode(userCredentials.codeAccesUniversel)
         loginViewModel.setPassword(userCredentials.motPasse)
-        verify(observer, never()).onChanged(any())
         loginViewModel.submitCredentials()
+
+        // then
         verify(observer).onChanged(true)
+    }
 
-        liveData.value = Resource.success(true)
+    @Test
+    fun loading_ProcessedCredentialsSuccessfully_EmitsTrue() {
+        // given
+        val liveData = MutableLiveData<Resource<Boolean>>().apply {
+            value = Resource.success(true)
+        }
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
+        val observer: Observer<Boolean> = mock()
+        loginViewModel.showLoading.observeForever(observer)
+
+        // when
+        loginViewModel.setUniversalCode(userCredentials.codeAccesUniversel)
+        loginViewModel.setPassword(userCredentials.motPasse)
+        loginViewModel.submitCredentials()
+
+        // then
         /*
-         onSuccess, the UI will navigate to MainActivity and we want the loading animation to
-         continue during the transition
+         On success, the loading animation should continue. The transition to the next screen looks
+         better if the animation doesn't stop.
           */
-        verify(observer, times(2)).onChanged(true)
+        verify(observer, times(1)).onChanged(true)
+    }
 
-        liveData.value = Resource.error("foo", null)
+    @Test
+    fun loading_ErrorOccurringWhenProcessingCredentials_EmitsFalse() {
+        // given
+        val liveData = MutableLiveData<Resource<Boolean>>().apply {
+            value = Resource.error("foo", null)
+        }
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
+        val observer: Observer<Boolean> = mock()
+        loginViewModel.showLoading.observeForever(observer)
+
+        // when
+        loginViewModel.setUniversalCode(userCredentials.codeAccesUniversel)
+        loginViewModel.setPassword(userCredentials.motPasse)
+        loginViewModel.submitCredentials()
+
+        // then
         verify(observer, times(1)).onChanged(false)
     }
 
     @Test
-    fun testUniversalCodeError() {
-        val emptyError = "Ce champ est requis"
-        val invalidError = "Le code universel est invalide"
-        `when`(app.getString(R.string.error_field_required)).thenReturn(emptyError)
-        `when`(app.getString(R.string.error_invalid_universal_code)).thenReturn(invalidError)
-
+    fun universalCodeError_InvalidCode_EmitsErrorMessage() {
+        // given
+        val errorMessage = "Le code universel est invalide"
+        `when`(app.getString(R.string.error_invalid_universal_code)).thenReturn(errorMessage)
         val observer: Observer<String> = mock()
         loginViewModel.universalCodeError.observeForever(observer)
 
-        var universalCode = ""
-        loginViewModel.setUniversalCode(universalCode)
-        verify(observer).onChanged(emptyError)
+        // when
+        val invalidUniversalCode = UniversalCode("echasdf")
+        loginViewModel.setUniversalCode(invalidUniversalCode)
 
-        universalCode = "AZ1234"
-        loginViewModel.setUniversalCode(universalCode)
-        verify(observer).onChanged(invalidError)
+        // then
+        verify(observer).onChanged(errorMessage)
+    }
 
-        universalCode = "Z12345"
-        loginViewModel.setUniversalCode(universalCode)
-        verify(observer, times(2)).onChanged(invalidError)
+    @Test
+    fun universalCode_ValidCode_EmitsNull() {
+        // given
+        val observer: Observer<String> = mock()
+        loginViewModel.universalCodeError.observeForever(observer)
 
-        universalCode = "AZ12345@ens"
-        loginViewModel.setUniversalCode(universalCode)
-        verify(observer, times(3)).onChanged(invalidError)
+        // when
+        val validUniversalCode = UniversalCode("AZ12345")
+        loginViewModel.setUniversalCode(validUniversalCode)
 
-        universalCode = "\\AZ12345"
-        loginViewModel.setUniversalCode(universalCode)
-        verify(observer, times(4)).onChanged(invalidError)
-
-        universalCode = "AZ12345"
-        loginViewModel.setUniversalCode(universalCode)
+        // then
         verify(observer).onChanged(null)
     }
 
     @Test
-    fun testPasswordError() {
+    fun passwordError_EmptyPassword_EmitsEmptyErrorMessage() {
+        // given
         val emptyError = "Ce champ est requis"
         `when`(app.getString(R.string.error_field_required)).thenReturn(emptyError)
-
         val observer: Observer<String> = mock()
         loginViewModel.passwordError.observeForever(observer)
 
+        // when
         loginViewModel.setPassword("")
-        verify(observer).onChanged(emptyError)
 
+        // then
+        verify(observer).onChanged(emptyError)
+    }
+
+    @Test
+    fun passwordError_NonEmptyPassword_EmitsNull() {
+        // given
+        val observer: Observer<String> = mock()
+        loginViewModel.passwordError.observeForever(observer)
+
+        // when
         loginViewModel.setPassword("foo")
+
+        // then
         verify(observer).onChanged(null)
     }
 
     @Test
-    fun testNavigateToActivity() {
-        val observer: Observer<Class<out Activity>> = mock()
-        loginViewModel.activityToGoTo.observeForever(observer)
-
-        loginViewModel.clickOnAppletsLogo()
-        verify(observer).onChanged(AboutActivity::class.java)
-
+    fun navigateToDashboard_Error_NotCalled() {
+        // given
+        val observer = mock<EventObserver<Unit>>()
+        loginViewModel.navigateToDashboard.observeForever(observer)
         val liveData = MutableLiveData<Resource<Boolean>>()
         liveData.value = Resource.loading(null)
         `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
         loginViewModel.showLoading.observeForever(mock())
-
         setAndSubmitCredentials(userCredentials)
+
+        // when
         liveData.value = Resource.error("foo", null)
-        verify(observer, never()).onChanged(MainActivity::class.java)
-        liveData.value = Resource.success(false)
-        verify(observer, never()).onChanged(MainActivity::class.java)
-        liveData.value = Resource.success(true)
-        verify(observer).onChanged(MainActivity::class.java)
+
+        // then
+        verify(observer, never()).onChanged(any())
     }
 
     @Test
-    fun testHideKeyboard() {
+    fun navigateToDashboard_False_NotCalled() {
+        // given
+        val observer = mock<EventObserver<Unit>>()
+        loginViewModel.navigateToDashboard.observeForever(observer)
+        val liveData = MutableLiveData<Resource<Boolean>>()
+        liveData.value = Resource.loading(null)
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
+        loginViewModel.showLoading.observeForever(mock())
+        setAndSubmitCredentials(userCredentials)
+
+        // when
+        liveData.value = Resource.success(false)
+
+        // then
+        verify(observer, never()).onChanged(any())
+    }
+
+    @Test
+    fun navigateToDashboard_True_Called() {
+        // given
+        val observer = mock<EventObserver<Unit>>()
+        loginViewModel.navigateToDashboard.observeForever(observer)
+        val liveData = MutableLiveData<Resource<Boolean>>()
+        liveData.value = Resource.loading(null)
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
+        loginViewModel.showLoading.observeForever(mock())
+        setAndSubmitCredentials(userCredentials)
+
+        // when
+        liveData.value = Resource.success(true)
+
+        // then
+        verify(observer).onChanged(any())
+    }
+
+    @Test
+    fun hideKeyboard_UniversalCodeSet_NotCalled() {
+        // given
         val observer: Observer<Void> = mock()
         loginViewModel.hideKeyboard.observeForever(observer)
 
-        loginViewModel.setUniversalCode("AZ12345")
-        verify(observer, never()).onChanged(any())
+        // when
+        loginViewModel.setUniversalCode(UniversalCode("AZ12345"))
 
+        // then
+        verify(observer, never()).onChanged(any())
+    }
+
+    @Test
+    fun hideKeyboard_CredentialsSet_NotCalled() {
+        // given
+        val observer: Observer<Void> = mock()
+        loginViewModel.hideKeyboard.observeForever(observer)
+
+        // when
+        loginViewModel.setUniversalCode(UniversalCode("AZ12345"))
         loginViewModel.setPassword("foo")
-        verify(observer, never()).onChanged(any())
 
+        // then
+        verify(observer, never()).onChanged(any())
+    }
+
+    @Test
+    fun hideKeyboard_CredentialsSubmitted_Called() {
+        // given
+        val observer: Observer<Void> = mock()
+        loginViewModel.hideKeyboard.observeForever(observer)
+
+        // when
+        loginViewModel.setUniversalCode(UniversalCode("AZ12345"))
+        loginViewModel.setPassword("foo")
         loginViewModel.submitCredentials()
+
+        // then
         verify(observer).onChanged(null)
     }
 
     @Test
-    fun showLoginFragment() {
+    fun navigateToLogin_SubmittedCredentialsAreValid_NotCalled() {
+        // given
         loginViewModel.showLoading.observeForever(mock())
-
         val observer: Observer<Void> = mock()
-        loginViewModel.showLoginFragment.observeForever(observer)
-
+        loginViewModel.navigateToLogin.observeForever(observer)
         val liveData = MutableLiveData<Resource<Boolean>>()
         `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
         setAndSubmitCredentials(userCredentials)
-        liveData.value = Resource.success(true)
-        verifyZeroInteractions(observer)
 
+        // when
+        liveData.value = Resource.success(true)
+
+        // then
+        verifyZeroInteractions(observer)
+    }
+
+    @Test
+    fun navigateToLogin_SubmittedCredentialsAreMotValid_Called() {
+        // given
+        loginViewModel.showLoading.observeForever(mock())
+        val observer: Observer<Void> = mock()
+        loginViewModel.navigateToLogin.observeForever(observer)
+        val liveData = MutableLiveData<Resource<Boolean>>()
+        `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
+        setAndSubmitCredentials(userCredentials)
+
+        // when
         liveData.value = Resource.error("foo", false)
+
+        // then
         verify(observer).onChanged(null)
     }
 
     @Test
-    fun testUniversalCodeInfoButton() {
+    fun displayUniversalCodeDialog_WantsToDisplay_EmitsTrue() {
+        // given
         val observer: Observer<Boolean> = mock()
         loginViewModel.displayUniversalCodeDialog.observeForever(observer)
 
+        // when
         loginViewModel.displayUniversalCodeInfo(true)
-        verify(observer).onChanged(true)
 
+        // then
+        verify(observer).onChanged(true)
+    }
+
+    @Test
+    fun displayUniversalCodeDialog_WantsToHide_EmitsFalse() {
+        // given
+        val observer: Observer<Boolean> = mock()
+        loginViewModel.displayUniversalCodeDialog.observeForever(observer)
+
+        // when
         loginViewModel.displayUniversalCodeInfo(false)
+
+        // then
         verify(observer).onChanged(false)
     }
 }

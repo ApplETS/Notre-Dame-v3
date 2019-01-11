@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -11,6 +11,10 @@
         <item name="android:textColorPrimary">@android:color/primary_text_light</item>
         <item name="android:textColorPrimaryInverse">@android:color/primary_text_light</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.MaterialComponents.ActionBar">
@@ -65,10 +69,6 @@
         <item name="android:textColor">@color/material_yellow_500</item>
     </style>
 
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash</item>
-    </style>
-
     <style name="AppCompatAlertDialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
@@ -86,5 +86,12 @@
         <item name="android:textColorLink">@android:color/white</item>
         <item name="colorButtonNormal">@android:color/white</item>
         <item name="android:navigationBarColor">?android:attr/colorPrimary</item>
+    </style>
+
+    <!-- Buglife -->
+    <style name="buglife_alert_dialog" parent="Theme.MaterialComponents.Light.Dialog" tools:override="true">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 </resources>

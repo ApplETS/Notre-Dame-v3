@@ -20,9 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# Keep the names of our api models so that Moshi can use them
--keepnames class ca.etsmtl.applets.repository.data.api.response.** { *; }
-
 # For stack traces
 -keepattributes SourceFile,LineNumberTable
 -keepattributes *Annotation*
@@ -31,6 +28,9 @@
 -dontwarn javax.annotation.**
 
 # Moshi
+-keep class ca.etsmtl.applets.repository.data.api.response.** { *; }
+-keep class ca.etsmtl.applets.repository.data.api.requestbody.** { *; }
+
 -keepclasseswithmembers class * {
     @com.squareup.moshi.* <methods>;
 }
@@ -38,13 +38,21 @@
 -keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
     <fields>;
 }
--keepnames @com.squareup.moshi.JsonClass class *
--if @com.squareup.moshi.JsonClass class *
--keep class <1>JsonAdapter {
+-keep class **JsonAdapter {
     <init>(...);
     <fields>;
 }
 -keep class kotlin.reflect.jvm.internal.impl.builtins.BuiltInsLoaderImpl
+
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
+
+# Retrofit
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn kotlin.Unit
+-dontwarn retrofit2.-KotlinExtensions

@@ -3,4 +3,5 @@
     <!-- transition shared elements -->
     <string name="transition_grades_details_toolbar" translatable="false">GradesDetailsToolbar</string>
     <string name="transition_grades_details_content" translatable="false">GradesDetailsContent</string>
+    <string name="transition_about_applets_logo" translatable="false">AboutAppletsLogo</string>
 </resources>

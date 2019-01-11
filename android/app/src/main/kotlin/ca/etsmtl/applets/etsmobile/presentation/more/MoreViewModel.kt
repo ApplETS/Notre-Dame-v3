@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.app.Activity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -9,9 +8,8 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.presentation.about.AboutActivity
-import ca.etsmtl.applets.etsmobile.presentation.login.WelcomeActivity
 import ca.etsmtl.applets.etsmobile.util.Event
+import com.buglife.sdk.Buglife
 import javax.inject.Inject
 
 /**
@@ -23,18 +21,18 @@ class MoreViewModel @Inject constructor(
     private val app: App
 ) : AndroidViewModel(app) {
 
-    enum class ItemsIndex {
-        ABOUT, LOGOUT
-    }
-
-    private val _displayLogoutConfirmationDialog by lazy { MutableLiveData<Boolean>() }
-    private val _displayMessage by lazy { MutableLiveData<Event<String>>() }
-    private val logoutMediatorLiveData by lazy { MediatorLiveData<Boolean>() }
-    private val _activityToGoTo by lazy { MutableLiveData<Event<Class<out Activity>>>() }
-    val loading = Transformations.map(logoutMediatorLiveData) { it }
-    val displayLogoutDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
+    private val logoutMediatorLiveData = MediatorLiveData<Boolean>()
+    val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
+    private val _displayLogoutConfirmationDialog = MutableLiveData<Boolean>()
+    val displayLogoutConfirmationDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
+    private val _displayMessage = MutableLiveData<Event<String>>()
     val displayMessage: LiveData<Event<String>> = _displayMessage
-    val activityToGoTo: LiveData<Event<Class<out Activity>>> = _activityToGoTo
+    private val _navigateToLogin = MutableLiveData<Event<Unit>>()
+    val navigateToLogin: LiveData<Event<Unit>> = _navigateToLogin
+    private val _navigateToAbout = MutableLiveData<Event<Unit>>()
+    val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
+    private val _navigateToOpenSourceLicenses = MutableLiveData<Event<Unit>>()
+    val navigateToOpenSourcesLicenses: LiveData<Event<Unit>> = _navigateToOpenSourceLicenses
 
     /**
      * Clears the user's data
@@ -52,7 +50,7 @@ class MoreViewModel @Inject constructor(
 
                         logoutMediatorLiveData.removeSource(this)
 
-                        _activityToGoTo.value = Event(WelcomeActivity::class.java)
+                        _navigateToLogin.value = Event(Unit)
                     }
                 }
             }
@@ -60,18 +58,28 @@ class MoreViewModel @Inject constructor(
     }
 
     fun itemsList(): List<MoreItem> {
-        val moreItems = ArrayList<MoreItem>()
-        val icons = app.resources.obtainTypedArray(R.array.more_items_icons)
-        val labels = app.resources.getStringArray(R.array.more_items_labels)
+        return listOf(
+            MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_report_bug) {
+                navigateToBuglifeReporter()
+            },
+            MoreItem(R.drawable.ic_code_black_24dp, R.string.more_item_open_source_licenses) {
+                _navigateToOpenSourceLicenses.value = Event(Unit)
+            },
+            MoreItem(R.drawable.ic_exit_to_app_black_24dp, R.string.more_item_label_log_out) {
+                _displayLogoutConfirmationDialog.value = true
+            }
+        )
+    }
 
-        labels.forEachIndexed { index, label ->
-            moreItems.add(MoreItem(icons.getResourceId(index,
-                    R.drawable.ic_info_white_24dp), label))
-        }
+    private fun navigateToBuglifeReporter() {
+        val screenShot = Buglife.captureScreenshot() // TODO: Let user attach his own file
 
-        icons.recycle()
+        screenShot?.let { Buglife.addAttachment(it) }
+        Buglife.showReporter()
+    }
 
-        return moreItems
+    fun clickAbout() {
+        _navigateToAbout.value = Event(Unit)
     }
 
     fun clickLogoutConfirmationDialogButton(confirmedLogout: Boolean) {
@@ -79,12 +87,5 @@ class MoreViewModel @Inject constructor(
 
         if (confirmedLogout)
             logout()
-    }
-
-    fun selectItem(index: Int) {
-        when (index) {
-            ItemsIndex.ABOUT.ordinal -> _activityToGoTo.value = Event(AboutActivity::class.java)
-            ItemsIndex.LOGOUT.ordinal -> _displayLogoutConfirmationDialog.value = true
-        }
     }
 }
