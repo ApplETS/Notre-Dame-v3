@@ -37,7 +37,7 @@ internal fun String.msDateToUnix() = substringAfter('(').substringBefore(')').to
  */
 fun String.dateToUnix(format: String): Long {
     return try {
-        SimpleDateFormat(format).parse(this@dateToUnix).time
+        SimpleDateFormat(format).parse(this@dateToUnix).timeInSeconds
     } catch (e: Exception) {
         e.printStackTrace()
         0
@@ -50,4 +50,10 @@ internal fun String.signetsDefaultDateToUnix(): Long = dateToUnix("yyyy-MM-dd")
  * Format unix date in seconds to Signets default date format
  */
 internal fun Long.unixToDefaultSignetsDate() = SimpleDateFormat("yyyy-MM-dd")
-    .format(Date(this))
+    .format(Date(this * 1000))
+
+inline var Date.timeInSeconds: Long
+    get() = time / 1000
+    set(value) {
+        time = value * 1000
+    }
