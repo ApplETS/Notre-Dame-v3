@@ -129,9 +129,8 @@ class GradesDetailsViewModel @Inject constructor(
         }
 
     val loading: LiveData<Boolean> = summaryAndEvaluations
-        .nonNull()
         .map {
-            it.status == Resource.Status.LOADING
+            it == null || it.status == Resource.Status.LOADING
         }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

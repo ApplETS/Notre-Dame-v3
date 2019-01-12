@@ -49,9 +49,8 @@ class GradesViewModel @Inject constructor(
         }
 
     val loading: LiveData<Boolean> = coursRes
-        .nonNull()
         .map {
-            it.status == Resource.Status.LOADING
+            it == null || it.status == Resource.Status.LOADING
         }
 
     /**
