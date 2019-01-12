@@ -116,4 +116,7 @@
         <item>Rarement</item>
     </string-array>
     <string name="buglife_steps_to_reproduce">Étapes pour reproduire</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

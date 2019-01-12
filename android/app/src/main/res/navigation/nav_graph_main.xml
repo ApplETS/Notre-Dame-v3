@@ -44,7 +44,16 @@
         android:id="@+id/fragmentEts"
         android:name="ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment"
         android:label="@string/title_ets"
-        tools:layout="@layout/fragment_ets" />
+        tools:layout="@layout/fragment_ets" >
+        <action
+            android:id="@+id/action_navigation_ets_to_securityFragment"
+            app:destination="@id/securityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityFragment"
+        android:label="@string/title_security"
+        tools:layout="@layout/fragment_security" />
     <fragment
         android:id="@+id/fragmentMore"
         android:name="ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment"
