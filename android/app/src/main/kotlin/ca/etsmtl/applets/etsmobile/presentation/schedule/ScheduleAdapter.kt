@@ -30,6 +30,10 @@ class ScheduleAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         TODO("not implemented")
     }
 
+    override fun getPageTitle(position: Int): CharSequence? {
+        return super.getPageTitle(position)
+    }
+
     //TODO: see https://developer.android.com/training/implementing-navigation/lateral
     private var itemList: List<Map.Entry<Date, List<Seance>>> = emptyList()
 
