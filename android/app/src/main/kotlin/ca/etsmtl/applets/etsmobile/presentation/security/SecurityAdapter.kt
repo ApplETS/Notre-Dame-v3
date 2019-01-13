@@ -8,7 +8,7 @@ import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_security.*
 
-class SecurityAdapter(val securityList: ArrayList<SecurityModel>) : RecyclerView.Adapter<SecurityAdapter.SecurityViewHolder>() {
+class SecurityAdapter(private val securityList: List<SecurityModel>) : RecyclerView.Adapter<SecurityAdapter.SecurityViewHolder>() {
     //TODO Ajouter clickListener pour les differentes type d'urgence
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SecurityViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_security, parent, false)
