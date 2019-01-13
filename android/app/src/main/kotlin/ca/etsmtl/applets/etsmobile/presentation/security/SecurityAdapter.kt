@@ -8,20 +8,20 @@ import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_security.*
 
-class SecurityAdapter(val emergencyList: ArrayList<SecurityModel>) : RecyclerView.Adapter<SecurityAdapter.EmergencyViewHolder>() {
+class SecurityAdapter(val securityList: ArrayList<SecurityModel>) : RecyclerView.Adapter<SecurityAdapter.SecurityViewHolder>() {
     //TODO Ajouter clickListener pour les differentes type d'urgence
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = EmergencyViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SecurityViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_security, parent, false)
     )
 
-    override fun getItemCount(): Int = emergencyList.size
+    override fun getItemCount(): Int = securityList.size
 
-    override fun onBindViewHolder(holder: EmergencyViewHolder, position: Int) {
-        with(emergencyList[position]) {
+    override fun onBindViewHolder(holder: SecurityViewHolder, position: Int) {
+        with(securityList[position]) {
             holder.titleTypeUrgence.text = securityType
         }
     }
 
-    class EmergencyViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer
+    class SecurityViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer
 
 }
