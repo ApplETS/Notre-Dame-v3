@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
-import kotlinx.android.synthetic.main.fragment_more.*
+import kotlinx.android.synthetic.main.fragment_security.*
 
 /**
  * This fragment contains information about the security.
@@ -29,10 +29,10 @@ class SecurityFragment : Fragment() {
 
 
     }
-    private fun setupRecyclerView() {
-        with (recyclerViewMore) {
-            val itemsList = listOf(SecurityModel("Bombe","qwe"))
 
+    private fun setupRecyclerView() {
+        with(security_recycler_view) {
+            val itemsList = listOf("Appel à la bombe", "Colis suspect", "Évacuation", "Fuite de gaz", "Incendie", "Panne d'ascenseur", "Panne électrique", "Personne armée", "Tremblement de terre", "Urgence médicale")
             adapter = SecurityAdapter(itemsList)
             setHasFixedSize(true)
         }
