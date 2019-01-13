@@ -16,6 +16,7 @@ import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
+import ca.etsmtl.applets.repository.util.timeInSeconds
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
@@ -124,7 +125,7 @@ class ScheduleViewModel @Inject constructor(
             }
             selectedSessionMediatorLiveData.addSource(this) {
                 var currentSession = it.data.orEmpty()
-                    .firstOrNull { s -> System.currentTimeMillis() in s.dateDebut..s.dateFin }
+                    .firstOrNull { s -> Date().timeInSeconds in s.dateDebut..s.dateFin }
                 if (currentSession == null) {
                     currentSession = if (it.data?.isNotEmpty() == true) it.data?.get(0) else null
                 }
