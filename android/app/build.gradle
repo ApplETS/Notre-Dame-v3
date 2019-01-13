@@ -11,6 +11,12 @@ def keystorePropertiesFile = rootProject.file("android/keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def versionMajor = 3
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = Integer.valueOf(System.getenv("TRAVIS_BUILD_NUMBER") ?: 0)
+println("versionBuild: " + versionBuild)
+
 android {
     compileSdkVersion 28
 
@@ -18,8 +24,8 @@ android {
         applicationId "ca.etsmtl.applets.etsmobile"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.0"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
