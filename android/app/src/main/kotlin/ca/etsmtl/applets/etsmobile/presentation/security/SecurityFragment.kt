@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.synthetic.main.fragment_security.*
 
@@ -12,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_security.*
  * This fragment contains information about the security.
  */
 class SecurityFragment : Fragment() {
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -24,17 +24,14 @@ class SecurityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //setupRecyclerView()
 
 
     }
 
     private fun setupRecyclerView() {
-        with(security_recycler_view) {
-            val itemsList = listOf("Appel à la bombe", "Colis suspect", "Évacuation", "Fuite de gaz", "Incendie", "Panne d'ascenseur", "Panne électrique", "Personne armée", "Tremblement de terre", "Urgence médicale")
-            adapter = SecurityAdapter(itemsList)
-            setHasFixedSize(true)
-        }
+        val itemsList = listOf("Appel à la bombe", "Colis suspect", "Évacuation", "Fuite de gaz", "Incendie", "Panne d'ascenseur", "Panne électrique", "Personne armée", "Tremblement de terre", "Urgence médicale")
+        security_recycler_view.adapter = SecurityAdapter(itemsList,findNavController())
+        security_recycler_view.setHasFixedSize(true)
     }
 }
