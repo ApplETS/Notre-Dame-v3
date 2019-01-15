@@ -116,4 +116,414 @@
         <item>Rarely</item>
     </string-array>
     <string name="buglife_steps_to_reproduce">Steps to reproduce</string>
+
+    <!-- Security -->
+    <string-array name="security_type">
+        <item>Bomb threat</item>
+        <item>Suspicious packages</item>
+        <item>Evacuation</item>
+        <item>Gas leak</item>
+        <item>Fire</item>
+        <item>Broken elevator</item>
+        <item>Electrical outage</item>
+        <item>Armed person</item>
+        <item>Earthquake</item>
+        <item>Medical emergency</item>
+    </string-array>
+
+
+    <string name="bomb_threat">
+        <![CDATA[
+<h3>If the bomb threat is made by phone:</h3>
+
+<ul>
+	<li>Don&rsquo;t hang up.&nbsp;</li>
+	<li>Let the caller hang up first.</li>
+	<li>Try to get as much information as possible.&nbsp;</li>
+	<li>Get the person to repeat him- or herself, or pretend you can&rsquo;t hear to buy time.&nbsp;</li>
+	<li>&nbsp;Pay special attention to the following elements:
+	<ul>
+		<li>Gender</li>
+		<li>Age</li>
+		<li>Accent, language spoken</li>
+		<li>Tone of voice (high or low)</li>
+		<li>Speech rhythm and emotions (angry, calm, agitated)</li>
+		<li>Background noises</li>
+	</ul>
+	</li>
+	<li>Depending on the situation and what is possible, try to obtain the following information:
+	<ul>
+		<li>The time at which the bomb will go off</li>
+		<li>The type of bomb</li>
+		<li>The people being targeted and the reason</li>
+		<li>The location of the bomb</li>
+		<li>The name and number on the phone&rsquo;s Caller ID</li>
+	</ul>
+	</li>
+	<li>Contact Security at extension 55 (internal phone system) to alert them to the situation and share relevant information.&nbsp;</li>
+	<li>Security may then ask you to come to the Security Operations Centre, located at the entrance of Pavilion A.</li>
+</ul>
+
+<h3>Evacuation</h3>
+
+<ul>
+	<li>Wait until Security orders evacuation. Security officers must inspect evacuation routes to ensure that there is no danger (suspicious packages).&nbsp;</li>
+	<li>Stay calm.</li>
+	<li>Dress according to the outdoor temperature, but don&rsquo;t make a detour to get clothing (for example, don&rsquo;t go to your locker).&nbsp;</li>
+	<li>Evacuate the area via the closest emergency staircase. Don&rsquo;t take the elevator.&nbsp;</li>
+	<li>Keep a safe distance from the building.&nbsp;</li>
+	<li>Go to the designated meeting point.</li>
+	<li>Do not go back inside for any reason.</li>
+</ul>
+
+<h3>Returning to the building</h3>
+
+<ul>
+	<li>You can return to the building as soon as Security announces that it is safe to do so.</li>
+	<li>This authorization will be announced over a megaphone at the meeting point.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="suspicious_packages">
+        <![CDATA[
+<p>A package is considered suspicious if it presents the following characteristics:&nbsp;</p>
+
+<ul>
+	<li>Excessive stamps</li>
+	<li>Suspicious odour</li>
+	<li>Suspicious noise</li>
+	<li>No return address</li>
+	<li>Several misspelled words</li>
+	<li>Addressed to a person&rsquo;s title or no name</li>
+	<li>Excessive amount of tape</li>
+	<li>Unexpected delivery</li>
+	<li>Labelled &ldquo;private&rdquo; or &ldquo;only to be opened by&rdquo;</li>
+</ul>
+
+<h4>Note</h4>
+
+<p>A package may contain nuclear, radiological, biological or chemical material if it presents one of the following characteristics:&nbsp;</p>
+
+<ul>
+	<li>It appears damaged</li>
+	<li>It&rsquo;s leaking</li>
+	<li>It contains liquid, dust or granules&nbsp;</li>
+	<li>It smells unusual</li>
+	<li>It is emitting gas or vapour</li>
+	<li>It is seeping or boiling</li>
+	<li>It contains aerosols</li>
+	<li>It shows signs of corrosion</li>
+</ul>
+
+<h3>What to do</h3>
+
+<ul>
+	<li>Keep a safe distance from the package.</li>
+	<li>Don&rsquo;t use your cell phone near the package. Turn it off to prevent any interference with the package.&nbsp;</li>
+	<li>Contact Security at extension 55 (internal telephone system).</li>
+	<li>Don&rsquo;t hang up until the dispatcher tells you to do so.</li>
+</ul>
+
+<h3>Evacuation</h3>
+
+<ul>
+	<li>Wait until Security orders evacuation. Security officers must inspect evacuation routes to ensure that there is no danger (suspicious packages).&nbsp;</li>
+	<li>Stay calm.</li>
+	<li>Dress according to the outdoor temperature, but don&rsquo;t make a detour to get clothing (for example, don&rsquo;t go to your locker).&nbsp;</li>
+	<li>Evacuate the area via the closest emergency stairwell. Don&rsquo;t take the elevator.&nbsp;</li>
+	<li>Keep a safe distance from the building.&nbsp;</li>
+	<li>Go to the meeting point.</li>
+	<li>Do not go back inside for any reason.</li>
+</ul>
+
+<h3>Returning to the building</h3>
+
+<ul>
+	<li>You can return to the building as soon as Security announces that it is safe to do so.</li>
+	<li>This authorization will be announced over a megaphone at the meeting point.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="evacuation">
+        <![CDATA[
+<ul>
+	<li>Wait until Security orders evacuation. Security officers must inspect evacuation routes to ensure that there is no danger (suspicious packages).&nbsp;</li>
+	<li>Stay calm.</li>
+	<li>Dress according to the outdoor temperature, but don&rsquo;t make a detour to get clothing (for example, don&rsquo;t go to your locker).&nbsp;</li>
+	<li>Evacuate the area via the closest emergency stairwell. Don&rsquo;t take the elevator.&nbsp;</li>
+	<li>Keep a safe distance from the building.&nbsp;</li>
+	<li>Go to the meeting point.</li>
+	<li>Do not go back inside for any reason.</li>
+</ul>
+
+<h3>Returning to the building</h3>
+
+<ul>
+	<li>You can return to the building as soon as Security announces that it is safe to do so.</li>
+	<li>This authorization will be announced over a megaphone at the meeting point.&nbsp;</li>
+</ul>
+
+<h3>Meeting points</h3>
+
+<ul>
+	<li>The Dow Planetarium parking lot, at the corner of Peel and Notre Dame streets, at the northeastern corner of ÉTS.&nbsp;</li>
+	<li>In the wintertime, people who are evacuated will be escorted, as soon as possible, to the hall in Pavilion B and the common areas of the dormitories located at 301 Peel Street and 1045 Ottawa Street. &nbsp;</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="gas_leak">
+        <![CDATA[
+<h3>Gas odour or leak</h3>
+
+<ul>
+	<li>Leave the area where you are (i.e. lab, cafeteria kitchen, etc.).</li>
+	<li>Contact Security at extension 55 (internal phone system) in an emergency, using a phone in your area.&nbsp;</li>
+	<li>Don&rsquo;t use a cell phone near the leak (be sure that there is no perceptible odour before using a cell phone, to prevent any danger of explosion).&nbsp;</li>
+	<li>Never activate a fire alarm (red station).</li>
+</ul>
+
+<h3>Evacuation order</h3>
+
+<p>Under order of evacuation by Security or a member of the evacuation team:</p>
+
+<ul>
+	<li>Stay calm.</li>
+	<li>Stop whatever you are doing safely.&nbsp;</li>
+</ul>
+
+<h3>Don&rsquo;t touch anything</h3>
+
+<ul>
+	<li>Anything that is on must stay on.&nbsp;</li>
+	<li>Anything that is off must stay off.&nbsp;</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="fire">
+        <![CDATA[
+<ul>
+	<li>If you see fire or smoke</li>
+	<li>Help anyone who is in immediate danger, as long as there is no risk to your own life.&nbsp;</li>
+	<li>Leave the premises.</li>
+	<li>Set off the fire alarm (stations are very close to emergency exits).</li>
+	<li>Use the stairs to leave the building (never use the elevators).&nbsp;</li>
+	<li>Close all doors behind you to make sure that the fire doesn&rsquo;t spread.&nbsp;</li>
+	<li>Dial 911 as soon as you are in a safe area.&nbsp;</li>
+	<li>Do not go back inside for any reason.</li>
+</ul>
+
+<h3>&nbsp;If you hear a fire alarm go off</h3>
+
+<ul>
+	<li>Help anyone who is in immediate danger, as long as there is no risk to your own life.&nbsp;</li>
+	<li>Leave the premises.</li>
+	<li>Use the stairs to leave the building (never use the elevators).&nbsp;</li>
+	<li>Close all doors behind you to make sure that the fire doesn&rsquo;t spread.&nbsp;</li>
+	<li>Keep your distance from the premises (minimum of 100 metres) so that those who are following behind you can exit easily, and to make firefighters&rsquo; jobs easier.</li>
+	<li>Do not go back inside for any reason.</li>
+</ul>
+
+<h3>Meeting points</h3>
+
+<ul>
+	<li>The Dow Planetarium parking lot, at the corner of Peel and Notre Dame Streets, at the northeastern corner of ÉTS.&nbsp;</li>
+	<li>In the wintertime, people who are evacuated will be escorted, as soon as possible, to the hall in Pavilion B and the common areas of the dormitories located at 301 Peel Street and 1045 Ottawa Street. &nbsp;</li>
+</ul>
+
+<h3>Returning to the building</h3>
+
+<ul>
+	<li>You can return to the building as soon as Security announces that it is safe to do so.</li>
+	<li>This authorization will be announced over a megaphone at the meeting point.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="broken_elevator">
+        <![CDATA[
+<h3>If people are stuck inside</h3>
+
+<ul>
+	<li>Don&rsquo;t try to save them by opening the door.</li>
+	<li>Reassure them. Let them know that help is on the way.&nbsp;</li>
+	<li>Ask them if anyone is injured or if anyone needs special assistance (for example, people with claustrophobia) and find out how many people are stuck in the elevator. &nbsp;</li>
+	<li>Contact Security at extension 55 (internal phone system).</li>
+	<li>Stay on site until help arrives. Continue to reassure people.&nbsp;</li>
+</ul>
+
+<h4>If a person&rsquo;s condition worsens, inform Security.<br />
+If you can&rsquo;t reach Security, dial 911.</h4>
+
+
+]]>
+    </string>
+
+
+    <string name="electrical_outage">
+        <![CDATA[
+<h3>When an electrical outage occurs.&nbsp;</h3>
+
+<ul>
+	<li>Remain calm.</li>
+	<li>Stay at your work station.</li>
+	<li>If you are in a dark area, slowly make your way to a place that is well-lit until the situation returns to normal.&nbsp;</li>
+	<li>Find people who may be in spaces without windows: washrooms, storages areas, etc.&nbsp;</li>
+	<li>Make sure that the outage does not affect your area.</li>
+	<li>Ask the person in charge of your group to contact Security at extension 55 (internal phone system).</li>
+	<li>Stop any dangerous activity (for example, handling chemical products).</li>
+	<li>Put away dangerous products.&nbsp;</li>
+	<li>Turn off all sources of heat and burners.&nbsp;</li>
+	<li>Listen to instructions announced over the loudspeakers.&nbsp;</li>
+</ul>
+
+<h4>There may be a delay between the beginning of the outage and emergency systems being activated.</h4>
+
+<h3>General outage</h3>
+
+<ul>
+	<li>Wait for instructions from Security.&nbsp;</li>
+	<li>Following an evacuation order, take the stairs. Elevators should only be used for emergencies and for people with reduced mobility.&nbsp;</li>
+	<li>When an evacuation occurs following an electricity outage, people leave school for the rest of the day. They should not go to the meeting point.&nbsp;</li>
+	<li>If the outage is of a longer duration, you can obtain information on the ÉTS Web site or by listening to its greeting message at 514-396-8800.</li>
+</ul>
+
+<h3>End of the outage</h3>
+
+<ul>
+	<li>Wait for instructions before entering the building.&nbsp;</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="armed_person"><![CDATA[
+
+<h3>If you can leave the premises without putting yourself in danger, evacuate the building</h3>
+
+<ul>
+	<li>Remain calm.</li>
+	<li>Never try to stop an armed person.</li>
+	<li>Do not activate the fire alarm.</li>
+	<li>Take the nearest emergency exit.&nbsp;</li>
+	<li>Use the stairs to exit the building. Don&rsquo;t take the elevator.&nbsp;</li>
+	<li>Show your hands so that police officers don&rsquo;t see you as a threat.&nbsp;</li>
+	<li>Inform anyone you meet that they should leave the premises immediately.</li>
+	<li>Once you leave the building, don&rsquo;t stay in close range. Go to the meeting point that is a little further away, at the corner of Peel and St. Jacques Streets (the space in front of the old Planetarium).&nbsp;</li>
+	<li>Once you&rsquo;ve reached safety, call 911.</li>
+</ul>
+
+<h3>If you cannot safely leave the premises without putting yourself in danger, hide</h3>
+
+<ul>
+	<li>Stay calm and silent.&nbsp;</li>
+	<li>Hide and tell other people to do the same.&nbsp;</li>
+	<li>Lock the door of the room where you&rsquo;re hiding.&nbsp;</li>
+	<li>Barricade the door with furniture.&nbsp;</li>
+	<li>Close the blinds on the windows.&nbsp;</li>
+	<li>Stay away from doors and windows (hallways and outdoor walls).</li>
+	<li>If there is a window that looks out on an external wall of the building, let police know you are there by putting a note in the window.&nbsp;</li>
+	<li>Hide under a desk.&nbsp;</li>
+	<li>Stay quiet.&nbsp;</li>
+	<li>Put your cell phone in silent mode.&nbsp;</li>
+	<li>If someone knocks at the door, don&rsquo;t open it. The person who is knocking may pose a threat to you.</li>
+	<li>In the event that police officers need to check the premises, they will receive access cards and sets of keys.&nbsp;</li>
+	<li>Never jump out of your hiding place, and keep your hands in plain sight.&nbsp;</li>
+	<li>Wait for directions from police officers or the Security and Prevention Office before leaving the premises.&nbsp;</li>
+</ul>
+
+<h3>In the event of an evacuation</h3>
+
+<ul>
+	<li>Go to the meeting point that is a little further away, at the corner of Peel and St. Jacques Streets (the space in front of the old Planetarium).&nbsp;</li>
+	<li>Never stay close to the building.</li>
+	<li>Keep quiet so you can hear directions given by police or security officers.</li>
+</ul>
+
+<h3>Remember…</h3>
+
+<ul>
+	<li>Never jump out of your hiding place.</li>
+	<li>Keep your hands in plain sight.&nbsp;</li>
+</ul>
+
+
+    ]]></string>
+
+
+    <string name="earthquake">
+        <![CDATA[
+<ul>
+	<li>Get down: As soon as you feel the first tremors, your first reflex should be to crouch down on the floor to avoid falling.&nbsp;</li>
+	<li>Seek shelter: As soon as you have crouched down, locate and move to a place where you can shelter yourself, such as underneath your desk or work table.&nbsp;</li>
+	<li>Hang on: As soon as you are under your shelter, hang on tightly to the desk or table and remain there until the earthquake is over.</li>
+	<li>Once the tremors have ended, remain under your shelter.&nbsp;</li>
+	<li>Security will make an announcement by voice message that is appropriate for your area.&nbsp;</li>
+</ul>
+
+<h3>When should you evacuate?</h3>
+
+<ul>
+	<li>When a fire has been declared near you.&nbsp;</li>
+	<li>When Security has ordered you to evacuate.&nbsp;</li>
+</ul>
+
+<h3>How should you evacuate the building?</h3>
+
+<ul>
+	<li>Do not use elevators.</li>
+	<li>Follow the directions given by Security through the voice messaging system.</li>
+	<li>Security may indicate emergency exits for you to use.&nbsp;</li>
+	<li>Once you have exited the building, look around carefully to avoid objects that could fall on you.&nbsp;</li>
+	<li>Go to the meeting point in the parking lot of the old Planetarium, at the corner of Peel and Notre Dame Streets.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="medical_emergency">
+        <![CDATA[
+<h4>If someone&rsquo;s life is in danger, call 911</h4>
+
+<h3>If the person is conscious, ask him or her:</h3>
+
+<ol>
+	<li>His or her name</li>
+	<li>Details about the incident</li>
+	<li>Details about his or her wounds</li>
+	<li>Questions about his or her allergies and health problems</li>
+</ol>
+
+<ul>
+	<li>Contact Security at extension 55 (internal telephone system).</li>
+	<li>Do not hang up until the dispatcher tells you to do so.</li>
+	<li>If you have first aid training, give first aid.</li>
+	<li>Ask those who are present to find a first aid worker on the floor.</li>
+	<li>Stay on site to assist first aid workers and give them information about the victim.&nbsp;</li>
+	<li>Ask people on site to help you as you wait for help.</li>
+	<li>Keep people away from the victim to keep the area clear and make first aid workers&rsquo; job easier.</li>
+	<li>Don&rsquo;t move the victim unless the situation presents a danger to him or her.</li>
+	<li>Don&rsquo;t give the victim anything to eat or drink, even if he or she asks for it.&nbsp;</li>
+	<li>If possible, stay in contact with Security.</li>
+	<li>If the victim&rsquo;s state deteriorates, inform Security.</li>
+</ul>
+
+]]>
+    </string>
+
 </resources>

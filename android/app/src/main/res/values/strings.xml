@@ -117,6 +117,412 @@
     </string-array>
     <string name="buglife_steps_to_reproduce">Étapes pour reproduire</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Security -->
+    <string-array name="security_type">
+        <item>Appel à la bombe</item>
+        <item>Colis suspect</item>
+        <item>Évacuation</item>
+        <item>Fuite de gaz</item>
+        <item>Incendie</item>
+        <item>Panne d\'ascenseur</item>
+        <item>Panne électrique</item>
+        <item>Personne armée</item>
+        <item>Tremblement de terre</item>
+        <item>Urgence médicale</item>
+    </string-array>
+
+    <string name="bomb_threat">
+        <![CDATA[<h2>Si la menace est transmise par téléphone</h2>
+
+<ul>
+	<li>Ne mettez pas fin à la communication;</li>
+	<li>Laissez l&rsquo;interlocuteur raccrocher en premier;</li>
+	<li>Tentez d&rsquo;obtenir le maximum de renseignements;</li>
+	<li>Faites répéter la personne ou prétextez avoir de la difficulté à l&rsquo;entendre afin de gagner du temps;</li>
+	<li>Portez une attention particulière aux éléments suivants :
+	<ul>
+		<li>Sexe</li>
+		<li>Âge</li>
+		<li>Accent, langue parlée</li>
+		<li>Tonalité de la voix (aiguë ou grave)</li>
+		<li>Débit et émotions (fâché, calme, agité)</li>
+		<li>Bruits dans l&rsquo;environnement<br />
+		&nbsp;</li>
+	</ul>
+	</li>
+	<li>Dans la mesure du possible et en fonction de la situation, tentez d&rsquo;obtenir les renseignements suivants :
+	<ul>
+		<li>L&rsquo;heure à laquelle la bombe explosera</li>
+		<li>Le type de bombe</li>
+		<li>Les personnes visées et le motif</li>
+		<li>L&rsquo;emplacement de la bombe</li>
+		<li>Le nom et le numéro qui apparaissent sur l&rsquo;afficheur du téléphone<br />
+		&nbsp;</li>
+	</ul>
+	</li>
+	<li>Communiquez&nbsp; avec la Sécurité au poste 55 (système téléphonique interne) pour signaler la situation et transmettre les renseignements pertinents;</li>
+	<li>La Sécurité pourrait ensuite vous demander de vous rendre au centre des opérations de la sécurité, située à l&rsquo;entrée du Pavillon A.</li>
+</ul>
+
+<h3>Évacuation</h3>
+
+<ul>
+	<li>Attendez que la Sécurité ordonne l&rsquo;évacuation. Celle-ci doit inspecter les voies d&rsquo;évacuation pour s&rsquo;assurer qu&rsquo;il n&rsquo;y a pas de danger (colis suspect);</li>
+	<li>Restez calme;</li>
+	<li>Habillez-vous en fonction de la température extérieure, mais ne faites pas de&nbsp;détour pour récupérer vos vêtements (par exemple : n&rsquo;allez pas à votre casier);</li>
+	<li>Évacuez l&rsquo;endroit par les escaliers de secours les plus près. N&rsquo;utilisez pas les&nbsp;ascenseurs;</li>
+	<li>Éloignez-vous de l&rsquo;immeuble;</li>
+	<li>Dirigez-vous vers le lieu de rassemblement;</li>
+	<li>Ne retournez sous aucun prétexte à l&rsquo;intérieur.</li>
+</ul>
+
+<h3>Retour dans l&rsquo;immeuble</h3>
+
+<ul>
+	<li>Le retour dans l&rsquo;immeuble se fera dès que la Sécurité l&rsquo;autorisera;</li>
+	<li>Cette autorisation sera communiquée au moyen d&rsquo;un porte-voix au lieu de rassemblement.</li>
+</ul>
+]]>
+    </string>
+
+
+    <string name="suspicious_packages">
+        <![CDATA[
+
+<p>Un colis est considéré comme suspect s&rsquo;il présente les caractéristiques suivantes :</p>
+
+<ul>
+	<li>&nbsp; Timbrage exagéré;</li>
+	<li>&nbsp; Odeur suspecte;</li>
+	<li>&nbsp; Bruit suspect;</li>
+	<li>&nbsp; Aucune adresse de retour;</li>
+	<li>&nbsp; Plusieurs mots mal orthographiés;</li>
+	<li>&nbsp; Titre de la personne ou absence du nom du destinataire;</li>
+	<li>&nbsp; Présence excessive de ruban;</li>
+	<li>&nbsp; Livraison non prévue;</li>
+	<li>&nbsp; Mention &laquo; privé &raquo;, &laquo; à ouvrir seulement par &raquo;.</li>
+</ul>
+
+<p><strong>Note</strong></p>
+
+<p>Un colis peut être considéré comme contenant des matières nucléaires, radiologiques, biologiques ou chimiques s&rsquo;il présente l&rsquo;une des caractéristiques suivantes :</p>
+
+<ul>
+	<li>Il est détérioré;</li>
+	<li>Il fuit;</li>
+	<li>Il contient du liquide, de la poussière ou des granules;</li>
+	<li>Il dégage une odeur anormale;</li>
+	<li>Il émet des gaz ou de la vapeur;</li>
+	<li>Il suinte ou bouillonne;</li>
+	<li>Il contient des aérosols;</li>
+	<li>Il démontre des signes de corrosion.</li>
+</ul>
+
+<h2>Marche à suivre</h2>
+
+<ul>
+	<li>Éloignez-vous du colis;</li>
+	<li>N&rsquo;utilisez pas votre téléphone cellulaire à proximité du colis. Éteignez-le&nbsp;pour prévenir toute interférence avec le colis;</li>
+	<li>Communiquez avec la Sécurité, au poste 55 (système téléphonique interne);</li>
+	<li>Ne raccrochez pas tant que le répartiteur&nbsp;vous dit de le faire.</li>
+</ul>
+
+<h3>Évacuation</h3>
+
+<ul>
+	<li>Attendez que la Sécurité ordonne l&rsquo;évacuation. La Sécurité doit inspecter les voies d&rsquo;évacuation pour s&rsquo;assurer qu&rsquo;il n&rsquo;y a pas de danger (colis suspect);</li>
+	<li>Restez calme;</li>
+	<li>Habillez-vous en fonction de la température extérieure, mais ne faites pas de&nbsp; détour pour récupérer vos vêtements (par exemple : n&rsquo;allez pas à votre casier);</li>
+	<li>Évacuez l&rsquo;endroit par les escaliers de secours les plus près. N&rsquo;utilisez pas les&nbsp; ascenseurs;</li>
+	<li>Éloignez-vous de l&rsquo;immeuble;</li>
+	<li>Dirigez-vous vers le lieu de rassemblement;</li>
+	<li>Ne retournez sous aucun prétexte à l&rsquo;intérieur.</li>
+</ul>
+
+<h3>Retour dans l&rsquo;immeuble</h3>
+
+<ul>
+	<li>Le retour dans l&rsquo;immeuble se fera dès que la Sécurité l&rsquo;autorisera;</li>
+	<li>Cette autorisation sera communiquée au moyen d&rsquo;un porte-voix au lieu de rassemblement.</li>
+</ul>
+
+
+]]>
+    </string>
+
+
+    <string name="evacuation">
+        <![CDATA[
+<p>Attendez que la Sécurité ordonne l&rsquo;évacuation. Celui-ci doit inspecter les voies d&rsquo;évacuation pour s&rsquo;assurer qu&rsquo;il n&rsquo;y a pas de danger (colis suspect)</p>
+
+<ul>
+	<li>Restez calme</li>
+	<li>Habillez-vous en fonction de la température extérieure, mais ne faites pas de&nbsp;détour pour récupérer vos vêtements (par exemple : n&rsquo;allez pas à votre casier)</li>
+	<li>Évacuez l&rsquo;endroit par les escaliers de secours les plus près. N&rsquo;utilisez pas les&nbsp; ascenseurs.</li>
+	<li>Éloignez-vous de l&rsquo;immeuble</li>
+	<li>Dirigez-vous vers le lieu&nbsp; de rassemblement</li>
+	<li>Ne retournez sous aucun prétexte à l&rsquo;intérieur</li>
+</ul>
+
+<h2>Retour dans l&rsquo;immeuble</h2>
+
+<ul>
+	<li>Le retour dans l&rsquo;immeuble se fera dès que le responsable de la Sécurité l&rsquo;autorisera</li>
+	<li>Cette autorisation sera communiquée au moyen d&rsquo;un porte-voix au point de rassemblement</li>
+</ul>
+
+<h2>Lieux de rassemblement</h2>
+
+<ul>
+	<li>Le stationnement du Planétarium Dow, situé à l&rsquo;angle des rues Peel et Notre-Dame côté nord-est de l&rsquo;ÉTS.</li>
+	<li>En période hivernale, tous les évacués seront escortés le plus tôt possible dans le hall du pavillon B et dans les salles communes des résidences universitaires situées au 301, rue Peel et au 1045, rue Ottawa.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="gas_leak">
+        <![CDATA[
+<h2>Odeur ou fuite de gaz</h2>
+
+<ul>
+	<li>Quittez le secteur où vous vous trouvez (par ex. : laboratoire, cuisine de la cafétéria, etc.)</li>
+	<li>Communiquez avec la Sécurité au poste 55 (système téléphonique interne) pour les urgences en utilisant un téléphone situé dans un autre secteur.</li>
+	<li>N&rsquo;utilisez pas un cellulaire à proximité de la fuite (s&rsquo;assurer que l&rsquo;odeur n&rsquo;est plus perceptible avant d&rsquo;utiliser un cellulaire, pour prévenir tout danger d&rsquo;explosion).</li>
+	<li>N&rsquo;activez jamais une alarme-incendie (station rouge)</li>
+</ul>
+
+<h3>Ordre d&rsquo;évacuation</h3>
+
+<p>Sur ordre d&rsquo;évacuation de la Sécurité ou d&rsquo;un membre de l&rsquo;équipe d&rsquo;évacuation :</p>
+
+<ul>
+	<li>Restez calme</li>
+	<li>Cessez toute activité de façon sécuritaire</li>
+</ul>
+
+<h3>Ne touchez à rien</h3>
+
+<ul>
+	<li>Ce qui est allumé doit rester allumé.</li>
+	<li>Ce qui est éteint doit rester&nbsp;éteint.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="fire">
+        <![CDATA[
+<h2><strong>Si vous voyez du feu ou de la fumée</strong></h2>
+
+<ul>
+	<li>Aidez quiconque se trouve en danger immédiat, si cela ne comporte pas de risque pour votre vie;</li>
+	<li>Quittez les lieux;</li>
+	<li>Déclenchez l&rsquo;alarme-incendie (les postes se trouvent près des issues de secours);</li>
+	<li>Utilisez les escaliers pour sortir du bâtiment (n&rsquo;utilisez jamais les ascenseurs);</li>
+	<li>Fermez toutes les portes derrières vous pour éviter que l&rsquo;incendie ne se propage;</li>
+	<li>Composez le 911 dès que vous vous trouvez dans un endroit sécuritaire;</li>
+	<li>Ne retournez sous aucun prétexte à l&rsquo;intérieur.</li>
+	<li>Si vous entendez le signal d&rsquo;alarme-incendie &nbsp;</li>
+	<li>Aidez quiconque se trouve en danger immédiat, si cela ne comporte pas de risque pour votre vie;</li>
+	<li>Quittez les lieux;</li>
+	<li>Utilisez les escaliers pour sortir du bâtiment (n&rsquo;utilisez jamais les ascenseurs);</li>
+	<li>Fermez toutes les portes derrière vous pour éviter que l&rsquo;incendie ne se propage;</li>
+	<li>Éloignez-vous des lieux (distance minimale de 100 mètres)&nbsp; afin de permettre à ceux qui suivent de sortir et de faciliter le travail des pompiers;</li>
+	<li>Ne retournez sous aucun prétexte à l&rsquo;intérieur.</li>
+</ul>
+
+<h3>Lieux de rassemblement</h3>
+
+<ul>
+	<li>Le stationnement du Planétarium Dow, situé à l&rsquo;angle des rues Peel et Notre-Dame, du côté nord-est de l&rsquo;ÉTS;</li>
+	<li>En période hivernale, tous les évacués seront escortés le plus tôt possible dans le hall du pavillon B et dans les salles communes des résidences universitaires situées au 301, rue Peel et au 1045, rue Ottawa.</li>
+</ul>
+
+<h3>Retour dans l&rsquo;immeuble</h3>
+
+<ul>
+	<li>Le retour dans l&rsquo;immeuble se fera dès que la Sécurité l&rsquo;autorisera;</li>
+	<li>Cette autorisation sera communiquée au moyen d&rsquo;un porte-voix au lieu de rassemblement.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="broken_elevator">
+        <![CDATA[
+<h2>Si des personnes sont coincées à l&rsquo;intérieur</h2>
+
+<ul>
+	<li>Ne tentez pas de les secourir en ouvrant la porte;</li>
+	<li>Rassurez-les. Dites-leur que les secours s&rsquo;en viennent;</li>
+	<li>Demandez-leur s&rsquo;il y a des blessés ou des personnes nécessitant une assistance particulière (par exemple : claustrophobes) et le nombre de personnes prises dans l&rsquo;ascenseur;</li>
+	<li>Communiquez avec la Sécurité, au poste 55 (à partir du système téléphonique interne);</li>
+	<li>Restez sur les lieux jusqu&rsquo;à ce les secours arrivent. Continuez de rassurer les gens.</li>
+</ul>
+
+<p><strong>Si l&rsquo;état d&rsquo;une personne s&rsquo;aggrave, informez-en la Sécurité.<br />
+Si vous n&rsquo;arrivez pas à&nbsp;joindre la Sécurité, composez le 911.</strong></p>
+
+]]>
+    </string>
+
+
+    <string name="electrical_outage">
+        <![CDATA[
+<h2>Dès que survient la panne électrique</h2>
+
+<ul>
+	<li>Restez calme;</li>
+	<li>Demeurez à votre poste de travail;</li>
+	<li>Si vous êtes dans un local sans lumière, dirigez-vous&nbsp; lentement&nbsp; vers un endroit éclairé en attendant que la situation se rétablisse;</li>
+	<li>Aller chercher les personnes qui pourraient se trouver dans des locaux sans fenêtres : toilettes, rangements, etc.;</li>
+	<li>Vérifiez que la panne ne touche que votre secteur;</li>
+	<li>Demandez à la personne responsable de votre groupe de communiquer avec la sécurité au poste 55 (à partir du système téléphonique interne);</li>
+	<li>Cessez toute activité dangereuse (par exemple : manipulation de produits chimiques);</li>
+	<li>Entreposez les produits dangereux);</li>
+	<li>Éteignez les sources de chaleurs ou les brûleurs;</li>
+	<li>Soyez à l&rsquo;écoute des instructions diffusées dans les haut-parleurs.</li>
+</ul>
+
+<p><strong>Il peut y avoir un délai entre le début de la panne et l&rsquo;activation des systèmes d&rsquo;urgence.</strong></p>
+
+<h3>Panne généralisée</h3>
+
+<ul>
+	<li>Attendez les instructions de la Sécurité;</li>
+	<li>À la suite d&rsquo;un ordre d&rsquo;évacuation, prenez les escaliers. Les ascenseurs ne doivent servir que pour les cas d&rsquo;urgence et pour les personnes à mobilité réduite;</li>
+	<li>Lorsqu&rsquo;une évacuation survient à la suite d&rsquo;une panne d&rsquo;électricité, les personnes quittent l&rsquo;école pour le reste de la journée. Elles ne doivent pas se rendre au point de rassemblement;</li>
+	<li>Si la panne est de longue durée, vous pouvez vous informer sur le site Web de l&rsquo;ÉTS ou en écoutant son message d&rsquo;accueil, au 514 396-8800.</li>
+</ul>
+
+<h3>Fin de la panne</h3>
+
+<ul>
+	<li>Attendez les instructions avant d&rsquo;entrer dans l&rsquo;établissement.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="armed_person">
+        <![CDATA[
+<h2><strong>Si vous pouvez quitter les lieux sans être menacé, évacuez l&rsquo;édifice</strong></h2>
+
+<ul>
+	<li>Restez calme;</li>
+	<li>Ne tentez jamais d&rsquo;arrêter une personne armée;</li>
+	<li>N&rsquo;activez pas l&rsquo;alarme-incendie;</li>
+	<li>Empruntez la sortie de secours la plus près;</li>
+	<li>Utilisez les escaliers pour sortir du bâtiment (n&rsquo;utilisez jamais les ascenseurs);</li>
+	<li>Montrez vos mains afin de ne pas être perçu comme une menace par les policiers;</li>
+	<li>Informez les gens que vous croisez de quitter les lieux immédiatement;</li>
+	<li>Une fois que vous avez quitté l&rsquo;édifice, ne restez pas à proximité de l&rsquo;immeuble; rendez-vous au point de rassemblement éloigné, qui se trouve au coin des rue Peel et St-Jacques (l&rsquo;espace devant l&rsquo;ancien planétarium);</li>
+	<li>Une fois en sécurité, composez le 911.</li>
+</ul>
+
+<h2>Si vous ne pouvez pas quitter les lieux sans être menacé, confinez-vous &nbsp;</h2>
+
+<ul>
+	<li>Restez calme et silencieux;</li>
+	<li>Cachez-vous et dites aux gens de faire comme vous;</li>
+	<li>Verrouillez la porte du local où vous êtes caché;</li>
+	<li>Barricadez la porte avec des meubles;</li>
+	<li>Fermez les stores des fenêtres;</li>
+	<li>Éloignez-vous de la porte et des fenêtres (corridors et murs extérieurs);</li>
+	<li>Si une fenêtre donne sur un mur extérieur du bâtiment, signalez votre présence aux policiers en mettant un papier avec une note;</li>
+	<li>Cachez-vous sous un bureau;</li>
+	<li>Gardez le silence;</li>
+	<li>Mettez votre cellulaire en mode silencieux;</li>
+	<li>Si une personne frappe à la porte, ne l&rsquo;ouvrez pas. La personne qui frappe à la porte représente peut-être une menace;</li>
+	<li>Dans l&rsquo;éventualité où les policiers auront à vérifier tous les locaux, ces derniers recevront des cartes d&rsquo;accès et des trousseaux de clefs;</li>
+	<li>Ne bondissez jamais de votre cachette et gardez les mains bien en vue;</li>
+	<li>Attendez les directives des policiers ou du Bureau de la prévention et de la sécurité avant de quitter les lieux.</li>
+</ul>
+
+<h3>Dans l&rsquo;éventualité d&rsquo;une évacuation</h3>
+
+<ul>
+	<li>Rendez-vous au lieu de rassemblement éloigné (l&rsquo;espace devant l&rsquo;ancien Planétarium) situé à l&rsquo;angle des rues Peel et St-Jacques;</li>
+	<li>Ne demeurez jamais à proximité de l&rsquo;immeuble;</li>
+	<li>Gardez le silence pour entendre les directives données par les policiers ou par la sécurité.</li>
+</ul>
+
+<h3>Rappelez-vous</h3>
+
+<ul>
+	<li>Ne bondissez jamais de votre cachette;</li>
+	<li>Gardez vos mains bien en vue.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="earthquake">
+        <![CDATA[
+<ul>
+	<li>Baissez-vous : Dès les premières secousses, votre premier réflexe doit être de vous accroupir au sol pour éviter une chute.</li>
+	<li>Abritez-vous : Aussitôt que vous êtes accroupi, localisez et dirigez-vous vers un endroit où vous pouvez vous abriter. Les dessous de votre bureau ou de votre table de travail, par exemple.</li>
+	<li>Agrippez-vous : Dès que vous êtes à l&rsquo;abri, agrippez-vous solidement au meuble et demeurez ainsi jusqu&rsquo;à la fin du tremblement de terre.</li>
+	<li>Une fois les secousses terminées, restez à l&rsquo;abri</li>
+	<li>La Sécurité diffusera un message phonique approprié à votre secteur.</li>
+</ul>
+
+<h2>Quand évacuer?</h2>
+
+<ul>
+	<li>Lorsqu&rsquo;un incendie s&rsquo;est déclaré près de vous</li>
+	<li>Lorsque la Sécurité vous donne l&rsquo;ordre d&rsquo;évacuer.</li>
+</ul>
+
+<h3>Comment évacuer le bâtiment ?</h3>
+
+<ul>
+	<li>N&rsquo;utilisez pas les&nbsp;ascenseurs</li>
+	<li>Suivez les indications transmises par la Sécurité au moyen du système de messagerie phonique.</li>
+	<li>La Sécurité pourra alors vous indiquer les issues de secours à utiliser</li>
+	<li>Une fois à l&rsquo;extérieur du bâtiment, surveillez votre environnement pour éviter les objets qui pourraient vous heurter</li>
+	<li>Dirigez-vous au lieu de rassemblement situé dans le stationnement de l&rsquo;ancien planétarium, à l&rsquo;angle des rues Peel et Notre-Dame.</li>
+</ul>
+
+]]>
+    </string>
+
+
+    <string name="medical_emergency">
+        <![CDATA[
+<p><strong>Si la vie d&rsquo;une personne est en danger, composez le 911</strong></p>
+
+<h2>Si la personne est consciente, demandez-lui :</h2>
+
+<ul>
+	<li>Son nom;</li>
+	<li>Les détails sur l&rsquo;incident;</li>
+	<li>Des détails sur ses blessures;</li>
+	<li>Des questions sur ses allergies et ses problèmes de santé.</li>
+</ul>
+
+<ul>
+	<li>Communiquez avec la sécurité, au poste 55 (système téléphonique interne);</li>
+	<li>Ne raccrochez pas tant que le répartiteur ne vous dit pas de le faire;</li>
+	<li>Prodiguez les premiers soins si vous avez été formé pour le faire;</li>
+	<li>Demandez aux personnes présentes de trouver un secouriste sur l&rsquo;étage;</li>
+	<li>Restez sur place pour aider&nbsp;les secouristes et leur fournir de l&rsquo;information sur la victime;</li>
+	<li>Demandez aux personnes sur place de vous aider en attendant les secours;</li>
+	<li>Éloignez les personnes de la victime afin de lui faire de la place et de faciliter la tâche des secouristes;</li>
+	<li>Ne déplacez pas la victime sauf si la situation représente un danger pour elle;</li>
+	<li>Ne lui donner ni à boire ni à manger même si la victime l&rsquo;exige;</li>
+	<li>Restez en communication avec la sécurité, si cela est possible;</li>
+	<li>Si l&rsquo;état de la victime se détériore, en informer la sécurité.</li>
+</ul>
+
+]]>
+    </string>
+
 </resources>

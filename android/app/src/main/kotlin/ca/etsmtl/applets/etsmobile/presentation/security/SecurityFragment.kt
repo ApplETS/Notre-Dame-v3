@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.synthetic.main.fragment_security.*
 
@@ -24,14 +25,15 @@ class SecurityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setupRecyclerView()
-
-
+        setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
-        val itemsList = listOf("Appel à la bombe", "Colis suspect", "Évacuation", "Fuite de gaz", "Incendie", "Panne d'ascenseur", "Panne électrique", "Personne armée", "Tremblement de terre", "Urgence médicale")
+        val itemsList = resources.getStringArray(R.array.security_type)
+        security_recycler_view.layoutManager=LinearLayoutManager(context)
         security_recycler_view.adapter = SecurityAdapter(itemsList,findNavController())
         security_recycler_view.setHasFixedSize(true)
+
+
     }
 }
