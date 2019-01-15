@@ -1,15 +1,15 @@
 package ca.etsmtl.applets.etsmobile.presentation.security
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebSettings
 import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.util.getColorCompat
+import ca.etsmtl.applets.etsmobile.util.toggle
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_security_detail.*
 
 class SecurityDetailFragment : Fragment() {
@@ -24,30 +24,39 @@ class SecurityDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity)?.let { it.bottomNavigationView.toggle(false)}
+
 
         val safeArgs = SecurityDetailFragmentArgs.fromBundle(arguments).securityName
         val itemsList = resources.getStringArray(R.array.security_type)
-//        toolbar.title = safeArgs
-        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // chromium, enable hardware acceleration
-            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        } else {
-            // older android version, disable hardware acceleration
-            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
-//        webView.settings.cacheMode = WebSettings.LOAD_NO_CACHE;
-        val htmlAsString: String
-        val htmlAsSpanned: Spanned
+        var url: String=""
+
         when (safeArgs) {
-            itemsList[0] -> {
-                htmlAsString = getString(R.string.bomb_threat)
-                htmlAsSpanned = Html.fromHtml(htmlAsString)
-                webView.loadDataWithBaseURL(null, htmlAsString, "text/html", "utf-8", null);
-
-            }
-
+            itemsList[0] -> url= resources.getString(R.string.bomb_threat)
+            itemsList[1] -> url= resources.getString(R.string.suspicious_packages)
+            itemsList[2] -> url= resources.getString(R.string.evacuation)
+            itemsList[3] -> url= resources.getString(R.string.gas_leak)
+            itemsList[4] -> url= resources.getString(R.string.fire)
+            itemsList[5] -> url= resources.getString(R.string.broken_elevator)
+            itemsList[6] -> url= resources.getString(R.string.electrical_outage)
+            itemsList[7] -> url= resources.getString(R.string.armed_person)
+            itemsList[8] -> url= resources.getString(R.string.earthquake)
+            itemsList[9] -> url= resources.getString(R.string.medical_emergency)
         }
+        webView.loadUrl(url)
+        webView.requestFocus()
+    }
 
+    override fun onDestroyView() {
+        restoreActivityState()
+
+        super.onDestroyView()
+    }
+    private fun restoreActivityState() {
+        (activity as? MainActivity)?.let {
+            it.appBarLayout.setExpanded(true, true)
+            it.bottomNavigationView.toggle(true)
+            it.window.statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
+        }
     }
 }
