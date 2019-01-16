@@ -85,7 +85,8 @@ class MoreViewModel @Inject constructor(
     fun clickLogoutConfirmationDialogButton(confirmedLogout: Boolean) {
         _displayLogoutConfirmationDialog.value = false
 
-        if (confirmedLogout)
+        if (confirmedLogout) {
             logout()
+        }
     }
 }
