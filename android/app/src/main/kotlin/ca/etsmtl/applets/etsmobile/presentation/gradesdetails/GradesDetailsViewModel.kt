@@ -12,6 +12,7 @@ import ca.etsmtl.applets.etsmobile.domain.FetchGradesDetailsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
+import ca.etsmtl.applets.etsmobile.util.toLocalizedString
 import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.Resource
@@ -75,7 +76,7 @@ class GradesDetailsViewModel @Inject constructor(
             ),
             EvaluationDetailItem(
                 app.getString(R.string.label_target_date),
-                evaluation.dateCible
+                evaluation.dateCible?.toLocalizedString() ?: ""
             )
         )
 

@@ -9,7 +9,7 @@ data class EvaluationEntity(
     var session: String,
     var nom: String,
     var equipe: String,
-    var dateCible: String,
+    var dateCible: Long?,
     var note: String,
     var corrigeSur: String,
     var notePourcentage: String,
