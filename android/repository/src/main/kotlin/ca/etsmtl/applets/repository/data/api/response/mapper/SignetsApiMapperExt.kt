@@ -141,7 +141,10 @@ fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): Somm
             .sum()
             .coerceAtMost(100f)
 
-    val moyenneClassePourcentage = this.moyenneClasse.replaceCommaAndParseToFloat() / noteSur * 100
+    val moyenneClassePourcentage = when (noteSur) {
+        0f -> 0f
+        else -> this.moyenneClasse.replaceCommaAndParseToFloat() / noteSur * 100
+    }
 
     return SommaireElementsEvaluationEntity(
             cours.sigle,
