@@ -54,9 +54,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                         .replaceFirst(",", ".")
                         .toFloat()
 
-                if (grade > 100) {
-                    grade = 100f
-                }
+                grade = grade.coerceIn(0f, 100f)
 
                 setEndProgress(grade)
 
