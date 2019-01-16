@@ -102,7 +102,7 @@ class GradeAverageItem(
         animate: Boolean
     ) {
         with(circleProgressView) {
-            setEndProgress(progress)
+            setEndProgress(progress.coerceIn(0f, 100f))
 
             if (animate) {
                 startProgressAnimation()
