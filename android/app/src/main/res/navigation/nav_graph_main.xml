@@ -52,8 +52,7 @@
         tools:layout="@layout/fragment_more">
         <action
             android:id="@+id/action_fragmentMore_to_fragmentAbout"
-            app:destination="@id/fragmentAbout"
-            app:popUpTo="@id/fragmentMore" />
+            app:destination="@id/fragmentAbout" />
         <action
             android:id="@+id/action_fragmentMore_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
