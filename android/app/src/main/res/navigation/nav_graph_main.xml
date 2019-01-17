@@ -52,7 +52,8 @@
         tools:layout="@layout/fragment_more">
         <action
             android:id="@+id/action_fragmentMore_to_fragmentAbout"
-            app:destination="@id/fragmentAbout" />
+            app:destination="@id/fragmentAbout"
+            app:popUpTo="@id/fragmentMore" />
         <action
             android:id="@+id/action_fragmentMore_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
@@ -63,6 +64,5 @@
         tools:layout="@layout/fragment_about" />
     <activity
         android:id="@+id/activityOpenSourceLicenses"
-        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
-    </activity>
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
 </navigation>
