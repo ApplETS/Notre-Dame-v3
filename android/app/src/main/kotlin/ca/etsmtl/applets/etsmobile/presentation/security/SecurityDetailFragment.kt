@@ -24,24 +24,26 @@ class SecurityDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.let { it.bottomNavigationView.toggle(false)}
 
+        (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
 
         val safeArgs = SecurityDetailFragmentArgs.fromBundle(arguments).securityName
+        (activity as? MainActivity)?.toolbar!!.title=safeArgs
+
         val itemsList = resources.getStringArray(R.array.security_type)
-        var url: String=""
+        var url: String = ""
 
         when (safeArgs) {
-            itemsList[0] -> url= resources.getString(R.string.bomb_threat)
-            itemsList[1] -> url= resources.getString(R.string.suspicious_packages)
-            itemsList[2] -> url= resources.getString(R.string.evacuation)
-            itemsList[3] -> url= resources.getString(R.string.gas_leak)
-            itemsList[4] -> url= resources.getString(R.string.fire)
-            itemsList[5] -> url= resources.getString(R.string.broken_elevator)
-            itemsList[6] -> url= resources.getString(R.string.electrical_outage)
-            itemsList[7] -> url= resources.getString(R.string.armed_person)
-            itemsList[8] -> url= resources.getString(R.string.earthquake)
-            itemsList[9] -> url= resources.getString(R.string.medical_emergency)
+            itemsList[0] -> url = resources.getString(R.string.bomb_threat)
+            itemsList[1] -> url = resources.getString(R.string.suspicious_packages)
+            itemsList[2] -> url = resources.getString(R.string.evacuation)
+            itemsList[3] -> url = resources.getString(R.string.gas_leak)
+            itemsList[4] -> url = resources.getString(R.string.fire)
+            itemsList[5] -> url = resources.getString(R.string.broken_elevator)
+            itemsList[6] -> url = resources.getString(R.string.electrical_outage)
+            itemsList[7] -> url = resources.getString(R.string.armed_person)
+            itemsList[8] -> url = resources.getString(R.string.earthquake)
+            itemsList[9] -> url = resources.getString(R.string.medical_emergency)
         }
         webView.loadUrl(url)
         webView.requestFocus()
@@ -49,9 +51,9 @@ class SecurityDetailFragment : Fragment() {
 
     override fun onDestroyView() {
         restoreActivityState()
-
         super.onDestroyView()
     }
+
     private fun restoreActivityState() {
         (activity as? MainActivity)?.let {
             it.appBarLayout.setExpanded(true, true)

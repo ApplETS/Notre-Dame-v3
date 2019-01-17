@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayoutx xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
     <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/webView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_above="@+id/ll_v_"
         />
-</RelativeLayoutx>
+
+    <LinearLayout
+        android:id="@+id/ll_v_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/urgence_appel_urgence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/etsRougeClair"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="lololol"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+</RelativeLayout>
