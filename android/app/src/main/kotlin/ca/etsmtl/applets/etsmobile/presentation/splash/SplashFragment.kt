@@ -16,10 +16,8 @@ import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.toast
 import ca.etsmtl.applets.etsmobile.util.toggle
-import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
-import kotlinx.android.synthetic.main.fragment_splash.iVBackground
 import kotlinx.android.synthetic.main.fragment_splash.progressBarSplash
 import javax.inject.Inject
 
@@ -43,8 +41,6 @@ class SplashFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
         (activity as MainActivity).bottomNavigationView.toggle(false, 0)
 

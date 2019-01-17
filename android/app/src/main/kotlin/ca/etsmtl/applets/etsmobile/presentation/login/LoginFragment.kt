@@ -31,7 +31,6 @@ import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
-import kotlinx.android.synthetic.main.fragment_splash.iVBackground
 import kotlinx.android.synthetic.main.include_login_form.btnForgotPassword
 import kotlinx.android.synthetic.main.include_login_form.btnSignIn
 import kotlinx.android.synthetic.main.include_login_form.btnUniversalCodeInfo
@@ -92,7 +91,6 @@ class LoginFragment : DaggerFragment() {
         (activity as MainActivity).bottomNavigationView.toggle(false, 0)
 
         Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
-        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
         setupFields()
 
