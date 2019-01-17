@@ -95,10 +95,7 @@ class AboutFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(false, true)
-            toolbarAbout.setupWithNavController(findNavController())
-        }
+        toolbarAbout.setupWithNavController(findNavController())
     }
 
     private fun executeEnterCircularReveal() {
@@ -130,7 +127,7 @@ class AboutFragment : Fragment() {
 
     private fun setInitialActivityState() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(false, false)
+            it.appBarLayout.setExpanded(false, true)
             it.bottomNavigationView.toggle(false)
             it.window.apply {
                 if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {

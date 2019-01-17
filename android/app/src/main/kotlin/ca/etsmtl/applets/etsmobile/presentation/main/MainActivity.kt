@@ -27,8 +27,7 @@ class MainActivity : BaseActivity() {
         R.id.fragmentSchedule,
         R.id.fragmentStudent,
         R.id.fragmentEts,
-        R.id.fragmentMore,
-        R.id.fragmentAbout
+        R.id.fragmentMore
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
