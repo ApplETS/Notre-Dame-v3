@@ -21,6 +21,7 @@ import ca.etsmtl.applets.repository.data.model.Seance
 import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
 import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
+import com.soywiz.klock.seconds
 import java.util.Date
 
 /**
@@ -55,7 +56,7 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.session,
         this.nom,
         this.equipe,
-        this.dateCible,
+        dateCible?.let { Date(it.seconds.millisecondsLong) },
         this.note.zeroIfNullOrBlank(),
         this.corrigeSur.zeroIfNullOrBlank(),
         this.notePourcentage.zeroIfNullOrBlank(),
@@ -74,8 +75,8 @@ fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
 
 fun EvaluationCoursEntity.toEvaluationCours() = EvaluationCours(
     session,
-    Date(dateDebutEvaluation),
-    Date(dateFinEvaluation),
+    Date(dateDebutEvaluation.seconds.millisecondsLong),
+    Date(dateFinEvaluation.seconds.millisecondsLong),
     enseignant,
     estComplete,
     groupe,
@@ -124,8 +125,8 @@ fun ProgrammeEntity.toProgramme() = Programme(
 fun List<ProgrammeEntity>.toProgrammes(): List<Programme> = map { it.toProgramme() }
 
 fun SeanceEntity.toSeance() = Seance(
-        Date(dateDebut),
-        Date(dateFin),
+        Date(dateDebut.seconds.millisecondsLong),
+        Date(dateFin.seconds.millisecondsLong),
         this.nomActivite,
         this.local,
         this.descriptionActivite,

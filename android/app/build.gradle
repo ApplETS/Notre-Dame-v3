@@ -101,7 +101,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.0.1'
 
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
 
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"

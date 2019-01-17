@@ -37,7 +37,6 @@ import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import ca.etsmtl.applets.repository.util.signetsDefaultDateToUnix
-import ca.etsmtl.applets.repository.util.toLocaleDate
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -116,7 +115,7 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             cours.session,
             this.nom,
             this.equipe,
-            dateCible.apply { if (isNotBlank()) { toLocaleDate() } },
+            dateCible.takeIf { !it.isNullOrBlank() }?.signetsDefaultDateToUnix(),
             numberFormatter.format(note),
             numberFormatter.format(corrigeSur.replaceCommaAndParseToFloat()),
             numberFormatter.format(notePourcentage),
