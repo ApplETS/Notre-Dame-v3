@@ -6,6 +6,7 @@ apply plugin: "org.jlleitschuh.gradle.ktlint"
 apply plugin: 'io.fabric'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+apply plugin: 'com.github.triplet.play'
 apply from: rootProject.file('gradle/android.gradle')
 
 def keystorePropertiesFile = rootProject.file("android/keystore.properties")
@@ -70,6 +71,16 @@ android {
         }
     }
 
+    playConfigs {
+        beta {
+            serviceAccountCredentials = file("../service_account_credentials_beta.json")
+            track = "beta" // internal/alpha/beta/production
+        }
+// TODO:
+//            production {
+//                serviceAccountCredentials = file('customer-two-key.json')
+//            }
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -80,6 +91,12 @@ android {
             java.srcDirs += 'src/androidTest/kotlin'
         }
     }
+}
+
+play {
+    userFraction = 1
+    releaseStatus = "completed" // completed/draft/inProgress/halted
+    resolutionStrategy = "ignore" // ignore or auto
 }
 
 androidExtensions {
