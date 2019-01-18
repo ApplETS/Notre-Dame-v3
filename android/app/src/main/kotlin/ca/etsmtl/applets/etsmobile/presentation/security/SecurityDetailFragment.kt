@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.toggle
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_security_detail.*
@@ -28,7 +27,7 @@ class SecurityDetailFragment : Fragment() {
         (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
 
         val safeArgs = SecurityDetailFragmentArgs.fromBundle(arguments).securityName
-        (activity as? MainActivity)?.toolbar!!.title=safeArgs
+        (activity as? MainActivity)?.toolbar!!.title = safeArgs
 
         val itemsList = resources.getStringArray(R.array.security_type)
         var url: String = ""
@@ -56,9 +55,7 @@ class SecurityDetailFragment : Fragment() {
 
     private fun restoreActivityState() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(true, true)
             it.bottomNavigationView.toggle(true)
-            it.window.statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
         }
     }
 }
