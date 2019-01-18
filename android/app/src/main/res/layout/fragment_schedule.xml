@@ -17,13 +17,26 @@
             <include
                 layout="@layout/empty_view_schedule"
                 android:visibility="gone" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewSchedule"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/schedule_pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible"
-                tools:listitem="@layout/item_schedule" />
+                android:layout_height="match_parent">
+                <androidx.viewpager.widget.PagerTitleStrip
+                    android:id="@+id/schedule_pager_title_strip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/material_light_white"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"/>
+            </androidx.viewpager.widget.ViewPager>
+            <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerViewSchedule"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:visibility="visible"-->
+                <!--tools:listitem="@layout/item_schedule" />-->
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

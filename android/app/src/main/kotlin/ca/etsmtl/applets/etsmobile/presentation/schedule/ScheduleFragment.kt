@@ -30,7 +30,7 @@ class ScheduleFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val adapter: ScheduleWeekAdapter = ScheduleWeekAdapter()
+    private val adapter: ScheduleAdapter = ScheduleAdapter(requireFragmentManager())
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +43,8 @@ class ScheduleFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpSwipeRefresh()
-        setUpRecyclerView()
+//        setUpRecyclerView()
+        setUpPager()
         btnRetry.setOnClickListener { scheduleViewModel.refresh() }
         subscribeUI()
     }
@@ -53,26 +54,21 @@ class ScheduleFragment : DaggerFragment() {
         swipeRefreshLayoutSchedule.setOnRefreshListener { scheduleViewModel.refresh() }
     }
 
-    private fun setUpRecyclerView() {
-        recyclerViewSchedule.adapter = adapter
-        recyclerViewSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        recyclerViewSchedule.itemAnimator = FadeInLeftAnimator()
+    private fun setUpPager(){
+        schedule_pager.adapter = adapter
     }
 
+//    private fun setUpRecyclerView() {
+//        recyclerViewSchedule.adapter = adapter
+//        recyclerViewSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+//        recyclerViewSchedule.itemAnimator = FadeInLeftAnimator()
+//    }
+
     private fun subscribeUI() {
-        scheduleViewModel.sessions.observe(this, Observer {
-            // TODO utiliser les sessions dans un option menu
-        })
         scheduleViewModel.seances.observe(this, Observer {
-            it?.takeIf { it.isNotEmpty() }?.let { seances ->
-                adapter.items = seances
-            }
+            it?.let { adapter.items = it }
         })
 
-        scheduleViewModel.showEmptyView.observe(this, Observer {
-            recyclerViewSchedule.isVisible = !it
-            emptyViewSchedule.isVisible = it
-        })
         scheduleViewModel.loading.observe(this, Observer {
             it?.let { swipeRefreshLayoutSchedule.isRefreshing = it }
         })
