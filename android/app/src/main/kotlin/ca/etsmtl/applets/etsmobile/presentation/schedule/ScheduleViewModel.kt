@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
+import android.util.Range
 import androidx.annotation.VisibleForTesting
 import androidx.core.util.Pair
 import androidx.lifecycle.Lifecycle
@@ -44,10 +45,10 @@ class ScheduleViewModel @Inject constructor(
         it.getGenericErrorMessage(app)
     }
 
-    val seances: LiveData<Map<Pair<Calendar, Calendar>, List<Seance>>> = seanceRes.nonNull()
+    val seances: LiveData<Map<Range<Calendar>, List<Seance>>> = seanceRes.nonNull()
         .map { res->
             res.data?.groupBy {
-                it.extractWeekPair()
+                it.extractWeekRange()
             }
         }
 
@@ -63,7 +64,7 @@ class ScheduleViewModel @Inject constructor(
      *  Finds the pair of calendar that represents the week that this seance belongs to
      */
     @VisibleForTesting
-    private fun Seance.extractWeekPair(): Pair<Calendar, Calendar>{
+    private fun Seance.extractWeekRange(): Range<Calendar>{
         val beginningCal = Calendar.getInstance()
                     beginningCal.clear()
                     beginningCal.time = dateDebut
@@ -76,7 +77,7 @@ class ScheduleViewModel @Inject constructor(
         val endCal = beginningCal.clone() as Calendar
         endCal.add(Calendar.WEEK_OF_YEAR, 1)
 
-        return Pair(beginningCal, endCal)
+        return Range(beginningCal, endCal)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
