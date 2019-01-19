@@ -1,0 +1,3 @@
+package org.kotlin.mpp.mobile
+
+actual fun platformName() = "Android"

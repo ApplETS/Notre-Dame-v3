@@ -186,6 +186,7 @@ dependencies {
     implementation "com.buglife.sdk:buglife-android:$buglife"
 
     implementation project(':android:repository')
+    implementation project(':shared')
 }
 
 apply plugin: 'com.google.gms.google-services'
