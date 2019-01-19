@@ -5,7 +5,7 @@ import android.util.Range
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import ca.etsmtl.applets.etsmobile.presentation.schedule.Week.ScheduleWeekFragment
+import ca.etsmtl.applets.etsmobile.presentation.schedule.week.ScheduleWeekFragment
 import ca.etsmtl.applets.repository.data.model.Seance
 import java.text.DateFormat
 import java.text.SimpleDateFormat

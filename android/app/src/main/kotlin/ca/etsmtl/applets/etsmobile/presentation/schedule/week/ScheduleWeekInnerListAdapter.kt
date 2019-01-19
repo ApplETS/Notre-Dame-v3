@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.presentation.schedule.Week
+package ca.etsmtl.applets.etsmobile.presentation.schedule.week
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
