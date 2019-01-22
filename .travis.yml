@@ -1,3 +1,5 @@
+dist: xenial
+
 cache:
 - bundler
 - cocoapods
@@ -10,7 +12,9 @@ cache:
 
 matrix:
   include:
-  - language: android
+  - os: linux
+    dist: trusty
+    language: android
     jdk: oraclejdk8
     sudo: false
     android:
@@ -35,6 +39,7 @@ matrix:
         - sys-img-armeabi-v7a-android-28
         - sys-img-armeabi-v7a-android-21
     before_install:
+    - lsb_release -a
     - wget https://www.openssl.org/source/openssl-1.1.0g.tar.gz > /dev/null
     - tar xzvf openssl-1.1.0g.tar.gz > /dev/null
     - cd openssl-1.1.0g
