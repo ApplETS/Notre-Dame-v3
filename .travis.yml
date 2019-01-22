@@ -71,6 +71,7 @@ matrix:
     - "./gradlew ktlintCheck > /dev/null"
     - "./gradlew test > /dev/null"
     - "./gradlew connectedAndroidTest -PdisablePreDex"
+    - if [[ $TRAVIS_BRANCH == 'master' ]] ./gradlew publishBetaReleaseApk
         
   - os: osx
     osx_image: xcode10
