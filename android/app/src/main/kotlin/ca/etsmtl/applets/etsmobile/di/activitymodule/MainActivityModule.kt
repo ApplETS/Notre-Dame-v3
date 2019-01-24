@@ -2,6 +2,8 @@ package ca.etsmtl.applets.etsmobile.di.activitymodule
 
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.di.ViewModelKey
+import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardFragment
+import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardViewModel
 import ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.applets.etsmobile.presentation.ets.EtsViewModel
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
@@ -40,9 +42,15 @@ interface MainActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
-    fun bindLoginViewModel(
-        loginViewModel: LoginViewModel
-    ): ViewModel
+    fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DashboardViewModel::class)
+    fun bindDashboardViewModel(dashboardViewModel: DashboardViewModel): ViewModel
+
+    @ContributesAndroidInjector
+    fun contributeDashboardFragment(): DashboardFragment
 
     @ContributesAndroidInjector
     fun contributeStudentFragment(): StudentFragment
@@ -53,9 +61,7 @@ interface MainActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(ScheduleViewModel::class)
-    fun bindScheduleViewModel(
-        scheduleViewModel: ScheduleViewModel
-    ): ViewModel
+    fun bindScheduleViewModel(scheduleViewModel: ScheduleViewModel): ViewModel
 
     @ContributesAndroidInjector
     fun contributeScheduleFragment(): ScheduleFragment
@@ -63,9 +69,7 @@ interface MainActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(GradesViewModel::class)
-    fun bindGradesViewModel(
-        gradesViewModel: GradesViewModel
-    ): ViewModel
+    fun bindGradesViewModel(gradesViewModel: GradesViewModel): ViewModel
 
     @ContributesAndroidInjector
     fun contributeProfileFragment(): ProfileFragment
@@ -73,9 +77,7 @@ interface MainActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(EtsViewModel::class)
-    fun bindEtsViewModel(
-        etsViewModel: EtsViewModel
-    ): ViewModel
+    fun bindEtsViewModel(etsViewModel: EtsViewModel): ViewModel
 
     @ContributesAndroidInjector
     fun contributeEtsFragment(): EtsFragment
@@ -93,7 +95,5 @@ interface MainActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(MoreViewModel::class)
-    fun bindMoreViewModel(
-        moreViewModel: MoreViewModel
-    ): ViewModel
+    fun bindMoreViewModel(moreViewModel: MoreViewModel): ViewModel
 }
