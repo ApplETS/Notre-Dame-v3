@@ -2,37 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@+id/toolbar"
-    android:layout_marginBottom="@dimen/design_bottom_navigation_height"
-    android:orientation="vertical"
-    >
+    android:layout_marginBottom="@dimen/material_layout_vertical_spacing_tool_bar"
+    android:orientation="vertical">
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_v_"
-        />
+        android:layout_centerInParent="true" />
 
-    <LinearLayout
-        android:id="@+id/ll_v_"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
+
+    <Button
+        android:id="@+id/urgence_appel_urgence"
+        android:layout_width="210dp"
+        android:layout_height="53dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_centerHorizontal="true"
+        android:text="@string/emergency_call"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <Button
-            android:id="@+id/urgence_appel_urgence"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/etsRougeClair"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="lololol"
-            android:textColor="#fff" />
 
-    </LinearLayout>
 </RelativeLayout>

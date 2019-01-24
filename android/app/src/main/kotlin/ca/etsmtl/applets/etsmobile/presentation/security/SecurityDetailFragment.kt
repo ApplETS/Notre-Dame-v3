@@ -1,5 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.security
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,11 +48,21 @@ class SecurityDetailFragment : Fragment() {
         }
         webView.loadUrl(url)
         webView.requestFocus()
+        setUpButtonListener()
     }
 
     override fun onDestroyView() {
         restoreActivityState()
         super.onDestroyView()
+    }
+
+    private fun setUpButtonListener() {
+        urgence_appel_urgence.setOnClickListener {
+            val uri = "tel:911"
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse(uri)
+            startActivity(intent)
+        }
     }
 
     private fun restoreActivityState() {

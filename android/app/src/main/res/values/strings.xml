@@ -142,4 +142,5 @@
     <string name="armed_person">file:///android_asset/armed_person_detail_fr.html</string>
     <string name="earthquake">file:///android_asset/earthquake_detail_fr.html</string>
     <string name="medical_emergency">file:///android_asset/medical_emergency_detail_fr.html</string>
+    <string name="emergency_call">Appel d\'urgence</string>
 </resources>
