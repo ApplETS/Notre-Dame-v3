@@ -22,7 +22,7 @@ buildscript {
     ext.mockito = '2.23.4'
     ext.mockito_kotlin = '1.6.0'
     ext.moshi = '1.8.0'
-    ext.navigation = '1.0.0-alpha08'
+    ext.navigation = '1.0.0-alpha11'
     ext.okhttp = '3.8.0'
     ext.recyclerviewanimators = '2.3.0'
     ext.retrofit = '2.5.0'
