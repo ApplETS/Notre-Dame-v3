@@ -58,7 +58,7 @@ class SecurityDetailFragment : Fragment() {
 
     private fun setUpButtonListener() {
         urgence_appel_urgence.setOnClickListener {
-            val uri = "tel:911"
+            val uri = "tel:"+resources.getString(R.string.emergency_number)
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse(uri)
             startActivity(intent)

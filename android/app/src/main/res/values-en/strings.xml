@@ -142,5 +142,10 @@
     <string name="earthquake">file:///android_asset/earthquake_detail_en.html</string>
     <string name="medical_emergency">file:///android_asset/medical_emergency_detail_en.html</string>
     <string name="emergency_call">Emergency call</string>
+    <string name="reach_security">Reach security</string>
+    <string name="emergency_number">514 396-8900</string>
+    <string name="emergency_intern_call">From inside campus</string>
+    <string name="emergency_intern_number">55</string>
+    <string name="emergency_procedures">Emergency procedures</string>
 
 </resources>

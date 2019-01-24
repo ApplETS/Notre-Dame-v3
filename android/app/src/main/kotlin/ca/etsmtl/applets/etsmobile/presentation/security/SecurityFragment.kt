@@ -1,5 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.security
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,12 +28,22 @@ class SecurityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setUpViewListener()
+    }
+
+    private fun setUpViewListener() {
+        viewCall.setOnClickListener {
+            val uri = "tel:" + resources.getString(R.string.emergency_number)
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse(uri)
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerView() {
         val itemsList = resources.getStringArray(R.array.security_type)
-        security_recycler_view.layoutManager=LinearLayoutManager(context)
-        security_recycler_view.adapter = SecurityAdapter(itemsList,findNavController())
+        security_recycler_view.layoutManager = LinearLayoutManager(context)
+        security_recycler_view.adapter = SecurityAdapter(itemsList, findNavController())
         security_recycler_view.setHasFixedSize(true)
 
 

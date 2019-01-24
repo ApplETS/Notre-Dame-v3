@@ -143,4 +143,9 @@
     <string name="earthquake">file:///android_asset/earthquake_detail_fr.html</string>
     <string name="medical_emergency">file:///android_asset/medical_emergency_detail_fr.html</string>
     <string name="emergency_call">Appel d\'urgence</string>
+    <string name="reach_security">Joindre la sécurité</string>
+    <string name="emergency_number">514 396-8900</string>
+    <string name="emergency_intern_call">À l\'interne</string>
+    <string name="emergency_intern_number">55</string>
+    <string name="emergency_procedures">Procédures d\'urgence</string>
 </resources>
