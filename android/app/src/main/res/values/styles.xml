@@ -83,6 +83,13 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
+    <style name="AppTheme.Dashboard.Card.Applets.Button" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="iconTint">@android:color/white</item>
+        <item name="rippleColor">@android:color/white</item>
+        <item name="strokeColor">@android:color/white</item>
+    </style>
+
     <!-- About screen theme -->
     <style name="AboutTheme" parent="AppTheme">
         <item name="colorPrimary">@color/applets</item>

@@ -10,6 +10,9 @@
     <string name="session_summer">Été</string>
     <string name="session_without">Sans trimestre</string>
     <string name="oss_license_title" tools:ignore="MissingTranslation">Licences des logiciels libres</string>
+    <string name="facebook">Facebook</string>
+    <string name="github">GitHub</string>
+    <string name="email">Courriel</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Horaire</string>
@@ -31,6 +34,10 @@
     <string name="msg_logout_success">Vous vous êtes déconnecté</string>
     <string name="label_login_applets_logo">Conçue par</string>
     <string name="password_forgotten">Mot de passe oublié?</string>
+
+    <!-- Applets card -->
+    <string name="title_applets_card">ApplETS</string>
+    <string name="text_applets_card">ÉTSMobile a été conçue par le club ApplETS. Supportez-nous en aimant notre page Facebook, en contribuaant sur GitHub ou en nous faisant part de vos commentaires par courriel.</string>
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>

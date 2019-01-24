@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.presentation.dashboard
+package ca.etsmtl.applets.etsmobile.presentation.dashboard.card
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

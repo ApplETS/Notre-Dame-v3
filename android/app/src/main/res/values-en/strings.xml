@@ -10,6 +10,9 @@
     <string name="session_winter">Winter</string>
     <string name="session_summer">Summer</string>
     <string name="session_without">Without Session</string>
+    <string name="facebook">Facebook</string>
+    <string name="github">GitHub</string>
+    <string name="email">Email</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Schedule</string>
@@ -31,6 +34,10 @@
     <string name="msg_logout_success">You have logged out</string>
     <string name="label_login_applets_logo">Made by</string>
     <string name="password_forgotten">Forgot your password?</string>
+
+    <!-- Applets card -->
+    <string name="title_applets_card">ApplETS</string>
+    <string name="text_applets_card">ÉTSMobile was made by the club ApplETS. Support us by liking our Facebook page, contributing to GitHub or sending us your comments via email.</string>
 
     <!-- Grades -->
     <string name="title_grades">Grades</string>
