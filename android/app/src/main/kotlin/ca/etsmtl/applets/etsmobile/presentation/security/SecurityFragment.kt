@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.synthetic.main.fragment_security.*
+
 
 /**
  * This fragment contains information about the security.
@@ -29,6 +31,8 @@ class SecurityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setUpViewListener()
+        ViewCompat.setNestedScrollingEnabled(lol, false)
+
     }
 
     private fun setUpViewListener() {

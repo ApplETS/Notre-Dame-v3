@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lol"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/material_layout_vertical_spacing_tool_bar"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.security.SecurityFragment">
 
     <LinearLayout
@@ -113,7 +114,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
-            android:scrollbars="none" />
+            android:layout_marginBottom="@dimen/material_layout_vertical_spacing_tool_bar"
+            android:scrollbars="none"
+            />
 
     </LinearLayout>
 
