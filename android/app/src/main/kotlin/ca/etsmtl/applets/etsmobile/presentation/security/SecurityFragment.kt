@@ -11,27 +11,50 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_security.*
 
 
 /**
  * This fragment contains information about the security.
  */
-class SecurityFragment : Fragment() {
+class SecurityFragment : Fragment(), OnMapReadyCallback {
+
+
+    private var mMap: MapView? = null
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        mMap?.onSaveInstanceState(outState)
+    }
+
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_security, container, false)
+        val v = inflater.inflate(R.layout.fragment_security, container, false)
+
+
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mMap = view.findViewById(R.id.mapView) as MapView
+        mMap?.onCreate(savedInstanceState)
+        mMap?.getMapAsync(this)
+
+
         setupRecyclerView()
         setUpViewListener()
-        ViewCompat.setNestedScrollingEnabled(lol, false)
+        ViewCompat.setNestedScrollingEnabled(nestedScrollView, false)
 
     }
 
@@ -52,4 +75,39 @@ class SecurityFragment : Fragment() {
 
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        mMap?.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mMap?.onPause()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mMap?.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mMap?.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mMap?.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mMap?.onLowMemory()
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.addMarker(MarkerOptions().position(LatLng(0.0, 0.0)).title("Marker"))
+    }
+
 }
