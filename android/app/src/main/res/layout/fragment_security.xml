@@ -16,11 +16,12 @@
         android:background="@color/material_light_white"
         android:orientation="vertical">
 
-        <com.google.android.gms.maps.MapView
+        <ca.etsmtl.applets.etsmobile.presentation.security.CustomMapView
 
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="250dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -118,10 +119,9 @@
             android:id="@+id/security_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             android:layout_marginBottom="@dimen/material_layout_vertical_spacing_tool_bar"
-            android:scrollbars="none"
-            />
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none" />
 
     </LinearLayout>
 

@@ -39,10 +39,7 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.fragment_security, container, false)
-
-
-        return v
+        return inflater.inflate(R.layout.fragment_security, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,6 +73,10 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
 
     }
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.addMarker(MarkerOptions().position(LatLng(0.0, 0.0)).title("Marker"))
+    }
+
     override fun onResume() {
         super.onResume()
         mMap?.onResume()
@@ -104,10 +105,6 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         mMap?.onLowMemory()
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        googleMap.addMarker(MarkerOptions().position(LatLng(0.0, 0.0)).title("Marker"))
     }
 
 }
