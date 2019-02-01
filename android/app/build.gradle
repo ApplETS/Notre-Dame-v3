@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "org.jlleitschuh.gradle.ktlint"
 apply plugin: 'io.fabric'
-apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 def keystorePropertiesFile = rootProject.file("android/keystore.properties")
@@ -130,9 +130,6 @@ dependencies {
 
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:rules:1.1.1'
-
-    // Android Navigation Test Helpers
-    androidTestImplementation "android.arch.navigation:navigation-testing:$navigation"
 
     // Assertions
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
