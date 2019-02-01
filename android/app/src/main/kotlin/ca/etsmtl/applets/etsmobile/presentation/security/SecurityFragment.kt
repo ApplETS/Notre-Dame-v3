@@ -13,19 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_security.*
 
 
+
+
 /**
  * This fragment contains information about the security.
  */
 class SecurityFragment : Fragment(), OnMapReadyCallback {
-
-    private var mMap: MapView? = null
 
     companion object {
         private val etsLocation = LatLng(45.49449875, -73.56246144109338)
@@ -44,19 +43,18 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpMap(savedInstanceState)
-        setupRecyclerView()
-        setUpViewListener()
+        setMap(savedInstanceState)
+        setRecyclerView()
+        setViewListener()
         ViewCompat.setNestedScrollingEnabled(nestedScrollView, false)
     }
 
-    private fun setUpMap(savedInstanceState: Bundle?) {
-        mMap = mapView
-        mMap?.onCreate(savedInstanceState)
-        mMap?.getMapAsync(this)
+    private fun setMap(savedInstanceState: Bundle?) {
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
     }
 
-    private fun setUpViewListener() {
+    private fun setViewListener() {
         viewCall.setOnClickListener {
             val uri = "tel:" + resources.getString(R.string.emergency_number)
             val intent = Intent(Intent.ACTION_DIAL)
@@ -65,7 +63,7 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun setupRecyclerView() {
+    private fun setRecyclerView() {
         val itemsList = resources.getStringArray(R.array.security_type)
         security_recycler_view.layoutManager = LinearLayoutManager(context)
         security_recycler_view.adapter = SecurityAdapter(itemsList, findNavController())
@@ -87,38 +85,37 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mMap?.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
     }
 
     override fun onResume() {
         super.onResume()
-        mMap?.onResume()
+        mapView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        mMap?.onPause()
+        mapView.onPause()
     }
 
     override fun onStart() {
         super.onStart()
-        mMap?.onStart()
+        mapView.onStart()
     }
 
     override fun onStop() {
         super.onStop()
-        mMap?.onStop()
+        mapView.onStop()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mMap?.onDestroy()
-        mMap = null
+        mapView?.onDestroy()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mMap?.onLowMemory()
+        mapView.onLowMemory()
     }
 
 }
