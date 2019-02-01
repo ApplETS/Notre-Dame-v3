@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.more.MoreFragmentDirections
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_security.*
 
@@ -20,8 +22,7 @@ class SecurityAdapter(private val securityList: Array<String>, private val findN
     override fun onBindViewHolder(holder: SecurityViewHolder, position: Int) {
         holder.titleTypeUrgence.text = securityList[position]
         holder.containerView.setOnClickListener {
-            val action = SecurityFragmentDirections.actionSecurityFragmentToSecurityDetailFragment()
-            action.setSecurityName(securityList[position])
+            val action = SecurityFragmentDirections.actionSecurityFragmentToSecurityDetailFragment(securityList[position])
             findNavController.navigate(action)
         }
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.toggle
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_security_detail.*
 
 class SecurityDetailFragment : Fragment() {
+    val args: SecurityDetailFragmentArgs by navArgs()
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -25,10 +27,8 @@ class SecurityDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
-
-        val safeArgs = SecurityDetailFragmentArgs.fromBundle(arguments).securityName
+        val safeArgs = args.securityName
         (activity as? MainActivity)?.toolbar!!.title = safeArgs
 
         val itemsList = resources.getStringArray(R.array.security_type)
