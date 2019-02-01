@@ -147,5 +147,6 @@
     <string name="emergency_intern_call">From inside campus</string>
     <string name="emergency_intern_number">55</string>
     <string name="emergency_procedures">Emergency procedures</string>
+    <string name="security_station">Security station</string>
 
 </resources>

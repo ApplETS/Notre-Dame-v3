@@ -26,8 +26,14 @@ import kotlinx.android.synthetic.main.fragment_security.*
 class SecurityFragment : Fragment(), OnMapReadyCallback {
 
     private var mMap: MapView? = null
-    private val etsLocation = LatLng(45.49449875, -73.56246144109338)
-    private val securityBuildingALocation = LatLng(45.49511855948888, -73.56270170940309)
+
+    companion object {
+        private val etsLocation = LatLng(45.49449875, -73.56246144109338)
+        private val securityBuildingALocation = LatLng(45.49511855948888, -73.56270170940309)
+        private val securityBuildingBLocation = LatLng(45.495089693692194, -73.56374294991838)
+        private val securityBuildingELocation = LatLng(45.49391646843658, -73.5634878349083)
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -36,22 +42,18 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
         return inflater.inflate(R.layout.fragment_security, container, false)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mMap?.onSaveInstanceState(outState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mMap = view.findViewById(R.id.mapView) as MapView
-        mMap?.onCreate(savedInstanceState)
-        mMap?.getMapAsync(this)
-
-
+        setUpMap(savedInstanceState)
         setupRecyclerView()
         setUpViewListener()
         ViewCompat.setNestedScrollingEnabled(nestedScrollView, false)
+    }
 
+    private fun setUpMap(savedInstanceState: Bundle?) {
+        mMap = mapView
+        mMap?.onCreate(savedInstanceState)
+        mMap?.getMapAsync(this)
     }
 
     private fun setUpViewListener() {
@@ -72,8 +74,20 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.uiSettings.isMapToolbarEnabled = false
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(etsLocation, 17F))
-        googleMap.addMarker(MarkerOptions().position(securityBuildingALocation).title("Security Station Building A"))
+        setMapMarker(googleMap)
+    }
+
+    private fun setMapMarker(googleMap: GoogleMap) {
+        googleMap.addMarker(MarkerOptions().position(securityBuildingALocation).title(resources.getString(R.string.security_station)))
+        googleMap.addMarker(MarkerOptions().position(securityBuildingBLocation).title(resources.getString(R.string.security_station)))
+        googleMap.addMarker(MarkerOptions().position(securityBuildingELocation).title(resources.getString(R.string.security_station)))
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mMap?.onSaveInstanceState(outState)
     }
 
     override fun onResume() {

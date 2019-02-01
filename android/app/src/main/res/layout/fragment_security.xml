@@ -75,6 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="17dp"
                 android:text="@string/emergency_call"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -84,6 +86,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="17dp"
                 android:text="@string/emergency_intern_call"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="@+id/imageView3" />
@@ -93,6 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/emergency_intern_number"
+                android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -101,6 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:text="@string/emergency_number"
+                android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
