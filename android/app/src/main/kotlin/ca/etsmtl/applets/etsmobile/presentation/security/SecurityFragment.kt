@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,22 +25,20 @@ import kotlinx.android.synthetic.main.fragment_security.*
  */
 class SecurityFragment : Fragment(), OnMapReadyCallback {
 
-
     private var mMap: MapView? = null
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        mMap?.onSaveInstanceState(outState)
-    }
-
-
+    private val etsLocation = LatLng(45.49449875, -73.56246144109338)
+    private val securityBuildingALocation = LatLng(45.49511855948888, -73.56270170940309)
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_security, container, false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mMap?.onSaveInstanceState(outState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,11 +69,11 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
         security_recycler_view.adapter = SecurityAdapter(itemsList, findNavController())
         security_recycler_view.setHasFixedSize(true)
 
-
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        googleMap.addMarker(MarkerOptions().position(LatLng(0.0, 0.0)).title("Marker"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(etsLocation, 17F))
+        googleMap.addMarker(MarkerOptions().position(securityBuildingALocation).title("Security Station Building A"))
     }
 
     override fun onResume() {
@@ -100,6 +99,7 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     override fun onDestroy() {
         super.onDestroy()
         mMap?.onDestroy()
+        mMap = null
     }
 
     override fun onLowMemory() {
