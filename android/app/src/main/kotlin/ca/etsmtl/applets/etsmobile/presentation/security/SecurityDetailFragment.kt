@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_security_detail.*
 
 class SecurityDetailFragment : Fragment() {
-    val args: SecurityDetailFragmentArgs by navArgs()
+    private val args: SecurityDetailFragmentArgs by navArgs()
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -27,47 +28,53 @@ class SecurityDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
-        val safeArgs = args.securityName
-        (activity as? MainActivity)?.toolbar!!.title = safeArgs
-
-        val itemsList = resources.getStringArray(R.array.security_type)
-        var url: String = ""
-
-        when (safeArgs) {
-            itemsList[0] -> url = resources.getString(R.string.bomb_threat)
-            itemsList[1] -> url = resources.getString(R.string.suspicious_packages)
-            itemsList[2] -> url = resources.getString(R.string.evacuation)
-            itemsList[3] -> url = resources.getString(R.string.gas_leak)
-            itemsList[4] -> url = resources.getString(R.string.fire)
-            itemsList[5] -> url = resources.getString(R.string.broken_elevator)
-            itemsList[6] -> url = resources.getString(R.string.electrical_outage)
-            itemsList[7] -> url = resources.getString(R.string.armed_person)
-            itemsList[8] -> url = resources.getString(R.string.earthquake)
-            itemsList[9] -> url = resources.getString(R.string.medical_emergency)
-        }
-        webView.loadUrl(url)
-        webView.requestFocus()
-        setUpButtonListener()
+        hideBottomNavigation()
+        setToolbarTitle()
+        setEmergencyDetailText()
+        setButtonListener()
     }
 
-    override fun onDestroyView() {
-        restoreActivityState()
-        super.onDestroyView()
+    private fun setEmergencyDetailText() {
+        val securityTypeList = resources.getStringArray(R.array.security_type)
+        webView.loadUrl(
+                when (args.securityName) {
+                    securityTypeList[0] -> resources.getString(R.string.bomb_threat)
+                    securityTypeList[1] -> resources.getString(R.string.suspicious_packages)
+                    securityTypeList[2] -> resources.getString(R.string.evacuation)
+                    securityTypeList[3] -> resources.getString(R.string.gas_leak)
+                    securityTypeList[4] -> resources.getString(R.string.fire)
+                    securityTypeList[5] -> resources.getString(R.string.broken_elevator)
+                    securityTypeList[6] -> resources.getString(R.string.electrical_outage)
+                    securityTypeList[7] -> resources.getString(R.string.armed_person)
+                    securityTypeList[8] -> resources.getString(R.string.earthquake)
+                    else -> resources.getString(R.string.medical_emergency)
+                }
+        )
     }
 
-    private fun setUpButtonListener() {
+    private fun setToolbarTitle() {
+        (activity as? MainActivity)?.toolbar!!.title = args.securityName
+    }
+
+    private fun setButtonListener() {
         urgence_appel_urgence.setOnClickListener {
-            val uri = "tel:"+resources.getString(R.string.emergency_number)
+            val uri = "tel:" + resources.getString(R.string.emergency_number)
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse(uri)
             startActivity(intent)
         }
     }
 
-    private fun restoreActivityState() {
-        (activity as? MainActivity)?.let {
-            it.bottomNavigationView.toggle(true)
-        }
+    override fun onDestroyView() {
+        restoreBottomNavigation()
+        super.onDestroyView()
+    }
+
+    private fun hideBottomNavigation() {
+        (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
+    }
+
+    private fun restoreBottomNavigation() {
+        (activity as? MainActivity)?.bottomNavigationView?.toggle(true)
     }
 }

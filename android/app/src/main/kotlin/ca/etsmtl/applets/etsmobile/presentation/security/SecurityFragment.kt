@@ -18,14 +18,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_security.*
 
-
-
-
 /**
  * This fragment contains information about the security.
  */
 class SecurityFragment : Fragment(), OnMapReadyCallback {
-
     companion object {
         private val etsLocation = LatLng(45.49449875, -73.56246144109338)
         private val securityBuildingALocation = LatLng(45.49511855948888, -73.56270170940309)
@@ -65,27 +61,25 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
 
     private fun setRecyclerView() {
         val itemsList = resources.getStringArray(R.array.security_type)
-        security_recycler_view.layoutManager = LinearLayoutManager(context)
-        security_recycler_view.adapter = SecurityAdapter(itemsList, findNavController())
-        security_recycler_view.setHasFixedSize(true)
-
+        security_recycler_view.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = SecurityAdapter(itemsList, findNavController())
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        googleMap.uiSettings.isMapToolbarEnabled = false
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(etsLocation, 17F))
-        setMapMarker(googleMap)
+        googleMap.let {
+            it.uiSettings.isMapToolbarEnabled = false
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(etsLocation, 17F))
+            setMapMarker(it)
+        }
     }
 
     private fun setMapMarker(googleMap: GoogleMap) {
         googleMap.addMarker(MarkerOptions().position(securityBuildingALocation).title(resources.getString(R.string.security_station)))
         googleMap.addMarker(MarkerOptions().position(securityBuildingBLocation).title(resources.getString(R.string.security_station)))
         googleMap.addMarker(MarkerOptions().position(securityBuildingELocation).title(resources.getString(R.string.security_station)))
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
     }
 
     override fun onResume() {
@@ -108,14 +102,18 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
         mapView.onStop()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         mapView?.onDestroy()
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        mapView?.onDestroy()
+        super.onDestroy()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
     }
-
 }
