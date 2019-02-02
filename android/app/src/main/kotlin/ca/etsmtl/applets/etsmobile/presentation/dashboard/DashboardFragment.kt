@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
+import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.toggle
 import dagger.android.support.DaggerFragment
@@ -47,5 +49,6 @@ class DashboardFragment : DaggerFragment() {
         val adapter = DashboardCardAdapter(childFragmentManager)
         adapter.items = dashboardViewModel.cards
         rvCards.adapter = adapter
+        ItemTouchHelper(DashboardCardsTouchHelperCallback(adapter)).attachToRecyclerView(rvCards)
     }
 }
