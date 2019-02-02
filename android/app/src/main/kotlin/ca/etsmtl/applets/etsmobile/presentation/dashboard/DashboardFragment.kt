@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.toggle
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
+import kotlinx.android.synthetic.main.fragment_dashboard.rvCards
 import javax.inject.Inject
 
 /**
@@ -41,9 +43,9 @@ class DashboardFragment : DaggerFragment() {
             appBarLayout.setExpanded(true, true)
             bottomNavigationView.toggle(true)
         }
-    }
 
-    companion object {
-        fun newInstance() = DashboardFragment()
+        val adapter = DashboardCardAdapter(childFragmentManager)
+        adapter.items = dashboardViewModel.cards
+        rvCards.adapter = adapter
     }
 }

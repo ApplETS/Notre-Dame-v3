@@ -2,11 +2,12 @@ package ca.etsmtl.applets.etsmobile.presentation.dashboard.card
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 
-class DashboardCardAdapter : RecyclerView.Adapter<DashboardCardViewHolder>() {
-    private var items: List<DashboardCard> = emptyList()
+class DashboardCardAdapter(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<DashboardCardViewHolder>() {
+    var items: List<DashboardCard> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardCardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,6 +21,6 @@ class DashboardCardAdapter : RecyclerView.Adapter<DashboardCardViewHolder>() {
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: DashboardCardViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], fragmentManager)
     }
 }

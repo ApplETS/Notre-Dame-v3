@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/applets"
@@ -30,43 +31,33 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_applets_card_facebook"
-        style="@style/AppTheme.Dashboard.Card.Applets.Button"
+        style="@style/Widget.AppTheme.Dashboard.Card.Applets.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/facebook"
         app:icon="@drawable/ic_facebook_white_24dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_applets_card_github"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_applets_card_github"
-        style="@style/AppTheme.Dashboard.Card.Applets.Button"
+        style="@style/Widget.AppTheme.Dashboard.Card.Applets.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/github"
         app:icon="@drawable/ic_github_white_24dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_applets_card_email"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_applets_card_facebook"
-        app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
+        app:layout_constraintStart_toStartOf="@+id/btn_applets_card_facebook"
+        app:layout_constraintTop_toBottomOf="@+id/btn_applets_card_facebook" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_applets_card_email"
-        style="@style/AppTheme.Dashboard.Card.Applets.Button"
+        style="@style/Widget.AppTheme.Dashboard.Card.Applets.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/email"
         app:icon="@drawable/ic_email_white_24dp"
-        app:layout_constraintEnd_toEndOf="@+id/tvInfo"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_applets_card_github"
-        app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
+        app:layout_constraintStart_toStartOf="@+id/btn_applets_card_github"
+        app:layout_constraintTop_toBottomOf="@+id/btn_applets_card_github" />
 </androidx.constraintlayout.widget.ConstraintLayout>

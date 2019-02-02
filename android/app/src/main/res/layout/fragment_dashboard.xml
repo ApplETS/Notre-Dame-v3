@@ -10,5 +10,9 @@
         android:id="@+id/rvCards"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_marginBottom="@dimen/design_bottom_navigation_height"
+        android:paddingTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:ignore="PrivateResource"
+        tools:listitem="@layout/item_dashboard_card" />
 </LinearLayout>
