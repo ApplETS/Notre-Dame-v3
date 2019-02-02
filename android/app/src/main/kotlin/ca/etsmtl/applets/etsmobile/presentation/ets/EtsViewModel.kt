@@ -18,6 +18,9 @@ class EtsViewModel @Inject constructor() : ViewModel() {
     val navigateToMonEts: LiveData<Event<Unit>> = _navigateToMonEts
     private val _navigateToBibliotech = MutableLiveData<Event<Unit>>()
     val navigateToBibliotech: LiveData<Event<Unit>> = _navigateToBibliotech
+    private val _navigateToMoodle = MutableLiveData<Event<Unit>>()
+    val navigateToMoodle: LiveData<Event<Unit>> = _navigateToMoodle
+
 
     fun itemsList() = listOf(
         EtsItem(R.drawable.ic_security_white_24dp, R.string.title_security) {
@@ -28,6 +31,9 @@ class EtsViewModel @Inject constructor() : ViewModel() {
         },
         EtsItem(R.drawable.ic_book_white_24dp, R.string.title_bibliotech) {
             _navigateToBibliotech.value = Event(Unit)
+        },
+        EtsItem(R.drawable.ic_moodle_24dp,  R.string.title_moodle) {
+        _navigateToMoodle.value = Event(Unit)
         }
     )
 }

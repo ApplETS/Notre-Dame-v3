@@ -4,6 +4,7 @@
     <string name="uri_password_forgotten" translatable="false">https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx</string>
     <string name="uri_mon_ets" translatable="false">https://portail.etsmtl.ca/</string>
     <string name="uri_bibliotech" translatable="false">https://www.etsmtl.ca/Bibliotheque/Accueil</string>
+    <string name="uri_moodle" translatable="false">https://ena.etsmtl.ca/</string>
     <string name="uri_applets_website" translatable="false">https://clubapplets.ca/</string>
     <string name="uri_applets_gh" translatable="false">https://github.com/orgs/ApplETS/</string>
     <string name="uri_applets_fb" translatable="false">https://www.facebook.com/ClubApplETS</string>

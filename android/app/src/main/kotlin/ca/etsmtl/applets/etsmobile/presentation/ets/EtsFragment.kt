@@ -68,6 +68,12 @@ class EtsFragment : DaggerFragment() {
                 Uri.parse(getString(R.string.uri_bibliotech)).open(context)
             }
         })
+
+        etsViewModel.navigateToMoodle.observe(this, EventObserver {
+            context?.let { context ->
+                Uri.parse(getString(R.string.uri_moodle)).open(context)
+            }
+        })
     }
 
     companion object {

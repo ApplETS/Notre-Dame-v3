@@ -75,6 +75,7 @@
     <string name="title_security">Securité</string>
     <string name="title_monets">MonÉTS</string>
     <string name="title_bibliotech">Bibliotech</string>
+    <string name="title_moodle">Moodle</string>
 
     <!-- More -->
     <string name="more_item_label_faq">FAQ</string>
