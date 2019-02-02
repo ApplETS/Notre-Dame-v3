@@ -22,13 +22,6 @@ import kotlinx.android.synthetic.main.fragment_security.*
  * This fragment contains information about the security.
  */
 class SecurityFragment : Fragment(), OnMapReadyCallback {
-    companion object {
-        private val etsLocation = LatLng(45.49449875, -73.56246144109338)
-        private val securityBuildingALocation = LatLng(45.49511855948888, -73.56270170940309)
-        private val securityBuildingBLocation = LatLng(45.495089693692194, -73.56374294991838)
-        private val securityBuildingELocation = LatLng(45.49391646843658, -73.5634878349083)
-    }
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -69,6 +62,7 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        val etsLocation = LatLng(45.49449875, -73.56246144109338)
         googleMap.let {
             it.uiSettings.isMapToolbarEnabled = false
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(etsLocation, 17F))
@@ -77,6 +71,9 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setMapMarker(googleMap: GoogleMap) {
+        val securityBuildingALocation = LatLng(45.49511855948888, -73.56270170940309)
+        val securityBuildingBLocation = LatLng(45.495089693692194, -73.56374294991838)
+        val securityBuildingELocation = LatLng(45.49391646843658, -73.5634878349083)
         googleMap.addMarker(MarkerOptions().position(securityBuildingALocation).title(resources.getString(R.string.security_station)))
         googleMap.addMarker(MarkerOptions().position(securityBuildingBLocation).title(resources.getString(R.string.security_station)))
         googleMap.addMarker(MarkerOptions().position(securityBuildingELocation).title(resources.getString(R.string.security_station)))
