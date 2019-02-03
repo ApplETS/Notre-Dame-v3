@@ -11,7 +11,12 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_dashboard_card.view.container
 
 class DashboardCardViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    var card: DashboardCard? = null
+        private set
+
     fun bind(card: DashboardCard, fragmentManager: FragmentManager) {
+        this.card = card
+
         val fragment = when (card.type) {
             DashboardCardType.DASHBOARD_CARD_APPLETS -> AppletsCardFragment.newInstance()
             DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE -> TodayScheduleCardFragment.newInstance()

@@ -9,7 +9,7 @@ class DashboardViewModel @Inject constructor() : ViewModel() {
     val cards = mutableListOf(
         DashboardCard(DashboardCardType.DASHBOARD_CARD_APPLETS),
         DashboardCard(DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE),
-        DashboardCard(DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE),
+        DashboardCard(DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE, false),
         DashboardCard(DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE)
     )
 }

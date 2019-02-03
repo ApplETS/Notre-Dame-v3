@@ -5,6 +5,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class DashboardCardsTouchHelperCallback(private val dashboardCardAdapter: DashboardCardAdapter) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
     override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+        val card = (viewHolder as DashboardCardViewHolder).card
+
+        if (card == null || !card.isDismissible) {
+            return 0
+        }
+
         return super.getSwipeDirs(recyclerView, viewHolder)
     }
 
