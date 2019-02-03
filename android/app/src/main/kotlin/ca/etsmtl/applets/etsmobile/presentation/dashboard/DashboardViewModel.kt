@@ -6,8 +6,10 @@ import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardType
 import javax.inject.Inject
 
 class DashboardViewModel @Inject constructor() : ViewModel() {
-    val cards = listOf(
+    val cards = mutableListOf(
         DashboardCard(DashboardCardType.DASHBOARD_CARD_APPLETS),
+        DashboardCard(DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE),
+        DashboardCard(DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE),
         DashboardCard(DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE)
     )
 }

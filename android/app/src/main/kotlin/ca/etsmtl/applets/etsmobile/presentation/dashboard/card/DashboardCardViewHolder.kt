@@ -22,12 +22,12 @@ class DashboardCardViewHolder(override val containerView: View) : RecyclerView.V
 
     private fun FragmentManager.replaceFragment(fragment: Fragment) {
         transaction {
-            with (itemView.container) {
-                findFragmentById(id)?.let { remove(it) }
+            itemView.container?.let {
+                findFragmentById(it.id)?.let { remove(it) }
 
                 val newId = View.generateViewId()
 
-                id = newId
+                it.id = newId
                 replace(newId, fragment)
             }
         }
