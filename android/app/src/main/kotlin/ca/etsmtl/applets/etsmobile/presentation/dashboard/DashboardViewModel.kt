@@ -11,6 +11,7 @@ import java.util.Collections
 import javax.inject.Inject
 
 const val SHOW_CARD_PREF_KEY_PREFIX = "ShowCard"
+const val POSITION_CARD_PREF_KEY_PREFIX = "PositionCard"
 
 class DashboardViewModel @Inject constructor(private val prefs: SharedPreferences) : ViewModel() {
     private val cardList by lazy {
@@ -21,6 +22,9 @@ class DashboardViewModel @Inject constructor(private val prefs: SharedPreference
             .map { type ->
                 DashboardCard(type)
             }
+            .sortedBy { card ->
+                prefs.getInt(POSITION_CARD_PREF_KEY_PREFIX + card.type, card.type.ordinal)
+            }
             .toMutableList()
     }
 
@@ -30,6 +34,10 @@ class DashboardViewModel @Inject constructor(private val prefs: SharedPreference
     val cards: LiveData<List<DashboardCard>> = _cards
 
     fun moveCard(fromPosition: Int, toPosition: Int) {
+        prefs.edit {
+            putInt(POSITION_CARD_PREF_KEY_PREFIX + cardList[fromPosition].type, toPosition)
+            putInt(POSITION_CARD_PREF_KEY_PREFIX + cardList[toPosition].type, fromPosition)
+        }
         Collections.swap(cardList, fromPosition, toPosition)
     }
 
