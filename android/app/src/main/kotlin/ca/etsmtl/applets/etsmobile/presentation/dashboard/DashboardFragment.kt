@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -31,6 +32,7 @@ class DashboardFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var adapter: DashboardCardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +48,21 @@ class DashboardFragment : DaggerFragment() {
             bottomNavigationView.toggle(true)
         }
 
-        val adapter = DashboardCardAdapter(childFragmentManager)
-        adapter.items = dashboardViewModel.cards
+        setupRecyclerView()
+
+        subscribeUI()
+    }
+
+    private fun setupRecyclerView() {
+        adapter = DashboardCardAdapter(childFragmentManager, dashboardViewModel)
+
         rvCards.adapter = adapter
         ItemTouchHelper(DashboardCardsTouchHelperCallback(adapter)).attachToRecyclerView(rvCards)
+    }
+
+    private fun subscribeUI() {
+        dashboardViewModel.cards.observe(this, Observer {
+            adapter.items = it
+        })
     }
 }

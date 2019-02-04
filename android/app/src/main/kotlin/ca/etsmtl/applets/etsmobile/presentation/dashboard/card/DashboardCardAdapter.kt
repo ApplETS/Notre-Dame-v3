@@ -5,10 +5,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
-import java.util.Collections
+import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardViewModel
 
-class DashboardCardAdapter(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<DashboardCardViewHolder>() {
-    var items: MutableList<DashboardCard> = mutableListOf()
+class DashboardCardAdapter(
+    private val fragmentManager: FragmentManager,
+    private val dashboardViewModel: DashboardViewModel
+) : RecyclerView.Adapter<DashboardCardViewHolder>() {
+    var items: List<DashboardCard> = mutableListOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardCardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,12 +33,14 @@ class DashboardCardAdapter(private val fragmentManager: FragmentManager) : Recyc
     }
 
     fun onItemMove(fromPosition: Int, toPosition: Int) {
-        Collections.swap(items, fromPosition, toPosition)
+        dashboardViewModel.moveCard(fromPosition, toPosition)
+
         notifyItemMoved(fromPosition, toPosition)
     }
 
     fun onItemRemoved(position: Int) {
-        items.removeAt(position)
+        dashboardViewModel.removeCard(position)
+
         notifyItemRemoved(position)
     }
 }
