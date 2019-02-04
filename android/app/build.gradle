@@ -74,6 +74,17 @@ android {
         }
     }
 
+    android.applicationVariants.all { variant ->
+        def mergedFlavor = variant.getMergedFlavor()
+        if (variant.flavorName.equals("beta")) {
+            if (variant.buildType.name.equals("debug")) {
+                mergedFlavor.manifestPlaceholders = [googleApiKey:"@string/google_maps_key_beta_debug"]
+            } else {
+                mergedFlavor.manifestPlaceholders = [googleApiKey:"@string/google_maps_key_beta_release"]
+            }
+        }
+    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test {
