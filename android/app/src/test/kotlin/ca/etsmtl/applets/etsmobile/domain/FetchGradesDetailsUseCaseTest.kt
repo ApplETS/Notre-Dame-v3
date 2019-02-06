@@ -6,19 +6,20 @@ import androidx.lifecycle.Observer
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.mockNetwork
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.EvaluationCours
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
-import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
-import ca.etsmtl.applets.repository.data.model.UniversalCode
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationCoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
+import com.soywiz.klock.DateTime
+import model.Cours
+import model.EvaluationCours
+import model.SignetsUserCredentials
+import model.SommaireElementsEvaluation
+import model.SommaireEtEvaluations
+import model.UniversalCode
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -27,7 +28,6 @@ import org.junit.runners.JUnit4
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
-import java.util.Date
 
 /**
  * Created by Sonphil on 08-12-18.
@@ -178,8 +178,8 @@ class FetchGradesDetailsUseCaseTest {
         evaluationCoursLiveData.postValue(Resource.success(listOf(
             EvaluationCours(
                 "H2018",
-                Date(),
-                Date(),
+                DateTime(0),
+                DateTime(0),
                 "",
                 true,
                 "",
@@ -188,8 +188,8 @@ class FetchGradesDetailsUseCaseTest {
             ),
             EvaluationCours(
                 "H2018",
-                Date(),
-                Date(),
+                DateTime(0),
+                DateTime(0),
                 "",
                 false,
                 "",
@@ -213,8 +213,8 @@ class FetchGradesDetailsUseCaseTest {
         evaluationCoursLiveData.postValue(Resource.success(listOf(
             EvaluationCours(
                 "H2018",
-                Date(),
-                Date(),
+                DateTime(0),
+                DateTime(0),
                 "",
                 false,
                 "",
@@ -223,8 +223,8 @@ class FetchGradesDetailsUseCaseTest {
             ),
             EvaluationCours(
                 "H2018",
-                Date(),
-                Date(),
+                DateTime(0),
+                DateTime(0),
                 "",
                 true,
                 "",
@@ -233,8 +233,8 @@ class FetchGradesDetailsUseCaseTest {
             ),
             EvaluationCours(
                 "H2018",
-                Date(),
-                Date(),
+                DateTime(0),
+                DateTime(0),
                 "",
                 false,
                 "",

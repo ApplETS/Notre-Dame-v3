@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.repository.data.repository
 
-import ca.etsmtl.applets.repository.data.model.Cours
+import model.Cours
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

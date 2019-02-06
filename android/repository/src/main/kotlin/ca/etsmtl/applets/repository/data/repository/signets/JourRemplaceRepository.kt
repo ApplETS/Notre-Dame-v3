@@ -10,9 +10,9 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeJoursRempl
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.JourRemplaceDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toJoursRemplaces
-import ca.etsmtl.applets.repository.data.model.JourRemplace
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Session
+import model.JourRemplace
+import model.Session
 import javax.inject.Inject
 
 /**

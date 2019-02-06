@@ -1,9 +1,6 @@
-package ca.etsmtl.applets.repository.data.model
+package model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
+@AndroidParcelize
 data class Cours(
     var sigle: String,
     var groupe: String,
@@ -14,7 +11,7 @@ data class Cours(
     var noteSur100: String?,
     var nbCredits: Int = 0,
     var titreCours: String
-) : Parcelable {
+) : AndroidParcel {
     /**
      * Returns true if the course has a valid session (i.e. H2018)
      *

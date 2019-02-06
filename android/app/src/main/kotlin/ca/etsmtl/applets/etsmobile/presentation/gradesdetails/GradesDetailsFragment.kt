@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.repository.data.model.Cours
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import dagger.android.support.DaggerFragment
@@ -20,6 +19,7 @@ import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades_details.recyclerGradesDetails
 import kotlinx.android.synthetic.main.fragment_grades_details.swipeRefreshLayoutGradesDetails
+import model.Cours
 import javax.inject.Inject
 
 /**

@@ -1,16 +1,16 @@
 package ca.etsmtl.applets.etsmobile.domain
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
-import androidx.annotation.VisibleForTesting
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
+import model.Cours
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**

@@ -16,8 +16,8 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.call
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.model.UniversalCode
+import model.SignetsUserCredentials
+import model.UniversalCode
 import javax.inject.Inject
 
 /**

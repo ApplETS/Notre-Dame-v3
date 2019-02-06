@@ -1,10 +1,10 @@
 package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.lifecycle.LiveData
-import ca.etsmtl.applets.repository.data.model.Etudiant
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
+import model.Etudiant
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 class FetchEtudiantUseCase @Inject constructor(
