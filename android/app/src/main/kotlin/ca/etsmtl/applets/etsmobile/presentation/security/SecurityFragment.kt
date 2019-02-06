@@ -23,9 +23,9 @@ import kotlinx.android.synthetic.main.fragment_security.*
  */
 class SecurityFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_security, container, false)
     }
