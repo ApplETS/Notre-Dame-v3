@@ -71,8 +71,8 @@ class GradesDetailsActivity : BaseActivity() {
 
         setUpToolbar()
 
-        with (intent?.extras) {
-            with (this?.getParcelable(EXTRA_COURS) as Cours) {
+        with(intent?.extras) {
+            with(this?.getParcelable(EXTRA_COURS) as Cours) {
                 if (savedInstanceState == null) {
                     addFragment(this)
                 }
@@ -117,7 +117,7 @@ class GradesDetailsActivity : BaseActivity() {
         containerTvGradesDetailsSubtitle.isVisible = false
         toolbar.isVisible = false
         supportFragmentManager.findFragmentByTag(GradesDetailsFragment.TAG)?.let {
-            with (supportFragmentManager.beginTransaction()) {
+            with(supportFragmentManager.beginTransaction()) {
                 remove(it)
                 commit()
             }

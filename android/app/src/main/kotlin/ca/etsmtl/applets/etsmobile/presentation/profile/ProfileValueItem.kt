@@ -15,7 +15,7 @@ data class ProfileValueItem(
     override fun getLayout() = R.layout.item_profile
 
     override fun bind(viewHolder: ProfileAdapter.ProfileViewHolder.ItemViewHolder, position: Int) {
-        with (viewHolder) {
+        with(viewHolder) {
             tvInfoProfileItemLabel.text = label
             tvProfileItemValue.text = value
         }

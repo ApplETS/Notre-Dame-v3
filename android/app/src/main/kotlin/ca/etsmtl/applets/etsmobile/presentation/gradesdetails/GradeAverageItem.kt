@@ -30,7 +30,7 @@ class GradeAverageItem(
     private var animatedProgress = false
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        with (viewHolder) {
+        with(viewHolder) {
             tvRating.text = rating
 
             fun setGrade() {

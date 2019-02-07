@@ -19,7 +19,7 @@ import ca.etsmtl.applets.repository.util.networkOrSignetsError
 abstract class SignetsNetworkBoundResource<ResultType, RequestType : ApiSignetsData>(appExecutors: AppExecutors) : NetworkBoundResource<ResultType, ApiSignetsModel<RequestType>>(appExecutors) {
     override fun processCall(call: LiveData<ApiResponse<ApiSignetsModel<RequestType>>>): LiveData<ApiResponse<ApiSignetsModel<RequestType>>> {
         return Transformations.map(call) { apiResponse ->
-            with (apiResponse.networkOrSignetsError) {
+            with(apiResponse.networkOrSignetsError) {
                 when (isNullOrEmpty()) {
                     true -> apiResponse
                     false -> ApiResponse(kotlin.Throwable(this))
