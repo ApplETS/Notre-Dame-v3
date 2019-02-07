@@ -74,9 +74,27 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
         val securityBuildingALocation = LatLng(45.49511855948888, -73.56270170940309)
         val securityBuildingBLocation = LatLng(45.495089693692194, -73.56374294991838)
         val securityBuildingELocation = LatLng(45.49391646843658, -73.5634878349083)
-        googleMap.addMarker(MarkerOptions().position(securityBuildingALocation).title(resources.getString(R.string.security_station)))
-        googleMap.addMarker(MarkerOptions().position(securityBuildingBLocation).title(resources.getString(R.string.security_station)))
-        googleMap.addMarker(MarkerOptions().position(securityBuildingELocation).title(resources.getString(R.string.security_station)))
+        googleMap.addMarker(
+            MarkerOptions().position(securityBuildingALocation).title(
+                resources.getString(
+                    R.string.security_station
+                )
+            )
+        )
+        googleMap.addMarker(
+            MarkerOptions().position(securityBuildingBLocation).title(
+                resources.getString(
+                    R.string.security_station
+                )
+            )
+        )
+        googleMap.addMarker(
+            MarkerOptions().position(securityBuildingELocation).title(
+                resources.getString(
+                    R.string.security_station
+                )
+            )
+        )
     }
 
     override fun onResume() {

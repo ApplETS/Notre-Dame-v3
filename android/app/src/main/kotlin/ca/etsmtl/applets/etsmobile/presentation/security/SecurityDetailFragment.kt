@@ -37,18 +37,18 @@ class SecurityDetailFragment : Fragment() {
     private fun setEmergencyDetailText() {
         val securityTypeList = resources.getStringArray(R.array.security_type)
         webView.loadUrl(
-                when (args.securityName) {
-                    securityTypeList[0] -> resources.getString(R.string.bomb_threat)
-                    securityTypeList[1] -> resources.getString(R.string.suspicious_packages)
-                    securityTypeList[2] -> resources.getString(R.string.evacuation)
-                    securityTypeList[3] -> resources.getString(R.string.gas_leak)
-                    securityTypeList[4] -> resources.getString(R.string.fire)
-                    securityTypeList[5] -> resources.getString(R.string.broken_elevator)
-                    securityTypeList[6] -> resources.getString(R.string.electrical_outage)
-                    securityTypeList[7] -> resources.getString(R.string.armed_person)
-                    securityTypeList[8] -> resources.getString(R.string.earthquake)
-                    else -> resources.getString(R.string.medical_emergency)
-                }
+            when (args.securityName) {
+                securityTypeList[0] -> resources.getString(R.string.bomb_threat)
+                securityTypeList[1] -> resources.getString(R.string.suspicious_packages)
+                securityTypeList[2] -> resources.getString(R.string.evacuation)
+                securityTypeList[3] -> resources.getString(R.string.gas_leak)
+                securityTypeList[4] -> resources.getString(R.string.fire)
+                securityTypeList[5] -> resources.getString(R.string.broken_elevator)
+                securityTypeList[6] -> resources.getString(R.string.electrical_outage)
+                securityTypeList[7] -> resources.getString(R.string.armed_person)
+                securityTypeList[8] -> resources.getString(R.string.earthquake)
+                else -> resources.getString(R.string.medical_emergency)
+            }
         )
     }
 
