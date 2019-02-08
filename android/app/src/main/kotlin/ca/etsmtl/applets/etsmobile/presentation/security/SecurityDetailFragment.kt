@@ -29,7 +29,6 @@ class SecurityDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigation()
-        setToolbarTitle()
         setEmergencyDetailText()
         setButtonListener()
     }
@@ -37,7 +36,7 @@ class SecurityDetailFragment : Fragment() {
     private fun setEmergencyDetailText() {
         val securityTypeList = resources.getStringArray(R.array.security_type)
         webView.loadUrl(
-            when (args.securityName) {
+            when (args.securityTitle) {
                 securityTypeList[0] -> resources.getString(R.string.bomb_threat)
                 securityTypeList[1] -> resources.getString(R.string.suspicious_packages)
                 securityTypeList[2] -> resources.getString(R.string.evacuation)
@@ -50,10 +49,6 @@ class SecurityDetailFragment : Fragment() {
                 else -> resources.getString(R.string.medical_emergency)
             }
         )
-    }
-
-    private fun setToolbarTitle() {
-        (activity as? MainActivity)?.toolbar!!.title = args.securityName
     }
 
     private fun setButtonListener() {

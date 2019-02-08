@@ -89,10 +89,9 @@
     <fragment
         android:id="@+id/securityDetailFragment"
         android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityDetailFragment"
-        android:label="SecurityDetailFragment" >
+        android:label="{securityTitle}" >
         <argument
-            android:name="securityName"
-            android:defaultValue="null"
+            android:name="securityTitle"
             app:argType="string" />
     </fragment>
 </navigation>
