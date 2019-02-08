@@ -11,13 +11,13 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/urgence_appel_urgence"
-        android:layout_width="210dp"
-        android:layout_height="53dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/emergency_call"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/emergency_call" />
+
 
 </RelativeLayout>
