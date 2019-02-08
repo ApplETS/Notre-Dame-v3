@@ -11,12 +11,12 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.SeanceDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSeances
-import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.util.unixToDefaultSignetsDate
+import model.Cours
+import model.Seance
+import model.Session
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**

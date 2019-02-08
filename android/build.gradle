@@ -15,7 +15,6 @@ buildscript {
     ext.glide = '4.8.0'
     ext.groupie = '2.1.0'
     ext.junit = '4.12'
-    ext.klock = '1.0.0'
     ext.leakcanary = '1.6.2'
     ext.lifecycle = '2.0.0'
     ext.materialprogressview = '1.0.6'
@@ -54,7 +53,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://dl.bintray.com/soywiz/soywiz" }
     }
 }
 

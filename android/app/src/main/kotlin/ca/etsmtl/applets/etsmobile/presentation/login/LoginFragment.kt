@@ -21,7 +21,6 @@ import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.hideKeyboard
 import ca.etsmtl.applets.etsmobile.util.open
 import ca.etsmtl.applets.etsmobile.util.toggle
-import ca.etsmtl.applets.repository.data.model.UniversalCode
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -38,6 +37,7 @@ import kotlinx.android.synthetic.main.include_login_form.layoutPassword
 import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
 import kotlinx.android.synthetic.main.include_login_form.universalCode
+import model.UniversalCode
 import javax.inject.Inject
 
 /**

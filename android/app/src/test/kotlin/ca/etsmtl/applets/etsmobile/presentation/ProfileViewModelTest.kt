@@ -14,12 +14,12 @@ import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.mockNetwork
-import ca.etsmtl.applets.repository.data.model.Etudiant
-import ca.etsmtl.applets.repository.data.model.Programme
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.mock
+import model.Etudiant
+import model.Programme
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

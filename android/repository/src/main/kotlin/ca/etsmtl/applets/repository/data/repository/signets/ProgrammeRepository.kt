@@ -11,8 +11,8 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeProgrammes
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.ProgrammeDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toProgrammes
-import ca.etsmtl.applets.repository.data.model.Programme
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import model.Programme
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**

@@ -31,23 +31,17 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import ca.etsmtl.applets.repository.util.signetsDefaultDateToUnix
-import java.text.NumberFormat
-import java.util.Locale
+import extensions.formatSingleFractionDigits
+import model.Cours
+import model.Session
 
 /**
  * Created by Sonphil on 08-07-18.
  */
-
-val numberFormatter: NumberFormat
-    get() = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
-        maximumFractionDigits = 1
-    }
 
 fun ApiActivite.toActiviteEntity() = ActiviteEntity(
         this.sigle,
@@ -116,15 +110,15 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             this.nom,
             this.equipe,
             dateCible.takeIf { !it.isNullOrBlank() }?.signetsDefaultDateToUnix(),
-            numberFormatter.format(note),
-            numberFormatter.format(corrigeSur.replaceCommaAndParseToFloat()),
-            numberFormatter.format(notePourcentage),
-            numberFormatter.format(ponderation.replaceCommaAndParseToFloat()),
-            numberFormatter.format(moyenne),
-            numberFormatter.format(moyennePourcentage),
-            numberFormatter.format(ecartType.replaceCommaAndParseToFloat()),
-            numberFormatter.format(mediane.replaceCommaAndParseToFloat()),
-            numberFormatter.format(rangCentile.replaceCommaAndParseToFloat()),
+            note.formatSingleFractionDigits(),
+            corrigeSur.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            notePourcentage.formatSingleFractionDigits(),
+            ponderation.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            moyenne.formatSingleFractionDigits(),
+            moyennePourcentage.formatSingleFractionDigits(),
+            ecartType.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            mediane.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            rangCentile.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
             this.publie == "Oui",
             this.messageDuProf,
             this.ignoreDuCalcul == "Oui"
@@ -148,16 +142,16 @@ fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): Somm
     return SommaireElementsEvaluationEntity(
             cours.sigle,
             cours.session,
-            numberFormatter.format(scoreFinalSur100.replaceCommaAndParseToFloat()),
-            numberFormatter.format(noteSur),
-            numberFormatter.format(noteACeJour.replaceCommaAndParseToFloat()),
-            numberFormatter.format(moyenneClasse.replaceCommaAndParseToFloat()),
-            numberFormatter.format(moyenneClassePourcentage),
-            numberFormatter.format(ecartTypeClasse.replaceCommaAndParseToFloat()),
-            numberFormatter.format(medianeClasse.replaceCommaAndParseToFloat()),
-            numberFormatter.format(rangCentileClasse.replaceCommaAndParseToFloat()),
-            numberFormatter.format(noteACeJourElementsIndividuels.replaceCommaAndParseToFloat()),
-            numberFormatter.format(noteSur100PourElementsIndividuels.replaceCommaAndParseToFloat())
+            scoreFinalSur100.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            noteSur.formatSingleFractionDigits(),
+            noteACeJour.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            moyenneClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            moyenneClassePourcentage.formatSingleFractionDigits(),
+            ecartTypeClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            medianeClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            rangCentileClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            noteACeJourElementsIndividuels.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            noteSur100PourElementsIndividuels.replaceCommaAndParseToFloat().formatSingleFractionDigits()
     )
 }
 
