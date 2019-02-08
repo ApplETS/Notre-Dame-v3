@@ -63,7 +63,7 @@ class DashboardFragment : DaggerFragment() {
 
     private fun subscribeUI() {
         dashboardViewModel.cards.observe(this, Observer {
-            adapter.items = it
+            adapter.items = it.toMutableList()
         })
 
         dashboardViewModel.showUndoCardRemove.observe(this, Observer {
