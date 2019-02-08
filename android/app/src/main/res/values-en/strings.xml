@@ -38,6 +38,7 @@
     <!-- Applets card -->
     <string name="title_applets_card">ApplETS</string>
     <string name="text_applets_card">ÉTSMobile was made by the club ApplETS. Support us by liking our Facebook page, contributing to GitHub or sending us your comments via email.</string>
+    <string name="error_no_email_app">No email application available</string>
 
     <!-- Grades -->
     <string name="title_grades">Grades</string>
