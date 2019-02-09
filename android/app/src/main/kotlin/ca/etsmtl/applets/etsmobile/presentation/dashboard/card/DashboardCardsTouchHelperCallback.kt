@@ -7,7 +7,7 @@ class DashboardCardsTouchHelperCallback(private val dashboardCardAdapter: Dashbo
     override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         val card = (viewHolder as DashboardCardViewHolder).card
 
-        if (card == null || !card.isDismissible) {
+        if (card == null || !card.dismissible) {
             return 0
         }
 
