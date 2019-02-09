@@ -3,6 +3,7 @@ package ca.etsmtl.applets.etsmobile.di
 import android.app.Application
 import ca.etsmtl.applets.etsmobile.di.activitymodule.GradesDetailsActivityBuilder
 import ca.etsmtl.applets.etsmobile.di.activitymodule.MainActivityBuilder
+import ca.etsmtl.applets.etsmobile.di.shared.UseCaseModule
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.di.RepositoryModule
 import dagger.BindsInstance
@@ -21,7 +22,8 @@ import javax.inject.Singleton
     RepositoryModule::class,
     ViewModelModule::class,
     MainActivityBuilder::class,
-    GradesDetailsActivityBuilder::class
+    GradesDetailsActivityBuilder::class,
+    UseCaseModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
     @Component.Builder

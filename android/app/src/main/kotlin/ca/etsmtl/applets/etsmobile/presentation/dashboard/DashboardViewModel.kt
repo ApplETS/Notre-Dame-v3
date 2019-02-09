@@ -1,32 +1,23 @@
 package ca.etsmtl.applets.etsmobile.presentation.dashboard
 
-import android.content.SharedPreferences
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
-import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCard
-import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardType
 import ca.etsmtl.applets.etsmobile.util.Event
+import data.domain.FetchDashboardCardsUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
+import model.DashboardCard
 import java.util.Collections
 import javax.inject.Inject
 
-const val SHOW_CARD_PREF_KEY_PREFIX = "ShowCard"
-const val POSITION_CARD_PREF_KEY_PREFIX = "PositionCard"
-
-class DashboardViewModel @Inject constructor(private val prefs: SharedPreferences) : ViewModel() {
-    private val cardList by lazy {
-        DashboardCardType.values()
-            .filter { type ->
-                prefs.getBoolean(SHOW_CARD_PREF_KEY_PREFIX + type, true)
-            }
-            .map { type ->
-                DashboardCard(type)
-            }
-            .sortedBy { card ->
-                prefs.getInt(POSITION_CARD_PREF_KEY_PREFIX + card.type, card.type.ordinal)
-            }
-            .toMutableList()
-    }
+class DashboardViewModel @Inject constructor(private val fetchDashboardCardsUseCase: FetchDashboardCardsUseCase) : ViewModel(), LifecycleObserver {
+    private var cardList: MutableList<DashboardCard> = mutableListOf()
 
     private val _cards = MutableLiveData<List<DashboardCard>>().apply {
         value = cardList
@@ -60,6 +51,16 @@ class DashboardViewModel @Inject constructor(private val prefs: SharedPreference
             cardList.add(position, removedCard)
 
             _cards.value = cardList
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun load() {
+        CoroutineScope(Dispatchers.Main).launch {
+            fetchDashboardCardsUseCase().consumeEach {
+                cardList = it.toMutableList()
+                _cards.value = cardList
+            }
         }
     }
 

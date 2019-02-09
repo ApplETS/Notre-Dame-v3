@@ -1,6 +1,0 @@
-package ca.etsmtl.applets.etsmobile.presentation.dashboard.card
-
-data class DashboardCard(
-    val type: DashboardCardType,
-    val dismissible: Boolean = true
-)

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardViewModel
+import model.DashboardCard
 
 class DashboardCardAdapter(
     private val fragmentManager: FragmentManager,

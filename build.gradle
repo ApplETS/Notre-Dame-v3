@@ -4,6 +4,7 @@ buildscript {
             "buglife": "1.4.0",
             "chuck": "1.1.0",
             "constraint_layout": "2.0.0-alpha3",
+            "coroutines": "1.1.1",
             "dagger": "2.16",
             "dimens": "1.4",
             "espresso": "3.1.2-alpha01",
@@ -29,6 +30,7 @@ buildscript {
             "retrofit": "2.5.0",
             "room": "2.1.0-alpha04",
             "test": "1.1.2-alpha01",
+            "sqldelight": "1.0.3",
             "support": "1.0.0"
     ]
 
@@ -40,6 +42,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$versions.gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$versions.kotlin"
+        classpath "com.squareup.sqldelight:gradle-plugin:$versions.sqldelight"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

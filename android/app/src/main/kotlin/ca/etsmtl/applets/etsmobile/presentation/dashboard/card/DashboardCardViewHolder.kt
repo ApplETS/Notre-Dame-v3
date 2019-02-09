@@ -10,6 +10,7 @@ import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.grades.GradesCard
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.todayschedule.TodayScheduleCardFragment
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_dashboard_card.view.container
+import model.DashboardCard
 
 class DashboardCardViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
     var card: DashboardCard? = null
@@ -19,9 +20,9 @@ class DashboardCardViewHolder(override val containerView: View) : RecyclerView.V
         this.card = card
 
         val fragment = when (card.type) {
-            DashboardCardType.DASHBOARD_CARD_APPLETS -> AppletsCardFragment.newInstance()
-            DashboardCardType.DASHBOARD_CARD_TODAY_SCHEDULE -> TodayScheduleCardFragment.newInstance()
-            DashboardCardType.DASHBOARD_CARD_GRADES -> GradesCardFragment.newInstance()
+            DashboardCard.Type.DASHBOARD_CARD_APPLETS -> AppletsCardFragment.newInstance()
+            DashboardCard.Type.DASHBOARD_CARD_TODAY_SCHEDULE -> TodayScheduleCardFragment.newInstance()
+            DashboardCard.Type.DASHBOARD_CARD_GRADES -> GradesCardFragment.newInstance()
         }
 
         fragmentManager.replaceFragment(fragment)

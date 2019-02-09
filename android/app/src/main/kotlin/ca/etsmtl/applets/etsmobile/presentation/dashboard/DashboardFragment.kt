@@ -12,6 +12,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.toggle
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
@@ -66,7 +67,7 @@ class DashboardFragment : DaggerFragment() {
             adapter.items = it.toMutableList()
         })
 
-        dashboardViewModel.showUndoCardRemove.observe(this, Observer {
+        dashboardViewModel.showUndoCardRemove.observe(this, EventObserver {
             activity?.let { activity ->
                 Snackbar.make(
                     activity.findViewById(android.R.id.content),
@@ -77,5 +78,7 @@ class DashboardFragment : DaggerFragment() {
                 }.show()
             }
         })
+
+        lifecycle.addObserver(dashboardViewModel)
     }
 }
