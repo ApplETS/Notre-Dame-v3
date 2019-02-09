@@ -24,30 +24,30 @@ class FetchSeancesUseCase @Inject constructor(
     operator fun  invoke(): LiveData<Resource<List<Seance>>>{
         return Transformations.switchMap(fetchSessionsUseCase()){ resSessions->
             val sessions = resSessions.data.orEmpty()
-            var completedSeancesFetch = 0
+            val completedSeancesFetch = mutableSetOf<Session>()
             val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
 
             fun fetchSeancesFromSession(session: Session){
                 mediatorLiveData.addSource(
                     seanceRepository.getSeancesSession(
-                        userCredentials,null, session, false
+                        userCredentials,null, session, true
                     )
                 ){ res ->
                     when(res.status){
                         Resource.Status.LOADING ->
-                            mediatorLiveData.value = Resource.loading(mediatorLiveData.value?.data)
+                            mediatorLiveData.value = Resource.loading(mediatorLiveData.value?.data.orEmpty())
                         Resource.Status.ERROR -> { //TODO: Traiter le message d'erreur d'aucun cours
-                            ++completedSeancesFetch
+                            completedSeancesFetch.add(session)
                             mediatorLiveData.value = Resource.error(
                                 res.message ?: app.getString(R.string.error),
-                                mediatorLiveData.value?.data
+                                mediatorLiveData.value?.data.orEmpty()
                             )
                         }
                         Resource.Status.SUCCESS ->{
-                            ++completedSeancesFetch
+                            completedSeancesFetch.add(session)
 
-                            if (res.data == null){
-                                mediatorLiveData.value = Resource.error(app.getString(R.string.error), null)
+                            if (res.data == null){ //TODO: Remove if?
+                                mediatorLiveData.value = Resource.error(app.getString(R.string.error), emptyList())
                             } else {
                                 val seances = mutableListOf<Seance>()
                                 mediatorLiveData.value?.data?.let {
@@ -55,7 +55,7 @@ class FetchSeancesUseCase @Inject constructor(
                                 }
                                 seances.addAll(res.data!!)
 
-                                mediatorLiveData.value = if (completedSeancesFetch == sessions.size)
+                                mediatorLiveData.value = if (completedSeancesFetch.size == sessions.size)
                                     Resource.success(seances) else Resource.loading(seances)
                             }
                         }
@@ -65,8 +65,8 @@ class FetchSeancesUseCase @Inject constructor(
 
             when (resSessions.status){
                 Resource.Status.ERROR -> mediatorLiveData.value =
-                    Resource.error(resSessions.message ?: app.getString(R.string.error), null)
-                Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(null)
+                    Resource.error(resSessions.message ?: app.getString(R.string.error), emptyList())
+                Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(emptyList())
                 Resource.Status.SUCCESS -> {
                     sessions.forEach { fetchSeancesFromSession(it) }
                 }

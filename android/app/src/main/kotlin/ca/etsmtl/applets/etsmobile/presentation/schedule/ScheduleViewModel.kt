@@ -2,30 +2,22 @@ package ca.etsmtl.applets.etsmobile.presentation.schedule
 
 import android.util.Range
 import androidx.annotation.VisibleForTesting
-import androidx.core.util.Pair
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchSeancesUseCase
-import ca.etsmtl.applets.etsmobile.domain.FetchSessionSeancesUseCase
-import ca.etsmtl.applets.etsmobile.domain.FetchSessionsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
 import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.util.timeInSeconds
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import java.util.Calendar
-import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -42,7 +34,10 @@ class ScheduleViewModel @Inject constructor(
     }
 
     val errorMessage: LiveData<Event<String?>> = seanceRes.nonNull().map {
-        it.getGenericErrorMessage(app)
+        if (app.getString(R.string.msg_api_no_seance)==it.message){
+            Event(null)
+        } else
+            it.getGenericErrorMessage(app)
     }
 
     val seances: LiveData<Map<Range<Calendar>, List<Seance>>> = seanceRes.nonNull()
@@ -66,13 +61,13 @@ class ScheduleViewModel @Inject constructor(
     @VisibleForTesting
     private fun Seance.extractWeekRange(): Range<Calendar>{
         val beginningCal = Calendar.getInstance()
-                    beginningCal.clear()
-                    beginningCal.time = dateDebut
-                    beginningCal.set(Calendar.DAY_OF_WEEK, 0)
-                    beginningCal.set(Calendar.HOUR, 0)
-                    beginningCal.set(Calendar.MINUTE, 0)
-                    beginningCal.set(Calendar.SECOND, 0)
-                    beginningCal.set(Calendar.AM_PM, 0)
+        beginningCal.clear()
+        beginningCal.time = dateDebut
+        beginningCal.set(Calendar.DAY_OF_WEEK, 0)
+        beginningCal.set(Calendar.HOUR, 0)
+        beginningCal.set(Calendar.MINUTE, 0)
+        beginningCal.set(Calendar.SECOND, 0)
+        beginningCal.set(Calendar.AM_PM, 0)
 
         val endCal = beginningCal.clone() as Calendar
         endCal.add(Calendar.WEEK_OF_YEAR, 1)
