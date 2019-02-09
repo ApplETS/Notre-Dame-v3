@@ -6,6 +6,7 @@ apply plugin: "org.jlleitschuh.gradle.ktlint"
 apply plugin: 'io.fabric'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+apply from: rootProject.file('gradle/android.gradle')
 
 def keystorePropertiesFile = rootProject.file("android/keystore.properties")
 def keystoreProperties = new Properties()
@@ -18,15 +19,10 @@ def versionBuild = Integer.valueOf(System.getenv("TRAVIS_BUILD_NUMBER") ?: 0)
 println("versionBuild: " + versionBuild)
 
 android {
-    compileSdkVersion 28
-
     defaultConfig {
         applicationId "ca.etsmtl.applets.etsmobile"
-        minSdkVersion 21
-        targetSdkVersion 28
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -188,7 +184,6 @@ dependencies {
     implementation "com.buglife.sdk:buglife-android:$buglife"
 
     implementation project(':android:repository')
-    implementation project(':shared')
 }
 
 apply plugin: 'com.google.gms.google-services'

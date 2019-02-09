@@ -1,10 +1,10 @@
 package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.lifecycle.LiveData
-import ca.etsmtl.applets.repository.data.model.Programme
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.ProgrammeRepository
+import model.Programme
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**

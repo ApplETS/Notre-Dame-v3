@@ -1,13 +1,10 @@
-package ca.etsmtl.applets.repository.data.model
-
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+package model
 
 /**
  * Created by Sonphil on 30-12-18.
  */
-@Parcelize
-data class UniversalCode(val value: String) : Parcelable {
+@AndroidParcelize
+data class UniversalCode(val value: String) : AndroidParcel {
     enum class Error {
         EMPTY,
         INVALID

@@ -13,16 +13,17 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
 import ca.etsmtl.applets.etsmobile.util.toLocalizedString
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
-import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Group
 import com.xwray.groupie.Section
+import model.Cours
+import model.Evaluation
+import model.SommaireElementsEvaluation
+import model.SommaireEtEvaluations
+import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -76,7 +77,7 @@ class GradesDetailsViewModel @Inject constructor(
             ),
             EvaluationDetailItem(
                 app.getString(R.string.label_target_date),
-                evaluation.dateCible?.toLocalizedString() ?: ""
+                evaluation.dateCible?.let { Date(it.unixMillisLong).toLocalizedString() } ?: ""
             )
         )
 

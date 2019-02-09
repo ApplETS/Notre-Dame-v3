@@ -11,11 +11,11 @@ import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
-import ca.etsmtl.applets.repository.data.model.Cours
 import kotlinx.android.synthetic.main.activity_grades_details.containerTvGradesDetailsSubtitle
 import kotlinx.android.synthetic.main.activity_grades_details.toolbar
 import kotlinx.android.synthetic.main.activity_grades_details.tvGradesDetailsCourseName
 import kotlinx.android.synthetic.main.activity_grades_details.tvGradesDetailsGroup
+import model.Cours
 
 /**
  * Created by Sonphil on 15-08-18.

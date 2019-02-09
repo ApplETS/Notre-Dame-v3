@@ -8,11 +8,11 @@ import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.mockNetwork
-import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
+import model.Cours
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

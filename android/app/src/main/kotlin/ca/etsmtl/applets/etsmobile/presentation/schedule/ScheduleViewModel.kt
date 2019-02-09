@@ -14,9 +14,9 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.Session
 import ca.etsmtl.applets.repository.util.timeInSeconds
+import model.Seance
+import model.Session
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
@@ -82,7 +82,7 @@ class ScheduleViewModel @Inject constructor(
             val wantedYear = thisWeekCal.get(Calendar.YEAR)
             it.filter { s ->
                 val dateCal = Calendar.getInstance()
-                dateCal.time = s.dateDebut
+                dateCal.time = Date(s.dateDebut.unixMillisLong)
                 val dateWeek = dateCal.get(Calendar.WEEK_OF_YEAR)
                 val dateYear = dateCal.get(Calendar.YEAR)
 
@@ -91,7 +91,7 @@ class ScheduleViewModel @Inject constructor(
                 .groupBy { s ->
                     val cal = Calendar.getInstance()
                     cal.clear()
-                    cal.time = s.dateDebut
+                    cal.time = Date(s.dateDebut.unixMillisLong)
                     cal.set(Calendar.HOUR, 0)
                     cal.set(Calendar.MINUTE, 0)
                     cal.set(Calendar.SECOND, 0)

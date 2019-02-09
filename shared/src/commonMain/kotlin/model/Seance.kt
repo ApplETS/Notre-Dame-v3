@@ -1,10 +1,10 @@
-package ca.etsmtl.applets.repository.data.model
+package model
 
-import java.util.Date
+import com.soywiz.klock.DateTime
 
 data class Seance(
-    var dateDebut: Date,
-    var dateFin: Date,
+    var dateDebut: DateTime,
+    var dateFin: DateTime,
     var nomActivite: String,
     var local: String,
     var descriptionActivite: String,
