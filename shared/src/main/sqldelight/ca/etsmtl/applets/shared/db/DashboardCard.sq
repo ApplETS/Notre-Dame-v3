@@ -13,6 +13,12 @@ VALUES ('DASHBOARD_CARD_APPLETS', 0),
 ('DASHBOARD_CARD_TODAY_SCHEDULE', 1),
 ('DASHBOARD_CARD_GRADES', 2);
 
+insertInitialCards:
+INSERT INTO dashboardCardEntity (type, pos)
+VALUES ('DASHBOARD_CARD_APPLETS', 0),
+('DASHBOARD_CARD_TODAY_SCHEDULE', 1),
+('DASHBOARD_CARD_GRADES', 2);
+
 selectAll:
 SELECT *
 FROM dashboardCardEntity
@@ -22,3 +28,7 @@ updateCard:
 UPDATE dashboardCardEntity
 SET pos = ?, visible = ?
 WHERE type = ?;
+
+deleteAll:
+DELETE
+FROM dashboardCardEntity;

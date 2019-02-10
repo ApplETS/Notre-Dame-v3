@@ -61,19 +61,17 @@ class DashboardViewModel @Inject constructor(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun load() {
-        CoroutineScope(Dispatchers.Default).launch {
-            val cards = dashboardCardsUseCase
-                .fetch()
-                .receive()
-                .partition { card ->
-                    card.visible
-                }
+    fun load() = CoroutineScope(Dispatchers.Default).launch {
+        val cards = dashboardCardsUseCase
+            .fetch()
+            .receive()
+            .partition { card ->
+                card.visible
+            }
 
-            delay(300)
-            visibleCards.postValue(cards.first.toMutableList())
-            hiddenCards.postValue(cards.second.toMutableList())
-        }
+        delay(200)
+        visibleCards.postValue(cards.first.toMutableList())
+        hiddenCards.postValue(cards.second.toMutableList())
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -82,5 +80,10 @@ class DashboardViewModel @Inject constructor(
             visibleCards.value ?: emptyList(),
             hiddenCards.value ?: emptyList()
         )
+    }
+
+    fun restore() {
+        dashboardCardsUseCase.restore()
+        load()
     }
 }

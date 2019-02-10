@@ -29,4 +29,9 @@ class DashboardCardRepository(
         .launch {
             dashboardCardQueries.updateCard(position.toLong(), card.visible, card.type)
         }
+
+    fun restore() {
+        dashboardCardQueries.deleteAll()
+        dashboardCardQueries.insertInitialCards()
+    }
 }

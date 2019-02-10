@@ -8,18 +8,20 @@ import model.DashboardCard
  * Created by Sonphil on 09-02-19.
  */
 
-class DashboardCardsUseCase(private val dashboardCardRepository: DashboardCardRepository) {
+class DashboardCardsUseCase(private val repository: DashboardCardRepository) {
     fun fetch(): ReceiveChannel<List<DashboardCard>> {
-        return dashboardCardRepository.dashboardCards()
+        return repository.dashboardCards()
     }
 
     fun save(visibleCards: List<DashboardCard>, hiddenCards: List<DashboardCard>) {
         visibleCards.forEachIndexed { index, dashboardCard ->
-            dashboardCardRepository.updateDashboardCard(dashboardCard, index)
+            repository.updateDashboardCard(dashboardCard, index)
         }
 
         hiddenCards.forEach { dashboardCard ->
-            dashboardCardRepository.updateDashboardCard(dashboardCard, -1)
+            repository.updateDashboardCard(dashboardCard, -1)
         }
     }
+
+    fun restore() = repository.restore()
 }
