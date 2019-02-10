@@ -25,12 +25,14 @@ class ScheduleFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val adapter: ScheduleAdapter = ScheduleAdapter(requireFragmentManager())
+    private lateinit var adapter: ScheduleAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        adapter = ScheduleAdapter(requireFragmentManager())
         return inflater.inflate(R.layout.fragment_schedule, container, false)
     }
 
@@ -61,7 +63,10 @@ class ScheduleFragment : DaggerFragment() {
 
     private fun subscribeUI() {
         scheduleViewModel.seances.observe(this, Observer {
-            it?.let { adapter.items = it }
+            it?.let {
+                adapter.items = it
+                adapter.notifyDataSetChanged()
+            }
         })
 
         scheduleViewModel.loading.observe(this, Observer {

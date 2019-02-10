@@ -14,6 +14,7 @@ import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileViewModel
 import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment
 import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleViewModel
+import ca.etsmtl.applets.etsmobile.presentation.schedule.week.ScheduleWeekFragment
 import ca.etsmtl.applets.etsmobile.presentation.splash.SplashFragment
 import ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment
 import dagger.Binds
@@ -59,6 +60,9 @@ interface MainActivityModule {
 
     @ContributesAndroidInjector
     fun contributeScheduleFragment(): ScheduleFragment
+
+    @ContributesAndroidInjector
+    fun contributeScheduleWeekFragment(): ScheduleWeekFragment
 
     @Binds
     @IntoMap

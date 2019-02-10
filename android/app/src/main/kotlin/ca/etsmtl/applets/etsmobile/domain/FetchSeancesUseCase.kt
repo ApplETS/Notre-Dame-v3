@@ -36,7 +36,7 @@ class FetchSeancesUseCase @Inject constructor(
                     when(res.status){
                         Resource.Status.LOADING ->
                             mediatorLiveData.value = Resource.loading(mediatorLiveData.value?.data.orEmpty())
-                        Resource.Status.ERROR -> { //TODO: Traiter le message d'erreur d'aucun cours
+                        Resource.Status.ERROR -> {
                             completedSeancesFetch.add(session)
                             mediatorLiveData.value = Resource.error(
                                 res.message ?: app.getString(R.string.error),
