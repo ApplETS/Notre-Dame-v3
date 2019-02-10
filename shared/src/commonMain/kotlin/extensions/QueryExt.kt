@@ -10,12 +10,13 @@ import kotlinx.coroutines.channels.ReceiveChannel
  */
 
 /**
- * Convert [Query] to a [ReceiveChannel]
+ * Converts the [Query] to a [ReceiveChannel]
  */
 fun <T : Any> Query<T>.asChannel(): ReceiveChannel<Query<T>> {
     // Create a ConflatedChannel
     val channel = Channel<Query<T>>(CONFLATED)
-    // Ensure consumers immediately run the query.
+
+    // Ensure consumers immediately run the query
     channel.offer(this)
 
     val listener = object : Query.Listener {

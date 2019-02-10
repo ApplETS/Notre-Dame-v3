@@ -2,7 +2,7 @@ package ca.etsmtl.applets.etsmobile.di.shared
 
 import dagger.Module
 import dagger.Provides
-import data.domain.FetchDashboardCardsUseCase
+import data.domain.DashboardCardsUseCase
 import data.repository.DashboardCardRepository
 import javax.inject.Singleton
 
@@ -19,7 +19,7 @@ object UseCaseModule {
     @Singleton
     fun provideFetchDashboardCardsUseCase(
         repository: DashboardCardRepository
-    ): FetchDashboardCardsUseCase {
-        return FetchDashboardCardsUseCase(repository)
+    ): DashboardCardsUseCase {
+        return DashboardCardsUseCase(repository)
     }
 }

@@ -2,6 +2,7 @@ package model
 
 data class DashboardCard(
     val type: Type,
+    var visible: Boolean,
     val dismissible: Boolean = true
 ) {
     enum class Type {
