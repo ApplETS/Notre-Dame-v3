@@ -39,7 +39,7 @@ git clone https://github.com/ApplETS/Notre-Dame.git
   ```
   * Un fichier .xcworkspace sera généré. Vous devrez désormais ouvrir le projet avec ce fichier.
 
-## 🤖 / 🍎 Kotlin Multiplatform Project
+## 🤖 / 🍎 Projet Kotlin Multiplatform
 Le projet est en cours de migration vers [Kotlin Native](https://kotlinlang.org/docs/reference/native-overview.html).
 <image src="docs/images/architecture_multiplatform.png" width="600" />
 
