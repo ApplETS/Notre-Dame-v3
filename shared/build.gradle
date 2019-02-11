@@ -25,6 +25,7 @@ kotlin {
             dependencies {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-common'
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.10.0"
+                api "com.soywiz:klock:1.1.1"
             }
         }
 
@@ -35,6 +36,7 @@ kotlin {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-jdk7'
             }
         }
+
         iOSMain {
             dependsOn commonMain
             dependencies {
@@ -42,10 +44,6 @@ kotlin {
             }
         }
     }
-}
-
-dependencies {
-    api "com.soywiz:klock:1.1.1"
 }
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170

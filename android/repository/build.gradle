@@ -91,5 +91,10 @@ dependencies {
     // livedata-ktx
     api "com.shopify:livedata-ktx:2.0.1"
 
-    api project(':shared')
+    // Klock
+    api "com.soywiz:klock-jvm:1.1.1"
+
+    api (project(':shared')) {
+        exclude module: 'klock'
+    }
 }
