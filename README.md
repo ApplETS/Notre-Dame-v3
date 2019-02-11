@@ -42,7 +42,7 @@ pod install
 * A .xcworkspace file will be generated. You must use this file to open the project.
  
 ## 🤖 / 🍎 Kotlin Multiplatform Project
-The projet is migrating towards [Kotlin Native](https://kotlinlang.org/docs/reference/native-overview.html).
+The projet is migrating towards [Kotlin Multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
 <image src="docs/images/architecture_multiplatform.png" width="600" />
 
 ## ⚖️ License
