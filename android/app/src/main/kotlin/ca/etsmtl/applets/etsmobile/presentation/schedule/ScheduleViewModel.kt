@@ -61,13 +61,12 @@ class ScheduleViewModel @Inject constructor(
     @VisibleForTesting
     private fun Seance.extractWeekRange(): Range<Calendar>{
         val beginningCal = Calendar.getInstance()
-        beginningCal.clear()
+
         beginningCal.time = dateDebut
-        beginningCal.set(Calendar.DAY_OF_WEEK, 0)
-        beginningCal.set(Calendar.HOUR, 0)
-        beginningCal.set(Calendar.MINUTE, 0)
-        beginningCal.set(Calendar.SECOND, 0)
-        beginningCal.set(Calendar.AM_PM, 0)
+        beginningCal.set(Calendar.DAY_OF_WEEK, beginningCal.firstDayOfWeek)
+        beginningCal.set(Calendar.HOUR_OF_DAY, 0)
+        beginningCal.clear(Calendar.MINUTE)
+        beginningCal.clear(Calendar.SECOND)
 
         val endCal = beginningCal.clone() as Calendar
         endCal.add(Calendar.WEEK_OF_YEAR, 1)

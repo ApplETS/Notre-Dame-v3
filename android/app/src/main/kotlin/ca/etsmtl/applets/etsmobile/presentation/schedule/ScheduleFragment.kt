@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
+import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.empty_view_schedule.*
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import javax.inject.Inject
@@ -53,6 +58,26 @@ class ScheduleFragment : DaggerFragment() {
 
     private fun setUpPager(){
         schedule_pager.adapter = adapter
+
+        schedule_pager.addOnPageChangeListener(object:ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {
+                swipeRefreshLayoutSchedule.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {}
+
+            override fun onPageSelected(position: Int) {}
+        })
+
+        (activity as? MainActivity)?.tabLayout?.let {
+            it.isVisible = true
+            it.setupWithViewPager(schedule_pager)
+            it.tabMode = TabLayout.MODE_SCROLLABLE
+        }
     }
 
 //    private fun setUpRecyclerView() {
@@ -78,6 +103,12 @@ class ScheduleFragment : DaggerFragment() {
         })
 
         this.lifecycle.addObserver(scheduleViewModel)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        (activity as? MainActivity)?.tabLayout?.isVisible = false
     }
 
     companion object {

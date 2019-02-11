@@ -55,6 +55,8 @@ class FetchSeancesUseCase @Inject constructor(
                                 }
                                 seances.addAll(res.data!!)
 
+                                seances.sortBy { it.dateDebut }
+
                                 mediatorLiveData.value = if (completedSeancesFetch.size == sessions.size)
                                     Resource.success(seances) else Resource.loading(seances)
                             }
