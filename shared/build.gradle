@@ -32,6 +32,8 @@ kotlin {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-common'
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlinx_serialization"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.coroutines"
+                api "com.soywiz:klock:$versions.klock"
+                api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
             }
         }
 
@@ -50,14 +52,10 @@ kotlin {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$versions.kotlinx_serialization"
                 api "com.squareup.sqldelight:ios-driver:$versions.sqldelight"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$versions.coroutines"
             }
         }
     }
-}
-
-dependencies {
-    api "com.soywiz:klock:$versions.klock"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
 }
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170

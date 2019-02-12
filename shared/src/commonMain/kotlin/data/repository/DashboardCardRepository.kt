@@ -7,18 +7,15 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.launch
 import model.DashboardCard
-import kotlin.coroutines.CoroutineContext
+import utils.EtsMobileDispatchers
 
 /**
  * Created by Sonphil on 09-02-19.
  */
 
-class DashboardCardRepository(
-    private val ioContext: CoroutineContext,
-    private val dashboardCardQueries: DashboardCardQueries
-) {
+class DashboardCardRepository(private val dashboardCardQueries: DashboardCardQueries) {
     fun dashboardCards(): ReceiveChannel<List<DashboardCard>> = GlobalScope.produce(
-        ioContext,
+        EtsMobileDispatchers.IO,
         1
     ) {
         val query = dashboardCardQueries.selectAll { type, _, visible, dismissible ->
@@ -28,7 +25,7 @@ class DashboardCardRepository(
         offer(query.executeAsList())
     }
 
-    fun updateDashboardCard(card: DashboardCard, position: Int) = CoroutineScope(ioContext)
+    fun updateDashboardCard(card: DashboardCard, position: Int) = CoroutineScope(EtsMobileDispatchers.IO)
         .launch {
             dashboardCardQueries.updateCard(position.toLong(), card.visible, card.type)
         }

@@ -4,7 +4,6 @@ import ca.etsmtl.applets.shared.db.DashboardCardQueries
 import dagger.Module
 import dagger.Provides
 import data.repository.DashboardCardRepository
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 /**
@@ -17,6 +16,6 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideDashboardCardRepository(queries: DashboardCardQueries): DashboardCardRepository {
-        return DashboardCardRepository(Dispatchers.IO, queries)
+            return DashboardCardRepository(queries)
     }
 }
