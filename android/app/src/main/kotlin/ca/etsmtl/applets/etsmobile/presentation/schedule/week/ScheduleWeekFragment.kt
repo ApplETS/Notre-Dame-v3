@@ -45,6 +45,7 @@ class ScheduleWeekFragment : DaggerFragment(){
 
                 day
             }
+            this.remove(LIST_TAG)
         }
 
         setUpRecyclerView()

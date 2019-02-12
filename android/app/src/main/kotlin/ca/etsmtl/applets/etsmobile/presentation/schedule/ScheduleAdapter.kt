@@ -25,25 +25,22 @@ class ScheduleAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
                 value.forEach { this.add(it) }
             }
 
-//            val diffCallback = object: DiffUtil.Callback(){
-//                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-//                    itemList[oldItemPosition].key == newItemsList[newItemPosition].value
-//
-//
-//                override fun getOldListSize(): Int = itemList.size
-//
-//                override fun getNewListSize(): Int = newItemsList.size
-//
-//                override fun areContentsTheSame(
-//                    oldItemPosition: Int,
-//                    newItemPosition: Int
-//                ): Boolean = itemList[oldItemPosition].value == newItemsList[oldItemPosition].value
-//            }
-
-//            val diffResult = DiffUtil.calculateDiff(diffCallback)
             itemList = newItemsList
-//            diffResult.dispatchUpdatesTo(this)
+
         }
+
+    fun getCurrentPosition(): Int{
+        val cal =  Calendar.getInstance()
+        var i = 0
+
+        while (i < itemList.size){
+            if ((cal in itemList[i].key) or (cal < itemList[i].key.lower)) return i
+
+            ++i
+        }
+
+        return i-1
+    }
 
 
     override fun getItem(position: Int): Fragment = ScheduleWeekFragment().apply {

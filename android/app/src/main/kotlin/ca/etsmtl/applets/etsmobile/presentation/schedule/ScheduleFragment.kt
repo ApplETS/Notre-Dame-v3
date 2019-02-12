@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_schedule.*
 import javax.inject.Inject
 
 /**
- * Created by Sonphil on 25-02-18.
+ * Created by Mykaelll87 on 15-01-19.
  */
 class ScheduleFragment : DaggerFragment() {
     private val scheduleViewModel: ScheduleViewModel by lazy {
@@ -31,6 +31,7 @@ class ScheduleFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var adapter: ScheduleAdapter
+    private var tabLayout: TabLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +46,6 @@ class ScheduleFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpSwipeRefresh()
-//        setUpRecyclerView()
         setUpPager()
         btnRetry.setOnClickListener { scheduleViewModel.refresh() }
         subscribeUI()
@@ -73,10 +73,10 @@ class ScheduleFragment : DaggerFragment() {
             override fun onPageSelected(position: Int) {}
         })
 
-        (activity as? MainActivity)?.tabLayout?.let {
-            it.isVisible = true
-            it.setupWithViewPager(schedule_pager)
-            it.tabMode = TabLayout.MODE_SCROLLABLE
+        this.tabLayout = (activity as? MainActivity)?.tabLayout?.apply {
+            isVisible = true
+            setupWithViewPager(schedule_pager)
+            tabMode = TabLayout.MODE_SCROLLABLE
         }
     }
 
@@ -89,8 +89,11 @@ class ScheduleFragment : DaggerFragment() {
     private fun subscribeUI() {
         scheduleViewModel.seances.observe(this, Observer {
             it?.let {
-                adapter.items = it
-                adapter.notifyDataSetChanged()
+                if (it.isNotEmpty()){
+                    adapter.items = it
+                    adapter.notifyDataSetChanged()
+                    this.tabLayout?.getTabAt(adapter.getCurrentPosition())?.select()
+                }
             }
         })
 
@@ -108,7 +111,10 @@ class ScheduleFragment : DaggerFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        (activity as? MainActivity)?.tabLayout?.isVisible = false
+        this.tabLayout?.let {
+            it.isVisible = false
+            it.tabMode = TabLayout.MODE_FIXED
+        }
     }
 
     companion object {
