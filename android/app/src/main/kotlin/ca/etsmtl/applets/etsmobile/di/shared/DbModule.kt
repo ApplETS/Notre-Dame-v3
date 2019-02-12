@@ -20,8 +20,8 @@ internal object DbModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideEtsMobileDb(context: Context, fileName: String): EtsMobileDb {
-            Db.setupDb(AndroidSqliteDriver(EtsMobileDb.Schema, context, fileName))
+        fun provideEtsMobileDb(context: Context): EtsMobileDb {
+            Db.setupDb(AndroidSqliteDriver(EtsMobileDb.Schema, context, "etsmobile.shated.db"))
 
             return Db.instance
         }

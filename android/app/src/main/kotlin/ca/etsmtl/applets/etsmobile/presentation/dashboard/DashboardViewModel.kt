@@ -6,10 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import ca.etsmtl.applets.etsmobile.util.Event
 import data.domain.DashboardCardsUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import model.DashboardCard
@@ -61,7 +60,7 @@ class DashboardViewModel @Inject constructor(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun load() = CoroutineScope(Dispatchers.Default).launch {
+    fun load() = viewModelScope.launch {
         val cards = dashboardCardsUseCase
             .fetch()
             .receive()
