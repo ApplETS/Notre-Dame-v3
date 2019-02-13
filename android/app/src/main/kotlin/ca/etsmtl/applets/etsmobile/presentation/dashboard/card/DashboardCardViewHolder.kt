@@ -19,22 +19,30 @@ class DashboardCardViewHolder(override val containerView: View) : RecyclerView.V
     fun bind(card: DashboardCard, fragmentManager: FragmentManager) {
         this.card = card
 
-        val fragment = when (card.type) {
+        val fragment = fragmentManager.findOrCreateFragment(card.type)
+
+        fragmentManager.replaceFragment(fragment, card.type.name)
+    }
+
+    private fun FragmentManager.findOrCreateFragment(type: DashboardCard.Type): Fragment {
+        return findFragmentByTag(type.name) ?: when (type) {
             DashboardCard.Type.DASHBOARD_CARD_APPLETS -> AppletsCardFragment.newInstance()
             DashboardCard.Type.DASHBOARD_CARD_TODAY_SCHEDULE -> TodayScheduleCardFragment.newInstance()
             DashboardCard.Type.DASHBOARD_CARD_GRADES -> GradesCardFragment.newInstance()
         }
-
-        fragmentManager.replaceFragment(fragment)
     }
 
-    private fun FragmentManager.replaceFragment(fragment: Fragment) {
+    private fun FragmentManager.replaceFragment(fragment: Fragment, tag: String) {
+        transaction(now = true) {
+            remove(fragment)
+        }
+
         transaction {
             itemView.container?.let { itemView ->
                 findFragmentById(itemView.id)?.let { remove(it) }
 
                 itemView.id = View.generateViewId()
-                replace(itemView.id, fragment)
+                replace(itemView.id, fragment, tag)
             }
         }
     }
