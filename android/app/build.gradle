@@ -142,8 +142,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$versions.glide"
     kapt "com.github.bumptech.glide:compiler:$versions.glide"
 
-    //Google maps
-    implementation "com.google.android.gms:play-services-maps:$google_maps"
+    // Google Maps
+    implementation "com.google.android.gms:play-services-maps:$versions.google_maps"
 
     // Dagger
     implementation "com.google.dagger:dagger:$versions.dagger"
