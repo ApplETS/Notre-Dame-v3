@@ -9,127 +9,122 @@
     android:layout_marginBottom="@dimen/material_layout_vertical_spacing_tool_bar"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.security.SecurityFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/material_light_white"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <ca.etsmtl.applets.etsmobile.presentation.security.CustomMapView
 
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="250dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/txtReachSecurity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/reach_security"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/material_red_500"
+            app:layout_constraintTop_toBottomOf="@+id/mapView"
+            tools:layout_editor_absoluteX="0dp" />
 
-            <TextView
-                android:id="@+id/txtReachSecurity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/reach_security"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/material_red_500"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp" />
+        <ImageView
+            android:id="@+id/imagePhone1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_phone_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtReachSecurity" />
 
-            <ImageView
-                android:id="@+id/imagePhone1"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_phone_black_24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtReachSecurity" />
+        <TextView
+            android:id="@+id/textEmergencyCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/emergency_call"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/imagePhone1"
+            app:layout_constraintTop_toTopOf="@+id/imagePhone1" />
 
-            <TextView
-                android:id="@+id/textEmergencyCall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:text="@string/emergency_call"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="17sp"
-                app:layout_constraintStart_toEndOf="@+id/imagePhone1"
-                app:layout_constraintTop_toTopOf="@+id/imagePhone1" />
+        <TextView
+            android:id="@+id/textEmergencyNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:text="@string/emergency_number"
+            android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
+            app:layout_constraintStart_toStartOf="@+id/textEmergencyCall"
+            app:layout_constraintTop_toBottomOf="@+id/textEmergencyCall" />
 
-            <TextView
-                android:id="@+id/textEmergencyNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:text="@string/emergency_number"
-                android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
-                app:layout_constraintStart_toStartOf="@+id/textEmergencyCall"
-                app:layout_constraintTop_toBottomOf="@+id/textEmergencyCall" />
+        <View
+            android:id="@+id/viewCall"
+            android:layout_width="209dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/textEmergencyCall"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imagePhone1"
+            app:layout_constraintTop_toTopOf="@+id/imagePhone1" />
 
-            <View
-                android:id="@+id/viewCall"
-                android:layout_width="209dp"
-                android:layout_height="40dp"
-                app:layout_constraintEnd_toEndOf="@+id/textEmergencyCall"
-                app:layout_constraintHorizontal_bias="0.384"
-                app:layout_constraintStart_toStartOf="@+id/imagePhone1"
-                app:layout_constraintTop_toTopOf="@+id/imagePhone1" />
+        <ImageView
+            android:id="@+id/imagePhone2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/ic_phone_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagePhone1" />
 
-            <ImageView
-                android:id="@+id/imagePhone2"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
-                android:src="@drawable/ic_phone_black_24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagePhone1" />
+        <TextView
+            android:id="@+id/textEmergencyInternCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/emergency_intern_call"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/imagePhone2"
+            app:layout_constraintTop_toTopOf="@+id/imagePhone2" />
 
-            <TextView
-                android:id="@+id/textEmergencyInternCall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:text="@string/emergency_intern_call"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="17sp"
-                app:layout_constraintStart_toEndOf="@+id/imagePhone2"
-                app:layout_constraintTop_toTopOf="@+id/imagePhone2" />
+        <TextView
+            android:id="@+id/textEmergencyInternNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/emergency_intern_number"
+            android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
+            app:layout_constraintStart_toStartOf="@+id/textEmergencyInternCall"
+            app:layout_constraintTop_toBottomOf="@+id/textEmergencyInternCall" />
 
-            <TextView
-                android:id="@+id/textEmergencyInternNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/emergency_intern_number"
-                android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
-                app:layout_constraintStart_toStartOf="@+id/textEmergencyInternCall"
-                app:layout_constraintTop_toBottomOf="@+id/textEmergencyInternCall" />
-
-            <TextView
-                android:id="@+id/txtEmergencyProcedures"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="16dp"
-                android:text="@string/emergency_procedures"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/material_red_500"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textEmergencyInternNumber"
-                tools:layout_editor_absoluteX="0dp" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txtEmergencyProcedures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="16dp"
+            android:text="@string/emergency_procedures"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/material_red_500"
+            app:layout_constraintTop_toBottomOf="@+id/textEmergencyInternNumber"
+            tools:layout_editor_absoluteX="0dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/security_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@+id/txtEmergencyProcedures"
+            tools:layout_editor_absoluteX="4dp" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.core.widget.NestedScrollView>
 
