@@ -13,6 +13,7 @@ buildscript {
     ext.firebase_crashlytics = '2.9.8'
     ext.flexbox = '1.0.0'
     ext.glide = '4.8.0'
+    ext.google_maps = '16.0.0'
     ext.groupie = '2.1.0'
     ext.junit = '4.12'
     ext.klock = '1.0.0'

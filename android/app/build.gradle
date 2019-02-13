@@ -108,7 +108,6 @@ dependencies {
 
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigation"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigation"
@@ -144,6 +143,9 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:${glide}"
     kapt "com.github.bumptech.glide:compiler:${glide}"
+
+    //Google maps
+    implementation "com.google.android.gms:play-services-maps:$google_maps"
 
     // Dagger
     implementation "com.google.dagger:dagger:${dagger}"
