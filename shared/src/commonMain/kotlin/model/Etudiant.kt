@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.repository.data.model
+package model
 
 data class Etudiant(
     var type: String,

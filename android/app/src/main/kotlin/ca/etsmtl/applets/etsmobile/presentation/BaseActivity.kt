@@ -1,8 +1,8 @@
 package ca.etsmtl.applets.etsmobile.presentation
 
 import android.os.Bundle
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import dagger.android.support.DaggerAppCompatActivity
+import model.SignetsUserCredentials
 
 /**
  * This base activity saves the user's credentials when [onSaveInstanceState] is called and restore
@@ -18,7 +18,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         savedInstanceState?.run {
             val signetsCredentials: SignetsUserCredentials? = this.getParcelable(STATE_SIGNETS_CREDENTIALS)
             if (signetsCredentials != null) {
-                SignetsUserCredentials.INSTANCE.set(signetsCredentials)
+                SignetsUserCredentials.INSTANCE = signetsCredentials
             }
         }
 
@@ -26,7 +26,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(STATE_SIGNETS_CREDENTIALS, SignetsUserCredentials.INSTANCE.get())
+        outState.putParcelable(STATE_SIGNETS_CREDENTIALS, SignetsUserCredentials.INSTANCE)
 
         super.onSaveInstanceState(outState)
     }

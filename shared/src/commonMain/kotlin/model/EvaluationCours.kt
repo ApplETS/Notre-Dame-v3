@@ -1,11 +1,11 @@
-package ca.etsmtl.applets.repository.data.model
+package model
 
-import java.util.Date
+import com.soywiz.klock.DateTime
 
 data class EvaluationCours(
     var session: String,
-    var dateDebutEvaluation: Date,
-    var dateFinEvaluation: Date,
+    var dateDebutEvaluation: DateTime,
+    var dateFinEvaluation: DateTime,
     var enseignant: String,
     var estComplete: Boolean = false,
     var groupe: String,

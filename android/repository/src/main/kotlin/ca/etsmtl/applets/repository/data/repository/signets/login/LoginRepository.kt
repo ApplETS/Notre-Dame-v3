@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.db.AppDatabase
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.model.UniversalCode
+import model.SignetsUserCredentials
+import model.UniversalCode
 import javax.inject.Inject
 
 /**
@@ -61,8 +61,8 @@ class LoginRepository @Inject constructor(
      * @return A [LiveData] whose value would be true if the save is complete
      */
     fun saveUserCredentialsIfNeeded(userCredentials: SignetsUserCredentials): LiveData<Boolean> {
-        return if (SignetsUserCredentials.INSTANCE.get() == null) {
-            SignetsUserCredentials.INSTANCE.set(userCredentials)
+        return if (SignetsUserCredentials.INSTANCE == null) {
+            SignetsUserCredentials.INSTANCE = userCredentials
 
             saveUserCredentials(userCredentials)
         } else {
@@ -85,7 +85,7 @@ class LoginRepository @Inject constructor(
 
             if (motPasse != null) {
                 userCredentials = SignetsUserCredentials(UniversalCode(codeAccesUniversel), motPasse)
-                SignetsUserCredentials.INSTANCE.set(userCredentials)
+                SignetsUserCredentials.INSTANCE = userCredentials
             }
         }
 
@@ -189,11 +189,11 @@ class LoginRepository @Inject constructor(
         appExecutors.diskIO().execute {
             prefs.edit().clear().apply()
 
-            with(SignetsUserCredentials.INSTANCE.get()) {
+            with(SignetsUserCredentials.INSTANCE) {
                 if (this != null) {
                     deletePassword(this.codeAccesUniversel.value)
 
-                    SignetsUserCredentials.INSTANCE.set(null)
+                    SignetsUserCredentials.INSTANCE = null
                 }
             }
 

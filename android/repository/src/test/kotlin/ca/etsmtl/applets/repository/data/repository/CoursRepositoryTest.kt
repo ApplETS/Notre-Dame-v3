@@ -13,11 +13,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toCours
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
-import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
-import ca.etsmtl.applets.repository.data.model.UniversalCode
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import ca.etsmtl.applets.repository.util.ApiUtil
@@ -26,6 +22,10 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.eq
 import junit.framework.Assert.assertEquals
+import model.Cours
+import model.SignetsUserCredentials
+import model.SommaireElementsEvaluation
+import model.UniversalCode
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
