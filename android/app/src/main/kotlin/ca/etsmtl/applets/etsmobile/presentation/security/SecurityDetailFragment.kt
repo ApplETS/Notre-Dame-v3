@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.toggle
@@ -28,7 +30,8 @@ class SecurityDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideBottomNavigation()
+        setInitialActivityState()
+        setUpToolbarSecurityDetail()
         setEmergencyDetailText()
         setButtonListener()
     }
@@ -60,16 +63,24 @@ class SecurityDetailFragment : Fragment() {
         }
     }
 
+    private fun setInitialActivityState() {
+        (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
+        (activity as? MainActivity)?.appBarLayout?.setExpanded(false, false)
+        appBarLayoutSecurity?.setExpanded(true, true)
+    }
+
+    private fun setUpToolbarSecurityDetail() {
+        toolbarSecurity.setupWithNavController(findNavController())
+    }
+
     override fun onDestroyView() {
-        restoreBottomNavigation()
+        restoreActivityState()
         super.onDestroyView()
     }
 
-    private fun hideBottomNavigation() {
-        (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
-    }
-
-    private fun restoreBottomNavigation() {
+    private fun restoreActivityState() {
         (activity as? MainActivity)?.bottomNavigationView?.toggle(true)
+        appBarLayoutSecurity?.setExpanded(false, false)
+        (activity as? MainActivity)?.appBarLayout?.setExpanded(true, false)
     }
 }

@@ -126,7 +126,6 @@
             android:id="@+id/security_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/material_layout_vertical_spacing_tool_bar"
             android:nestedScrollingEnabled="false"
             android:scrollbars="none" />
 
