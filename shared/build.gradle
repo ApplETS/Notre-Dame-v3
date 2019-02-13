@@ -34,6 +34,8 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.coroutines"
                 api "com.soywiz:klock:$versions.klock"
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+                implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-alpha02"
             }
         }
 

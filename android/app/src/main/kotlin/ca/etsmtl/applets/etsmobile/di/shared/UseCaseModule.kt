@@ -17,7 +17,7 @@ object UseCaseModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun provideFetchDashboardCardsUseCase(
+    fun provideDashboardCardsUseCase(
         repository: DashboardCardRepository
     ): DashboardCardsUseCase {
         return DashboardCardsUseCase(repository)

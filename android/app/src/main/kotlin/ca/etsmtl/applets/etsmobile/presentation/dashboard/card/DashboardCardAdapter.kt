@@ -6,14 +6,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardViewModel
 import model.DashboardCard
+import presentation.DashboardViewModel
 
 class DashboardCardAdapter(
     private val fragmentManager: FragmentManager,
     private val dashboardViewModel: DashboardViewModel
 ) : RecyclerView.Adapter<DashboardCardViewHolder>() {
-    var items: MutableList<DashboardCard> = mutableListOf()
+    var items: List<DashboardCard> = emptyList()
         set(value) {
             val diffCallback = object : DiffUtil.Callback() {
                 override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -51,10 +51,10 @@ class DashboardCardAdapter(
     }
 
     fun onItemMove(fromPosition: Int, toPosition: Int) {
-        dashboardViewModel.moveCard(fromPosition, toPosition)
+        dashboardViewModel.onCardMoved(fromPosition, toPosition)
     }
 
     fun onItemRemoved(position: Int) {
-        dashboardViewModel.removeCard(position)
+        dashboardViewModel.onCardRemoved(position)
     }
 }

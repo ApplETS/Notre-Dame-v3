@@ -3,7 +3,6 @@ package ca.etsmtl.applets.etsmobile.di.activitymodule
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.di.ViewModelKey
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardFragment
-import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardViewModel
 import ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.applets.etsmobile.presentation.ets.EtsViewModel
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
@@ -22,6 +21,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+import presentation.DashboardViewModel
 
 /**
  * Created by Sonphil on 15-03-18.

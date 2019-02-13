@@ -12,13 +12,14 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.util.toLiveData
 import ca.etsmtl.applets.etsmobile.util.toggle
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_dashboard.rvCards
+import presentation.DashboardViewModel
 import javax.inject.Inject
 
 /**
@@ -63,22 +64,34 @@ class DashboardFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        dashboardViewModel.cards.observe(this, Observer {
-            adapter.items = it.toMutableList()
-        })
+        dashboardViewModel
+            .cardsChannel
+            .toLiveData()
+            .observe(this, Observer {
+                adapter.items = it
+            })
 
-        dashboardViewModel.showUndoCardRemove.observe(this, EventObserver {
-            activity?.let { activity ->
-                Snackbar.make(
-                    activity.findViewById(android.R.id.content),
-                    R.string.msg_dashboard_card_removed,
-                    Snackbar.LENGTH_LONG
-                ).setAction(R.string.cancel) {
-                    dashboardViewModel.undoLastRemove()
-                }.show()
-            }
-        })
+        dashboardViewModel
+            .showUndoRemoveChannel
+            .toLiveData()
+            .observe(this, Observer {
+                activity?.let { activity ->
+                    Snackbar.make(
+                        activity.findViewById(android.R.id.content),
+                        R.string.msg_dashboard_card_removed,
+                        Snackbar.LENGTH_LONG
+                    ).setAction(R.string.cancel) {
+                        dashboardViewModel.undoLastRemove()
+                    }.show()
+                }
+            })
 
-        lifecycle.addObserver(dashboardViewModel)
+        dashboardViewModel.load()
+    }
+
+    override fun onStop() {
+        dashboardViewModel.save()
+
+        super.onStop()
     }
 }

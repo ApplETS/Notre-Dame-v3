@@ -15,7 +15,7 @@ import model.DashboardCard
 import java.util.Collections
 import javax.inject.Inject
 
-class DashboardViewModel @Inject constructor(
+class OldDashboardViewModel @Inject constructor(
     private val dashboardCardsUseCase: DashboardCardsUseCase
 ) : ViewModel(), LifecycleObserver {
     private val visibleCards = MutableLiveData<MutableList<DashboardCard>>()
