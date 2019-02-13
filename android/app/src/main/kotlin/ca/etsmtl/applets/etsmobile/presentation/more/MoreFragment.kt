@@ -68,7 +68,7 @@ class MoreFragment : DaggerFragment() {
     }
 
     private fun setupRecyclerView() {
-        with (recyclerViewMore) {
+        with(recyclerViewMore) {
             val itemsList = moreViewModel.itemsList()
 
             adapter = MoreRecyclerViewAdapter(itemsList)
@@ -100,7 +100,7 @@ class MoreFragment : DaggerFragment() {
         })
 
         moreViewModel.navigateToLogin.observe(this, EventObserver {
-            with (activity as MainActivity) {
+            with(activity as MainActivity) {
                 appBarLayout.setExpanded(false, false)
                 bottomNavigationView.toggle(false)
                 findNavController().navigate(MoreFragmentDirections.actionFragmentMoreToFragmentLogin())

@@ -140,7 +140,7 @@ class LoginFragment : DaggerFragment() {
      * of the lifecycle
      */
     private fun subscribeUI() {
-        with (loginViewModel) {
+        with(loginViewModel) {
             showLoading.observe(this@LoginFragment, Observer {
                 showProgress(it == true)
             })
@@ -158,7 +158,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             navigateToDashboard.observe(this@LoginFragment, EventObserver {
-                with ((activity as MainActivity)) {
+                with((activity as MainActivity)) {
                     findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
                 }
             })
