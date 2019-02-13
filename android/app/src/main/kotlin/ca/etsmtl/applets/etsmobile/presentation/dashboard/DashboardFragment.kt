@@ -28,7 +28,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with (activity as MainActivity) {
+        with(activity as MainActivity) {
             appBarLayout.setExpanded(true, true)
             bottomNavigationView.toggle(true)
         }

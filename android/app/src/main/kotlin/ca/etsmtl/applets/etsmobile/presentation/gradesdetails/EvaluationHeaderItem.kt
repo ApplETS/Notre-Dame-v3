@@ -32,7 +32,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     override fun getLayout() = R.layout.item_evaluation_header
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        with (viewHolder) {
+        with(viewHolder) {
             tvName.text = evaluation.nom
 
             tvWeight.apply {
@@ -79,7 +79,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
             tvIgnoredEvaluation.isVisible = evaluation.ignoreDuCalcul
             btnIgnoredEvaluation.isVisible = evaluation.ignoreDuCalcul
             if (evaluation.ignoreDuCalcul) {
-                with (View.OnClickListener {
+                with(View.OnClickListener {
                     showIgnoredEvaluationDialog(tvIgnoredEvaluation.context)
                 }) {
                     tvIgnoredEvaluation.setOnClickListener(this)

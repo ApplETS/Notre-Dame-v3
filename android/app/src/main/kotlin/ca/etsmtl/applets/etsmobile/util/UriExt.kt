@@ -20,7 +20,7 @@ import ca.etsmtl.applets.etsmobile.R
  */
 fun Uri.open(context: Context, @ColorRes colorId: Int = R.color.colorPrimary): Boolean {
     try {
-        with (CustomTabsIntent.Builder().setToolbarColor(context.getColorCompat(colorId)).build()) {
+        with(CustomTabsIntent.Builder().setToolbarColor(context.getColorCompat(colorId)).build()) {
             launchUrl(context, this@open)
 
             return true
@@ -30,7 +30,7 @@ fun Uri.open(context: Context, @ColorRes colorId: Int = R.color.colorPrimary): B
     }
 
     try {
-        with (Intent(Intent.ACTION_VIEW, this)) {
+        with(Intent(Intent.ACTION_VIEW, this)) {
             if (resolveActivity(context.packageManager) != null) {
                 context.startActivity(this)
 

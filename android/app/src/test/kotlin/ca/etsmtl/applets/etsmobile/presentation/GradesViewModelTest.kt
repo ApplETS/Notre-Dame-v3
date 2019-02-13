@@ -164,7 +164,7 @@ class GradesViewModelTest {
         )
 
         // when
-        val resultCours = with (gradesViewModel) {
+        val resultCours = with(gradesViewModel) {
             cours.adjustCote()
         }
 
@@ -188,7 +188,7 @@ class GradesViewModelTest {
         `when`(app.getString(R.string.text_grade_in_percentage)).thenReturn("%1\$s %%")
 
         // when
-        val resultCours = with (gradesViewModel) {
+        val resultCours = with(gradesViewModel) {
             cours.adjustCote()
         }
 
@@ -212,7 +212,7 @@ class GradesViewModelTest {
         `when`(app.getString(R.string.abbreviation_not_available)).thenReturn("N/A")
 
         // when
-        val resultCours = with (gradesViewModel) {
+        val resultCours = with(gradesViewModel) {
             cours.adjustCote()
         }
 

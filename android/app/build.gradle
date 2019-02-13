@@ -70,6 +70,7 @@ android {
         }
     }
 
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test {
@@ -139,6 +140,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:${glide}"
     kapt "com.github.bumptech.glide:compiler:${glide}"
 
+    //Google maps
+    implementation "com.google.android.gms:play-services-maps:$google_maps"
+
     // Dagger
     implementation "com.google.dagger:dagger:${dagger}"
     implementation "com.google.dagger:dagger-android:${dagger}"
@@ -185,4 +189,3 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-
