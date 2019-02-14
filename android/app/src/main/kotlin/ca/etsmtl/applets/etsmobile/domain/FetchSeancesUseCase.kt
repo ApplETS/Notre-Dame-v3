@@ -26,6 +26,26 @@ class FetchSeancesUseCase @Inject constructor(
             val sessions = resSessions.data.orEmpty()
             val completedSeancesFetch = mutableSetOf<Session>()
             val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
+            var latestError: String? = null
+
+            fun updateMediatorLiveData(res: Resource<List<Seance>>){
+
+                val seances = mutableListOf<Seance>()
+                mediatorLiveData.value?.data?.let {
+                    seances.addAll(it)
+                }
+                seances.addAll(res.data!!)
+
+                seances.sortBy { it.dateDebut }
+
+                if (completedSeancesFetch.size != sessions.size){
+                    mediatorLiveData.value = Resource.loading(seances)
+                } else if (latestError != null && latestError != ""){
+                    mediatorLiveData.value = Resource.error(latestError!!, seances)
+                } else {
+                    mediatorLiveData.value = Resource.success(seances)
+                }
+            }
 
             fun fetchSeancesFromSession(session: Session){
                 mediatorLiveData.addSource(
@@ -38,28 +58,13 @@ class FetchSeancesUseCase @Inject constructor(
                             mediatorLiveData.value = Resource.loading(mediatorLiveData.value?.data.orEmpty())
                         Resource.Status.ERROR -> {
                             completedSeancesFetch.add(session)
-                            mediatorLiveData.value = Resource.error(
-                                res.message ?: app.getString(R.string.error),
-                                mediatorLiveData.value?.data.orEmpty()
-                            )
+                            latestError = res.message
+                            updateMediatorLiveData(res)
+
                         }
                         Resource.Status.SUCCESS ->{
                             completedSeancesFetch.add(session)
-
-                            if (res.data == null){ //TODO: Remove if?
-                                mediatorLiveData.value = Resource.error(app.getString(R.string.error), emptyList())
-                            } else {
-                                val seances = mutableListOf<Seance>()
-                                mediatorLiveData.value?.data?.let {
-                                    seances.addAll(it)
-                                }
-                                seances.addAll(res.data!!)
-
-                                seances.sortBy { it.dateDebut }
-
-                                mediatorLiveData.value = if (completedSeancesFetch.size == sessions.size)
-                                    Resource.success(seances) else Resource.loading(seances)
-                            }
+                            updateMediatorLiveData(res)
                         }
                     }
                 }
