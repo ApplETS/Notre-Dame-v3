@@ -105,6 +105,13 @@ class ScheduleFragment : DaggerFragment() {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
 
+        scheduleViewModel.showEmptyView.observe(this, Observer {
+            it?.let {
+                schedule_pager.isVisible = !it
+                emptyViewSchedule.isVisible = it
+            }
+        })
+
         this.lifecycle.addObserver(scheduleViewModel)
     }
 
