@@ -89,7 +89,8 @@ class DashboardFragment : DaggerFragment() {
                         activity.findViewById(android.R.id.content),
                         R.string.msg_dashboard_card_removed,
                         Snackbar.LENGTH_LONG
-                    ).setAction(R.string.cancel) {
+                    ).setAction(R.string.cancel) { view ->
+                        view.isEnabled = false
                         dashboardViewModel.undoLastRemove()
                     }.show()
                 }
