@@ -9,7 +9,6 @@ import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.applets.AppletsCa
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.grades.GradesCardFragment
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.todayschedule.TodayScheduleCardFragment
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_dashboard_card.view.container
 import model.DashboardCard
 
 class DashboardCardViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
@@ -38,12 +37,10 @@ class DashboardCardViewHolder(override val containerView: View) : RecyclerView.V
         }
 
         transaction {
-            itemView.container?.let { itemView ->
-                findFragmentById(itemView.id)?.let { remove(it) }
+            findFragmentById(itemView.id)?.let { remove(it) }
 
-                itemView.id = View.generateViewId()
-                replace(itemView.id, fragment, tag)
-            }
+            itemView.id = View.generateViewId()
+            replace(itemView.id, fragment, tag)
         }
     }
 }
