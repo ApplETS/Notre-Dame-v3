@@ -20,28 +20,26 @@ class ScheduleAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     private var itemList: List<Map.Entry<Range<Calendar>, List<Seance>>> = emptyList()
     var items: Map<Range<Calendar>, List<Seance>> = emptyMap()
         set(value) {
-            field=value
+            field = value
             val newItemsList = mutableListOf<Map.Entry<Range<Calendar>, List<Seance>>>().apply {
                 value.forEach { this.add(it) }
             }
 
             itemList = newItemsList
-
         }
 
-    fun getCurrentPosition(): Int{
-        val cal =  Calendar.getInstance()
+    fun getCurrentPosition(): Int {
+        val cal = Calendar.getInstance()
         var i = 0
 
-        while (i < itemList.size){
+        while (i < itemList.size) {
             if ((cal in itemList[i].key) or (cal < itemList[i].key.lower)) return i
 
             ++i
         }
 
-        return i-1
+        return i - 1
     }
-
 
     override fun getItem(position: Int): Fragment = ScheduleWeekFragment().apply {
         arguments = Bundle().apply {
@@ -60,5 +58,5 @@ class ScheduleAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
             .format(range.lower.time)
     }
 
-    //TODO: see https://developer.android.com/training/implementing-navigation/lateral
+    // TODO: see https://developer.android.com/training/implementing-navigation/lateral
 }

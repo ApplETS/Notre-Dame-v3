@@ -27,39 +27,39 @@ class ScheduleViewModel @Inject constructor(
     private val fetchSeancesUseCase: FetchSeancesUseCase,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
-    private var seanceRes = object : RefreshableLiveData<Resource<List<Seance>>>(){
+    private var seanceRes = object : RefreshableLiveData<Resource<List<Seance>>>() {
         override fun updateSource(): LiveData<Resource<List<Seance>>> {
             return fetchSeancesUseCase()
         }
     }
 
     val errorMessage: LiveData<Event<String?>> = seanceRes.nonNull().map {
-        if (app.getString(R.string.msg_api_no_seance)==it.message){
+        if (app.getString(R.string.msg_api_no_seance) == it.message) {
             Event(null)
         } else
             it.getGenericErrorMessage(app)
     }
 
     val seances: LiveData<Map<Range<Calendar>, List<Seance>>> = seanceRes.nonNull()
-        .map { res->
+        .map { res ->
             res.data?.groupBy {
                 it.extractWeekRange()
             }
         }
 
     val loading: LiveData<Boolean> = seanceRes.map {
-        it == null || it.status==Resource.Status.LOADING
+        it == null || it.status == Resource.Status.LOADING
     }
 
     val showEmptyView: LiveData<Boolean> = seanceRes.nonNull().map {
-        it.status != Resource.Status.LOADING &&(it?.data ==null || it.data?.isEmpty()==true)
+        it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
     }
 
     /**
      *  Finds the pair of calendar that represents the week that this seance belongs to
      */
     @VisibleForTesting
-    private fun Seance.extractWeekRange(): Range<Calendar>{
+    private fun Seance.extractWeekRange(): Range<Calendar> {
         val beginningCal = Calendar.getInstance()
 
         beginningCal.time = dateDebut

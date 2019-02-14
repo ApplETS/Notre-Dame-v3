@@ -16,14 +16,14 @@ import java.util.Calendar
 /**
 Created by mykaelll87 on 10/01/19
  */
-class ScheduleWeekFragment : DaggerFragment(){
+class ScheduleWeekFragment : DaggerFragment() {
 
     private val adapter: ScheduleWeekAdapter = ScheduleWeekAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?{
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_schedule_week, container, false)
     }
@@ -41,7 +41,7 @@ class ScheduleWeekFragment : DaggerFragment(){
                 day.set(Calendar.HOUR, 0)
                 day.set(Calendar.MINUTE, 0)
                 day.set(Calendar.SECOND, 0)
-                day.set(Calendar.AM_PM,0)
+                day.set(Calendar.AM_PM, 0)
 
                 day
             }
@@ -51,7 +51,7 @@ class ScheduleWeekFragment : DaggerFragment(){
         setUpRecyclerView()
     }
 
-    private fun setUpRecyclerView(){
+    private fun setUpRecyclerView() {
         recyclerViewSchedule.adapter = adapter
         recyclerViewSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerViewSchedule.itemAnimator = FadeInLeftAnimator()

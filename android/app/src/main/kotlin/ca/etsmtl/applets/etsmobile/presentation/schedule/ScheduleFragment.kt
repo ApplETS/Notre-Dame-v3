@@ -56,10 +56,10 @@ class ScheduleFragment : DaggerFragment() {
         swipeRefreshLayoutSchedule.setOnRefreshListener { scheduleViewModel.refresh() }
     }
 
-    private fun setUpPager(){
+    private fun setUpPager() {
         schedule_pager.adapter = adapter
 
-        schedule_pager.addOnPageChangeListener(object:ViewPager.OnPageChangeListener{
+        schedule_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
                 swipeRefreshLayoutSchedule.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
             }
@@ -89,7 +89,7 @@ class ScheduleFragment : DaggerFragment() {
     private fun subscribeUI() {
         scheduleViewModel.seances.observe(this, Observer {
             it?.let {
-                if (it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     adapter.items = it
                     adapter.notifyDataSetChanged()
                     this.tabLayout?.getTabAt(adapter.getCurrentPosition())?.select()

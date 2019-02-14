@@ -21,14 +21,14 @@ class FetchSeancesUseCase @Inject constructor(
     private val fetchSessionsUseCase: FetchSessionsUseCase,
     private val app: App
 ) {
-    operator fun  invoke(): LiveData<Resource<List<Seance>>>{
-        return Transformations.switchMap(fetchSessionsUseCase()){ resSessions->
+    operator fun invoke(): LiveData<Resource<List<Seance>>> {
+        return Transformations.switchMap(fetchSessionsUseCase()) { resSessions ->
             val sessions = resSessions.data.orEmpty()
             val completedSeancesFetch = mutableSetOf<Session>()
             val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
             var latestError: String? = null
 
-            fun updateMediatorLiveData(res: Resource<List<Seance>>){
+            fun updateMediatorLiveData(res: Resource<List<Seance>>) {
 
                 val seances = mutableListOf<Seance>()
                 mediatorLiveData.value?.data?.let {
@@ -38,31 +38,30 @@ class FetchSeancesUseCase @Inject constructor(
 
                 seances.sortBy { it.dateDebut }
 
-                if (completedSeancesFetch.size != sessions.size){
+                if (completedSeancesFetch.size != sessions.size) {
                     mediatorLiveData.value = Resource.loading(seances)
-                } else if (latestError != null && latestError != ""){
+                } else if (latestError != null && latestError != "") {
                     mediatorLiveData.value = Resource.error(latestError!!, seances)
                 } else {
                     mediatorLiveData.value = Resource.success(seances)
                 }
             }
 
-            fun fetchSeancesFromSession(session: Session){
+            fun fetchSeancesFromSession(session: Session) {
                 mediatorLiveData.addSource(
                     seanceRepository.getSeancesSession(
-                        userCredentials,null, session, true
+                        userCredentials, null, session, true
                     )
-                ){ res ->
-                    when(res.status){
+                ) { res ->
+                    when (res.status) {
                         Resource.Status.LOADING ->
                             mediatorLiveData.value = Resource.loading(mediatorLiveData.value?.data.orEmpty())
                         Resource.Status.ERROR -> {
                             completedSeancesFetch.add(session)
                             latestError = res.message
                             updateMediatorLiveData(res)
-
                         }
-                        Resource.Status.SUCCESS ->{
+                        Resource.Status.SUCCESS -> {
                             completedSeancesFetch.add(session)
                             updateMediatorLiveData(res)
                         }
@@ -70,7 +69,7 @@ class FetchSeancesUseCase @Inject constructor(
                 }
             }
 
-            when (resSessions.status){
+            when (resSessions.status) {
                 Resource.Status.ERROR -> mediatorLiveData.value =
                     Resource.error(resSessions.message ?: app.getString(R.string.error), emptyList())
                 Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(emptyList())
