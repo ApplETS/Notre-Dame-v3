@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.rotate
 import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
-import ca.etsmtl.applets.repository.data.model.Evaluation
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
@@ -20,6 +19,7 @@ import kotlinx.android.synthetic.main.item_evaluation_header.tvGrade
 import kotlinx.android.synthetic.main.item_evaluation_header.tvIgnoredEvaluation
 import kotlinx.android.synthetic.main.item_evaluation_header.tvName
 import kotlinx.android.synthetic.main.item_evaluation_header.tvWeight
+import model.Evaluation
 
 /**
  * Created by Sonphil on 05-09-18.
@@ -32,7 +32,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
     override fun getLayout() = R.layout.item_evaluation_header
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        with (viewHolder) {
+        with(viewHolder) {
             tvName.text = evaluation.nom
 
             tvWeight.apply {
@@ -54,9 +54,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
                         .replaceFirst(",", ".")
                         .toFloat()
 
-                if (grade > 100) {
-                    grade = 100f
-                }
+                grade = grade.coerceIn(0f, 100f)
 
                 setEndProgress(grade)
 
@@ -81,7 +79,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
             tvIgnoredEvaluation.isVisible = evaluation.ignoreDuCalcul
             btnIgnoredEvaluation.isVisible = evaluation.ignoreDuCalcul
             if (evaluation.ignoreDuCalcul) {
-                with (View.OnClickListener {
+                with(View.OnClickListener {
                     showIgnoredEvaluationDialog(tvIgnoredEvaluation.context)
                 }) {
                     tvIgnoredEvaluation.setOnClickListener(this)

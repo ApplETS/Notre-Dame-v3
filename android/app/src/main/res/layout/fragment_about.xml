@@ -12,11 +12,12 @@
         android:id="@+id/backgroundAbout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgApplets"
+        android:background="@color/applets"
         android:visibility="invisible"
         tools:visibility="visible" />
 
     <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.api.requestbody.signets
 
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import com.squareup.moshi.Json
+import model.SignetsUserCredentials
 
 /**
  * Created by Sonphil on 12-08-18.

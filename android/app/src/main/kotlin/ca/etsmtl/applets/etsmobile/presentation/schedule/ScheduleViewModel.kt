@@ -14,7 +14,7 @@ import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
 import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Seance
+import model.Seance
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import java.util.Calendar
@@ -62,7 +62,7 @@ class ScheduleViewModel @Inject constructor(
     private fun Seance.extractWeekRange(): Range<Calendar> {
         val beginningCal = Calendar.getInstance()
 
-        beginningCal.time = dateDebut
+        beginningCal.timeInMillis = dateDebut.unixMillisLong
         beginningCal.set(Calendar.DAY_OF_WEEK, beginningCal.firstDayOfWeek)
         beginningCal.set(Calendar.HOUR_OF_DAY, 0)
         beginningCal.clear(Calendar.MINUTE)

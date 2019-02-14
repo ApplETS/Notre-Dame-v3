@@ -1,7 +1,5 @@
 package ca.etsmtl.applets.repository.util
 
-import java.text.DateFormat
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -9,26 +7,14 @@ import java.util.Date
  * Created by Sonphil on 09-01-19.
  */
 
-/**
- * Formats the [String] which must be in the following format: "yyyy-MM-dd"
- *
- * @return The formatted [String] or the [String] (without formatting) if it can't be parsed
- */
-fun String.toLocaleDate(): String {
-    with (SimpleDateFormat("yyyy-MM-dd")) {
-        return try {
-            DateFormat.getDateInstance().format(parse(this@toLocaleDate))
-        } catch (e: ParseException) {
-            e.printStackTrace()
-            this@toLocaleDate
-        }
-    }
-}
+const val MILLIS_PER_SECOND = 1000
 
 /**
- * Formats Microsoft JSON date (e.g. /Date(1525093200000)/) to Unix time (e.g. 1525093200000)
+ * Formats Microsoft JSON date (e.g. /Date(1525093200000)/) to Unix time seconds (e.g. 1525093200)
  */
-internal fun String.msDateToUnix() = substringAfter('(').substringBefore(')').toLong()
+internal fun String.msDateToUnix() = substringAfter('(')
+    .substringBefore(')')
+    .toLong() / MILLIS_PER_SECOND
 
 /**
  * Convert date [String] to Unix time in seconds
@@ -50,10 +36,10 @@ internal fun String.signetsDefaultDateToUnix(): Long = dateToUnix("yyyy-MM-dd")
  * Format unix date in seconds to Signets default date format
  */
 internal fun Long.unixToDefaultSignetsDate() = SimpleDateFormat("yyyy-MM-dd")
-    .format(Date(this * 1000))
+    .format(Date(this * MILLIS_PER_SECOND))
 
 inline var Date.timeInSeconds: Long
-    get() = time / 1000
+    get() = time / MILLIS_PER_SECOND
     set(value) {
-        time = value * 1000
+        time = value * MILLIS_PER_SECOND
     }

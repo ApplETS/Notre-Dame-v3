@@ -68,7 +68,7 @@ class MoreFragment : DaggerFragment() {
     }
 
     private fun setupRecyclerView() {
-        with (recyclerViewMore) {
+        with(recyclerViewMore) {
             val itemsList = moreViewModel.itemsList()
 
             adapter = MoreRecyclerViewAdapter(itemsList)
@@ -81,7 +81,7 @@ class MoreFragment : DaggerFragment() {
             iconView to getString(R.string.transition_about_applets_logo)
         )
 
-        findNavController().navigate(MoreFragmentDirections.ActionFragmentMoreToFragmentAbout(), extras)
+        findNavController().navigate(MoreFragmentDirections.actionFragmentMoreToFragmentAbout(), extras)
     }
 
     private fun subscribeUI() {
@@ -100,10 +100,10 @@ class MoreFragment : DaggerFragment() {
         })
 
         moreViewModel.navigateToLogin.observe(this, EventObserver {
-            with (activity as MainActivity) {
+            with(activity as MainActivity) {
                 appBarLayout.setExpanded(false, false)
                 bottomNavigationView.toggle(false)
-                findNavController().navigate(MoreFragmentDirections.ActionFragmentMoreToFragmentLogin())
+                findNavController().navigate(MoreFragmentDirections.actionFragmentMoreToFragmentLogin())
             }
         })
 

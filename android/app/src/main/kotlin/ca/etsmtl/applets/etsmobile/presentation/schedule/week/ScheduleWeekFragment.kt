@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.repository.data.model.Seance
+import model.Seance
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_schedule_week.*
@@ -37,7 +37,7 @@ class ScheduleWeekFragment : DaggerFragment() {
             adapter.items = seances.groupBy {
                 val day = Calendar.getInstance()
                 day.clear()
-                day.time = it.dateDebut
+                day.timeInMillis = it.dateDebut.unixMillisLong
                 day.set(Calendar.HOUR, 0)
                 day.set(Calendar.MINUTE, 0)
                 day.set(Calendar.SECOND, 0)

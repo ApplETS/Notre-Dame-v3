@@ -1,1 +1,3 @@
-include ':android', ':android:repository', ':android:app'
+include ':android', ':android:repository', ':android:app', ':shared'
+
+enableFeaturePreview('GRADLE_METADATA')
