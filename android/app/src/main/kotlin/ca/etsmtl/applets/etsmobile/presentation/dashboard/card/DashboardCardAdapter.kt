@@ -7,11 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import model.DashboardCard
-import presentation.DashboardViewModel
 
 class DashboardCardAdapter(
-    private val fragmentManager: FragmentManager,
-    private val dashboardViewModel: DashboardViewModel
+    private val fragmentManager: FragmentManager
 ) : RecyclerView.Adapter<DashboardCardViewHolder>() {
     var items: List<DashboardCard> = emptyList()
         set(value) {
@@ -48,13 +46,5 @@ class DashboardCardAdapter(
 
     override fun onBindViewHolder(holder: DashboardCardViewHolder, position: Int) {
         holder.bind(items[position], fragmentManager)
-    }
-
-    fun onItemMove(fromPosition: Int, toPosition: Int) {
-        dashboardViewModel.onCardMoved(fromPosition, toPosition)
-    }
-
-    fun onItemRemoved(position: Int) {
-        dashboardViewModel.onCardRemoved(position)
     }
 }

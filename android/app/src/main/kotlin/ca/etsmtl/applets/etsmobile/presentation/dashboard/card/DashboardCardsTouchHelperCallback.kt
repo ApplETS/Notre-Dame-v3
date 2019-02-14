@@ -1,9 +1,14 @@
 package ca.etsmtl.applets.etsmobile.presentation.dashboard.card
 
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import presentation.DashboardViewModel
 
-class DashboardCardsTouchHelperCallback(private val dashboardCardAdapter: DashboardCardAdapter) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+class DashboardCardsTouchHelperCallback(
+    private val dashboardViewModel: DashboardViewModel,
+    private val fragmentManager: FragmentManager
+) : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
     override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         val card = (viewHolder as DashboardCardViewHolder).card
 
@@ -19,12 +24,14 @@ class DashboardCardsTouchHelperCallback(private val dashboardCardAdapter: Dashbo
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        dashboardCardAdapter.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        dashboardViewModel.onCardMoved(viewHolder.adapterPosition, target.adapterPosition)
 
         return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        dashboardCardAdapter.onItemRemoved(viewHolder.adapterPosition)
+        (viewHolder as DashboardCardViewHolder).clear(fragmentManager)
+
+        dashboardViewModel.onCardRemoved(viewHolder.adapterPosition)
     }
 }

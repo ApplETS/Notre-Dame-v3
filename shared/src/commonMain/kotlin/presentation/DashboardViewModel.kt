@@ -11,10 +11,11 @@ import model.DashboardCard
 
 class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCase) : ViewModel() {
     val cardsChannel = Channel<List<DashboardCard>>()
+    val showUndoRemoveChannel = Channel<Boolean>()
+
     private var visibleCards: MutableList<DashboardCard> = mutableListOf()
     private var hiddenCards: MutableList<DashboardCard> = mutableListOf()
     private var lastRemovedCardPosition = -1
-    val showUndoRemoveChannel = Channel<Boolean>()
 
     fun load() = scope.launch {
         if (visibleCards.isNullOrEmpty()) {

@@ -43,4 +43,12 @@ class DashboardCardViewHolder(override val containerView: View) : RecyclerView.V
             replace(itemView.id, fragment, tag)
         }
     }
+
+    fun clear(fragmentManager: FragmentManager) {
+        fragmentManager.findFragmentByTag(card?.type?.name)?.let { fragment ->
+            fragmentManager.transaction(true) {
+                remove(fragment)
+            }
+        }
+    }
 }

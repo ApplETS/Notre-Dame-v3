@@ -61,10 +61,13 @@ class DashboardFragment : DaggerFragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = DashboardCardAdapter(childFragmentManager, dashboardViewModel)
+        adapter = DashboardCardAdapter(childFragmentManager)
 
         rvCards.adapter = adapter
-        ItemTouchHelper(DashboardCardsTouchHelperCallback(adapter)).attachToRecyclerView(rvCards)
+        ItemTouchHelper(DashboardCardsTouchHelperCallback(
+            dashboardViewModel,
+            childFragmentManager
+        )).attachToRecyclerView(rvCards)
     }
 
     private fun subscribeUI() {
