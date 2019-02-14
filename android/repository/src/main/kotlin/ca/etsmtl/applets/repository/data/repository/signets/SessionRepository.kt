@@ -12,8 +12,8 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.SessionDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSessions
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import model.Session
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 class SessionRepository @Inject constructor(

@@ -21,7 +21,6 @@ import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import ca.etsmtl.applets.etsmobile.util.hideKeyboard
 import ca.etsmtl.applets.etsmobile.util.open
 import ca.etsmtl.applets.etsmobile.util.toggle
-import ca.etsmtl.applets.repository.data.model.UniversalCode
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -31,7 +30,6 @@ import kotlinx.android.synthetic.main.fragment_login.iVETSLogo
 import kotlinx.android.synthetic.main.fragment_login.loginForm
 import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
-import kotlinx.android.synthetic.main.fragment_splash.iVBackground
 import kotlinx.android.synthetic.main.include_login_form.btnForgotPassword
 import kotlinx.android.synthetic.main.include_login_form.btnSignIn
 import kotlinx.android.synthetic.main.include_login_form.btnUniversalCodeInfo
@@ -39,6 +37,7 @@ import kotlinx.android.synthetic.main.include_login_form.layoutPassword
 import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
 import kotlinx.android.synthetic.main.include_login_form.universalCode
+import model.UniversalCode
 import javax.inject.Inject
 
 /**
@@ -92,7 +91,6 @@ class LoginFragment : DaggerFragment() {
         (activity as MainActivity).bottomNavigationView.toggle(false, 0)
 
         Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
-        Glide.with(this).load(R.drawable.bg_ets_red).into(iVBackground)
 
         setupFields()
 
@@ -142,7 +140,7 @@ class LoginFragment : DaggerFragment() {
      * of the lifecycle
      */
     private fun subscribeUI() {
-        with (loginViewModel) {
+        with(loginViewModel) {
             showLoading.observe(this@LoginFragment, Observer {
                 showProgress(it == true)
             })
@@ -160,7 +158,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             navigateToDashboard.observe(this@LoginFragment, EventObserver {
-                with ((activity as MainActivity)) {
+                with((activity as MainActivity)) {
                     findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
                 }
             })

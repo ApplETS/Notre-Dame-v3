@@ -5,9 +5,10 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
+import ca.etsmtl.applets.repository.util.timeInSeconds
+import model.Session
+import model.SignetsUserCredentials
 import java.util.Date
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ class FetchCurrentSessionUseCase @Inject constructor(
     operator fun invoke(): LiveData<Resource<Session>> {
         return Transformations.map(sessionRepository.getSessions(userCredentials) { true }) {
             val currentSession = it.data.orEmpty().find {
-                Date().time in it.dateDebut..it.dateFin
+                Date().timeInSeconds in it.dateDebut..it.dateFin
             }
 
             if (it.status == Resource.Status.LOADING) {

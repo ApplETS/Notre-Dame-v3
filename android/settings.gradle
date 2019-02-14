@@ -1,1 +1,1 @@
-include ':app', ':repository'
+include ':app', ':repository', ':shared'

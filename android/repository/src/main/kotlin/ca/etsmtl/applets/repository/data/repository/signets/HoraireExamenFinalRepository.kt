@@ -11,10 +11,10 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeHoraireExa
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.HoraireExamenFinalDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toHorairesExamensFinaux
-import ca.etsmtl.applets.repository.data.model.HoraireExamenFinal
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import model.HoraireExamenFinal
+import model.Session
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**

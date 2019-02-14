@@ -1,14 +1,17 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipeRefreshLayoutProfile"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayoutProfile"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/design_bottom_navigation_height"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:ignore="PrivateResource"
         tools:listitem="@layout/item_profile" />
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

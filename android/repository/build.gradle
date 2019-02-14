@@ -1,35 +1,19 @@
 apply plugin: 'com.android.library'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
-
 apply plugin: "org.jlleitschuh.gradle.ktlint"
+apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas".toString())
             }
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            consumerProguardFiles 'proguard-rules.pro'
         }
     }
 
@@ -103,4 +87,9 @@ dependencies {
     // Chuck
     debugImplementation "com.readystatesoftware.chuck:library:$chuck"
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck"
+
+    // livedata-ktx
+    api "com.shopify:livedata-ktx:2.0.1"
+
+    api project(':shared')
 }

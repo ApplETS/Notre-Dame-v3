@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.open
-import ca.etsmtl.applets.etsmobile.util.toast
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -54,7 +54,8 @@ class EtsFragment : DaggerFragment() {
 
     private fun subscribeUI() {
         etsViewModel.navigateToSecurity.observe(this, EventObserver {
-            context?.toast("TODO: Navigate to security")
+            val nextAction = EtsFragmentDirections.actionNavigationEtsToSecurityFragment()
+            Navigation.findNavController(view!!).navigate(nextAction)
         })
 
         etsViewModel.navigateToMonEts.observe(this, EventObserver {

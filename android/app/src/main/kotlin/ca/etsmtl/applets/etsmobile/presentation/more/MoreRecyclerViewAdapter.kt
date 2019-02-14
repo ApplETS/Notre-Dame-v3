@@ -21,7 +21,7 @@ class MoreRecyclerViewAdapter(
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with (holder) {
+        with(holder) {
             val item: MoreItem = items[position]
 
             iVMoreItemIcon.setImageResource(item.iconId)

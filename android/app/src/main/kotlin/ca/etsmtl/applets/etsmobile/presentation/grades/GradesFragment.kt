@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.repository.data.model.Cours
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -24,6 +23,7 @@ import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCourses
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.swipeRefreshLayoutCoursesGrades
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
+import model.Cours
 import javax.inject.Inject
 
 /**

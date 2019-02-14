@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
  * select items on the bottom navigation view to switch between fragments.
  *
- * This activity is displayed when the is user logged in.
- *
  * Created by Sonphil on 24-02-18.
  */
 
@@ -75,12 +73,14 @@ class MainActivity : BaseActivity() {
         val navController = findNavController(R.id.fragmentNavHostMain)
         val currentId = navController.currentDestination?.id
 
-        if (topLevelDestinations.contains(currentId)) {
-            if (currentId != R.id.fragmentDashboard) {
-                navController.navigate(R.id.fragmentDashboard)
+        if (currentId != R.id.fragmentLogin) {
+            if (topLevelDestinations.contains(currentId)) {
+                if (currentId != R.id.fragmentDashboard) {
+                    navController.navigate(R.id.fragmentDashboard)
+                }
+            } else {
+                super.onBackPressed()
             }
-        } else {
-            super.onBackPressed()
         }
     }
 }

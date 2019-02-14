@@ -10,17 +10,19 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.Etudiant
-import ca.etsmtl.applets.repository.data.model.Evaluation
-import ca.etsmtl.applets.repository.data.model.EvaluationCours
-import ca.etsmtl.applets.repository.data.model.HoraireExamenFinal
-import ca.etsmtl.applets.repository.data.model.JourRemplace
-import ca.etsmtl.applets.repository.data.model.Programme
-import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
-import java.util.Date
+import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
+import com.soywiz.klock.DateTime
+import com.soywiz.klock.seconds
+import model.Cours
+import model.Etudiant
+import model.Evaluation
+import model.EvaluationCours
+import model.HoraireExamenFinal
+import model.JourRemplace
+import model.Programme
+import model.Seance
+import model.Session
+import model.SommaireElementsEvaluation
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -54,13 +56,13 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.session,
         this.nom,
         this.equipe,
-        this.dateCible,
-        this.note,
-        this.corrigeSur,
-        this.notePourcentage,
+        dateCible?.let { DateTime(it.seconds.millisecondsLong) },
+        this.note.zeroIfNullOrBlank(),
+        this.corrigeSur.zeroIfNullOrBlank(),
+        this.notePourcentage.zeroIfNullOrBlank(),
         this.ponderation,
-        this.moyenne,
-        this.moyennePourcentage,
+        this.moyenne.zeroIfNullOrBlank(),
+        this.moyennePourcentage.zeroIfNullOrBlank(),
         this.ecartType,
         this.mediane,
         this.rangCentile,
@@ -73,8 +75,8 @@ fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
 
 fun EvaluationCoursEntity.toEvaluationCours() = EvaluationCours(
     session,
-    Date(dateDebutEvaluation),
-    Date(dateFinEvaluation),
+    DateTime(dateDebutEvaluation.seconds.millisecondsLong),
+    DateTime(dateFinEvaluation.seconds.millisecondsLong),
     enseignant,
     estComplete,
     groupe,
@@ -123,8 +125,8 @@ fun ProgrammeEntity.toProgramme() = Programme(
 fun List<ProgrammeEntity>.toProgrammes(): List<Programme> = map { it.toProgramme() }
 
 fun SeanceEntity.toSeance() = Seance(
-        Date(dateDebut),
-        Date(dateFin),
+        DateTime(dateDebut.seconds.millisecondsLong),
+        DateTime(dateFin.seconds.millisecondsLong),
         this.nomActivite,
         this.local,
         this.descriptionActivite,
@@ -137,18 +139,18 @@ fun SeanceEntity.toSeance() = Seance(
 fun List<SeanceEntity>.toSeances(): List<Seance> = map { it.toSeance() }
 
 fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEvaluation(
-        this.sigleCours,
-        this.session,
-        this.note,
-        this.noteSur,
-        this.noteSur100,
-        this.moyenneClasse,
-        this.moyenneClassePourcentage,
-        this.ecartTypeClasse,
-        this.medianeClasse,
-        this.rangCentileClasse,
-        this.noteACeJourElementsIndividuels,
-        this.noteSur100PourElementsIndividuels
+        sigleCours,
+        session,
+        note.zeroIfNullOrBlank(),
+        noteSur.zeroIfNullOrBlank(),
+        noteSur100.zeroIfNullOrBlank(),
+        moyenneClasse.zeroIfNullOrBlank(),
+        moyenneClassePourcentage.zeroIfNullOrBlank(),
+        ecartTypeClasse,
+        medianeClasse,
+        rangCentileClasse,
+        noteACeJourElementsIndividuels,
+        noteSur100PourElementsIndividuels
 )
 
 fun SessionEntity.toSession() = Session(

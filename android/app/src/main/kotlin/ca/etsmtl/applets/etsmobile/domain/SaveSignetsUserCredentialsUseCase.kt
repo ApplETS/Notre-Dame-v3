@@ -1,6 +1,6 @@
 package ca.etsmtl.applets.etsmobile.domain
 
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
 import javax.inject.Inject
 

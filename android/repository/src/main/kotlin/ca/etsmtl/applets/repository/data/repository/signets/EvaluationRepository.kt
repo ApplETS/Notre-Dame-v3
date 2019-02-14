@@ -15,12 +15,11 @@ import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.SommaireElementsEvaluationDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEvaluations
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSommaireEvaluation
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.Evaluation
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
-import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
+import model.Cours
+import model.SignetsUserCredentials
+import model.SommaireElementsEvaluation
+import model.SommaireEtEvaluations
 import javax.inject.Inject
 
 /**

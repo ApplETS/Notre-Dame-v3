@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="85dp"
-    android:layout_height="85dp"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
     android:layout_marginStart="10dp"
     android:layout_marginTop="20dp"
-    android:layout_marginEnd="10dp"
     android:layout_marginBottom="8dp"
     android:stateListAnimator="@animator/selector_elevation_card_item">
 
@@ -17,7 +16,7 @@
         <TextView
             android:id="@+id/tvCourseSigle"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="24dp"
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:textColor="@android:color/white"

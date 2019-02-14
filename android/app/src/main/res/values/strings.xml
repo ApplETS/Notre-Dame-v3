@@ -116,4 +116,37 @@
         <item>Rarement</item>
     </string-array>
     <string name="buglife_steps_to_reproduce">Étapes pour reproduire</string>
+
+
+    <!-- Security -->
+    <string-array name="security_type">
+        <item>Appel à la bombe</item>
+        <item>Colis suspect</item>
+        <item>Évacuation</item>
+        <item>Fuite de gaz</item>
+        <item>Incendie</item>
+        <item>Panne d\'ascenseur</item>
+        <item>Panne électrique</item>
+        <item>Personne armée</item>
+        <item>Tremblement de terre</item>
+        <item>Urgence médicale</item>
+    </string-array>
+
+    <string name="bomb_threat">file:///android_asset/bomb_threat_detail_fr.html</string>
+    <string name="suspicious_packages">file:///android_asset/suspicious_packages_detail_fr.html</string>
+    <string name="evacuation">file:///android_asset/evacuation_detail_fr.html</string>
+    <string name="gas_leak">file:///android_asset/gas_leak_detail_fr.html</string>
+    <string name="fire">file:///android_asset/fire_detail_fr.html</string>
+    <string name="broken_elevator">file:///android_asset/broken_elevator_detail_fr.html</string>
+    <string name="electrical_outage">file:///android_asset/electrical_outage_detail_fr.html</string>
+    <string name="armed_person">file:///android_asset/armed_person_detail_fr.html</string>
+    <string name="earthquake">file:///android_asset/earthquake_detail_fr.html</string>
+    <string name="medical_emergency">file:///android_asset/medical_emergency_detail_fr.html</string>
+    <string name="emergency_call">Appel d\'urgence</string>
+    <string name="reach_security">Joindre la sécurité</string>
+    <string name="emergency_number">514 396–8900</string>
+    <string name="emergency_intern_call">À l\'interne</string>
+    <string name="emergency_intern_number">55</string>
+    <string name="emergency_procedures">Procédures d\'urgence</string>
+    <string name="security_station">Poste de sécurité</string>
 </resources>

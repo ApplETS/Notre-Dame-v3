@@ -1,9 +1,8 @@
 package ca.etsmtl.applets.repository.di
 
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
+import model.SignetsUserCredentials
 
 /**
  * Created by Sonphil on 30-12-18.
@@ -11,7 +10,6 @@ import javax.inject.Singleton
 
 @Module
 class UserModule {
-    @Singleton
     @Provides
-    fun provideSignetsUserCredentials(): SignetsUserCredentials = SignetsUserCredentials.INSTANCE.get()
+    fun provideSignetsUserCredentials(): SignetsUserCredentials = SignetsUserCredentials.INSTANCE!!
 }

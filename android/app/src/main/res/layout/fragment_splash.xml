@@ -6,13 +6,6 @@
     android:theme="@style/LoginTheme"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.splash.SplashFragment">
 
-    <ImageView
-        android:id="@+id/iVBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/bg_ets_red" />
-
     <ProgressBar
         android:id="@+id/progressBarSplash"
         style="?android:attr/progressBarStyleLarge"
