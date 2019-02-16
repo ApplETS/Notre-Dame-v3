@@ -4,19 +4,69 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleInnerListAdapter
+import ca.etsmtl.applets.etsmobile.util.EventObserver
+import com.shopify.livedataktx.observe
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_today_schedule_card.*
+import javax.inject.Inject
 
 /**
  * Created by Sonphil on 24-01-19.
  */
 
-class TodayScheduleCardFragment : Fragment() {
+class TodayScheduleCardFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val adapter: ScheduleInnerListAdapter = ScheduleInnerListAdapter()
+    private val todayScheduleCardViewModel: TodayScheduleCardViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(TodayScheduleCardViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_today_schedule_card, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setUpRecyclerView()
+        subscribeUI()
+    }
+
+    private fun setUpRecyclerView() {
+        todayRecyclerview.adapter = adapter
+        todayRecyclerview.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    }
+
+    private fun subscribeUI() {
+        todayScheduleCardViewModel.seances.observe(this) {
+            it?.takeIf { it.isNotEmpty() }?.let { seances ->
+                adapter.items = seances
+            }
+        }
+
+        todayScheduleCardViewModel.showEmptyView.observe(this) {
+            it?.let {
+                todayRecyclerview.isVisible = !it
+                emptyViewToday.isVisible = it
+            }
+        }
+
+        todayScheduleCardViewModel.errorMessage.observe(this, EventObserver {
+            it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+        })
+    }
 
     companion object {
         val TAG = "TodayScheduleCardFragment"

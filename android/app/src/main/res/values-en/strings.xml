@@ -159,5 +159,6 @@
     <string name="emergency_intern_number">55</string>
     <string name="emergency_procedures">Emergency procedures</string>
     <string name="security_station">Security station</string>
+    <string name="msg_no_seances_today">No class scheduled today</string>
 
 </resources>
