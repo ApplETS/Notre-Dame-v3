@@ -21,7 +21,7 @@ internal object DbModule {
         @Provides
         @Singleton
         fun provideEtsMobileDb(context: Context): EtsMobileDb {
-            Db.setupDb(AndroidSqliteDriver(EtsMobileDb.Schema, context, "etsmobile.shated.db"))
+            Db.setupDb(AndroidSqliteDriver(EtsMobileDb.Schema, context, "etsmobile.shared.db"))
 
             return Db.instance
         }
