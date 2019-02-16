@@ -45,7 +45,7 @@ class FetchCurrentSessionSeancesUseCase @Inject constructor(
                                 mediatorLiveData.value = Resource.loading(seances)
                             Resource.Status.ERROR ->
                                 mediatorLiveData.value =
-                                    Resource.error(app.getString(R.string.error), seances)
+                                    Resource.error(it.message ?: app.getString(R.string.error), seances)
                             Resource.Status.SUCCESS -> {
                                 if (seances == null) {
                                     mediatorLiveData.value =
