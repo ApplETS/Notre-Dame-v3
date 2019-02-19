@@ -49,9 +49,7 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:scrollbars="none"
-            android:visibility="gone"
-            tools:listitem="@layout/sub_item_schedule"
-            tools:visibility="visible" />
+            tools:listitem="@layout/sub_item_schedule" />
     </FrameLayout>
 
     <ProgressBar
