@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:background="@android:color/white"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/title_schedule"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
-        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="120dp"
@@ -27,29 +28,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
-
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/emptyViewToday"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/msg_no_seances_today"
                 android:textAlignment="center" />
-        </LinearLayout>
+        </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/todayRecyclerview"
+            android:id="@+id/rvToday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:scrollbars="none"
             android:visibility="gone"
-            tools:listitem="@layout/sub_item_schedule" />
+            tools:listitem="@layout/sub_item_schedule"
+            tools:visibility="visible" />
     </FrameLayout>
 
     <ProgressBar

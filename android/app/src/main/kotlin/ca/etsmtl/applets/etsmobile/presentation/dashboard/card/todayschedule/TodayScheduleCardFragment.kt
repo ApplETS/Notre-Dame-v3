@@ -18,7 +18,7 @@ import com.shopify.livedataktx.observe
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_today_schedule_card.emptyViewToday
 import kotlinx.android.synthetic.main.fragment_today_schedule_card.progressBarTodaySchedule
-import kotlinx.android.synthetic.main.fragment_today_schedule_card.todayRecyclerview
+import kotlinx.android.synthetic.main.fragment_today_schedule_card.rvToday
 import javax.inject.Inject
 
 /**
@@ -48,8 +48,12 @@ class TodayScheduleCardFragment : DaggerFragment() {
     }
 
     private fun setUpRecyclerView() {
-        todayRecyclerview.adapter = adapter
-        todayRecyclerview.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        rvToday.adapter = adapter
+        rvToday.layoutManager = LinearLayoutManager(
+            context,
+            RecyclerView.VERTICAL,
+            false
+        )
     }
 
     private fun subscribeUI() {
@@ -61,7 +65,7 @@ class TodayScheduleCardFragment : DaggerFragment() {
 
         todayScheduleCardViewModel.showEmptyView.observe(this) {
             it?.let {
-                todayRecyclerview.isVisible = !it
+                rvToday.isVisible = !it
                 emptyViewToday.isVisible = it
             }
         }
