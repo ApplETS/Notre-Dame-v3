@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,9 @@ import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleInnerListAdapte
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.shopify.livedataktx.observe
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_today_schedule_card.*
+import kotlinx.android.synthetic.main.fragment_today_schedule_card.emptyViewToday
+import kotlinx.android.synthetic.main.fragment_today_schedule_card.progressBarTodaySchedule
+import kotlinx.android.synthetic.main.fragment_today_schedule_card.todayRecyclerview
 import javax.inject.Inject
 
 /**
@@ -65,6 +68,10 @@ class TodayScheduleCardFragment : DaggerFragment() {
 
         todayScheduleCardViewModel.errorMessage.observe(this, EventObserver {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+        })
+
+        todayScheduleCardViewModel.loading.observe(this, Observer { visible ->
+            progressBarTodaySchedule.isVisible = visible
         })
     }
 

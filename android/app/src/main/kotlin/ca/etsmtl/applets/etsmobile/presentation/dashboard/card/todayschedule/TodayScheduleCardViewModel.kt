@@ -16,7 +16,7 @@ import javax.inject.Inject
 Created by mykaelll87 on 15/02/19
  */
 class TodayScheduleCardViewModel @Inject constructor(
-    private val fetchTodaySeancesUseCase: FetchTodaySeancesUseCase,
+    fetchTodaySeancesUseCase: FetchTodaySeancesUseCase,
     private val app: App
 ) : ViewModel() {
     private var seancesRes = fetchTodaySeancesUseCase()
@@ -31,10 +31,10 @@ class TodayScheduleCardViewModel @Inject constructor(
     val seances = seancesRes.nonNull().map {
         it.data
     }
-//
-//    val loading: LiveData<Boolean> = seancesRes.map {
-//        it==null|| it.status == Resource.Status.LOADING
-//    }
+
+    val loading: LiveData<Boolean> = seancesRes.map {
+        it == null || it.status == Resource.Status.LOADING
+    }
 
     val showEmptyView: LiveData<Boolean> = seancesRes.nonNull().map {
         it.status != Resource.Status.LOADING && (it.data == null || it.data?.isEmpty() == true)
