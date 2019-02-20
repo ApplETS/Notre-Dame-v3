@@ -36,6 +36,8 @@ kotlin {
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
                 implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
                 implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-alpha02"
+                implementation "io.ktor:ktor-client-core:$versions.ktor"
+                implementation "io.ktor:ktor-client-json:$versions.ktor"
             }
         }
 
@@ -47,14 +49,19 @@ kotlin {
                 api "com.squareup.sqldelight:android-driver:$versions.sqldelight"
                 api "com.squareup.sqldelight:android-paging-extensions:$versions.sqldelight"
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+                implementation "io.ktor:ktor-client-android:$versions.ktor"
+                implementation "io.ktor:ktor-client-json-jvm:$versions.ktor"
             }
         }
+
         iOSMain {
             dependsOn commonMain
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$versions.kotlinx_serialization"
                 api "com.squareup.sqldelight:ios-driver:$versions.sqldelight"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$versions.coroutines"
+                implementation "io.ktor:ktor-client-ios:$versions.ktor"
+                implementation "io.ktor:ktor-client-json-ios:$versions.ktor"
             }
         }
     }
