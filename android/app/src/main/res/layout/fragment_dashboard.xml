@@ -1,12 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootDashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCards"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/title_dashboard" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/design_bottom_navigation_height"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:ignore="PrivateResource"
+        tools:listitem="@layout/item_dashboard_card" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

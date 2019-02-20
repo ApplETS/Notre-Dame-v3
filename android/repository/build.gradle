@@ -39,54 +39,54 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Architecture components
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
-    api "androidx.room:room-runtime:$room"
-    kapt "androidx.room:room-compiler:$room"
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+    api "androidx.room:room-runtime:$versions.room"
+    kapt "androidx.room:room-compiler:$versions.room"
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin_version"
 
     // Dependencies for local unit tests
-    testImplementation "junit:junit:${junit}"
-    testImplementation "androidx.room:room-testing:$room"
-    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testImplementation "androidx.arch.core:core-testing:$lifecycle"
-    testImplementation "org.mockito:mockito-core:$mockito"
-    testImplementation "org.mockito:mockito-inline:$mockito"
-    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "androidx.room:room-testing:$versions.room"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$versions.kotlin"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+    testImplementation "androidx.arch.core:core-testing:$versions.lifecycle"
+    testImplementation "org.mockito:mockito-core:$versions.mockito"
+    testImplementation "org.mockito:mockito-inline:$versions.mockito"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okhttp"
 
     // Android Testing Support Library's runner and rules
-    androidTestImplementation "androidx.test:runner:$test"
-    androidTestImplementation "androidx.test:rules:$test"
-    androidTestImplementation "androidx.room:room-testing:$room"
-    androidTestImplementation "androidx.arch.core:core-testing:$lifecycle"
+    androidTestImplementation "androidx.test:runner:$versions.test"
+    androidTestImplementation "androidx.test:rules:$versions.test"
+    androidTestImplementation "androidx.room:room-testing:$versions.room"
+    androidTestImplementation "androidx.arch.core:core-testing:$versions.lifecycle"
 
     // Dagger
-    implementation "com.google.dagger:dagger:$dagger"
-    implementation "com.google.dagger:dagger-android:$dagger"
-    implementation "com.google.dagger:dagger-android-support:$dagger"
-    kapt "com.google.dagger:dagger-compiler:$dagger"
-    kapt "com.google.dagger:dagger-android-processor:$dagger"
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
     // Moshi
-    implementation "com.squareup.moshi:moshi:$moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$moshi"
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi"
+    implementation "com.squareup.moshi:moshi:$versions.moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$versions.moshi"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
-    implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 
     // Mockito-Kotlin
-    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin"
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$versions.mockito_kotlin"
 
     // Chuck
-    debugImplementation "com.readystatesoftware.chuck:library:$chuck"
-    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck"
+    debugImplementation "com.readystatesoftware.chuck:library:$versions.chuck"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$versions.chuck"
 
     // livedata-ktx
     api "com.shopify:livedata-ktx:2.0.1"
