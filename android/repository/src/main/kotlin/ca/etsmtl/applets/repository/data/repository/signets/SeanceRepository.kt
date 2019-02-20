@@ -11,7 +11,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.SeanceDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSeances
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import ca.etsmtl.applets.repository.util.unixToDefaultSignetsDate
 import model.Cours
 import model.Seance

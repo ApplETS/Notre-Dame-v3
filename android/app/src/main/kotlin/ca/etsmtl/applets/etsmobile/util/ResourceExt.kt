@@ -2,7 +2,7 @@ package ca.etsmtl.applets.etsmobile.util
 
 import android.content.Context
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 
 /**
  * Created by Sonphil on 03-11-18.

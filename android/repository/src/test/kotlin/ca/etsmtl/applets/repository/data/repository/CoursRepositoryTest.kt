@@ -13,7 +13,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toCours
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import ca.etsmtl.applets.repository.util.ApiUtil

@@ -21,7 +21,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ca.etsmtl.applets.repository.data.api.ApiResponse
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import ca.etsmtl.applets.repository.util.ApiUtil
 import ca.etsmtl.applets.repository.util.CountingAppExecutors
 import ca.etsmtl.applets.repository.util.InstantAppExecutors

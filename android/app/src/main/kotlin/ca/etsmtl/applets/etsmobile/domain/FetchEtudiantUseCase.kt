@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.lifecycle.LiveData
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
 import model.Etudiant
 import model.SignetsUserCredentials

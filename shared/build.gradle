@@ -30,7 +30,7 @@ kotlin {
         commonMain {
             dependencies {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-common'
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlinx_serialization"
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlinx_serialization"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.coroutines"
                 api "com.soywiz:klock:$versions.klock"
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"

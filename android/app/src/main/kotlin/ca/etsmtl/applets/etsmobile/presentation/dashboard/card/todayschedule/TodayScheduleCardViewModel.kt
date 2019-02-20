@@ -7,7 +7,7 @@ import ca.etsmtl.applets.etsmobile.domain.FetchTodaySeancesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import javax.inject.Inject

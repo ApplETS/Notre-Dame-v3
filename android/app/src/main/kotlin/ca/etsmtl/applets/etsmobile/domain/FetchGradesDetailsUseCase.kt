@@ -6,7 +6,7 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationCoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import model.Cours
