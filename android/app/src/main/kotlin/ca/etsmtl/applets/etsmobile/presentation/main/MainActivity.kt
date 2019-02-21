@@ -12,6 +12,7 @@ import ca.etsmtl.applets.etsmobile.util.getColorCompat
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.coroutines.Dispatchers
 
 /**
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
@@ -34,6 +35,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setTheme(R.style.AppTheme)
+        Dispatchers.IO
 
         setContentView(R.layout.activity_main)
 

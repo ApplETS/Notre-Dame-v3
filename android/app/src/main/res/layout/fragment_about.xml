@@ -57,7 +57,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvInfo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
@@ -82,7 +82,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/btnGithub"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btnGithub"
@@ -96,7 +96,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/btnWebsite"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btnFacebook"
@@ -109,7 +109,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/btnTwitter"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/btnGithub"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btnTwitter"
@@ -123,7 +123,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/btnYoutube"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/btnFacebook"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btnYoutube"
@@ -137,7 +137,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/btnTwitter"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </LinearLayout>

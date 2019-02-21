@@ -44,7 +44,24 @@
         android:id="@+id/fragmentEts"
         android:name="ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment"
         android:label="@string/title_ets"
-        tools:layout="@layout/fragment_ets" />
+        tools:layout="@layout/fragment_ets" >
+        <action
+            android:id="@+id/action_navigation_ets_to_securityFragment"
+            app:destination="@id/securityFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityFragment"
+        android:label="@string/title_security"
+        tools:layout="@layout/fragment_security" >
+        <action
+            android:id="@+id/action_securityFragment_to_securityDetailFragment"
+            app:destination="@id/securityDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentMore"
         android:name="ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment"
@@ -63,5 +80,14 @@
         tools:layout="@layout/fragment_about" />
     <activity
         android:id="@+id/activityOpenSourceLicenses"
-        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
+    </activity>
+    <fragment
+        android:id="@+id/securityDetailFragment"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityDetailFragment"
+        android:label="{securityTitle}" >
+        <argument
+            android:name="securityTitle"
+            app:argType="string" />
+    </fragment>
 </navigation>
