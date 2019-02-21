@@ -403,8 +403,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25553FCB20545D42009897F7 /* Build configuration list for PBXNativeTarget "ETSMobile" */;
 			buildPhases = (
-				2D7C32B011916B225BBB6870 /* [CP] Check Pods Manifest.lock */,
 				C8EBC605221EF5620049BCB2 /* Prepare NotreDame Framework */,
+				2D7C32B011916B225BBB6870 /* [CP] Check Pods Manifest.lock */,
 				25553F9D20545D42009897F7 /* Sources */,
 				25553F9E20545D42009897F7 /* Frameworks */,
 				25553F9F20545D42009897F7 /* Resources */,
