@@ -15,6 +15,7 @@ kotlin {
 
         fromPreset(iOSTarget, 'iOS') {
             compilations.main.outputKinds('FRAMEWORK')
+            compilations.main.extraOpts '-output', 'NotreDame'
         }
 
         fromPreset(presets.android, 'android')
