@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 
-@class NotreDameActivite, NotreDameCours, NotreDameEnseignant, NotreDameEtudiant, NotreDameEvaluation, NotreDameEvaluationCours, NotreDameHoraireExamenFinal, NotreDameJourRemplace, NotreDameProgramme, NotreDameSeance, NotreDameSession, NotreDameSignetsUserCredentials, NotreDameUniversalCode, NotreDameSignetsUserCredentialsCompanion, NotreDameSommaireElementsEvaluation, NotreDameSommaireEtEvaluations, NotreDameUniversalCodeError, NotreDameKotlinEnum, NotreDameKotlinNumber;
+@class NotreDameDashboardViewModel, NotreDameViewModel, NotreDameDashboardCardsUseCase, NotreDameDashboardCardRepository, NotreDameDashboardCardQueries, NotreDameDashboardCard, NotreDameDb, NotreDameEtsMobileDb, NotreDameEtsMobileDispatchers, NotreDameKotlinx_coroutines_core_nativeCoroutineDispatcher, NotreDameActivite, NotreDameCours, NotreDameDashboardCardType, NotreDameKotlinEnum, NotreDameEnseignant, NotreDameEtudiant, NotreDameEvaluation, NotreDameEvaluationCours, NotreDameHoraireExamenFinal, NotreDameJourRemplace, NotreDameProgramme, NotreDameSeance, NotreDameSession, NotreDameSignetsUserCredentials, NotreDameUniversalCode, NotreDameSignetsUserCredentialsCompanion, NotreDameSommaireElementsEvaluation, NotreDameSommaireEtEvaluations, NotreDameUniversalCodeError, NotreDameDashboardCardEntityAdapter, NotreDameDashboardCardEntityImpl, NotreDameSqldelight_runtimeTransacter, NotreDameSqldelight_runtimeQuery, NotreDameKotlinUnit, NotreDameSqldelight_runtimeTransacterTransaction, NotreDameEtsMobileDbSchema, NotreDameKotlinNumber, NotreDameKotlinThrowable, NotreDameKotlinx_coroutines_core_nativeCancellationException, NotreDameKotlinAbstractCoroutineContextElement, NotreDameKotlinByteArray, NotreDameKotlinArray, NotreDameKotlinIllegalStateException, NotreDameKotlinRuntimeException, NotreDameKotlinException, NotreDameKotlinByteIterator, NotreDameKotlinx_coroutines_core_nativeAtomicDesc, NotreDameKotlinx_coroutines_core_nativeAtomicOp, NotreDameKotlinx_coroutines_core_nativeOpDescriptor;
 
-@protocol NotreDameAndroidParcel, NotreDameKotlinComparable;
+@protocol NotreDameKotlinx_coroutines_core_nativeCoroutineScope, NotreDameKotlinx_coroutines_core_nativeJob, NotreDameKotlinx_coroutines_core_nativeChannel, NotreDameKotlinx_coroutines_core_nativeReceiveChannel, NotreDameSqldelight_runtimeSqlDriver, NotreDameAndroidParcel, NotreDameKotlinComparable, NotreDameDashboardCardEntity, NotreDameSqldelight_runtimeColumnAdapter, NotreDameSqldelight_runtimeSqlDriverSchema, NotreDameSqldelight_runtimeSqlCursor, NotreDameSqldelight_runtimeQueryListener, NotreDameKotlinCoroutineContext, NotreDameKotlinx_coroutines_core_nativeChildHandle, NotreDameKotlinx_coroutines_core_nativeChildJob, NotreDameKotlinx_coroutines_core_nativeDisposableHandle, NotreDameKotlinSequence, NotreDameKotlinx_coroutines_core_nativeSelectClause0, NotreDameKotlinCoroutineContextElement, NotreDameKotlinCoroutineContextKey, NotreDameKotlinx_coroutines_core_nativeSendChannel, NotreDameKotlinx_coroutines_core_nativeSelectClause2, NotreDameKotlinx_coroutines_core_nativeChannelIterator, NotreDameKotlinx_coroutines_core_nativeSelectClause1, NotreDameSqldelight_runtimeSqlPreparedStatement, NotreDameSqldelight_runtimeCloseable, NotreDameKotlinContinuationInterceptor, NotreDameKotlinContinuation, NotreDameKotlinx_coroutines_core_nativeRunnable, NotreDameKotlinx_coroutines_core_nativeParentJob, NotreDameKotlinIterator, NotreDameKotlinx_coroutines_core_nativeSelectInstance, NotreDameKotlinSuspendFunction0, NotreDameKotlinSuspendFunction1, NotreDameKotlinSuspendFunction;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -141,6 +141,69 @@ __attribute__((swift_name("KotlinBoolean")))
 + (instancetype)numberWithBool:(BOOL)value;
 @end;
 
+__attribute__((swift_name("ViewModel")))
+@interface NotreDameViewModel : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property (readonly) id<NotreDameKotlinx_coroutines_core_nativeCoroutineScope> scope;
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardViewModel")))
+@interface NotreDameDashboardViewModel : NotreDameViewModel
+- (instancetype)initWithDashboardCardsUseCase:(NotreDameDashboardCardsUseCase *)dashboardCardsUseCase __attribute__((swift_name("init(dashboardCardsUseCase:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (id<NotreDameKotlinx_coroutines_core_nativeJob>)load __attribute__((swift_name("load()")));
+- (void)onCardMovedFromPosition:(int32_t)fromPosition toPosition:(int32_t)toPosition __attribute__((swift_name("onCardMoved(fromPosition:toPosition:)")));
+- (void)onCardRemovedPosition:(int32_t)position __attribute__((swift_name("onCardRemoved(position:)")));
+- (void)undoLastRemove __attribute__((swift_name("undoLastRemove()")));
+- (void)save __attribute__((swift_name("save()")));
+- (void)restore __attribute__((swift_name("restore()")));
+@property (readonly) id<NotreDameKotlinx_coroutines_core_nativeChannel> cardsChannel;
+@property (readonly) id<NotreDameKotlinx_coroutines_core_nativeChannel> showUndoRemoveChannel;
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardCardRepository")))
+@interface NotreDameDashboardCardRepository : KotlinBase
+- (instancetype)initWithDashboardCardQueries:(NotreDameDashboardCardQueries *)dashboardCardQueries __attribute__((swift_name("init(dashboardCardQueries:)"))) __attribute__((objc_designated_initializer));
+- (id<NotreDameKotlinx_coroutines_core_nativeReceiveChannel>)dashboardCards __attribute__((swift_name("dashboardCards()")));
+- (id<NotreDameKotlinx_coroutines_core_nativeJob>)updateDashboardCardCard:(NotreDameDashboardCard *)card position:(int32_t)position __attribute__((swift_name("updateDashboardCard(card:position:)")));
+- (void)restore __attribute__((swift_name("restore()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Db")))
+@interface NotreDameDb : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)db __attribute__((swift_name("init()")));
+- (void)setupDbDriver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("setupDb(driver:)")));
+@property (readonly) BOOL ready;
+@property (readonly) NotreDameEtsMobileDb *instance;
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardCardsUseCase")))
+@interface NotreDameDashboardCardsUseCase : KotlinBase
+- (instancetype)initWithRepository:(NotreDameDashboardCardRepository *)repository __attribute__((swift_name("init(repository:)"))) __attribute__((objc_designated_initializer));
+- (id<NotreDameKotlinx_coroutines_core_nativeReceiveChannel>)fetch __attribute__((swift_name("fetch()")));
+- (void)saveVisibleCards:(NSArray<NotreDameDashboardCard *> *)visibleCards hiddenCards:(NSArray<NotreDameDashboardCard *> *)hiddenCards __attribute__((swift_name("save(visibleCards:hiddenCards:)")));
+- (void)restore __attribute__((swift_name("restore()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("EtsMobileDispatchers")))
+@interface NotreDameEtsMobileDispatchers : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)etsMobileDispatchers __attribute__((swift_name("init()")));
+@property (readonly) NotreDameKotlinx_coroutines_core_nativeCoroutineDispatcher *Default;
+@property (readonly) NotreDameKotlinx_coroutines_core_nativeCoroutineDispatcher *IO;
+@property (readonly) NotreDameKotlinx_coroutines_core_nativeCoroutineDispatcher *Main;
+@end;
+
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Activite")))
 @interface NotreDameActivite : KotlinBase
@@ -197,6 +260,45 @@ __attribute__((swift_name("Cours")))
 @property NSString * _Nullable noteSur100;
 @property int32_t nbCredits;
 @property NSString *titreCours;
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardCard")))
+@interface NotreDameDashboardCard : KotlinBase
+- (instancetype)initWithType:(NotreDameDashboardCardType *)type visible:(BOOL)visible dismissible:(BOOL)dismissible __attribute__((swift_name("init(type:visible:dismissible:)"))) __attribute__((objc_designated_initializer));
+- (NotreDameDashboardCardType *)component1 __attribute__((swift_name("component1()")));
+- (BOOL)component2 __attribute__((swift_name("component2()")));
+- (BOOL)component3 __attribute__((swift_name("component3()")));
+- (NotreDameDashboardCard *)doCopyType:(NotreDameDashboardCardType *)type visible:(BOOL)visible dismissible:(BOOL)dismissible __attribute__((swift_name("doCopy(type:visible:dismissible:)")));
+@property (readonly) NotreDameDashboardCardType *type;
+@property BOOL visible;
+@property (readonly) BOOL dismissible;
+@end;
+
+__attribute__((swift_name("KotlinComparable")))
+@protocol NotreDameKotlinComparable
+@required
+- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
+@end;
+
+__attribute__((swift_name("KotlinEnum")))
+@interface NotreDameKotlinEnum : KotlinBase <NotreDameKotlinComparable>
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
+- (int32_t)compareToOther:(NotreDameKotlinEnum *)other __attribute__((swift_name("compareTo(other:)")));
+@property (readonly) NSString *name;
+@property (readonly) int32_t ordinal;
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardCard.Type")))
+@interface NotreDameDashboardCardType : NotreDameKotlinEnum
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+@property (class, readonly) NotreDameDashboardCardType *dashboardCardApplets;
+@property (class, readonly) NotreDameDashboardCardType *dashboardCardTodaySchedule;
+@property (class, readonly) NotreDameDashboardCardType *dashboardCardGrades;
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (int32_t)compareToOther:(NotreDameDashboardCardType *)other __attribute__((swift_name("compareTo(other:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -500,20 +602,6 @@ __attribute__((swift_name("UniversalCode")))
 @property (readonly) NSString *value;
 @end;
 
-__attribute__((swift_name("KotlinComparable")))
-@protocol NotreDameKotlinComparable
-@required
-- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
-@end;
-
-__attribute__((swift_name("KotlinEnum")))
-@interface NotreDameKotlinEnum : KotlinBase <NotreDameKotlinComparable>
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
-- (int32_t)compareToOther:(NotreDameKotlinEnum *)other __attribute__((swift_name("compareTo(other:)")));
-@property (readonly) NSString *name;
-@property (readonly) int32_t ordinal;
-@end;
-
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("UniversalCode.Error")))
 @interface NotreDameUniversalCodeError : NotreDameKotlinEnum
@@ -523,6 +611,76 @@ __attribute__((swift_name("UniversalCode.Error")))
 @property (class, readonly) NotreDameUniversalCodeError *invalid;
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 - (int32_t)compareToOther:(NotreDameUniversalCodeError *)other __attribute__((swift_name("compareTo(other:)")));
+@end;
+
+__attribute__((swift_name("DashboardCardEntity")))
+@protocol NotreDameDashboardCardEntity
+@required
+@property (readonly) NotreDameDashboardCardType *type;
+@property (readonly) int64_t pos;
+@property (readonly) BOOL visible;
+@property (readonly) BOOL dismissible;
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardCardEntityAdapter")))
+@interface NotreDameDashboardCardEntityAdapter : KotlinBase
+- (instancetype)initWithTypeAdapter:(id<NotreDameSqldelight_runtimeColumnAdapter>)typeAdapter __attribute__((swift_name("init(typeAdapter:)"))) __attribute__((objc_designated_initializer));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardCardEntityImpl")))
+@interface NotreDameDashboardCardEntityImpl : KotlinBase <NotreDameDashboardCardEntity>
+- (instancetype)initWithType:(NotreDameDashboardCardType *)type pos:(int64_t)pos visible:(BOOL)visible dismissible:(BOOL)dismissible __attribute__((swift_name("init(type:pos:visible:dismissible:)"))) __attribute__((objc_designated_initializer));
+- (NotreDameDashboardCardType *)component1 __attribute__((swift_name("component1()")));
+- (int64_t)component2 __attribute__((swift_name("component2()")));
+- (BOOL)component3 __attribute__((swift_name("component3()")));
+- (BOOL)component4 __attribute__((swift_name("component4()")));
+- (NotreDameDashboardCardEntityImpl *)doCopyType:(NotreDameDashboardCardType *)type pos:(int64_t)pos visible:(BOOL)visible dismissible:(BOOL)dismissible __attribute__((swift_name("doCopy(type:pos:visible:dismissible:)")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeTransacter")))
+@interface NotreDameSqldelight_runtimeTransacter : KotlinBase
+- (instancetype)initWithDriver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("init(driver:)"))) __attribute__((objc_designated_initializer));
+- (NSString *)createArgumentsCount:(int32_t)count offset:(int32_t)offset __attribute__((swift_name("createArguments(count:offset:)")));
+- (void)notifyQueriesQueryList:(NSArray<NotreDameSqldelight_runtimeQuery *> *)queryList __attribute__((swift_name("notifyQueries(queryList:)")));
+- (void)transactionNoEnclosing:(BOOL)noEnclosing body:(NotreDameKotlinUnit *(^)(NotreDameSqldelight_runtimeTransacterTransaction *))body __attribute__((swift_name("transaction(noEnclosing:body:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("DashboardCardQueries")))
+@interface NotreDameDashboardCardQueries : NotreDameSqldelight_runtimeTransacter
+- (instancetype)initWithDatabase:(NotreDameEtsMobileDb *)database driver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("init(database:driver:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithDriver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("init(driver:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (NotreDameSqldelight_runtimeQuery *)selectAllMapper:(id (^)(NotreDameDashboardCardType *, NotreDameLong *, NotreDameBoolean *, NotreDameBoolean *))mapper __attribute__((swift_name("selectAll(mapper:)")));
+- (NotreDameSqldelight_runtimeQuery *)selectAll __attribute__((swift_name("selectAll()")));
+- (void)insertInitialCards __attribute__((swift_name("insertInitialCards()")));
+- (void)updateCardPos:(int64_t)pos visible:(BOOL)visible type:(NotreDameDashboardCardType *)type __attribute__((swift_name("updateCard(pos:visible:type:)")));
+- (void)deleteAll __attribute__((swift_name("deleteAll()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("EtsMobileDb")))
+@interface NotreDameEtsMobileDb : NotreDameSqldelight_runtimeTransacter
+- (instancetype)initWithDriver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver dashboardCardEntityAdapter:(NotreDameDashboardCardEntityAdapter *)dashboardCardEntityAdapter __attribute__((swift_name("init(driver:dashboardCardEntityAdapter:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithDriver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("init(driver:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (readonly) NotreDameDashboardCardQueries *dashboardCardQueries;
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeSqlDriverSchema")))
+@protocol NotreDameSqldelight_runtimeSqlDriverSchema
+@required
+- (void)createDriver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("create(driver:)")));
+- (void)migrateDriver:(id<NotreDameSqldelight_runtimeSqlDriver>)driver oldVersion:(int32_t)oldVersion newVersion:(int32_t)newVersion __attribute__((swift_name("migrate(driver:oldVersion:newVersion:)")));
+@property (readonly) int32_t version;
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("EtsMobileDb.Schema")))
+@interface NotreDameEtsMobileDbSchema : KotlinBase <NotreDameSqldelight_runtimeSqlDriverSchema>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)schema __attribute__((swift_name("init()")));
 @end;
 
 __attribute__((swift_name("KotlinNumber")))
@@ -541,6 +699,395 @@ __attribute__((swift_name("KotlinNumber")))
 @interface NotreDameKotlinNumber (Extensions)
 - (NSString *)formatFractionDigitsMaximumIntegerDigits:(int32_t)maximumIntegerDigits __attribute__((swift_name("formatFractionDigits(maximumIntegerDigits:)")));
 - (NSString *)formatSingleFractionDigits __attribute__((swift_name("formatSingleFractionDigits()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeQuery")))
+@interface NotreDameSqldelight_runtimeQuery : KotlinBase
+- (instancetype)initWithQueries:(NSMutableArray<NotreDameSqldelight_runtimeQuery *> *)queries mapper:(id (^)(id<NotreDameSqldelight_runtimeSqlCursor>))mapper __attribute__((swift_name("init(queries:mapper:)"))) __attribute__((objc_designated_initializer));
+- (void)addListenerListener:(id<NotreDameSqldelight_runtimeQueryListener>)listener __attribute__((swift_name("addListener(listener:)")));
+- (id<NotreDameSqldelight_runtimeSqlCursor>)execute __attribute__((swift_name("execute()")));
+- (NSArray<id> *)executeAsList __attribute__((swift_name("executeAsList()")));
+- (id)executeAsOne __attribute__((swift_name("executeAsOne()")));
+- (id _Nullable)executeAsOneOrNull __attribute__((swift_name("executeAsOneOrNull()")));
+- (void)notifyDataChanged __attribute__((swift_name("notifyDataChanged()")));
+- (void)removeListenerListener:(id<NotreDameSqldelight_runtimeQueryListener>)listener __attribute__((swift_name("removeListener(listener:)")));
+@property (readonly) id (^mapper)(id<NotreDameSqldelight_runtimeSqlCursor>);
+@end;
+
+@interface NotreDameSqldelight_runtimeQuery (Extensions)
+- (id<NotreDameKotlinx_coroutines_core_nativeReceiveChannel>)asChannel __attribute__((swift_name("asChannel()")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeCoroutineScope")))
+@protocol NotreDameKotlinx_coroutines_core_nativeCoroutineScope
+@required
+@property (readonly) id<NotreDameKotlinCoroutineContext> coroutineContext;
+@end;
+
+__attribute__((swift_name("KotlinCoroutineContext")))
+@protocol NotreDameKotlinCoroutineContext
+@required
+- (id _Nullable)foldInitial:(id _Nullable)initial operation:(id _Nullable (^)(id _Nullable, id<NotreDameKotlinCoroutineContextElement>))operation __attribute__((swift_name("fold(initial:operation:)")));
+- (id<NotreDameKotlinCoroutineContextElement> _Nullable)getKey:(id<NotreDameKotlinCoroutineContextKey>)key __attribute__((swift_name("get(key:)")));
+- (id<NotreDameKotlinCoroutineContext>)minusKeyKey:(id<NotreDameKotlinCoroutineContextKey>)key __attribute__((swift_name("minusKey(key:)")));
+- (id<NotreDameKotlinCoroutineContext>)plusContext:(id<NotreDameKotlinCoroutineContext>)context __attribute__((swift_name("plus(context:)")));
+@end;
+
+__attribute__((swift_name("KotlinCoroutineContextElement")))
+@protocol NotreDameKotlinCoroutineContextElement <NotreDameKotlinCoroutineContext>
+@required
+@property (readonly) id<NotreDameKotlinCoroutineContextKey> key;
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeJob")))
+@protocol NotreDameKotlinx_coroutines_core_nativeJob <NotreDameKotlinCoroutineContextElement>
+@required
+- (id<NotreDameKotlinx_coroutines_core_nativeChildHandle>)attachChildChild:(id<NotreDameKotlinx_coroutines_core_nativeChildJob>)child __attribute__((swift_name("attachChild(child:)")));
+- (void)cancel __attribute__((swift_name("cancel()")));
+- (BOOL)cancelCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("cancel(cause:)")));
+- (BOOL)cancel0 __attribute__((swift_name("cancel0()")));
+- (NotreDameKotlinx_coroutines_core_nativeCancellationException *)getCancellationException __attribute__((swift_name("getCancellationException()")));
+- (id<NotreDameKotlinx_coroutines_core_nativeDisposableHandle>)invokeOnCompletionOnCancelling:(BOOL)onCancelling invokeImmediately:(BOOL)invokeImmediately handler:(NotreDameKotlinUnit *(^)(NotreDameKotlinThrowable * _Nullable))handler __attribute__((swift_name("invokeOnCompletion(onCancelling:invokeImmediately:handler:)")));
+- (id<NotreDameKotlinx_coroutines_core_nativeDisposableHandle>)invokeOnCompletionHandler:(NotreDameKotlinUnit *(^)(NotreDameKotlinThrowable * _Nullable))handler __attribute__((swift_name("invokeOnCompletion(handler:)")));
+- (id<NotreDameKotlinx_coroutines_core_nativeJob>)plusOther:(id<NotreDameKotlinx_coroutines_core_nativeJob>)other __attribute__((swift_name("plus(other:)")));
+- (BOOL)start __attribute__((swift_name("start()")));
+@property (readonly) id<NotreDameKotlinSequence> children;
+@property (readonly) BOOL isActive;
+@property (readonly) BOOL isCancelled;
+@property (readonly) BOOL isCompleted;
+@property (readonly) id<NotreDameKotlinx_coroutines_core_nativeSelectClause0> onJoin;
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeSendChannel")))
+@protocol NotreDameKotlinx_coroutines_core_nativeSendChannel
+@required
+- (BOOL)closeCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("close(cause:)")));
+- (void)invokeOnCloseHandler:(NotreDameKotlinUnit *(^)(NotreDameKotlinThrowable * _Nullable))handler __attribute__((swift_name("invokeOnClose(handler:)")));
+- (BOOL)offerElement:(id _Nullable)element __attribute__((swift_name("offer(element:)")));
+@property (readonly) BOOL isClosedForSend;
+@property (readonly) BOOL isFull;
+@property (readonly) id<NotreDameKotlinx_coroutines_core_nativeSelectClause2> onSend;
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeReceiveChannel")))
+@protocol NotreDameKotlinx_coroutines_core_nativeReceiveChannel
+@required
+- (void)cancel __attribute__((swift_name("cancel()")));
+- (BOOL)cancelCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("cancel(cause:)")));
+- (BOOL)cancel0 __attribute__((swift_name("cancel0()")));
+- (id<NotreDameKotlinx_coroutines_core_nativeChannelIterator>)iterator __attribute__((swift_name("iterator()")));
+- (id _Nullable)poll __attribute__((swift_name("poll()")));
+@property (readonly) BOOL isClosedForReceive;
+@property (readonly) BOOL isEmpty;
+@property (readonly) id<NotreDameKotlinx_coroutines_core_nativeSelectClause1> onReceive;
+@property (readonly) id<NotreDameKotlinx_coroutines_core_nativeSelectClause1> onReceiveOrNull;
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeChannel")))
+@protocol NotreDameKotlinx_coroutines_core_nativeChannel <NotreDameKotlinx_coroutines_core_nativeSendChannel, NotreDameKotlinx_coroutines_core_nativeReceiveChannel>
+@required
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeCloseable")))
+@protocol NotreDameSqldelight_runtimeCloseable
+@required
+- (void)close __attribute__((swift_name("close()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeSqlDriver")))
+@protocol NotreDameSqldelight_runtimeSqlDriver <NotreDameSqldelight_runtimeCloseable>
+@required
+- (NotreDameSqldelight_runtimeTransacterTransaction * _Nullable)currentTransaction __attribute__((swift_name("currentTransaction()")));
+- (void)executeIdentifier:(NotreDameInt * _Nullable)identifier sql:(NSString *)sql parameters:(int32_t)parameters binders:(NotreDameKotlinUnit *(^ _Nullable)(id<NotreDameSqldelight_runtimeSqlPreparedStatement>))binders __attribute__((swift_name("execute(identifier:sql:parameters:binders:)")));
+- (id<NotreDameSqldelight_runtimeSqlCursor>)executeQueryIdentifier:(NotreDameInt * _Nullable)identifier sql:(NSString *)sql parameters:(int32_t)parameters binders:(NotreDameKotlinUnit *(^ _Nullable)(id<NotreDameSqldelight_runtimeSqlPreparedStatement>))binders __attribute__((swift_name("executeQuery(identifier:sql:parameters:binders:)")));
+- (NotreDameSqldelight_runtimeTransacterTransaction *)doNewTransaction __attribute__((swift_name("doNewTransaction()")));
+@end;
+
+__attribute__((swift_name("KotlinAbstractCoroutineContextElement")))
+@interface NotreDameKotlinAbstractCoroutineContextElement : KotlinBase <NotreDameKotlinCoroutineContextElement>
+- (instancetype)initWithKey:(id<NotreDameKotlinCoroutineContextKey>)key __attribute__((swift_name("init(key:)"))) __attribute__((objc_designated_initializer));
+@end;
+
+__attribute__((swift_name("KotlinContinuationInterceptor")))
+@protocol NotreDameKotlinContinuationInterceptor <NotreDameKotlinCoroutineContextElement>
+@required
+- (id<NotreDameKotlinContinuation>)interceptContinuationContinuation:(id<NotreDameKotlinContinuation>)continuation __attribute__((swift_name("interceptContinuation(continuation:)")));
+- (void)releaseInterceptedContinuationContinuation:(id<NotreDameKotlinContinuation>)continuation __attribute__((swift_name("releaseInterceptedContinuation(continuation:)")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeCoroutineDispatcher")))
+@interface NotreDameKotlinx_coroutines_core_nativeCoroutineDispatcher : NotreDameKotlinAbstractCoroutineContextElement <NotreDameKotlinContinuationInterceptor>
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithKey:(id<NotreDameKotlinCoroutineContextKey>)key __attribute__((swift_name("init(key:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (void)dispatchContext:(id<NotreDameKotlinCoroutineContext>)context block:(id<NotreDameKotlinx_coroutines_core_nativeRunnable>)block __attribute__((swift_name("dispatch(context:block:)")));
+- (void)dispatchYieldContext:(id<NotreDameKotlinCoroutineContext>)context block:(id<NotreDameKotlinx_coroutines_core_nativeRunnable>)block __attribute__((swift_name("dispatchYield(context:block:)")));
+- (BOOL)isDispatchNeededContext:(id<NotreDameKotlinCoroutineContext>)context __attribute__((swift_name("isDispatchNeeded(context:)")));
+- (NotreDameKotlinx_coroutines_core_nativeCoroutineDispatcher *)plusOther_:(NotreDameKotlinx_coroutines_core_nativeCoroutineDispatcher *)other __attribute__((swift_name("plus(other_:)")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeColumnAdapter")))
+@protocol NotreDameSqldelight_runtimeColumnAdapter
+@required
+- (id)decodeDatabaseValue:(id _Nullable)databaseValue __attribute__((swift_name("decode(databaseValue:)")));
+- (id _Nullable)encodeValue:(id)value __attribute__((swift_name("encode(value:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinUnit")))
+@interface NotreDameKotlinUnit : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)unit __attribute__((swift_name("init()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeTransacter.Transaction")))
+@interface NotreDameSqldelight_runtimeTransacterTransaction : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)afterCommitFunction:(NotreDameKotlinUnit *(^)(void))function __attribute__((swift_name("afterCommit(function:)")));
+- (void)afterRollbackFunction:(NotreDameKotlinUnit *(^)(void))function __attribute__((swift_name("afterRollback(function:)")));
+- (void)endTransactionSuccessful:(BOOL)successful __attribute__((swift_name("endTransaction(successful:)")));
+- (void)rollback __attribute__((swift_name("rollback()")));
+- (void)transactionBody:(NotreDameKotlinUnit *(^)(NotreDameSqldelight_runtimeTransacterTransaction *))body __attribute__((swift_name("transaction(body:)")));
+@property (readonly) NotreDameSqldelight_runtimeTransacterTransaction * _Nullable enclosingTransaction;
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeSqlCursor")))
+@protocol NotreDameSqldelight_runtimeSqlCursor <NotreDameSqldelight_runtimeCloseable>
+@required
+- (NotreDameKotlinByteArray * _Nullable)getBytesIndex:(int32_t)index __attribute__((swift_name("getBytes(index:)")));
+- (NotreDameDouble * _Nullable)getDoubleIndex:(int32_t)index __attribute__((swift_name("getDouble(index:)")));
+- (NotreDameLong * _Nullable)getLongIndex:(int32_t)index __attribute__((swift_name("getLong(index:)")));
+- (NSString * _Nullable)getStringIndex:(int32_t)index __attribute__((swift_name("getString(index:)")));
+- (BOOL)next __attribute__((swift_name("next()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeQueryListener")))
+@protocol NotreDameSqldelight_runtimeQueryListener
+@required
+- (void)queryResultsChanged __attribute__((swift_name("queryResultsChanged()")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeDisposableHandle")))
+@protocol NotreDameKotlinx_coroutines_core_nativeDisposableHandle
+@required
+- (void)dispose __attribute__((swift_name("dispose()")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeChildHandle")))
+@protocol NotreDameKotlinx_coroutines_core_nativeChildHandle <NotreDameKotlinx_coroutines_core_nativeDisposableHandle>
+@required
+- (BOOL)childCancelledCause:(NotreDameKotlinThrowable *)cause __attribute__((swift_name("childCancelled(cause:)")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeChildJob")))
+@protocol NotreDameKotlinx_coroutines_core_nativeChildJob <NotreDameKotlinx_coroutines_core_nativeJob>
+@required
+- (void)parentCancelledParentJob:(id<NotreDameKotlinx_coroutines_core_nativeParentJob>)parentJob __attribute__((swift_name("parentCancelled(parentJob:)")));
+@end;
+
+__attribute__((swift_name("KotlinThrowable")))
+@interface NotreDameKotlinThrowable : KotlinBase
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+- (NotreDameKotlinArray *)getStackTrace __attribute__((swift_name("getStackTrace()")));
+- (void)printStackTrace __attribute__((swift_name("printStackTrace()")));
+@property (readonly) NotreDameKotlinThrowable * _Nullable cause;
+@property (readonly) NSString * _Nullable message;
+@end;
+
+__attribute__((swift_name("KotlinException")))
+@interface NotreDameKotlinException : NotreDameKotlinThrowable
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+@end;
+
+__attribute__((swift_name("KotlinRuntimeException")))
+@interface NotreDameKotlinRuntimeException : NotreDameKotlinException
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+@end;
+
+__attribute__((swift_name("KotlinIllegalStateException")))
+@interface NotreDameKotlinIllegalStateException : NotreDameKotlinRuntimeException
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeCancellationException")))
+@interface NotreDameKotlinx_coroutines_core_nativeCancellationException : NotreDameKotlinIllegalStateException
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithCause:(NotreDameKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@end;
+
+__attribute__((swift_name("KotlinSequence")))
+@protocol NotreDameKotlinSequence
+@required
+- (id<NotreDameKotlinIterator>)iterator __attribute__((swift_name("iterator()")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeSelectClause0")))
+@protocol NotreDameKotlinx_coroutines_core_nativeSelectClause0
+@required
+- (void)registerSelectClause0Select:(id<NotreDameKotlinx_coroutines_core_nativeSelectInstance>)select block:(id<NotreDameKotlinSuspendFunction0>)block __attribute__((swift_name("registerSelectClause0(select:block:)")));
+@end;
+
+__attribute__((swift_name("KotlinCoroutineContextKey")))
+@protocol NotreDameKotlinCoroutineContextKey
+@required
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeSelectClause2")))
+@protocol NotreDameKotlinx_coroutines_core_nativeSelectClause2
+@required
+- (void)registerSelectClause2Select:(id<NotreDameKotlinx_coroutines_core_nativeSelectInstance>)select param:(id _Nullable)param block:(id<NotreDameKotlinSuspendFunction1>)block __attribute__((swift_name("registerSelectClause2(select:param:block:)")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeChannelIterator")))
+@protocol NotreDameKotlinx_coroutines_core_nativeChannelIterator
+@required
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeSelectClause1")))
+@protocol NotreDameKotlinx_coroutines_core_nativeSelectClause1
+@required
+- (void)registerSelectClause1Select:(id<NotreDameKotlinx_coroutines_core_nativeSelectInstance>)select block:(id<NotreDameKotlinSuspendFunction1>)block __attribute__((swift_name("registerSelectClause1(select:block:)")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeSqlPreparedStatement")))
+@protocol NotreDameSqldelight_runtimeSqlPreparedStatement
+@required
+- (void)bindBytesIndex:(int32_t)index value:(NotreDameKotlinByteArray * _Nullable)value __attribute__((swift_name("bindBytes(index:value:)")));
+- (void)bindDoubleIndex:(int32_t)index value:(NotreDameDouble * _Nullable)value __attribute__((swift_name("bindDouble(index:value:)")));
+- (void)bindLongIndex:(int32_t)index value:(NotreDameLong * _Nullable)value __attribute__((swift_name("bindLong(index:value:)")));
+- (void)bindStringIndex:(int32_t)index value:(NSString * _Nullable)value __attribute__((swift_name("bindString(index:value:)")));
+@end;
+
+__attribute__((swift_name("KotlinContinuation")))
+@protocol NotreDameKotlinContinuation
+@required
+- (void)resumeWithResult:(id _Nullable)result __attribute__((swift_name("resumeWith(result:)")));
+@property (readonly) id<NotreDameKotlinCoroutineContext> context;
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeRunnable")))
+@protocol NotreDameKotlinx_coroutines_core_nativeRunnable
+@required
+- (void)run __attribute__((swift_name("run()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinByteArray")))
+@interface NotreDameKotlinByteArray : KotlinBase
++ (instancetype)arrayWithSize:(int32_t)size __attribute__((swift_name("init(size:)")));
++ (instancetype)arrayWithSize:(int32_t)size init:(NotreDameByte *(^)(NotreDameInt *))init __attribute__((swift_name("init(size:init:)")));
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (int8_t)getIndex:(int32_t)index __attribute__((swift_name("get(index:)")));
+- (NotreDameKotlinByteIterator *)iterator __attribute__((swift_name("iterator()")));
+- (void)setIndex:(int32_t)index value:(int8_t)value __attribute__((swift_name("set(index:value:)")));
+@property (readonly) int32_t size;
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeParentJob")))
+@protocol NotreDameKotlinx_coroutines_core_nativeParentJob <NotreDameKotlinx_coroutines_core_nativeJob>
+@required
+- (NotreDameKotlinThrowable *)getChildJobCancellationCause __attribute__((swift_name("getChildJobCancellationCause()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinArray")))
+@interface NotreDameKotlinArray : KotlinBase
++ (instancetype)arrayWithSize:(int32_t)size init:(id _Nullable (^)(NotreDameInt *))init __attribute__((swift_name("init(size:init:)")));
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (id _Nullable)getIndex:(int32_t)index __attribute__((swift_name("get(index:)")));
+- (id<NotreDameKotlinIterator>)iterator __attribute__((swift_name("iterator()")));
+- (void)setIndex:(int32_t)index value:(id _Nullable)value __attribute__((swift_name("set(index:value:)")));
+@property (readonly) int32_t size;
+@end;
+
+__attribute__((swift_name("KotlinIterator")))
+@protocol NotreDameKotlinIterator
+@required
+- (BOOL)hasNext __attribute__((swift_name("hasNext()")));
+- (id _Nullable)next_ __attribute__((swift_name("next_()")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeSelectInstance")))
+@protocol NotreDameKotlinx_coroutines_core_nativeSelectInstance
+@required
+- (void)disposeOnSelectHandle:(id<NotreDameKotlinx_coroutines_core_nativeDisposableHandle>)handle __attribute__((swift_name("disposeOnSelect(handle:)")));
+- (id _Nullable)performAtomicIfNotSelectedDesc:(NotreDameKotlinx_coroutines_core_nativeAtomicDesc *)desc __attribute__((swift_name("performAtomicIfNotSelected(desc:)")));
+- (id _Nullable)performAtomicTrySelectDesc:(NotreDameKotlinx_coroutines_core_nativeAtomicDesc *)desc __attribute__((swift_name("performAtomicTrySelect(desc:)")));
+- (void)resumeSelectCancellableWithExceptionException:(NotreDameKotlinThrowable *)exception __attribute__((swift_name("resumeSelectCancellableWithException(exception:)")));
+- (BOOL)trySelectIdempotent:(id _Nullable)idempotent __attribute__((swift_name("trySelect(idempotent:)")));
+@property (readonly) id<NotreDameKotlinContinuation> completion;
+@property (readonly) BOOL isSelected;
+@end;
+
+__attribute__((swift_name("KotlinSuspendFunction")))
+@protocol NotreDameKotlinSuspendFunction
+@required
+@end;
+
+__attribute__((swift_name("KotlinSuspendFunction0")))
+@protocol NotreDameKotlinSuspendFunction0 <NotreDameKotlinSuspendFunction>
+@required
+@end;
+
+__attribute__((swift_name("KotlinSuspendFunction1")))
+@protocol NotreDameKotlinSuspendFunction1 <NotreDameKotlinSuspendFunction>
+@required
+@end;
+
+__attribute__((swift_name("KotlinByteIterator")))
+@interface NotreDameKotlinByteIterator : KotlinBase <NotreDameKotlinIterator>
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (NotreDameByte *)next_ __attribute__((swift_name("next_()")));
+- (int8_t)nextByte __attribute__((swift_name("nextByte()")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeAtomicDesc")))
+@interface NotreDameKotlinx_coroutines_core_nativeAtomicDesc : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)completeOp:(NotreDameKotlinx_coroutines_core_nativeAtomicOp *)op failure:(id _Nullable)failure __attribute__((swift_name("complete(op:failure:)")));
+- (id _Nullable)prepareOp:(NotreDameKotlinx_coroutines_core_nativeAtomicOp *)op __attribute__((swift_name("prepare(op:)")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeOpDescriptor")))
+@interface NotreDameKotlinx_coroutines_core_nativeOpDescriptor : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (id _Nullable)performAffected:(id _Nullable)affected __attribute__((swift_name("perform(affected:)")));
+@end;
+
+__attribute__((swift_name("Kotlinx_coroutines_core_nativeAtomicOp")))
+@interface NotreDameKotlinx_coroutines_core_nativeAtomicOp : NotreDameKotlinx_coroutines_core_nativeOpDescriptor
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)completeAffected:(id _Nullable)affected failure:(id _Nullable)failure __attribute__((swift_name("complete(affected:failure:)")));
+- (id _Nullable)prepareAffected:(id _Nullable)affected __attribute__((swift_name("prepare(affected:)")));
+- (BOOL)tryDecideDecision:(id _Nullable)decision __attribute__((swift_name("tryDecide(decision:)")));
+@property (readonly) BOOL isDecided;
 @end;
 
 NS_ASSUME_NONNULL_END
