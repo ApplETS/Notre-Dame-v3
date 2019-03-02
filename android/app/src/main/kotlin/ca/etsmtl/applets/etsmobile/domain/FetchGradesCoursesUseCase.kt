@@ -8,7 +8,6 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
-import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import model.Cours
 import model.SignetsUserCredentials
 import javax.inject.Inject
@@ -20,7 +19,7 @@ import javax.inject.Inject
 class FetchGradesCoursesUseCase @Inject constructor(
     private var userCredentials: SignetsUserCredentials,
     private val coursRepository: CoursRepository,
-    private val evaluationRepository: EvaluationRepository,
+    private val fetchGradesForCourses: FetchGradesForCourses,
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<Map<String, List<Cours>>>> {
@@ -29,72 +28,22 @@ class FetchGradesCoursesUseCase @Inject constructor(
             /** LiveData returned to the caller **/
             val mediatorLiveData = MediatorLiveData<Resource<List<Cours>>>()
 
-            /**
-             * Fetch the grade for each [Cours] that needs it. This method should be called only if
-             * the courses have been successfully fetched beforehand.
-             */
-            fun fetchGrades() {
-                val coursesToFetchGradesFor = courses.filterByCoursesToFetchGradesFor()
-
-                coursesToFetchGradesFor.forEach { cours ->
-                    mediatorLiveData.addSource(evaluationRepository.getEvaluationsSummary(
-                            userCredentials,
-                            cours,
-                            true
-                    )) {
-                        if (it == null) {
-                            mediatorLiveData.value = Resource.error(app.getString(R.string.error), courses)
-                            coursesToFetchGradesFor.clear()
-                        } else {
-                            if (it.status == Resource.Status.LOADING) {
-                                Resource.loading(courses)
-                            } else {
-                                coursesToFetchGradesFor.remove(cours)
-
-                                if (coursesToFetchGradesFor.isEmpty()) {
-                                    mediatorLiveData.value = Resource.success(courses)
-                                }
-                            }
-                        }
-                    }
+            if (res.status == Resource.Status.ERROR) {
+                // Return an error to the caller saying that an error occurred during the fetch
+                mediatorLiveData.value = Resource.error(res.message ?: app.getString(R.string.error), courses)
+            } else {
+                if (res.status == Resource.Status.LOADING) {
+                    mediatorLiveData.value = Resource.loading(courses)
                 }
 
-                mediatorLiveData.value = when {
-                    // No course needs its grade to be fetched
-                    coursesToFetchGradesFor.isEmpty() -> Resource.success(courses)
-                    // At least one course needs its grade to be fetched
-                    else -> Resource.loading(courses)
+                mediatorLiveData.addSource(fetchGradesForCourses(courses)) {
+                    mediatorLiveData.value = it
                 }
             }
 
-            when (res.status) {
-                Resource.Status.ERROR ->
-                    // Return an error to the caller saying that an error occurred during the fetch
-                    mediatorLiveData.value = Resource.error(res.message ?: app.getString(R.string.error), courses)
-                Resource.Status.SUCCESS ->
-                    /*
-                    The courses have been successfully fetched. The grades of some courses must be
-                    fetched.
-                     */
-                    fetchGrades()
-                Resource.Status.LOADING -> mediatorLiveData.value = Resource.loading(courses)
-            }
-
-            /*
-             Group the courses by session because the UI would like to display the courses no matter
-             what
-              */
             mediatorLiveData.groupBySession()
         }
     }
-
-    /**
-     * Filters the courses that we need to fetch the grade for
-     */
-    @VisibleForTesting
-    fun List<Cours>.filterByCoursesToFetchGradesFor() = filter {
-        it.hasValidSession() && it.cote.isNullOrBlank() && it.noteSur100.isNullOrBlank()
-    }.toMutableList()
 
     private fun LiveData<Resource<List<Cours>>>.groupBySession() = Transformations.map(this) {
         val map = it.groupBySession()
