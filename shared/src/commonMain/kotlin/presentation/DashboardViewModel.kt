@@ -1,5 +1,6 @@
 package presentation
 
+import di.Inject
 import domain.FetchDashboardCardsUseCase
 import domain.RestoreDashboardCardsUseCase
 import domain.SaveDashboardCardsUseCase
@@ -12,7 +13,7 @@ import model.DashboardCard
  * Created by Sonphil on 12-02-19.
  */
 
-class DashboardViewModel(
+class DashboardViewModel @Inject constructor(
     private val fetchDashboardCardsUseCase: FetchDashboardCardsUseCase,
     private val restoreDashboardCardsUseCase: RestoreDashboardCardsUseCase,
     private val saveDashboardCardsUseCase: SaveDashboardCardsUseCase
