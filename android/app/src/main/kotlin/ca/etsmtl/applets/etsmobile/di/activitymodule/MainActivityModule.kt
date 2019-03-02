@@ -3,6 +3,7 @@ package ca.etsmtl.applets.etsmobile.di.activitymodule
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.di.ViewModelKey
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.DashboardFragment
+import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.grades.GradesCardFragment
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.todayschedule.TodayScheduleCardFragment
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.todayschedule.TodayScheduleCardViewModel
 import ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment
@@ -61,6 +62,9 @@ interface MainActivityModule {
 
     @ContributesAndroidInjector
     fun contributeTodayFragment(): TodayScheduleCardFragment
+
+    @ContributesAndroidInjector
+    fun contributeGradesCardFragment(): GradesCardFragment
 
     @ContributesAndroidInjector
     fun contributeStudentFragment(): StudentFragment
