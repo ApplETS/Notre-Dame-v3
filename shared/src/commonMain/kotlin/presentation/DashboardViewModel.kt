@@ -21,17 +21,15 @@ class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCas
     private var lastRemovedCardPosition = -1
 
     fun load() = scope.launch {
-        if (visibleCards.isNullOrEmpty()) {
-            val cards = dashboardCardsUseCase
-                .fetch()
-                .receive()
-                .partition { card ->
-                    card.visible
-                }
+        val cards = dashboardCardsUseCase
+            .fetch()
+            .receive()
+            .partition { card ->
+                card.visible
+            }
 
-            visibleCards = cards.first.toMutableList()
-            hiddenCards = cards.second.toMutableList()
-        }
+        visibleCards = cards.first.toMutableList()
+        hiddenCards = cards.second.toMutableList()
 
         this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
     }
@@ -70,6 +68,7 @@ class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCas
     )
 
     fun restore() {
+        _showUndoRemoveChannel.offer(false)
         dashboardCardsUseCase.restore()
         load()
     }
