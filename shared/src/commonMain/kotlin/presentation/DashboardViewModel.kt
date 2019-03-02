@@ -1,6 +1,8 @@
 package presentation
 
-import data.domain.DashboardCardsUseCase
+import domain.FetchDashboardCardsUseCase
+import domain.RestoreDashboardCardsUseCase
+import domain.SaveDashboardCardsUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
@@ -10,7 +12,11 @@ import model.DashboardCard
  * Created by Sonphil on 12-02-19.
  */
 
-class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCase) : ViewModel() {
+class DashboardViewModel(
+    private val fetchDashboardCardsUseCase: FetchDashboardCardsUseCase,
+    private val restoreDashboardCardsUseCase: RestoreDashboardCardsUseCase,
+    private val saveDashboardCardsUseCase: SaveDashboardCardsUseCase
+) : ViewModel() {
     private val _cardsChannel = Channel<List<DashboardCard>>()
     val cardsChannel: ReceiveChannel<List<DashboardCard>> = _cardsChannel
     private val _showUndoRemoveChannel = Channel<Boolean>()
@@ -21,8 +27,7 @@ class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCas
     private var lastRemovedCardPosition = -1
 
     fun load() = scope.launch {
-        val cards = dashboardCardsUseCase
-            .fetch()
+        val cards = fetchDashboardCardsUseCase()
             .receive()
             .partition { card ->
                 card.visible
@@ -62,14 +67,14 @@ class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCas
         _cardsChannel.offer(visibleCards.toList())
     }
 
-    fun save() = dashboardCardsUseCase.save(
+    fun save() = saveDashboardCardsUseCase(
         visibleCards,
         hiddenCards
     )
 
     fun restore() {
         _showUndoRemoveChannel.offer(false)
-        dashboardCardsUseCase.restore()
+        restoreDashboardCardsUseCase()
         load()
     }
 }

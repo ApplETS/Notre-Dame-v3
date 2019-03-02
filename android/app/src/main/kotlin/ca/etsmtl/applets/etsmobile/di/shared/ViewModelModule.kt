@@ -2,7 +2,9 @@ package ca.etsmtl.applets.etsmobile.di.shared
 
 import dagger.Module
 import dagger.Provides
-import data.domain.DashboardCardsUseCase
+import domain.FetchDashboardCardsUseCase
+import domain.RestoreDashboardCardsUseCase
+import domain.SaveDashboardCardsUseCase
 import presentation.DashboardViewModel
 
 /**
@@ -16,6 +18,12 @@ object ViewModelModule {
     @JvmStatic
     @Provides
     fun provideDashboardViewModel(
-        dashboardUseCase: DashboardCardsUseCase
-    ): DashboardViewModel = DashboardViewModel(dashboardUseCase)
+        fetchDashboardCardsUseCase: FetchDashboardCardsUseCase,
+        restoreDashboardCardsUseCase: RestoreDashboardCardsUseCase,
+        saveDashboardCardsUseCase: SaveDashboardCardsUseCase
+    ): DashboardViewModel = DashboardViewModel(
+        fetchDashboardCardsUseCase,
+        restoreDashboardCardsUseCase,
+        saveDashboardCardsUseCase
+    )
 }
