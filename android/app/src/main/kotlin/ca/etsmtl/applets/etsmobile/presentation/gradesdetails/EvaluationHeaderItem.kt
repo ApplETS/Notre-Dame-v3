@@ -50,11 +50,11 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
             }
 
             progressViewGrade.apply {
-                var grade = evaluation.notePourcentage
-                        .replaceFirst(",", ".")
-                        .toFloat()
-
-                grade = grade.coerceIn(0f, 100f)
+                val grade = evaluation.notePourcentage
+                        ?.replaceFirst(",", ".")
+                        ?.toFloat()
+                        ?.coerceIn(0f, 100f)
+                        ?: 0f
 
                 setEndProgress(grade)
 

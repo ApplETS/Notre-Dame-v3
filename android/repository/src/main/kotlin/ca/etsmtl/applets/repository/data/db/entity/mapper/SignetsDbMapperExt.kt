@@ -10,7 +10,6 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
 import com.soywiz.klock.DateTime
 import com.soywiz.klock.seconds
 import model.Cours
@@ -57,12 +56,12 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.nom,
         this.equipe,
         dateCible?.let { DateTime(it.seconds.millisecondsLong) },
-        this.note.zeroIfNullOrBlank(),
-        this.corrigeSur.zeroIfNullOrBlank(),
-        this.notePourcentage.zeroIfNullOrBlank(),
+        this.note,
+        this.corrigeSur,
+        this.notePourcentage,
         this.ponderation,
-        this.moyenne.zeroIfNullOrBlank(),
-        this.moyennePourcentage.zeroIfNullOrBlank(),
+        this.moyenne,
+        this.moyennePourcentage,
         this.ecartType,
         this.mediane,
         this.rangCentile,
@@ -141,11 +140,11 @@ fun List<SeanceEntity>.toSeances(): List<Seance> = map { it.toSeance() }
 fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEvaluation(
         sigleCours,
         session,
-        note.zeroIfNullOrBlank(),
-        noteSur.zeroIfNullOrBlank(),
-        noteSur100.zeroIfNullOrBlank(),
-        moyenneClasse.zeroIfNullOrBlank(),
-        moyenneClassePourcentage.zeroIfNullOrBlank(),
+        note,
+        noteSur,
+        noteSur100,
+        moyenneClasse,
+        moyenneClassePourcentage,
         ecartTypeClasse,
         medianeClasse,
         rangCentileClasse,

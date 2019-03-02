@@ -90,16 +90,16 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
 fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     val note = this.note.replaceCommaAndParseToDouble()
     val moyenne = this.moyenne.replaceCommaAndParseToDouble()
-    var notePourcentage = 0.0
-    var moyennePourcentage = 0.0
+    var notePourcentage: Double? = null
+    var moyennePourcentage: Double? = null
 
     this.corrigeSur.substringBefore("+").replace(",", ".").toDoubleOrNull()?.let {
         if (it == 0.0) {
             notePourcentage = 0.0
             moyennePourcentage = 0.0
         } else {
-            notePourcentage = note / it * 100
-            moyennePourcentage = moyenne / it * 100
+            notePourcentage = if (note != null) note / it * 100 else null
+            moyennePourcentage = if (moyenne != null) moyenne / it * 100 else null
         }
     }
 
@@ -110,15 +110,15 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             this.nom,
             this.equipe,
             dateCible.takeIf { !it.isNullOrBlank() }?.signetsDefaultDateToUnix(),
-            note.formatSingleFractionDigits(),
-            corrigeSur.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            notePourcentage.formatSingleFractionDigits(),
-            ponderation.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            moyenne.formatSingleFractionDigits(),
-            moyennePourcentage.formatSingleFractionDigits(),
-            ecartType.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            mediane.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            rangCentile.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            note?.formatSingleFractionDigits(),
+            corrigeSur.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            notePourcentage?.formatSingleFractionDigits(),
+            ponderation.replaceCommaAndParseToFloat()?.formatSingleFractionDigits() ?: "0",
+            moyenne?.formatSingleFractionDigits(),
+            moyennePourcentage?.formatSingleFractionDigits(),
+            ecartType.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            mediane.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            rangCentile.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
             this.publie == "Oui",
             this.messageDuProf,
             this.ignoreDuCalcul == "Oui"
@@ -130,28 +130,28 @@ fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map
 fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
     val noteSur = liste.asSequence()
             .filter { it.note.isNotBlank() && it.ignoreDuCalcul == "Non" }
-            .map { it.ponderation.replaceCommaAndParseToFloat() }
+            .map { it.ponderation.replaceCommaAndParseToFloat() ?: 0f }
             .sum()
             .coerceAtMost(100f)
 
     val moyenneClassePourcentage = when (noteSur) {
         0f -> 0f
-        else -> this.moyenneClasse.replaceCommaAndParseToFloat() / noteSur * 100
+        else -> (moyenneClasse.replaceCommaAndParseToFloat()?.div(noteSur) ?: 0f) * 100
     }
 
     return SommaireElementsEvaluationEntity(
             cours.sigle,
             cours.session,
-            scoreFinalSur100.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            scoreFinalSur100.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
             noteSur.formatSingleFractionDigits(),
-            noteACeJour.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            moyenneClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
+            noteACeJour.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            moyenneClasse.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
             moyenneClassePourcentage.formatSingleFractionDigits(),
-            ecartTypeClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            medianeClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            rangCentileClasse.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            noteACeJourElementsIndividuels.replaceCommaAndParseToFloat().formatSingleFractionDigits(),
-            noteSur100PourElementsIndividuels.replaceCommaAndParseToFloat().formatSingleFractionDigits()
+            ecartTypeClasse.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            medianeClasse.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            rangCentileClasse.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            noteACeJourElementsIndividuels.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            noteSur100PourElementsIndividuels.replaceCommaAndParseToFloat()?.formatSingleFractionDigits()
     )
 }
 
