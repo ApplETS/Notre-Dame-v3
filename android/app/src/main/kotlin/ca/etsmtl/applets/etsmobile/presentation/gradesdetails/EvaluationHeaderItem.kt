@@ -5,8 +5,8 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.rotate
-import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
+import ca.etsmtl.applets.etsmobile.extension.rotate
+import ca.etsmtl.applets.etsmobile.extension.setGradePercentageColor
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem

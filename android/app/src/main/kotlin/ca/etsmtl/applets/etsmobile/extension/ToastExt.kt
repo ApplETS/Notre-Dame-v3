@@ -16,7 +16,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE")
 
-package ca.etsmtl.applets.etsmobile.util
+package ca.etsmtl.applets.etsmobile.extension
 
 import android.content.Context
 import android.widget.Toast

@@ -14,8 +14,8 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.toast
-import ca.etsmtl.applets.etsmobile.util.toggle
+import ca.etsmtl.applets.etsmobile.extension.toast
+import ca.etsmtl.applets.etsmobile.extension.toggle
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_splash.progressBarSplash

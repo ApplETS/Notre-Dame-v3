@@ -1,8 +1,8 @@
 package data.repository
 
 import ca.etsmtl.applets.shared.db.DashboardCardQueries
+import extension.asChannel
 import di.Inject
-import extensions.asChannel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ReceiveChannel

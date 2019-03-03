@@ -35,7 +35,7 @@ import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import ca.etsmtl.applets.repository.util.signetsDefaultDateToUnix
-import extensions.formatSingleFractionDigits
+import extension.formatSingleFractionDigits
 import model.Cours
 import model.Session
 

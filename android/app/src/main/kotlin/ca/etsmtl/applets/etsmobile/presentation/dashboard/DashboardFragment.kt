@@ -15,8 +15,8 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.util.toLiveData
-import ca.etsmtl.applets.etsmobile.util.toggle
+import ca.etsmtl.applets.etsmobile.extension.toLiveData
+import ca.etsmtl.applets.etsmobile.extension.toggle
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.appBarLayout

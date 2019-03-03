@@ -1,6 +1,6 @@
 @file:JvmName("NumberExtAndroid")
 
-package extensions
+package extension
 
 import java.text.NumberFormat
 

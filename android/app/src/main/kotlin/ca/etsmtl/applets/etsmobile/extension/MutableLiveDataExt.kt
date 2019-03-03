@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.util
+package ca.etsmtl.applets.etsmobile.extension
 
 import androidx.lifecycle.MutableLiveData
 

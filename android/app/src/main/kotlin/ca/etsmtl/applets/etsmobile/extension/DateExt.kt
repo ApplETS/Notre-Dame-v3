@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.util
+package ca.etsmtl.applets.etsmobile.extension
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat

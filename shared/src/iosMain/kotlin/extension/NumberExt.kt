@@ -1,4 +1,4 @@
-package extensions
+package extension
 
 /**
  * Created by Sonphil on 06-02-19.

@@ -1,4 +1,4 @@
-package extensions
+package extension
 
 import com.squareup.sqldelight.Query
 import kotlinx.coroutines.channels.Channel

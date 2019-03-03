@@ -9,8 +9,8 @@ import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
-import ca.etsmtl.applets.etsmobile.util.adjustCote
-import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
+import ca.etsmtl.applets.etsmobile.extension.adjustCote
+import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
