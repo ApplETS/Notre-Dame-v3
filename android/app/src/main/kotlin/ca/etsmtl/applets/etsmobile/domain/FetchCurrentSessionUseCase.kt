@@ -23,8 +23,8 @@ class FetchCurrentSessionUseCase @Inject constructor(
 ) {
     operator fun invoke(): LiveData<Resource<Session>> {
         return Transformations.map(sessionRepository.getSessions(userCredentials) { true }) {
-            val currentSession = it.data.orEmpty().find {
-                Date().timeInSeconds in it.dateDebut..it.dateFin
+            val currentSession = it.data.orEmpty().find { session ->
+                Date().timeInSeconds in session.dateDebut..session.dateFin
             }
 
             if (it.status == Resource.Status.LOADING) {

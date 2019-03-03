@@ -7,6 +7,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
+import ca.etsmtl.applets.etsmobile.util.adjustCote
 import ca.etsmtl.applets.etsmobile.util.mockNetwork
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.nhaarman.mockito_kotlin.capture
@@ -165,7 +166,9 @@ class GradesViewModelTest {
 
         // when
         val resultCours = with(gradesViewModel) {
-            cours.adjustCote()
+            cours.apply {
+                adjustCote(app)
+            }
         }
 
         // then
@@ -189,7 +192,9 @@ class GradesViewModelTest {
 
         // when
         val resultCours = with(gradesViewModel) {
-            cours.adjustCote()
+            cours.apply {
+                adjustCote(app)
+            }
         }
 
         // then
@@ -213,7 +218,9 @@ class GradesViewModelTest {
 
         // when
         val resultCours = with(gradesViewModel) {
-            cours.adjustCote()
+            cours.apply {
+                adjustCote(app)
+            }
         }
 
         // then

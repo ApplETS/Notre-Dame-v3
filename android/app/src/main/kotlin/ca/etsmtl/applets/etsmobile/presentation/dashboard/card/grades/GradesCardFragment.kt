@@ -11,15 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter
-import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import dagger.android.support.DaggerFragment
-import jp.wasabeef.recyclerview.animators.FadeInDownAnimator
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades_card.progressBarGrades
@@ -33,14 +31,14 @@ import javax.inject.Inject
 
 class GradesCardFragment : DaggerFragment() {
 
-    private val gradesViewModel: GradesViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(GradesViewModel::class.java)
+    private val gradesCardViewModel: GradesCardViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(GradesCardViewModel::class.java)
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val adapter: GradesAdapter by lazy {
-        GradesAdapter(object : GradesAdapter.OnCourseClickListener {
-            override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
+    private val adapter: GradesCardAdapter by lazy {
+        GradesCardAdapter(object : GradesCardAdapter.OnCourseClickListener {
+            override fun onCourseClick(cours: Cours, holder: GradesCardAdapter.GradeViewHolder) {
                 this@GradesCardFragment.activity?.let {
                     GradesDetailsActivity.start(
                         it as AppCompatActivity,
@@ -70,28 +68,28 @@ class GradesCardFragment : DaggerFragment() {
         recyclerViewCoursesGrades.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW).apply {
             justifyContent = JustifyContent.FLEX_START
         }
-        recyclerViewCoursesGrades.itemAnimator = FadeInDownAnimator()
+        recyclerViewCoursesGrades.itemAnimator = FadeInAnimator()
     }
 
     private fun subscribeUI() {
-        gradesViewModel.cours.observe(this, Observer {
+        gradesCardViewModel.cours.observe(this, Observer {
             it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
         })
 
-        gradesViewModel.showEmptyView.observe(this, Observer {
+        gradesCardViewModel.showEmptyView.observe(this, Observer {
             recyclerViewCoursesGrades.isVisible = it == false
             emptyViewCoursesGrades.isVisible = it == true
         })
 
-        gradesViewModel.loading.observe(this, Observer {
+        gradesCardViewModel.loading.observe(this, Observer {
             progressBarGrades.isVisible = it
         })
 
-        gradesViewModel.errorMessage.observe(this, EventObserver {
+        gradesCardViewModel.errorMessage.observe(this, EventObserver {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
 
-        this.lifecycle.addObserver(gradesViewModel)
+        this.lifecycle.addObserver(gradesCardViewModel)
     }
 
     companion object {

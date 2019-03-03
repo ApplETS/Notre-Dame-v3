@@ -1,16 +1,15 @@
 package ca.etsmtl.applets.etsmobile.presentation.grades
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
-import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
+import ca.etsmtl.applets.etsmobile.util.adjustCote
 import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.shopify.livedataktx.map
@@ -43,7 +42,7 @@ class GradesViewModel @Inject constructor(
         .map { res ->
             res.data?.mapValues {
                 it.value.map { course ->
-                    course.adjustCote()
+                    course.apply { adjustCote(app) }
                 }
             }
         }
@@ -62,18 +61,6 @@ class GradesViewModel @Inject constructor(
         .map {
             (it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true))
         }
-
-    @VisibleForTesting
-    fun Cours.adjustCote() = copy(cote = when {
-        !cote.isNullOrEmpty() -> cote!!
-        !noteSur100.isNullOrEmpty() -> {
-            String.format(
-                app.getString(R.string.text_grade_in_percentage),
-                noteSur100
-            )
-        }
-        else -> app.getString(R.string.abbreviation_not_available)
-    })
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun refresh() = coursRes.refresh()

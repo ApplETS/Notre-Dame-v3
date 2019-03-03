@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
+    android:minHeight="160dp"
     android:orientation="vertical"
     android:paddingTop="16dp"
     android:paddingBottom="16dp">
@@ -21,7 +22,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <include
             layout="@layout/empty_view_courses_grades"
@@ -31,7 +33,6 @@
             android:id="@+id/recyclerViewCoursesGrades"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/design_bottom_navigation_height"
             android:descendantFocusability="blocksDescendants"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
