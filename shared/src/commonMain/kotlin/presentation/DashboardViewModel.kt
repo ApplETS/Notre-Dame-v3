@@ -1,6 +1,9 @@
 package presentation
 
-import data.domain.DashboardCardsUseCase
+import di.Inject
+import domain.FetchDashboardCardsUseCase
+import domain.RestoreDashboardCardsUseCase
+import domain.SaveDashboardCardsUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
@@ -10,7 +13,11 @@ import model.DashboardCard
  * Created by Sonphil on 12-02-19.
  */
 
-class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCase) : ViewModel() {
+class DashboardViewModel @Inject constructor(
+    private val fetchDashboardCardsUseCase: FetchDashboardCardsUseCase,
+    private val restoreDashboardCardsUseCase: RestoreDashboardCardsUseCase,
+    private val saveDashboardCardsUseCase: SaveDashboardCardsUseCase
+) : ViewModel() {
     private val _cardsChannel = Channel<List<DashboardCard>>()
     val cardsChannel: ReceiveChannel<List<DashboardCard>> = _cardsChannel
     private val _showUndoRemoveChannel = Channel<Boolean>()
@@ -21,17 +28,14 @@ class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCas
     private var lastRemovedCardPosition = -1
 
     fun load() = scope.launch {
-        if (visibleCards.isNullOrEmpty()) {
-            val cards = dashboardCardsUseCase
-                .fetch()
-                .receive()
-                .partition { card ->
-                    card.visible
-                }
+        val cards = fetchDashboardCardsUseCase()
+            .receive()
+            .partition { card ->
+                card.visible
+            }
 
-            visibleCards = cards.first.toMutableList()
-            hiddenCards = cards.second.toMutableList()
-        }
+        visibleCards = cards.first.toMutableList()
+        hiddenCards = cards.second.toMutableList()
 
         this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
     }
@@ -64,13 +68,14 @@ class DashboardViewModel(private val dashboardCardsUseCase: DashboardCardsUseCas
         _cardsChannel.offer(visibleCards.toList())
     }
 
-    fun save() = dashboardCardsUseCase.save(
+    fun save() = saveDashboardCardsUseCase(
         visibleCards,
         hiddenCards
     )
 
     fun restore() {
-        dashboardCardsUseCase.restore()
+        _showUndoRemoveChannel.offer(false)
+        restoreDashboardCardsUseCase()
         load()
     }
 }

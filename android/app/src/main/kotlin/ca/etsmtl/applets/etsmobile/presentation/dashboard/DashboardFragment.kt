@@ -2,6 +2,9 @@ package ca.etsmtl.applets.etsmobile.presentation.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
@@ -40,6 +43,24 @@ class DashboardFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var adapter: DashboardCardAdapter
+    private var undoActionView: View? = null
+    private val undoSnackBar: Snackbar by lazy {
+        Snackbar.make(
+            requireActivity().findViewById(android.R.id.content),
+            R.string.msg_dashboard_card_removed,
+            Snackbar.LENGTH_LONG
+        ).setAction(R.string.cancel) { view ->
+            undoActionView = view
+            view.isEnabled = false
+            dashboardViewModel.undoLastRemove()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,6 +79,20 @@ class DashboardFragment : DaggerFragment() {
         setupRecyclerView()
 
         subscribeUI()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_dashboard, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.item_restore -> {
+            dashboardViewModel.restore()
+            true
+        }
+        else -> super.onContextItemSelected(item)
     }
 
     private fun setupRecyclerView() {
@@ -86,16 +121,13 @@ class DashboardFragment : DaggerFragment() {
         dashboardViewModel
             .showUndoRemoveChannel
             .toLiveData()
-            .observe(this, Observer {
-                activity?.let { activity ->
-                    Snackbar.make(
-                        activity.findViewById(android.R.id.content),
-                        R.string.msg_dashboard_card_removed,
-                        Snackbar.LENGTH_LONG
-                    ).setAction(R.string.cancel) { view ->
-                        view.isEnabled = false
-                        dashboardViewModel.undoLastRemove()
-                    }.show()
+            .observe(this, Observer { show ->
+                undoActionView?.isEnabled = show
+
+                if (show) {
+                    undoSnackBar.show()
+                } else {
+                    undoSnackBar.dismiss()
                 }
             })
 

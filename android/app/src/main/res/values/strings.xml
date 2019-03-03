@@ -37,10 +37,11 @@
 
     <!-- Dashboard -->
     <string name="msg_dashboard_card_removed">Carte supprimée</string>
+    <string name="title_dashboard_restore_all_cards">Restaurer toutes les cartes</string>
 
     <!-- Applets card -->
     <string name="title_applets_card">ApplETS</string>
-    <string name="text_applets_card">ÉTSMobile a été conçue par le club ApplETS. Supportez-nous en aimant notre page Facebook, en contribuaant sur GitHub ou en nous faisant part de vos commentaires par courriel.</string>
+    <string name="text_applets_card">ÉTSMobile a été conçue par le club ApplETS. Supportez-nous en aimant notre page Facebook, en contribuant sur GitHub ou en nous faisant part de vos commentaires par courriel.</string>
     <string name="error_no_email_app">Aucune application de courriel disponible</string>
 
     <!-- Grades -->
