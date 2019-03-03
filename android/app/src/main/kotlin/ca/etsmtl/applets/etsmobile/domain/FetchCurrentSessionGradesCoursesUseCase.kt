@@ -16,7 +16,7 @@ import javax.inject.Inject
 class FetchCurrentSessionGradesCoursesUseCase @Inject constructor(
     private var userCredentials: SignetsUserCredentials,
     private val coursRepository: CoursRepository,
-    private val fetchGradesForCourses: FetchGradesForCourses,
+    private val fetchGradesForCoursesUseCase: FetchGradesForCoursesUseCase,
     private val fetchCurrentSessionUseCase: FetchCurrentSessionUseCase
 ) {
     operator fun invoke(): LiveData<Resource<List<Cours>>> {
@@ -34,7 +34,7 @@ class FetchCurrentSessionGradesCoursesUseCase @Inject constructor(
                     } else {
                         removeSource(coursesSrc)
 
-                        val coursesWithGradesSrc = fetchGradesForCourses(courses)
+                        val coursesWithGradesSrc = fetchGradesForCoursesUseCase(courses)
 
                         addSource(coursesWithGradesSrc) { coursesWithGradesRes ->
                             if (coursesWithGradesRes.status != Resource.Status.LOADING) {

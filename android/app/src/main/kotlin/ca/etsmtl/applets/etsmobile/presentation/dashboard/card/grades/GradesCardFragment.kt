@@ -18,6 +18,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
+import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades_card.progressBarGrades
@@ -61,6 +62,7 @@ class GradesCardFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpRecyclerView()
+        btnRetry.setOnClickListener { gradesCardViewModel.refresh() }
         subscribeUI()
     }
     private fun setUpRecyclerView() {

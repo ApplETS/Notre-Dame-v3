@@ -15,7 +15,7 @@ import javax.inject.Inject
  * Created by Sonphil on 02-03-19.
  */
 
-class FetchGradesForCourses @Inject constructor(
+class FetchGradesForCoursesUseCase @Inject constructor(
     private var userCredentials: SignetsUserCredentials,
     private val evaluationRepository: EvaluationRepository,
     private val app: App

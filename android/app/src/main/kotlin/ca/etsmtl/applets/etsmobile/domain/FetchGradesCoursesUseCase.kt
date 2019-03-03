@@ -19,7 +19,7 @@ import javax.inject.Inject
 class FetchGradesCoursesUseCase @Inject constructor(
     private var userCredentials: SignetsUserCredentials,
     private val coursRepository: CoursRepository,
-    private val fetchGradesForCourses: FetchGradesForCourses,
+    private val fetchGradesForCoursesUseCase: FetchGradesForCoursesUseCase,
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<Map<String, List<Cours>>>> {
@@ -36,7 +36,7 @@ class FetchGradesCoursesUseCase @Inject constructor(
                     mediatorLiveData.value = Resource.loading(courses)
                 }
 
-                mediatorLiveData.addSource(fetchGradesForCourses(courses)) {
+                mediatorLiveData.addSource(fetchGradesForCoursesUseCase(courses)) {
                     mediatorLiveData.value = it
                 }
             }

@@ -8,7 +8,8 @@
     android:minHeight="160dp"
     android:orientation="vertical"
     android:paddingTop="16dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="16dp"
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.dashboard.card.grades.GradesCardFragment">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -34,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:descendantFocusability="blocksDescendants"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
             tools:ignore="PrivateResource"
             tools:listitem="@layout/item_grade_course" />
 
