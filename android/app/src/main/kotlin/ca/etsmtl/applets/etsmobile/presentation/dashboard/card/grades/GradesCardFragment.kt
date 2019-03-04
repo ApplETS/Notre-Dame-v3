@@ -19,8 +19,8 @@ import com.google.android.flexbox.JustifyContent
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
-import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
+import kotlinx.android.synthetic.main.fragment_grades_card.includeEmptyView
 import kotlinx.android.synthetic.main.fragment_grades_card.progressBarGrades
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 import model.Cours
@@ -80,7 +80,7 @@ class GradesCardFragment : DaggerFragment() {
 
         gradesCardViewModel.showEmptyView.observe(this, Observer {
             recyclerViewCoursesGrades.isVisible = it == false
-            emptyViewCoursesGrades.isVisible = it == true
+            includeEmptyView.isVisible = it == true
         })
 
         gradesCardViewModel.loading.observe(this, Observer {
