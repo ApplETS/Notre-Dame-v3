@@ -34,7 +34,7 @@ class CoursExtTest {
 
         // when
         val resultCours = cours.apply {
-            adjustCote(app)
+            adjustCoteForDisplay(app)
         }
 
         // then
@@ -58,7 +58,7 @@ class CoursExtTest {
 
         // when
         val resultCours = cours.apply {
-            adjustCote(app)
+            adjustCoteForDisplay(app)
         }
 
         // then
@@ -82,7 +82,7 @@ class CoursExtTest {
 
         // when
         val resultCours = cours.apply {
-            adjustCote(app)
+            adjustCoteForDisplay(app)
         }
 
         // then

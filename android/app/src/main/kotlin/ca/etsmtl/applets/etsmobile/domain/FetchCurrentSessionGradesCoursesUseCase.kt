@@ -1,7 +1,6 @@
 package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
@@ -23,28 +22,12 @@ class FetchCurrentSessionGradesCoursesUseCase @Inject constructor(
         return Transformations.switchMap(fetchCurrentSessionUseCase()) { currentSessionRes ->
             val coursesSrc = coursRepository.getCours(userCredentials)
 
-            MediatorLiveData<Resource<List<Cours>>>().apply {
-                addSource(coursesSrc) { coursesRes ->
-                    val courses = coursesRes.data?.filter { course ->
-                        course.session == currentSessionRes.data?.abrege
-                    }.orEmpty()
+            Transformations.switchMap(coursesSrc) { coursesRes ->
+                val courses = coursesRes.data?.filter { course ->
+                    course.session == currentSessionRes.data?.abrege
+                }.orEmpty()
 
-                    if (coursesRes.status == Resource.Status.LOADING) {
-                        value = Resource.loading(courses)
-                    } else {
-                        removeSource(coursesSrc)
-
-                        val coursesWithGradesSrc = fetchGradesForCoursesUseCase(courses)
-
-                        addSource(coursesWithGradesSrc) { coursesWithGradesRes ->
-                            if (coursesWithGradesRes.status != Resource.Status.LOADING) {
-                                removeSource(coursesWithGradesSrc)
-                            }
-
-                            value = coursesWithGradesRes
-                        }
-                    }
-                }
+                fetchGradesForCoursesUseCase(courses)
             }
         }
     }

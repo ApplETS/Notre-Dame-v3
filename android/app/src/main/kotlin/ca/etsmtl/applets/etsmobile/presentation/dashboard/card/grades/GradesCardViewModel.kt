@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.domain.FetchCurrentSessionGradesCoursesUseCase
+import ca.etsmtl.applets.etsmobile.extension.adjustCoteForDisplay
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
-import ca.etsmtl.applets.etsmobile.extension.adjustCote
 import ca.etsmtl.applets.repository.data.model.Resource
 import model.Cours
 import presentation.ViewModel
@@ -31,7 +31,7 @@ class GradesCardViewModel @Inject constructor(
     val cours: LiveData<List<Cours>> = Transformations.map(_cours) { res ->
         res.data?.asReversed()?.apply {
             forEach { course ->
-                course.adjustCote(app)
+                course.adjustCoteForDisplay(app)
             }
         }
     }

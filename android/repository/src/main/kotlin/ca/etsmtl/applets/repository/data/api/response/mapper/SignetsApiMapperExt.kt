@@ -35,6 +35,7 @@ import ca.etsmtl.applets.repository.util.msDateToUnix
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import ca.etsmtl.applets.repository.util.signetsDefaultDateToUnix
+import extension.formatFractionDigits
 import extension.formatSingleFractionDigits
 import model.Cours
 import model.Session
@@ -144,7 +145,7 @@ fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): Somm
             cours.session,
             scoreFinalSur100.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
             noteSur.formatSingleFractionDigits(),
-            noteACeJour.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            noteACeJour.replaceCommaAndParseToFloat()?.formatFractionDigits(0),
             moyenneClasse.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
             moyenneClassePourcentage.formatSingleFractionDigits(),
             ecartTypeClasse.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),

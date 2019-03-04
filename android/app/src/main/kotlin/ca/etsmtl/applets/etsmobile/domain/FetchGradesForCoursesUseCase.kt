@@ -21,17 +21,19 @@ class FetchGradesForCoursesUseCase @Inject constructor(
     private val app: App
 ) {
     operator fun invoke(courses: List<Cours>): LiveData<Resource<List<Cours>>> {
-        return courses.fetchGradesForCoursesThatNeedsIt()
+        return fetchGradesForCoursesThatNeedsIt(courses)
     }
 
     /**
      * Fetch the grade for each [Cours] that needs it. This method should be called only if
      * the courses have been successfully fetched beforehand.
      */
-    private fun List<Cours>.fetchGradesForCoursesThatNeedsIt(): LiveData<Resource<List<Cours>>> {
+    private fun fetchGradesForCoursesThatNeedsIt(courses: List<Cours>): LiveData<Resource<List<Cours>>> {
         val mediatorLiveData = MediatorLiveData<Resource<List<Cours>>>()
-        val coursesToFetchGradesFor = filterByCoursesToFetchGradesFor()
+        val courses = courses.clone()
+        val coursesToFetchGradesFor = courses.filterByCoursesToFetchGradesFor()
 
+        mediatorLiveData.value = Resource.loading(courses.map { it.copy() })
         coursesToFetchGradesFor.forEach { cours ->
             mediatorLiveData.addSource(evaluationRepository.getEvaluationsSummary(
                 userCredentials,
@@ -39,19 +41,21 @@ class FetchGradesForCoursesUseCase @Inject constructor(
                 true
             )) { res ->
                 if (res == null) {
-                    mediatorLiveData.value = Resource.error(app.getString(R.string.error), this)
+                    mediatorLiveData.value = Resource.error(app.getString(R.string.error), courses)
                     coursesToFetchGradesFor.clear()
                 } else {
-                    cours.noteSur100 = res.data?.noteSur100
+                    res.data?.let { cours.noteSur100 = it.noteSur100 }
 
-                    if (res.status == Resource.Status.LOADING) {
-                        Resource.loading(this)
-                    } else {
+                    if (res.status != Resource.Status.LOADING) {
                         coursesToFetchGradesFor.remove(cours)
 
-                        if (coursesToFetchGradesFor.isEmpty()) {
-                            mediatorLiveData.value = Resource.success(this)
+                        mediatorLiveData.value = if (coursesToFetchGradesFor.isEmpty()) {
+                            Resource.success(courses.clone())
+                        } else {
+                            Resource.loading(courses.clone())
                         }
+                    } else {
+                        Resource.loading(courses.clone())
                     }
                 }
             }
@@ -59,6 +63,8 @@ class FetchGradesForCoursesUseCase @Inject constructor(
 
         return mediatorLiveData
     }
+
+    fun List<Cours>.clone() = map { it.copy() }
 
     @VisibleForTesting
     fun List<Cours>.filterByCoursesToFetchGradesFor() = filter {

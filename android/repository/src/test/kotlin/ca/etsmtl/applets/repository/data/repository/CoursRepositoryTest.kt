@@ -95,7 +95,7 @@ class CoursRepositoryTest {
         dao = mock(CoursDao::class.java)
         `when`(dao.getAll()).thenReturn(dbData)
         evaluationRepository = mock(EvaluationRepository::class.java)
-        repo = CoursRepository(InstantAppExecutors(), signetsApi, dao)
+        repo = CoursRepository(InstantAppExecutors(), signetsApi, dao, evaluationRepository)
     }
 
     @Test

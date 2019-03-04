@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
+import ca.etsmtl.applets.etsmobile.extension.adjustCoteForDisplay
+import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
-import ca.etsmtl.applets.etsmobile.extension.adjustCote
-import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
@@ -42,7 +42,7 @@ class GradesViewModel @Inject constructor(
         .map { res ->
             res.data?.mapValues {
                 it.value.map { course ->
-                    course.apply { adjustCote(app) }
+                    course.apply { adjustCoteForDisplay(app) }
                 }
             }
         }

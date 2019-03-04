@@ -22,7 +22,8 @@ import javax.inject.Inject
 class CoursRepository @Inject constructor(
     appExecutors: AppExecutors,
     private val api: SignetsApi,
-    private val coursDao: CoursDao
+    private val coursDao: CoursDao,
+    private val evaluationRepository: EvaluationRepository
 ) : SignetsRepository(appExecutors) {
     /**
      * Returns the user's courses
