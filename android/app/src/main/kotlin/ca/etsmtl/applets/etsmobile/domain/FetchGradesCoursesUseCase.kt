@@ -2,7 +2,7 @@ package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
@@ -19,29 +19,22 @@ import javax.inject.Inject
 class FetchGradesCoursesUseCase @Inject constructor(
     private var userCredentials: SignetsUserCredentials,
     private val coursRepository: CoursRepository,
-    private val fetchGradesForCoursesUseCase: FetchGradesForCoursesUseCase,
+    private val updateGradesForCoursesUseCase: UpdateGradesForCoursesUseCase,
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<Map<String, List<Cours>>>> {
-        return Transformations.switchMap(coursRepository.getCours(userCredentials, true)) { res ->
-            val courses = res.data.orEmpty()
-            /** LiveData returned to the caller **/
-            val mediatorLiveData = MediatorLiveData<Resource<List<Cours>>>()
-
-            if (res.status == Resource.Status.ERROR) {
-                // Return an error to the caller saying that an error occurred during the fetch
-                mediatorLiveData.value = Resource.error(res.message ?: app.getString(R.string.error), courses)
-            } else {
-                if (res.status == Resource.Status.LOADING) {
-                    mediatorLiveData.value = Resource.loading(courses)
+        return Transformations.switchMap(coursRepository.getCours(userCredentials)) { coursesRes ->
+            if (coursesRes.status != Resource.Status.SUCCESS) {
+                MutableLiveData<Resource<Map<String, List<Cours>>>>().apply {
+                    value = coursesRes.copyStatusAndMessage(coursesRes.groupBySession())
                 }
+            } else {
+                val courses = coursesRes.data.orEmpty().filterByCoursesToFetchGradesFor()
 
-                mediatorLiveData.addSource(fetchGradesForCoursesUseCase(courses)) {
-                    mediatorLiveData.value = it
+                Transformations.switchMap(updateGradesForCoursesUseCase(courses)) { updateCoursesGradesRes ->
+                    coursRepository.getCours(userCredentials, false).groupBySession()
                 }
             }
-
-            mediatorLiveData.groupBySession()
         }
     }
 
@@ -70,4 +63,9 @@ class FetchGradesCoursesUseCase @Inject constructor(
             }
         }
     }
+
+    @VisibleForTesting
+    fun List<Cours>.filterByCoursesToFetchGradesFor() = filter {
+        it.hasValidSession() && it.cote.isNullOrBlank() && it.noteSur100.isNullOrBlank()
+    }.toMutableList()
 }

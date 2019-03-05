@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.repository.data.db.entity.mapper
 
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntityAndNoteSur100
 import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationCoursEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
@@ -27,18 +28,22 @@ import model.SommaireElementsEvaluation
  * Created by Sonphil on 09-07-18.
  */
 
-fun CoursEntity.toCours() = Cours(
+fun CoursEntity.toCours(noteSur100: String?) = Cours(
         this.sigle,
         this.groupe,
         this.session,
         this.programmeEtudes,
         this.cote,
-        null,
+        noteSur100,
         this.nbCredits,
         this.titreCours
 )
 
-fun List<CoursEntity>.toCours() = map { it.toCours() }
+fun List<CoursEntityAndNoteSur100>.toCours() = map {
+    val coursEntity = it.cours
+
+    coursEntity.toCours(it.noteSur100)
+}
 
 fun EtudiantEntity.toEtudiant() = Etudiant(
         this.type,

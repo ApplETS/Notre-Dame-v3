@@ -22,8 +22,7 @@ import javax.inject.Inject
 class CoursRepository @Inject constructor(
     appExecutors: AppExecutors,
     private val api: SignetsApi,
-    private val coursDao: CoursDao,
-    private val evaluationRepository: EvaluationRepository
+    private val coursDao: CoursDao
 ) : SignetsRepository(appExecutors) {
     /**
      * Returns the user's courses
@@ -49,8 +48,8 @@ class CoursRepository @Inject constructor(
             override fun shouldFetch(data: List<Cours>?) = shouldFetch
 
             override fun loadFromDb(): LiveData<List<Cours>> {
-                return Transformations.map(coursDao.getAll()) {
-                    it?.toCours()
+                return Transformations.map(coursDao.getAllCoursEntityAndNoteSur100()) {
+                    it.toCours()
                 }
             }
 

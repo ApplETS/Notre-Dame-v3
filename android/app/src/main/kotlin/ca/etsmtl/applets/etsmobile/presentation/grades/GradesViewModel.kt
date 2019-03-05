@@ -4,6 +4,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
 import ca.etsmtl.applets.etsmobile.extension.adjustCoteForDisplay
@@ -37,15 +38,13 @@ class GradesViewModel @Inject constructor(
         }
 
     /** The courses grouped by session **/
-    val cours: LiveData<Map<String, List<Cours>>> = coursRes
-        .nonNull()
-        .map { res ->
-            res.data?.mapValues {
-                it.value.map { course ->
-                    course.apply { adjustCoteForDisplay(app) }
-                }
+    val cours: LiveData<Map<String, List<Cours>>> = Transformations.map(coursRes) { res ->
+        res.data?.mapValues {
+            it.value.map { course ->
+                course.apply { adjustCoteForDisplay(app) }
             }
         }
+    }
 
     val loading: LiveData<Boolean> = coursRes
         .map {
