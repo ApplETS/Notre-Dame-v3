@@ -2,7 +2,7 @@ package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
@@ -23,23 +23,66 @@ class FetchGradesCoursesUseCase @Inject constructor(
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<Map<String, List<Cours>>>> {
-        return Transformations.switchMap(coursRepository.getCours(userCredentials)) { coursesRes ->
-            if (coursesRes.status != Resource.Status.SUCCESS) {
-                MutableLiveData<Resource<Map<String, List<Cours>>>>().apply {
-                    value = coursesRes.copyStatusAndMessage(coursesRes.groupBySession())
-                }
-            } else {
-                val courses = coursesRes.data.orEmpty().filterByCoursesToFetchGradesFor()
+        val result = MediatorLiveData<Resource<Map<String, List<Cours>>>>()
 
-                Transformations.switchMap(updateGradesForCoursesUseCase(courses)) { updateCoursesGradesRes ->
-                    coursRepository.getCours(userCredentials, false).groupBySession()
+        fun sendCachedCoursesAfterGradesUpdate(updateCoursesGradesRes: Resource<List<Cours>>) {
+            result.addSource(coursRepository
+                .getCours(userCredentials, false)
+                .groupCoursesBySession()) { cachedCoursesRes ->
+                result.value = if (updateCoursesGradesRes.status == Resource.Status.LOADING) {
+                    Resource.loading(cachedCoursesRes.data)
+                } else {
+                    cachedCoursesRes
                 }
             }
         }
+
+        fun sendFetchCoursesError(courses: Resource<List<Cours>>) {
+            result.value = Resource.error(
+                courses.message ?: app.getString(R.string.error),
+                courses.groupCoursesBySession()
+            )
+        }
+
+        fun updateCoursesAndSendUpdatedCourses(coursesRes: Resource<List<Cours>>) {
+            val courses = coursesRes
+                .data
+                .orEmpty()
+                .filterByCoursesToFetchGradesFor()
+            val updateCoursesSrc = updateGradesForCoursesUseCase(courses)
+
+            result.addSource(updateCoursesSrc) { updateCoursesGradesRes ->
+
+                if (updateCoursesGradesRes.status != Resource.Status.LOADING) {
+                    result.removeSource(updateCoursesSrc)
+                }
+
+                sendCachedCoursesAfterGradesUpdate(updateCoursesGradesRes)
+            }
+        }
+
+        val coursesSrc = coursRepository.getCours(userCredentials)
+
+        result.value = Resource.loading(null)
+        result.addSource(coursesSrc) { coursesRes ->
+            if (coursesRes.status == Resource.Status.LOADING) {
+                result.value = Resource.loading(coursesRes.groupCoursesBySession())
+            } else {
+                result.removeSource(coursesSrc)
+
+                if (coursesRes.status == Resource.Status.SUCCESS) {
+                    updateCoursesAndSendUpdatedCourses(coursesRes)
+                } else {
+                    sendFetchCoursesError(coursesRes)
+                }
+            }
+        }
+
+        return result
     }
 
-    private fun LiveData<Resource<List<Cours>>>.groupBySession() = Transformations.map(this) {
-        val map = it.groupBySession()
+    private fun LiveData<Resource<List<Cours>>>.groupCoursesBySession() = Transformations.map(this) {
+        val map = it.groupCoursesBySession()
 
         when {
             it.status == Resource.Status.LOADING -> Resource.loading(map)
@@ -53,19 +96,22 @@ class FetchGradesCoursesUseCase @Inject constructor(
      * name
      */
     @VisibleForTesting
-    fun Resource<List<Cours>>.groupBySession() = data?.asReversed()?.groupBy {
-        it.run {
-            when {
-                it.session.startsWith("A") -> it.session.replaceFirst("A", app.getString(R.string.session_fall) + " ")
-                it.session.startsWith("H") -> it.session.replaceFirst("H", app.getString(R.string.session_winter) + " ")
-                it.session.startsWith("É") -> it.session.replaceFirst("É", app.getString(R.string.session_summer) + " ")
-                else -> app.getString(R.string.session_without)
+    fun Resource<List<Cours>>.groupCoursesBySession() = data
+        ?.asReversed()
+        ?.map { it.copy() }
+        ?.groupBy {
+            it.run {
+                when {
+                    it.session.startsWith("A") -> it.session.replaceFirst("A", app.getString(R.string.session_fall) + " ")
+                    it.session.startsWith("H") -> it.session.replaceFirst("H", app.getString(R.string.session_winter) + " ")
+                    it.session.startsWith("É") -> it.session.replaceFirst("É", app.getString(R.string.session_summer) + " ")
+                    else -> app.getString(R.string.session_without)
+                }
             }
         }
-    }
 
     @VisibleForTesting
     fun List<Cours>.filterByCoursesToFetchGradesFor() = filter {
-        it.hasValidSession() && it.cote.isNullOrBlank() && it.noteSur100.isNullOrBlank()
+        it.hasValidSession() && it.cote.isNullOrBlank()
     }.toMutableList()
 }

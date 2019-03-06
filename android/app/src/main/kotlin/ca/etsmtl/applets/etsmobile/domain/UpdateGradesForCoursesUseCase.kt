@@ -20,24 +20,28 @@ class UpdateGradesForCoursesUseCase @Inject constructor(
     private val app: App
 ) {
     operator fun invoke(courses: List<Cours>): LiveData<Resource<List<Cours>>> {
-        val courses = courses.toMutableList()
+        val _courses = courses.toMutableList()
         val mediatorLiveData = MediatorLiveData<Resource<List<Cours>>>()
 
-        mediatorLiveData.value = Resource.loading(courses)
-        courses.forEach { cours ->
-            mediatorLiveData.addSource(evaluationRepository.getEvaluationsSummary(
-                userCredentials,
-                cours,
-                true
-            )) { res ->
-                if (res == null) {
-                    mediatorLiveData.value = Resource.error(app.getString(R.string.error), courses)
-                    courses.clear()
-                } else {
-                    if (res.status != Resource.Status.LOADING) {
-                        courses.remove(cours)
-                        if (courses.isEmpty()) {
-                            mediatorLiveData.value = Resource.success(courses)
+        if (_courses.isEmpty()) {
+            mediatorLiveData.value = Resource.success(_courses)
+        } else {
+            mediatorLiveData.value = Resource.loading(_courses)
+            _courses.forEach { cours ->
+                mediatorLiveData.addSource(evaluationRepository.getEvaluationsSummary(
+                    userCredentials,
+                    cours,
+                    true
+                )) { res ->
+                    if (res == null) {
+                        mediatorLiveData.value = Resource.error(app.getString(R.string.error), _courses)
+                        _courses.clear()
+                    } else {
+                        if (res.status != Resource.Status.LOADING) {
+                            _courses.remove(cours)
+                            if (_courses.isEmpty()) {
+                                mediatorLiveData.value = Resource.success(_courses)
+                            }
                         }
                     }
                 }
