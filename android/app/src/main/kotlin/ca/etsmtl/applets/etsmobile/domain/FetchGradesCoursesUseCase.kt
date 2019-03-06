@@ -3,7 +3,6 @@ package ca.etsmtl.applets.etsmobile.domain
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.Resource
@@ -13,7 +12,7 @@ import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
- * Created by Sonphil on 10-10-18.
+ * Created by Sonphil on 06-03-19.
  */
 
 class FetchGradesCoursesUseCase @Inject constructor(
@@ -22,13 +21,12 @@ class FetchGradesCoursesUseCase @Inject constructor(
     private val updateGradesForCoursesUseCase: UpdateGradesForCoursesUseCase,
     private val app: App
 ) {
-    operator fun invoke(): LiveData<Resource<Map<String, List<Cours>>>> {
-        val result = MediatorLiveData<Resource<Map<String, List<Cours>>>>()
+    operator fun invoke(): LiveData<Resource<List<Cours>>> {
+        val result = MediatorLiveData<Resource<List<Cours>>>()
 
         fun sendCachedCoursesAfterGradesUpdate(updateCoursesGradesRes: Resource<List<Cours>>) {
             result.addSource(coursRepository
-                .getCours(userCredentials, false)
-                .groupCoursesBySession()) { cachedCoursesRes ->
+                .getCours(userCredentials, false)) { cachedCoursesRes ->
                 result.value = if (updateCoursesGradesRes.status == Resource.Status.LOADING) {
                     Resource.loading(cachedCoursesRes.data)
                 } else {
@@ -40,11 +38,11 @@ class FetchGradesCoursesUseCase @Inject constructor(
         fun sendFetchCoursesError(courses: Resource<List<Cours>>) {
             result.value = Resource.error(
                 courses.message ?: app.getString(R.string.error),
-                courses.groupCoursesBySession()
+                courses.data
             )
         }
 
-        fun updateCoursesAndSendUpdatedCourses(coursesRes: Resource<List<Cours>>) {
+        fun updateCoursesGradesAndSendUpdatedCourses(coursesRes: Resource<List<Cours>>) {
             val courses = coursesRes
                 .data
                 .orEmpty()
@@ -66,12 +64,12 @@ class FetchGradesCoursesUseCase @Inject constructor(
         result.value = Resource.loading(null)
         result.addSource(coursesSrc) { coursesRes ->
             if (coursesRes.status == Resource.Status.LOADING) {
-                result.value = Resource.loading(coursesRes.groupCoursesBySession())
+                result.value = Resource.loading(coursesRes.data)
             } else {
                 result.removeSource(coursesSrc)
 
                 if (coursesRes.status == Resource.Status.SUCCESS) {
-                    updateCoursesAndSendUpdatedCourses(coursesRes)
+                    updateCoursesGradesAndSendUpdatedCourses(coursesRes)
                 } else {
                     sendFetchCoursesError(coursesRes)
                 }
@@ -80,35 +78,6 @@ class FetchGradesCoursesUseCase @Inject constructor(
 
         return result
     }
-
-    private fun LiveData<Resource<List<Cours>>>.groupCoursesBySession() = Transformations.map(this) {
-        val map = it.groupCoursesBySession()
-
-        when {
-            it.status == Resource.Status.LOADING -> Resource.loading(map)
-            it.status == Resource.Status.SUCCESS && map != null -> Resource.success(map)
-            else -> Resource.error(it.message ?: app.getString(R.string.error), map)
-        }
-    }
-
-    /**
-     * Groups the [Cours] of this [Resource] by session by replacing the first letter with the full
-     * name
-     */
-    @VisibleForTesting
-    fun Resource<List<Cours>>.groupCoursesBySession() = data
-        ?.asReversed()
-        ?.map { it.copy() }
-        ?.groupBy {
-            it.run {
-                when {
-                    it.session.startsWith("A") -> it.session.replaceFirst("A", app.getString(R.string.session_fall) + " ")
-                    it.session.startsWith("H") -> it.session.replaceFirst("H", app.getString(R.string.session_winter) + " ")
-                    it.session.startsWith("É") -> it.session.replaceFirst("É", app.getString(R.string.session_summer) + " ")
-                    else -> app.getString(R.string.session_without)
-                }
-            }
-        }
 
     @VisibleForTesting
     fun List<Cours>.filterByCoursesToFetchGradesFor() = filter {

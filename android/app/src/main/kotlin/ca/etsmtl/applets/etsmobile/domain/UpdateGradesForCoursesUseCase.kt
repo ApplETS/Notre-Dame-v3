@@ -21,26 +21,26 @@ class UpdateGradesForCoursesUseCase @Inject constructor(
 ) {
     operator fun invoke(courses: List<Cours>): LiveData<Resource<List<Cours>>> {
         val _courses = courses.toMutableList()
-        val mediatorLiveData = MediatorLiveData<Resource<List<Cours>>>()
+        val result = MediatorLiveData<Resource<List<Cours>>>()
 
         if (_courses.isEmpty()) {
-            mediatorLiveData.value = Resource.success(_courses)
+            result.value = Resource.success(_courses)
         } else {
-            mediatorLiveData.value = Resource.loading(_courses)
+            result.value = Resource.loading(_courses)
             _courses.forEach { cours ->
-                mediatorLiveData.addSource(evaluationRepository.getEvaluationsSummary(
+                result.addSource(evaluationRepository.getEvaluationsSummary(
                     userCredentials,
                     cours,
                     true
                 )) { res ->
                     if (res == null) {
-                        mediatorLiveData.value = Resource.error(app.getString(R.string.error), _courses)
+                        result.value = Resource.error(app.getString(R.string.error), _courses)
                         _courses.clear()
                     } else {
                         if (res.status != Resource.Status.LOADING) {
                             _courses.remove(cours)
                             if (_courses.isEmpty()) {
-                                mediatorLiveData.value = Resource.success(_courses)
+                                result.value = Resource.success(_courses)
                             }
                         }
                     }
@@ -48,6 +48,6 @@ class UpdateGradesForCoursesUseCase @Inject constructor(
             }
         }
 
-        return mediatorLiveData
+        return result
     }
 }

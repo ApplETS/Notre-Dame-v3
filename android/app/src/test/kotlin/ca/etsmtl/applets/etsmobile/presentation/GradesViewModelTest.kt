@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesGroupedBySessionUseCase
 import ca.etsmtl.applets.etsmobile.extension.mockNetwork
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
@@ -34,8 +34,8 @@ class GradesViewModelTest {
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private val app: App = mock()
-    private val fetchGradesCoursesUseCase: FetchGradesCoursesUseCase = mock()
-    private val gradesViewModel = GradesViewModel(fetchGradesCoursesUseCase, app)
+    private val fetchGradesCoursesGroupedBySessionUseCase: FetchGradesCoursesGroupedBySessionUseCase = mock()
+    private val gradesViewModel = GradesViewModel(fetchGradesCoursesGroupedBySessionUseCase, app)
     @Captor
     private lateinit var messageEventArgumentCaptor: ArgumentCaptor<Event<String?>>
     private val coursLiveData = MutableLiveData<Resource<Map<String, List<Cours>>>>()
@@ -47,7 +47,7 @@ class GradesViewModelTest {
         `when`(app.getString(R.string.error_no_internet_connection)).thenReturn("Absence de connexion internet")
         `when`(app.getString(R.string.error)).thenReturn("Une erreur est survenue")
 
-        `when`(fetchGradesCoursesUseCase()).thenReturn(coursLiveData)
+        `when`(fetchGradesCoursesGroupedBySessionUseCase()).thenReturn(coursLiveData)
     }
 
     @Test

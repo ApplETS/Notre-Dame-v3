@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesGroupedBySessionUseCase
 import ca.etsmtl.applets.etsmobile.extension.adjustCoteForDisplay
 import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.etsmobile.presentation.App
@@ -23,12 +23,12 @@ import javax.inject.Inject
  */
 
 class GradesViewModel @Inject constructor(
-    private val fetchGradesCoursesUseCase: FetchGradesCoursesUseCase,
+    private val fetchGradesCoursesGroupedBySessionUseCase: FetchGradesCoursesGroupedBySessionUseCase,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
     private var coursRes = object : RefreshableLiveData<Resource<Map<String, List<Cours>>>>() {
         override fun updateSource(): LiveData<Resource<Map<String, List<Cours>>>> {
-            return fetchGradesCoursesUseCase()
+            return fetchGradesCoursesGroupedBySessionUseCase()
         }
     }
     val errorMessage: LiveData<Event<String?>> = coursRes
