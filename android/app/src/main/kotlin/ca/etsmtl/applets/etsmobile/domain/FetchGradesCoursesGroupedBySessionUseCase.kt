@@ -48,5 +48,4 @@ class FetchGradesCoursesGroupedBySessionUseCase @Inject constructor(
                     else -> app.getString(R.string.session_without)
                 }
             }
-        }
-}
+        } }

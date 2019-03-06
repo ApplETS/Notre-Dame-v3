@@ -21,16 +21,18 @@ class FetchGradesCoursesUseCase @Inject constructor(
     private val updateGradesForCoursesUseCase: UpdateGradesForCoursesUseCase,
     private val app: App
 ) {
-    operator fun invoke(): LiveData<Resource<List<Cours>>> {
+    operator fun invoke(coursesFilterPredicate: (Cours) -> Boolean = { true }): LiveData<Resource<List<Cours>>> {
         val result = MediatorLiveData<Resource<List<Cours>>>()
+
+        fun Resource<List<Cours>>.coursesFiltered() = data?.filter(coursesFilterPredicate)
 
         fun sendCachedCoursesAfterGradesUpdate(updateCoursesGradesRes: Resource<List<Cours>>) {
             result.addSource(coursRepository
                 .getCours(userCredentials, false)) { cachedCoursesRes ->
                 result.value = if (updateCoursesGradesRes.status == Resource.Status.LOADING) {
-                    Resource.loading(cachedCoursesRes.data)
+                    Resource.loading(cachedCoursesRes.coursesFiltered())
                 } else {
-                    cachedCoursesRes
+                    cachedCoursesRes.copyStatusAndMessage(cachedCoursesRes.coursesFiltered())
                 }
             }
         }
@@ -38,7 +40,7 @@ class FetchGradesCoursesUseCase @Inject constructor(
         fun sendFetchCoursesError(courses: Resource<List<Cours>>) {
             result.value = Resource.error(
                 courses.message ?: app.getString(R.string.error),
-                courses.data
+                courses.coursesFiltered()
             )
         }
 
@@ -64,7 +66,7 @@ class FetchGradesCoursesUseCase @Inject constructor(
         result.value = Resource.loading(null)
         result.addSource(coursesSrc) { coursesRes ->
             if (coursesRes.status == Resource.Status.LOADING) {
-                result.value = Resource.loading(coursesRes.data)
+                result.value = Resource.loading(coursesRes.coursesFiltered())
             } else {
                 result.removeSource(coursesSrc)
 
