@@ -30,7 +30,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
                 value.forEach {
                     this.add(it.key)
                     it.value.forEach { cours ->
-                        this.add(cours)
+                        this.add(cours.copy())
                     }
                 }
             }

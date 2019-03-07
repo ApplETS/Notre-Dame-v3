@@ -1,7 +1,8 @@
-package ca.etsmtl.applets.etsmobile.util
+package ca.etsmtl.applets.etsmobile.extension
 
 import android.content.Context
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.repository.data.model.Resource
 
 /**

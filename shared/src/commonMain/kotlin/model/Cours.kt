@@ -7,7 +7,7 @@ data class Cours(
     var session: String,
     var programmeEtudes: String,
     var cote: String?,
-    /** Grade is null if cote is not null **/
+    /** Grade can be null if cote is not null **/
     var noteSur100: String?,
     var nbCredits: Int = 0,
     var titreCours: String

@@ -1,6 +1,6 @@
 @file:JvmName("NumberExtAndroid")
 
-package extensions
+package extension
 
 import java.text.NumberFormat
 
@@ -10,6 +10,6 @@ import java.text.NumberFormat
 
 actual fun Number.formatFractionDigits(maximumIntegerDigits: Int): String {
     return NumberFormat.getNumberInstance().apply {
-        maximumFractionDigits = 1
+        maximumFractionDigits = maximumIntegerDigits
     }.format(this)
 }
