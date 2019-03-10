@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.db.AppDatabase
+import ca.etsmtl.applets.shared.db.DashboardCardQueries
 import model.SignetsUserCredentials
 import model.UniversalCode
 import javax.inject.Inject
@@ -19,7 +20,8 @@ class LoginRepository @Inject constructor(
     private val cipherUtils: CipherUtils,
     private val prefs: SharedPreferences,
     private val appExecutors: AppExecutors,
-    private val db: AppDatabase
+    private val db: AppDatabase,
+    private val dashboardCardQueries: DashboardCardQueries
 ) {
     companion object {
         private const val TAG = "LoginRepository"
@@ -199,9 +201,16 @@ class LoginRepository @Inject constructor(
 
             db.clearAllTables()
 
+            resetDashboard()
+
             clearFinished.postValue(true)
         }
 
         return clearFinished
+    }
+
+    private fun resetDashboard() = with(dashboardCardQueries) {
+        deleteAll()
+        insertInitialCards()
     }
 }

@@ -37,17 +37,15 @@ class StudentFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        context?.let { context ->
-            (activity as? MainActivity)?.tabLayout?.let {
-                viewPagerStudent.adapter = StudentPagerAdapter(context, childFragmentManager)
-                it.setupWithViewPager(viewPagerStudent)
+        (activity as? MainActivity)?.let { activity ->
+            viewPagerStudent.adapter = StudentPagerAdapter(activity, childFragmentManager)
+            tabLayout.setupWithViewPager(viewPagerStudent)
 
-                showTabsRunnable = Runnable { it.isVisible = true }
-                showTabsHandler.postDelayed(
-                        showTabsRunnable,
-                        resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-                )
-            }
+            showTabsRunnable = Runnable { tabLayout.isVisible = true }
+            showTabsHandler.postDelayed(
+                showTabsRunnable,
+                resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            )
         }
     }
 
