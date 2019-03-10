@@ -9,7 +9,7 @@
     <string name="session_winter">Hiver</string>
     <string name="session_summer">Été</string>
     <string name="session_without">Sans trimestre</string>
-    <string name="oss_license_title" tools:ignore="MissingTranslation">Licences des logiciels libres</string>
+    <string name="oss_license_title">Licences des logiciels libres</string>
     <string name="facebook">Facebook</string>
     <string name="github">GitHub</string>
     <string name="email">Courriel</string>

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.extension.toggle
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_security_detail.*
 
@@ -64,7 +64,7 @@ class SecurityDetailFragment : Fragment() {
     }
 
     private fun setInitialActivityState() {
-        (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
+        (activity as? MainActivity)?.bottomNavigationView?.setVisible(false)
         (activity as? MainActivity)?.appBarLayout?.setExpanded(false, false)
         appBarLayoutSecurity?.setExpanded(true, true)
     }
@@ -79,7 +79,7 @@ class SecurityDetailFragment : Fragment() {
     }
 
     private fun restoreActivityState() {
-        (activity as? MainActivity)?.bottomNavigationView?.toggle(true)
+        (activity as? MainActivity)?.bottomNavigationView?.setVisible(true)
         appBarLayoutSecurity?.setExpanded(false, false)
         (activity as? MainActivity)?.appBarLayout?.setExpanded(true, false)
     }

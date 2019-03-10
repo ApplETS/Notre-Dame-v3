@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.extension.toggle
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
@@ -102,7 +102,7 @@ class MoreFragment : DaggerFragment() {
         moreViewModel.navigateToLogin.observe(this, EventObserver {
             with(activity as MainActivity) {
                 appBarLayout.setExpanded(false, false)
-                bottomNavigationView.toggle(false)
+                bottomNavigationView.setVisible(false)
                 findNavController().navigate(MoreFragmentDirections.actionFragmentMoreToFragmentLogin())
             }
         })

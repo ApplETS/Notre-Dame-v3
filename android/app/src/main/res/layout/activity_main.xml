@@ -62,6 +62,8 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
+        android:visibility="invisible"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navigation"
+        tools:visibility="visible" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
