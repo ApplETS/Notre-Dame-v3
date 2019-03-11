@@ -9,6 +9,7 @@ import ca.etsmtl.applets.repository.data.repository.signets.login.CipherUtils
 import ca.etsmtl.applets.repository.data.repository.signets.login.KeyStoreUtils
 import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
+import ca.etsmtl.applets.shared.db.DashboardCardQueries
 import model.SignetsUserCredentials
 import model.UniversalCode
 import org.junit.Before
@@ -41,6 +42,7 @@ import kotlin.test.assertTrue
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var appExecutors: AppExecutors
     private lateinit var appDatabase: AppDatabase
+    private lateinit var dashboardQueries: DashboardCardQueries
     private lateinit var loginRepository: LoginRepository
 
     @get:Rule
@@ -55,7 +57,15 @@ import kotlin.test.assertTrue
         `when`(prefs.edit()).thenReturn(editor)
         appExecutors = InstantAppExecutors()
         appDatabase = mock(AppDatabase::class.java)
-        loginRepository = LoginRepository(keyStoreUtils, cipherUtils, prefs, appExecutors, appDatabase)
+        dashboardQueries = mock(DashboardCardQueries::class.java)
+        loginRepository = LoginRepository(
+            keyStoreUtils,
+            cipherUtils,
+            prefs,
+            appExecutors,
+            appDatabase,
+            dashboardQueries
+        )
     }
 
     @Test
@@ -125,6 +135,8 @@ import kotlin.test.assertTrue
         assertNull(SignetsUserCredentials.INSTANCE)
 
         verify(appDatabase).clearAllTables()
+        verify(dashboardQueries).deleteAll()
+        verify(dashboardQueries).insertInitialCards()
     }
 
     @Test
