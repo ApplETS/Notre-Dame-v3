@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
@@ -74,8 +75,8 @@ class MainActivity : BaseActivity() {
         val navController = findNavController(R.id.fragmentNavHostMain)
         val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
 
-        toolbar.setupWithNavController(navController, appBarConfiguration)
         setSupportActionBar(toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onBackPressed() {
@@ -93,5 +94,11 @@ class MainActivity : BaseActivity() {
                 super.onBackPressed()
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        return true
     }
 }
