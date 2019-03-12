@@ -9,7 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *
  */
 
-fun BottomNavigationView.toggle(show: Boolean, duration: Long = 200) {
+fun BottomNavigationView.setVisible(show: Boolean, duration: Long = 200) {
     clearAnimation()
     animate()
         .translationY(when (show) {

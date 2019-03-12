@@ -10,6 +10,7 @@
     <string name="session_winter">Winter</string>
     <string name="session_summer">Summer</string>
     <string name="session_without">Without Session</string>
+    <string name="oss_license_title">Open source licenses</string>
     <string name="facebook">Facebook</string>
     <string name="github">GitHub</string>
     <string name="email">Email</string>

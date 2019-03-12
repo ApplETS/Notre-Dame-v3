@@ -16,7 +16,7 @@ import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdap
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.extension.toLiveData
-import ca.etsmtl.applets.etsmobile.extension.toggle
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
@@ -73,7 +73,7 @@ class DashboardFragment : DaggerFragment() {
 
         with(activity as MainActivity) {
             appBarLayout.setExpanded(true, true)
-            bottomNavigationView.toggle(true)
+            bottomNavigationView.setVisible(true)
         }
 
         setupRecyclerView()

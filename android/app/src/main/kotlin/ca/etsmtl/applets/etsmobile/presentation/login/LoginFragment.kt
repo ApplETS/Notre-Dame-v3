@@ -20,7 +20,7 @@ import ca.etsmtl.applets.etsmobile.extension.fadeTo
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.hideKeyboard
 import ca.etsmtl.applets.etsmobile.extension.open
-import ca.etsmtl.applets.etsmobile.extension.toggle
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -88,7 +88,7 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).bottomNavigationView.toggle(false, 0)
+        (activity as MainActivity).bottomNavigationView.setVisible(false, 0)
 
         Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
 
