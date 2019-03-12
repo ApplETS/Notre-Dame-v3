@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,10 @@ class ScheduleFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var adapter: ScheduleAdapter
-    private var tabLayout: TabLayout? = null
+//    private var tabLayout: TabLayout? = null
+
+    private val showTabsHandler = Handler()
+    private var showTabsRunnable: Runnable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,10 +77,14 @@ class ScheduleFragment : DaggerFragment() {
             override fun onPageSelected(position: Int) {}
         })
 
-        this.tabLayout = (activity as? MainActivity)?.tabLayout?.apply {
-            isVisible = true
-            setupWithViewPager(schedule_pager)
-            tabMode = TabLayout.MODE_SCROLLABLE
+        (activity as? MainActivity)?.tabLayout?.let {
+            showTabsRunnable = Runnable { it.isVisible = true }
+            it.setupWithViewPager(schedule_pager)
+            it.tabMode = TabLayout.MODE_SCROLLABLE
+            showTabsHandler.postDelayed(
+                showTabsRunnable,
+                resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            )
         }
     }
 
@@ -118,7 +126,8 @@ class ScheduleFragment : DaggerFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        this.tabLayout?.let {
+        showTabsHandler.removeCallbacks(showTabsRunnable)
+        (activity as? MainActivity)?.tabLayout?.let {
             it.isVisible = false
             it.tabMode = TabLayout.MODE_FIXED
         }
