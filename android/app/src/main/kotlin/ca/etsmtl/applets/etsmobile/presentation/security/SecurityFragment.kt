@@ -145,7 +145,6 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
         appBarLayout?.setExpanded(true, true)
     }
 
-
     private fun restoreActivityState() {
         (activity as? MainActivity)?.apply {
             bottomNavigationView?.setVisible(true)

@@ -47,7 +47,9 @@ class MainActivity : BaseActivity() {
 
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            if (!item.isChecked) {
+            val currentId = navController.currentDestination?.id
+
+            if (!item.isChecked && currentId != R.id.fragmentSplash && currentId != R.id.fragmentLogin) {
                 NavigationUI.onNavDestinationSelected(item, navController).apply {
                     if (this) {
                         appBarLayout.setExpanded(true, true)
