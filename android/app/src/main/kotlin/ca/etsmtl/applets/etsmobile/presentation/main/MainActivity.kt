@@ -84,7 +84,9 @@ class MainActivity : BaseActivity() {
 
         if (currentId != R.id.fragmentLogin) {
             if (topLevelDestinations.contains(currentId)) {
-                if (currentId != R.id.fragmentDashboard) {
+                if (currentId == R.id.fragmentDashboard) {
+                    finishAffinity()
+                } else {
                     navController.navigate(R.id.fragmentDashboard)
                 }
             } else {
