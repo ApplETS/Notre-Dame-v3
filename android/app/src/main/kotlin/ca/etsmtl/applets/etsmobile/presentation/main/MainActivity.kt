@@ -7,8 +7,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
+import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -37,7 +37,7 @@ class MainActivity : BaseActivity() {
 
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
+        setupActionBar()
 
         setupBottomNavigation()
     }
@@ -58,9 +58,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (!topLevelDestinations.contains(destination.id)) {
                 toolbar.navigationIcon?.setColorFilter(
@@ -69,6 +66,14 @@ class MainActivity : BaseActivity() {
                 )
             }
         }
+    }
+
+    private fun setupActionBar() {
+        val navController = findNavController(R.id.fragmentNavHostMain)
+        val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
+
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+        setSupportActionBar(toolbar)
     }
 
     override fun onBackPressed() {
