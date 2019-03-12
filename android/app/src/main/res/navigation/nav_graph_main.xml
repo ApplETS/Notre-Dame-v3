@@ -63,6 +63,14 @@
             app:destination="@id/securityDetailFragment" />
     </fragment>
     <fragment
+        android:id="@+id/securityDetailFragment"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityDetailFragment"
+        android:label="{securityTitle}" >
+        <argument
+            android:name="securityTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
         android:id="@+id/fragmentMore"
         android:name="ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment"
         android:label="@string/title_more"
@@ -82,12 +90,4 @@
         android:id="@+id/activityOpenSourceLicenses"
         android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
     </activity>
-    <fragment
-        android:id="@+id/securityDetailFragment"
-        android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityDetailFragment"
-        android:label="{securityTitle}" >
-        <argument
-            android:name="securityTitle"
-            app:argType="string" />
-    </fragment>
 </navigation>
