@@ -37,25 +37,29 @@ class StudentFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        context?.let { context ->
-            (activity as? MainActivity)?.tabLayout?.let {
-                viewPagerStudent.adapter = StudentPagerAdapter(context, childFragmentManager)
-                it.setupWithViewPager(viewPagerStudent)
+        (activity as? MainActivity)?.let { activity ->
+            activity.tabLayout?.let { tabLayout ->
+                viewPagerStudent.adapter = StudentPagerAdapter(activity, childFragmentManager)
+                tabLayout.setupWithViewPager(viewPagerStudent)
 
-                showTabsRunnable = Runnable { it.isVisible = true }
+                showTabsRunnable = Runnable { tabLayout.isVisible = true }
                 showTabsHandler.postDelayed(
-                        showTabsRunnable,
-                        resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+                    showTabsRunnable,
+                    resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
                 )
             }
         }
     }
 
     override fun onDestroyView() {
+        (activity as? MainActivity)?.tabLayout?.let {
+            it.setupWithViewPager(null)
+            it.isVisible = false
+        }
+
         super.onDestroyView()
 
         showTabsHandler.removeCallbacks(showTabsRunnable)
-        (activity as? MainActivity)?.tabLayout?.isVisible = false
     }
 
     companion object {

@@ -5,8 +5,8 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.rotate
-import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
+import ca.etsmtl.applets.etsmobile.extension.rotate
+import ca.etsmtl.applets.etsmobile.extension.setGradePercentageColor
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
@@ -50,11 +50,11 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
             }
 
             progressViewGrade.apply {
-                var grade = evaluation.notePourcentage
-                        .replaceFirst(",", ".")
-                        .toFloat()
-
-                grade = grade.coerceIn(0f, 100f)
+                val grade = evaluation.notePourcentage
+                        ?.replaceFirst(",", ".")
+                        ?.toFloat()
+                        ?.coerceIn(0f, 100f)
+                        ?: 0f
 
                 setEndProgress(grade)
 

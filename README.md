@@ -41,6 +41,9 @@ pod install
 ```
 * A .xcworkspace file will be generated. You must use this file to open the project.
  
+## 🤖 / 🍎 Kotlin Multiplatform Project
+The projet is migrating towards [Kotlin Multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
+<image src="docs/images/architecture_multiplatform.png" width="600" />
 
 ## ⚖️ License
 This projet is licensed under the Apache License V2.0. See the [LICENSE](https://github.com/ApplETS/Notre-Dame/blob/master/LICENSE) file for more info.

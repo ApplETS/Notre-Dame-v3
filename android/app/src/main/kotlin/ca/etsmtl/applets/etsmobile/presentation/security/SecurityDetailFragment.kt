@@ -12,9 +12,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.util.toggle
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_security_detail.*
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
+import kotlinx.android.synthetic.main.fragment_security_detail.appBarLayoutSecurity
+import kotlinx.android.synthetic.main.fragment_security_detail.btnEmergencyCall
+import kotlinx.android.synthetic.main.fragment_security_detail.toolbarSecurity
+import kotlinx.android.synthetic.main.fragment_security_detail.webView
 
 class SecurityDetailFragment : Fragment() {
     private val args: SecurityDetailFragmentArgs by navArgs()
@@ -24,38 +26,30 @@ class SecurityDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as? MainActivity)?.appBarLayout?.setExpanded(false, false)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_security_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setInitialActivityState()
-        setUpToolbarSecurityDetail()
+
+        setupToolbarSecurityDetail()
         setEmergencyDetailText()
         setButtonListener()
     }
 
     private fun setEmergencyDetailText() {
-        val securityTypeList = resources.getStringArray(R.array.security_type)
-        webView.loadUrl(
-            when (args.securityTitle) {
-                securityTypeList[0] -> resources.getString(R.string.bomb_threat)
-                securityTypeList[1] -> resources.getString(R.string.suspicious_packages)
-                securityTypeList[2] -> resources.getString(R.string.evacuation)
-                securityTypeList[3] -> resources.getString(R.string.gas_leak)
-                securityTypeList[4] -> resources.getString(R.string.fire)
-                securityTypeList[5] -> resources.getString(R.string.broken_elevator)
-                securityTypeList[6] -> resources.getString(R.string.electrical_outage)
-                securityTypeList[7] -> resources.getString(R.string.armed_person)
-                securityTypeList[8] -> resources.getString(R.string.earthquake)
-                else -> resources.getString(R.string.medical_emergency)
-            }
-        )
+        val securityTypeList = resources.getStringArray(R.array.array_security_type)
+        val fileUrlIndex = securityTypeList.indexOf(args.securityTitle)
+        val fileUrl = resources.getStringArray(R.array.array_security_file)[fileUrlIndex]
+
+        webView.loadUrl(fileUrl)
     }
 
     private fun setButtonListener() {
-        urgence_appel_urgence.setOnClickListener {
+        btnEmergencyCall.setOnClickListener {
             val uri = "tel:" + resources.getString(R.string.emergency_number)
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse(uri)
@@ -63,24 +57,14 @@ class SecurityDetailFragment : Fragment() {
         }
     }
 
-    private fun setInitialActivityState() {
-        (activity as? MainActivity)?.bottomNavigationView?.toggle(false)
-        (activity as? MainActivity)?.appBarLayout?.setExpanded(false, false)
+    private fun setupToolbarSecurityDetail() {
+        toolbarSecurity.setupWithNavController(findNavController())
         appBarLayoutSecurity?.setExpanded(true, true)
     }
 
-    private fun setUpToolbarSecurityDetail() {
-        toolbarSecurity.setupWithNavController(findNavController())
-    }
-
     override fun onDestroyView() {
-        restoreActivityState()
-        super.onDestroyView()
-    }
-
-    private fun restoreActivityState() {
-        (activity as? MainActivity)?.bottomNavigationView?.toggle(true)
-        appBarLayoutSecurity?.setExpanded(false, false)
         (activity as? MainActivity)?.appBarLayout?.setExpanded(true, false)
+
+        super.onDestroyView()
     }
 }

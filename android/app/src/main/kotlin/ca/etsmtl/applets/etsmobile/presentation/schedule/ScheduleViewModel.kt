@@ -12,7 +12,7 @@ import ca.etsmtl.applets.etsmobile.domain.FetchSessionSeancesUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSessionsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
+import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.util.timeInSeconds
 import model.Seance

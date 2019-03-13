@@ -48,8 +48,8 @@ class CoursRepository @Inject constructor(
             override fun shouldFetch(data: List<Cours>?) = shouldFetch
 
             override fun loadFromDb(): LiveData<List<Cours>> {
-                return Transformations.map(coursDao.getAll()) {
-                    it?.toCours()
+                return Transformations.map(coursDao.getAllCoursEntityAndNoteSur100()) {
+                    it.toCours()
                 }
             }
 

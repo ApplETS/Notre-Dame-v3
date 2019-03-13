@@ -4,10 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesGroupedBySessionUseCase
+import ca.etsmtl.applets.etsmobile.extension.mockNetwork
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.etsmobile.util.mockNetwork
 import ca.etsmtl.applets.repository.data.model.Resource
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.mock
@@ -34,8 +34,8 @@ class GradesViewModelTest {
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private val app: App = mock()
-    private val fetchGradesCoursesUseCase: FetchGradesCoursesUseCase = mock()
-    private val gradesViewModel = GradesViewModel(fetchGradesCoursesUseCase, app)
+    private val fetchGradesCoursesGroupedBySessionUseCase: FetchGradesCoursesGroupedBySessionUseCase = mock()
+    private val gradesViewModel = GradesViewModel(fetchGradesCoursesGroupedBySessionUseCase, app)
     @Captor
     private lateinit var messageEventArgumentCaptor: ArgumentCaptor<Event<String?>>
     private val coursLiveData = MutableLiveData<Resource<Map<String, List<Cours>>>>()
@@ -47,7 +47,7 @@ class GradesViewModelTest {
         `when`(app.getString(R.string.error_no_internet_connection)).thenReturn("Absence de connexion internet")
         `when`(app.getString(R.string.error)).thenReturn("Une erreur est survenue")
 
-        `when`(fetchGradesCoursesUseCase()).thenReturn(coursLiveData)
+        `when`(fetchGradesCoursesGroupedBySessionUseCase()).thenReturn(coursLiveData)
     }
 
     @Test
@@ -147,76 +147,5 @@ class GradesViewModelTest {
 
         // then
         verify(observer).onChanged(false)
-    }
-
-    @Test
-    fun cote_NotNullOrEmpty_ReturnsCote() {
-        // given
-        val cours = Cours(
-            "MAT123",
-            "01",
-            "s.o",
-            "7365",
-            "K",
-            "91",
-            3,
-            "Math"
-        )
-
-        // when
-        val resultCours = with(gradesViewModel) {
-            cours.adjustCote()
-        }
-
-        // then
-        assertEquals(cours, resultCours)
-    }
-
-    @Test
-    fun cote_CoteEmptyAndNotSur100NotNullOrEmpty_ReturnsNoteSur100() {
-        // given
-        val cours = Cours(
-            "MAT123",
-            "01",
-            "s.o",
-            "7365",
-            "",
-            "91",
-            3,
-            "Math"
-        )
-        `when`(app.getString(R.string.text_grade_in_percentage)).thenReturn("%1\$s %%")
-
-        // when
-        val resultCours = with(gradesViewModel) {
-            cours.adjustCote()
-        }
-
-        // then
-        assertEquals(cours.copy(cote = cours.noteSur100 + " %"), resultCours)
-    }
-
-    @Test
-    fun cote_CoteEmptyAndNoteSur100NullOrEmpty_ReturnsNotAvailable() {
-        // given
-        val cours = Cours(
-            "MAT123",
-            "01",
-            "s.o",
-            "7365",
-            "",
-            "",
-            3,
-            "Math"
-        )
-        `when`(app.getString(R.string.abbreviation_not_available)).thenReturn("N/A")
-
-        // when
-        val resultCours = with(gradesViewModel) {
-            cours.adjustCote()
-        }
-
-        // then
-        assertEquals(cours.copy(cote = "N/A"), resultCours)
     }
 }

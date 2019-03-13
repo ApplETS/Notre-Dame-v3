@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.open
-import ca.etsmtl.applets.etsmobile.util.toast
+import ca.etsmtl.applets.etsmobile.extension.open
+import ca.etsmtl.applets.etsmobile.extension.toast
 import kotlinx.android.synthetic.main.fragment_applets_card.btnAppletsCardEmail
 import kotlinx.android.synthetic.main.fragment_applets_card.btnAppletsCardFacebook
 import kotlinx.android.synthetic.main.fragment_applets_card.btnAppletsCardGithub
