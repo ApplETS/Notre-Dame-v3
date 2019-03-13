@@ -1,0 +1,6 @@
+framework module ETSKit {
+    umbrella header "ETSKit.h"
+
+    export *
+    module * { export * }
+}
