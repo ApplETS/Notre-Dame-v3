@@ -1,6 +1,0 @@
-framework module NotreDame {
-    umbrella header "NotreDame.h"
-
-    export *
-    module * { export * }
-}
