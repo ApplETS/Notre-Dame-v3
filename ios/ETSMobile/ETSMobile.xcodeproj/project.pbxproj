@@ -53,10 +53,10 @@
 		C8C49A862162D553006CCBED /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A852162D553006CCBED /* Schedule.storyboard */; };
 		C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C49A882162D60D006CCBED /* SchoolViewController.swift */; };
 		C8C49A8B2162D641006CCBED /* School.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A8A2162D641006CCBED /* School.storyboard */; };
-		C8EBC5FD221EF4DC0049BCB2 /* NotreDame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* NotreDame.framework */; };
-		C8EBC5FE221EF4DC0049BCB2 /* NotreDame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* NotreDame.framework */; };
-		C8EBC602221EF4F40049BCB2 /* NotreDame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* NotreDame.framework */; };
-		C8EBC603221EF4F40049BCB2 /* NotreDame.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* NotreDame.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C8EBC5FD221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
+		C8EBC5FE221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
+		C8EBC602221EF4F40049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
+		C8EBC603221EF4F40049BCB2 /* ETSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C8EBC603221EF4F40049BCB2 /* NotreDame.framework in Embed Frameworks */,
+				C8EBC603221EF4F40049BCB2 /* ETSKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,7 +150,7 @@
 		C8C49A852162D553006CCBED /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
 		C8C49A882162D60D006CCBED /* SchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolViewController.swift; sourceTree = "<group>"; };
 		C8C49A8A2162D641006CCBED /* School.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = School.storyboard; sourceTree = "<group>"; };
-		C8EBC5FB221EF4DC0049BCB2 /* NotreDame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotreDame.framework; path = ../../shared/NotreDame.framework; sourceTree = "<group>"; };
+		C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ETSKit.framework; path = ../../shared/ETSKit.framework; sourceTree = "<group>"; };
 		D02B165835FDFDB5440AD499 /* Pods_ETSMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEEB8EE6E30435FCA83AD267 /* Pods-ETSMobileUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileUITests/Pods-ETSMobileUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E43949F5E677A04728A6D0FF /* Pods_ETSMobileUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobileUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EBC602221EF4F40049BCB2 /* NotreDame.framework in Frameworks */,
+				C8EBC602221EF4F40049BCB2 /* ETSKit.framework in Frameworks */,
 				B6D2C0C1F41F5A744715A147 /* Pods_ETSMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,7 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EBC5FD221EF4DC0049BCB2 /* NotreDame.framework in Frameworks */,
+				C8EBC5FD221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */,
 				510B5B370EFA71A096DCAD66 /* Pods_ETSMobileTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,7 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8EBC5FE221EF4DC0049BCB2 /* NotreDame.framework in Frameworks */,
+				C8EBC5FE221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */,
 				3C3DAA0712832A60E4FAE299 /* Pods_ETSMobileUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,7 +388,7 @@
 		CFD252A53B6D99BD26458F33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C8EBC5FB221EF4DC0049BCB2 /* NotreDame.framework */,
+				C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */,
 				39C47FBC9D32E951F0CF7689 /* Pods_ETSMobile.framework */,
 				D02B165835FDFDB5440AD499 /* Pods_ETSMobileTests.framework */,
 				E43949F5E677A04728A6D0FF /* Pods_ETSMobileUITests.framework */,
