@@ -21,6 +21,7 @@ kotlin {
 
         fromPreset(iOSTarget, 'iOS') {
             compilations.main.outputKinds('FRAMEWORK')
+            compilations.main.extraOpts '-output', 'ETSKit'
         }
 
         fromPreset(presets.android, 'android')
