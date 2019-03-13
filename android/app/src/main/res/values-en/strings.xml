@@ -131,7 +131,7 @@
     <string name="buglife_steps_to_reproduce">Steps to reproduce</string>
 
     <!-- Security -->
-    <string-array name="security_type">
+    <string-array name="array_security_type">
         <item>Bomb threat</item>
         <item>Suspicious packages</item>
         <item>Evacuation</item>
@@ -144,21 +144,24 @@
         <item>Medical emergency</item>
     </string-array>
 
-    <string name="bomb_threat">file:///android_asset/bomb_threat_detail_en.html</string>
-    <string name="suspicious_packages">file:///android_asset/suspicious_packages_detail_en.html</string>
-    <string name="evacuation">file:///android_asset/evacuation_detail_en.html</string>
-    <string name="gas_leak">file:///android_asset/gas_leak_detail_en.html</string>
-    <string name="fire">file:///android_asset/fire_detail_en.html</string>
-    <string name="broken_elevator">file:///android_asset/broken_elevator_detail_en.html</string>
-    <string name="electrical_outage">file:///android_asset/electrical_outage_detail_en.html</string>
-    <string name="armed_person">file:///android_asset/armed_person_detail_en.html</string>
-    <string name="earthquake">file:///android_asset/earthquake_detail_en.html</string>
-    <string name="medical_emergency">file:///android_asset/medical_emergency_detail_en.html</string>
+    <string-array name="array_security_file">
+        <item>file:///android_asset/bomb_threat_detail_en.html</item>
+        <item>file:///android_asset/suspicious_packages_detail_en.html</item>
+        <item>file:///android_asset/evacuation_detail_en.html</item>
+        <item>file:///android_asset/gas_leak_detail_en.html</item>
+        <item>file:///android_asset/fire_detail_en.html</item>
+        <item>file:///android_asset/broken_elevator_detail_en.html</item>
+        <item>file:///android_asset/electrical_outage_detail_en.html</item>
+        <item>file:///android_asset/armed_person_detail_en.html</item>
+        <item>file:///android_asset/earthquake_detail_en.html</item>
+        <item>file:///android_asset/medical_emergency_detail_en.html</item>
+    </string-array>
+
     <string name="emergency_call">Emergency call</string>
     <string name="reach_security">Reach security</string>
     <string name="emergency_number">514 396–8900</string>
     <string name="emergency_intern_call">From inside campus</string>
-    <string name="emergency_intern_number">55</string>
+    <string name="emergency_intern_number">Ex. 55</string>
     <string name="emergency_procedures">Emergency procedures</string>
     <string name="security_station">Security station</string>
     <string name="msg_no_seances_today">No class scheduled today</string>

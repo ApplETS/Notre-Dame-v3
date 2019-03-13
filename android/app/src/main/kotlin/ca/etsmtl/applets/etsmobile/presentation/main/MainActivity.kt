@@ -5,10 +5,11 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
+import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -37,7 +38,7 @@ class MainActivity : BaseActivity() {
 
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
+        setupActionBar()
 
         setupBottomNavigation()
     }
@@ -47,7 +48,9 @@ class MainActivity : BaseActivity() {
 
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            if (!item.isChecked) {
+            val currentId = navController.currentDestination?.id
+
+            if (!item.isChecked && currentId != R.id.fragmentSplash && currentId != R.id.fragmentLogin) {
                 NavigationUI.onNavDestinationSelected(item, navController).apply {
                     if (this) {
                         appBarLayout.setExpanded(true, true)
@@ -57,9 +60,6 @@ class MainActivity : BaseActivity() {
                 false
             }
         }
-
-        val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (!topLevelDestinations.contains(destination.id)) {
@@ -71,18 +71,34 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    private fun setupActionBar() {
+        val navController = findNavController(R.id.fragmentNavHostMain)
+        val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
+
+        setSupportActionBar(toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
     override fun onBackPressed() {
         val navController = findNavController(R.id.fragmentNavHostMain)
         val currentId = navController.currentDestination?.id
 
         if (currentId != R.id.fragmentLogin) {
             if (topLevelDestinations.contains(currentId)) {
-                if (currentId != R.id.fragmentDashboard) {
+                if (currentId == R.id.fragmentDashboard) {
+                    finishAffinity()
+                } else {
                     navController.navigate(R.id.fragmentDashboard)
                 }
             } else {
                 super.onBackPressed()
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        return true
     }
 }
