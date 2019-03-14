@@ -12,20 +12,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.setVisible
+import ca.etsmtl.applets.etsmobile.extension.toLiveData
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.extension.toLiveData
-import ca.etsmtl.applets.etsmobile.extension.setVisible
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_dashboard.rvCards
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import presentation.DashboardViewModel
 import javax.inject.Inject
 
@@ -106,17 +102,12 @@ class DashboardFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        CoroutineScope(Dispatchers.Main).launch {
-            // Give the time for the toolbar to set in and the layout to resize
-            delay(200)
-
-            dashboardViewModel
-                .cardsChannel
-                .toLiveData()
-                .observe(this@DashboardFragment, Observer {
-                    adapter.items = it
-                })
-        }
+        dashboardViewModel
+            .cardsChannel
+            .toLiveData()
+            .observe(this@DashboardFragment, Observer {
+                adapter.items = it
+            })
 
         dashboardViewModel
             .showUndoRemoveChannel
