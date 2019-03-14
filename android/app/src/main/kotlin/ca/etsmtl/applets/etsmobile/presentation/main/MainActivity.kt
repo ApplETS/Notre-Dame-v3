@@ -49,7 +49,7 @@ class MainActivity : BaseActivity() {
 
             if (!item.isChecked && currentId != R.id.fragmentSplash && currentId != R.id.fragmentLogin) {
                 NavigationUI.onNavDestinationSelected(item, navController).apply {
-                    if (this) {
+                    if (this && currentId != R.id.fragmentStudent) {
                         appBarLayout.setExpanded(true, true)
                     }
                 }
