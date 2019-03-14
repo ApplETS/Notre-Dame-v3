@@ -1,15 +1,16 @@
 package ca.etsmtl.applets.etsmobile.presentation.student
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.fadeTo
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.tabLayout
 import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
 
@@ -21,9 +22,6 @@ import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
  */
 
 class StudentFragment : DaggerFragment() {
-
-    private val showTabsHandler = Handler()
-    private var showTabsRunnable: Runnable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,25 +39,19 @@ class StudentFragment : DaggerFragment() {
             activity.tabLayout?.let { tabLayout ->
                 viewPagerStudent.adapter = StudentPagerAdapter(activity, childFragmentManager)
                 tabLayout.setupWithViewPager(viewPagerStudent)
-
-                showTabsRunnable = Runnable { tabLayout.isVisible = true }
-                showTabsHandler.postDelayed(
-                    showTabsRunnable,
-                    resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-                )
+                tabLayout.fadeTo(View.VISIBLE)
             }
         }
     }
 
     override fun onDestroyView() {
-        (activity as? MainActivity)?.tabLayout?.let {
-            it.setupWithViewPager(null)
-            it.isVisible = false
+        (activity as? MainActivity)?.let {
+            it.appBarLayout.setExpanded(true, false)
+            it.tabLayout.setupWithViewPager(null)
+            it.tabLayout.isVisible = false
         }
 
         super.onDestroyView()
-
-        showTabsHandler.removeCallbacks(showTabsRunnable)
     }
 
     companion object {
