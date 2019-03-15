@@ -41,7 +41,7 @@ class ScheduleFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        adapter = ScheduleAdapter(requireFragmentManager())
+        adapter = ScheduleAdapter(childFragmentManager)
         return inflater.inflate(R.layout.fragment_schedule, container, false)
     }
 
