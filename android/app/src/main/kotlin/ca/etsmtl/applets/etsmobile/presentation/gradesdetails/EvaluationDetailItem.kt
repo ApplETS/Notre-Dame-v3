@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.item_evaluation_detail.tvValue
  */
 
 class EvaluationDetailItem(
-    private val label: String,
-    private val value: String
+    private val label: String?,
+    private val value: String?
 ) : Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         with(viewHolder) {

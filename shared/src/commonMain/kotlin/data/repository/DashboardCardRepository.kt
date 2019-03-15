@@ -1,7 +1,8 @@
 package data.repository
 
 import ca.etsmtl.applets.shared.db.DashboardCardQueries
-import extensions.asChannel
+import extension.asChannel
+import di.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ReceiveChannel
@@ -16,7 +17,7 @@ import utils.EtsMobileDispatchers
  * Created by Sonphil on 09-02-19.
  */
 
-class DashboardCardRepository(private val dashboardCardQueries: DashboardCardQueries) {
+class DashboardCardRepository @Inject constructor(private val dashboardCardQueries: DashboardCardQueries) {
     fun dashboardCards(): ReceiveChannel<List<DashboardCard>> = GlobalScope.produce(
         EtsMobileDispatchers.IO,
         1

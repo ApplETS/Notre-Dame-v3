@@ -40,8 +40,6 @@
 		95186718218E0650009DDD47 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95186717218E0650009DDD47 /* GradientView.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
-		95E9FCF7221527130067E1A5 /* main.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E9FCF6221527130067E1A5 /* main.framework */; };
-		95E9FCF8221527130067E1A5 /* main.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95E9FCF6221527130067E1A5 /* main.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6D2C0C1F41F5A744715A147 /* Pods_ETSMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C47FBC9D32E951F0CF7689 /* Pods_ETSMobile.framework */; };
 		C8B61D042162D9100040A732 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D032162D9100040A732 /* UserType.swift */; };
 		C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D072162DB1D0040A732 /* MonETSClient.swift */; };
@@ -55,6 +53,10 @@
 		C8C49A862162D553006CCBED /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A852162D553006CCBED /* Schedule.storyboard */; };
 		C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C49A882162D60D006CCBED /* SchoolViewController.swift */; };
 		C8C49A8B2162D641006CCBED /* School.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A8A2162D641006CCBED /* School.storyboard */; };
+		C8EBC5FD221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
+		C8EBC5FE221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
+		C8EBC602221EF4F40049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
+		C8EBC603221EF4F40049BCB2 /* ETSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,13 +77,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		95E9FCF9221527130067E1A5 /* Embed Frameworks */ = {
+		C8EBC604221EF4F40049BCB2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				95E9FCF8221527130067E1A5 /* main.framework in Embed Frameworks */,
+				C8EBC603221EF4F40049BCB2 /* ETSKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,7 +137,6 @@
 		95186717218E0650009DDD47 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		95E9FCF6221527130067E1A5 /* main.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = main.framework; path = "../../shared/build/xcode-frameworks/main.framework"; sourceTree = "<group>"; };
 		BDF2469E7134D6E5966A13B9 /* Pods-ETSMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileTests/Pods-ETSMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C8B61D032162D9100040A732 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		C8B61D072162DB1D0040A732 /* MonETSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonETSClient.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		C8C49A852162D553006CCBED /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
 		C8C49A882162D60D006CCBED /* SchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolViewController.swift; sourceTree = "<group>"; };
 		C8C49A8A2162D641006CCBED /* School.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = School.storyboard; sourceTree = "<group>"; };
+		C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ETSKit.framework; path = ../../shared/ETSKit.framework; sourceTree = "<group>"; };
 		D02B165835FDFDB5440AD499 /* Pods_ETSMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEEB8EE6E30435FCA83AD267 /* Pods-ETSMobileUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileUITests/Pods-ETSMobileUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E43949F5E677A04728A6D0FF /* Pods_ETSMobileUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobileUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,8 +161,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EBC602221EF4F40049BCB2 /* ETSKit.framework in Frameworks */,
 				B6D2C0C1F41F5A744715A147 /* Pods_ETSMobile.framework in Frameworks */,
-				95E9FCF7221527130067E1A5 /* main.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EBC5FD221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */,
 				510B5B370EFA71A096DCAD66 /* Pods_ETSMobileTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EBC5FE221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */,
 				3C3DAA0712832A60E4FAE299 /* Pods_ETSMobileUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,7 +244,6 @@
 		25553F9820545D42009897F7 = {
 			isa = PBXGroup;
 			children = (
-				95E9FCF6221527130067E1A5 /* main.framework */,
 				8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */,
 				25553FA320545D42009897F7 /* ETSMobile */,
 				25553FBA20545D42009897F7 /* ETSMobileTests */,
@@ -385,6 +388,7 @@
 		CFD252A53B6D99BD26458F33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */,
 				39C47FBC9D32E951F0CF7689 /* Pods_ETSMobile.framework */,
 				D02B165835FDFDB5440AD499 /* Pods_ETSMobileTests.framework */,
 				E43949F5E677A04728A6D0FF /* Pods_ETSMobileUITests.framework */,
@@ -399,14 +403,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25553FCB20545D42009897F7 /* Build configuration list for PBXNativeTarget "ETSMobile" */;
 			buildPhases = (
-				95E9FCF1221524CD0067E1A5 /* ShellScript */,
-				A7BF884272D44738E35D8A7C /* [CP] Check Pods Manifest.lock */,
+				C8EBC605221EF5620049BCB2 /* Prepare NotreDame Framework */,
+				2D7C32B011916B225BBB6870 /* [CP] Check Pods Manifest.lock */,
 				25553F9D20545D42009897F7 /* Sources */,
 				25553F9E20545D42009897F7 /* Frameworks */,
 				25553F9F20545D42009897F7 /* Resources */,
 				2C1BB3868ED0EEE31E21924B /* [CP] Embed Pods Frameworks */,
+				C8EBC604221EF4F40049BCB2 /* Embed Frameworks */,
 				8F91DFA2218DE83800472BE7 /* Lint */,
-				95E9FCF9221527130067E1A5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -565,6 +569,28 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ETSMobile/Pods-ETSMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2D7C32B011916B225BBB6870 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ETSMobile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2F6A6041A828F6668B4FE1F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -601,7 +627,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		95E9FCF1221524CD0067E1A5 /* ShellScript */ = {
+		C8EBC605221EF5620049BCB2 /* Prepare NotreDame Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -610,31 +636,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Prepare NotreDame Framework";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"$SRCROOT/../../shared/build/xcode-frameworks\"\n./gradlew :shared:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
-		};
-		A7BF884272D44738E35D8A7C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ETSMobile-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT/../../shared/build/xcode-frameworks\"\n./gradlew :shared:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
 		};
 		FC7794D21227206AE616840C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -791,6 +800,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -851,6 +861,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -880,9 +891,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\"",
-					"$(SRCROOT)/../../shared/build/xcode-frameworks",
+					"$(SRCROOT)/../../shared",
 				);
 				INFOPLIST_FILE = ETSMobile/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.applets.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -902,9 +914,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\"",
-					"$(SRCROOT)/../../shared/build/xcode-frameworks",
+					"$(SRCROOT)/../../shared",
 				);
 				INFOPLIST_FILE = "ETS-mobile/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.etsmtl.applets.;
 				PRODUCT_NAME = "$(TARGET_NAME)";

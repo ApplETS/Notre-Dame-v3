@@ -21,6 +21,7 @@ kotlin {
 
         fromPreset(iOSTarget, 'iOS') {
             compilations.main.outputKinds('FRAMEWORK')
+            compilations.main.extraOpts '-output', 'ETSKit'
         }
 
         fromPreset(presets.android, 'android')
@@ -36,6 +37,7 @@ kotlin {
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
                 implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
                 implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-alpha02"
+                implementation "javax.inject:javax.inject:1"
             }
         }
 

@@ -35,8 +35,7 @@ class SessionRepository @Inject constructor(
     ): LiveData<Resource<List<Session>>> {
         return object : SignetsNetworkBoundResource<List<Session>, ApiListeDeSessions>(appExecutors) {
             override fun saveSignetsData(item: ApiListeDeSessions) {
-                dao.deleteAll()
-                dao.insertAll(item.toSessionEntities())
+                dao.clearAndInsert(item.toSessionEntities())
             }
 
             override fun shouldFetch(data: List<Session>?) = shouldFetch(data)

@@ -11,8 +11,8 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchSeancesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
+import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
-import ca.etsmtl.applets.etsmobile.util.getGenericErrorMessage
 import ca.etsmtl.applets.repository.data.model.Resource
 import model.Seance
 import com.shopify.livedataktx.map
