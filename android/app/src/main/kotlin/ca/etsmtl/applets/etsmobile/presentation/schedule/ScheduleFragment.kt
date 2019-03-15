@@ -36,7 +36,7 @@ class ScheduleFragment : DaggerFragment() {
 
     private val showTabsHandler = Handler()
     private var showTabsRunnable: Runnable? = null
-    private var selectTabsRunnable: Runnable? =null
+    private var selectTabsRunnable: Runnable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,

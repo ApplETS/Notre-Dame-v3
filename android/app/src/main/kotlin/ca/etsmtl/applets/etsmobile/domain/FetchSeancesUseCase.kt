@@ -72,15 +72,15 @@ class FetchSeancesUseCase @Inject constructor(
             }
 
             sessions.forEach {
-                if(!seanceFetchStatus.contains(it)){
+                if (!seanceFetchStatus.contains(it)) {
                     fetchSeancesFromSession(it)
                 }
             }
 
-            if (resSessions.status === Resource.Status.ERROR ) {
+            if (resSessions.status === Resource.Status.ERROR) {
                 mediatorLiveData.value = Resource.error(resSessions.message ?: app.getString(R.string.error), emptyList())
             }
-            if(resSessions.status === Resource.Status.SUCCESS){
+            if (resSessions.status === Resource.Status.SUCCESS) {
                 sessionFetchDone = true
             }
 
