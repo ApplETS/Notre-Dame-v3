@@ -67,9 +67,9 @@ class FetchGradesDetailsUseCase @Inject constructor(
                 if (evaluationsCompletedRes.data == true) {
                     sommaireEtEvaluationsRes
                 } else {
-                    Resource.error(
+                    Resource.error<SommaireEtEvaluations>(
                         app.getString(R.string.error_course_evaluations_not_completed),
-                        sommaireEtEvaluationsRes.data
+                        null
                     )
                 }
             } else {
