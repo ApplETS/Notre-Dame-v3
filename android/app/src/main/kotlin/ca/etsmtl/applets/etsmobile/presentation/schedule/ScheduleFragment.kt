@@ -32,11 +32,10 @@ class ScheduleFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var adapter: ScheduleAdapter
-//    private var tabLayout: TabLayout? = null
 
     private val showTabsHandler = Handler()
     private var showTabsRunnable: Runnable? = null
-
+    private var selectTabsRunnable: Runnable? =null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -88,19 +87,15 @@ class ScheduleFragment : DaggerFragment() {
         }
     }
 
-//    private fun setUpRecyclerView() {
-//        recyclerViewSchedule.adapter = adapter
-//        recyclerViewSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-//        recyclerViewSchedule.itemAnimator = FadeInLeftAnimator()
-//    }
-
     private fun subscribeUI() {
         scheduleViewModel.seances.observe(this, Observer {
             it?.let {
                 if (it.isNotEmpty()) {
                     adapter.items = it
                     adapter.notifyDataSetChanged()
-                    this.tabLayout?.getTabAt(adapter.getCurrentPosition())?.select()
+                    showTabsHandler.postDelayed({
+                        (activity as? MainActivity)?.tabLayout?.getTabAt(adapter.getCurrentPosition())?.select()
+                    }, 100)
                 }
             }
         })
@@ -127,6 +122,7 @@ class ScheduleFragment : DaggerFragment() {
         super.onDestroyView()
 
         showTabsHandler.removeCallbacks(showTabsRunnable)
+        showTabsHandler.removeCallbacks(selectTabsRunnable)
         (activity as? MainActivity)?.tabLayout?.let {
             it.isVisible = false
             it.tabMode = TabLayout.MODE_FIXED
