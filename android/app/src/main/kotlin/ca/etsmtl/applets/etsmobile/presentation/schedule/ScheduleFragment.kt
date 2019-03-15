@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.fadeTo
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.material.tabs.TabLayout
@@ -36,6 +37,7 @@ class ScheduleFragment : DaggerFragment() {
     private val showTabsHandler = Handler()
     private var showTabsRunnable: Runnable? = null
     private var selectTabsRunnable: Runnable? =null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,9 +79,11 @@ class ScheduleFragment : DaggerFragment() {
         })
 
         (activity as? MainActivity)?.tabLayout?.let {
-            showTabsRunnable = Runnable { it.isVisible = true }
-            it.setupWithViewPager(schedule_pager)
-            it.tabMode = TabLayout.MODE_SCROLLABLE
+            showTabsRunnable = Runnable {
+                it.tabMode = TabLayout.MODE_SCROLLABLE
+                it.setupWithViewPager(schedule_pager)
+                it.fadeTo(View.VISIBLE)
+            }
             showTabsHandler.postDelayed(
                 showTabsRunnable,
                 resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
@@ -93,9 +97,14 @@ class ScheduleFragment : DaggerFragment() {
                 if (it.isNotEmpty()) {
                     adapter.items = it
                     adapter.notifyDataSetChanged()
-                    showTabsHandler.postDelayed({
+
+                    selectTabsRunnable = Runnable {
                         (activity as? MainActivity)?.tabLayout?.getTabAt(adapter.getCurrentPosition())?.select()
-                    }, 100)
+                    }
+                    showTabsHandler.postDelayed(
+                        selectTabsRunnable,
+                        resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+                    )
                 }
             }
         })
@@ -119,14 +128,15 @@ class ScheduleFragment : DaggerFragment() {
     }
 
     override fun onDestroyView() {
+        (activity as? MainActivity)?.tabLayout?.let {
+            it.isVisible = false
+            it.tabMode = TabLayout.MODE_FIXED
+            it.setupWithViewPager(null)
+        }
         super.onDestroyView()
 
         showTabsHandler.removeCallbacks(showTabsRunnable)
         showTabsHandler.removeCallbacks(selectTabsRunnable)
-        (activity as? MainActivity)?.tabLayout?.let {
-            it.isVisible = false
-            it.tabMode = TabLayout.MODE_FIXED
-        }
     }
 
     companion object {
