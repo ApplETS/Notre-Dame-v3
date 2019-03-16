@@ -14,14 +14,19 @@ androidExtensions {
     experimental = true
 }
 
+buildscript {
+    ext.iOS_framework_name = 'ETSKit'
+}
+
 kotlin {
     targets {
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
                               ? presets.iosArm64 : presets.iosX64
 
         fromPreset(iOSTarget, 'iOS') {
-            compilations.main.outputKinds('FRAMEWORK')
-            compilations.main.extraOpts '-output', 'ETSKit'
+            binaries {
+                framework("$iOS_framework_name")
+            }
         }
 
         fromPreset(presets.android, 'android')
@@ -67,17 +72,21 @@ configurations {
     compileClasspath
 }
 
-task packForXCode(type: Sync) {
+task packForXCode {
     final File frameworkDir = new File(buildDir, "xcode-frameworks")
-    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
+    final String buildType = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
 
-    inputs.property "mode", mode
-    dependsOn kotlin.targets.iOS.compilations.main.linkTaskName("FRAMEWORK", mode)
-
-    from { kotlin.targets.iOS.compilations.main.getBinary("FRAMEWORK", mode).parentFile }
-    into frameworkDir
+    def keyFrameworkPrefix = "$iOS_framework_name${buildType.toLowerCase().capitalize()}"
+    dependsOn "link${keyFrameworkPrefix}FrameworkIOS"
 
     doLast {
+        def srcFile = kotlin.targets.iOS.binaries.getFramework("$iOS_framework_name", buildType).outputFile
+
+        copy {
+            from srcFile.parent
+            into frameworkDir
+        }
+
         new File(frameworkDir, 'gradlew').with {
             text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
             setExecutable(true)
