@@ -6,9 +6,9 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.SeanceRepository
+import model.Seance
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -45,7 +45,7 @@ class FetchCurrentSessionSeancesUseCase @Inject constructor(
                                 mediatorLiveData.value = Resource.loading(seances)
                             Resource.Status.ERROR ->
                                 mediatorLiveData.value =
-                                    Resource.error(app.getString(R.string.error), seances)
+                                    Resource.error(it.message ?: app.getString(R.string.error), seances)
                             Resource.Status.SUCCESS -> {
                                 if (seances == null) {
                                     mediatorLiveData.value =

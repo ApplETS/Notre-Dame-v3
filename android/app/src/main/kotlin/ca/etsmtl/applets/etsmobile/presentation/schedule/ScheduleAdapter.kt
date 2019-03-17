@@ -9,9 +9,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.repository.data.model.Seance
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_schedule.*
+import kotlinx.android.synthetic.main.item_schedule.scheduleDay
+import kotlinx.android.synthetic.main.item_schedule.scheduleInnerList
+import model.Seance
 import java.util.Date
 
 /**

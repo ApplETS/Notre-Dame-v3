@@ -5,12 +5,13 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.LiveDataTestUtil
 import ca.etsmtl.applets.repository.data.db.AppDatabase
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.model.UniversalCode
 import ca.etsmtl.applets.repository.data.repository.signets.login.CipherUtils
 import ca.etsmtl.applets.repository.data.repository.signets.login.KeyStoreUtils
 import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
+import ca.etsmtl.applets.shared.db.DashboardCardQueries
+import model.SignetsUserCredentials
+import model.UniversalCode
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -41,6 +42,7 @@ import kotlin.test.assertTrue
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var appExecutors: AppExecutors
     private lateinit var appDatabase: AppDatabase
+    private lateinit var dashboardQueries: DashboardCardQueries
     private lateinit var loginRepository: LoginRepository
 
     @get:Rule
@@ -55,7 +57,15 @@ import kotlin.test.assertTrue
         `when`(prefs.edit()).thenReturn(editor)
         appExecutors = InstantAppExecutors()
         appDatabase = mock(AppDatabase::class.java)
-        loginRepository = LoginRepository(keyStoreUtils, cipherUtils, prefs, appExecutors, appDatabase)
+        dashboardQueries = mock(DashboardCardQueries::class.java)
+        loginRepository = LoginRepository(
+            keyStoreUtils,
+            cipherUtils,
+            prefs,
+            appExecutors,
+            appDatabase,
+            dashboardQueries
+        )
     }
 
     @Test
@@ -113,7 +123,7 @@ import kotlin.test.assertTrue
 
     @Test
     fun testClearUserData() {
-        SignetsUserCredentials.INSTANCE.set(SignetsUserCredentials(UniversalCode("test"), "test"))
+        SignetsUserCredentials.INSTANCE = SignetsUserCredentials(UniversalCode("test"), "test")
         `when`(editor.clear()).thenReturn(editor)
         val finishedLD = loginRepository.clearUserData()
         assertTrue(LiveDataTestUtil.getValue(finishedLD))
@@ -122,9 +132,11 @@ import kotlin.test.assertTrue
         verify(editor, times(2)).apply()
         verify(editor).remove("EncryptedPasswordPref")
 
-        assertNull(SignetsUserCredentials.INSTANCE.get())
+        assertNull(SignetsUserCredentials.INSTANCE)
 
         verify(appDatabase).clearAllTables()
+        verify(dashboardQueries).deleteAll()
+        verify(dashboardQueries).insertInitialCards()
     }
 
     @Test

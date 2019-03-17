@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.GradeViewHolder
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.HeaderViewHolder
-import ca.etsmtl.applets.repository.data.model.Cours
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.header_grade_course.tvSessionGrades
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseGrade
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
+import model.Cours
 
 /**
  * Created by Sonphil on 12-08-18.
@@ -30,7 +30,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
                 value.forEach {
                     this.add(it.key)
                     it.value.forEach { cours ->
-                        this.add(cours)
+                        this.add(cours.copy())
                     }
                 }
             }

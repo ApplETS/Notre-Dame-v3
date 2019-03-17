@@ -12,8 +12,8 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.SessionDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSessions
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import model.Session
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 class SessionRepository @Inject constructor(
@@ -35,8 +35,7 @@ class SessionRepository @Inject constructor(
     ): LiveData<Resource<List<Session>>> {
         return object : SignetsNetworkBoundResource<List<Session>, ApiListeDeSessions>(appExecutors) {
             override fun saveSignetsData(item: ApiListeDeSessions) {
-                dao.deleteAll()
-                dao.insertAll(item.toSessionEntities())
+                dao.clearAndInsert(item.toSessionEntities())
             }
 
             override fun shouldFetch(data: List<Session>?) = shouldFetch(data)

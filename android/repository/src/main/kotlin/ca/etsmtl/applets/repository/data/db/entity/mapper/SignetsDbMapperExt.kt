@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.repository.data.db.entity.mapper
 
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
+import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntityAndNoteSur100
 import ca.etsmtl.applets.repository.data.db.entity.signets.EtudiantEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationCoursEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.EvaluationEntity
@@ -10,36 +11,39 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.Etudiant
-import ca.etsmtl.applets.repository.data.model.Evaluation
-import ca.etsmtl.applets.repository.data.model.EvaluationCours
-import ca.etsmtl.applets.repository.data.model.HoraireExamenFinal
-import ca.etsmtl.applets.repository.data.model.JourRemplace
-import ca.etsmtl.applets.repository.data.model.Programme
-import ca.etsmtl.applets.repository.data.model.Seance
-import ca.etsmtl.applets.repository.data.model.Session
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
-import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
+import com.soywiz.klock.DateTime
 import com.soywiz.klock.seconds
-import java.util.Date
+import model.Cours
+import model.Etudiant
+import model.Evaluation
+import model.EvaluationCours
+import model.HoraireExamenFinal
+import model.JourRemplace
+import model.Programme
+import model.Seance
+import model.Session
+import model.SommaireElementsEvaluation
 
 /**
  * Created by Sonphil on 09-07-18.
  */
 
-fun CoursEntity.toCours() = Cours(
+fun CoursEntity.toCours(noteSur100: String?) = Cours(
         this.sigle,
         this.groupe,
         this.session,
         this.programmeEtudes,
         this.cote,
-        null,
+        noteSur100,
         this.nbCredits,
         this.titreCours
 )
 
-fun List<CoursEntity>.toCours() = map { it.toCours() }
+fun List<CoursEntityAndNoteSur100>.toCours() = map {
+    val coursEntity = it.cours
+
+    coursEntity.toCours(it.noteSur100)
+}
 
 fun EtudiantEntity.toEtudiant() = Etudiant(
         this.type,
@@ -56,13 +60,13 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.session,
         this.nom,
         this.equipe,
-        dateCible?.let { Date(it.seconds.millisecondsLong) },
-        this.note.zeroIfNullOrBlank(),
-        this.corrigeSur.zeroIfNullOrBlank(),
-        this.notePourcentage.zeroIfNullOrBlank(),
+        dateCible?.let { DateTime(it.seconds.millisecondsLong) },
+        this.note,
+        this.corrigeSur,
+        this.notePourcentage,
         this.ponderation,
-        this.moyenne.zeroIfNullOrBlank(),
-        this.moyennePourcentage.zeroIfNullOrBlank(),
+        this.moyenne,
+        this.moyennePourcentage,
         this.ecartType,
         this.mediane,
         this.rangCentile,
@@ -75,8 +79,8 @@ fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
 
 fun EvaluationCoursEntity.toEvaluationCours() = EvaluationCours(
     session,
-    Date(dateDebutEvaluation.seconds.millisecondsLong),
-    Date(dateFinEvaluation.seconds.millisecondsLong),
+    DateTime(dateDebutEvaluation.seconds.millisecondsLong),
+    DateTime(dateFinEvaluation.seconds.millisecondsLong),
     enseignant,
     estComplete,
     groupe,
@@ -125,8 +129,8 @@ fun ProgrammeEntity.toProgramme() = Programme(
 fun List<ProgrammeEntity>.toProgrammes(): List<Programme> = map { it.toProgramme() }
 
 fun SeanceEntity.toSeance() = Seance(
-        Date(dateDebut.seconds.millisecondsLong),
-        Date(dateFin.seconds.millisecondsLong),
+        DateTime(dateDebut.seconds.millisecondsLong),
+        DateTime(dateFin.seconds.millisecondsLong),
         this.nomActivite,
         this.local,
         this.descriptionActivite,
@@ -141,11 +145,11 @@ fun List<SeanceEntity>.toSeances(): List<Seance> = map { it.toSeance() }
 fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEvaluation(
         sigleCours,
         session,
-        note.zeroIfNullOrBlank(),
-        noteSur.zeroIfNullOrBlank(),
-        noteSur100.zeroIfNullOrBlank(),
-        moyenneClasse.zeroIfNullOrBlank(),
-        moyenneClassePourcentage.zeroIfNullOrBlank(),
+        note,
+        noteSur,
+        noteSur100,
+        moyenneClasse,
+        moyenneClassePourcentage,
         ecartTypeClasse,
         medianeClasse,
         rangCentileClasse,

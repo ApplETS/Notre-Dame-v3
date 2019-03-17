@@ -14,26 +14,30 @@ import javax.inject.Inject
 class EtsViewModel @Inject constructor() : ViewModel() {
     private val _navigateToSecurity = MutableLiveData<Event<Unit>>()
     val navigateToSecurity: LiveData<Event<Unit>> = _navigateToSecurity
-    private val _navigateToMonEts = MutableLiveData<Event<Unit>>()
-    val navigateToMonEts: LiveData<Event<Unit>> = _navigateToMonEts
-    private val _navigateToBibliotech = MutableLiveData<Event<Unit>>()
-    val navigateToBibliotech: LiveData<Event<Unit>> = _navigateToBibliotech
+    private val _navigateToUri = MutableLiveData<Event<Int>>()
+    val navigateToUri: LiveData<Event<Int>> = _navigateToUri
     private val _navigateToMoodle = MutableLiveData<Event<Unit>>()
     val navigateToMoodle: LiveData<Event<Unit>> = _navigateToMoodle
 
+    fun itemsList(): List<EtsItem> {
+        val items = mutableListOf(
+            EtsItem(R.drawable.ic_security_white_24dp, R.string.title_security) {
+                _navigateToSecurity.value = Event(Unit)
+            },
+            EtsItem(R.drawable.ic_monets, null) {
+                _navigateToUri.value = Event(R.string.uri_mon_ets)
+            },
+            EtsItem(R.drawable.ic_book_white_24dp, R.string.title_bibliotech) {
+                _navigateToUri.value = Event(R.string.uri_bibliotech)
+            },
+            EtsItem(R.drawable.ic_newspaper_black_24dp, R.string.title_news) {
+                _navigateToUri.value = Event(R.string.uri_news)
+            },
+            EtsItem(R.drawable.ic_import_contacts_white_24dp, R.string.title_directory) {
+                _navigateToUri.value = Event(R.string.uri_directory)
+            }
+        )
 
-    fun itemsList() = listOf(
-        EtsItem(R.drawable.ic_security_white_24dp, R.string.title_security) {
-            _navigateToSecurity.value = Event(Unit)
-        },
-        EtsItem(R.drawable.ic_monets, null) {
-            _navigateToMonEts.value = Event(Unit)
-        },
-        EtsItem(R.drawable.ic_book_white_24dp, R.string.title_bibliotech) {
-            _navigateToBibliotech.value = Event(Unit)
-        },
-        EtsItem(R.drawable.ic_moodle_24dp,  R.string.title_moodle) {
-        _navigateToMoodle.value = Event(Unit)
-        }
-    )
+        return items
+    }
 }

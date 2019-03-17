@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.repository.data.model.Seance
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.sub_item_schedule.*
+import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleEndTime
+import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleLocal
+import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleSigleGroup
+import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleStartTime
+import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleTitreCours
+import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleType
+import model.Seance
 
 /**
 Created by mykaelll87 on 08/12/18
@@ -49,13 +54,13 @@ class ScheduleInnerListAdapter : RecyclerView.Adapter<ScheduleInnerListAdapter.S
             holder.textViewScheduleStartTime.text = DateUtils
                 .formatDateTime(
                     holder.containerView.context,
-                    dateDebut.time,
+                    dateDebut.unixMillisLong,
                     DateUtils.FORMAT_SHOW_TIME
                 )
             holder.textViewScheduleEndTime.text = DateUtils
                 .formatDateTime(
                     holder.containerView.context,
-                    dateFin.time,
+                    dateFin.unixMillisLong,
                     DateUtils.FORMAT_SHOW_TIME
                 )
         }

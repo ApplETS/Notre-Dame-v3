@@ -3,8 +3,8 @@ package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 import android.animation.ArgbEvaluator
 import android.view.View
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.gradePercentageColor
-import ca.etsmtl.applets.etsmobile.util.setGradePercentageColor
+import ca.etsmtl.applets.etsmobile.extension.gradePercentageColor
+import ca.etsmtl.applets.etsmobile.extension.setGradePercentageColor
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import com.moos.library.CircleProgressView
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -30,7 +30,7 @@ class GradeAverageItem(
     private var animatedProgress = false
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        with (viewHolder) {
+        with(viewHolder) {
             tvRating.text = rating
 
             fun setGrade() {

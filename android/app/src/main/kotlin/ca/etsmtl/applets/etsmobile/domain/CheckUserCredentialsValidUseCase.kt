@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.etsmobile.util.isDeviceConnected
-import ca.etsmtl.applets.repository.data.model.Etudiant
+import ca.etsmtl.applets.etsmobile.extension.isDeviceConnected
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
+import model.Etudiant
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 class CheckUserCredentialsValidUseCase @Inject constructor(

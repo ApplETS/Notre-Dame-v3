@@ -16,12 +16,11 @@ import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.fadeTo
-import ca.etsmtl.applets.etsmobile.util.getColorCompat
-import ca.etsmtl.applets.etsmobile.util.hideKeyboard
-import ca.etsmtl.applets.etsmobile.util.open
-import ca.etsmtl.applets.etsmobile.util.toggle
-import ca.etsmtl.applets.repository.data.model.UniversalCode
+import ca.etsmtl.applets.etsmobile.extension.fadeTo
+import ca.etsmtl.applets.etsmobile.extension.getColorCompat
+import ca.etsmtl.applets.etsmobile.extension.hideKeyboard
+import ca.etsmtl.applets.etsmobile.extension.open
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -38,6 +37,7 @@ import kotlinx.android.synthetic.main.include_login_form.layoutPassword
 import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
 import kotlinx.android.synthetic.main.include_login_form.universalCode
+import model.UniversalCode
 import javax.inject.Inject
 
 /**
@@ -88,7 +88,7 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).bottomNavigationView.toggle(false, 0)
+        (activity as MainActivity).bottomNavigationView.setVisible(false, 0)
 
         Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
 
@@ -140,7 +140,7 @@ class LoginFragment : DaggerFragment() {
      * of the lifecycle
      */
     private fun subscribeUI() {
-        with (loginViewModel) {
+        with(loginViewModel) {
             showLoading.observe(this@LoginFragment, Observer {
                 showProgress(it == true)
             })
@@ -158,7 +158,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             navigateToDashboard.observe(this@LoginFragment, EventObserver {
-                with ((activity as MainActivity)) {
+                with((activity as MainActivity)) {
                     findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
                 }
             })

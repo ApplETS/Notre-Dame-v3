@@ -16,10 +16,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobile.util.getAndroidDimensionInPixelSize
-import ca.etsmtl.applets.etsmobile.util.getColorCompat
-import ca.etsmtl.applets.etsmobile.util.open
-import ca.etsmtl.applets.etsmobile.util.toggle
+import ca.etsmtl.applets.etsmobile.extension.getAndroidDimensionInPixelSize
+import ca.etsmtl.applets.etsmobile.extension.getColorCompat
+import ca.etsmtl.applets.etsmobile.extension.open
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
@@ -128,7 +128,7 @@ class AboutFragment : Fragment() {
     private fun setInitialActivityState() {
         (activity as? MainActivity)?.let {
             it.appBarLayout.setExpanded(false, true)
-            it.bottomNavigationView.toggle(false)
+            it.bottomNavigationView.setVisible(false)
             it.window.apply {
                 if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                     setFlags(
@@ -145,7 +145,7 @@ class AboutFragment : Fragment() {
     private fun restoreActivityState() {
         (activity as? MainActivity)?.let {
             it.appBarLayout.setExpanded(true, true)
-            it.bottomNavigationView.toggle(true)
+            it.bottomNavigationView.setVisible(true)
             it.window.apply {
                 clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                 statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)

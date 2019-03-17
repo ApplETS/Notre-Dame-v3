@@ -10,6 +10,10 @@
     <string name="session_winter">Winter</string>
     <string name="session_summer">Summer</string>
     <string name="session_without">Without Session</string>
+    <string name="oss_license_title">Open source licenses</string>
+    <string name="facebook">Facebook</string>
+    <string name="github">GitHub</string>
+    <string name="email">Email</string>
 
     <!-- Bottom navigation titles -->
     <string name="title_schedule">Schedule</string>
@@ -31,6 +35,15 @@
     <string name="msg_logout_success">You have logged out</string>
     <string name="label_login_applets_logo">Made by</string>
     <string name="password_forgotten">Forgot your password?</string>
+
+    <!-- Dashboard -->
+    <string name="msg_dashboard_card_removed">Card removed</string>
+    <string name="title_dashboard_restore_all_cards">Restore all cards</string>
+
+    <!-- Applets card -->
+    <string name="title_applets_card">ApplETS</string>
+    <string name="text_applets_card">ÉTSMobile was made by the club ApplETS. Support us by liking our Facebook page, contributing to GitHub or sending us your comments via email.</string>
+    <string name="error_no_email_app">No email application available</string>
 
     <!-- Grades -->
     <string name="title_grades">Grades</string>
@@ -75,13 +88,16 @@
     <string name="title_security">Security</string>
     <string name="title_monets">MonÉTS</string>
     <string name="title_bibliotech">Bibliotech</string>
+    <string name="title_news">News</string>
     <string name="title_moodle">Moodle</string>
+    <string name="title_directory">Directory</string>
 
     <!-- More -->
-    <string name="more_item_label_faq">FAQ</string>
     <string name="more_item_label_about_applets">About ApplETS</string>
-    <string name="more_item_report_bug">Report a bug</string>
-    <string name="more_item_open_source_licenses">@string/oss_license_title</string>
+    <string name="more_item_label_report_bug">Report a bug</string>
+    <string name="more_item_label_contributors">Contributors</string>
+    <string name="more_item_label_open_source_licenses">@string/oss_license_title</string>
+    <string name="more_item_label_beta_faq">Beta FAQ</string>
     <string name="more_item_label_log_out">Log out</string>
     <string name="prompt_log_out_confirmation">Are you sure you want to log out?</string>
     <string name="more_label_log_out_progress">Disconnection in progress</string>
@@ -117,4 +133,41 @@
         <item>Rarely</item>
     </string-array>
     <string name="buglife_steps_to_reproduce">Steps to reproduce</string>
+
+    <!-- Security -->
+    <string-array name="array_security_type">
+        <item>Bomb threat</item>
+        <item>Suspicious packages</item>
+        <item>Evacuation</item>
+        <item>Gas leak</item>
+        <item>Fire</item>
+        <item>Broken elevator</item>
+        <item>Electrical outage</item>
+        <item>Armed person</item>
+        <item>Earthquake</item>
+        <item>Medical emergency</item>
+    </string-array>
+
+    <string-array name="array_security_file">
+        <item>file:///android_asset/bomb_threat_detail_en.html</item>
+        <item>file:///android_asset/suspicious_packages_detail_en.html</item>
+        <item>file:///android_asset/evacuation_detail_en.html</item>
+        <item>file:///android_asset/gas_leak_detail_en.html</item>
+        <item>file:///android_asset/fire_detail_en.html</item>
+        <item>file:///android_asset/broken_elevator_detail_en.html</item>
+        <item>file:///android_asset/electrical_outage_detail_en.html</item>
+        <item>file:///android_asset/armed_person_detail_en.html</item>
+        <item>file:///android_asset/earthquake_detail_en.html</item>
+        <item>file:///android_asset/medical_emergency_detail_en.html</item>
+    </string-array>
+
+    <string name="emergency_call">Emergency call</string>
+    <string name="reach_security">Reach security</string>
+    <string name="emergency_number">514 396–8900</string>
+    <string name="emergency_intern_call">From inside campus</string>
+    <string name="emergency_intern_number">Ex. 55</string>
+    <string name="emergency_procedures">Emergency procedures</string>
+    <string name="security_station">Security station</string>
+    <string name="msg_no_seances_today">No class scheduled today</string>
+
 </resources>

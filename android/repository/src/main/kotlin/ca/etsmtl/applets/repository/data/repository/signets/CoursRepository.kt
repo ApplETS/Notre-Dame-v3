@@ -11,9 +11,9 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeCours
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toCours
-import ca.etsmtl.applets.repository.data.model.Cours
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SignetsUserCredentials
+import model.Cours
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -48,8 +48,8 @@ class CoursRepository @Inject constructor(
             override fun shouldFetch(data: List<Cours>?) = shouldFetch
 
             override fun loadFromDb(): LiveData<List<Cours>> {
-                return Transformations.map(coursDao.getAll()) {
-                    it?.toCours()
+                return Transformations.map(coursDao.getAllCoursEntityAndNoteSur100()) {
+                    it.toCours()
                 }
             }
 

@@ -12,17 +12,19 @@ import ca.etsmtl.applets.etsmobile.domain.FetchGradesDetailsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
-import ca.etsmtl.applets.etsmobile.util.toLocalizedString
-import ca.etsmtl.applets.repository.data.model.Cours
-import ca.etsmtl.applets.repository.data.model.Evaluation
+import ca.etsmtl.applets.etsmobile.extension.toLocalizedString
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.model.SommaireElementsEvaluation
-import ca.etsmtl.applets.repository.data.model.SommaireEtEvaluations
+import ca.etsmtl.applets.repository.util.zeroIfNullOrBlank
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Group
 import com.xwray.groupie.Section
+import model.Cours
+import model.Evaluation
+import model.SommaireElementsEvaluation
+import model.SommaireEtEvaluations
+import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -76,7 +78,7 @@ class GradesDetailsViewModel @Inject constructor(
             ),
             EvaluationDetailItem(
                 app.getString(R.string.label_target_date),
-                evaluation.dateCible?.toLocalizedString() ?: ""
+                evaluation.dateCible?.let { Date(it.unixMillisLong).toLocalizedString() } ?: ""
             )
         )
 
@@ -84,11 +86,11 @@ class GradesDetailsViewModel @Inject constructor(
             val gradeAverageItem = it.sommaireElementsEvaluation.run {
                 GradeAverageItem(
                     cours.value?.cote,
-                    note,
-                    noteSur,
-                    noteSur100,
-                    moyenneClasse,
-                    moyenneClassePourcentage
+                    note.zeroIfNullOrBlank(),
+                    noteSur.zeroIfNullOrBlank(),
+                    noteSur100.zeroIfNullOrBlank(),
+                    moyenneClasse.zeroIfNullOrBlank(),
+                    moyenneClassePourcentage.zeroIfNullOrBlank()
                 )
             }
 
@@ -99,23 +101,29 @@ class GradesDetailsViewModel @Inject constructor(
 
                 add(SectionTitleItem(app.getString(R.string.title_section_evaluations)))
 
-                val evaluationsItems = it.evaluations.map {
-                    ExpandableGroup(EvaluationHeaderItem(it)).apply {
-                        val grade = String.format(
-                            app.getString(R.string.text_grade_with_percentage),
-                            it.note,
-                            it.corrigeSur,
-                            it.notePourcentage
-                        )
+                val evaluationsItems = it.evaluations.map { evaluation ->
+                    evaluation.notePourcentage = evaluation.notePourcentage.zeroIfNullOrBlank()
 
-                        val averageStr = String.format(
+                    ExpandableGroup(EvaluationHeaderItem(evaluation)).apply {
+                        val grade = if (evaluation.note != null) String.format(
                             app.getString(R.string.text_grade_with_percentage),
-                            it.moyenne,
-                            it.corrigeSur,
-                            it.moyennePourcentage
-                        )
+                            evaluation.note,
+                            evaluation.corrigeSur,
+                            evaluation.notePourcentage
+                        ) else {
+                            ""
+                        }
 
-                        add(Section(getEvaluationDetailItems(grade, averageStr, it)))
+                        val averageStr = if (evaluation.moyenne != null) String.format(
+                            app.getString(R.string.text_grade_with_percentage),
+                            evaluation.moyenne,
+                            evaluation.corrigeSur,
+                            evaluation.moyennePourcentage
+                        ) else {
+                            ""
+                        }
+
+                        add(Section(getEvaluationDetailItems(grade, averageStr, evaluation)))
                     }
                 }
 

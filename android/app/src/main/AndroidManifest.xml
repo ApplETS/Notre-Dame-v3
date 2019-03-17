@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ca.etsmtl.applets.etsmobile">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,12 +19,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="${enableCrashReporting}" />
 
         <activity
-            android:name="ca.etsmtl.applets.etsmobile.presentation.main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -30,17 +44,19 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".presentation.gradesdetails.GradesDetailsActivity"
             android:parentActivityName=".presentation.main.MainActivity"
             android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:label="@string/more_item_open_source_licenses"
+            android:label="@string/more_item_label_open_source_licenses"
             android:theme="@style/AppTheme.WithActionBar"
             tools:replace="android:label" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:theme="@style/AppTheme.WithActionBar" />
     </application>
+
 </manifest>

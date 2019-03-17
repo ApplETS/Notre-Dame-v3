@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.security.SecurityFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ca.etsmtl.applets.etsmobile.presentation.security.CustomMapView
+
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tvReachSecurity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/reach_security"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/material_red_500"
+            app:layout_constraintTop_toBottomOf="@+id/mapView"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <View
+            android:id="@+id/viewCallEmergency"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReachSecurity" />
+
+        <ImageView
+            android:id="@+id/ivPhoneEmergency"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_phone_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewCallEmergency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReachSecurity" />
+
+        <TextView
+            android:id="@+id/tvEmergencyCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/emergency_call"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvEmergencyNumber"
+            app:layout_constraintStart_toEndOf="@+id/ivPhoneEmergency"
+            app:layout_constraintTop_toBottomOf="@+id/tvReachSecurity"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvEmergencyNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:text="@string/emergency_number"
+            android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/viewCallEmergency"
+            app:layout_constraintStart_toStartOf="@+id/tvEmergencyCall"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmergencyCall" />
+
+        <ImageView
+            android:id="@+id/ivPhoneInternal"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_phone_black_24dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtEmergencyProcedures"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewCallEmergency" />
+
+        <TextView
+            android:id="@+id/tvEmergencyInternCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/emergency_intern_call"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/tvEmergencyCall"
+            app:layout_constraintTop_toBottomOf="@+id/viewCallEmergency" />
+
+        <TextView
+            android:id="@+id/textEmergencyInternNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/emergency_intern_number"
+            android:textSize="@dimen/material_component_lists_two_line_secondary_text_size"
+            app:layout_constraintStart_toStartOf="@+id/tvEmergencyInternCall"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmergencyInternCall" />
+
+        <TextView
+            android:id="@+id/txtEmergencyProcedures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="16dp"
+            android:text="@string/emergency_procedures"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/material_red_500"
+            app:layout_constraintTop_toBottomOf="@+id/textEmergencyInternNumber" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSecurity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@+id/txtEmergencyProcedures"
+            tools:listitem="@layout/item_security" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+
