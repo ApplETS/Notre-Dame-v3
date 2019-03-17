@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.open
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.extension.setVisible
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
@@ -113,6 +115,10 @@ class MoreFragment : DaggerFragment() {
 
         moreViewModel.navigateToOpenSourcesLicenses.observe(this, EventObserver {
             findNavController().navigate(R.id.activityOpenSourceLicenses)
+        })
+
+        moreViewModel.navigateToUri.observe(this, EventObserver { uriId ->
+            Uri.parse(getString(uriId)).open(requireContext())
         })
 
         moreViewModel.loading.observe(this, Observer {

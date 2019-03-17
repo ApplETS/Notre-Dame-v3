@@ -87,13 +87,16 @@
     <string name="title_security">Securité</string>
     <string name="title_monets">MonÉTS</string>
     <string name="title_bibliotech">Bibliotech</string>
+    <string name="title_news">Nouvelles</string>
+    <string name="title_directory">Bottin</string>
 
     <!-- More -->
-    <string name="more_item_label_faq">FAQ</string>
     <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
-    <string name="more_item_report_bug">Rapporter un bogue</string>
+    <string name="more_item_label_report_bug">Rapporter un bogue</string>
+    <string name="more_item_label_contributors">Contributeurs</string>
+    <string name="more_item_label_open_source_licenses">@string/oss_license_title</string>
+    <string name="more_item_label_beta_faq">FAQ Bêta</string>
     <string name="more_item_label_log_out">Se déconnecter</string>
-    <string name="more_item_open_source_licenses">@string/oss_license_title</string>
     <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>
     <string name="more_label_log_out_progress">Déconnexion en cours</string>
 
