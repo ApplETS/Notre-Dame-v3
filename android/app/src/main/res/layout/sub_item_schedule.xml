@@ -7,18 +7,6 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textViewScheduleEndTime"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="textEnd"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/material_component_lists_single_line_text_size"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewScheduleType"
-        app:layout_constraintEnd_toEndOf="@+id/textViewScheduleStartTime"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text=" 12:00 AM" />
-
-    <TextView
         android:id="@+id/textViewScheduleStartTime"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
@@ -30,6 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="8:00" />
 
+    <TextView
+        android:id="@+id/textViewScheduleEndTime"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/material_component_lists_single_line_text_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewScheduleType"
+        app:layout_constraintEnd_toEndOf="@+id/textViewScheduleStartTime"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="12:00" />
 
     <View
         android:id="@+id/view"
