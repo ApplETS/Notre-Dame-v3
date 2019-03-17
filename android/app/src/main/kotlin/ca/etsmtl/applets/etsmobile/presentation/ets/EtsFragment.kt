@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.extension.open
+import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -58,20 +58,8 @@ class EtsFragment : DaggerFragment() {
             Navigation.findNavController(view!!).navigate(nextAction)
         })
 
-        etsViewModel.navigateToMonEts.observe(this, EventObserver {
-            context?.let { context ->
-                Uri.parse(getString(R.string.uri_mon_ets)).open(context)
-            }
+        etsViewModel.navigateToUri.observe(this, EventObserver { uriId ->
+            Uri.parse(getString(uriId)).open(requireContext())
         })
-
-        etsViewModel.navigateToBibliotech.observe(this, EventObserver {
-            context?.let { context ->
-                Uri.parse(getString(R.string.uri_bibliotech)).open(context)
-            }
-        })
-    }
-
-    companion object {
-        fun newInstance() = EtsFragment()
     }
 }
