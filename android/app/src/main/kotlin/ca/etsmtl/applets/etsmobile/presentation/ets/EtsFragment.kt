@@ -61,11 +61,5 @@ class EtsFragment : DaggerFragment() {
         etsViewModel.navigateToUri.observe(this, EventObserver { uriId ->
             Uri.parse(getString(uriId)).open(requireContext())
         })
-
-        etsViewModel.navigateToUri.observe(this, EventObserver {
-            context?.let { context ->
-                Uri.parse(getString(R.string.uri_moodle)).open(context)
-            }
-        })
     }
 }
