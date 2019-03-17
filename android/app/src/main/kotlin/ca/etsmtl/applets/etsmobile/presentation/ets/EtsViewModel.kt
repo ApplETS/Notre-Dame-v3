@@ -16,8 +16,6 @@ class EtsViewModel @Inject constructor() : ViewModel() {
     val navigateToSecurity: LiveData<Event<Unit>> = _navigateToSecurity
     private val _navigateToUri = MutableLiveData<Event<Int>>()
     val navigateToUri: LiveData<Event<Int>> = _navigateToUri
-    private val _navigateToMoodle = MutableLiveData<Event<Unit>>()
-    val navigateToMoodle: LiveData<Event<Unit>> = _navigateToMoodle
 
     fun itemsList(): List<EtsItem> {
         val items = mutableListOf(
@@ -35,6 +33,9 @@ class EtsViewModel @Inject constructor() : ViewModel() {
             },
             EtsItem(R.drawable.ic_import_contacts_white_24dp, R.string.title_directory) {
                 _navigateToUri.value = Event(R.string.uri_directory)
+            },
+            EtsItem(R.drawable.ic_moodle_24dp, R.string.title_moodle) {
+                _navigateToUri.value = Event(R.string.uri_moodle)
             }
         )
 
