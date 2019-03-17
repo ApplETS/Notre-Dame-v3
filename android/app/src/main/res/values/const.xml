@@ -4,6 +4,10 @@
     <string name="uri_password_forgotten" translatable="false">https://signets-ens.etsmtl.ca/Public/MotDePassePerdu.aspx</string>
     <string name="uri_mon_ets" translatable="false">https://portail.etsmtl.ca/</string>
     <string name="uri_bibliotech" translatable="false">https://www.etsmtl.ca/Bibliotheque/Accueil</string>
+    <string name="uri_news" translatable="false">https://www.etsmtl.ca/Nouvelles/</string>
+    <string name="uri_directory" translatable="false">https://www.etsmtl.ca/Bottin/</string>
+    <string name="uri_github_contributors" translatable="false">https://github.com/ApplETS/Notre-Dame/graphs/contributors</string>
+    <string name="uri_beta_faq" translatable="false">https://github.com/ApplETS/Notre-Dame/wiki/Beta-Test-FAQ-(FR)</string>
     <string name="uri_applets_website" translatable="false">https://clubapplets.ca/</string>
     <string name="uri_applets_gh" translatable="false">https://github.com/orgs/ApplETS/</string>
     <string name="uri_applets_fb" translatable="false">https://www.facebook.com/ClubApplETS</string>
