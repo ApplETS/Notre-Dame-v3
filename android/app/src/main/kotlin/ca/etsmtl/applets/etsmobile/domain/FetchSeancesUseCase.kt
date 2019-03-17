@@ -9,7 +9,6 @@ import ca.etsmtl.applets.repository.data.model.Resource
 import model.Seance
 import model.Session
 import model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.signets.SeanceRepository
 import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
 import javax.inject.Inject
 
@@ -18,8 +17,8 @@ Created by mykaelll87 on 13/01/19
  */
 class FetchSeancesUseCase @Inject constructor(
     private val userCredentials: SignetsUserCredentials,
-    private val seanceRepository: SeanceRepository,
     private val sessionRepository: SessionRepository,
+    private val fetchSessionSeancesUseCase: FetchSessionSeancesUseCase,
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<List<Seance>>> {
@@ -45,7 +44,7 @@ class FetchSeancesUseCase @Inject constructor(
                 if (!sessionFetchDone || seanceFetchStatus.any { !it.value }) {
 
                     mediatorLiveData.value = Resource.loading(seances)
-                } else if (latestError != null && latestError != "") {
+                } else if (!latestError.isNullOrBlank()) {
                     mediatorLiveData.value = Resource.error(latestError!!, seances)
                 } else {
                     mediatorLiveData.value = Resource.success(seances)
@@ -55,9 +54,7 @@ class FetchSeancesUseCase @Inject constructor(
             fun fetchSeancesFromSession(session: Session) {
                 seanceFetchStatus[session] = false
                 mediatorLiveData.addSource(
-                    seanceRepository.getSeancesSession(
-                        userCredentials, null, session, true
-                    )
+                    fetchSessionSeancesUseCase(session)
                 ) { res ->
                     if (res.status == Resource.Status.ERROR) {
                         seanceFetchStatus[session] = true
