@@ -41,11 +41,13 @@ class FetchSeancesUseCase @Inject constructor(
 
                 seances.sortBy { it.dateDebut }
 
+                val error = latestError
+
                 if (!sessionFetchDone || seanceFetchStatus.any { !it.value }) {
 
                     mediatorLiveData.value = Resource.loading(seances)
-                } else if (!latestError.isNullOrBlank()) {
-                    mediatorLiveData.value = Resource.error(latestError!!, seances)
+                } else if (!error.isNullOrBlank()) {
+                    mediatorLiveData.value = Resource.error(error, seances)
                 } else {
                     mediatorLiveData.value = Resource.success(seances)
                 }
