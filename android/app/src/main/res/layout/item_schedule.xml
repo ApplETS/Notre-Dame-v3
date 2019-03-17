@@ -14,12 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/scheduleDayFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/etsRougeClair"
-            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,10 +29,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/material_red_100"
                 android:textSize="@dimen/material_component_text_full_width_single_line_text_field_text_top_and_bottom_padding"
+                android:textStyle="bold"
                 tools:text="Lundi" />
-        </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/browser_actions_divider_color"
+            />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/scheduleInnerList"

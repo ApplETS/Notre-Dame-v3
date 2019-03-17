@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textViewScheduleEndTime"
-        android:layout_width="75dp"
+        android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:textAlignment="textEnd"
         android:textColor="@color/colorPrimary"
@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/textViewScheduleStartTime"
-        android:layout_width="75dp"
+        android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textAlignment="textEnd"

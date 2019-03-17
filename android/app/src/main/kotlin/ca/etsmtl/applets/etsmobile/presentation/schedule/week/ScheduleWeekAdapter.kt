@@ -60,10 +60,9 @@ class ScheduleWeekAdapter : RecyclerView.Adapter<ScheduleWeekAdapter.SeanceDayVi
                 this.key.timeInMillis,
                 DateUtils.FORMAT_SHOW_WEEKDAY or
                     DateUtils.FORMAT_SHOW_DATE or
-                    DateUtils.FORMAT_NO_YEAR)
+                    DateUtils.FORMAT_NO_YEAR).capitalize()
             if (DateUtils.isToday(key.timeInMillis)) {
-                holder.scheduleDay.setTypeface(holder.scheduleDay.typeface, Typeface.ITALIC)
-                holder.scheduleDay.setTextColor(ContextCompat.getColor(holder.containerView.context, R.color.material_light_white))
+                holder.scheduleDay.setTextColor(ContextCompat.getColor(holder.containerView.context, R.color.colorPrimary))
             }
 
             val innerAdapter =
