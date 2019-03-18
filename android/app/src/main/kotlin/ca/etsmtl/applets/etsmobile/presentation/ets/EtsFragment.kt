@@ -48,7 +48,7 @@ class EtsFragment : DaggerFragment() {
     private fun setupRecyclerView() {
         rvEts.adapter = EtsRecyclerViewAdapter(etsViewModel.itemsList())
         rvEts.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW).apply {
-            justifyContent = JustifyContent.SPACE_AROUND
+            justifyContent = JustifyContent.SPACE_BETWEEN
         }
     }
 
