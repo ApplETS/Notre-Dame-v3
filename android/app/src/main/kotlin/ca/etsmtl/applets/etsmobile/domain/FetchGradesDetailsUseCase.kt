@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.extension.isDeviceConnected
+import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.model.Resource
-import ca.etsmtl.applets.repository.data.repository.signets.EvaluationCoursRepository
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
+import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import model.Cours
-import model.EvaluationCours
 import model.SignetsUserCredentials
 import model.SommaireEtEvaluations
 import javax.inject.Inject
@@ -22,51 +21,59 @@ import javax.inject.Inject
 class FetchGradesDetailsUseCase @Inject constructor(
     private var userCredentials: SignetsUserCredentials,
     private val evaluationRepository: EvaluationRepository,
-    private val evaluationCoursRepository: EvaluationCoursRepository,
+    private val fetchCourseEvaluationsCompletedUseCase: FetchCourseEvaluationsCompletedUseCase,
     private val app: App
 ) {
     operator fun invoke(cours: Cours): LiveData<Resource<SommaireEtEvaluations>> = Transformations.switchMap(evaluationRepository.getSummaryAndEvaluations(
         userCredentials,
         cours,
         true
-    )) {
-        if (it.status == Resource.Status.ERROR) {
-            it.handleError(cours)
+    )) { sommaireEtEvaluationsRes ->
+        if (sommaireEtEvaluationsRes.status == Resource.Status.ERROR) {
+            sommaireEtEvaluationsRes.handleError()
+        } else if (sommaireEtEvaluationsRes.shouldCheckForEvaluationsCompletion()) {
+            handleEvaluationsMightBeIncomplete(sommaireEtEvaluationsRes, cours)
         } else {
-            MutableLiveData<Resource<SommaireEtEvaluations>>().apply { value = it }
+            MutableLiveData<Resource<SommaireEtEvaluations>>().apply {
+                value = sommaireEtEvaluationsRes
+            }
         }
     }
 
-    private fun Resource<SommaireEtEvaluations>.handleError(cours: Cours): LiveData<Resource<SommaireEtEvaluations>> {
-        fun List<EvaluationCours>.areCourseEvaluationsCompleted(): Boolean {
-            forEach {
-                if (!it.estComplete && it.sigle == cours.sigle) {
-                    return false
-                }
-            }
+    private fun Resource<SommaireEtEvaluations>.handleError(): LiveData<Resource<SommaireEtEvaluations>> {
+        val result = MutableLiveData<Resource<SommaireEtEvaluations>>()
 
-            return true
+        result.value = if (!app.isDeviceConnected()) {
+            Resource.error(app.getString(R.string.error_no_internet_connection), data)
+        } else {
+            Resource.error(message ?: app.getString(R.string.error), data)
         }
 
-        if (!app.isDeviceConnected()) {
-            return MutableLiveData<Resource<SommaireEtEvaluations>>().apply {
-                value = Resource.error(app.getString(R.string.error_no_internet_connection), data)
-            }
-        } else {
-            return Transformations.map(evaluationCoursRepository.getEvaluationCours(
-                userCredentials,
-                cours,
-                true
-            )) {
-                val genericErrorMsg by lazy { app.getString(R.string.error) }
+        return result
+    }
 
-                if (it.status == Resource.Status.LOADING) {
-                    Resource.loading(data)
-                } else if (it.status == Resource.Status.ERROR || it.data?.areCourseEvaluationsCompleted() == true) {
-                    Resource.error(genericErrorMsg, data)
+    private fun Resource<SommaireEtEvaluations>.shouldCheckForEvaluationsCompletion(): Boolean {
+        val noteStr = data?.sommaireElementsEvaluation?.note
+
+        return status == Resource.Status.SUCCESS && (noteStr == null || noteStr.replaceCommaAndParseToDouble() == 0.0)
+    }
+
+    private fun handleEvaluationsMightBeIncomplete(
+        sommaireEtEvaluationsRes: Resource<SommaireEtEvaluations>,
+        cours: Cours
+    ): LiveData<Resource<SommaireEtEvaluations>> {
+        return Transformations.map(fetchCourseEvaluationsCompletedUseCase(cours)) { evaluationsCompletedRes ->
+            if (evaluationsCompletedRes.status == Resource.Status.SUCCESS) {
+                if (evaluationsCompletedRes.data == true) {
+                    sommaireEtEvaluationsRes
                 } else {
-                    Resource.error(app.getString(R.string.error_course_evaluations_not_completed), data)
+                    Resource.error<SommaireEtEvaluations>(
+                        app.getString(R.string.error_course_evaluations_not_completed),
+                        null
+                    )
                 }
+            } else {
+                evaluationsCompletedRes.copyStatusAndMessage(sommaireEtEvaluationsRes.data)
             }
         }
     }

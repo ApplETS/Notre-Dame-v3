@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import ca.etsmtl.applets.etsmobile.BuildConfig
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
@@ -33,6 +34,8 @@ class MoreViewModel @Inject constructor(
     val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
     private val _navigateToOpenSourceLicenses = MutableLiveData<Event<Unit>>()
     val navigateToOpenSourcesLicenses: LiveData<Event<Unit>> = _navigateToOpenSourceLicenses
+    private val _navigateToUri = MutableLiveData<Event<Int>>()
+    val navigateToUri: LiveData<Event<Int>> = _navigateToUri
 
     /**
      * Clears the user's data
@@ -58,17 +61,29 @@ class MoreViewModel @Inject constructor(
     }
 
     fun itemsList(): List<MoreItem> {
-        return listOf(
-            MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_report_bug) {
+        val items = mutableListOf(
+            MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_label_report_bug) {
                 navigateToBuglifeReporter()
             },
-            MoreItem(R.drawable.ic_code_black_24dp, R.string.more_item_open_source_licenses) {
-                _navigateToOpenSourceLicenses.value = Event(Unit)
+            MoreItem(R.drawable.ic_people_outline_black_24dp, R.string.more_item_label_contributors) {
+                _navigateToUri.value = Event(R.string.uri_github_contributors)
             },
-            MoreItem(R.drawable.ic_exit_to_app_black_24dp, R.string.more_item_label_log_out) {
-                _displayLogoutConfirmationDialog.value = true
+            MoreItem(R.drawable.ic_code_black_24dp, R.string.more_item_label_open_source_licenses) {
+                _navigateToOpenSourceLicenses.value = Event(Unit)
             }
         )
+
+        if (BuildConfig.FLAVOR == "beta") {
+            items.add(MoreItem(R.drawable.ic_help_outline_black_24dp, R.string.more_item_label_beta_faq) {
+                _navigateToUri.value = Event(R.string.uri_beta_faq)
+            })
+        }
+
+        items.add(MoreItem(R.drawable.ic_exit_to_app_black_24dp, R.string.more_item_label_log_out) {
+            _displayLogoutConfirmationDialog.value = true
+        })
+
+        return items
     }
 
     private fun navigateToBuglifeReporter() {
