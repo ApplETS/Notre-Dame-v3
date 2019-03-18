@@ -33,6 +33,9 @@ class EtsViewModel @Inject constructor() : ViewModel() {
             },
             EtsItem(R.drawable.ic_import_contacts_white_24dp, R.string.title_directory) {
                 _navigateToUri.value = Event(R.string.uri_directory)
+            },
+            EtsItem(R.drawable.ic_moodle_24dp, R.string.title_moodle) {
+                _navigateToUri.value = Event(R.string.uri_moodle)
             }
         )
 
