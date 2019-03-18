@@ -17,21 +17,21 @@ class Request {
     }
 
     func buildCallback<DataType: Decodable>(
-        callback: @escaping (RequestResult<DataType>) -> Void
+        callback: @escaping (Result<DataType>) -> Void
     ) -> ((Data?, URLResponse?, Error?) -> Void) {
         return { data, response, error in
             DispatchQueue.main.async {
-                let result = RequestResult<Data>.fromValue(data: data, error: error)
+                let result = Result<Data>.fromValue(data: data, error: error)
 
                 switch result {
                 case .failure(let resultError):
-                    callback(RequestResult<DataType>.failure(resultError))
+                    callback(Result<DataType>.failure(resultError))
                     return
                 case .success:
                     do {
-                        callback(RequestResult.success(try result.decoded(as: DataType.self)))
+                        callback(Result.success(try result.decoded(as: DataType.self)))
                     } catch {
-                        callback(RequestResult.failure(RequestError.malformedJson))
+                        callback(Result.failure(RequestError.malformedJson))
                     }
                 }
             }
@@ -49,7 +49,7 @@ class Request {
         url: String,
         method: RequestMethod,
         headers: [String: String]? = nil,
-        callback: @escaping (RequestResult<DataType>) -> Void
+        callback: @escaping (Result<DataType>) -> Void
     ) -> URLSessionTask? {
         let completionHandler = buildCallback(callback: callback)
         guard let request = createURLRequest(url: url, method: method) else {
@@ -73,7 +73,7 @@ class Request {
         method: RequestMethod,
         data: SentDataType? = nil,
         headers: [String: String]? = nil,
-        callback: @escaping (RequestResult<DataType>) -> Void
+        callback: @escaping (Result<DataType>) -> Void
     ) -> URLSessionTask? {
         let completionHandler = buildCallback(callback: callback)
         guard let request = createURLRequest(url: url, method: method),
@@ -108,7 +108,7 @@ class Request {
     func get<DataType: Decodable>(
         url: String,
         headers: [String: String]? = nil,
-        callback: @escaping (RequestResult<DataType>) -> Void
+        callback: @escaping (Result<DataType>) -> Void
     ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.GET, callback: callback)
     }
@@ -122,7 +122,7 @@ class Request {
     func delete<DataType: Decodable>(
         url: String,
         headers: [String: String]? = nil,
-        callback: @escaping (RequestResult<DataType>) -> Void
+        callback: @escaping (Result<DataType>) -> Void
     ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.DELETE, callback: callback)
     }
@@ -138,7 +138,7 @@ class Request {
         url: String,
         data: SentDataType,
         headers: [String: String]? = nil,
-        callback: @escaping (RequestResult<DataType>) -> Void
+        callback: @escaping (Result<DataType>) -> Void
     ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.POST, data: data, callback: callback)
     }
@@ -154,7 +154,7 @@ class Request {
         url: String,
         data: SentDataType,
         headers: [String: String]? = nil,
-        callback: @escaping (RequestResult<DataType>) -> Void
+        callback: @escaping (Result<DataType>) -> Void
     ) -> URLSessionTask? {
         return self.request(url: url, method: RequestMethod.PUT, data: data, callback: callback)
     }

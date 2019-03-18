@@ -9,39 +9,27 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: ETSTextField!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: ETSTextField!
     @IBOutlet weak var loginButton: ETSButton!
-    @IBOutlet weak var madeBy: ETSLabel!
-    @IBOutlet weak var madeByLogo: UIImageView!
-    @IBOutlet weak var forgotPasswordLink: UIButton!
+    @IBOutlet weak var madeByLabel: UILabel!
+    @IBOutlet weak var clubButton: UIButton!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
 
-    let passwordRightSideButton = UIButton(type: .custom)
-    var passwordHidden = true
-    var isSecureTextEntry = true
-
-    // whether we are waiting on a server response, disables fields and login button
-    private var _loading = false
-    var loading: Bool {
-        get { return self._loading }
-        set {
-            if self._loading != newValue {
-                self._loading = newValue
-                self.username.isEnabled = !self._loading
-                self.password.isEnabled = !self._loading
-                self.loginButton.loading = self._loading
+    private(set) var isLoading: Bool = false {
+        didSet {
+            if isLoading != oldValue {
+                usernameTextField.isEnabled = !isLoading
+                passwordTextField.isEnabled = !isLoading
+                loginButton.isLoading = isLoading
             }
         }
     }
 
-    // whether the fields are valid, controls if we can push the login button
-    private var _valid = true
-    var valid: Bool {
-        get { return self._valid }
-        set {
-            if self._valid != newValue {
-                self._valid = newValue
-                self.loginButton.isEnabled = self._valid
+    private(set) var isValid: Bool = false {
+        didSet {
+            if isValid != oldValue {
+                loginButton.isEnabled = isValid
             }
         }
     }
@@ -50,145 +38,78 @@ class LoginViewController: UIViewController {
         return .lightContent
     }
 
-    @IBAction func sendLoginInfo(_ sender: Any) {
-        self.loading = true
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        view.addGestureRecognizer(tapGestureRecognizer)
+
+        usernameTextField.placeholder = NSLocalizedString("username", comment: "Access code")
+        passwordTextField.placeholder = NSLocalizedString("password", comment: "Password")
+        usernameTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+
+        let usernameInfoButton = UIButton(type: .infoLight)
+        usernameInfoButton.bounds.size = CGSize(width: 40, height: 40)
+        usernameInfoButton.addTarget(self, action: #selector(usernameInfo), for: .touchUpInside)
+        usernameTextField.rightView = usernameInfoButton
+        usernameTextField.rightViewMode = .always
+
+        let showPasswordButton = UIButton()
+        showPasswordButton.setImage(UIImage(named: "eyeClosed"), for: .normal)
+        showPasswordButton.setImage(UIImage(named: "eyeOpen"), for: .selected)
+        showPasswordButton.bounds.size = CGSize(width: 40, height: 40)
+        showPasswordButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        passwordTextField.rightView = showPasswordButton
+        passwordTextField.rightViewMode = .always
+
+        madeByLabel.text = NSLocalizedString("madeBy", comment: "Réalisé par")
+        loginButton.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
+
+        forgotPasswordButton.setTitle(NSLocalizedString("forgotPassword", comment: "Forgot password"), for: .normal)
+    }
+
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        isLoading = true
         // just for testing, we would do that after the auth request resolved
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            self.loading = false
-            self.performSegue(withIdentifier: "goToHome", sender: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) { [weak self] in
+            self?.isLoading = false
+            self?.performSegue(withIdentifier: "goToHome", sender: self)
         }
         // TODO : Send server request for authentification
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // enables tapping outside fields to dismiss keyboard
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.hideKeyboard)
-        )
-        self.view.addGestureRecognizer(tap)
-
-        // logo click redirect to club homepage
-        let logoTap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.onLogoClick)
-        )
-        self.madeByLogo.addGestureRecognizer(logoTap)
-
-        username!.placeholder = NSLocalizedString("username", comment: "Access code")
-        password!.placeholder = NSLocalizedString("password", comment: "Password")
-        username.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        password.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-
-        let usernameRightSideButton = UIButton(type: .custom)
-        usernameRightSideButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-        usernameRightSideButton.frame = CGRect(
-            x: CGFloat(username!.frame.size.width - 25),
-            y: CGFloat(5),
-            width: CGFloat(25),
-            height: CGFloat(25)
-        )
-        let disclosure = UITableViewCell()
-        disclosure.frame = usernameRightSideButton.bounds
-        disclosure.accessoryType = .detailButton
-        disclosure.isUserInteractionEnabled = false
-        usernameRightSideButton.addSubview(disclosure)
-        usernameRightSideButton.addTarget(self, action: #selector(usernameInfo), for: .touchUpInside)
-        username!.rightView = usernameRightSideButton
-        username!.rightViewMode = .always
-
-        passwordRightSideButton.setImage(UIImage(named: "eyeClosed"), for: .normal)
-        passwordRightSideButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-        passwordRightSideButton.frame = CGRect(
-            x: CGFloat(username!.frame.size.width - 25),
-            y: CGFloat(5),
-            width: CGFloat(25),
-            height: CGFloat(25)
-        )
-        passwordRightSideButton.addTarget(self, action: #selector(passwordToggle), for: .touchUpInside)
-
-        password!.rightView = passwordRightSideButton
-        password!.rightViewMode = .always
-
-        madeBy!.text = NSLocalizedString("madeBy", comment: "Réalisé par")
-        loginButton!.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
-
-        forgotPasswordLink!.setTitle(NSLocalizedString("forgotPassword", comment: "Forgot password"), for: .normal)
-
-        self.valid = false
-        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-    }
-
-    @IBAction func onPasswordForgot(_ sender: UIButton) {
+    @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
         UIApplication.shared.open(Environment.current.passwordReset())
     }
 
-    @objc func onLogoClick() {
+    @IBAction func clubButtonTapped() {
         UIApplication.shared.open(Environment.current.clubHomepage())
     }
 
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        self.valid = LoginValidation.validate(
-            code: username!.text ?? "",
-            password: password!.text ?? ""
+    @objc func textDidChange(_ textField: UITextField) {
+        isValid = LoginValidation.validate(
+            code: usernameTextField.text ?? "",
+            password: passwordTextField.text ?? ""
         )
     }
 
-    @objc private func hideKeyboard() {
-        self.view.endEditing(true)
+    @objc private func backgroundTapped() {
+        view.endEditing(true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @objc func usernameInfo(sender: UIButton!) {
-        let alert = UIAlertController(
-            title: NSLocalizedString(
-                "universalAccessCode",
-                comment: "universalAccessCode"
-            ),
-            message: NSLocalizedString(
-                "universalAccessCodeInfo",
-                comment: "universalAccessCodeInfo"
-            ),
-            preferredStyle: .actionSheet
+    @objc func usernameInfo(sender: UIButton) {
+        let alertController = UIAlertController(
+            title: NSLocalizedString("universalAccessCode", comment: "universalAccessCode"),
+            message: NSLocalizedString("universalAccessCodeInfo", comment: "universalAccessCodeInfo"),
+            preferredStyle: .alert
         )
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-        self.present(alert, animated: true)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true)
     }
 
-    @objc func passwordToggle(sender: UIButton!) {
-        password!.togglePasswordVisibility()
-        passwordHidden = !passwordHidden
-        if passwordHidden {
-            passwordRightSideButton.setImage(UIImage(named: "eyeClosed"), for: .normal)
-        } else {
-            passwordRightSideButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
-        }
-
+    @objc func togglePasswordVisibility(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        passwordTextField.togglePasswordVisibility()
     }
-    
-    @objc func appMovedToForeground() {
-        print("app moved to foreground")
-        loginButton.style()
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

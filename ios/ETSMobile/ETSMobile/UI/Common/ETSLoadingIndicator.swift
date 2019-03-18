@@ -65,6 +65,4 @@ import UIKit
             circle.add(animationGroup, forKey: "position")
         }
     }
-    
-
 }
