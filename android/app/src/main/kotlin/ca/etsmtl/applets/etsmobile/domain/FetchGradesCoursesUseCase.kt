@@ -45,11 +45,11 @@ class FetchGradesCoursesUseCase @Inject constructor(
         }
 
         fun updateCoursesGradesAndSendUpdatedCourses(coursesRes: Resource<List<Cours>>) {
-            val courses = coursesRes
+            val coursesToFetchGradesFor = coursesRes
                 .data
                 .orEmpty()
                 .filterByCoursesToFetchGradesFor()
-            val updateCoursesSrc = updateGradesForCoursesUseCase(courses)
+            val updateCoursesSrc = updateGradesForCoursesUseCase(coursesToFetchGradesFor)
 
             result.addSource(updateCoursesSrc) { updateCoursesGradesRes ->
 
