@@ -20,7 +20,7 @@ class MonETSClient {
 
     private init() { }
 
-    func authenticate(userInfo: UserInfo, completion: @escaping (RequestResult<UserInfo>) -> Void) -> URLSessionTask? {
+    func authenticate(userInfo: UserInfo, completion: @escaping (Result<UserInfo>) -> Void) -> URLSessionTask? {
         return Request.shared.post(url: baseURL.appendingPathComponent("authentification").absoluteString,
                                    data: userInfo, callback: completion)
     }
