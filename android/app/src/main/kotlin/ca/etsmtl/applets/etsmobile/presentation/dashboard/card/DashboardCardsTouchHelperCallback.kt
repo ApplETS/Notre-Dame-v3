@@ -1,8 +1,12 @@
 package ca.etsmtl.applets.etsmobile.presentation.dashboard.card
 
+import android.graphics.Canvas
+import android.view.View
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import ca.etsmtl.applets.etsmobile.extension.dpToPx
 import presentation.DashboardViewModel
 
 class DashboardCardsTouchHelperCallback(
@@ -17,6 +21,26 @@ class DashboardCardsTouchHelperCallback(
         }
 
         return super.getSwipeDirs(recyclerView, viewHolder)
+    }
+
+    override fun onChildDraw(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+
+        viewHolder.itemView.adjustItemViewElevation(isCurrentlyActive)
+    }
+
+    private fun View.adjustItemViewElevation(isCurrentlyActive: Boolean) {
+        val elevationDp = if (isCurrentlyActive) 8 else 1
+
+        ViewCompat.setElevation(this, elevationDp.dpToPx(resources.displayMetrics))
     }
 
     override fun onMove(
