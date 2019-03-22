@@ -11,7 +11,6 @@ import model.Seance
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_schedule_week.*
-import java.util.Calendar
 
 /**
 Created by mykaelll87 on 10/01/19
@@ -33,18 +32,7 @@ class ScheduleWeekFragment : DaggerFragment() {
 
         arguments?.takeIf { it.containsKey(LIST_TAG) }?.apply {
             val arrayList = this.getSerializable(LIST_TAG) as ArrayList<Seance>
-            val seances = arrayList.toList()
-            adapter.items = seances.groupBy {
-                val day = Calendar.getInstance()
-                day.clear()
-                day.timeInMillis = it.dateDebut.unixMillisLong
-                day.set(Calendar.HOUR, 0)
-                day.set(Calendar.MINUTE, 0)
-                day.set(Calendar.SECOND, 0)
-                day.set(Calendar.AM_PM, 0)
-
-                day
-            }
+            adapter.items = arrayList.toList()
             this.remove(LIST_TAG)
         }
 

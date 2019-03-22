@@ -19,11 +19,21 @@ import java.util.Calendar
 class ScheduleWeekAdapter : RecyclerView.Adapter<ScheduleWeekAdapter.SeanceDayViewHolder>() {
 
     private var itemList: List<Map.Entry<Calendar, List<Seance>>> = emptyList()
-    var items: Map<Calendar, List<Seance>> = emptyMap()
+    var items: List<Seance> = emptyList()
         set(value) {
             field = value
             val newItemsList = mutableListOf<Map.Entry<Calendar, List<Seance>>>().apply {
-                value.forEach { this.add(it) }
+                value.groupBy {
+                    val day = Calendar.getInstance()
+                    day.clear()
+                    day.timeInMillis = it.dateDebut.unixMillisLong
+                    day.set(Calendar.HOUR, 0)
+                    day.set(Calendar.MINUTE, 0)
+                    day.set(Calendar.SECOND, 0)
+                    day.set(Calendar.AM_PM, 0)
+
+                    day
+                }.forEach { this.add(it) }
             }
 
             val diffCallback = object : DiffUtil.Callback() {
