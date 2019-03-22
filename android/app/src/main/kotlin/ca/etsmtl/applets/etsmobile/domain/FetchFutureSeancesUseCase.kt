@@ -30,7 +30,6 @@ class FetchFutureSeancesUseCase @Inject constructor(
             set(Calendar.SECOND, 0)
         }.timeInMillis / 1000
 
-
         val seanceFetchStatus = mutableMapOf<Session, Boolean>()
         var sessionFetchDone = false
         val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()

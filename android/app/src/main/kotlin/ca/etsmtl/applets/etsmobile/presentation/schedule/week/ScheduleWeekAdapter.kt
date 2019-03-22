@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule.week
 
-import android.graphics.Typeface
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
