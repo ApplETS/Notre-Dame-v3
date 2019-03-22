@@ -10,18 +10,27 @@ import model.Seance
 import model.Session
 import model.SignetsUserCredentials
 import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
+import java.util.Calendar
 import javax.inject.Inject
 
 /**
 Created by mykaelll87 on 13/01/19
  */
-class FetchSeancesUseCase @Inject constructor(
+class FetchFutureSeancesUseCase @Inject constructor(
     private val userCredentials: SignetsUserCredentials,
     private val sessionRepository: SessionRepository,
     private val fetchSessionSeancesUseCase: FetchSessionSeancesUseCase,
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<List<Seance>>> {
+        val todayTimeStamp = Calendar.getInstance().apply {
+            set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }.timeInMillis / 1000
+
+
         val seanceFetchStatus = mutableMapOf<Session, Boolean>()
         var sessionFetchDone = false
         val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
@@ -37,7 +46,7 @@ class FetchSeancesUseCase @Inject constructor(
                 mediatorLiveData.value?.data?.let {
                     seances.addAll(it)
                 }
-                seances.addAll(res.data.orEmpty().filter { !seances.contains(it) })
+                seances.addAll(res.data.orEmpty().filter { !seances.contains(it) && it.dateDebut.unixMillisLong >= todayTimeStamp })
 
                 seances.sortBy { it.dateDebut }
 
@@ -71,7 +80,7 @@ class FetchSeancesUseCase @Inject constructor(
             }
 
             sessions.forEach {
-                if (!seanceFetchStatus.contains(it)) {
+                if (it.dateFin >= todayTimeStamp && !seanceFetchStatus.contains(it)) {
                     fetchSeancesFromSession(it)
                 }
             }

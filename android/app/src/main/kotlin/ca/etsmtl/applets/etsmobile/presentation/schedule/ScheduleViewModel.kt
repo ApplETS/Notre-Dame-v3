@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.domain.FetchSeancesUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchFutureSeancesUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
@@ -24,12 +24,12 @@ import javax.inject.Inject
  * Created by mykaelll87 on 2018-10-24
  */
 class ScheduleViewModel @Inject constructor(
-    private val fetchSeancesUseCase: FetchSeancesUseCase,
+    private val fetchFutureSeancesUseCase: FetchFutureSeancesUseCase,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
     private var seanceRes = object : RefreshableLiveData<Resource<List<Seance>>>() {
         override fun updateSource(): LiveData<Resource<List<Seance>>> {
-            return fetchSeancesUseCase()
+            return fetchFutureSeancesUseCase()
         }
     }
 
