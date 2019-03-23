@@ -48,6 +48,11 @@ matrix:
     - "./gradlew ktlintCheck > /dev/null"
     - "./gradlew test > /dev/null"
     - "./gradlew connectedAndroidTest -PdisablePreDex"
+    deploy:
+      provider: script
+      script: bash android/scripts/deploy_beta.sh
+      on:
+        branch: master
         
   - os: osx
     osx_image: xcode10
