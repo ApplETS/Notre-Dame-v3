@@ -75,7 +75,7 @@ android {
         // Beta flavor
         beta {
             serviceAccountCredentials = file("../service_account_credentials_beta.json")
-            track = "production" // internal/alpha/beta/production
+            track = "beta" // internal/alpha/beta/production
         }
         // Production flavor
 // TODO:
