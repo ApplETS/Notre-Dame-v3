@@ -1,3 +1,5 @@
+dist: xenial
+
 cache:
 - bundler
 - cocoapods
@@ -10,7 +12,9 @@ cache:
 
 matrix:
   include:
-  - language: android
+  - os: linux
+    dist: trusty
+    language: android
     jdk: oraclejdk8
     sudo: false
     android:
@@ -35,29 +39,8 @@ matrix:
         - sys-img-armeabi-v7a-android-28
         - sys-img-armeabi-v7a-android-21
     before_install:
-    - wget https://www.openssl.org/source/openssl-1.1.0g.tar.gz > /dev/null
-    - tar xzvf openssl-1.1.0g.tar.gz > /dev/null
-    - cd openssl-1.1.0g
-    - ./config
-    - make > /dev/null
-    - sudo make install > /dev/null
-    - export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64
-    - sudo ldconfig
-    - pwd
-    - cd ../android
-    - openssl version -v
-    - openssl aes-256-cbc -k "$ENCRYPTED_ANDROID_BETA_GOOGLE_SERVICES_PW" -in ./encrypted/google-services.json.beta.encrypted -out ./app/google-sersvices.json -d
-    - openssl aes-256-cbc -k "$ENCRYPTED_ANDROID_SECRETS_XML_PW" -in ./encrypted/secrets.xml.encrypted -out ./app/src/main/res/values/secrets.xml -d
-    - openssl aes-256-cbc -k "$ENCRYPTED_ETSMOBILE_KEYSTORE_PW" -in ./encrypted/etsm_upload_ks.jks.encrypted -out ./etsm_upload_ks.jks -d
-    - openssl aes-256-cbc -k "$ENCRYPTED_KEYSTORE_PROPERTIES_PW" -in ./encrypted/keystore.properties.encrypted -out ./keystore.properties -d
-    - yes | sdkmanager "platforms;android-28" > /dev/null
-    - yes | sdkmanager "platforms;android-27" > /dev/null
-    - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-    - emulator -avd test -no-audio -no-window &
-    - android-wait-for-emulator
-    - adb shell input keyevent 82 &
+    - bash android/scripts/before_install.sh
     before_script:
-    - cd ..
     - pwd
     - chmod +x gradlew
     script:
@@ -65,6 +48,11 @@ matrix:
     - "./gradlew ktlintCheck > /dev/null"
     - "./gradlew test > /dev/null"
     - "./gradlew connectedAndroidTest -PdisablePreDex"
+    deploy:
+      provider: script
+      script: bash android/scripts/deploy_beta.sh
+      on:
+        branch: master
         
   - os: osx
     osx_image: xcode10
