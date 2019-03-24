@@ -23,12 +23,13 @@ class FetchFutureSeancesUseCase @Inject constructor(
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<List<Seance>>> {
-        val todayTimeStamp = Calendar.getInstance().apply {
+        val todayTimeStampMilis = Calendar.getInstance().apply {
             set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
             set(Calendar.HOUR_OF_DAY, 0)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
-        }.timeInMillis / 1000
+        }.timeInMillis
+        val todayTimeStamp = todayTimeStampMilis / 1000
 
         val seanceFetchStatus = mutableMapOf<Session, Boolean>()
         var sessionFetchDone = false
@@ -45,7 +46,7 @@ class FetchFutureSeancesUseCase @Inject constructor(
                 mediatorLiveData.value?.data?.let {
                     seances.addAll(it)
                 }
-                seances.addAll(res.data.orEmpty().filter { !seances.contains(it) && it.dateDebut.unixMillisLong >= todayTimeStamp })
+                seances.addAll(res.data.orEmpty().filter { !seances.contains(it) && it.dateDebut.unixMillisLong >= todayTimeStampMilis })
 
                 seances.sortBy { it.dateDebut }
 
