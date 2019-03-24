@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:descendantFocusability="blocksDescendants"
+        android:nestedScrollingEnabled="false"
         android:paddingStart="6dp"
         android:paddingEnd="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
