@@ -45,7 +45,7 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvalu
             SessionEntity::class,
             SommaireElementsEvaluationEntity::class
         ],
-        version = 3
+        version = 4
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun activiteDao(): ActiviteDao
