@@ -1,9 +1,11 @@
 package ca.etsmtl.applets.etsmobile.presentation.student
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.fadeTo
@@ -32,14 +34,23 @@ class StudentFragment : DaggerFragment() {
         return inflater.inflate(R.layout.fragment_student, container, false)
     }
 
+    private val showTabsHandler = Handler()
+    private var showTabsRunnable: Runnable? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as? MainActivity)?.let { activity ->
             activity.tabLayout?.let { tabLayout ->
-                viewPagerStudent.adapter = StudentPagerAdapter(activity, childFragmentManager)
-                tabLayout.setupWithViewPager(viewPagerStudent)
-                tabLayout.fadeTo(View.VISIBLE)
+                showTabsRunnable = Runnable {
+                    viewPagerStudent.adapter = StudentPagerAdapter(activity, childFragmentManager)
+                    tabLayout.setupWithViewPager(viewPagerStudent)
+                    tabLayout.fadeTo(View.VISIBLE)
+                }
+                showTabsHandler.postDelayed(
+                    showTabsRunnable,
+                    resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+                )
             }
         }
     }
@@ -52,6 +63,7 @@ class StudentFragment : DaggerFragment() {
         }
 
         super.onDestroyView()
+        showTabsHandler.removeCallbacks(showTabsRunnable)
     }
 
     companion object {

@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleInnerListAdapter
+import ca.etsmtl.applets.etsmobile.presentation.schedule.week.ScheduleWeekInnerListAdapter
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.shopify.livedataktx.observe
 import dagger.android.support.DaggerFragment
@@ -29,7 +29,7 @@ class TodayScheduleCardFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val adapter: ScheduleInnerListAdapter = ScheduleInnerListAdapter()
+    private val adapter: ScheduleWeekInnerListAdapter = ScheduleWeekInnerListAdapter()
     private val todayScheduleCardViewModel: TodayScheduleCardViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(TodayScheduleCardViewModel::class.java)
     }
