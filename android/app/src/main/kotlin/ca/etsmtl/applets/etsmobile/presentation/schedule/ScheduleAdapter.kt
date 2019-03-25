@@ -1,77 +1,62 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
-import android.graphics.Typeface
-import android.text.format.DateUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import ca.etsmtl.applets.etsmobile.R
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_schedule.scheduleDay
-import kotlinx.android.synthetic.main.item_schedule.scheduleInnerList
+import android.os.Bundle
+import android.util.Range
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import ca.etsmtl.applets.etsmobile.presentation.schedule.week.ScheduleWeekFragment
 import model.Seance
-import java.util.Date
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 /**
- * Created by mykaelll87 on 2018-10-28
+ * Created by mykaelll87 on 2019-01-10
  */
-class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.SeanceDayViewHolder>() {
+class ScheduleAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    private var itemList: List<Map.Entry<Date, List<Seance>>> = emptyList()
-    var items: Map<Date, List<Seance>> = emptyMap()
+    private var itemList: List<Map.Entry<Range<Calendar>, List<Seance>>> = emptyList()
+    var items: Map<Range<Calendar>, List<Seance>> = emptyMap()
         set(value) {
             field = value
-            val newItemsList = mutableListOf<Map.Entry<Date, List<Seance>>>().apply {
+            val newItemsList = mutableListOf<Map.Entry<Range<Calendar>, List<Seance>>>().apply {
                 value.forEach { this.add(it) }
             }
 
-            val diffCallback = object : DiffUtil.Callback() {
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                    itemList[oldItemPosition].key == newItemsList[newItemPosition].key
-
-                override fun getOldListSize() = itemList.size
-
-                override fun getNewListSize() = newItemsList.size
-
-                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                    itemList[oldItemPosition].value == newItemsList[newItemPosition].value
-            }
-
-            val diffResult = DiffUtil.calculateDiff(diffCallback)
             itemList = newItemsList
-            diffResult.dispatchUpdatesTo(this)
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeanceDayViewHolder = SeanceDayViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_schedule, parent, false)
-    )
+    fun getCurrentPosition(): Int {
+        val cal = Calendar.getInstance()
+        var i = 0
 
-    override fun getItemCount(): Int {
-        return itemList.count()
+        while (i < itemList.size) {
+            if ((cal in itemList[i].key) or (cal < itemList[i].key.lower)) return i
+
+            ++i
+        }
+
+        return i - 1
     }
 
-    override fun onBindViewHolder(holder: SeanceDayViewHolder, position: Int) {
-        with(itemList[position]) {
-            holder.scheduleDay.text = DateUtils.formatDateTime(
-                holder.containerView.context,
-                this.key.time,
-                DateUtils.FORMAT_SHOW_WEEKDAY or
-                    DateUtils.FORMAT_SHOW_DATE or
-                    DateUtils.FORMAT_NO_YEAR)
-            if (DateUtils.isToday(key.time)) {
-                holder.scheduleDay.setTypeface(holder.scheduleDay.typeface, Typeface.ITALIC)
-                holder.scheduleDay.setTextColor(ContextCompat.getColor(holder.containerView.context, R.color.material_light_white))
-            }
-
-            val innerAdapter = ScheduleInnerListAdapter()
-            innerAdapter.items = value
-            holder.scheduleInnerList.adapter = innerAdapter
+    override fun getItem(position: Int): Fragment = ScheduleWeekFragment().apply {
+        arguments = Bundle().apply {
+            putSerializable(ScheduleWeekFragment.LIST_TAG, ArrayList<Seance>()
+                .apply { itemList[position].value.forEach { this.add(it) } })
         }
     }
 
-    class SeanceDayViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer
+    override fun getCount(): Int = itemList.size
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        val range = itemList[position].key
+
+        return SimpleDateFormat
+            .getDateInstance(DateFormat.DEFAULT, Locale.CANADA_FRENCH)
+            .format(range.lower.time)
+    }
+
+    // TODO: see https://developer.android.com/training/implementing-navigation/lateral
 }
