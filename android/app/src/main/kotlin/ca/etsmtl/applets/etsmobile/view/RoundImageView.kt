@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.util
+package ca.etsmtl.applets.etsmobile.view
 
 import android.content.Context
 import android.graphics.Outline

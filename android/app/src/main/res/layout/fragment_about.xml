@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent">
 
-                <ca.etsmtl.applets.etsmobile.util.RoundImageView
+                <ca.etsmtl.applets.etsmobile.view.RoundImageView
                     android:id="@+id/ivAppletsLogo"
                     android:layout_width="130dp"
                     android:layout_height="130dp"

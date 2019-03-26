@@ -52,7 +52,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tvItemAboutAppletsLabel"
                 app:layout_constraintVertical_bias="0.8" />
 
-            <ca.etsmtl.applets.etsmobile.util.RoundImageView
+            <ca.etsmtl.applets.etsmobile.view.RoundImageView
                 android:id="@+id/ivAppletsLogo"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
