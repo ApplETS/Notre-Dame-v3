@@ -17,9 +17,12 @@ import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.empty_view_schedule.*
-import kotlinx.android.synthetic.main.fragment_schedule.*
+import kotlinx.android.synthetic.main.activity_main.appBarLayout
+import kotlinx.android.synthetic.main.activity_main.tabLayout
+import kotlinx.android.synthetic.main.empty_view_schedule.btnRetry
+import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.schedule_pager
+import kotlinx.android.synthetic.main.fragment_schedule.swipeRefreshLayoutSchedule
 import javax.inject.Inject
 
 /**
@@ -128,10 +131,14 @@ class ScheduleFragment : DaggerFragment() {
     }
 
     override fun onDestroyView() {
-        (activity as? MainActivity)?.tabLayout?.let {
-            it.isVisible = false
-            it.tabMode = TabLayout.MODE_FIXED
-            it.setupWithViewPager(null)
+        (activity as? MainActivity)?.let { activity ->
+            activity.appBarLayout.setExpanded(true, false)
+
+            activity.tabLayout?.let {
+                it.setupWithViewPager(null)
+                it.tabMode = TabLayout.MODE_FIXED
+                it.isVisible = false
+            }
         }
         super.onDestroyView()
 
