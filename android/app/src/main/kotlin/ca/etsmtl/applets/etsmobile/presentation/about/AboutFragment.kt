@@ -15,11 +15,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.extension.getAndroidDimensionInPixelSize
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.open
 import ca.etsmtl.applets.etsmobile.extension.setVisible
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_about.backgroundAbout
@@ -74,11 +74,11 @@ class AboutFragment : Fragment() {
         val transitionInflater = TransitionInflater.from(activity)
 
         sharedElementReturnTransition = transitionInflater
-            .inflateTransition(R.transition.image_shared_element_transition)
+            .inflateTransition(R.transition.shared_element_transition_image)
 
         if (savedInstanceState == null) {
             sharedElementEnterTransition = transitionInflater
-                .inflateTransition(R.transition.image_shared_element_transition)
+                .inflateTransition(R.transition.shared_element_transition_image)
                 .apply {
                     addListener(
                         onPause = { isEnterTransitionCanceled = true },

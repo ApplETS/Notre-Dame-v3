@@ -35,7 +35,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/svMoreContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -54,24 +57,22 @@
 
             <ImageView
                 android:id="@+id/ivAppletsLogo"
-                android:layout_width="72dp"
-                android:layout_height="48dp"
-                android:paddingStart="16dp"
-                android:paddingTop="12dp"
-                android:paddingEnd="32dp"
-                android:paddingBottom="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_mini_logo_applets"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:scaleType="centerCrop"
                 android:transitionName="@string/transition_about_applets_logo"
                 app:layout_constraintBottom_toBottomOf="@+id/tvItemAboutAppletsLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvItemAboutAppletsLabel" />
+                app:layout_constraintTop_toTopOf="@+id/tvItemAboutAppletsLabel"
+                app:srcCompat="@drawable/ic_favicon_applets_48dp" />
 
             <TextView
                 android:id="@+id/tvItemAboutAppletsLabel"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:paddingStart="32dp"
                 android:paddingEnd="@dimen/material_component_lists_right_padding"
                 android:text="@string/more_item_label_about_applets"
                 android:textAppearance="?android:attr/textAppearanceListItem"

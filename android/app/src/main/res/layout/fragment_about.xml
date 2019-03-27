@@ -44,17 +44,18 @@
 
                 <ImageView
                     android:id="@+id/ivAppletsLogo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_mini_logo_applets"
+                    android:scaleType="centerCrop"
                     android:transitionName="@string/transition_about_applets_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_favicon_applets_48dp" />
 
                 <TextView
                     android:id="@+id/tvInfo"
