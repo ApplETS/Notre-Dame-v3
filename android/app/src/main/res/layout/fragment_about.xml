@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent">
 
-                <ca.etsmtl.applets.etsmobile.view.RoundImageView
+                <ImageView
                     android:id="@+id/ivAppletsLogo"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
@@ -51,11 +51,11 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_mini_logo_applets"
                     android:transitionName="@string/transition_about_applets_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_favicon_applets_48dp" />
 
                 <TextView
                     android:id="@+id/tvInfo"

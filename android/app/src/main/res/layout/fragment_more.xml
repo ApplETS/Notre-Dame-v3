@@ -35,7 +35,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/svMoreContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -52,17 +55,17 @@
                 app:layout_constraintTop_toTopOf="@+id/tvItemAboutAppletsLabel"
                 app:layout_constraintVertical_bias="0.8" />
 
-            <ca.etsmtl.applets.etsmobile.view.RoundImageView
+            <ImageView
                 android:id="@+id/ivAppletsLogo"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_mini_logo_applets"
                 android:transitionName="@string/transition_about_applets_logo"
                 app:layout_constraintBottom_toBottomOf="@+id/tvItemAboutAppletsLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvItemAboutAppletsLabel" />
+                app:layout_constraintTop_toTopOf="@+id/tvItemAboutAppletsLabel"
+                app:srcCompat="@drawable/ic_favicon_applets_48dp" />
 
             <TextView
                 android:id="@+id/tvItemAboutAppletsLabel"
