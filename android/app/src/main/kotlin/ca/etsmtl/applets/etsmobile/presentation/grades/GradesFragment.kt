@@ -46,10 +46,10 @@ class GradesFragment : DaggerFragment() {
                 currentCourseShown = cours
                 this@GradesFragment.activity?.let {
                     GradesDetailsActivity.start(
-                            it as AppCompatActivity,
-                            holder.itemView,
-                            holder.tvCourseSigle,
-                            cours
+                        it as AppCompatActivity,
+                        holder.itemView,
+                        holder.tvCourseSigle,
+                        cours
                     )
                 }
             }
@@ -88,9 +88,10 @@ class GradesFragment : DaggerFragment() {
     }
 
     private fun subscribeUI() {
-        gradesViewModel.cours.observe(this, Observer {
-            it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
-        })
+        gradesViewModel.cours
+            .observe(this, Observer {
+                it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
+            })
 
         gradesViewModel.showEmptyView.observe(this, Observer {
             recyclerViewCoursesGrades.isVisible = it == false

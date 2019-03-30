@@ -1,4 +1,4 @@
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayoutProfile"
@@ -14,4 +14,4 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:ignore="PrivateResource"
         tools:listitem="@layout/item_profile" />
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch>
