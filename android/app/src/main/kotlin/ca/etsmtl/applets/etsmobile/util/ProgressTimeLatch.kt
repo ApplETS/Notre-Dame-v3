@@ -29,7 +29,7 @@ import android.os.SystemClock
  * Works with an view through the lambda API.
  */
 class ProgressTimeLatch(
-    private val delayMs: Long = 750,
+    private val delayMs: Long = 300,
     private val minShowTime: Long = 500,
     private val viewRefreshingToggle: ((Boolean) -> Unit)
 ) {

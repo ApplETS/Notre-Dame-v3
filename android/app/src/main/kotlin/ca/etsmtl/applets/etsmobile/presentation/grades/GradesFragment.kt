@@ -16,6 +16,7 @@ import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.shopify.livedataktx.debounce
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInDownAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
@@ -89,6 +90,7 @@ class GradesFragment : DaggerFragment() {
 
     private fun subscribeUI() {
         gradesViewModel.cours
+            .debounce(100)
             .observe(this, Observer {
                 it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
             })
