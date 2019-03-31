@@ -14,7 +14,7 @@ class SwipeRefreshLayoutWithProgressTimeLatch @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : SwipeRefreshLayout(context, attrs) {
     private val swipeRefreshLatch: ProgressTimeLatch by lazy {
-        ProgressTimeLatch {
+        ProgressTimeLatch(200, 1500) {
             super.setRefreshing(it)
         }
     }
