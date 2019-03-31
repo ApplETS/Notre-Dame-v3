@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayoutCoursesGrades"
     android:layout_width="match_parent"
@@ -23,4 +23,4 @@
             tools:ignore="PrivateResource"
             tools:listitem="@layout/item_grade_course" />
     </FrameLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch>

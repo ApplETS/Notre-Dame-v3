@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/design_bottom_navigation_height"
     tools:ignore="PrivateResource">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch
         android:id="@+id/swipeRefreshLayoutSchedule"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,6 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </FrameLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch>
 </FrameLayout>
 
