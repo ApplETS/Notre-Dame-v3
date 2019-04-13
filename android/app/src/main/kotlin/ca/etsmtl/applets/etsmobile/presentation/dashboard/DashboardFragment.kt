@@ -125,9 +125,9 @@ class DashboardFragment : DaggerFragment() {
         dashboardViewModel.load()
     }
 
-    override fun onStop() {
+    override fun onPause() {
         dashboardViewModel.save()
 
-        super.onStop()
+        super.onPause()
     }
 }
