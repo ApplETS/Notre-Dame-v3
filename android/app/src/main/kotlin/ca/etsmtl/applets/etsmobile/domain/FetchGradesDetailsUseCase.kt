@@ -6,10 +6,10 @@ import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.isDeviceConnected
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import model.Cours
+import model.Resource
 import model.SignetsUserCredentials
 import model.SommaireEtEvaluations
 import javax.inject.Inject

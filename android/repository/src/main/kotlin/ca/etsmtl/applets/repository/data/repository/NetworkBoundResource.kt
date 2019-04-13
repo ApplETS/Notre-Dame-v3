@@ -22,7 +22,7 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.api.ApiResponse
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.

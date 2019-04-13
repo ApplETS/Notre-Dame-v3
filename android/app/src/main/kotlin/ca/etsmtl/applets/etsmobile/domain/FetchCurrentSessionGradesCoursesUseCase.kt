@@ -2,7 +2,7 @@ package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import model.Cours
 import javax.inject.Inject
 

@@ -2,10 +2,10 @@ package ca.etsmtl.applets.etsmobile.domain
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.EvaluationCoursRepository
 import model.Cours
 import model.EvaluationCours
+import model.Resource
 import model.SignetsUserCredentials
 import javax.inject.Inject
 

@@ -11,7 +11,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDeSessions
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.SessionDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSessions
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import model.Session
 import model.SignetsUserCredentials
 import javax.inject.Inject

@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchTodaySeancesUseCase
+import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
-import ca.etsmtl.applets.repository.data.model.Resource
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
+import model.Resource
 import javax.inject.Inject
 
 /**

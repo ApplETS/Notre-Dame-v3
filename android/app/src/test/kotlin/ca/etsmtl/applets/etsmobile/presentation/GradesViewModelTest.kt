@@ -8,7 +8,7 @@ import ca.etsmtl.applets.etsmobile.domain.FetchGradesCoursesGroupedBySessionUseC
 import ca.etsmtl.applets.etsmobile.extension.mockNetwork
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
