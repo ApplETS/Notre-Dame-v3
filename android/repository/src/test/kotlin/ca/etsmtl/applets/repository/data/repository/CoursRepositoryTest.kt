@@ -15,7 +15,7 @@ import ca.etsmtl.applets.repository.data.db.entity.mapper.toCours
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntityAndNoteSur100
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.util.ApiUtil
 import ca.etsmtl.applets.repository.util.InstantAppExecutors

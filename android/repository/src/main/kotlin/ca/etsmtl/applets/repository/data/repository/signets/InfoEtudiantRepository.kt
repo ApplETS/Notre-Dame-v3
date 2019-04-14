@@ -11,7 +11,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiEtudiant
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.EtudiantDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEtudiant
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import model.Etudiant
 import model.SignetsUserCredentials
 import javax.inject.Inject

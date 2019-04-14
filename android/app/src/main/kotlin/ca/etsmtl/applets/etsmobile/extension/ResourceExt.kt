@@ -3,7 +3,7 @@ package ca.etsmtl.applets.etsmobile.extension
 import android.content.Context
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 
 /**
  * Created by Sonphil on 03-11-18.

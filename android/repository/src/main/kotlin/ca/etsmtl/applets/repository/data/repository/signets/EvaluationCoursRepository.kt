@@ -11,7 +11,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeEvaluation
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationCoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEvaluationCours
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import model.Cours
 import model.EvaluationCours
 import model.SignetsUserCredentials

@@ -2,7 +2,7 @@ package ca.etsmtl.applets.repository.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 
 /**
  * Created by Sonphil on 01-11-18.

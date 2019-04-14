@@ -8,16 +8,16 @@ import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchEtudiantUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchProgrammesUseCase
+import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
-import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
-import ca.etsmtl.applets.repository.data.model.Resource
 import ca.etsmtl.applets.repository.util.zipResourceTo
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import model.Etudiant
 import model.Programme
+import model.Resource
 import javax.inject.Inject
 
 /**

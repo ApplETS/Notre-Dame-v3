@@ -3,9 +3,9 @@ package ca.etsmtl.applets.etsmobile.domain
 import androidx.lifecycle.LiveData
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.repository.data.model.Resource
 import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
+import model.Resource
 import model.Seance
 import java.util.Calendar
 import javax.inject.Inject

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package ca.etsmtl.applets.repository.data.model
+package model
 
 class Resource<T> private constructor(val status: Status, val data: T?, val message: String?) {
     enum class Status {
@@ -36,10 +36,6 @@ class Resource<T> private constructor(val status: Status, val data: T?, val mess
         // If this and other point to the same object ...
         if (this === other) {
             return true
-        }
-
-        if (other == null || javaClass != other.javaClass) {
-            return false
         }
 
         val res = other as Resource<*>

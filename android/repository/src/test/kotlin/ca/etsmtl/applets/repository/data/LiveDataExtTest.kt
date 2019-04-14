@@ -3,7 +3,7 @@ package ca.etsmtl.applets.repository.data
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import ca.etsmtl.applets.repository.util.zipResourceTo
 import ca.etsmtl.applets.repository.util.zipTo
 import com.nhaarman.mockito_kotlin.capture

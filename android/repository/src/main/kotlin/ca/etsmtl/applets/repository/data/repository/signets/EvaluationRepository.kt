@@ -15,7 +15,7 @@ import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.SommaireElementsEvaluationDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEvaluations
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSommaireEvaluation
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import model.Cours
 import model.SignetsUserCredentials
 import model.SommaireElementsEvaluation

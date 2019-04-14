@@ -15,7 +15,7 @@ import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.extension.call
-import ca.etsmtl.applets.repository.data.model.Resource
+import model.Resource
 import model.SignetsUserCredentials
 import model.UniversalCode
 import javax.inject.Inject

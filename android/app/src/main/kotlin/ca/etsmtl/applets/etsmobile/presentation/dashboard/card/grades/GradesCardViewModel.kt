@@ -10,8 +10,8 @@ import ca.etsmtl.applets.etsmobile.extension.adjustCoteForDisplay
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
-import ca.etsmtl.applets.repository.data.model.Resource
 import model.Cours
+import model.Resource
 import presentation.ViewModel
 import javax.inject.Inject
 
