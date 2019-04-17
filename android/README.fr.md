@@ -2,6 +2,8 @@
 
 Ce projet concrétise la nouvelle génération de l'application ÉTSMobile pour Android.
 
+<a href='https://play.google.com/store/apps/details?id=ca.etsmtl.applets.etsmobile.beta&hl=fr_CA'><img alt='Disponible sur Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/fr-ca_badge_web_generic.png' width=250px /></a>
+
 ## Prérequis
 
 * Git

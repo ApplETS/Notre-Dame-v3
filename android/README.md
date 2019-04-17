@@ -2,6 +2,8 @@
 
 This project is the placeholder for the next generation of ETSMobile currently available for Android.
 
+<a href='https://play.google.com/store/apps/details?id=ca.etsmtl.applets.etsmobile.beta'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=250px/></a>
+
 _Note: This guide is available in: [Français](https://github.com/ApplETS/Notre-Dame/blob/master/android/README.fr.md)_
 
 ## :rocket: Prerequisites
