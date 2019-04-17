@@ -77,8 +77,8 @@
     <string name="label_balance_profile">Balance</string>
     <string name="label_code_program_profile">Code</string>
     <string name="label_average_program_profile">Average</string>
-    <string name="label_number_accumulated_credits_program_profile">Accumulated Courses</string>
-    <string name="label_number_registered_credits_program_profile">Registered Courses</string>
+    <string name="label_number_accumulated_credits_program_profile">Accumulated Credits</string>
+    <string name="label_number_registered_credits_program_profile">Registered Credits</string>
     <string name="label_number_completed_courses_program_profile">Completed Courses</string>
     <string name="label_number_failed_courses_program_profile">Failed Courses</string>
     <string name="label_number_equivalent_courses_program_profile">Equivalent Courses</string>
