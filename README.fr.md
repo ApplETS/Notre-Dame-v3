@@ -9,6 +9,9 @@ Ce projet concrétise la troisième version de l'application mobile ÉTSMobile p
 * Et bien plus...
 
 ## 🤖 [Application Android](https://github.com/ApplETS/Notre-Dame/tree/master/android)
+
+<a href='https://play.google.com/store/apps/details?id=ca.etsmtl.applets.etsmobile.beta&hl=fr_CA'><img alt='Disponible sur Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/fr-ca_badge_web_generic.png' width=250px /></a>
+
 * Langage: [Kotlin](https://github.com/ApplETS/Notre-Dame/search?l=kotlin)
 * Version du SDK minimale: 21
 * [Architecture](https://github.com/ApplETS/Notre-Dame/wiki/Architecture-(FR))
