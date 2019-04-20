@@ -15,14 +15,16 @@ matrix:
   - os: linux
     dist: minimal
     before_install:
-      # set SDK Tools path variable and ANDROID_HOME
+      # Set SDK Tools path variable and ANDROID_HOME
       - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
       - export PATH=$PATH:$HOME/sdk/emulator:$HOME/sdk/tools/bin:$HOME/sdk/tools:$HOME/sdk/platform-tools
       - export ANDROID_HOME=$HOME/sdk
+      # Set permissions and execute the configuration scripts
       - chmod +x android/scripts/before_install.sh
       - chmod +x android/scripts/android-wait-for-emulator
       - android/scripts/before_install.sh
     install:
+      # Create and start the Android emulator
       - echo no | avdmanager create avd --force -n test -k "system-images;android-21;default;x86_64"
       - emulator -avd test -no-accel -no-snapshot -no-audio -no-window &
       - android/scripts/android-wait-for-emulator
@@ -31,6 +33,7 @@ matrix:
       - pwd
       - chmod +x gradlew
     script:
+      # Compile and test the application
       - ./gradlew assembleDebug -PdisablePreDex
       - ./gradlew ktlintCheck > /dev/null
       - ./gradlew test > /dev/null
@@ -41,10 +44,10 @@ matrix:
       on:
         branch: master
     before_cache:
+      # Cleanup cached gradle versions for wrapper
+      # List content in wrapper/dist sorted by modification time and remove entries starting by the second entry
       - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
       - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
-      # cleanup cached gradle versions for wrapper
-      # list content in wrapper/dist sorted by modification time and remove entries starting by the second entry
       - ls -d $HOME/.gradle/wrapper/dists/* -1t | tail -n +2 | xargs rm -rf
         
   - os: osx
