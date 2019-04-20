@@ -13,25 +13,19 @@ cache:
 matrix:
   include:
   - os: linux
-    dist: trusty
-    language: android
-    jdk: oraclejdk8
-    env:
-      global:
-      # PATH order is incredibly important. e.g. the 'emulator' script exists in more than one place!
-      - ANDROID_HOME=/usr/local/android-sdk
-      - TOOLS=${ANDROID_HOME}/tools
-      - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
-    android:
-      components:
-        - tools
+    dist: minimal
     before_install:
+      # set SDK Tools path variable and ANDROID_HOME
+      - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+      - export PATH=$PATH:$HOME/sdk/emulator:$HOME/sdk/tools/bin:$HOME/sdk/tools:$HOME/sdk/platform-tools
+      - export ANDROID_HOME=$HOME/sdk
       - chmod +x android/scripts/before_install.sh
+      - chmod +x android/scripts/android-wait-for-emulator
       - android/scripts/before_install.sh
     install:
       - echo no | avdmanager create avd --force -n test -k "system-images;android-21;default;x86_64"
       - emulator -avd test -no-accel -no-snapshot -no-audio -no-window &
-      - android-wait-for-emulator
+      - android/scripts/android-wait-for-emulator
       - adb shell input keyevent 82 &
     before_script:
       - pwd
