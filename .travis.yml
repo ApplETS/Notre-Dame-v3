@@ -38,7 +38,7 @@ matrix:
       - pwd
       - chmod +x gradlew
     script:
-      - ./gradlew assembleRelease -PdisablePreDex
+      - ./gradlew assembleDebug -PdisablePreDex
       - ./gradlew ktlintCheck > /dev/null
       - ./gradlew test > /dev/null
       - ./gradlew connectedAndroidTest -PdisablePreDex
