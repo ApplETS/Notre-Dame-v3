@@ -15,6 +15,9 @@ matrix:
   - os: linux
     dist: minimal
     before_install:
+      # Check if the required files have been changed before building
+      - chmod +x .build-check.sh
+      - ./.build-check.sh || travis_terminate 0
       # Set SDK Tools path variable and ANDROID_HOME
       - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
       - export PATH=$PATH:$HOME/sdk/emulator:$HOME/sdk/tools/bin:$HOME/sdk/tools:$HOME/sdk/platform-tools
@@ -56,6 +59,10 @@ matrix:
     xcode_project: ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj
     xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
     xcode_sdk : iphonesimulator11.3
+    before_install:
+    # For some reason, macOS builds doesn't work well with travis_terminate()
+    - chmod +x .build-check.sh
+    - ./.build-check.sh || exit 0
     before_script:
     - gem install xcpretty
     script:
