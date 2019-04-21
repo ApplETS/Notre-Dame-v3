@@ -3,9 +3,6 @@
 # Running on Ubuntu 16.04 (Xenial Xerus)
 # Club App|ETS
 
-# Set the variables for the Android version
-ANDROID_API_LEVEL=28
-ANDROID_BUILD_TOOLS_VERSION=28.0.3
 # SDK Tools Revision 26.1.1
 # For Updates check https://developer.android.com/studio#downloads
 ANDROID_SDK_TOOLS=sdk-tools-linux-4333796.zip
