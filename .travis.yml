@@ -13,7 +13,8 @@ cache:
 matrix:
   include:
   - os: linux
-    dist: minimal
+    dist: xenial
+    language: minimal
     before_install:
       # Check if the required files have been changed before building
       - ./.build-check.sh || travis_terminate 0
