@@ -40,7 +40,7 @@ matrix:
       - ./gradlew connectedAndroidTest -PdisablePreDex
     deploy:
       provider: script
-      script: bash android/scripts/deploy_beta.sh
+      script: android/scripts/deploy_beta.sh
       on:
         branch: master
     before_cache:
@@ -57,13 +57,13 @@ matrix:
     xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
     xcode_sdk : iphonesimulator11.3
     before_install:
-    # For some reason, macOS builds doesn't work well with travis_terminate()
-    - ./.build-check.sh || exit 0
+      # For some reason, macOS builds doesn't work well with travis_terminate()
+      - ./.build-check.sh || exit 0
     before_script:
-    - gem install xcpretty
+      - gem install xcpretty
     script:
-    - xcodebuild clean -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
-    - xcodebuild build -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
+      - xcodebuild clean -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
+      - xcodebuild build -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
     
 notifications:
   slack:
