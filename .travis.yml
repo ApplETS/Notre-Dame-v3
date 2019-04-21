@@ -40,7 +40,10 @@ matrix:
       - ./gradlew connectedAndroidTest -PdisablePreDex
     deploy:
       provider: script
-      script: android/scripts/deploy_beta.sh
+      script: 
+        - cd android
+        - echo "Publishing Beta APK file"
+        - ./gradlew publishBetaReleaseApk
       on:
         branch: master
     before_cache:
