@@ -56,8 +56,8 @@ matrix:
   - os: osx
     osx_image: xcode10
     language: swift
-    xcode_project: ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj
-    xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
+    xcode_project: ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj
+    xcode_scheme: ../Notre-Dame/ios/ETSMobile/ETSMobile
     xcode_sdk : iphonesimulator11.3
     before_install:
       # For some reason, macOS builds doesn't work well with travis_terminate()
@@ -65,8 +65,8 @@ matrix:
     before_script:
       - gem install xcpretty
     script:
-      - xcodebuild clean -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
-      - xcodebuild build -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
+      - xcodebuild clean -project ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj | xcpretty
+      - xcodebuild build -project ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETSMobile CODE_SIGNING_REQUIRED=NO | xcpretty
     
 notifications:
   slack:
