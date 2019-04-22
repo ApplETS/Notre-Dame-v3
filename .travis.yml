@@ -41,12 +41,9 @@ matrix:
       - ./gradlew connectedAndroidTest -PdisablePreDex
     deploy:
       provider: script
-      script: 
-        - cd android
-        - echo "Publishing Beta APK file"
-        - ./gradlew publishBetaReleaseApk
+      script: echo "Publishing Beta APK file" && ./gradlew assembleRelease -PdisablePreDex
       on:
-        branch: master
+        branch: optimize_travis_fix
     before_cache:
       # Cleanup cached gradle versions for wrapper
       # List content in wrapper/dist sorted by modification time and remove entries starting by the second entry
