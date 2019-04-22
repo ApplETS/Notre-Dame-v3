@@ -25,23 +25,23 @@ matrix:
       # Set permissions and execute the configuration scripts
       - android/scripts/before_install.sh
     install:
-      ## Create and start the Android emulator
-      - echo no | avdmanager create avd --force -n test -k "system-images;android-21;default;x86_64"
-      - emulator -avd test -no-accel -no-snapshot -no-audio -no-window &
-      - android/scripts/android-wait-for-emulator
-      - adb shell input keyevent 82 &
+      # Create and start the Android emulator
+      #- echo no | avdmanager create avd --force -n test -k "system-images;android-21;default;x86_64"
+      #- emulator -avd test -no-accel -no-snapshot -no-audio -no-window &
+      #- android/scripts/android-wait-for-emulator
+      #- adb shell input keyevent 82 &
     before_script:
       - pwd
       - chmod +x gradlew
     script:
       # Compile and test the application
-      - ./gradlew assembleDebug -PdisablePreDex
-      - ./gradlew ktlintCheck > /dev/null
-      - ./gradlew test > /dev/null
-      - ./gradlew connectedAndroidTest -PdisablePreDex
+      #- ./gradlew assembleDebug -PdisablePreDex
+      #- ./gradlew ktlintCheck > /dev/null
+      #- ./gradlew test > /dev/null
+      #- ./gradlew connectedAndroidTest -PdisablePreDex
     deploy:
       provider: script
-      script: echo "Publishing Beta APK file" && ./gradlew assembleRelease -PdisablePreDex
+      script: echo "Publishing Beta APK file" && ls && ./gradlew assembleRelease -PdisablePreDex
       on:
         branch: optimize_travis_fix
     before_cache:
