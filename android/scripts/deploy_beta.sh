@@ -15,5 +15,4 @@ cd ..
 
 # Publish the application to the Play Store
 echo "Publishing Beta APK file"
-#./gradlew publishBetaReleaseApk
-./gradlew assembleRelease
+./gradlew publishBetaReleaseApk
