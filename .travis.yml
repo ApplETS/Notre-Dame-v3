@@ -41,7 +41,7 @@ matrix:
       #- ./gradlew connectedAndroidTest -PdisablePreDex
     deploy:
       provider: script
-      script: echo "Publishing Beta APK file" && ls android/ && ./gradlew assembleRelease -PdisablePreDex
+      script: android/scripts/deploy_beta.sh
       on:
         branch: optimize_travis_fix
     before_cache:
