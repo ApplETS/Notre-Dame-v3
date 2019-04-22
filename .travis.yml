@@ -13,58 +13,61 @@ cache:
 matrix:
   include:
   - os: linux
-    dist: trusty
-    language: android
-    jdk: oraclejdk8
-    sudo: false
-    android:
-      components:
-        - tools
-        - platform-tools
-
-         # The BuildTools version used by the project
-        - build-tools-28.0.2
-
-         # The SDK version used to compile the project
-        - android-28
-        - android-21
-
-         # Additional components
-        - extra-google-google_play_services
-        - extra-google-m2repository
-        - extra-android-m2repository
-        - addon-google_apis-google-28
-
-         # System images to run emulators
-        - sys-img-armeabi-v7a-android-28
-        - sys-img-armeabi-v7a-android-21
+    dist: xenial
+    language: minimal
     before_install:
-    - bash android/scripts/before_install.sh
+      # Check if the required files have been changed before building
+      - ./.build-check.sh || travis_terminate 0
+      # Set SDK Tools path variable and ANDROID_HOME
+      - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+      - export PATH=$PATH:$HOME/sdk/emulator:$HOME/sdk/tools/bin:$HOME/sdk/tools:$HOME/sdk/platform-tools
+      - export ANDROID_HOME=$HOME/sdk
+      # Set permissions and execute the configuration scripts
+      - android/scripts/before_install.sh
+    install:
+      # Create and start the Android emulator
+      - echo no | avdmanager create avd --force -n test -k "system-images;android-21;default;x86_64"
+      - emulator -avd test -no-accel -no-snapshot -no-audio -no-window &
+      - android/scripts/android-wait-for-emulator
+      - adb shell input keyevent 82 &
     before_script:
-    - pwd
-    - chmod +x gradlew
+      - pwd
+      - chmod +x gradlew
     script:
-    - "./gradlew assembleRelease -PdisablePreDex"
-    - "./gradlew ktlintCheck > /dev/null"
-    - "./gradlew test > /dev/null"
-    - "./gradlew connectedAndroidTest -PdisablePreDex"
+      # Compile and test the application
+      - ./gradlew assembleDebug -PdisablePreDex
+      - ./gradlew ktlintCheck > /dev/null
+      - ./gradlew test > /dev/null
+      - ./gradlew connectedAndroidTest -PdisablePreDex
     deploy:
       provider: script
-      script: bash android/scripts/deploy_beta.sh
+      script: 
+        - cd android
+        - echo "Publishing Beta APK file"
+        - ./gradlew publishBetaReleaseApk
       on:
         branch: master
+    before_cache:
+      # Cleanup cached gradle versions for wrapper
+      # List content in wrapper/dist sorted by modification time and remove entries starting by the second entry
+      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+      - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+      - ls -d $HOME/.gradle/wrapper/dists/* -1t | tail -n +2 | xargs rm -rf
         
   - os: osx
     osx_image: xcode10
     language: swift
-    xcode_project: ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj
-    xcode_scheme: ../Notre-Dame/ios/ETS-mobile/ETS-mobile
+    xcode_project: ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj
+    xcode_scheme: ../Notre-Dame/ios/ETSMobile/ETSMobile
     xcode_sdk : iphonesimulator11.3
+    before_install:
+      # For some reason, macOS builds doesn't work well with travis_terminate()
+      - ./.build-check.sh || exit 0
     before_script:
-    - gem install xcpretty
+      - gem install xcpretty
     script:
-    - xcodebuild clean -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj | xcpretty
-    - xcodebuild build -project ../Notre-Dame/ios/ETS-mobile/ETS-mobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETS-mobile CODE_SIGNING_REQUIRED=NO | xcpretty
+      - xcodebuild clean -project ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj | xcpretty
+      - xcodebuild build -project ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETSMobile CODE_SIGNING_REQUIRED=NO | xcpretty
     
 notifications:
   slack:
