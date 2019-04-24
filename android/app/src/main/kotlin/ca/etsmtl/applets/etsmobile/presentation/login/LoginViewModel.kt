@@ -14,7 +14,9 @@ import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCa
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.etsmobile.extension.call
+import com.shopify.livedataktx.filter
+import com.shopify.livedataktx.map
+import com.shopify.livedataktx.nonNull
 import model.Resource
 import model.SignetsUserCredentials
 import model.UniversalCode
@@ -51,23 +53,20 @@ class LoginViewModel @Inject constructor(
             it
         }
     }
-    private val _navigateToLogin = MediatorLiveData<Void>().apply {
-        addSource(userCredentialsValid) {
-            it?.let {
-                if (it.status != Resource.Status.LOADING && it.data == false) {
-                    this.call()
-                }
-            }
+    private val _navigateToLogin: MediatorLiveData<Event<Unit>> = userCredentialsValid
+        .nonNull()
+        .filter { it.status != Resource.Status.LOADING && it.data == false }
+        .map {
+            Event(Unit)
         }
-    }
+
     /** An error message to be displayed to the user **/
-    val errorMessage: LiveData<Event<String>> = MediatorLiveData<Event<String>>().apply {
-        this.addSource(userCredentialsValid) {
-            if (it != null && it.status == Resource.Status.ERROR) {
-                this.value = Event(it.message ?: app.getString(R.string.error))
-            }
+    val errorMessage: LiveData<Event<String>> = userCredentialsValid
+        .nonNull()
+        .filter { it.status == Resource.Status.ERROR }
+        .map {
+            Event(it.message ?: app.getString(R.string.error))
         }
-    }
 
     private val displayUniversalCodeDialogMediator: MediatorLiveData<Boolean> = MediatorLiveData()
 
@@ -77,7 +76,7 @@ class LoginViewModel @Inject constructor(
      * The [LoginFragment] needs to be displayed when the user needs to login for the first time or
      * if his credentials are no longer valid.
      */
-    val navigateToLogin: LiveData<Void> = _navigateToLogin
+    val navigateToLogin: LiveData<Event<Unit>> = _navigateToLogin
 
     /**
      * A [LiveData] with a [Boolean] which would be set to true a loading animation should
@@ -172,7 +171,7 @@ class LoginViewModel @Inject constructor(
     fun submitSavedCredentials() {
         with(fetchSavedSignetsUserCredentialsUserCase()) {
             if (this == null) {
-                _navigateToLogin.call()
+                _navigateToLogin.value = Event(Unit)
             } else {
                 universalCode.value = this.codeAccesUniversel
                 password.value = this.motPasse
