@@ -399,7 +399,7 @@ class LoginViewModelTest {
         liveData.value = Resource.error("foo", false)
 
         // then
-        verify(observer).onChanged(null)
+        verify(observer).onChanged(any())
     }
 
     @Test
