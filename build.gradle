@@ -16,7 +16,7 @@ buildscript {
             "groupie": "2.3.0",
             "junit": "4.12",
             "klock": "1.1.1",
-            "kotlin": "1.3.21",
+            "kotlin": "1.3.31",
             "kotlinx_serialization": "0.11.0",
             "leakcanary": "1.6.3",
             "lifecycle": "2.0.0",
