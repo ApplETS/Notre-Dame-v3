@@ -62,7 +62,6 @@ class ProfileViewModel @Inject constructor(
             it.getGenericErrorMessage(app)
         }
 
-
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun refreshIfContentNotLoaded() = profileRes.refreshIfValueIsNull()
 
