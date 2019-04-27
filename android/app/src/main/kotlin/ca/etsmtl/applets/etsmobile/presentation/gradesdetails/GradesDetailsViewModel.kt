@@ -48,7 +48,7 @@ class GradesDetailsViewModel @Inject constructor(
         .map {
             Event(it.message)
         }
-    val recyclerViewItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluations) {
+    val detailsListItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluations) {
         fun getSummaryItems(sommaireElementsEvaluation: SommaireElementsEvaluation) = listOf(
             EvaluationDetailItem(app.getString(R.string.label_median), sommaireElementsEvaluation.medianeClasse),
             EvaluationDetailItem(app.getString(R.string.label_standard_deviation), sommaireElementsEvaluation.ecartTypeClasse),
@@ -142,6 +142,8 @@ class GradesDetailsViewModel @Inject constructor(
             it == null || it.status == Resource.Status.LOADING
         }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun refreshIfContentNotLoaded() = summaryAndEvaluations.refreshIfValueIsNull()
+
     fun refresh() = summaryAndEvaluations.refresh()
 }

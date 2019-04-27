@@ -7,14 +7,14 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
+import ca.etsmtl.applets.etsmobile.extension.mockNetwork
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.extension.mockNetwork
-import model.Resource
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.mock
+import model.Resource
 import model.SignetsUserCredentials
 import model.UniversalCode
 import org.junit.Before
@@ -372,7 +372,7 @@ class LoginViewModelTest {
     fun navigateToLogin_SubmittedCredentialsAreValid_NotCalled() {
         // given
         loginViewModel.showLoading.observeForever(mock())
-        val observer: Observer<Void> = mock()
+        val observer: EventObserver<Unit> = mock()
         loginViewModel.navigateToLogin.observeForever(observer)
         val liveData = MutableLiveData<Resource<Boolean>>()
         `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
@@ -389,7 +389,7 @@ class LoginViewModelTest {
     fun navigateToLogin_SubmittedCredentialsAreMotValid_Called() {
         // given
         loginViewModel.showLoading.observeForever(mock())
-        val observer: Observer<Void> = mock()
+        val observer: EventObserver<Unit> = mock()
         loginViewModel.navigateToLogin.observeForever(observer)
         val liveData = MutableLiveData<Resource<Boolean>>()
         `when`(checkUserCredentialsValidUseCase(userCredentials)).thenReturn(liveData)
@@ -399,7 +399,7 @@ class LoginViewModelTest {
         liveData.value = Resource.error("foo", false)
 
         // then
-        verify(observer).onChanged(null)
+        verify(observer).onChanged(any())
     }
 
     @Test
