@@ -80,7 +80,7 @@ class GradesDetailsFragment : DaggerFragment() {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
         })
 
-        gradesDetailsViewModel.recyclerViewItems.observe(this, Observer {
+        gradesDetailsViewModel.detailsListItems.observe(this, Observer {
             it?.let { groupAdapter.update(it) }
         })
 

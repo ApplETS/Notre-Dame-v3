@@ -62,5 +62,7 @@ class GradesViewModel @Inject constructor(
         }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun refreshIfContentNotLoaded() = coursRes.refreshIfValueIsNull()
+
     fun refresh() = coursRes.refresh()
 }

@@ -62,7 +62,10 @@ class ProfileViewModel @Inject constructor(
             it.getGenericErrorMessage(app)
         }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun refreshIfContentNotLoaded() = profileRes.refreshIfValueIsNull()
+
     fun refresh() = profileRes.refresh()
 
     private fun Etudiant.addToSections(sections: MutableList<ProfileItem<out ProfileAdapter.ProfileViewHolder>>) {

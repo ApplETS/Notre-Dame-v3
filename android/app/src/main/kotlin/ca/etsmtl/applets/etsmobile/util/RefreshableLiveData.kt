@@ -24,5 +24,11 @@ abstract class RefreshableLiveData<T> : MediatorLiveData<T>() {
         }
     }
 
+    fun refreshIfValueIsNull() {
+        if (value == null) {
+            refresh()
+        }
+    }
+
     abstract fun updateSource(): LiveData<T>
 }
