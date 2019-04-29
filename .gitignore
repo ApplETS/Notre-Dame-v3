@@ -8,6 +8,9 @@ out/
 build/
 local.properties
 
+# Android Layout Inspector Captures
+captures/
+
 # Created by https://www.gitignore.io/api/macos,xcode
   
 ### macOS ###

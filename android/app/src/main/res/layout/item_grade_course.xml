@@ -2,9 +2,9 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="75dp"
-    android:layout_height="75dp"
-    android:layout_marginStart="10dp"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:layout_marginStart="4dp"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="8dp"
     android:stateListAnimator="@animator/selector_elevation_card_item">
@@ -31,8 +31,8 @@
             android:gravity="center"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textSize="25sp"
-            app:autoSizeMaxTextSize="25sp"
+            android:textSize="23sp"
+            app:autoSizeMaxTextSize="23sp"
             app:autoSizeMinTextSize="20sp"
             app:autoSizeTextType="uniform"
             tools:text="A+" />
