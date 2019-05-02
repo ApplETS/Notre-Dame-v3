@@ -14,10 +14,10 @@ abstract class SeanceDao : SignetsDao<SeanceEntity> {
     @Query("SELECT * FROM seanceentity")
     abstract fun getAll(): LiveData<List<SeanceEntity>>
 
-    @Query("SELECT * FROM seanceentity WHERE sigleCours LIKE :sigleCours AND session LIKE :session")
+    @Query("SELECT * FROM seanceentity WHERE sigleCours LIKE :sigleCours AND session LIKE :session ORDER BY dateDebut")
     abstract fun getByCoursAndSession(sigleCours: String, session: String): LiveData<List<SeanceEntity>>
 
-    @Query("SELECT * FROM seanceentity WHERE session LIKE :session")
+    @Query("SELECT * FROM seanceentity WHERE session LIKE :session ORDER BY dateDebut")
     abstract fun getBySession(session: String): LiveData<List<SeanceEntity>>
 
     @Query("DELETE FROM seanceentity WHERE sigleCours LIKE :sigleCours  AND session LIKE :session")
