@@ -48,8 +48,6 @@ class FetchFutureSeancesUseCase @Inject constructor(
                 }
                 seances.addAll(res.data.orEmpty().filter { !seances.contains(it) && it.dateDebut.unixMillisLong >= todayTimeStampMilis })
 
-                seances.sortBy { it.dateDebut }
-
                 val error = latestError
 
                 if (!sessionFetchDone || seanceFetchStatus.any { !it.value }) {
