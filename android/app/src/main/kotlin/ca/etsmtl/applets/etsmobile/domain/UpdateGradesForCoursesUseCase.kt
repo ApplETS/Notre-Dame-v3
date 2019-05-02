@@ -20,27 +20,28 @@ class UpdateGradesForCoursesUseCase @Inject constructor(
     private val app: App
 ) {
     operator fun invoke(courses: List<Cours>): LiveData<Resource<List<Cours>>> {
-        val _courses = courses.toMutableList()
+        val remainingCoursesToUpdate = courses.toMutableList()
         val result = MediatorLiveData<Resource<List<Cours>>>()
 
-        if (_courses.isEmpty()) {
-            result.value = Resource.success(_courses)
+        if (remainingCoursesToUpdate.isEmpty()) {
+            result.value = Resource.success(remainingCoursesToUpdate)
         } else {
-            result.value = Resource.loading(_courses)
-            _courses.forEach { cours ->
+            result.value = Resource.loading(remainingCoursesToUpdate)
+            remainingCoursesToUpdate.forEach { cours ->
                 result.addSource(evaluationRepository.getEvaluationsSummary(
                     userCredentials,
                     cours,
                     true
                 )) { res ->
                     if (res == null) {
-                        result.value = Resource.error(app.getString(R.string.error), _courses)
-                        _courses.clear()
+                        result.value = Resource.error(app.getString(R.string.error), remainingCoursesToUpdate)
+                        remainingCoursesToUpdate.clear()
                     } else {
                         if (res.status != Resource.Status.LOADING) {
-                            _courses.remove(cours)
-                            if (_courses.isEmpty()) {
-                                result.value = Resource.success(_courses)
+                            remainingCoursesToUpdate.remove(cours)
+                            if (remainingCoursesToUpdate.isEmpty()) {
+                                // Dispatch updated courses with last status and message
+                                result.value = res.copyStatusAndMessage(remainingCoursesToUpdate)
                             }
                         }
                     }

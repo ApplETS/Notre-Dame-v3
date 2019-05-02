@@ -27,12 +27,17 @@ class FetchGradesCoursesUseCase @Inject constructor(
         fun Resource<List<Cours>>.coursesFiltered() = data?.filter(coursesFilterPredicate)
 
         fun sendCachedCoursesAfterGradesUpdate(updateCoursesGradesRes: Resource<List<Cours>>) {
-            result.addSource(coursRepository
-                .getCours(userCredentials, false)) { cachedCoursesRes ->
+            val src = coursRepository.getCours(userCredentials, false)
+
+            result.addSource(src) { cachedCoursesRes ->
                 result.value = if (updateCoursesGradesRes.status == Resource.Status.LOADING) {
                     Resource.loading(cachedCoursesRes.coursesFiltered())
                 } else {
                     cachedCoursesRes.copyStatusAndMessage(cachedCoursesRes.coursesFiltered())
+                }
+
+                if (cachedCoursesRes.status != Resource.Status.LOADING) {
+                    result.removeSource(src)
                 }
             }
         }
