@@ -20,16 +20,12 @@ class FetchTodaySeancesUseCase @Inject constructor(
     operator fun invoke(): LiveData<Resource<List<Seance>>> = fetchCurrentSessionSeancesUseCase()
         .nonNull()
         .map { res ->
-            when (res.status) {
-                Resource.Status.LOADING ->
-                    Resource.loading(res.data.filterToday())
-                Resource.Status.ERROR ->
-                    Resource.error(
-                        res.message ?: app.getString(R.string.error), emptyList()
-                    )
-                Resource.Status.SUCCESS -> {
-                    Resource.success(res.data.filterToday())
-                }
+            val seances = res.data.filterToday()
+
+            if (res.status == Resource.Status.ERROR) {
+                Resource.error(res.message ?: app.getString(R.string.error), seances)
+            } else {
+                res.copyStatusAndMessage(seances)
             }
         }
 
