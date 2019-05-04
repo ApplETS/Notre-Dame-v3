@@ -11,9 +11,9 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.SeanceDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSeances
-import model.Resource
 import ca.etsmtl.applets.repository.util.unixToDefaultSignetsDate
 import model.Cours
+import model.Resource
 import model.Seance
 import model.Session
 import model.SignetsUserCredentials
@@ -32,15 +32,15 @@ class SeanceRepository @Inject constructor(
      * Returns the schedule of the sessions for a given course and a given session
      *
      * @param userCredentials The user's credentials
-     * @param cours The course. If null, the [Seance]s will be fetched by [session].
      * @param shouldFetch True if the data should be fetched from the network. False if the the data
      * should only be fetched from the DB.
+     * @param cours The course. If null, the [Seance]s will be fetched by [session].
      * @return The schedule of the sessions
      */
     fun getSeancesSession(
         userCredentials: SignetsUserCredentials,
-        cours: Cours?,
         session: Session,
+        cours: Cours? = null,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<Seance>>> {
         return object : SignetsNetworkBoundResource<List<Seance>, ApiListeDesSeances>(appExecutors) {

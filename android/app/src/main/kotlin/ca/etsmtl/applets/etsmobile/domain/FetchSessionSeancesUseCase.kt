@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
-import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.SeanceRepository
+import model.Resource
 import model.Seance
 import model.Session
 import model.SignetsUserCredentials
@@ -22,7 +22,6 @@ class FetchSessionSeancesUseCase @Inject constructor(
     operator fun invoke(session: Session): LiveData<Resource<List<Seance>>> {
         return Transformations.map(seanceRepository.getSeancesSession(
             userCredentials,
-            null,
             session
         )) { seancesRes ->
             if (seancesRes.status == Resource.Status.ERROR) {

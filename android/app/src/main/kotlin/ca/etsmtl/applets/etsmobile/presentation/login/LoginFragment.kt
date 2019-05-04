@@ -90,7 +90,7 @@ class LoginFragment : DaggerFragment() {
 
         (activity as MainActivity).bottomNavigationView.setVisible(false, 0)
 
-        Glide.with(this).load(R.drawable.ets_blanc_impr_fond_transparent).into(iVETSLogo)
+        Glide.with(this).load(R.drawable.ic_ets_logo_blanc).into(iVETSLogo)
 
         setupFields()
 

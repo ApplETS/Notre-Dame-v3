@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ets_blanc_impr_fond_transparent" />
+            tools:src="@drawable/ic_ets_logo_blanc" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginForm"
