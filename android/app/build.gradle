@@ -181,8 +181,6 @@ dependencies {
 
     // LeakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary"
-    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakcanary"
 
     // Firebase
     implementation "com.google.firebase:firebase-core:$versions.firebase"
