@@ -7,7 +7,6 @@ import com.buglife.sdk.Buglife
 import com.buglife.sdk.InvocationMethod
 import com.buglife.sdk.PickerInputField
 import com.buglife.sdk.TextInputField
-import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
@@ -19,12 +18,6 @@ class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return
-        }
-        LeakCanary.install(this)
 
         setupBuglife()
     }

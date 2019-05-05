@@ -16,7 +16,7 @@ import model.Cours
  * Created by Sonphil on 03-03-19.
  */
 
-class GradesCardAdapter(private val onCourseClickListener: OnCourseClickListener) : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder>() {
+class GradesCardAdapter(var onCourseClickListener: OnCourseClickListener?) : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder>() {
     var items: List<Cours> = emptyList()
         set(value) {
             val diffCallback = object : DiffUtil.Callback() {
@@ -57,7 +57,7 @@ class GradesCardAdapter(private val onCourseClickListener: OnCourseClickListener
         holder.tvCourseGrade.text = course.cote
         holder.tvCourseSigle.text = course.sigle
         ViewCompat.setTransitionName(holder.tvCourseGrade, course.sigle)
-        holder.itemView.setOnClickListener { onCourseClickListener.onCourseClick(course, holder) }
+        holder.itemView.setOnClickListener { onCourseClickListener?.onCourseClick(course, holder) }
     }
 
     class GradeViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer

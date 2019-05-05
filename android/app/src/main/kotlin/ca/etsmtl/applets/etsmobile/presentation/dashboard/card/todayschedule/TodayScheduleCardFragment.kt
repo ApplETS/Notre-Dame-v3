@@ -79,6 +79,12 @@ class TodayScheduleCardFragment : DaggerFragment() {
         })
     }
 
+    override fun onDestroyView() {
+        rvToday.adapter = null
+
+        super.onDestroyView()
+    }
+
     companion object {
         val TAG = "TodayScheduleCardFragment"
         fun newInstance() = TodayScheduleCardFragment()

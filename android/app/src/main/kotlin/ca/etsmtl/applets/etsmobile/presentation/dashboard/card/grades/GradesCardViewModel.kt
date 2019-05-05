@@ -53,5 +53,5 @@ class GradesCardViewModel @Inject constructor(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun refresh() = _cours.refresh()
+    fun refresh() = _cours.refreshIfValueIsNull()
 }

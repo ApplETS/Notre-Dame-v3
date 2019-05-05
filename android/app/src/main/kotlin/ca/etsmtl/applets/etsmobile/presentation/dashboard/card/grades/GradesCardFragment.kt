@@ -94,6 +94,13 @@ class GradesCardFragment : DaggerFragment() {
         this.lifecycle.addObserver(gradesCardViewModel)
     }
 
+    override fun onDestroyView() {
+        adapter.onCourseClickListener = null
+        recyclerViewCoursesGrades.adapter = null
+
+        super.onDestroyView()
+    }
+
     companion object {
         fun newInstance() = GradesCardFragment()
     }
