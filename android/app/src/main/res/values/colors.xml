@@ -11,6 +11,8 @@
     <color name="etsGrisClair">#807F83</color>
     <color name="etsNoir">#2E2A25</color>
 
+    <color name="colorSplash">@color/etsNoir</color>
+
     <color name="applets">#19375F</color>
 
     <color name="colorFailureGradeMin">#D32F2F</color>
