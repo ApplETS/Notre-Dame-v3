@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.applyAppTheme
 import ca.etsmtl.applets.etsmobile.extension.fadeTo
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import ca.etsmtl.applets.etsmobile.util.EventObserver
@@ -60,7 +61,7 @@ class ScheduleFragment : DaggerFragment() {
     }
 
     private fun setUpSwipeRefresh() {
-        swipeRefreshLayoutSchedule.setColorSchemeResources(R.color.colorPrimary)
+        swipeRefreshLayoutSchedule.applyAppTheme(requireContext())
         swipeRefreshLayoutSchedule.setOnRefreshListener { scheduleViewModel.refresh() }
     }
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryDark">@android:color/black</color>
     <color name="colorToolbar">@android:color/white</color>
     <color name="colorToolbarAccent">#EF3E45</color>
+    <color name="colorSwipeRefreshBg">@android:color/white</color>
 </resources>

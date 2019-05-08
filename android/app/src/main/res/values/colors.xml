@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">@color/etsRougeClair</color>
-    <color name="colorPrimaryDark">@color/etsRougeFonce</color>
+    <color name="colorPrimaryDark">@android:color/black</color>
     <color name="colorAccent">@color/etsRougeClair</color>
 
     <!-- Couleurs de l'École de technologie supérieure -->
@@ -19,9 +19,12 @@
     <color name="colorGoodGradeMin">#AED581</color>
     <color name="colorGoodGradeMax">#43A047</color>
 
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/white</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">
+        @android:color/white
+    </color>
     <color name="background_material_dark">#ffffff</color>
 
-    <color name="colorToolbar">@android:color/transparent</color>
+    <color name="colorToolbar">#FF2E2E2E</color>
     <color name="colorToolbarAccent">@android:color/white</color>
+    <color name="colorSwipeRefreshBg">@color/etsNoir</color>
 </resources>
