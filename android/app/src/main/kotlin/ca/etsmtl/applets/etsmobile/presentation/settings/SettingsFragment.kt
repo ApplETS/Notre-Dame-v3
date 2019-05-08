@@ -33,6 +33,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
                 }
             }
 
+            activity?.recreate()
+
             return true
         }
 
