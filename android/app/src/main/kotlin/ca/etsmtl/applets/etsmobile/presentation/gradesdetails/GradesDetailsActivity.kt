@@ -69,7 +69,7 @@ class GradesDetailsActivity : BaseActivity() {
 
         setContentView(R.layout.activity_grades_details)
 
-        setUpToolbar()
+        setupToolbar()
 
         with(intent?.extras) {
             with(this?.getParcelable(EXTRA_COURS) as Cours) {
@@ -86,7 +86,7 @@ class GradesDetailsActivity : BaseActivity() {
         }
     }
 
-    private fun setUpToolbar() {
+    private fun setupToolbar() {
         setSupportActionBar(toolbar)
 
         supportActionBar?.let {

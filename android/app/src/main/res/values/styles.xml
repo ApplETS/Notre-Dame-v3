@@ -32,12 +32,12 @@
 
     <style name="TextAppearance.AppTheme.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/colorToolbarAccent</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="TextAppearance.AppTheme.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorToolbarAccent</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="WindowAnimationTransition">

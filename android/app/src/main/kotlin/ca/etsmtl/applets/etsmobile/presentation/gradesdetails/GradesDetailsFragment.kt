@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.applyAppTheme
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -62,7 +63,7 @@ class GradesDetailsFragment : DaggerFragment() {
     }
 
     private fun setUpSwipeRefresh() {
-        swipeRefreshLayoutGradesDetails.setColorSchemeResources(R.color.colorPrimary)
+        swipeRefreshLayoutGradesDetails.applyAppTheme(requireContext())
         swipeRefreshLayoutGradesDetails.setOnRefreshListener { gradesDetailsViewModel.refresh() }
     }
 
