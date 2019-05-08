@@ -98,6 +98,7 @@
     <string name="more_item_label_contributors">Contributors</string>
     <string name="more_item_label_open_source_licenses">@string/oss_license_title</string>
     <string name="more_item_label_beta_faq">Beta FAQ</string>
+    <string name="more_item_label_settings">Settings</string>
     <string name="more_item_label_log_out">Log out</string>
     <string name="prompt_log_out_confirmation">Are you sure you want to log out?</string>
     <string name="more_label_log_out_progress">Disconnection in progress</string>
@@ -170,4 +171,13 @@
     <string name="security_station">Security station</string>
     <string name="msg_no_seances_today">No class scheduled today</string>
 
+    <!-- Settings -->
+    <string name="title_settings">Settings</string>
+    <string name="label_display_pref_category">Display</string>
+    <string name="label_dark_theme_pref">Dark Theme</string>
+    <string-array name="entries_dark_theme_pref">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Default</item>
+    </string-array>
 </resources>

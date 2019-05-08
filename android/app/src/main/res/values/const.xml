@@ -16,4 +16,16 @@
     <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
     <string name="msg_api_no_seance" translatable="false">"Aucune donnée.  Cela peut être causé parce que l'horaire détaillé n'est pas encore finalisé (il l'est généralement quelques jours avant le début de la session), ou parce que l'horaire est trop ancien (nous ne gardons que 4 sessions), ou que vous n'êtes pas inscrit, ou que vous n'êtes inscrit qu'à des activité sans horaire, comme un stage ou que que vous êtes en rédaction de mémoire ou de thèse."</string>
     <string name="email_applets" translatable="false">info@clubapplets.ca</string>
+
+    <!-- Settings-->
+    <string name="key_display_pref_category" translatable="false">display_category</string>
+    <string name="key_dark_theme_pref" translatable="false">dark_theme</string>
+    <string name="entry_value_dark_theme_pref_enabled" translatable="false">MODE_NIGHT_YES</string>
+    <string name="entry_value_dark_theme_pref_disabled" translatable="false">MODE_NIGHT_NO</string>
+    <string name="default_entry_value_dark_theme_pref" translatable="false">MODE_NIGHT_DEFAULT</string>
+    <string-array name="entry_values_dark_theme_pref">
+        <item>@string/entry_value_dark_theme_pref_enabled</item>
+        <item>@string/entry_value_dark_theme_pref_disabled</item>
+        <item>@string/default_entry_value_dark_theme_pref</item>
+    </string-array>
 </resources>

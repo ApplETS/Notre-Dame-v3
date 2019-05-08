@@ -34,6 +34,8 @@ class MoreViewModel @Inject constructor(
     val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
     private val _navigateToOpenSourceLicenses = MutableLiveData<Event<Unit>>()
     val navigateToOpenSourcesLicenses: LiveData<Event<Unit>> = _navigateToOpenSourceLicenses
+    private val _navigateToSettings = MutableLiveData<Event<Unit>>()
+    val navigateToSettings: LiveData<Event<Unit>> = _navigateToSettings
     private val _navigateToUri = MutableLiveData<Event<Int>>()
     val navigateToUri: LiveData<Event<Int>> = _navigateToUri
 
@@ -78,6 +80,10 @@ class MoreViewModel @Inject constructor(
                 _navigateToUri.value = Event(R.string.uri_beta_faq)
             })
         }
+
+        items.add(MoreItem(R.drawable.ic_settings_black_24dp, R.string.more_item_label_settings) {
+            _navigateToSettings.value = Event(Unit)
+        })
 
         items.add(MoreItem(R.drawable.ic_exit_to_app_black_24dp, R.string.more_item_label_log_out) {
             _displayLogoutConfirmationDialog.value = true

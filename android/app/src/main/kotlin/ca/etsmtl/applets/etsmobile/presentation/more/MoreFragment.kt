@@ -117,6 +117,10 @@ class MoreFragment : DaggerFragment() {
             findNavController().navigate(R.id.activityOpenSourceLicenses)
         })
 
+        moreViewModel.navigateToSettings.observe(this, EventObserver {
+            findNavController().navigate(MoreFragmentDirections.actionFragmentMoreToFragmentSettings())
+        })
+
         moreViewModel.navigateToUri.observe(this, EventObserver { uriId ->
             Uri.parse(getString(uriId)).open(requireContext())
         })
