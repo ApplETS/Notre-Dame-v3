@@ -75,7 +75,6 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="@dimen/material_component_lists_right_padding"
                 android:text="@string/more_item_label_about_applets"
-                android:textAppearance="?android:attr/textAppearanceListItem"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivAppletsLogo"
                 app:layout_constraintTop_toTopOf="parent" />

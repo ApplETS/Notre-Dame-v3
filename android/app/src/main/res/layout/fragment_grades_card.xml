@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
     android:minHeight="160dp"
     android:orientation="vertical"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.dashboard.card.grades.GradesCardFragment">
@@ -16,7 +15,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/title_grades"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

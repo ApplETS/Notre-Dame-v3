@@ -22,11 +22,10 @@ class StudentPagerAdapter(
 
     override fun getCount() = 2
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             GRADES -> GradesFragment.newInstance()
-            PROFILE -> ProfileFragment.newInstance()
-            else -> null
+            else -> ProfileFragment.newInstance()
         }
     }
 

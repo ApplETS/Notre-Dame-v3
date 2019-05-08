@@ -111,7 +111,7 @@ dependencies {
 
     // Support libraries
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation "com.google.android.material:material:$versions.support"
+    implementation "com.google.android.material:material:$versions.material_components"
     implementation "androidx.legacy:legacy-support-v4:$versions.support"
     implementation "androidx.cardview:cardview:$versions.support"
     implementation "androidx.recyclerview:recyclerview:$versions.support"

@@ -12,6 +12,7 @@
         android:id="@+id/appBarLayoutGradesDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:transitionName="@string/transition_grades_details_toolbar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -28,13 +29,13 @@
                 android:id="@+id/containerTvGradesDetailsSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="125dp"
+                android:gravity="bottom"
                 android:orientation="vertical"
-                android:paddingBottom="10dp"
                 android:paddingStart="20dp"
-                android:paddingEnd="8dp"
                 android:paddingTop="8dp"
-                app:layout_collapseMode="parallax"
-                android:gravity="bottom">
+                android:paddingEnd="8dp"
+                android:paddingBottom="10dp"
+                app:layout_collapseMode="parallax">
 
                 <TextView
                     android:id="@+id/tvGradesDetailsCourseName"
