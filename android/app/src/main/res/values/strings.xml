@@ -178,6 +178,6 @@
     <string-array name="entries_dark_theme_pref">
         <item>Oui</item>
         <item>Non</item>
-        <item>Par défaut</item>
+        <item>Paramètre par défaut de l\'appareil</item>
     </string-array>
 </resources>
