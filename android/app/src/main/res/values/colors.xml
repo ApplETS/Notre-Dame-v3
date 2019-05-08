@@ -3,7 +3,6 @@
     <color name="colorPrimary">@color/etsRougeClair</color>
     <color name="colorPrimaryDark">@color/etsRougeFonce</color>
     <color name="colorAccent">@color/etsRougeClair</color>
-    <color name="colorToolbarText">@android:color/white</color>
 
     <!-- Couleurs de l'École de technologie supérieure -->
     <color name="etsRougeClair">#EF3E45</color>
@@ -14,12 +13,15 @@
 
     <color name="applets">#19375F</color>
 
-    <color name="failureGradeMinColor">#D32F2F</color>
-    <color name="failureGradeMaxColor">#FF7043</color>
-    <color name="passingGradeColor">#FFF176</color>
-    <color name="goodGradeMinColor">#AED581</color>
-    <color name="goodGradeMaxColor">#43A047</color>
+    <color name="colorFailureGradeMin">#D32F2F</color>
+    <color name="colorFailureGradeMax">#FF7043</color>
+    <color name="colorPassingGrade">#FFF176</color>
+    <color name="colorGoodGradeMin">#AED581</color>
+    <color name="colorGoodGradeMax">#43A047</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/white</color>
     <color name="background_material_dark">#ffffff</color>
+
+    <color name="colorToolbar">@android:color/transparent</color>
+    <color name="colorToolbarAccent">@android:color/white</color>
 </resources>

@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
+        android:background="@color/colorToolbar"
         app:expanded="false"
         tools:expanded="true">
 
@@ -28,6 +29,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
+                app:titleTextColor="@color/colorToolbarAccent"
                 tools:title="Title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -37,7 +39,9 @@
             android:layout_height="?android:attr/actionBarSize"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:tabIndicatorColor="@color/colorToolbarAccent"
+            app:tabSelectedTextColor="@color/colorToolbarAccent" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <fragment

@@ -14,19 +14,19 @@ fun ArgbEvaluator.gradePercentageColor(context: Context, gradePercentage: Float)
     var colorProportion = gradePercentage
     when (gradePercentage) {
         in 0 until Grades.PASSING_GRADE -> {
-            startColor = context.getColorCompat(R.color.failureGradeMinColor)
-            endColor = context.getColorCompat(R.color.failureGradeMaxColor)
+            startColor = context.getColorCompat(R.color.colorFailureGradeMin)
+            endColor = context.getColorCompat(R.color.colorFailureGradeMax)
             colorProportion /= Grades.PASSING_GRADE
         }
         in Grades.PASSING_GRADE until Grades.MIN_GOOD_GRADE -> {
-            startColor = context.getColorCompat(R.color.passingGradeColor)
-            endColor = context.getColorCompat(R.color.goodGradeMinColor)
+            startColor = context.getColorCompat(R.color.colorPassingGrade)
+            endColor = context.getColorCompat(R.color.colorGoodGradeMin)
             colorProportion -= Grades.PASSING_GRADE
             colorProportion /= Grades.MIN_GOOD_GRADE - Grades.PASSING_GRADE
         }
         else -> {
-            startColor = context.getColorCompat(R.color.goodGradeMinColor)
-            endColor = context.getColorCompat(R.color.goodGradeMaxColor)
+            startColor = context.getColorCompat(R.color.colorGoodGradeMin)
+            endColor = context.getColorCompat(R.color.colorGoodGradeMax)
 
             if (colorProportion >= Grades.MAX_GRADE) {
                 colorProportion = 1f
