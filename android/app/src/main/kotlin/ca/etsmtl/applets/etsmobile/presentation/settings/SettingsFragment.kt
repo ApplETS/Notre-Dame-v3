@@ -2,12 +2,14 @@ package ca.etsmtl.applets.etsmobile.presentation.settings
 
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 
 /**
+ * Settings screen
+ *
  * Created by Sonphil on 08-05-19.
  */
 
@@ -24,27 +26,20 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        if (preference.key == getString(R.string.key_dark_theme_pref)) {
-            val nightMode = when (newValue) {
-                getString(R.string.entry_value_dark_theme_pref_enabled) -> {
-                    AppCompatDelegate.MODE_NIGHT_YES
-                }
-                getString(R.string.entry_value_dark_theme_pref_disabled) -> {
-                    AppCompatDelegate.MODE_NIGHT_NO
-                }
-                getString(R.string.entry_value_dark_theme_pref_battery_saver) -> {
-                    AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
-                }
-                else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            }
+        return if (preference.key == getString(R.string.key_dark_theme_pref)) {
+            handleDarkThemePreferenceChange(newValue)
 
-            AppCompatDelegate.setDefaultNightMode(nightMode)
+            true
+        } else {
+            false
+        }
+    }
+
+    private fun handleDarkThemePreferenceChange(newValue: Any?) {
+        if (activity is MainActivity && newValue is String) {
+            (activity as MainActivity).applyDarkThemePref(newValue)
 
             activity?.recreate()
-
-            return true
         }
-
-        return false
     }
 }

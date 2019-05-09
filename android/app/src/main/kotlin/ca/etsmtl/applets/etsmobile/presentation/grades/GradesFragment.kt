@@ -78,7 +78,7 @@ class GradesFragment : DaggerFragment() {
     }
 
     private fun setUpSwipeRefresh() {
-        with (swipeRefreshLayoutCoursesGrades) {
+        with(swipeRefreshLayoutCoursesGrades) {
             applyAppTheme(context)
             setOnRefreshListener { gradesViewModel.refresh() }
         }

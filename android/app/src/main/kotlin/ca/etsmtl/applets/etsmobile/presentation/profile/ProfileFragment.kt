@@ -48,7 +48,7 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun setUpSwipeRefresh() {
-        with (swipeRefreshLayoutProfile) {
+        with(swipeRefreshLayoutProfile) {
             applyAppTheme(context)
             setOnRefreshListener { profileViewModel.refresh() }
         }
