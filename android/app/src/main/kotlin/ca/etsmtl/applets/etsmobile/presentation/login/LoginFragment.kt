@@ -55,7 +55,7 @@ class LoginFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val universalCodeInfoDialog by lazy {
         context?.let {
-            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
+            val builder = AlertDialog.Builder(it, R.style.AppTheme_Dialog_Alert)
 
             val icon = it.getDrawable(R.drawable.ic_info_outline_white_24dp)?.mutate()
             icon?.setTint(it.getColorCompat(R.color.colorPrimary))
