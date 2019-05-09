@@ -21,6 +21,6 @@ class RepositoryModule(private val application: Application) {
     @Singleton
     @Provides
     fun providePrefs(): SharedPreferences = application
-        .getSharedPreferences(application.getString(R.string.preference_file_key),
+        .getSharedPreferences(application.getString(R.string.key_preference_file),
             Context.MODE_PRIVATE)
 }

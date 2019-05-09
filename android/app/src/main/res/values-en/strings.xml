@@ -178,6 +178,6 @@
     <string-array name="entries_dark_theme_pref">
         <item>Yes</item>
         <item>No</item>
-        <item>Default device setting</item>
+        <item>Set by Battery Saver</item>
     </string-array>
 </resources>

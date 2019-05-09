@@ -178,6 +178,6 @@
     <string-array name="entries_dark_theme_pref">
         <item>Oui</item>
         <item>Non</item>
-        <item>Paramètre par défaut de l\'appareil</item>
+        <item>Défini par l\'économiseur de batterie</item>
     </string-array>
 </resources>
