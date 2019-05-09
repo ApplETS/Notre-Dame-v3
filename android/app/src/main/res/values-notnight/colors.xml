@@ -5,4 +5,5 @@
     <color name="colorToolbar">@color/etsRougeClair</color>
     <color name="colorToolbarAccent">@android:color/white</color>
     <color name="colorSwipeRefreshBg">@android:color/white</color>
+    <color name="colorDialogBg">@android:color/white</color>
 </resources>
