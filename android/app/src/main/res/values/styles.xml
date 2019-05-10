@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="android:textColorSecondary">@color/etsGrisClair</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>
@@ -72,8 +73,12 @@
     <style name="AppTheme.Dialog.Alert" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.AppTheme.Button.TextButton.Dialog.Negative</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Widget.AppTheme.Button.TextButton.Dialog.Positive</item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/Widget.AppTheme.Button.TextButton.Dialog.Negative
+        </item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/Widget.AppTheme.Button.TextButton.Dialog.Positive
+        </item>
         <item name="android:windowBackground">@color/colorDialogBg</item>
     </style>
 

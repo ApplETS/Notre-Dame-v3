@@ -6,4 +6,5 @@
     <color name="colorToolbarAccent">@android:color/white</color>
     <color name="colorSwipeRefreshBg">@android:color/white</color>
     <color name="colorDialogBg">@android:color/white</color>
+    <color name="colorControlNormal">@color/colorPrimaryDark</color>
 </resources>

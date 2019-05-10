@@ -30,4 +30,5 @@
     <color name="colorToolbarAccent">@android:color/white</color>
     <color name="colorSwipeRefreshBg">@color/etsNoir</color>
     <color name="colorDialogBg">@color/etsNoir</color>
+    <color name="colorControlNormal">@color/etsGrisFonce</color>
 </resources>
