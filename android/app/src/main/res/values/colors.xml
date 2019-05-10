@@ -29,5 +29,5 @@
     <color name="colorToolbar">#FF2E2E2E</color>
     <color name="colorToolbarAccent">@android:color/white</color>
     <color name="colorSwipeRefreshBg">@color/etsNoir</color>
-    <color name="colorDialogBg">@color/etsGrisFonce</color>
+    <color name="colorDialogBg">@color/etsNoir</color>
 </resources>

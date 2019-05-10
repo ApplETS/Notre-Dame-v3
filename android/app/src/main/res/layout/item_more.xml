@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/material_component_lists_icon_left_padding"
             android:scaleType="centerInside"
+            android:tint="?attr/colorControlNormal"
             tools:src="@drawable/ic_exit_to_app_black_24dp" />
     </FrameLayout>
 
@@ -28,5 +29,6 @@
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/material_component_lists_right_padding"
         android:textSize="16sp"
+        android:textColor="?android:attr/textColorPrimary"
         tools:text="@tools:sample/lorem" />
 </LinearLayout>
