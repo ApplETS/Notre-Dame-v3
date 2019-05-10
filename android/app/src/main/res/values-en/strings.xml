@@ -176,8 +176,8 @@
     <string name="label_display_pref_category">Display</string>
     <string name="label_dark_theme_pref">Dark Theme</string>
     <string-array name="entries_dark_theme_pref">
-        <item>Yes</item>
-        <item>No</item>
+        <item>Enabled</item>
+        <item>Disabled</item>
         <item>Set by Battery Saver</item>
     </string-array>
 </resources>

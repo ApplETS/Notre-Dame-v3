@@ -176,8 +176,8 @@
     <string name="label_display_pref_category">Affichage</string>
     <string name="label_dark_theme_pref">Thème sombre</string>
     <string-array name="entries_dark_theme_pref">
-        <item>Oui</item>
-        <item>Non</item>
+        <item>Activé</item>
+        <item>Désactivé</item>
         <item>Défini par l\'économiseur de batterie</item>
     </string-array>
 </resources>

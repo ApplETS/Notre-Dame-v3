@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="entries_dark_theme_pref">
-        <item>Oui</item>
-        <item>Non</item>
-        <item>Paramètre par défaut dy système</item>
+        <item>Activé</item>
+        <item>Désactivé</item>
+        <item>Paramètre par défaut du système</item>
     </string-array>
 </resources>
