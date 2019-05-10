@@ -17,7 +17,6 @@
             android:id="@+id/collapsingToolbarLayoutSecurity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/colorPrimary"
             app:expandedTitleGravity="top"
             app:layout_scrollFlags="scroll"
             app:titleEnabled="false">
