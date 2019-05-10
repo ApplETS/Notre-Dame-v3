@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorSplash">@color/etsRougeClair</color>
-    <color name="colorPrimaryDark">@android:color/black</color>
+    <color name="colorPrimaryDark">@color/etsRougeFonce</color>
     <color name="colorToolbar">@color/etsRougeClair</color>
     <color name="colorToolbarAccent">@android:color/white</color>
     <color name="colorSwipeRefreshBg">@android:color/white</color>
     <color name="colorDialogBg">@android:color/white</color>
-    <color name="colorControlNormal">@color/colorPrimaryDark</color>
+    <color name="colorControlNormal">@android:color/black</color>
 </resources>
