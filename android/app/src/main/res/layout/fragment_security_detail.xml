@@ -17,7 +17,6 @@
             android:id="@+id/collapsingToolbarLayoutSecurity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/colorPrimary"
             app:expandedTitleGravity="top"
             app:layout_scrollFlags="scroll"
             app:titleEnabled="false">
@@ -41,15 +40,20 @@
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp" />
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnEmergencyCall"
-        style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/emergency_call"
-        app:icon="@drawable/ic_phone_black_24dp" />
+        android:textColor="@android:color/white"
+        app:icon="@drawable/ic_phone_black_24dp"
+        app:iconTint="@android:color/white"
+        app:rippleColor="@android:color/white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

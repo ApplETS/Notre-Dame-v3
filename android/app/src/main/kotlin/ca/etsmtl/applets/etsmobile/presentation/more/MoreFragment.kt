@@ -37,7 +37,7 @@ class MoreFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val logoutConfirmationDialog: AlertDialog? by lazy {
         context?.let {
-            val builder = AlertDialog.Builder(it, R.style.AppCompatAlertDialogStyle)
+            val builder = AlertDialog.Builder(it, R.style.AppTheme_Dialog_Alert)
 
             builder.setMessage(R.string.prompt_log_out_confirmation)
                     .setTitle(getString(R.string.more_item_label_log_out))
@@ -115,6 +115,10 @@ class MoreFragment : DaggerFragment() {
 
         moreViewModel.navigateToOpenSourcesLicenses.observe(this, EventObserver {
             findNavController().navigate(R.id.activityOpenSourceLicenses)
+        })
+
+        moreViewModel.navigateToSettings.observe(this, EventObserver {
+            findNavController().navigate(MoreFragmentDirections.actionFragmentMoreToFragmentSettings())
         })
 
         moreViewModel.navigateToUri.observe(this, EventObserver { uriId ->

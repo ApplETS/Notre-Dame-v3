@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
+        android:background="@color/colorToolbar"
         app:expanded="false"
         tools:expanded="true">
 
@@ -20,7 +21,6 @@
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/colorPrimary"
             app:expandedTitleGravity="top"
             app:layout_scrollFlags="scroll"
             app:titleEnabled="false">
@@ -29,7 +29,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                app:titleTextColor="@android:color/white"
+                app:titleTextColor="@color/colorToolbarAccent"
                 tools:title="Title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -38,11 +38,10 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
+            android:background="@android:color/transparent"
             android:visibility="gone"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="@color/material_grey_200" />
+            app:tabIndicatorColor="@color/colorToolbarAccent"
+            app:tabSelectedTextColor="@color/colorToolbarAccent" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <fragment

@@ -47,8 +47,7 @@
 
         <activity
             android:name=".presentation.gradesdetails.GradesDetailsActivity"
-            android:parentActivityName=".presentation.main.MainActivity"
-            android:theme="@style/AppTheme.Transparent" />
+            android:parentActivityName=".presentation.main.MainActivity" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:label="@string/more_item_label_open_source_licenses"

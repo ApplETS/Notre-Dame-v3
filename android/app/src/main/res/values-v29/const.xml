@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entry_values_dark_theme_pref">
+        <item>@string/entry_value_dark_theme_pref_enabled</item>
+        <item>@string/entry_value_dark_theme_pref_disabled</item>
+        <item>@string/entry_value_dark_theme_pref_system</item>
+    </string-array>
+    <string name="default_entry_value_dark_theme_pref" translatable="false">@string/entry_value_dark_theme_pref_system</string>
+</resources>

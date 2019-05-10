@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:key="@string/key_display_pref_category"
+        app:title="@string/label_display_pref_category">
+
+        <ListPreference
+            app:defaultValue="@string/default_entry_value_dark_theme_pref"
+            app:entries="@array/entries_dark_theme_pref"
+            app:entryValues="@array/entry_values_dark_theme_pref"
+            app:icon="@drawable/ic_brightness_6_control_normal_24dp"
+            app:key="@string/key_dark_theme_pref"
+            app:summary="%s"
+            app:title="@string/label_dark_theme_pref" />
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>

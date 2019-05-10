@@ -108,7 +108,7 @@ class EvaluationHeaderItem(private val evaluation: Evaluation) : Item(), Expanda
 
     private fun showIgnoredEvaluationDialog(context: Context) {
         if (ignoredEvaluationDialog == null) {
-            ignoredEvaluationDialog = AlertDialog.Builder(context)
+            ignoredEvaluationDialog = AlertDialog.Builder(context, R.style.AppTheme_Dialog_Alert)
                     .setTitle(R.string.title_ignored_evaluation)
                     .setMessage(R.string.text_ignored_evaluation)
                     .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }

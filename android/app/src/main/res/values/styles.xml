@@ -1,15 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
-        <item name="android:navigationBarColor">?android:attr/colorPrimary</item>
         <item name="android:textColorSecondary">@color/etsGrisClair</item>
-        <item name="android:textColorPrimary">@android:color/primary_text_light</item>
-        <item name="android:textColorPrimaryInverse">@android:color/primary_text_light</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>
         <item name="android:statusBarColor">?android:attr/colorPrimaryDark</item>
     </style>
@@ -33,23 +31,17 @@
 
     <style name="TextAppearance.AppTheme.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/colorToolbarText</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="TextAppearance.AppTheme.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorToolbarText</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="WindowAnimationTransition">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
-    </style>
-
-    <style name="AppTheme.Transparent" parent="AppTheme">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!-- Login screen theme. -->
@@ -78,10 +70,28 @@
         <item name="android:textColor">@color/material_yellow_500</item>
     </style>
 
-    <style name="AppCompatAlertDialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+    <style name="AppTheme.Dialog.Alert" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/Widget.AppTheme.Button.TextButton.Dialog.Negative
+        </item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/Widget.AppTheme.Button.TextButton.Dialog.Positive
+        </item>
+        <item name="android:windowBackground">@color/colorDialogBg</item>
     </style>
+
+    <style name="Widget.AppTheme.Button.TextButton.Dialog.Negative" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="rippleColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Widget.AppTheme.Button.TextButton.Dialog.Positive" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="rippleColor">@color/colorPrimary</item>
+    </style>
+
 
     <style name="Widget.AppTheme.Dashboard.Card.Applets.Button" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@android:color/white</item>

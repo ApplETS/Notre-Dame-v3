@@ -8,8 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.util.EventObserver
+import ca.etsmtl.applets.etsmobile.extension.applyAppTheme
 import ca.etsmtl.applets.etsmobile.extension.toast
+import ca.etsmtl.applets.etsmobile.util.EventObserver
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.recyclerViewProfile
 import kotlinx.android.synthetic.main.fragment_profile.swipeRefreshLayoutProfile
@@ -47,8 +48,10 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun setUpSwipeRefresh() {
-        swipeRefreshLayoutProfile.setColorSchemeResources(R.color.colorPrimary)
-        swipeRefreshLayoutProfile.setOnRefreshListener { profileViewModel.refresh() }
+        with(swipeRefreshLayoutProfile) {
+            applyAppTheme(context)
+            setOnRefreshListener { profileViewModel.refresh() }
+        }
     }
 
     private fun setUpRecyclerView() {

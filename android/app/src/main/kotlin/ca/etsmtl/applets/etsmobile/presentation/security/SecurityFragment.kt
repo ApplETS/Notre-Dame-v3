@@ -10,15 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.setVisible
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_main.appBarLayout
-import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_security.mapView
 import kotlinx.android.synthetic.main.fragment_security.rvSecurity
 import kotlinx.android.synthetic.main.fragment_security.viewCallEmergency
@@ -38,7 +34,6 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setInitialActivityState()
         setMap(savedInstanceState)
         setRecyclerView()
         setViewListener()
@@ -129,8 +124,6 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onDestroy() {
-        restoreActivityState()
-
         mapView?.onDestroy()
         super.onDestroy()
     }
@@ -138,17 +131,5 @@ class SecurityFragment : Fragment(), OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
-    }
-
-    private fun setInitialActivityState() = (activity as? MainActivity)?.apply {
-        bottomNavigationView?.setVisible(false)
-        appBarLayout?.setExpanded(true, true)
-    }
-
-    private fun restoreActivityState() {
-        (activity as? MainActivity)?.apply {
-            bottomNavigationView?.setVisible(true)
-            appBarLayout?.setExpanded(true, true)
-        }
     }
 }

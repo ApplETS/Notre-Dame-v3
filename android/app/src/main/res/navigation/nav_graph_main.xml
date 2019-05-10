@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_fragmentMore_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentMore_to_fragmentSettings"
+            app:destination="@id/fragmentSettings" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAbout"
@@ -90,4 +93,8 @@
         android:id="@+id/activityOpenSourceLicenses"
         android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
     </activity>
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:label="@string/title_settings"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.settings.SettingsFragment" />
 </navigation>

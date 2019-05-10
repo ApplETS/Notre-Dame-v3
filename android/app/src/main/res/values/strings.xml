@@ -97,6 +97,7 @@
     <string name="more_item_label_contributors">Contributeurs</string>
     <string name="more_item_label_open_source_licenses">@string/oss_license_title</string>
     <string name="more_item_label_beta_faq">FAQ Bêta</string>
+    <string name="more_item_label_settings">Paramètres</string>
     <string name="more_item_label_log_out">Se déconnecter</string>
     <string name="prompt_log_out_confirmation">Êtes-vous certain de vouloir vous déconnecter?</string>
     <string name="more_label_log_out_progress">Déconnexion en cours</string>
@@ -169,4 +170,14 @@
     <string name="emergency_procedures">Procédures d\'urgence</string>
     <string name="security_station">Poste de sécurité</string>
     <string name="msg_no_seances_today">Aucune séance de cours à l\'horaire aujourd\'hui</string>
+
+    <!-- Settings -->
+    <string name="title_settings">Paramètres</string>
+    <string name="label_display_pref_category">Affichage</string>
+    <string name="label_dark_theme_pref">Thème sombre</string>
+    <string-array name="entries_dark_theme_pref">
+        <item>Activé</item>
+        <item>Désactivé</item>
+        <item>Défini par l\'économiseur de batterie</item>
+    </string-array>
 </resources>

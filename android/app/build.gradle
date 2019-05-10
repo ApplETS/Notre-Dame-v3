@@ -111,7 +111,7 @@ dependencies {
 
     // Support libraries
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation "com.google.android.material:material:$versions.support"
+    implementation "com.google.android.material:material:$versions.material_components"
     implementation "androidx.legacy:legacy-support-v4:$versions.support"
     implementation "androidx.cardview:cardview:$versions.support"
     implementation "androidx.recyclerview:recyclerview:$versions.support"
@@ -119,6 +119,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
     implementation 'androidx.core:core-ktx:1.0.1'
     implementation 'androidx.fragment:fragment-ktx:1.0.0'
+    implementation "androidx.preference:preference:1.0.0"
 
     // Google Play Services
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
