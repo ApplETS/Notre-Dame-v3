@@ -12,15 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.extension.toLiveData
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_main.appBarLayout
-import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.fragment_dashboard.rvCards
 import presentation.DashboardViewModel
 import javax.inject.Inject
@@ -66,11 +62,6 @@ class DashboardFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        with(activity as MainActivity) {
-            appBarLayout.setExpanded(true, true)
-            bottomNavigationView.setVisible(true)
-        }
 
         setupRecyclerView()
 

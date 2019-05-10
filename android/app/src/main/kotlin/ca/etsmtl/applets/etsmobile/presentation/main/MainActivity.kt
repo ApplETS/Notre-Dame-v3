@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
+import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
@@ -77,22 +78,24 @@ class MainActivity : BaseActivity() {
                 val currentId = navController.currentDestination?.id
 
                 if (!item.isChecked && currentId != R.id.fragmentSplash && currentId != R.id.fragmentLogin) {
-                    NavigationUI.onNavDestinationSelected(item, navController).apply {
-                        if (this && currentId != R.id.fragmentStudent) {
-                            appBarLayout.setExpanded(true, true)
-                        }
-                    }
+                    NavigationUI.onNavDestinationSelected(item, navController)
                 } else {
                     false
                 }
             }
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (!topLevelDestinations.contains(destination.id)) {
+                if (topLevelDestinations.contains(destination.id)) {
+                    bottomNavigationView?.setVisible(true)
+
+                    appBarLayout.setExpanded(true, true)
+                } else {
                     toolbar.navigationIcon?.setColorFilter(
-                        getColorCompat(android.R.color.white),
-                        PorterDuff.Mode.SRC_ATOP
+                            getColorCompat(android.R.color.white),
+                            PorterDuff.Mode.SRC_ATOP
                     )
+
+                    bottomNavigationView?.setVisible(false, 0)
                 }
             }
         }
