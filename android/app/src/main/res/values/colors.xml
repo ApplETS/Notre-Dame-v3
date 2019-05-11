@@ -31,4 +31,5 @@
     <color name="colorSwipeRefreshBg">@color/etsNoir</color>
     <color name="colorDialogBg">@color/etsNoir</color>
     <color name="colorControlNormal">@color/etsGrisFonce</color>
+    <color name="colorNavigationBar">@color/colorPrimaryDark</color>
 </resources>

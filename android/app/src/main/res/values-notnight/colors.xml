@@ -7,4 +7,5 @@
     <color name="colorSwipeRefreshBg">@android:color/white</color>
     <color name="colorDialogBg">@android:color/white</color>
     <color name="colorControlNormal">@android:color/black</color>
+    <color name="colorNavigationBar">@color/etsRougeClair</color>
 </resources>
