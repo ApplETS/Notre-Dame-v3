@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 
 /**
  * Settings screen
@@ -36,9 +35,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
     }
 
     private fun handleDarkThemePreferenceChange(newValue: Any?) {
-        if (activity is MainActivity && newValue is String) {
-            (activity as MainActivity).applyDarkThemePref(newValue)
-
+        if (newValue is String) {
+            // Recreating the activity will apply the new theme
             activity?.recreate()
         }
     }

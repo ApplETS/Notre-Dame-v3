@@ -5,13 +5,13 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.applyDarkThemePref
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
@@ -145,25 +145,5 @@ class MainActivity : BaseActivity() {
         )
 
         applyDarkThemePref(prefValue)
-    }
-
-    /**
-     * Apply dark theme mode preference
-     */
-    fun applyDarkThemePref(modePreferenceValue: String?) {
-        val nightMode = when (modePreferenceValue) {
-            getString(R.string.entry_value_dark_theme_pref_enabled) -> {
-                AppCompatDelegate.MODE_NIGHT_YES
-            }
-            getString(R.string.entry_value_dark_theme_pref_disabled) -> {
-                AppCompatDelegate.MODE_NIGHT_NO
-            }
-            getString(R.string.entry_value_dark_theme_pref_battery_saver) -> {
-                AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
-            }
-            else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        }
-
-        AppCompatDelegate.setDefaultNightMode(nightMode)
     }
 }
