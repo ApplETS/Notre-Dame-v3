@@ -1,10 +1,12 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
-import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -15,6 +17,7 @@ import ca.etsmtl.applets.etsmobile.extension.applyDarkThemePref
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
+import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
@@ -31,16 +34,11 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+    }
     @Inject
-    lateinit var prefs: SharedPreferences
-
-    private val topLevelDestinations = setOf(
-        R.id.fragmentDashboard,
-        R.id.fragmentSchedule,
-        R.id.fragmentStudent,
-        R.id.fragmentEts,
-        R.id.fragmentMore
-    )
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +48,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setupActionBar()
         setupBottomNavigation()
+        subscribeUI()
     }
 
     private fun setupBottomNavigation() {
@@ -75,9 +74,7 @@ class MainActivity : BaseActivity() {
 
             bottomNavigationView.setupWithNavController(navController)
             bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-                val currentId = navController.currentDestination?.id
-
-                if (!item.isChecked && currentId != R.id.fragmentSplash && currentId != R.id.fragmentLogin) {
+                if (mainViewModel.shouldPerformBottomNavigationViewAction()) {
                     NavigationUI.onNavDestinationSelected(item, navController)
                 } else {
                     false
@@ -85,18 +82,12 @@ class MainActivity : BaseActivity() {
             }
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (topLevelDestinations.contains(destination.id)) {
-                    bottomNavigationView?.setVisible(true)
+                mainViewModel.onNavigationDestinationChanged(destination.id.toDestination())
 
-                    appBarLayout.setExpanded(true, true)
-                } else {
-                    toolbar.navigationIcon?.setColorFilter(
-                            getColorCompat(android.R.color.white),
-                            PorterDuff.Mode.SRC_ATOP
-                    )
-
-                    bottomNavigationView?.setVisible(false, 0)
-                }
+                toolbar.navigationIcon?.setColorFilter(
+                    getColorCompat(android.R.color.white),
+                    PorterDuff.Mode.SRC_ATOP
+                )
             }
         }
 
@@ -106,6 +97,9 @@ class MainActivity : BaseActivity() {
 
     private fun setupActionBar() {
         val navController = findNavController(R.id.fragmentNavHostMain)
+        val topLevelDestinations = mainViewModel.topLevelDestinations.map {
+            it.toDestinationId()
+        }.toSet()
         val appBarConfiguration = AppBarConfiguration(topLevelDestinations)
 
         setSupportActionBar(toolbar)
@@ -113,20 +107,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        val navController = findNavController(R.id.fragmentNavHostMain)
-        val currentId = navController.currentDestination?.id
-
-        if (currentId != R.id.fragmentLogin) {
-            if (topLevelDestinations.contains(currentId)) {
-                if (currentId == R.id.fragmentDashboard) {
-                    finishAffinity()
-                } else {
-                    navController.navigate(R.id.fragmentDashboard)
-                }
-            } else {
-                super.onBackPressed()
-            }
-        }
+        mainViewModel.onBackPressed()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -139,11 +120,30 @@ class MainActivity : BaseActivity() {
      * Load dark theme preference and apply it
      */
     private fun loadDarkThemePref() {
-        val prefValue = prefs.getString(
-                getString(R.string.key_dark_theme_pref),
-                getString(R.string.default_entry_value_dark_theme_pref)
-        )
+        applyDarkThemePref(mainViewModel.getDarkThemePreferenceValue())
+    }
 
-        applyDarkThemePref(prefValue)
+    private fun subscribeUI() {
+        mainViewModel.navigateToDestination.observe(this, EventObserver {
+            findNavController(R.id.fragmentNavHostMain).navigate(it.toDestinationId())
+        })
+
+        mainViewModel.appBarLayoutExpanded.observe(this, Observer { expanded ->
+            appBarLayout.setExpanded(expanded, true)
+        })
+
+        mainViewModel.bottomNavigationViewVisible.observe(this, Observer { visible ->
+            val duration: Long = if (visible) 200 else 0
+
+            bottomNavigationView?.setVisible(visible, duration)
+        })
+
+        mainViewModel.closeApp.observe(this, EventObserver {
+            finishAffinity()
+        })
+
+        mainViewModel.navigateBack.observe(this, EventObserver {
+            super.onBackPressed()
+        })
     }
 }
