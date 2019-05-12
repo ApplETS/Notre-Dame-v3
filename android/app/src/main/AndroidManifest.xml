@@ -57,5 +57,4 @@
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:theme="@style/AppTheme.WithActionBar" />
     </application>
-
 </manifest>

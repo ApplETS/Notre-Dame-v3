@@ -3,6 +3,8 @@ package ca.etsmtl.applets.etsmobile.extension
 import android.Manifest
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.TypedValue
+import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresPermission
@@ -32,4 +34,17 @@ fun Context.isDeviceConnected(): Boolean {
 @ColorInt
 fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
+}
+
+/**
+ * Returns color from attribute
+ */
+@ColorInt
+fun Context.getColorFromAttr(
+    @AttrRes attrColor: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
 }

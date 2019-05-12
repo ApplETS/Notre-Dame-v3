@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.getAndroidDimensionInPixelSize
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
+import ca.etsmtl.applets.etsmobile.extension.getColorFromAttr
 import ca.etsmtl.applets.etsmobile.extension.open
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
@@ -149,7 +150,7 @@ class AboutFragment : Fragment() {
             it.window.apply {
                 clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                 statusBarColor = it.getColorCompat(R.color.colorPrimaryDark)
-                navigationBarColor = it.getColorCompat(R.color.colorPrimary)
+                navigationBarColor = it.getColorFromAttr(android.R.attr.navigationBarColor)
             }
         }
     }

@@ -13,6 +13,7 @@ import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
+import ca.etsmtl.applets.etsmobile.presentation.main.MainViewModel
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreViewModel
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment
@@ -33,6 +34,11 @@ import presentation.DashboardViewModel
  */
 @Module
 interface MainActivityModule {
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+
     @ContributesAndroidInjector
     fun contributeSplashFragment(): SplashFragment
 

@@ -2,7 +2,7 @@ buildscript {
     ext.versions = [
             "buglife": "1.4.3",
             "chuck": "1.1.0",
-            "constraint_layout": "2.0.0-alpha5",
+            "constraint_layout": "2.0.0-beta1",
             "coroutines": "1.1.1",
             "dagger": "2.22.1",
             "dimens": "1.4",
@@ -20,7 +20,7 @@ buildscript {
             "kotlinx_serialization": "0.11.0",
             "leakcanary": "2.0-alpha-1",
             "lifecycle": "2.0.0",
-            "lifecycle_viewmodel_ktx": "2.1.0-alpha04",
+            "lifecycle_viewmodel_ktx": "2.2.0-alpha01",
             "material_components": "1.1.0-alpha06",
             "materialprogressview": "1.0.6",
             "mockito": "2.23.4",

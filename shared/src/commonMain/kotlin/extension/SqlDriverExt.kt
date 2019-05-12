@@ -9,7 +9,6 @@ import model.DashboardCard
 /**
  * Created by Sonphil on 10-03-19.
  */
- 
 
 fun SqlDriver.createDb(): EtsMobileDb {
     val adapter = DashboardCardEntity.Adapter(object : ColumnAdapter<DashboardCard.Type, String> {
