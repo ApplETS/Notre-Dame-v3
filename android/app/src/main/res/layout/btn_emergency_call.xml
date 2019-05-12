@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnEmergencyCall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center"
+    android:layout_marginBottom="16dp"
+    android:backgroundTint="@color/colorPrimary"
+    android:text="@string/emergency_call"
+    android:textColor="@android:color/white"
+    app:icon="@drawable/ic_phone_black_24dp"
+    app:iconTint="@android:color/white"
+    app:rippleColor="@android:color/white" />
