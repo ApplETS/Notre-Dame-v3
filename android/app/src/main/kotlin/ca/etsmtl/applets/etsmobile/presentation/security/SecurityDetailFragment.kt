@@ -6,36 +6,64 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
-import kotlinx.android.synthetic.main.fragment_security_detail.appBarLayoutSecurity
-import kotlinx.android.synthetic.main.fragment_security_detail.btnEmergencyCall
-import kotlinx.android.synthetic.main.fragment_security_detail.toolbarSecurity
+import kotlinx.android.synthetic.main.activity_main.coordinatorLayout
+import kotlinx.android.synthetic.main.btn_emergency_call.btnEmergencyCall
 import kotlinx.android.synthetic.main.fragment_security_detail.webView
 
 class SecurityDetailFragment : Fragment() {
     private val args: SecurityDetailFragmentArgs by navArgs()
+    private var emergencyCallBtn: Button? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as? MainActivity)?.appBarLayout?.setExpanded(false, false)
+        (activity as? MainActivity)?.let { activity ->
+            activity.appBarLayout?.setExpanded(true, true)
+            addEmergencyCallButtonToMainLayout(activity, inflater)
+        }
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_security_detail, container, false)
     }
 
+    /**
+     * Inflates and adds the emergency call button to the main layout
+     *
+     * The emergency call FloatingActionButton should be positioned at the bottom of this
+     * [Fragment]'s layout. However, the [MainActivity]'s app bar will push the [Fragment]'s layout
+     * down and cause the button to be partially hidden. To prevent this from happening, we add the
+     * button to the [MainActivity]'s CoordinatorLayout and we remove afterwards when the user
+     * leaves this [Fragment].
+     *
+     * @param activity [MainActivity]
+     * @param inflater [LayoutInflater] instance used to instantiates the button
+     */
+    private fun addEmergencyCallButtonToMainLayout(
+        activity: MainActivity,
+        inflater: LayoutInflater
+    ) {
+        activity.coordinatorLayout?.let { coordinatorLayout ->
+            emergencyCallBtn = inflater.inflate(
+                R.layout.btn_emergency_call,
+                coordinatorLayout,
+                false
+            ) as Button
+
+            coordinatorLayout.addView(emergencyCallBtn)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupToolbarSecurityDetail()
         setEmergencyDetailText()
         setButtonListener()
     }
@@ -48,22 +76,22 @@ class SecurityDetailFragment : Fragment() {
         webView.loadUrl(fileUrl)
     }
 
-    private fun setButtonListener() {
-        btnEmergencyCall.setOnClickListener {
+    private fun setButtonListener() = (activity as? MainActivity)
+        ?.btnEmergencyCall
+        ?.setOnClickListener {
             val uri = "tel:" + resources.getString(R.string.emergency_number)
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse(uri)
             startActivity(intent)
         }
-    }
-
-    private fun setupToolbarSecurityDetail() {
-        toolbarSecurity.setupWithNavController(findNavController())
-        appBarLayoutSecurity?.setExpanded(true, true)
-    }
 
     override fun onDestroyView() {
-        (activity as? MainActivity)?.appBarLayout?.setExpanded(true, false)
+        (activity as? MainActivity)?.let {
+            it.appBarLayout?.setExpanded(true, true)
+
+            // Remove emergency call button from main layout
+            it.coordinatorLayout?.removeView(emergencyCallBtn)
+        }
 
         super.onDestroyView()
     }
