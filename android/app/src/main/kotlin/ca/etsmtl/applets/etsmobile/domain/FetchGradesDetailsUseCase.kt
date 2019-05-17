@@ -55,7 +55,7 @@ class FetchGradesDetailsUseCase @Inject constructor(
     private fun Resource<SommaireEtEvaluations>.shouldCheckForEvaluationsCompletion(): Boolean {
         val noteStr = data?.sommaireElementsEvaluation?.note
 
-        return status == Resource.Status.SUCCESS && (noteStr == null || noteStr.replaceCommaAndParseToDouble() == 0.0)
+        return status == Resource.Status.SUCCESS && (noteStr?.replaceCommaAndParseToDouble() == 0.0)
     }
 
     private fun handleEvaluationsMightBeIncomplete(
