@@ -10,6 +10,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.toast
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_grades_details.containerTvGradesDetailsSubtitle
 import kotlinx.android.synthetic.main.activity_grades_details.toolbar
@@ -72,16 +73,21 @@ class GradesDetailsActivity : BaseActivity() {
         setupToolbar()
 
         with(intent?.extras) {
-            with(this?.getParcelable(EXTRA_COURS) as Cours) {
-                if (savedInstanceState == null) {
-                    addFragment(this)
-                }
+            with(this?.getParcelable(EXTRA_COURS) as? Cours) {
+                if (this == null) {
+                    toast(R.string.error)
+                    onBackPressed()
+                } else {
+                    if (savedInstanceState == null) {
+                        addFragment(this)
+                    }
 
-                supportActionBar?.let {
-                    it.title = sigle
+                    supportActionBar?.let {
+                        it.title = sigle
+                    }
+                    tvGradesDetailsCourseName.text = titreCours
+                    tvGradesDetailsGroup.text = String.format(getString(R.string.text_group), groupe)
                 }
-                tvGradesDetailsCourseName.text = titreCours
-                tvGradesDetailsGroup.text = String.format(getString(R.string.text_group), groupe)
             }
         }
     }

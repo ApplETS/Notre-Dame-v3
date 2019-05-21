@@ -7,7 +7,8 @@
     android:layout_marginStart="4dp"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="8dp"
-    android:stateListAnimator="@animator/selector_elevation_card_item">
+    android:stateListAnimator="@animator/selector_elevation_card_item"
+    app:cardCornerRadius="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
