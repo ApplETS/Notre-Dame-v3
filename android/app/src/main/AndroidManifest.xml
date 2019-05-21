@@ -51,10 +51,10 @@
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:label="@string/more_item_label_open_source_licenses"
-            android:theme="@style/AppTheme.WithActionBar"
+            android:theme="@style/AppOssLicensesTheme"
             tools:replace="android:label" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-            android:theme="@style/AppTheme.WithActionBar" />
+            android:theme="@style/AppOssLicensesTheme" />
     </application>
 </manifest>
