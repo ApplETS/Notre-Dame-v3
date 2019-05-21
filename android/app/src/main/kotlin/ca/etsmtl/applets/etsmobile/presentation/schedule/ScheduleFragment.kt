@@ -41,6 +41,21 @@ class ScheduleFragment : DaggerFragment() {
     private val showTabsHandler = Handler()
     private var showTabsRunnable: Runnable? = null
     private var selectTabsRunnable: Runnable? = null
+    private val onPageChangeListener by lazy {
+        object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+                swipeRefreshLayoutSchedule?.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {}
+
+            override fun onPageSelected(position: Int) {}
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,19 +83,7 @@ class ScheduleFragment : DaggerFragment() {
     private fun setUpPager() {
         schedule_pager.adapter = adapter
 
-        schedule_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-                swipeRefreshLayoutSchedule.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
-            }
-
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {}
-
-            override fun onPageSelected(position: Int) {}
-        })
+        schedule_pager.addOnPageChangeListener(onPageChangeListener)
 
         (activity as? MainActivity)?.tabLayout?.let {
             showTabsRunnable = Runnable {
@@ -135,6 +138,7 @@ class ScheduleFragment : DaggerFragment() {
         (activity as? MainActivity)?.let { activity ->
             activity.appBarLayout.setExpanded(true, false)
 
+            schedule_pager.removeOnPageChangeListener(onPageChangeListener)
             activity.tabLayout?.let {
                 it.setupWithViewPager(null)
                 it.tabMode = TabLayout.MODE_FIXED
