@@ -16,7 +16,6 @@ buildscript {
             "gradle": '3.4.1',
             "groupie": "2.3.0",
             "junit": "4.12",
-            "klock": "1.1.1",
             "kotlin": "1.3.31",
             "kotlinx_serialization": "0.11.0",
             "leakcanary": "2.0-alpha-1",
@@ -40,6 +39,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.gradle"
@@ -58,6 +58,5 @@ allprojects {
         jcenter()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url "https://kotlin.bintray.com/kotlinx" }
-        maven { url "https://dl.bintray.com/soywiz/soywiz" }
     }
 }
