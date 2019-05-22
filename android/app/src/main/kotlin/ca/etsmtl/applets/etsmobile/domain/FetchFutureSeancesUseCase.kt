@@ -5,11 +5,11 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
+import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
 import model.Resource
 import model.Seance
 import model.Session
 import model.SignetsUserCredentials
-import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -46,7 +46,7 @@ class FetchFutureSeancesUseCase @Inject constructor(
                 mediatorLiveData.value?.data?.let {
                     seances.addAll(it)
                 }
-                seances.addAll(res.data.orEmpty().filter { !seances.contains(it) && it.dateDebut.unixMillisLong >= todayTimeStampMilis })
+                seances.addAll(res.data.orEmpty().filter { !seances.contains(it) && it.dateDebut.timeInMilliseconds >= todayTimeStampMilis })
 
                 val error = latestError
 
