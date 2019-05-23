@@ -6,13 +6,12 @@ import data.securepreferences.utils.CipherUtils
 import data.securepreferences.utils.HashUtils
 import data.securepreferences.utils.KeyStoreUtils
 import java.security.KeyPair
-import javax.inject.Inject
 
 /**
  * Created by Sonphil on 18-05-19.
  */
 
-internal class SharedPreferencesWrapper @Inject constructor(
+internal class SharedPreferencesWrapper constructor(
     private val prefs: SharedPreferences,
     private val cipherUtils: CipherUtils,
     private val keyStoreUtils: KeyStoreUtils,

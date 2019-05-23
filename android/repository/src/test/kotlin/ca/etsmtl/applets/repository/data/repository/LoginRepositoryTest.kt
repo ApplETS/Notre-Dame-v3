@@ -7,7 +7,7 @@ import ca.etsmtl.applets.repository.LiveDataTestUtil
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import data.securepreferences.utils.CipherUtils
 import data.securepreferences.utils.KeyStoreUtils
-import ca.etsmtl.applets.repository.data.repository.signets.login.LoginRepository
+import ca.etsmtl.applets.repository.data.repository.signets.LoginRepository
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
 import ca.etsmtl.applets.shared.db.DashboardCardQueries
 import model.SignetsUserCredentials
