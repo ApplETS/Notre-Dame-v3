@@ -1,7 +1,7 @@
 package ca.etsmtl.applets.repository.data.login
 
 import androidx.test.InstrumentationRegistry
-import ca.etsmtl.applets.repository.data.repository.signets.login.KeyStoreUtils
+import data.securepreferences.utils.KeyStoreUtils
 import org.junit.After
 import org.junit.Before
 

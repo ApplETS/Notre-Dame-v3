@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import ca.etsmtl.applets.shared.db.DashboardCardQueries
+import data.securepreferences.utils.CipherUtils
+import data.securepreferences.utils.KeyStoreUtils
 import model.SignetsUserCredentials
 import model.UniversalCode
 import javax.inject.Inject

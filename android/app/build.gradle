@@ -79,10 +79,12 @@ android {
             track = "beta" // internal/alpha/beta/production
         }
         // Production flavor
-// TODO:
-//            production {
-//                serviceAccountCredentials = file('customer-two-key.json')
-//            }
+        // TODO:
+        /*
+        production {
+            serviceAccountCredentials = file('customer-two-key.json')
+        }
+        */
     }
 
     sourceSets {
@@ -117,7 +119,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$versions.support"
     implementation "androidx.browser:browser:$versions.support"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
-    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation "androidx.core:core-ktx:$versions.android_ktx"
     implementation 'androidx.fragment:fragment-ktx:1.0.0'
     implementation "androidx.preference:preference:1.0.0"
 

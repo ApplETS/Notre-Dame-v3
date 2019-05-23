@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-package ca.etsmtl.applets.repository.data.repository.signets.login
+package data.securepreferences.utils
 
 import android.content.Context
 import android.os.Build

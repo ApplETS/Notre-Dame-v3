@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.repository.data.repository.signets.login
+package data.securepreferences.utils
 
 import android.util.Base64
 import java.security.Key
