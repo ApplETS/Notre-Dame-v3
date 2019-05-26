@@ -6,7 +6,6 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import data.securepreferences.utils.CipherUtils
-import data.securepreferences.utils.HashUtils
 import data.securepreferences.utils.KeyStoreUtils
 
 /**
@@ -27,8 +26,7 @@ internal class PreferencesProvider : ContentProvider() {
             return SharedPreferencesWrapper(
                 shredPrefs,
                 CipherUtils(),
-                KeyStoreUtils(applicationContext),
-                HashUtils()
+                KeyStoreUtils(applicationContext)
             )
         }
     }
