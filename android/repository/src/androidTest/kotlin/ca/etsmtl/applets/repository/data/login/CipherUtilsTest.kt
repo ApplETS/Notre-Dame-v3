@@ -2,7 +2,7 @@ package ca.etsmtl.applets.repository.data.login
 
 import android.os.Build
 import android.util.Base64
-import ca.etsmtl.applets.repository.data.repository.signets.login.CipherUtils
+import data.securepreferences.utils.CipherUtils
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before

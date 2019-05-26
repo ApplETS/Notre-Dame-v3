@@ -54,8 +54,10 @@ kotlin {
                 api "com.squareup.sqldelight:android-driver:$versions.sqldelight"
                 api "com.squareup.sqldelight:android-paging-extensions:$versions.sqldelight"
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+                implementation "androidx.core:core-ktx:$versions.android_ktx"
             }
         }
+
         iOSMain {
             dependsOn commonMain
             dependencies {
