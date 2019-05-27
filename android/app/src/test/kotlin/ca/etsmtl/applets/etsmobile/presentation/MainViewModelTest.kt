@@ -1,7 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import ca.etsmtl.applets.etsmobile.presentation.main.Destination
@@ -17,7 +15,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
-import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -31,9 +28,7 @@ class MainViewModelTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private val context: Context = mock()
-    private val prefs: SharedPreferences = mock(SharedPreferences::class.java)
-    private val mainViewModel = MainViewModel(context, prefs)
+    private val mainViewModel = MainViewModel()
     private val closeAppObserver: Observer<Event<Unit>> = mock()
     private val navigateToDestinationObserver: Observer<Event<Destination>> = mock()
     private val navigateBackObserver: Observer<Event<Unit>> = mock()
