@@ -89,7 +89,7 @@ fun ApiEtudiant.toEtudiantEntity() = EtudiantEntity(
 )
 
 fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
-    val note = this.note.replaceCommaAndParseToDouble()
+    val note = this.note?.replaceCommaAndParseToDouble()
     val moyenne = this.moyenne.replaceCommaAndParseToDouble()
     var notePourcentage: Double? = null
     var moyennePourcentage: Double? = null
@@ -130,7 +130,7 @@ fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map
 
 fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
     val noteSur = liste.asSequence()
-            .filter { it.note.isNotBlank() && it.ignoreDuCalcul == "Non" }
+            .filter { it.note != null && it.ignoreDuCalcul == "Non" }
             .map { it.ponderation.replaceCommaAndParseToFloat() ?: 0f }
             .sum()
             .coerceAtMost(100f)
