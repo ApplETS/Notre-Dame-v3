@@ -13,7 +13,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.applyDarkThemePref
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
@@ -43,7 +42,6 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loadDarkThemePref()
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
         setupActionBar()
@@ -114,13 +112,6 @@ class MainActivity : BaseActivity() {
         onBackPressed()
 
         return true
-    }
-
-    /**
-     * Load dark theme preference and apply it
-     */
-    private fun loadDarkThemePref() {
-        applyDarkThemePref(mainViewModel.getDarkThemePreferenceValue())
     }
 
     private fun subscribeUI() {
