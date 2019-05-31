@@ -147,13 +147,13 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:$versions.mockito"
 
     // Android Test Core library
-    androidTestImplementation 'androidx.test:core:1.1.0'
+    androidTestImplementation "androidx.test:core:$versions.test"
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation "androidx.test:rules:$versions.test"
 
     // Assertions
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
     // Espresso UI Testing
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso"

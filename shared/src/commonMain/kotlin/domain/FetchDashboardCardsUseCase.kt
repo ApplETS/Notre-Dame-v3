@@ -10,5 +10,5 @@ import model.DashboardCard
  */
 
 class FetchDashboardCardsUseCase @Inject constructor(private val repository: DashboardCardRepository) {
-    operator fun invoke(): ReceiveChannel<List<DashboardCard>> = repository.dashboardCards()
+    suspend operator fun invoke(): ReceiveChannel<List<DashboardCard>> = repository.dashboardCards()
 }
