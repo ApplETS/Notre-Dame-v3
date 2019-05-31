@@ -9,7 +9,7 @@ buildscript {
             "dimens": "1.4",
             "espresso": "3.1.2-alpha01",
             "firebase": "16.0.9",
-            "firebase_crashlytics": "2.10.0",
+            "firebase_crashlytics": "2.10.1",
             "flexbox" : "1.1.0",
             "glide": "4.9.0",
             "google_maps": "16.1.0",
@@ -22,7 +22,7 @@ buildscript {
             "leakcanary": "2.0-alpha-1",
             "lifecycle": "2.0.0",
             "lifecycle_viewmodel_ktx": "2.2.0-alpha01",
-            "material_components": "1.1.0-alpha06",
+            "material_components": "1.1.0-alpha07",
             "materialprogressview": "1.0.6",
             "mockito": "2.23.4",
             "mockito_kotlin": "1.6.0",
@@ -32,7 +32,7 @@ buildscript {
             "recyclerviewanimators": "2.3.0",
             "retrofit": "2.5.0",
             "room": "2.1.0-alpha04",
-            "test": "1.1.2-alpha01",
+            "test": "1.2.0",
             "sqldelight": "1.0.3",
             "support": "1.0.0"
     ]
