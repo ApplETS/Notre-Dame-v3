@@ -1,15 +1,13 @@
 package data.repository
 
 import ca.etsmtl.applets.shared.db.DashboardCardQueries
-import extension.asChannel
 import di.Inject
+import extension.asChannel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.map
-import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import model.DashboardCard
 import utils.EtsMobileDispatchers
 
@@ -18,21 +16,17 @@ import utils.EtsMobileDispatchers
  */
 
 class DashboardCardRepository @Inject constructor(private val dashboardCardQueries: DashboardCardQueries) {
-    fun dashboardCards(): ReceiveChannel<List<DashboardCard>> = GlobalScope.produce(
-        EtsMobileDispatchers.IO,
-        1
-    ) {
-        dashboardCardQueries
-            .selectAll { type, _, visible, dismissible ->
-                DashboardCard(type, visible, dismissible)
-            }
-            .asChannel()
-            .map(EtsMobileDispatchers.IO) { query ->
-                query.executeAsList()
-            }
-            .consumeEach { cards ->
-                offer(cards)
-            }
+    suspend fun dashboardCards(): ReceiveChannel<List<DashboardCard>> {
+        return withContext(EtsMobileDispatchers.IO) {
+            dashboardCardQueries
+                .selectAll { type, _, visible, dismissible ->
+                    DashboardCard(type, visible, dismissible)
+                }
+                .asChannel()
+                .map(EtsMobileDispatchers.IO) { query ->
+                    query.executeAsList()
+                }
+        }
     }
 
     fun updateDashboardCard(card: DashboardCard, position: Int) = CoroutineScope(EtsMobileDispatchers.IO)
