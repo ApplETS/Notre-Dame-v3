@@ -8,8 +8,7 @@ import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import data.db.DashboardCardDatabase
 import data.securepreferences.SecurePreferences
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import model.SignetsUserCredentials
 import model.UniversalCode
 import utils.EtsMobileDispatchers
@@ -141,18 +140,9 @@ class LoginRepository @Inject constructor(
      *
      * Clears the [SharedPreferences], deletes the saved password and clears the
      * database
-     *
-     * @return A [LiveData] with a value set to true if the process has finished or false if the
-     * process hasn't finished yet
      */
-    fun clearUserData(): LiveData<Boolean> {
-        val clearFinished = MutableLiveData<Boolean>()
-        clearFinished.value = false
-
-        // Add clearing task to diskIO queue
-        // Wait for operations running on diskIO thread to finish
-        // Prevent crash when the user when logout while the password is being saved
-        CoroutineScope(EtsMobileDispatchers.IO).launch {
+    suspend fun clearUserData() {
+        withContext(EtsMobileDispatchers.IO) {
             securePrefs.clear()
 
             SignetsUserCredentials.INSTANCE = null
@@ -160,11 +150,7 @@ class LoginRepository @Inject constructor(
             db.clearAllTables()
 
             resetDashboard()
-
-            clearFinished.postValue(true)
         }
-
-        return clearFinished
     }
 
     private suspend fun resetDashboard() = dashboardCardDatabase.reset()

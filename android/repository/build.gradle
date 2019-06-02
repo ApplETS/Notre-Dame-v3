@@ -82,7 +82,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 
     // Mockito-Kotlin
-    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$versions.mockito_kotlin"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito_kotlin"
 
     // Chuck
     debugImplementation "com.readystatesoftware.chuck:library:$versions.chuck"

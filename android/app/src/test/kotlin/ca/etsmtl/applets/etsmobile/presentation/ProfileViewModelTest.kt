@@ -15,9 +15,9 @@ import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.extension.mockNetwork
 import model.Resource
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.capture
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.capture
+import com.nhaarman.mockitokotlin2.mock
 import model.Etudiant
 import model.Programme
 import org.junit.Before

@@ -2,7 +2,7 @@ package ca.etsmtl.applets.etsmobile.extension
 
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import model.Cours
 import org.junit.Test
 import org.junit.runner.RunWith
