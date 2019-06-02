@@ -1,12 +1,9 @@
 package ca.etsmtl.applets.etsmobile.di.shared
 
-import android.content.Context
-import ca.etsmtl.applets.shared.db.DashboardCardQueries
-import ca.etsmtl.applets.shared.db.EtsMobileDb
-import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
-import extension.createDb
+import data.db.DashboardCardDatabase
+import data.db.DashboardCardDatabaseImpl
 import javax.inject.Singleton
 
 /**
@@ -20,21 +17,8 @@ internal object DbModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideEtsMobileDb(context: Context): EtsMobileDb {
-            val driver = AndroidSqliteDriver(
-                EtsMobileDb.Schema,
-                context,
-                "etsmobile.shared.db"
-            )
-
-            return driver.createDb()
-        }
-
-        @JvmStatic
-        @Provides
-        @Singleton
-        fun dashboardCardQueries(db: EtsMobileDb): DashboardCardQueries {
-            return db.dashboardCardQueries
+        fun provideDashboardCardDatabase(): DashboardCardDatabase {
+            return DashboardCardDatabaseImpl()
         }
     }
 }
