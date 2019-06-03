@@ -2,12 +2,13 @@ package data.db
 
 import kotlinx.coroutines.channels.Channel
 import model.DashboardCard
+import javax.inject.Inject
 
 /**
  * Created by Sonphil on 02-06-19.
  */
 
-class DashboardCardDatabaseImpl : DashboardCardDatabase {
+class DashboardCardDatabaseImpl @Inject constructor(): DashboardCardDatabase {
     override suspend fun dashboardCards(): Channel<List<DashboardCard>> {
         TODO()
     }
