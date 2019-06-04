@@ -4,6 +4,7 @@ import di.Inject
 import domain.FetchDashboardCardsUseCase
 import domain.RestoreDashboardCardsUseCase
 import domain.SaveDashboardCardsUseCase
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
@@ -68,12 +69,14 @@ class DashboardViewModel @Inject constructor(
         _cardsChannel.offer(visibleCards.toList())
     }
 
-    fun save() = saveDashboardCardsUseCase(
-        visibleCards,
-        hiddenCards
-    )
+    fun save() = GlobalScope.launch {
+        saveDashboardCardsUseCase(
+            visibleCards,
+            hiddenCards
+        )
+    }
 
-    fun restore() {
+    fun restore() = scope.launch {
         _showUndoRemoveChannel.offer(false)
         restoreDashboardCardsUseCase()
         load()

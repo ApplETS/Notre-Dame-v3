@@ -1,6 +1,6 @@
 package data.db
 
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
 import model.DashboardCard
 
 /**
@@ -8,7 +8,18 @@ import model.DashboardCard
  */
 
 interface DashboardCardDatabase {
-    suspend fun dashboardCards(): Channel<List<DashboardCard>>
+    /**
+     * Returns the dashboard cards ordered according the user preference
+     */
+    suspend fun dashboardCards(): ReceiveChannel<List<DashboardCard>>
+
+    /**
+     * Update a dashboard card and set to the provided position
+     */
     suspend fun updateCard(dashboardCard: DashboardCard, position: Int)
+
+    /**
+     * Restore the default cards
+     */
     suspend fun reset()
 }

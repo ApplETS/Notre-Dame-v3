@@ -96,6 +96,10 @@ android {
             java.srcDirs += 'src/androidTest/kotlin'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+    }
 }
 
 play {
