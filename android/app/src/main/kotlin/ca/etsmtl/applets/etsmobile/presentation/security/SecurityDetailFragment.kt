@@ -94,8 +94,9 @@ class SecurityDetailFragment : Fragment() {
         (activity as? MainActivity)?.let {
             it.appBarLayout?.setExpanded(true, true)
 
-            // Remove emergency call button from main layout
-            it.coordinatorLayout?.removeView(emergencyCallBtn)
+            // Remove emergency call button from MainActivity
+            emergencyCallBtn?.setOnClickListener(null)
+            (emergencyCallBtn?.parent as? ViewGroup)?.removeView(emergencyCallBtn)
         }
 
         super.onDestroyView()
