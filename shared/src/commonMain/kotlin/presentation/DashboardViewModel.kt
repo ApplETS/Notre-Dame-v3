@@ -28,16 +28,16 @@ class DashboardViewModel @Inject constructor(
     private var lastRemovedCardPosition = -1
 
     fun load() = scope.launch {
-        val cards = fetchDashboardCardsUseCase()
-            .receive()
-            .partition { card ->
+        for (cards in fetchDashboardCardsUseCase()) {
+            val cards = cards.partition { card ->
                 card.visible
             }
 
-        visibleCards = cards.first.toMutableList()
-        hiddenCards = cards.second.toMutableList()
+            visibleCards = cards.first.toMutableList()
+            hiddenCards = cards.second.toMutableList()
 
-        this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
+            this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
+        }
     }
 
     fun onCardMoved(fromPosition: Int, toPosition: Int) {
