@@ -3,7 +3,7 @@ buildscript {
             "android_ktx": "1.0.2",
             "buglife": "1.4.3",
             "constraint_layout": "2.0.0-beta1",
-            "coroutines": "1.1.1",
+            "coroutines": "1.2.1",
             "dagger": "2.22.1",
             "dimens": "1.4",
             "espresso": "3.1.2-alpha01",
