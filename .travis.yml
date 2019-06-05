@@ -63,6 +63,7 @@ matrix:
     before_script:
       - gem install xcpretty
     script:
+      - ./gradlew compileKotlinIOS
       - xcodebuild clean -project ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj | xcpretty
       - xcodebuild build -project ../Notre-Dame/ios/ETSMobile/ETSMobile.xcodeproj -sdk iphonesimulator11.3 -scheme ETSMobile CODE_SIGNING_REQUIRED=NO | xcpretty
     
