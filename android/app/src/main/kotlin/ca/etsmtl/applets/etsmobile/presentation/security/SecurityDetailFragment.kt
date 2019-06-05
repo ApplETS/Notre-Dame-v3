@@ -14,6 +14,7 @@ import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.coordinatorLayout
 import kotlinx.android.synthetic.main.btn_emergency_call.btnEmergencyCall
+import kotlinx.android.synthetic.main.btn_emergency_call.view.btnEmergencyCall
 import kotlinx.android.synthetic.main.fragment_security_detail.webView
 
 class SecurityDetailFragment : Fragment() {
@@ -51,13 +52,17 @@ class SecurityDetailFragment : Fragment() {
         inflater: LayoutInflater
     ) {
         activity.coordinatorLayout?.let { coordinatorLayout ->
-            emergencyCallBtn = inflater.inflate(
-                R.layout.btn_emergency_call,
-                coordinatorLayout,
-                false
-            ) as Button
+            emergencyCallBtn = coordinatorLayout.btnEmergencyCall
 
-            coordinatorLayout.addView(emergencyCallBtn)
+            if (emergencyCallBtn == null) {
+                emergencyCallBtn = inflater.inflate(
+                    R.layout.btn_emergency_call,
+                    coordinatorLayout,
+                    false
+                ) as Button
+
+                coordinatorLayout.addView(emergencyCallBtn)
+            }
         }
     }
 
@@ -89,8 +94,9 @@ class SecurityDetailFragment : Fragment() {
         (activity as? MainActivity)?.let {
             it.appBarLayout?.setExpanded(true, true)
 
-            // Remove emergency call button from main layout
-            it.coordinatorLayout?.removeView(emergencyCallBtn)
+            // Remove emergency call button from MainActivity
+            emergencyCallBtn?.setOnClickListener(null)
+            (emergencyCallBtn?.parent as? ViewGroup)?.removeView(emergencyCallBtn)
         }
 
         super.onDestroyView()
