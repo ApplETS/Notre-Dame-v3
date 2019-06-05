@@ -15,6 +15,6 @@ import data.db.entity.DashboardCardEntity
     ],
     version = 1
 )
-abstract class AppRoomDatabase : RoomDatabase() {
+abstract class DashboardCardRoomDatabase : RoomDatabase() {
     abstract fun dashboardCardDao(): DashboardCardDao
 }
