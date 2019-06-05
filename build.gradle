@@ -2,7 +2,6 @@ buildscript {
     ext.versions = [
             "android_ktx": "1.0.2",
             "buglife": "1.4.3",
-            "chuck": "1.1.0",
             "constraint_layout": "2.0.0-beta1",
             "coroutines": "1.1.1",
             "dagger": "2.22.1",
