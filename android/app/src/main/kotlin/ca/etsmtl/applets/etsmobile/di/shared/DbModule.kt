@@ -7,9 +7,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import data.db.AppRoomDatabase
 import data.db.DashboardCardDatabase
 import data.db.DashboardCardDatabaseImpl
+import data.db.DashboardCardRoomDatabase
 import data.db.dao.DashboardCardDao
 import data.db.entity.DashboardCardEntity
 import kotlinx.coroutines.CoroutineScope
@@ -27,17 +27,21 @@ import javax.inject.Singleton
 internal abstract class DbModule {
     @Module
     internal object Providers {
-        private lateinit var DB_INSTANCE: AppRoomDatabase
+        private lateinit var DB_INSTANCE: DashboardCardRoomDatabase
 
         @JvmStatic
         @Singleton
         @Provides
-        fun provideDb(context: Context): AppRoomDatabase {
-            DB_INSTANCE = Room.databaseBuilder(context, AppRoomDatabase::class.java, "etsmobileshared.db")
+        fun provideDashboardCardRoomDb(context: Context): DashboardCardRoomDatabase {
+            DB_INSTANCE = Room.databaseBuilder(
+                context,
+                DashboardCardRoomDatabase::class.java,
+                "etsmobiledashboardcard.db"
+            )
                 .fallbackToDestructiveMigration()
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
-                        initDatabaseContent(DB_INSTANCE)
+                        initDashboardCardDbContent(DB_INSTANCE)
                     }
                 })
                 .build()
@@ -45,7 +49,7 @@ internal abstract class DbModule {
             return DB_INSTANCE
         }
 
-        private fun initDatabaseContent(db: AppRoomDatabase) {
+        private fun initDashboardCardDbContent(db: DashboardCardRoomDatabase) {
             CoroutineScope(EtsMobileDispatchers.IO).launch {
                 runBlocking {
                     db.dashboardCardDao().let { dao ->
@@ -72,7 +76,7 @@ internal abstract class DbModule {
         @JvmStatic
         @Singleton
         @Provides
-        fun provideDashboardCardDao(db: AppRoomDatabase): DashboardCardDao = db.dashboardCardDao()
+        fun provideDashboardCardDao(db: DashboardCardRoomDatabase): DashboardCardDao = db.dashboardCardDao()
     }
 
     @Binds
