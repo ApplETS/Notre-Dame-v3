@@ -13,7 +13,6 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.coordinatorLayout
-import kotlinx.android.synthetic.main.btn_emergency_call.btnEmergencyCall
 import kotlinx.android.synthetic.main.btn_emergency_call.view.btnEmergencyCall
 import kotlinx.android.synthetic.main.fragment_security_detail.webView
 
@@ -81,14 +80,14 @@ class SecurityDetailFragment : Fragment() {
         webView.loadUrl(fileUrl)
     }
 
-    private fun setButtonListener() = (activity as? MainActivity)
-        ?.btnEmergencyCall
-        ?.setOnClickListener {
+    private fun setButtonListener() {
+        emergencyCallBtn?.setOnClickListener {
             val uri = "tel:" + resources.getString(R.string.emergency_number)
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse(uri)
             startActivity(intent)
         }
+    }
 
     override fun onDestroyView() {
         (activity as? MainActivity)?.let {
