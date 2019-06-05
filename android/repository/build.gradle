@@ -84,10 +84,6 @@ dependencies {
     // Mockito-Kotlin
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$versions.mockito_kotlin"
 
-    // Chuck
-    debugImplementation "com.readystatesoftware.chuck:library:$versions.chuck"
-    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$versions.chuck"
-
     // livedata-ktx
     api "com.shopify:livedata-ktx:2.0.1"
 
