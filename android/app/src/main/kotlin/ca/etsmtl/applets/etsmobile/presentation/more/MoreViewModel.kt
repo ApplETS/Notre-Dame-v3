@@ -2,15 +2,15 @@ package ca.etsmtl.applets.etsmobile.presentation.more
 
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import ca.etsmtl.applets.etsmobile.BuildConfig
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import com.buglife.sdk.Buglife
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -22,8 +22,8 @@ class MoreViewModel @Inject constructor(
     private val app: App
 ) : AndroidViewModel(app) {
 
-    private val logoutMediatorLiveData = MediatorLiveData<Boolean>()
-    val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
     private val _displayLogoutConfirmationDialog = MutableLiveData<Boolean>()
     val displayLogoutConfirmationDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
     private val _displayMessage = MutableLiveData<Event<String>>()
@@ -45,20 +45,15 @@ class MoreViewModel @Inject constructor(
      * This function should be called when the user want to log out.
      */
     private fun logout() {
-        with(clearUserDataUseCase()) {
-            logoutMediatorLiveData.addSource(this) { finished ->
-                finished?.let {
-                    logoutMediatorLiveData.value = finished
+        _loading.value = true
+        viewModelScope.launch {
+            clearUserDataUseCase()
 
-                    if (finished) {
-                        _displayMessage.value = Event(app.getString(R.string.msg_logout_success))
+            _loading.postValue(false)
 
-                        logoutMediatorLiveData.removeSource(this)
+            _displayMessage.postValue(Event(app.getString(R.string.msg_logout_success)))
 
-                        _navigateToLogin.value = Event(Unit)
-                    }
-                }
-            }
+            _navigateToLogin.postValue(Event(Unit))
         }
     }
 
