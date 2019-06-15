@@ -24,7 +24,7 @@ import model.Evaluation
 import model.Resource
 import model.SommaireElementsEvaluation
 import model.SommaireEtEvaluations
-import java.util.Date
+import utils.date.toJvmDate
 import javax.inject.Inject
 
 /**
@@ -78,7 +78,7 @@ class GradesDetailsViewModel @Inject constructor(
             ),
             EvaluationDetailItem(
                 app.getString(R.string.label_target_date),
-                evaluation.dateCible?.let { Date(it.unixMillisLong).toLocalizedString() } ?: ""
+                evaluation.dateCible?.toJvmDate()?.toLocalizedString() ?: ""
             )
         )
 
