@@ -8,9 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
-import model.Seance
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_schedule.*
+import kotlinx.android.synthetic.main.item_schedule.scheduleDay
+import kotlinx.android.synthetic.main.item_schedule.scheduleInnerList
+import model.Seance
 import java.util.Calendar
 
 /**
@@ -26,7 +27,7 @@ class ScheduleWeekAdapter : RecyclerView.Adapter<ScheduleWeekAdapter.SeanceDayVi
                 value.groupBy {
                     val day = Calendar.getInstance()
                     day.clear()
-                    day.timeInMillis = it.dateDebut.unixMillisLong
+                    day.timeInMillis = it.dateDebut.timeInMilliseconds
                     day.set(Calendar.HOUR, 0)
                     day.set(Calendar.MINUTE, 0)
                     day.set(Calendar.SECOND, 0)
