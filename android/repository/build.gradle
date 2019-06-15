@@ -29,6 +29,10 @@ android {
             java.srcDirs += 'src/test-common/kotlin'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+    }
 }
 
 androidExtensions {
