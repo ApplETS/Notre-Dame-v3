@@ -62,7 +62,7 @@ class ScheduleViewModel @Inject constructor(
     private fun Seance.extractWeekRange(): Range<Calendar> {
         val beginningCal = Calendar.getInstance()
 
-        beginningCal.timeInMillis = dateDebut.unixMillisLong
+        beginningCal.timeInMillis = dateDebut.timeInMilliseconds
         beginningCal.set(Calendar.DAY_OF_WEEK, beginningCal.firstDayOfWeek)
         beginningCal.set(Calendar.HOUR_OF_DAY, 0)
         beginningCal.clear(Calendar.MINUTE)

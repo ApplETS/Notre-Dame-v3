@@ -2,15 +2,15 @@ package ca.etsmtl.applets.repository.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import ca.etsmtl.applets.repository.AppExecutors
-import ca.etsmtl.applets.repository.LiveDataTestUtil
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import ca.etsmtl.applets.repository.data.repository.signets.LoginRepository
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
-import ca.etsmtl.applets.shared.db.DashboardCardQueries
-import com.nhaarman.mockito_kotlin.times
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import data.db.DashboardCardDatabase
 import data.securepreferences.SecurePreferences
+import kotlinx.coroutines.runBlocking
 import model.SignetsUserCredentials
 import model.UniversalCode
 import org.junit.Before
@@ -22,7 +22,6 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
-import kotlin.test.assertTrue
 
 /**
  * Created by Sonphil on 25-04-18.
@@ -31,7 +30,7 @@ import kotlin.test.assertTrue
     private lateinit var prefs: SecurePreferences
     private lateinit var appExecutors: AppExecutors
     private lateinit var appDatabase: AppDatabase
-    private lateinit var dashboardQueries: DashboardCardQueries
+    private lateinit var dashboardCardDatabase: DashboardCardDatabase
     private lateinit var loginRepository: LoginRepository
 
     @get:Rule
@@ -42,12 +41,12 @@ import kotlin.test.assertTrue
         prefs = mock(SecurePreferences::class.java)
         appExecutors = InstantAppExecutors()
         appDatabase = mock(AppDatabase::class.java)
-        dashboardQueries = mock(DashboardCardQueries::class.java)
+        dashboardCardDatabase = mock(DashboardCardDatabase::class.java)
         loginRepository = LoginRepository(
             prefs,
             appExecutors,
             appDatabase,
-            dashboardQueries
+            dashboardCardDatabase
         )
     }
 
@@ -83,16 +82,17 @@ import kotlin.test.assertTrue
     @Test
     fun testClearUserData() {
         SignetsUserCredentials.INSTANCE = SignetsUserCredentials(UniversalCode("test"), "test")
-        val finishedLD = loginRepository.clearUserData()
-        assertTrue(LiveDataTestUtil.getValue(finishedLD))
+        runBlocking {
+            loginRepository.clearUserData()
 
-        verify(prefs).clear()
+            verify(prefs).clear()
 
-        assertNull(SignetsUserCredentials.INSTANCE)
+            assertNull(SignetsUserCredentials.INSTANCE)
 
-        verify(appDatabase).clearAllTables()
-        verify(dashboardQueries).deleteAll()
-        verify(dashboardQueries).insertInitialCards()
+            verify(appDatabase).clearAllTables()
+
+            verify(dashboardCardDatabase).reset()
+        }
     }
 
     @Test

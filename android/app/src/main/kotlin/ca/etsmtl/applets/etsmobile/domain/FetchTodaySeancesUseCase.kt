@@ -38,7 +38,7 @@ class FetchTodaySeancesUseCase @Inject constructor(
         end.add(Calendar.DAY_OF_YEAR, 1)
 
         it.filter {
-            it.dateDebut.unixMillis.toLong() in start.timeInMillis..end.timeInMillis
+            it.dateDebut.timeInMilliseconds in start.timeInMillis..end.timeInMillis
         }
     }.orEmpty()
 }
