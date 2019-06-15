@@ -19,8 +19,8 @@ import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.util.ApiUtil
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.capture
 import junit.framework.Assert.assertEquals
 import model.Cours
 import model.SignetsUserCredentials

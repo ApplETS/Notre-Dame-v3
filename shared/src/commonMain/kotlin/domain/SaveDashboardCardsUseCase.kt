@@ -9,7 +9,7 @@ import model.DashboardCard
  */
 
 class SaveDashboardCardsUseCase @Inject constructor(private val repository: DashboardCardRepository) {
-    operator fun invoke(visibleCards: List<DashboardCard>, hiddenCards: List<DashboardCard>) {
+    suspend operator fun invoke(visibleCards: List<DashboardCard>, hiddenCards: List<DashboardCard>) {
         visibleCards.forEachIndexed { index, dashboardCard ->
             repository.updateDashboardCard(dashboardCard, index)
         }

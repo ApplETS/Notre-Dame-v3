@@ -55,13 +55,13 @@ class ScheduleWeekInnerListAdapter : RecyclerView.Adapter<ScheduleWeekInnerListA
             holder.textViewScheduleStartTime.text = DateUtils
                 .formatDateTime(
                     holder.containerView.context,
-                    dateDebut.unixMillisLong,
+                    dateDebut.timeInMilliseconds,
                     DateUtils.FORMAT_SHOW_TIME
                 )
             holder.textViewScheduleEndTime.text = DateUtils
                 .formatDateTime(
                     holder.containerView.context,
-                    dateFin.unixMillisLong,
+                    dateFin.timeInMilliseconds,
                     DateUtils.FORMAT_SHOW_TIME
                 )
         }
