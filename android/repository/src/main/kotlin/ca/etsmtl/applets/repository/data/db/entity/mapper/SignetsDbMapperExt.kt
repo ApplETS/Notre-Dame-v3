@@ -11,8 +11,6 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
-import com.soywiz.klock.DateTime
-import com.soywiz.klock.seconds
 import model.Cours
 import model.Etudiant
 import model.Evaluation
@@ -23,6 +21,7 @@ import model.Programme
 import model.Seance
 import model.Session
 import model.SommaireElementsEvaluation
+import utils.date.ETSMobileDate
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -60,7 +59,7 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.session,
         this.nom,
         this.equipe,
-        dateCible?.let { DateTime(it.seconds.millisecondsLong) },
+        dateCible?.let { ETSMobileDate(it * 1000) },
         this.note,
         this.corrigeSur,
         this.notePourcentage,
@@ -79,8 +78,8 @@ fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
 
 fun EvaluationCoursEntity.toEvaluationCours() = EvaluationCours(
     session,
-    DateTime(dateDebutEvaluation.seconds.millisecondsLong),
-    DateTime(dateFinEvaluation.seconds.millisecondsLong),
+    ETSMobileDate(dateDebutEvaluation * 1000),
+    ETSMobileDate(dateFinEvaluation * 1000),
     enseignant,
     estComplete,
     groupe,
@@ -129,8 +128,8 @@ fun ProgrammeEntity.toProgramme() = Programme(
 fun List<ProgrammeEntity>.toProgrammes(): List<Programme> = map { it.toProgramme() }
 
 fun SeanceEntity.toSeance() = Seance(
-        DateTime(dateDebut.seconds.millisecondsLong),
-        DateTime(dateFin.seconds.millisecondsLong),
+        ETSMobileDate(dateDebut * 1000),
+        ETSMobileDate(dateFin * 1000),
         this.nomActivite,
         this.local,
         this.descriptionActivite,
