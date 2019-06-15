@@ -1,10 +1,10 @@
 package model
 
-import com.soywiz.klock.DateTime
+import utils.date.ETSMobileDate
 
 data class Seance(
-    var dateDebut: DateTime,
-    var dateFin: DateTime,
+    var dateDebut: ETSMobileDate,
+    var dateFin: ETSMobileDate,
     var nomActivite: String,
     var local: String,
     var descriptionActivite: String,
