@@ -16,7 +16,6 @@
 		146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B07208B87C900275F71 /* ScheduleViewController.swift */; };
 		146F3B0C208B883400275F71 /* EmergencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B0B208B883400275F71 /* EmergencyTableViewController.swift */; };
 		146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B0D208B89AA00275F71 /* HomeView.swift */; };
-		146F3B10208B89E100275F71 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B0F208B89E100275F71 /* ProfileView.swift */; };
 		146F3B12208B89EB00275F71 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B11208B89EB00275F71 /* ScheduleView.swift */; };
 		14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8E3BD20C8CC9B00751350 /* SuspiciousSmellViewController.swift */; };
 		25553FA520545D42009897F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FA420545D42009897F7 /* AppDelegate.swift */; };
@@ -36,8 +35,11 @@
 		8F91DFA4218E07CA00472BE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */; };
 		8F9F71152182265A0052D16C /* ETSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F71142182265A0052D16C /* ETSButton.swift */; };
 		95186718218E0650009DDD47 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95186717218E0650009DDD47 /* GradientView.swift */; };
+		9521A22522B8221B007CDEF8 /* SemesterCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A22422B8221B007CDEF8 /* SemesterCourses.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
+		95920B0122C2A7370062E5F0 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95920B0022C2A7370062E5F0 /* CourseModel.swift */; };
+		95A0600222B559540028DF1B /* CourseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0600122B559540028DF1B /* CourseCard.swift */; };
 		C8B61D042162D9100040A732 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D032162D9100040A732 /* UserType.swift */; };
 		C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D072162DB1D0040A732 /* MonETSClient.swift */; };
 		C8B61D0A2162E8660040A732 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D092162E8660040A732 /* Environment.swift */; };
@@ -80,7 +82,6 @@
 		146F3B07208B87C900275F71 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		146F3B0B208B883400275F71 /* EmergencyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyTableViewController.swift; sourceTree = "<group>"; };
 		146F3B0D208B89AA00275F71 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		146F3B0F208B89E100275F71 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		146F3B11208B89EB00275F71 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		14E8E3BD20C8CC9B00751350 /* SuspiciousSmellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousSmellViewController.swift; sourceTree = "<group>"; };
 		226CDCEB9C2BB569A61C6C93 /* Pods_ETSMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,8 +108,11 @@
 		8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8F9F71142182265A0052D16C /* ETSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSButton.swift; sourceTree = "<group>"; };
 		95186717218E0650009DDD47 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		9521A22422B8221B007CDEF8 /* SemesterCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemesterCourses.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		95920B0022C2A7370062E5F0 /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
+		95A0600122B559540028DF1B /* CourseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCard.swift; sourceTree = "<group>"; };
 		C8B61D032162D9100040A732 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		C8B61D072162DB1D0040A732 /* MonETSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonETSClient.swift; sourceTree = "<group>"; };
 		C8B61D092162E8660040A732 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -176,7 +180,8 @@
 			children = (
 				C8C49A832162D4B7006CCBED /* Profile.storyboard */,
 				146F3B05208B87AD00275F71 /* ProfileViewController.swift */,
-				146F3B0F208B89E100275F71 /* ProfileView.swift */,
+				95A0600122B559540028DF1B /* CourseCard.swift */,
+				9521A22422B8221B007CDEF8 /* SemesterCourses.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 			children = (
 				958F2F012106ADF70074DBF5 /* UserInfo.swift */,
 				C8B61D032162D9100040A732 /* UserType.swift */,
+				95920B0022C2A7370062E5F0 /* CourseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -516,6 +522,7 @@
 				25553FA520545D42009897F7 /* AppDelegate.swift in Sources */,
 				146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */,
 				14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */,
+				95920B0122C2A7370062E5F0 /* CourseModel.swift in Sources */,
 				C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */,
 				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
 				C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */,
@@ -527,7 +534,9 @@
 				84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */,
 				958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */,
 				8F1C750621835F47002CE21F /* Regex.swift in Sources */,
+				9521A22522B8221B007CDEF8 /* SemesterCourses.swift in Sources */,
 				8F4CAF2921825178009ADDEF /* ETSLoadingIndicator.swift in Sources */,
+				95A0600222B559540028DF1B /* CourseCard.swift in Sources */,
 				146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */,
 				958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */,
 				C8B61D042162D9100040A732 /* UserType.swift in Sources */,
@@ -536,7 +545,6 @@
 				8F2994442163C2DB00747A21 /* Request.swift in Sources */,
 				C8B61D0C2162E99A0040A732 /* Result.swift in Sources */,
 				95186718218E0650009DDD47 /* GradientView.swift in Sources */,
-				146F3B10208B89E100275F71 /* ProfileView.swift in Sources */,
 				146F3B04208B878900275F71 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -703,7 +711,7 @@
 					"$(SRCROOT)/../../shared/build/xcode-frameworks",
 				);
 				INFOPLIST_FILE = ETSMobile/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.applets.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -725,7 +733,7 @@
 					"$(SRCROOT)/../../shared/build/xcode-frameworks",
 				);
 				INFOPLIST_FILE = "ETS-mobile/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.etsmtl.applets.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
