@@ -7,13 +7,14 @@
 //
 
 import SwiftUI
+import ETSKit
 
 struct SemesterCourses : View {
-    var courses: [Course]
+    var courses: [Cours]
     var body: some View {
         HStack {
-            ForEach(self.courses.identified(by: \.courseCode)) { course in
-                CourseCard(course: course.courseCode, grade: course.grade)
+            ForEach(self.courses.identified(by: \.sigle)) { course in
+                CourseCard(course: course.sigle, grade: course.noteSur100 ?? "0")
             }
         }
     }
@@ -22,8 +23,7 @@ struct SemesterCourses : View {
 #if DEBUG
 struct SemesterCoursesPreviews : PreviewProvider {
     static var previews: some View {
-        SemesterCourses(courses: [Course(courseCode: "LOG121", grade: "98%"),
-            Course(courseCode: "LOG240", grade: "90%")])
+        SemesterCourses(courses: [Cours(sigle: "ING150", groupe: "08", session: "Something", programmeEtudes: "SOMETHING", cote: "", noteSur100: "98%", nbCredits: 2, titreCours: "Something")])
     }
 }
 #endif

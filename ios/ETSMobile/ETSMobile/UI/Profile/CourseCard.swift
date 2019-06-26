@@ -13,17 +13,17 @@ struct CourseCard : View {
     var grade: String
     var body: some View {
         VStack {
-            Text("Grade")
-                .font(.headline)
+            Text(self.grade)
+                .font(.largeTitle)
                 .padding(20)
-            Text("Course")
+            Text(self.course)
                 .padding(2)
                 .font(.subheadline)
         }
         .clipShape(RoundedRectangle(cornerRadius: 5))
         .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.white, lineWidth: 4))
         .shadow(radius: 1)
-            .frame(width: 100, height: 100)
+            .frame(width: 125, height: 100)
     }
 }
 
