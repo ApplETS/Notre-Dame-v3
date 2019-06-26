@@ -24,6 +24,7 @@ struct CourseCard : View {
         .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.white, lineWidth: 4))
         .shadow(radius: 1)
             .frame(width: 125, height: 100)
+        .padding(10)
     }
 }
 
