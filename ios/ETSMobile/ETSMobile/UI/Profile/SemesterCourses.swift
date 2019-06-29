@@ -18,13 +18,11 @@ struct SemesterCourses : View {
                 .font(.headline)
                 .padding(.leading, 15)
                 .padding(.vertical, 5)
-            
             ScrollView(isScrollEnabled: true, showsHorizontalIndicator: false) {
                 HStack(alignment: .top, spacing: 0) {
                     ForEach(self.courses.identified(by: \.sigle)) { course in
                         CourseCard(course: course.sigle, grade: course.noteSur100 ?? "0")
                     }
-                
                 }
             }
 
