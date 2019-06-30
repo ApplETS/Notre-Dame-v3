@@ -24,7 +24,6 @@ internal fun String.hash(): String? {
         digest.update(bytes, 0, bytes.size)
 
         return Base64.encodeToString(digest.digest(), Base64.NO_WRAP)
-
     } catch (e: NoSuchAlgorithmException) {
         e.printStackTrace()
     } catch (e: UnsupportedEncodingException) {

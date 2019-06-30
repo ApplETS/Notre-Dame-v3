@@ -5,7 +5,7 @@ import kotlinx.cinterop.memScoped
 /**
  * Creates a new [ETSMobileDate] from the specified [timestamp]
  *
- * @param timestamp Unix time (Number of Epoch milliseconds)
+ * @param timestamp Unix time (Number of Epoch milliseconds) (it is `now` by default)
  */
 actual fun ETSMobileDate(timestamp: Long?): ETSMobileDate = memScoped {
     TODO()
@@ -22,12 +22,5 @@ actual fun ETSMobileDate(
     month: Month,
     year: Int
 ): ETSMobileDate {
-    TODO()
-}
-
-/**
- * Creates a new [ETSMobileDate] which represents the current time
- */
-actual fun ETSMobileDate.now(): ETSMobileDate {
     TODO()
 }
