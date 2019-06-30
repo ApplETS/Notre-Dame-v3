@@ -57,7 +57,7 @@ data class ETSMobileDate internal constructor(
 /**
  * Creates a new [ETSMobileDate] from the specified [timestamp]
  *
- * @param timestamp Unix time (Number of Epoch milliseconds)
+ * @param timestamp Unix time (Number of Epoch milliseconds) (it is `now` by default)
  */
 @Suppress("FunctionName")
 expect fun ETSMobileDate(timestamp: Long? = null): ETSMobileDate
@@ -74,11 +74,6 @@ expect fun ETSMobileDate(
     month: Month,
     year: Int
 ): ETSMobileDate
-
-/**
- * Creates a new [ETSMobileDate] which represents the current time
- */
-expect fun ETSMobileDate.now(): ETSMobileDate
 
 /**
  * Adds the specified number of [milliseconds]
