@@ -36,9 +36,9 @@ class FetchCourseEvaluationsCompletedUseCase @Inject constructor(
 
     private fun List<EvaluationCours>.areCourseEvaluationsCompletedForCourse(cours: Cours): Boolean {
         return find {
-            !it.estComplete
-                && it.sigle == cours.sigle
-                && ETSMobileDate() in it.dateDebutEvaluation..it.dateFinEvaluation
+            val duringEvaluationPeriod = ETSMobileDate() in it.dateDebutEvaluation..it.dateFinEvaluation
+
+            !it.estComplete && it.sigle == cours.sigle && duringEvaluationPeriod
         } == null
     }
 }
