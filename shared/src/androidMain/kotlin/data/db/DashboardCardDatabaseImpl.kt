@@ -44,6 +44,7 @@ class DashboardCardDatabaseImpl @Inject constructor(
                 DashboardCard.Type.DASHBOARD_CARD_GRADES.name,
                 true,
                 DashboardCard.Type.DASHBOARD_CARD_GRADES.ordinal
-            ))}
+            ))
         }
+    }
 }
