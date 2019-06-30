@@ -7,6 +7,7 @@ import model.Cours
 import model.EvaluationCours
 import model.Resource
 import model.SignetsUserCredentials
+import utils.date.ETSMobileDate
 import javax.inject.Inject
 
 /**
@@ -34,6 +35,10 @@ class FetchCourseEvaluationsCompletedUseCase @Inject constructor(
     }
 
     private fun List<EvaluationCours>.areCourseEvaluationsCompletedForCourse(cours: Cours): Boolean {
-        return find { !it.estComplete && it.sigle == cours.sigle } == null
+        return find {
+            !it.estComplete
+                && it.sigle == cours.sigle
+                && ETSMobileDate() in it.dateDebutEvaluation..it.dateFinEvaluation
+        } == null
     }
 }
