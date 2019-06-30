@@ -128,7 +128,7 @@ dependencies {
     implementation "androidx.preference:preference:1.0.0"
 
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
