@@ -3,7 +3,7 @@
   <p>
     <br /><strong>Projet Notre-Dame</strong>
     <br />
-    <a href="https://travis-ci.org/ApplETS/Notre-Dame" style=" text-decoration:none; color:red">
+    <a href="https://travis-ci.org/ApplETS/Notre-Dame" style="text-decoration: none;">
         <img src="https://travis-ci.com/ApplETS/Notre-Dame.svg?branch=master" alt="Build Status"/>
     </a>
     <br />
@@ -52,7 +52,10 @@ git clone https://github.com/ApplETS/Notre-Dame.git
 
 ## 🤖 / 🍎 Projet Kotlin Multiplatform
 Le projet est en cours de migration vers [Kotlin Multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
-<image src="docs/images/architecture_multiplatform.png" width="600" />
+
+<a href="https://github.com/ApplETS/Notre-Dame/wiki/Project-Architecture-(EN)" style="text-decoration: none;">
+    <img src="docs/images/architecture_multiplatform.png" width="600" />
+</a>
 
 ## 🤔 Question ou problème?
 
