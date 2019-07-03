@@ -3,7 +3,7 @@
   <p>
     <br /><strong>Projet Notre-Dame</strong>
     <br />
-    <a href="https://travis-ci.org/ApplETS/Notre-Dame" style=" text-decoration:none; color:red">
+    <a href="https://travis-ci.org/ApplETS/Notre-Dame" style="text-decoration: none;">
         <img src="https://travis-ci.com/ApplETS/Notre-Dame.svg?branch=master" alt="Build Status"/>
     </a>
     <br />
@@ -25,12 +25,13 @@ _Note: This guide is also available in: [Français](https://github.com/ApplETS/N
 * Language: [Kotlin](https://github.com/ApplETS/Notre-Dame/search?l=kotlin)
 * Minimum SDK Version: 21
 * [Architecture](https://github.com/ApplETS/Notre-Dame/wiki/Architecture-(EN))
+  
   #### Getting started
  * Download and install the latest version of [Android Studio](https://developer.android.com/studio/)
  * Clone the project
  ```bash
 git clone https://github.com/ApplETS/Notre-Dame.git
-```
+ ```
  * Open the entire project in Android Studio
 
 ## 🍎 [iOS Application](https://github.com/ApplETS/Notre-Dame/tree/master/ios)
@@ -54,11 +55,12 @@ pod install
 
 ## 🤖 / 🍎 Kotlin Multiplatform Project
 The projet is migrating towards [Kotlin Multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
-<image src="docs/images/architecture_multiplatform.png" width="600" />
+<a href="https://github.com/ApplETS/Notre-Dame/wiki/Project-Architecture-(EN)" style="text-decoration: none;">
+    <img src="docs/images/architecture_multiplatform.png" width="600" />
 
 ##  🤔 Question or issue?
 
-Check out the [FAQ](https://github.com/ApplETS/Notre-Dame/wiki/Beta-Test-FAQ-(FR)) (in French), open an [issue](https://github.com/ApplETS/Notre-Dame/issues/new/choose) or send an email at info@clubapplets.ca.
+Check out the [FAQ](https://github.com/ApplETS/Notre-Dame/wiki/Beta-Test-FAQ-(FR)) (in French), open an [issue](https://github.com/ApplETS/Notre-Dame/issues/new/choose) or send an email to info@clubapplets.ca.
 
 ## ⚖️ License
 This projet is licensed under the Apache License V2.0. See the [LICENSE](https://github.com/ApplETS/Notre-Dame/blob/master/LICENSE) file for more info.
