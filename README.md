@@ -55,8 +55,10 @@ pod install
 
 ## 🤖 / 🍎 Kotlin Multiplatform Project
 The projet is migrating towards [Kotlin Multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
+
 <a href="https://github.com/ApplETS/Notre-Dame/wiki/Project-Architecture-(EN)" style="text-decoration: none;">
     <img src="docs/images/architecture_multiplatform.png" width="600" />
+</a>
 
 ##  🤔 Question or issue?
 
