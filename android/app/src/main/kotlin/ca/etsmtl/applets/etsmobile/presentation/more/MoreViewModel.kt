@@ -38,6 +38,8 @@ class MoreViewModel @Inject constructor(
     val navigateToSettings: LiveData<Event<Unit>> = _navigateToSettings
     private val _navigateToUri = MutableLiveData<Event<Int>>()
     val navigateToUri: LiveData<Event<Int>> = _navigateToUri
+    private val _displayBugReportDialog = MutableLiveData<Boolean>()
+    val displayBugReportDialog: LiveData<Boolean> = _displayBugReportDialog
 
     /**
      * Clears the user's data
@@ -60,7 +62,7 @@ class MoreViewModel @Inject constructor(
     fun itemsList(): List<MoreItem> {
         val items = mutableListOf(
             MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_label_report_bug) {
-                navigateToBuglifeReporter()
+                _displayBugReportDialog.value = true
             },
             MoreItem(R.drawable.ic_people_outline_black_24dp, R.string.more_item_label_contributors) {
                 _navigateToUri.value = Event(R.string.uri_github_contributors)
@@ -70,6 +72,7 @@ class MoreViewModel @Inject constructor(
             }
         )
 
+        @Suppress("ConstantConditionIf")
         if (BuildConfig.FLAVOR == "beta") {
             items.add(MoreItem(R.drawable.ic_help_outline_black_24dp, R.string.more_item_label_beta_faq) {
                 _navigateToUri.value = Event(R.string.uri_beta_faq)
@@ -87,11 +90,18 @@ class MoreViewModel @Inject constructor(
         return items
     }
 
-    private fun navigateToBuglifeReporter() {
-        val screenShot = Buglife.captureScreenshot() // TODO: Let user attach his own file
+    fun reportBugWithScreenshot() {
+        _displayBugReportDialog.value = false
+        val screenshot = Buglife.captureScreenshot()
 
-        screenShot?.let { Buglife.addAttachment(it) }
+        screenshot?.let { Buglife.addAttachment(it) }
         Buglife.showReporter()
+    }
+
+    fun reportBugWithVideo() {
+        _displayBugReportDialog.value = false
+
+        Buglife.startScreenRecording() // TODO: Fix Buglife's permission flow
     }
 
     fun clickAbout() {
