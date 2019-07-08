@@ -94,6 +94,9 @@
     <!-- More -->
     <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
     <string name="more_item_label_report_bug">Rapporter un bogue</string>
+    <string name="prompt_report_bug_method">Comment souhaitez-vous rapporter le bogue?</string>
+    <string name="report_bug_method_screenshot">Capture d\'écran</string>
+    <string name="report_bug_method_video">Capturer une vidéo</string>
     <string name="more_item_label_contributors">Contributeurs</string>
     <string name="more_item_label_open_source_licenses">@string/oss_license_title</string>
     <string name="more_item_label_beta_faq">FAQ Bêta</string>
