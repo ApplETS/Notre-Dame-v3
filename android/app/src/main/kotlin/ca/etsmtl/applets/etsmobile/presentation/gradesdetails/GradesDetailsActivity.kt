@@ -6,16 +6,15 @@ import android.transition.TransitionInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.toast
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
-import kotlinx.android.synthetic.main.activity_grades_details.containerTvGradesDetailsSubtitle
-import kotlinx.android.synthetic.main.activity_grades_details.toolbar
-import kotlinx.android.synthetic.main.activity_grades_details.tvGradesDetailsCourseName
-import kotlinx.android.synthetic.main.activity_grades_details.tvGradesDetailsGroup
+import kotlinx.android.synthetic.main.activity_grades_details.*
 import model.Cours
 
 /**
@@ -72,6 +71,10 @@ class GradesDetailsActivity : BaseActivity() {
 
         setupToolbar()
 
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            window.statusBarColor = getColorCompat(R.color.etsRougeClair)
+        }
+
         with(intent?.extras) {
             with(this?.getParcelable(EXTRA_COURS) as? Cours) {
                 if (this == null) {
@@ -119,6 +122,7 @@ class GradesDetailsActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        appBarLayoutGradesDetails.setExpanded(true, true)
         // Don't show the toolbar's content during the shared element transition
         containerTvGradesDetailsSubtitle.isVisible = false
         toolbar.isVisible = false
@@ -127,6 +131,10 @@ class GradesDetailsActivity : BaseActivity() {
                 remove(it)
                 commit()
             }
+        }
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            window.statusBarColor = getColorCompat(R.color.colorPrimaryDark)
         }
 
         super.onBackPressed()
