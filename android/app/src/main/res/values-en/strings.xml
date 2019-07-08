@@ -95,6 +95,9 @@
     <!-- More -->
     <string name="more_item_label_about_applets">About ApplETS</string>
     <string name="more_item_label_report_bug">Report a bug</string>
+    <string name="prompt_report_bug_method">How would you like to report the bug?</string>
+    <string name="report_bug_method_screenshot">Screenshot</string>
+    <string name="report_bug_method_video">Video recording</string>
     <string name="more_item_label_contributors">Contributors</string>
     <string name="more_item_label_open_source_licenses">@string/oss_license_title</string>
     <string name="more_item_label_beta_faq">Beta FAQ</string>
