@@ -32,7 +32,7 @@ class App : DaggerApplication() {
     private fun setupBuglife() {
         Buglife.initWithApiKey(this, getString(R.string.buglife_key))
         Buglife.setInvocationMethod(InvocationMethod.BUG_BUTTON)
-        Buglife.setInvocationMethod(InvocationMethod.SHAKE)
+        Buglife.setInvocationMethod(InvocationMethod.SCREENSHOT)
 
         val summaryField = TextInputField.summaryInputField()
         val emailField = TextInputField(getString(R.string.buglife_email))
