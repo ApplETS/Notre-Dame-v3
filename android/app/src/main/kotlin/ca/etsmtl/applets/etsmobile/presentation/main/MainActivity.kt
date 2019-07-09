@@ -1,6 +1,8 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
+import android.content.IntentFilter
 import android.graphics.PorterDuff
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
