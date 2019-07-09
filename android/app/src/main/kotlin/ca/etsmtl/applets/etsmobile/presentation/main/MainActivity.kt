@@ -51,6 +51,7 @@ class MainActivity : BaseActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private var broadCastReciever: BroadCastReceiver = BroadCastReceiver()
     private var intentFilter: IntentFilter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
