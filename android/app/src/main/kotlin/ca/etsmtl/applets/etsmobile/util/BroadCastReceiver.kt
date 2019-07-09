@@ -5,9 +5,11 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.widget.Toast
 import android.content.BroadcastReceiver
+import ca.etsmtl.applets.etsmobile.R
 
-class BroadCastReceiver: BroadcastReceiver()
-{
+class BroadCastReceiver: BroadcastReceiver() {
+
+
     companion
     object { var wasNotConnected  =false}
     override fun onReceive(context: Context, intent: Intent) {
@@ -15,9 +17,11 @@ class BroadCastReceiver: BroadcastReceiver()
             var isNotConnect = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false)
             if (isNotConnect) {
                 wasNotConnected = true
-                Toast.makeText(context, "no may", Toast.LENGTH_SHORT).show()
-            } else if (!isNotConnect && wasNotConnected)
-                Toast.makeText(context, "connected may", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.error_no_internet_connection), Toast.LENGTH_SHORT).show()
+            } else if (!isNotConnect && wasNotConnected) {
+                Toast.makeText(context, context.getString(R.string.internet_connected), Toast.LENGTH_SHORT).show()
+                wasNotConnected=false
+            }
         }
     }
 }

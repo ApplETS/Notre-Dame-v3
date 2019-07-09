@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="error">Une erreur est survenue</string>
     <string name="error_no_internet_connection">Aucune connexion Internet</string>
+    <string name="internet_connected">Internet est connecté</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="retry">Réessayer</string>
