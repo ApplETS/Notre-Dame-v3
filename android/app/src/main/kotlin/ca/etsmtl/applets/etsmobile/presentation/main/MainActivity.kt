@@ -44,7 +44,6 @@ class MainActivity : BaseActivity() {
     object {
         var wasNotConnected = false
     }
-
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
