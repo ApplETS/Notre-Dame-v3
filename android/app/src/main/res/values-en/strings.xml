@@ -183,4 +183,6 @@
         <item>Disabled</item>
         <item>Set by Battery Saver</item>
     </string-array>
+    <string name="label_miscellaneous_pref_category">Miscellaneous</string>
+    <string name="label_shake_bug_reporter_invocation_method_pref">Shake to report a bug</string>
 </resources>

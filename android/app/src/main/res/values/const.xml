@@ -29,5 +29,7 @@
         <item>@string/entry_value_dark_theme_pref_disabled</item>
         <item>@string/entry_value_dark_theme_pref_battery_saver</item>
     </string-array>
+    <string name="key_miscellaneous_pref_category" translatable="false">miscellaneous_category</string>
     <string name="default_entry_value_dark_theme_pref" translatable="false">@string/entry_value_dark_theme_pref_battery_saver</string>
+    <string name="key_shake_bug_reporter_invocation_method_pref" translatable="false">shake_bug_reporter_invocation_method_pref</string>
 </resources>
