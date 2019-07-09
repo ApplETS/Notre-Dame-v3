@@ -1,4 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
+
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
+import ca.etsmtl.applets.etsmobile.util.BroadCastReciever
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
@@ -73,6 +75,8 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(broadCastReciever)
+       var intentFilter : IntentFilter= IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(broadCastReciever,intentFilter)
     }
 
     private fun setupBottomNavigation() {
