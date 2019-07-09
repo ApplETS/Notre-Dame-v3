@@ -137,7 +137,6 @@
     </string-array>
     <string name="buglife_steps_to_reproduce">Étapes pour reproduire</string>
 
-
     <!-- Security -->
     <string-array name="array_security_type">
         <item>Appel à la bombe</item>
@@ -183,4 +182,6 @@
         <item>Désactivé</item>
         <item>Défini par l\'économiseur de batterie</item>
     </string-array>
+    <string name="label_miscellaneous_pref_category">Divers</string>
+    <string name="label_shake_bug_reporter_invocation_method_pref">Secouer pour rapporter un bogue</string>
 </resources>
