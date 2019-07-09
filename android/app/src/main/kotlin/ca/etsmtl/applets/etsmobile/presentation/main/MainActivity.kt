@@ -47,6 +47,7 @@ class MainActivity : BaseActivity() {
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private var broadCastReciever: BroadCastReceiver = BroadCastReceiver()
