@@ -3,7 +3,6 @@
     <PreferenceCategory
         app:key="@string/key_display_pref_category"
         app:title="@string/label_display_pref_category">
-
         <ListPreference
             app:defaultValue="@string/default_entry_value_dark_theme_pref"
             app:entries="@array/entries_dark_theme_pref"
@@ -12,5 +11,16 @@
             app:key="@string/key_dark_theme_pref"
             app:summary="%s"
             app:title="@string/label_dark_theme_pref" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="@string/key_miscellaneous_pref_category"
+        app:title="@string/label_miscellaneous_pref_category">
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:icon="@drawable/ic_vibration_control_normal_24dp"
+            app:key="@string/key_shake_bug_reporter_invocation_method_pref"
+            app:singleLineTitle="false"
+            app:title="@string/label_shake_bug_reporter_invocation_method_pref" />
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>
