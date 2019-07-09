@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
-
+import ca.etsmtl.applets.etsmobile.util.BroadCastReceiver
 /**
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
  * select items on the bottom navigation view to switch between fragments.
@@ -40,7 +40,7 @@ class MainActivity : BaseActivity() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    var broadCastReciever : BroadCastReciever= BroadCastReciever();
+    var broadCastReciever : BroadCastReceiver= BroadCastReceiver();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
