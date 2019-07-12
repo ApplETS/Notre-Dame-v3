@@ -4,11 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import data.db.DashboardCardDatabase
-import data.db.DashboardCardDatabaseImpl
 import data.db.DashboardCardRoomDatabase
 import data.db.dao.DashboardCardDao
 import data.db.entity.DashboardCardEntity
@@ -78,7 +75,4 @@ internal abstract class DbModule {
         @Provides
         fun provideDashboardCardDao(db: DashboardCardRoomDatabase): DashboardCardDao = db.dashboardCardDao()
     }
-
-    @Binds
-    abstract fun provideDashboardCardDatabase(impl: DashboardCardDatabaseImpl): DashboardCardDatabase
 }

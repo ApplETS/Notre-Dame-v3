@@ -14,20 +14,20 @@ import javax.inject.Inject
  * Created by Sonphil on 02-06-19.
  */
 
-class DashboardCardDatabaseImpl @Inject constructor(
+actual class DashboardCardDatabase @Inject constructor(
     private val dao: DashboardCardDao
-) : DashboardCardDatabase {
-    override suspend fun dashboardCards(): ReceiveChannel<List<DashboardCard>> {
+) {
+    actual fun dashboardCards(): ReceiveChannel<List<DashboardCard>> {
         return dao.getAll().map {
             it.toDashboardCards()
         }.openSubscription()
     }
 
-    override suspend fun updateCard(dashboardCard: DashboardCard, position: Int) {
+    actual suspend fun updateCard(dashboardCard: DashboardCard, position: Int) {
         dao.updateDashboardCard(dashboardCard.toDashboardCardEntity(position))
     }
 
-    override suspend fun reset() {
+    actual suspend fun reset() {
         runBlocking {
             dao.deleteAll()
             dao.insertDashboardCard(DashboardCardEntity(
