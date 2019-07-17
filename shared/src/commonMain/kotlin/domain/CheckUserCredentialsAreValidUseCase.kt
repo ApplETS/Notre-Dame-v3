@@ -27,6 +27,8 @@ class CheckUserCredentialsAreValidUseCase @Inject constructor(
                     send(Resource.success(true))
                 } catch (cause: Throwable) {
                     send(Resource.error(cause.message ?: "", false))
+                } finally {
+                    close()
                 }
             }
         }
