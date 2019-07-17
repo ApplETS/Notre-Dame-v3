@@ -31,7 +31,7 @@ class LoginRepository @Inject constructor(
         }
     }
 
-    suspend fun login(creds: SignetsUserCredentials): MonETSUser = withContext(EtsMobileDispatchers.IO) {
+    suspend fun authenticate(creds: SignetsUserCredentials): MonETSUser = withContext(EtsMobileDispatchers.IO) {
         val monETSUser = monETSApi.authenticateUser(MonETSAuthenticationRequestBody(
             creds.motPasse,
             creds.codeAccesUniversel.value
