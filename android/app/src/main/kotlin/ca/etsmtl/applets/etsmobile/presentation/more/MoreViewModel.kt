@@ -1,5 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +14,8 @@ import ca.etsmtl.applets.repository.data.db.AppDatabase
 import com.buglife.sdk.Buglife
 import domain.ClearUserDataUseCase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import utils.EtsMobileDispatchers
 import javax.inject.Inject
 
 /**
@@ -24,6 +28,7 @@ class MoreViewModel @Inject constructor(
      * fully implemented in the shared module
      **/
     private val androidAppDatabase: AppDatabase,
+    private val prefs: SharedPreferences,
     private val app: App
 ) : AndroidViewModel(app) {
 
@@ -51,12 +56,17 @@ class MoreViewModel @Inject constructor(
      *
      * This function should be called when the user want to log out.
      */
+    @SuppressLint("ApplySharedPref")
     private fun logout() {
         _loading.value = true
         viewModelScope.launch {
             clearUserDataUseCase()
 
-            androidAppDatabase.clearAllTables()
+            withContext(EtsMobileDispatchers.IO) {
+                androidAppDatabase.clearAllTables()
+
+                prefs.edit().clear().commit()
+            }
 
             _loading.postValue(false)
 
