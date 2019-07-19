@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.fragment_login.progressLogin
 import kotlinx.android.synthetic.main.fragment_login.tvMadeBy
 import kotlinx.android.synthetic.main.include_login_form.btnForgotPassword
 import kotlinx.android.synthetic.main.include_login_form.btnSignIn
-import kotlinx.android.synthetic.main.include_login_form.btnUniversalCodeInfo
 import kotlinx.android.synthetic.main.include_login_form.layoutPassword
 import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
@@ -97,8 +96,7 @@ class LoginFragment : DaggerFragment() {
 
         View.OnClickListener {
             when (it.id) {
-                R.id.btnSignIn -> { toggleFocusAndSubmitCredentials() }
-                R.id.btnUniversalCodeInfo -> loginViewModel.displayUniversalCodeInfo(true)
+                R.id.btnSignIn -> { setCredentialsFieldsAndSubmitCredentials() }
                 R.id.btnForgotPassword -> {
                     context?.let {
                         Uri.parse(getString(R.string.uri_password_forgotten)).open(it)
@@ -107,7 +105,6 @@ class LoginFragment : DaggerFragment() {
             }
         }.apply {
             btnSignIn.setOnClickListener(this)
-            btnUniversalCodeInfo.setOnClickListener(this)
             btnForgotPassword.setOnClickListener(this)
             btnApplets.setOnClickListener(this)
         }
@@ -118,11 +115,14 @@ class LoginFragment : DaggerFragment() {
 
     private fun setupFields() {
         universalCode.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
+        layoutUniversalCode.setEndIconOnClickListener {
+            loginViewModel.displayUniversalCodeInfo(true)
+        }
         password.onFocusChangeListener = credentialsFieldsOnFocusChangeListener
 
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                toggleFocusAndSubmitCredentials()
+                setCredentialsFieldsAndSubmitCredentials()
                 return@OnEditorActionListener true
             }
             false
@@ -202,17 +202,9 @@ class LoginFragment : DaggerFragment() {
         }
     }
 
-    /**
-     * Toggles the focus on each field and submit the credentials
-     *
-     * Toggling the focus will set the universal code and password in [loginViewModel] and trigger
-     * a validity check for each field
-     */
-    private fun toggleFocusAndSubmitCredentials() {
-        universalCode.requestFocus()
-        universalCode.clearFocus()
-        password.requestFocus()
-        password.clearFocus()
+    private fun setCredentialsFieldsAndSubmitCredentials() {
+        universalCode.setField()
+        password.setField()
         loginViewModel.submitCredentials()
     }
 
