@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.toast
-import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_splash.progressBarSplash

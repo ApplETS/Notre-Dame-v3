@@ -20,6 +20,7 @@ import ca.etsmtl.applets.etsmobile.extension.hideKeyboard
 import ca.etsmtl.applets.etsmobile.extension.open
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.presentation.splash.LoginViewModel
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout

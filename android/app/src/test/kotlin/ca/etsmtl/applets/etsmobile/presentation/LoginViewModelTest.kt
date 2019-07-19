@@ -8,7 +8,7 @@ import ca.etsmtl.applets.etsmobile.domain.CheckUserCredentialsValidUseCase
 import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCase
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.extension.mockNetwork
-import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
+import ca.etsmtl.applets.etsmobile.presentation.splash.LoginViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.nhaarman.mockitokotlin2.any
@@ -47,10 +47,10 @@ class LoginViewModelTest {
     private val savedSignetsUserCredentialsUserCase = mock(SaveSignetsUserCredentialsUseCase::class.java)
     private val app: App = mock()
     private val loginViewModel = LoginViewModel(
-            fetchSavedSignetsUserCredentialsUserCase,
-            checkUserCredentialsValidUseCase,
-            savedSignetsUserCredentialsUserCase,
-            app
+        fetchSavedSignetsUserCredentialsUserCase,
+        checkUserCredentialsValidUseCase,
+        savedSignetsUserCredentialsUserCase,
+        app
     )
     private val userCredentials = SignetsUserCredentials(UniversalCode("test"), "test")
     @Captor

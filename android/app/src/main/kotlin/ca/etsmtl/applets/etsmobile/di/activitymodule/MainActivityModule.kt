@@ -12,7 +12,7 @@ import ca.etsmtl.applets.etsmobile.presentation.ets.EtsViewModel
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment
-import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
+import ca.etsmtl.applets.etsmobile.presentation.splash.LoginViewModel
 import ca.etsmtl.applets.etsmobile.presentation.main.MainViewModel
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreViewModel

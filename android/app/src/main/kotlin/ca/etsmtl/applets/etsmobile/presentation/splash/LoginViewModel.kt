@@ -1,4 +1,4 @@
-package ca.etsmtl.applets.etsmobile.presentation.login
+package ca.etsmtl.applets.etsmobile.presentation.splash
 
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
@@ -15,7 +15,6 @@ import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import com.shopify.livedataktx.filter
-import com.shopify.livedataktx.map
 import com.shopify.livedataktx.nonNull
 import model.Resource
 import model.SignetsUserCredentials
