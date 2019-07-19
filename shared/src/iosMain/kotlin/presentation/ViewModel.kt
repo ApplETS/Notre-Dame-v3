@@ -7,6 +7,6 @@ import kotlinx.coroutines.CoroutineScope
  */
 
 actual open class ViewModel {
-    actual val scope: CoroutineScope
+    actual val viewModelScope: CoroutineScope
         get() = TODO()
 }
