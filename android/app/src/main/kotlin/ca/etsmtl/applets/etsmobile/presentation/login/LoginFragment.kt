@@ -180,6 +180,7 @@ class LoginFragment : DaggerFragment() {
             textInputLayout.error = null
         } else {
             textInputLayout.error = errorMessage
+            textInputLayout.requestLayout()
         }
     }
 
