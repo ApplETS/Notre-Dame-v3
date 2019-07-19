@@ -11,7 +11,7 @@ import model.SignetsUserCredentials
 import model.UniversalCode
 
 /**
- * Created by Sonphil on 18-07-19.
+ * Created by Sonphil on 28-02-18.
  */
 
 class LoginViewModel @Inject constructor(

@@ -6,10 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ca.etsmtl.applets.etsmobile.BuildConfig
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
+import ca.etsmtl.applets.repository.data.db.AppDatabase
 import com.buglife.sdk.Buglife
+import domain.ClearUserDataUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +20,10 @@ import javax.inject.Inject
 
 class MoreViewModel @Inject constructor(
     private val clearUserDataUseCase: ClearUserDataUseCase,
+    /** Used on logout when the user's data needs to be cleared. Will be removed when the db is
+     * fully implemented in the shared module
+     **/
+    private val androidAppDatabase: AppDatabase,
     private val app: App
 ) : AndroidViewModel(app) {
 
@@ -50,6 +55,8 @@ class MoreViewModel @Inject constructor(
         _loading.value = true
         viewModelScope.launch {
             clearUserDataUseCase()
+
+            androidAppDatabase.clearAllTables()
 
             _loading.postValue(false)
 

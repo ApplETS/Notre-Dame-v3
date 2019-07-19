@@ -3,6 +3,7 @@ package data.repository
 import data.api.MonETSApi
 import data.api.model.MonETSAuthenticationRequestBody
 import data.api.model.MonETSUser
+import data.db.DashboardCardDatabase
 import data.securepreferences.SecurePreferences
 import di.Inject
 import kotlinx.coroutines.withContext
@@ -12,7 +13,8 @@ import utils.EtsMobileDispatchers
 
 class LoginRepository @Inject constructor(
     private val securePrefs: SecurePreferences,
-    private val monETSApi: MonETSApi
+    private val monETSApi: MonETSApi,
+    private val dashboardCardDatabase: DashboardCardDatabase
 ) {
     companion object {
         const val UNIVERSAL_CODE_KEY = "UniversalCodeKey"
@@ -45,5 +47,15 @@ class LoginRepository @Inject constructor(
         SignetsUserCredentials.INSTANCE = creds
 
         monETSUser
+    }
+
+    suspend fun clearUserData() {
+        withContext(EtsMobileDispatchers.IO) {
+            securePrefs.clear()
+
+            SignetsUserCredentials.INSTANCE = null
+            
+            dashboardCardDatabase.reset()
+        }
     }
 }

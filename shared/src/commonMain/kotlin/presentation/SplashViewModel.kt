@@ -8,12 +8,12 @@ import kotlinx.coroutines.launch
 import model.Resource
 
 /**
- * Created by Sonphil on 19-07-19.
+ * Created by Sonphil on 28-02-18.
  */
 
 class SplashViewModel @Inject constructor(
     private val loginWithSavedCredentials: LoginWithSavedCredentials
-): ViewModel() {
+) : ViewModel() {
     val navigateToDashboard = Channel<Event<Unit>>()
     val navigateToLogin = Channel<Event<Unit>>()
     val showLoading = Channel<Boolean>()
