@@ -27,7 +27,7 @@ class LoginRepository @Inject constructor(
         val password = securePrefs.getString(PASSWORD_KEY, null)
 
         return if (universalCode != null && password != null) {
-            SignetsUserCredentials.INSTANCE =  SignetsUserCredentials(UniversalCode(universalCode), password)
+            SignetsUserCredentials.INSTANCE = SignetsUserCredentials(UniversalCode(universalCode), password)
             SignetsUserCredentials.INSTANCE
         } else {
             null
@@ -54,7 +54,7 @@ class LoginRepository @Inject constructor(
             securePrefs.clear()
 
             SignetsUserCredentials.INSTANCE = null
-            
+
             dashboardCardDatabase.reset()
         }
     }
