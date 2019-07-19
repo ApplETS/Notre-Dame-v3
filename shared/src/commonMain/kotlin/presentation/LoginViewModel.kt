@@ -79,7 +79,7 @@ class LoginViewModel @Inject constructor(
             when (universalCode.error) {
                 UniversalCode.Error.EMPTY -> universalCodeErrorMessage.send(Event("error_field_required"))
                 UniversalCode.Error.INVALID -> universalCodeErrorMessage.send(Event("string.error_invalid_universal_code"))
-                null -> null
+                null -> universalCodeErrorMessage.send(Event(""))
             }
         }
     }
@@ -90,7 +90,7 @@ class LoginViewModel @Inject constructor(
 
             when {
                 password.isEmpty() -> passwordErrorMessage.send(Event("error_field_required"))
-                else -> null
+                else -> passwordErrorMessage.send(Event(""))
             }
         }
     }
