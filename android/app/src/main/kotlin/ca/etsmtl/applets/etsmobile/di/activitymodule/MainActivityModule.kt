@@ -12,7 +12,6 @@ import ca.etsmtl.applets.etsmobile.presentation.ets.EtsViewModel
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment
-import ca.etsmtl.applets.etsmobile.presentation.splash.LoginViewModel
 import ca.etsmtl.applets.etsmobile.presentation.main.MainViewModel
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreViewModel
@@ -21,6 +20,7 @@ import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileViewModel
 import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment
 import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleViewModel
 import ca.etsmtl.applets.etsmobile.presentation.schedule.week.ScheduleWeekFragment
+import ca.etsmtl.applets.etsmobile.presentation.splash.LoginViewModel
 import ca.etsmtl.applets.etsmobile.presentation.splash.SplashFragment
 import ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment
 import dagger.Binds
@@ -53,7 +53,12 @@ interface MainActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
-    fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+    fun bindSplashViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(presentation.LoginViewModel::class)
+    fun bindLoginViewModel(loginViewModel: presentation.LoginViewModel): ViewModel
 
     @Binds
     @IntoMap

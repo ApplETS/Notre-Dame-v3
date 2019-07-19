@@ -18,7 +18,7 @@ class LoginWithSavedCredentials @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<Resource<Boolean>> {
         return withContext(coroutineContext) {
-            flow {
+            flow<Resource<Boolean>> {
                 emit(Resource.loading<Boolean>(null))
 
                 val credentials = fetchSavedUserCredentialsUseCase()

@@ -28,7 +28,7 @@ class DashboardViewModel @Inject constructor(
     private var hiddenCards: MutableList<DashboardCard> = mutableListOf()
     private var lastRemovedCardPosition = -1
 
-    fun load() = viewModelScope.launch {
+    fun load() = vmScope.launch {
         for (cards in fetchDashboardCardsUseCase()) {
             val cards = cards.partition { card ->
                 card.visible
@@ -76,7 +76,7 @@ class DashboardViewModel @Inject constructor(
         )
     }
 
-    fun restore() = viewModelScope.launch {
+    fun restore() = vmScope.launch {
         _showUndoRemoveChannel.offer(false)
         restoreDashboardCardsUseCase()
         load()

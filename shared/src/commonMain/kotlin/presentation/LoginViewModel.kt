@@ -18,15 +18,18 @@ class LoginViewModel @Inject constructor(
     private val checkUserCredentialsAreValidUseCase: CheckUserCredentialsAreValidUseCase,
     private val loginWithSavedCredentials: LoginWithSavedCredentials
 ) : ViewModel() {
+    private var universalCode: UniversalCode = UniversalCode("")
+    private var password: String = ""
     val navigateToDashboard = Channel<Event<Unit>>()
     val displayUniversalCodeDialog = Channel<Boolean>()
     val showLoading = Channel<Boolean>()
     val universalCodeErrorMessage = Channel<Event<String>>()
     val passwordErrorMessage = Channel<Event<String>>()
     val loginErrorMessage = Channel<Event<String>>()
+    val hideKeyboard = Channel<Unit>()
 
     fun submitSavedCredentials() {
-        viewModelScope.launch {
+        vmScope.launch {
             loginWithSavedCredentials().collect { res ->
                 handleLoginResult(res)
             }
@@ -35,14 +38,11 @@ class LoginViewModel @Inject constructor(
 
     /**
      * Submits the user's credentials
-     *
-     * If the universal code and the password are not null, this will trigger a validity check of
-     * the user's credentials.
-     *
-     * @param credentials The user's credentials
      */
-    private suspend fun submitCredentials(credentials: SignetsUserCredentials) {
-        viewModelScope.launch {
+    fun submitCredentials() {
+        vmScope.launch {
+            hideKeyboard.send(Unit)
+            val credentials = SignetsUserCredentials(universalCode, password)
             checkUserCredentialsAreValidUseCase(credentials).collect { res ->
                 if (res.status != Resource.Status.LOADING && res.data == false) {
                     loginErrorMessage.send(Event(res.message ?: "Erreur"))
@@ -67,12 +67,14 @@ class LoginViewModel @Inject constructor(
      * be hidden
      */
     fun displayUniversalCodeInfo(shouldShow: Boolean) {
-        viewModelScope.launch { displayUniversalCodeDialog.send(shouldShow) }
+        vmScope.launch { displayUniversalCodeDialog.send(shouldShow) }
     }
 
     fun setUniversalCode(universalCode: String) {
-        viewModelScope.launch {
+        vmScope.launch {
             val universalCode = UniversalCode(universalCode)
+
+            this@LoginViewModel.universalCode = universalCode
 
             when (universalCode.error) {
                 UniversalCode.Error.EMPTY -> universalCodeErrorMessage.send(Event("error_field_required"))
@@ -83,7 +85,9 @@ class LoginViewModel @Inject constructor(
     }
 
     fun setPassword(password: String) {
-        viewModelScope.launch {
+        vmScope.launch {
+            this@LoginViewModel.password = password
+
             when {
                 password.isEmpty() -> passwordErrorMessage.send(Event("error_field_required"))
                 else -> null

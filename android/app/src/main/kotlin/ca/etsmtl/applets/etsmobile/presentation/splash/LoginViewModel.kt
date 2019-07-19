@@ -14,8 +14,6 @@ import ca.etsmtl.applets.etsmobile.domain.FetchSavedSignetsUserCredentialsUserCa
 import ca.etsmtl.applets.etsmobile.domain.SaveSignetsUserCredentialsUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
-import com.shopify.livedataktx.filter
-import com.shopify.livedataktx.nonNull
 import model.Resource
 import model.SignetsUserCredentials
 import model.UniversalCode
@@ -52,20 +50,23 @@ class LoginViewModel @Inject constructor(
             it
         }
     }
-    private val _navigateToLogin: MediatorLiveData<Event<Unit>> = userCredentialsValid
-        .nonNull()
-        .filter { it.status != Resource.Status.LOADING && it.data == false }
-        .map {
-            Event(Unit)
+
+    private val _navigateToLogin: MediatorLiveData<Event<Unit>> = MediatorLiveData<Event<Unit>>().apply {
+        addSource(userCredentialsValid) {
+            if (it.status != Resource.Status.LOADING && it.data == false) {
+                value = Event(Unit)
+            }
         }
+    }
 
     /** An error message to be displayed to the user **/
-    val errorMessage: LiveData<Event<String>> = userCredentialsValid
-        .nonNull()
-        .filter { it.status == Resource.Status.ERROR }
-        .map {
-            Event(it.message ?: app.getString(R.string.error))
+    val errorMessage: LiveData<Event<String>> = MediatorLiveData<Event<String>>().apply {
+        addSource(userCredentialsValid) {
+            if (it.status == Resource.Status.ERROR) {
+                value = Event(it.message ?: app.getString(R.string.error))
+            }
         }
+    }
 
     private val displayUniversalCodeDialogMediator: MediatorLiveData<Boolean> = MediatorLiveData()
 
