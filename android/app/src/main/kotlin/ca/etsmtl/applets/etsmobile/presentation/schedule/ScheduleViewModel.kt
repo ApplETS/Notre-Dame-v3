@@ -64,5 +64,7 @@ class ScheduleViewModel @Inject constructor(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun refresh() = seanceRes.refreshIfValueIsNull()
+    fun init() = seanceRes.refreshIfValueIsNull()
+
+    fun refresh() = seanceRes.refresh()
 }

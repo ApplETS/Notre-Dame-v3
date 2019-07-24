@@ -110,6 +110,7 @@ class ScheduleFragment : DaggerFragment() {
         scheduleViewModel.showEmptyView.observe(this, Observer {
             it?.let {
                 emptyViewSchedule.isVisible = it
+                weekView.isVisible = !it
             }
         })
 
