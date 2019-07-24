@@ -16,7 +16,7 @@ import javax.inject.Inject
 /**
 Created by mykaelll87 on 13/01/19
  */
-class FetchFutureSeancesUseCase @Inject constructor(
+class FetchCurrentAndFutureSeancesUseCase @Inject constructor(
     private val userCredentials: SignetsUserCredentials,
     private val sessionRepository: SessionRepository,
     private val fetchSessionSeancesUseCase: FetchSessionSeancesUseCase,
@@ -32,6 +32,11 @@ class FetchFutureSeancesUseCase @Inject constructor(
 
         return Transformations.switchMap(sessionRepository.getSessions(userCredentials) { true }) { resSessions ->
             val sessions = resSessions.data.orEmpty()
+            val currentSession = resSessions
+                .data
+                ?.find {
+                    it.dateFin >= now
+                }
             var latestError: String? = null
 
             fun updateMediatorLiveData(res: Resource<List<Seance>>) {
@@ -40,8 +45,11 @@ class FetchFutureSeancesUseCase @Inject constructor(
                 mediatorLiveData.value?.data?.let {
                     seances.addAll(it)
                 }
-                seances.addAll(res.data.orEmpty().filter { 
-                    !seances.contains(it) && it.dateDebut >= now
+                seances.addAll(res.data.orEmpty().filter {
+                    val inCurrentSession = currentSession?.let { it.dateFin >= now } ?: true
+                    val inNextSession = it.dateDebut >= now
+
+                    !seances.contains(it) && (inCurrentSession || inNextSession)
                 })
 
                 val error = latestError
