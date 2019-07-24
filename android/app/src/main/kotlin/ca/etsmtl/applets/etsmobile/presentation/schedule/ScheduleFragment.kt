@@ -1,10 +1,12 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,11 +19,13 @@ import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewDisplayable
 import com.alamkanak.weekview.WeekViewEvent
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.empty_view_schedule.*
-import kotlinx.android.synthetic.main.fragment_schedule.*
+import kotlinx.android.synthetic.main.empty_view_schedule.btnRetry
+import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.progressBarSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.weekView
 import model.Seance
 import utils.date.toCalendar
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 
 /**
@@ -51,13 +55,14 @@ class ScheduleFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpWeekView()
+        setupWeekView()
         btnRetry.setOnClickListener { scheduleViewModel.refresh() }
         subscribeUI()
     }
 
-    private fun setUpWeekView() {
+    private fun setupWeekView() {
         weekView.setShowTimeColumnHourSeparator(true)
+        // Listener called when the week view needs to load another month
         val monthChangeListener = object : MonthChangeListener<Seance> {
             override fun onMonthChange(startDate: Calendar, endDate: Calendar): List<WeekViewDisplayable<Seance>> {
                 return scheduleViewModel.getSeancesForDates(startDate, endDate).map { seance ->
@@ -72,14 +77,17 @@ class ScheduleFragment : DaggerFragment() {
     private fun Seance.toWeekViewEvent(): WeekViewEvent<Seance> {
         val style = WeekViewEvent.Style
             .Builder()
-            .setBackgroundColor(sigleCours.run {
-                this.hashCode()
-            })
+            .setBackgroundColor(ColorUtils.blendARGB(
+                sigleCours.hashCode(),
+                Color.BLACK,
+                0.3f
+            ))
             .build()
 
         return WeekViewEvent.Builder<Seance>()
-            .setTitle(libelleCours + "\n" + sigleCours)
-            .setLocation("\n" + local)
+            .setTitle("$libelleCours")
+            .setLocation("\n" +
+                "$sigleCours $nomActivite\n$local")
             .setStartTime(dateDebut.toCalendar())
             .setEndTime(dateFin.toCalendar())
             .setStyle(style)

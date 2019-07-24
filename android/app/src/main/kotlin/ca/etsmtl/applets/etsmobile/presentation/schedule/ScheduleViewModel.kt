@@ -1,6 +1,11 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchFutureSeancesUseCase
 import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
@@ -11,7 +16,7 @@ import com.shopify.livedataktx.map
 import model.Resource
 import model.Seance
 import utils.date.toCalendar
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 
 /**
@@ -59,5 +64,5 @@ class ScheduleViewModel @Inject constructor(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun refresh() = seanceRes.refresh()
+    fun refresh() = seanceRes.refreshIfValueIsNull()
 }
