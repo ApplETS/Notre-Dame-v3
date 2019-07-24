@@ -10,7 +10,7 @@ import model.Resource
 import model.Seance
 import model.Session
 import model.SignetsUserCredentials
-import java.util.Calendar
+import utils.date.ETSMobileDate
 import javax.inject.Inject
 
 /**
@@ -23,17 +23,11 @@ class FetchFutureSeancesUseCase @Inject constructor(
     private val app: App
 ) {
     operator fun invoke(): LiveData<Resource<List<Seance>>> {
-        val todayTimeStampMilis = Calendar.getInstance().apply {
-            set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-        }.timeInMillis
-        val todayTimeStamp = todayTimeStampMilis / 1000
-
+        val now = ETSMobileDate()
         val seanceFetchStatus = mutableMapOf<Session, Boolean>()
         var sessionFetchDone = false
         val mediatorLiveData = MediatorLiveData<Resource<List<Seance>>>()
+
         mediatorLiveData.value = Resource.loading(emptyList())
 
         return Transformations.switchMap(sessionRepository.getSessions(userCredentials) { true }) { resSessions ->
@@ -46,12 +40,13 @@ class FetchFutureSeancesUseCase @Inject constructor(
                 mediatorLiveData.value?.data?.let {
                     seances.addAll(it)
                 }
-                seances.addAll(res.data.orEmpty().filter { !seances.contains(it) && it.dateDebut.timeInMilliseconds >= todayTimeStampMilis })
+                seances.addAll(res.data.orEmpty().filter { 
+                    !seances.contains(it) && it.dateDebut >= now
+                })
 
                 val error = latestError
 
                 if (!sessionFetchDone || seanceFetchStatus.any { !it.value }) {
-
                     mediatorLiveData.value = Resource.loading(seances)
                 } else if (!error.isNullOrBlank()) {
                     mediatorLiveData.value = Resource.error(error, seances)
@@ -78,7 +73,7 @@ class FetchFutureSeancesUseCase @Inject constructor(
             }
 
             sessions.forEach {
-                if (it.dateFin >= todayTimeStamp && !seanceFetchStatus.contains(it)) {
+                if (it.dateFin >= now && !seanceFetchStatus.contains(it)) {
                     fetchSeancesFromSession(it)
                 }
             }
