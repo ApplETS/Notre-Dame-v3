@@ -34,7 +34,7 @@ actual fun ETSMobileDate(
     set(Calendar.MILLISECOND, 0)
 }.toETSMobileDate(null)
 
-private fun Calendar.toETSMobileDate(timestamp: Long? = null): ETSMobileDate {
+fun Calendar.toETSMobileDate(timestamp: Long? = null): ETSMobileDate {
     timestamp?.let { timeInMillis = it }
 
     val seconds = get(Calendar.SECOND)
