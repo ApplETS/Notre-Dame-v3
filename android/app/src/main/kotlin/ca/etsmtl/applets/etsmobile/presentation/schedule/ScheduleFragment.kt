@@ -70,7 +70,6 @@ class ScheduleFragment : DaggerFragment() {
                 }
             }
         }
-        weekView.goToCurrentTime()
         (weekView as WeekView<Seance>).setMonthChangeListener(monthChangeListener)
     }
 
