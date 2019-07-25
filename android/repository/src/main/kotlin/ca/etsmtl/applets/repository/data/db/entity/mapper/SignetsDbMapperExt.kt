@@ -22,6 +22,7 @@ import model.Seance
 import model.Session
 import model.SommaireElementsEvaluation
 import utils.date.ETSMobileDate
+import utils.date.MILLIS_PER_SECOND
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -59,7 +60,7 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.session,
         this.nom,
         this.equipe,
-        dateCible?.let { ETSMobileDate(it * 1000) },
+        dateCible?.let { ETSMobileDate(it * MILLIS_PER_SECOND) },
         this.note,
         this.corrigeSur,
         this.notePourcentage,
@@ -78,8 +79,8 @@ fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
 
 fun EvaluationCoursEntity.toEvaluationCours() = EvaluationCours(
     session,
-    ETSMobileDate(dateDebutEvaluation * 1000),
-    ETSMobileDate(dateFinEvaluation * 1000),
+    ETSMobileDate(dateDebutEvaluation * MILLIS_PER_SECOND),
+    ETSMobileDate(dateFinEvaluation * MILLIS_PER_SECOND),
     enseignant,
     estComplete,
     groupe,
@@ -128,8 +129,8 @@ fun ProgrammeEntity.toProgramme() = Programme(
 fun List<ProgrammeEntity>.toProgrammes(): List<Programme> = map { it.toProgramme() }
 
 fun SeanceEntity.toSeance() = Seance(
-        ETSMobileDate(dateDebut * 1000),
-        ETSMobileDate(dateFin * 1000),
+        ETSMobileDate(dateDebut * MILLIS_PER_SECOND),
+        ETSMobileDate(dateFin * MILLIS_PER_SECOND),
         this.nomActivite,
         this.local,
         this.descriptionActivite,
@@ -159,8 +160,8 @@ fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEv
 fun SessionEntity.toSession() = Session(
         abrege,
         auLong,
-        dateDebut,
-        dateFin,
+        ETSMobileDate(dateDebut * MILLIS_PER_SECOND),
+        ETSMobileDate(dateFin * MILLIS_PER_SECOND),
         dateFinCours,
         dateDebutChemiNot,
         dateFinChemiNot,

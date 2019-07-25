@@ -20,6 +20,7 @@ import javax.inject.Inject
 
 class LoginRepository @Inject constructor(
     private val securePrefs: SecurePreferences,
+    private val prefs: SharedPreferences,
     private val appExecutors: AppExecutors,
     private val db: AppDatabase,
     private val dashboardCardDatabase: DashboardCardDatabase
@@ -144,6 +145,8 @@ class LoginRepository @Inject constructor(
     suspend fun clearUserData() {
         withContext(EtsMobileDispatchers.IO) {
             securePrefs.clear()
+
+            prefs.edit().clear().apply()
 
             SignetsUserCredentials.INSTANCE = null
 
