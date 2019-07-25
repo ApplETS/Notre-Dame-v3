@@ -2,9 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootSchedule"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/design_bottom_navigation_height"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/design_bottom_navigation_height"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment"
     tools:ignore="PrivateResource">
 
@@ -36,7 +39,6 @@
         app:nowLineStrokeWidth="1dp"
         app:numberOfVisibleDays="1"
         app:overlappingEventGap="1dp"
-        app:showCurrentTimeFirst="true"
         app:showHeaderRowBottomLine="true"
         app:showNowLine="true"
         app:showTimeColumnSeparator="true"
@@ -58,6 +60,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnToday"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:borderWidth="0dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_today_white_24dp"
+        app:tint="@android:color/white"
         tools:visibility="visible" />
 </FrameLayout>
 
