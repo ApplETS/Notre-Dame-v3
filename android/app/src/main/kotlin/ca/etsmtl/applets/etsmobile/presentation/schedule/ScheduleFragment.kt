@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.ProgressTimeLatch
-import com.alamkanak.weekview.MonthChangeListener
-import com.alamkanak.weekview.WeekView
-import com.alamkanak.weekview.WeekViewDisplayable
-import com.alamkanak.weekview.WeekViewEvent
+import com.alamkanak.weekview.*
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.empty_view_schedule.btnRetry
 import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
 import kotlinx.android.synthetic.main.fragment_schedule.progressBarSchedule
 import kotlinx.android.synthetic.main.fragment_schedule.weekView
+import kotlinx.android.synthetic.main.fragment_schedule.btnToday
 import model.Seance
+import utils.date.isToday
 import utils.date.toCalendar
+import utils.date.toETSMobileDate
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -57,11 +57,13 @@ class ScheduleFragment : DaggerFragment() {
 
         setupWeekView()
         btnRetry.setOnClickListener { scheduleViewModel.refresh() }
+        btnToday.setOnClickListener { weekView.goToToday() }
         subscribeUI()
     }
 
     private fun setupWeekView() {
         weekView.setShowTimeColumnHourSeparator(true)
+
         // Listener called when the week view needs to load another month
         val monthChangeListener = object : MonthChangeListener<Seance> {
             override fun onMonthChange(startDate: Calendar, endDate: Calendar): List<WeekViewDisplayable<Seance>> {
@@ -71,6 +73,23 @@ class ScheduleFragment : DaggerFragment() {
             }
         }
         (weekView as WeekView<Seance>).setMonthChangeListener(monthChangeListener)
+
+        weekView.scrollListener = object : ScrollListener {
+            override fun onFirstVisibleDayChanged(
+                newFirstVisibleDay: Calendar,
+                oldFirstVisibleDay: Calendar?
+            ) {
+                val newFirstVisibleDayIsToday = newFirstVisibleDay
+                    .toETSMobileDate(newFirstVisibleDay.timeInMillis)
+                    .isToday()
+
+                if (newFirstVisibleDayIsToday) {
+                    btnToday.hide()
+                } else {
+                    btnToday.show()
+                }
+            }
+        }
     }
 
     private fun Seance.toWeekViewEvent(): WeekViewEvent<Seance> {
@@ -84,9 +103,8 @@ class ScheduleFragment : DaggerFragment() {
             .build()
 
         return WeekViewEvent.Builder<Seance>()
-            .setTitle("$libelleCours")
-            .setLocation("\n" +
-                "$sigleCours $nomActivite\n$local")
+            .setTitle(libelleCours)
+            .setLocation("\n$sigleCours $nomActivite\n$local")
             .setStartTime(dateDebut.toCalendar())
             .setEndTime(dateFin.toCalendar())
             .setStyle(style)
@@ -114,10 +132,5 @@ class ScheduleFragment : DaggerFragment() {
         })
 
         this.lifecycle.addObserver(scheduleViewModel)
-    }
-
-    companion object {
-        private const val TAG = "ScheduleFragment"
-        fun newInstance(): ScheduleFragment = ScheduleFragment()
     }
 }
