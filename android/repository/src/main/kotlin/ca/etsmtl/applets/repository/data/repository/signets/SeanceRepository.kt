@@ -16,6 +16,7 @@ import model.Resource
 import model.Seance
 import model.Session
 import model.SignetsUserCredentials
+import utils.date.plus
 import utils.date.toDefaultSignetsDate
 import javax.inject.Inject
 
@@ -28,6 +29,10 @@ class SeanceRepository @Inject constructor(
     private val api: SignetsApi,
     private val dao: SeanceDao
 ) : SignetsRepository(appExecutors) {
+    companion object {
+        const val NB_MS_IN_A_DAY = 86400000L
+    }
+
     /**
      * Returns the schedule of the sessions for a given course and a given session
      *
@@ -80,7 +85,7 @@ class SeanceRepository @Inject constructor(
                                 cours?.sigle ?: "",
                                 session.abrege,
                             session.dateDebut.toDefaultSignetsDate(),
-                            session.dateFin.toDefaultSignetsDate()
+                            (session.dateFin + NB_MS_IN_A_DAY).toDefaultSignetsDate()
                         )
                 )
             }
