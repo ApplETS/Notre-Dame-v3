@@ -55,6 +55,22 @@ data class ETSMobileDate internal constructor(
 }
 
 /**
+ * Formats date to Signets default date format (yyyy-MM-dd)
+ */
+fun ETSMobileDate.toDefaultSignetsDate(): String {
+    val monthStr = (month.ordinal + 1).twoDigits()
+    val dayOfMonthStr = dayOfMonth.twoDigits()
+
+    return "$year-$monthStr-$dayOfMonthStr"
+}
+
+private fun Int.twoDigits(): String {
+    val str = "$this"
+
+    return if (str.length < 2) { "0$str" } else str
+}
+
+/**
  * Creates a new [ETSMobileDate] from the specified [timestamp]
  *
  * @param timestamp Unix time (Number of Epoch milliseconds) (it is `now` by default)
