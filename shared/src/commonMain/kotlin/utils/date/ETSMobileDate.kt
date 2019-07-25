@@ -100,3 +100,12 @@ operator fun ETSMobileDate.plus(milliseconds: Long): ETSMobileDate = ETSMobileDa
  * Subtracts the specified number of [milliseconds]
  */
 operator fun ETSMobileDate.minus(milliseconds: Long): ETSMobileDate = ETSMobileDate(timeInMilliseconds - milliseconds)
+
+/**
+ * Returns true if it's today
+ */
+fun ETSMobileDate.isToday(): Boolean {
+    val now = ETSMobileDate()
+
+    return dayOfYear == now.dayOfYear && year == now.year
+}
