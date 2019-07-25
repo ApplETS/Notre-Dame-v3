@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.repository.data.repository
 
+import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import ca.etsmtl.applets.repository.AppExecutors
 import ca.etsmtl.applets.repository.data.db.AppDatabase
@@ -27,7 +28,8 @@ import kotlin.test.assertNull
  * Created by Sonphil on 25-04-18.
  */
 @RunWith(JUnit4::class)class LoginRepositoryTest {
-    private lateinit var prefs: SecurePreferences
+    private lateinit var prefs: SharedPreferences
+    private lateinit var securePrefs: SecurePreferences
     private lateinit var appExecutors: AppExecutors
     private lateinit var appDatabase: AppDatabase
     private lateinit var dashboardCardDatabase: DashboardCardDatabase
@@ -38,11 +40,13 @@ import kotlin.test.assertNull
 
     @Before
     fun setup() {
-        prefs = mock(SecurePreferences::class.java)
+        securePrefs = mock(SecurePreferences::class.java)
+        prefs = mock(SharedPreferences::class.java)
         appExecutors = InstantAppExecutors()
         appDatabase = mock(AppDatabase::class.java)
         dashboardCardDatabase = mock(DashboardCardDatabase::class.java)
         loginRepository = LoginRepository(
+            securePrefs,
             prefs,
             appExecutors,
             appDatabase,
@@ -53,13 +57,13 @@ import kotlin.test.assertNull
     @Test
     fun testSaveUniversalCode() {
         loginRepository.saveUniversalCode("test")
-        verify(prefs, times(1)).putString("UniversalCodePref", "test")
+        verify(securePrefs, times(1)).putString("UniversalCodePref", "test")
     }
 
     @Test
     fun testGetSavedUniversalCode() {
         val expectedUniversalCode = "AM12345"
-        `when`(prefs.getString("UniversalCodePref", null)).thenReturn(expectedUniversalCode)
+        `when`(securePrefs.getString("UniversalCodePref", null)).thenReturn(expectedUniversalCode)
         val universalCode: String = loginRepository.getSavedUniversalCode()!!
         assertEquals(expectedUniversalCode, universalCode)
     }
@@ -67,7 +71,7 @@ import kotlin.test.assertNull
     @Test
     fun testGetSavedPassword() {
         val expectedPassword = "expectedPw"
-        `when`(prefs.getString("EncryptedPasswordPref", null)).thenReturn(expectedPassword)
+        `when`(securePrefs.getString("EncryptedPasswordPref", null)).thenReturn(expectedPassword)
         assertEquals(loginRepository.getSavedPassword(), expectedPassword)
     }
 
@@ -76,16 +80,21 @@ import kotlin.test.assertNull
         val passwordToSave = "PassowrdToSave"
 
         loginRepository.savePassword(passwordToSave)
-        verify(prefs, times(1)).putString("EncryptedPasswordPref", passwordToSave)
+        verify(securePrefs, times(1)).putString("EncryptedPasswordPref", passwordToSave)
     }
 
     @Test
     fun testClearUserData() {
+        val mockSharedPrefsEditor = mock(SharedPreferences.Editor::class.java)
+        `when`(prefs.edit()).thenReturn(mockSharedPrefsEditor)
+        `when`(mockSharedPrefsEditor.clear()).thenReturn(mockSharedPrefsEditor)
         SignetsUserCredentials.INSTANCE = SignetsUserCredentials(UniversalCode("test"), "test")
         runBlocking {
             loginRepository.clearUserData()
 
-            verify(prefs).clear()
+            verify(securePrefs).clear()
+
+            verify(mockSharedPrefsEditor).clear()
 
             assertNull(SignetsUserCredentials.INSTANCE)
 
@@ -101,14 +110,14 @@ import kotlin.test.assertNull
         loginRepository.saveUserCredentialsIfNeeded(userCredentials)
 
         // Check universal code was saved
-        verify(prefs, times(1)).putString("UniversalCodePref", userCredentials.codeAccesUniversel.value)
+        verify(securePrefs, times(1)).putString("UniversalCodePref", userCredentials.codeAccesUniversel.value)
 
         // Check password was saved
-        verify(prefs, times(1)).putString("EncryptedPasswordPref", userCredentials.motPasse)
+        verify(securePrefs, times(1)).putString("EncryptedPasswordPref", userCredentials.motPasse)
 
         loginRepository.saveUserCredentialsIfNeeded(userCredentials)
 
         // Make sure there was no interactions since the user's credentials have already been saved
-        verifyNoMoreInteractions(prefs)
+        verifyNoMoreInteractions(securePrefs)
     }
 }

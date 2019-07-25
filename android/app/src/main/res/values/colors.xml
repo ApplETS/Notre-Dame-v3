@@ -32,4 +32,6 @@
     <color name="colorDialogBg">@color/etsNoir</color>
     <color name="colorControlNormal">@color/etsGrisFonce</color>
     <color name="colorNavigationBar">@color/colorPrimaryDark</color>
+    <color name="colorScheduleBg">#2BEF3E45</color>
+    <color name="colorScheduleText">@android:color/white</color>
 </resources>
