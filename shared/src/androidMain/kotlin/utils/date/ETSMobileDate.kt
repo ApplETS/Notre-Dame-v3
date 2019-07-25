@@ -64,3 +64,14 @@ private fun Calendar.toETSMobileDate(timestamp: Long? = null): ETSMobileDate {
 }
 
 fun ETSMobileDate.toJvmDate(): Date = Date(timeInMilliseconds)
+
+fun ETSMobileDate.toCalendar(): Calendar = Calendar.getInstance().apply {
+    set(Calendar.YEAR, year)
+    // January is month 0 in Java's Calendar
+    set(Calendar.MONTH, month.ordinal)
+    set(Calendar.DAY_OF_MONTH, dayOfMonth)
+    set(Calendar.HOUR_OF_DAY, hours)
+    set(Calendar.MINUTE, minutes)
+    set(Calendar.SECOND, seconds)
+    set(Calendar.MILLISECOND, 0)
+}
