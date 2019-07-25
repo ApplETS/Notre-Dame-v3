@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment"
     android:layout_marginBottom="@dimen/design_bottom_navigation_height"
+    tools:context="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment"
     tools:ignore="PrivateResource">
 
-    <ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch
-        android:id="@+id/swipeRefreshLayoutSchedule"
+    <ProgressBar
+        android:id="@+id/progressBarSchedule"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <include
+        layout="@layout/empty_view_schedule"
+        android:visibility="gone" />
+
+    <com.alamkanak.weekview.WeekView
+        android:id="@+id/weekView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include
-                layout="@layout/empty_view_schedule"
-                android:visibility="gone" />
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/schedule_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </FrameLayout>
-    </ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch>
+        android:layout_height="match_parent"
+        app:dayBackgroundColor="@android:color/transparent"
+        app:defaultEventColor="@color/colorPrimary"
+        app:eventTextColor="@android:color/white"
+        app:eventTextSize="14sp"
+        app:headerRowBackgroundColor="@android:color/transparent"
+        app:headerRowTextColor="@color/colorScheduleText"
+        app:hourHeight="40dp"
+        app:hourSeparatorColor="@color/etsGrisFonce"
+        app:nowLineColor="@color/colorPrimary"
+        app:numberOfVisibleDays="1"
+        app:overlappingEventGap="2dp"
+        app:showHourSeparator="false"
+        app:showNowLine="true"
+        app:showTimeColumnHourSeparator="false"
+        app:showTimeColumnSeparator="false"
+        app:singleDayHorizontalMargin="2dp"
+        app:timeColumnBackgroundColor="@android:color/transparent"
+        app:timeColumnPadding="8dp"
+        app:timeColumnSeparatorColor="@android:color/transparent"
+        app:timeColumnTextColor="@color/colorScheduleText"
+        app:todayBackgroundColor="@color/colorScheduleBg"
+        app:todayHeaderTextColor="@color/colorPrimary"
+        app:xScrollingSpeed="1" />
 </FrameLayout>
 
