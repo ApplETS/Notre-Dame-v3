@@ -128,6 +128,9 @@
     <string name="error_serialize_report" tools:override="true">Échec de la sérialisation du rapport de bogue.</string>
     <string name="error_process_report" tools:override="true">Une erreur est survenue lors du traitement du rapport de bogue!</string>
     <string name="error_save_screenshot" tools:override="true">Une erreur est survenue lors de la sauvegarde du capture d\'écran.</string>
+    <string name="screen_recording_minimum_os_error" tools:override="true">Oups! La capture vidéo nécessite Android 6.0 (Marshmallow) ou une version ultérieure.</string>
+    <string name="screen_recording_permission_denied_overlay" tools:override="true">Oups! Nous avons besoin de votre autorisation pour afficher des éléments par dessus avant de pouvoir enregistrer votre écran.</string>
+    <string name="screen_recording_permission_denied_recording" tools:override="true">Oups! Nous avons besoin de votre permission pour enregistrer votre écran.</string>
     <string name="buglife_email">Adresse courriel</string>
     <string name="buglife_reproducibility">Reproductibilité</string>
     <string-array name="buglife_reproducibility_levels">
