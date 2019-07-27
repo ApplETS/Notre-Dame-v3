@@ -26,9 +26,9 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
             R.string.key_dark_theme_pref,
             R.string.key_shake_bug_reporter_invocation_method_pref
         ).forEach { keyId ->
-            val pref = findPreference(getString(keyId))
+            val pref = findPreference<Preference>(getString(keyId))
 
-            pref.onPreferenceChangeListener = this
+            pref?.onPreferenceChangeListener = this
         }
     }
 
