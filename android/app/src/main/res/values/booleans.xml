@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="default_schedule_show_today_btn_pref">true</bool>
+</resources>
