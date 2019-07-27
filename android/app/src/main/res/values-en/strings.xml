@@ -45,6 +45,13 @@
     <string name="text_applets_card">ÉTSMobile was made by the club ApplETS. Support us by liking our Facebook page, contributing to GitHub or sending us your comments via email.</string>
     <string name="error_no_email_app">No email application available</string>
 
+    <!-- Schedule -->
+    <string name="title_schedule_settings">Schedule Settings</string>
+    <string name="label_schedule_show_today_btn_pref">Show Today button</string>
+    <string name="label_schedule_no_visible_days_pref">Number of visible days</string>
+    <string name="label_schedule_x_scrolling_speed_pref">Horizontal scrolling speed</string>
+    <string name="label_schedule_scroll_duration_pref">Scroll duration in milliseconds</string>
+
     <!-- Grades -->
     <string name="title_grades">Grades</string>
     <string name="msg_no_grades">No grade available</string>
@@ -129,6 +136,9 @@
     <string name="error_serialize_report" tools:override="true">Failed to serialize bug report!</string>
     <string name="error_process_report" tools:override="true">There was an error processing bug report!</string>
     <string name="error_save_screenshot" tools:override="true">There was an error saving screenshot!</string>
+    <string name="screen_recording_minimum_os_error" tools:override="true">Oops! Screen recording requires Android 6.0 (Marshmallow) or above.</string>
+    <string name="screen_recording_permission_denied_overlay" tools:override="true">Oops! We need permission to draw screen overlays before we can record your screen.</string>
+    <string name="screen_recording_permission_denied_recording" tools:override="true">Oops! We need permission if you\'d like to record your screen.</string>
     <string name="buglife_email">Email Address</string>
     <string name="buglife_reproducibility">Reproducibility</string>
     <string-array name="buglife_reproducibility_levels">
