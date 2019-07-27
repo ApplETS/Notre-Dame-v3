@@ -3,6 +3,9 @@ package ca.etsmtl.applets.etsmobile.presentation.schedule
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,20 +14,23 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import ca.etsmtl.applets.etsmobile.util.ProgressTimeLatch
-import com.alamkanak.weekview.*
+import com.alamkanak.weekview.MonthChangeListener
+import com.alamkanak.weekview.ScrollListener
+import com.alamkanak.weekview.WeekView
+import com.alamkanak.weekview.WeekViewDisplayable
+import com.alamkanak.weekview.WeekViewEvent
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.empty_view_schedule.btnRetry
 import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.btnToday
 import kotlinx.android.synthetic.main.fragment_schedule.progressBarSchedule
 import kotlinx.android.synthetic.main.fragment_schedule.weekView
-import kotlinx.android.synthetic.main.fragment_schedule.btnToday
 import model.Seance
-import utils.date.isToday
 import utils.date.toCalendar
-import utils.date.toETSMobileDate
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -43,6 +49,12 @@ class ScheduleFragment : DaggerFragment() {
         progressBarSchedule?.isVisible = it
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,10 +67,24 @@ class ScheduleFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupWeekView()
         btnRetry.setOnClickListener { scheduleViewModel.refresh() }
         btnToday.setOnClickListener { weekView.goToToday() }
+        setupWeekView()
         subscribeUI()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_schedule, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.item_settings -> {
+            findNavController().navigate(ScheduleFragmentDirections.actionFragmentScheduleToFragmentScheduleSettings())
+            true
+        }
+        else -> super.onContextItemSelected(item)
     }
 
     private fun setupWeekView() {
@@ -79,15 +105,7 @@ class ScheduleFragment : DaggerFragment() {
                 newFirstVisibleDay: Calendar,
                 oldFirstVisibleDay: Calendar?
             ) {
-                val newFirstVisibleDayIsToday = newFirstVisibleDay
-                    .toETSMobileDate(newFirstVisibleDay.timeInMillis)
-                    .isToday()
-
-                if (newFirstVisibleDayIsToday) {
-                    btnToday.hide()
-                } else {
-                    btnToday.show()
-                }
+                scheduleViewModel.onDayChanged(newFirstVisibleDay)
             }
         }
     }
@@ -132,6 +150,22 @@ class ScheduleFragment : DaggerFragment() {
                 emptyViewSchedule.isVisible = it
                 weekView.isVisible = !it
             }
+        })
+
+        scheduleViewModel.showTodayButton.observe(this, Observer { show ->
+            if (show) btnToday.show() else btnToday.hide()
+        })
+
+        scheduleViewModel.numberOfVisibleDays.observe(this, Observer {
+            weekView.numberOfVisibleDays = it
+        })
+
+        scheduleViewModel.xScrollingSpeed.observe(this, Observer { speed ->
+            weekView.xScrollingSpeed = speed
+        })
+
+        scheduleViewModel.scrollDuration.observe(this, Observer { duration ->
+            weekView.scrollDuration = duration
         })
 
         this.lifecycle.addObserver(scheduleViewModel)
