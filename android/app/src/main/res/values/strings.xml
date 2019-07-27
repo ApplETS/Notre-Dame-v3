@@ -44,6 +44,13 @@
     <string name="text_applets_card">ÉTSMobile a été conçue par le club ApplETS. Supportez-nous en aimant notre page Facebook, en contribuant sur GitHub ou en nous faisant part de vos commentaires par courriel.</string>
     <string name="error_no_email_app">Aucune application de courriel disponible</string>
 
+    <!-- Schedule -->
+    <string name="title_schedule_settings">Paramètres de l\'horaire</string>
+    <string name="label_schedule_show_today_btn_pref">Afficher le bouton Aujourd\'hui</string>
+    <string name="label_schedule_no_visible_days_pref">Nombre de journées visibles</string>
+    <string name="label_schedule_x_scrolling_speed_pref">Vitesse de défilement horizontale</string>
+    <string name="label_schedule_scroll_duration_pref">Durée de défilement en millisecondes</string>
+
     <!-- Grades -->
     <string name="title_grades">Notes</string>
     <string name="msg_no_grades">Aucune note disponible</string>
@@ -128,6 +135,9 @@
     <string name="error_serialize_report" tools:override="true">Échec de la sérialisation du rapport de bogue.</string>
     <string name="error_process_report" tools:override="true">Une erreur est survenue lors du traitement du rapport de bogue!</string>
     <string name="error_save_screenshot" tools:override="true">Une erreur est survenue lors de la sauvegarde du capture d\'écran.</string>
+    <string name="screen_recording_minimum_os_error" tools:override="true">Oups! La capture vidéo nécessite Android 6.0 (Marshmallow) ou une version ultérieure.</string>
+    <string name="screen_recording_permission_denied_overlay" tools:override="true">Oups! Nous avons besoin de votre autorisation pour afficher des éléments par dessus avant de pouvoir enregistrer votre écran.</string>
+    <string name="screen_recording_permission_denied_recording" tools:override="true">Oups! Nous avons besoin de votre permission pour enregistrer votre écran.</string>
     <string name="buglife_email">Adresse courriel</string>
     <string name="buglife_reproducibility">Reproductibilité</string>
     <string-array name="buglife_reproducibility_levels">
