@@ -71,7 +71,8 @@ class TodayScheduleCardFragment : DaggerFragment() {
         }
 
         todayScheduleCardViewModel.errorMessage.observe(this, EventObserver {
-            it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+            it?.let {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
 
         todayScheduleCardViewModel.loading.observe(this, Observer { visible ->
