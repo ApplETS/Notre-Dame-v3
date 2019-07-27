@@ -77,8 +77,10 @@ class GradesDetailsFragment : DaggerFragment() {
             swipeRefreshLayoutGradesDetails.isRefreshing = it == true
         })
 
-        gradesDetailsViewModel.errorMessage.observe(this, EventObserver {
-            it?.let { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+       gradesDetailsViewModel.errorMessage.observe(this, EventObserver {
+            it?.let {
+                if (!it.equals(context?.getString(R.string.error_no_internet_connection)))
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
         })
 
         gradesDetailsViewModel.detailsListItems.observe(this, Observer {
