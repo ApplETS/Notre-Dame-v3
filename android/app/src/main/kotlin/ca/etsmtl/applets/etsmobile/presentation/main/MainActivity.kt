@@ -38,7 +38,6 @@ import android.content.IntentFilter
  */
 
 class MainActivity : BaseActivity() {
-    
     companion
     object {
         var wasNotConnected = false
@@ -74,8 +73,8 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(broadCastReciever)
-       var intentFilter : IntentFilter= IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(broadCastReciever,intentFilter)
+        var intentFilter: IntentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(broadCastReciever, intentFilter)
     }
 
     private fun setupBottomNavigation() {
