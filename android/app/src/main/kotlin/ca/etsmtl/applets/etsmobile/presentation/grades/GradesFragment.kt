@@ -115,7 +115,6 @@ class GradesFragment : DaggerFragment() {
                     Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             }
         })
-
         this.lifecycle.addObserver(gradesViewModel)
     }
 
