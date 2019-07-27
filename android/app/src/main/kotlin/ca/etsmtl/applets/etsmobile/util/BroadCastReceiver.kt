@@ -15,7 +15,7 @@ class BroadCastReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (ConnectivityManager.CONNECTIVITY_ACTION == intent.action) {
             var isNotConnect = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false)
-            if (isNotConnect) {
+            if (isNotConnect && !wasNotConnected ) {
                 wasNotConnected = true
                 Toast.makeText(context, context.getString(R.string.error_no_internet_connection), Toast.LENGTH_SHORT).show()
             } else if (!isNotConnect && wasNotConnected) {
