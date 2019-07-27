@@ -30,9 +30,7 @@ import kotlinx.android.synthetic.main.fragment_schedule.btnToday
 import kotlinx.android.synthetic.main.fragment_schedule.progressBarSchedule
 import kotlinx.android.synthetic.main.fragment_schedule.weekView
 import model.Seance
-import utils.date.isToday
 import utils.date.toCalendar
-import utils.date.toETSMobileDate
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -69,9 +67,9 @@ class ScheduleFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupWeekView()
         btnRetry.setOnClickListener { scheduleViewModel.refresh() }
         btnToday.setOnClickListener { weekView.goToToday() }
+        setupWeekView()
         subscribeUI()
     }
 
@@ -107,15 +105,7 @@ class ScheduleFragment : DaggerFragment() {
                 newFirstVisibleDay: Calendar,
                 oldFirstVisibleDay: Calendar?
             ) {
-                val newFirstVisibleDayIsToday = newFirstVisibleDay
-                    .toETSMobileDate(newFirstVisibleDay.timeInMillis)
-                    .isToday()
-
-                if (newFirstVisibleDayIsToday) {
-                    btnToday.hide()
-                } else {
-                    btnToday.show()
-                }
+                scheduleViewModel.onDayChanged(newFirstVisibleDay)
             }
         }
     }
@@ -157,6 +147,22 @@ class ScheduleFragment : DaggerFragment() {
                 emptyViewSchedule.isVisible = it
                 weekView.isVisible = !it
             }
+        })
+
+        scheduleViewModel.showTodayButton.observe(this, Observer { show ->
+            if (show) btnToday.show() else btnToday.hide()
+        })
+
+        scheduleViewModel.numberOfVisibleDays.observe(this, Observer {
+            weekView.numberOfVisibleDays = it
+        })
+
+        scheduleViewModel.xScrollingSpeed.observe(this, Observer { speed ->
+            weekView.xScrollingSpeed = speed
+        })
+
+        scheduleViewModel.scrollDuration.observe(this, Observer { duration ->
+            weekView.scrollDuration = duration
         })
 
         this.lifecycle.addObserver(scheduleViewModel)

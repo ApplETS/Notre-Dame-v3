@@ -20,7 +20,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.shopify.livedataktx.debounce
 import dagger.android.support.DaggerFragment
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
+import jp.wasabeef.recyclerview.animators.FadeInDownAnimator
 import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.empty_view_courses_grades.emptyViewCoursesGrades
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
@@ -90,7 +90,7 @@ class GradesFragment : DaggerFragment() {
             justifyContent = JustifyContent.FLEX_START
             flexWrap = FlexWrap.WRAP
         }
-        recyclerViewCoursesGrades.itemAnimator = FadeInUpAnimator()
+        recyclerViewCoursesGrades.itemAnimator = FadeInDownAnimator()
     }
 
     private fun subscribeUI() {

@@ -3,11 +3,13 @@ package ca.etsmtl.applets.etsmobile.presentation.schedule
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.domain.FetchCurrentAndFutureSeancesUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchSchedulePref
 import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
@@ -15,7 +17,10 @@ import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
 import com.shopify.livedataktx.map
 import model.Resource
 import model.Seance
+import utils.date.ETSMobileDate
+import utils.date.isToday
 import utils.date.toCalendar
+import utils.date.toETSMobileDate
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -24,6 +29,7 @@ import javax.inject.Inject
  */
 class ScheduleViewModel @Inject constructor(
     private val fetchCurrentAndFutureSeancesUseCase: FetchCurrentAndFutureSeancesUseCase,
+    private val fetchSchedulePref: FetchSchedulePref,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
     private var seanceRes = object : RefreshableLiveData<Resource<List<Seance>>>() {
@@ -50,6 +56,12 @@ class ScheduleViewModel @Inject constructor(
     val showEmptyView: LiveData<Boolean> = Transformations.map(seanceRes) {
         it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
     }
+    private val showTodayButtonPref = MutableLiveData<Boolean>()
+    val currentDay = MutableLiveData<ETSMobileDate>()
+    val showTodayButton = MutableLiveData<Boolean>()
+    val numberOfVisibleDays = MutableLiveData<Int>()
+    val xScrollingSpeed = MutableLiveData<Float>()
+    val scrollDuration = MutableLiveData<Int>()
 
     fun getSeancesForDates(startDate: Calendar, endDate: Calendar): List<Seance> {
         val seances = seanceRes.value?.data
@@ -64,7 +76,32 @@ class ScheduleViewModel @Inject constructor(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun init() = seanceRes.refreshIfValueIsNull()
+    fun init() {
+        seanceRes.refreshIfValueIsNull()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun loadPreferences() {
+        showTodayButtonPref.value = fetchSchedulePref.showTodayButton()
+        showTodayButton.value = showTodayButtonPref.value
+        numberOfVisibleDays.value = fetchSchedulePref.numberOfVisibleDays()
+        xScrollingSpeed.value = fetchSchedulePref.xScrollingSpeed()
+        scrollDuration.value = fetchSchedulePref.scrollDuration()
+    }
 
     fun refresh() = seanceRes.refresh()
+
+    /**
+     * Should be called when the day is changed
+     *
+     * @param newFirstVisibleDay
+     */
+    fun onDayChanged(newFirstVisibleDay: Calendar) {
+        if (showTodayButtonPref.value == true) {
+            currentDay.value = newFirstVisibleDay.toETSMobileDate(newFirstVisibleDay.timeInMillis)
+
+            // Hide today button if it's today
+            showTodayButton.value = currentDay.value?.isToday()?.not() ?: true
+        }
+    }
 }

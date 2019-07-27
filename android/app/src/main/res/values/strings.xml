@@ -49,7 +49,7 @@
     <string name="label_schedule_show_today_btn_pref">Afficher le bouton Aujourd\'hui</string>
     <string name="label_schedule_no_visible_days_pref">Nombre de journées visibles</string>
     <string name="label_schedule_x_scrolling_speed_pref">Vitesse de défilement horizontale</string>
-    <string name="label_schedule_scroll_duration_pref">Durée de défilement</string>
+    <string name="label_schedule_scroll_duration_pref">Durée de défilement en millisecondes</string>
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>

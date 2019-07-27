@@ -50,7 +50,7 @@
     <string name="label_schedule_show_today_btn_pref">Show Today button</string>
     <string name="label_schedule_no_visible_days_pref">Number of visible days</string>
     <string name="label_schedule_x_scrolling_speed_pref">Horizontal scrolling speed</string>
-    <string name="label_schedule_scroll_duration_pref">Scroll duration</string>
+    <string name="label_schedule_scroll_duration_pref">Scroll duration in milliseconds</string>
 
     <!-- Grades -->
     <string name="title_grades">Grades</string>
