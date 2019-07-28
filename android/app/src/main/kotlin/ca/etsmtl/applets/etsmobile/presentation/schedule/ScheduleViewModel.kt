@@ -50,14 +50,14 @@ class ScheduleViewModel @Inject constructor(
     }
 
     val loading: LiveData<Boolean> = seanceRes.map {
-        it == null || it.status == Resource.Status.LOADING
+        it?.status == Resource.Status.LOADING
     }
 
     val showEmptyView: LiveData<Boolean> = Transformations.map(seanceRes) {
         it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
     }
     private val showTodayButtonPref = MutableLiveData<Boolean>()
-    val currentDay = MutableLiveData<ETSMobileDate>()
+    private val currentDay = MutableLiveData<ETSMobileDate>()
     val showTodayButton = MutableLiveData<Boolean>()
     val numberOfVisibleDays = MutableLiveData<Int>()
     val xScrollingSpeed = MutableLiveData<Float>()
@@ -66,13 +66,9 @@ class ScheduleViewModel @Inject constructor(
     fun getSeancesForDates(startDate: Calendar, endDate: Calendar): List<Seance> {
         val seances = seanceRes.value?.data
 
-        if (seances != null) {
-            return seances.filter { seance ->
-                seance.dateDebut.toCalendar() in startDate..endDate
-            }
-        } else {
-            return emptyList()
-        }
+        return seances?.filter { seance ->
+            seance.dateDebut.toCalendar() in startDate..endDate
+        }.orEmpty()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
