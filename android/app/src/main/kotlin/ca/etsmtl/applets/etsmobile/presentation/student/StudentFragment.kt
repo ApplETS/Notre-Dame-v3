@@ -5,14 +5,12 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.fadeTo
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.tabLayout
 import kotlinx.android.synthetic.main.fragment_student.viewPagerStudent
 
@@ -57,7 +55,6 @@ class StudentFragment : DaggerFragment() {
 
     override fun onDestroyView() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(true, false)
             it.tabLayout.setupWithViewPager(null)
             it.tabLayout.isVisible = false
         }
