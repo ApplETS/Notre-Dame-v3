@@ -35,8 +35,9 @@ git clone https://github.com/ApplETS/Notre-Dame.git
  * Open the entire project in Android Studio
 
 ## 🍎 [iOS Application](https://github.com/ApplETS/Notre-Dame/tree/master/ios)
-* Language: [Swift](https://github.com/ApplETS/Notre-Dame/search?l=swift)
+* Language: [Swift](https://github.com/ApplETS/Notre-Dame/search?l=swift) version: 5
 * Minimum SDK Version: 12.x
+
  #### Getting started
  * Download and install the latest version of [Xcode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12)
  * Clone the project
@@ -52,6 +53,13 @@ cd Notre-Dame/ios/ETSMobile
 pod install
  ```
 * A .xcworkspace file will be generated. You must use this file to open the project.
+
+ ### Build the project
+ Run the following command after each modification into the shared module:
+ ```bash
+ gradlew packForXCode
+ ```
+Then you can build the application in XCode
 
 ## 🤖 / 🍎 Kotlin Multiplatform Project
 The projet is migrating towards [Kotlin Multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
