@@ -2,7 +2,7 @@ package presentation.login
 
 import di.Inject
 import domain.CheckUserCredentialsAreValidUseCase
-import domain.LoginWithSavedCredentials
+import domain.LoginWithSavedCredentialsUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ import utils.localizable.LocalizedString
 
 class LoginViewModel @Inject constructor(
     private val checkUserCredentialsAreValidUseCase: CheckUserCredentialsAreValidUseCase,
-    private val loginWithSavedCredentials: LoginWithSavedCredentials
+    private val loginWithSavedCredentialsUseCase: LoginWithSavedCredentialsUseCase
 ) : ViewModel() {
     private var universalCode: UniversalCode = UniversalCode("")
     private var password: String = ""
@@ -33,7 +33,7 @@ class LoginViewModel @Inject constructor(
 
     fun submitSavedCredentials() {
         vmScope.launch {
-            loginWithSavedCredentials().collect { res ->
+            loginWithSavedCredentialsUseCase().collect { res ->
                 handleLoginResult(res)
             }
         }

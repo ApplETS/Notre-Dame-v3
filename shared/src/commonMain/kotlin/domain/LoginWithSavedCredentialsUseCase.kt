@@ -12,7 +12,7 @@ import kotlin.coroutines.coroutineContext
  * Created by Sonphil on 17-07-19.
  */
 
-class LoginWithSavedCredentials @Inject constructor(
+class LoginWithSavedCredentialsUseCase @Inject constructor(
     private val fetchSavedUserCredentialsUseCase: FetchSavedUserCredentialsUseCase,
     private val checkUserCredentialsAreValidUseCase: CheckUserCredentialsAreValidUseCase
 ) {

@@ -1,7 +1,7 @@
 package presentation
 
 import di.Inject
-import domain.LoginWithSavedCredentials
+import domain.LoginWithSavedCredentialsUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -12,7 +12,7 @@ import model.Resource
  */
 
 class SplashViewModel @Inject constructor(
-    private val loginWithSavedCredentials: LoginWithSavedCredentials
+    private val loginWithSavedCredentialsUseCase: LoginWithSavedCredentialsUseCase
 ) : ViewModel() {
     val navigateToDashboard = Channel<Unit>()
     val navigateToLogin = Channel<Unit>()
@@ -21,7 +21,7 @@ class SplashViewModel @Inject constructor(
 
     fun submitSavedCredentials() {
         vmScope.launch {
-            loginWithSavedCredentials().collect { res ->
+            loginWithSavedCredentialsUseCase().collect { res ->
                 handleLoginResult(res)
             }
         }
