@@ -68,10 +68,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="TextAppearance.Login.Error" parent="TextAppearance.Design.Error">
-        <item name="android:textColor">@color/material_yellow_500</item>
-    </style>
-
     <style name="AppTheme.Dialog.Alert" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>

@@ -55,3 +55,14 @@
 -keepclassmembernames class kotlinx.** {
     volatile <fields>;
 }
+
+# Kotlin Serialization
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class ca.etsmtl.applets.**$$serializer { *; }
+-keepclassmembers class ca.etsmtl.applets.** {
+    *** Companion;
+}
+-keepclasseswithmembers class ca.etsmtl.applets.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
