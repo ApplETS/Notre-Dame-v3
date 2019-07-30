@@ -72,8 +72,9 @@ class TodayScheduleCardFragment : DaggerFragment() {
 
         todayScheduleCardViewModel.errorMessage.observe(this, EventObserver {
             it?.let {
-                if(!it.equals(context?.getString(R.string.error_no_internet_connection)))
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+                if (!it.equals(context?.getString(R.string.error_no_internet_connection)))
+                    Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            }
         })
 
         todayScheduleCardViewModel.loading.observe(this, Observer { visible ->
