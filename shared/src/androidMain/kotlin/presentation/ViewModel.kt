@@ -9,5 +9,5 @@ import kotlinx.coroutines.CoroutineScope
  */
 
 actual open class ViewModel : ViewModel() {
-    actual val scope: CoroutineScope = viewModelScope
+    actual val vmScope: CoroutineScope = viewModelScope
 }
