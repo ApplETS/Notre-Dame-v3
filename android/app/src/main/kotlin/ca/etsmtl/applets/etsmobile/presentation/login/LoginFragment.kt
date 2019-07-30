@@ -36,7 +36,6 @@ import kotlinx.android.synthetic.main.include_login_form.layoutPassword
 import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
 import kotlinx.android.synthetic.main.include_login_form.universalCode
-import presentation.EventObserver
 import presentation.login.LoginViewModel
 import javax.inject.Inject
 
@@ -145,7 +144,7 @@ class LoginFragment : DaggerFragment() {
                 showProgress(it == true)
             })
 
-            loginErrorMessage.toLiveData().observe(this@LoginFragment, EventObserver {
+            loginErrorMessage.toLiveData().observe(this@LoginFragment, Observer {
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
@@ -157,7 +156,7 @@ class LoginFragment : DaggerFragment() {
                 setFieldError(layoutPassword, it?.value)
             })
 
-            navigateToDashboard.toLiveData().observe(this@LoginFragment, EventObserver {
+            navigateToDashboard.toLiveData().observe(this@LoginFragment, Observer {
                 findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
             })
 

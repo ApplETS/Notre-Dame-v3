@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import model.Resource
 import model.SignetsUserCredentials
 import model.UniversalCode
-import presentation.Event
 import presentation.ViewModel
 import utils.LastValueReceiveChannel
 import utils.localizable.LocalizedString
@@ -24,12 +23,12 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
     private var universalCode: UniversalCode = UniversalCode("")
     private var password: String = ""
-    val navigateToDashboard = Channel<Event<Unit>>()
+    val navigateToDashboard = Channel<Unit>()
     val displayUniversalCodeDialog = LastValueReceiveChannel<Boolean>()
     val showLoading = Channel<Boolean>()
     val universalCodeErrorMessage = LastValueReceiveChannel<LocalizedString?>()
     val passwordErrorMessage = LastValueReceiveChannel<LocalizedString?>()
-    val loginErrorMessage = Channel<Event<String>>()
+    val loginErrorMessage = Channel<String>()
     val hideKeyboard = Channel<Unit>()
 
     fun submitSavedCredentials() {
@@ -49,7 +48,7 @@ class LoginViewModel @Inject constructor(
             val credentials = SignetsUserCredentials(universalCode, password)
             checkUserCredentialsAreValidUseCase(credentials).collect { res ->
                 if (res.status != Resource.Status.LOADING && res.data == false) {
-                    loginErrorMessage.send(Event(res.message ?: LocalizedString.GENERIC_ERROR.value))
+                    loginErrorMessage.send(res.message ?: LocalizedString.GENERIC_ERROR.value)
                 }
                 handleLoginResult(res)
             }
@@ -60,7 +59,7 @@ class LoginViewModel @Inject constructor(
         showLoading.send(res.status == Resource.Status.LOADING)
 
         if (res.status != Resource.Status.LOADING && res.data == true) {
-            navigateToDashboard.send(Event(Unit))
+            navigateToDashboard.send(Unit)
         }
     }
 
