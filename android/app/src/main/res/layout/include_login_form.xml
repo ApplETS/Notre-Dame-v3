@@ -12,8 +12,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:endIconDrawable="@drawable/ic_info_outline_white_24dp"
+        app:endIconMode="custom"
+        app:endIconTint="@android:color/white"
         app:errorEnabled="true"
-        app:errorTextAppearance="@style/TextAppearance.Login.Error"
+        app:errorTextColor="@color/material_yellow_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -31,28 +34,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageButton
-        android:id="@+id/btnUniversalCodeInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:paddingStart="14dp"
-        android:paddingTop="14dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="14dp"
-        android:src="@drawable/ic_info_outline_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/layoutUniversalCode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:errorEnabled="true"
-        app:errorTextAppearance="@style/TextAppearance.Login.Error"
+        app:errorTextColor="@color/material_yellow_500"
         app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

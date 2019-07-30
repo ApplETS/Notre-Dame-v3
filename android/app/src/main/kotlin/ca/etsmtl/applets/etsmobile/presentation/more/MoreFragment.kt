@@ -115,7 +115,7 @@ class MoreFragment : DaggerFragment() {
         })
 
         moreViewModel.displayMessage.observe(this, EventObserver {
-            if(!it.equals(context?.getString(R.string.error_no_internet_connection)))
+            if (!it.equals(context?.getString(R.string.error_no_internet_connection)))
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
 

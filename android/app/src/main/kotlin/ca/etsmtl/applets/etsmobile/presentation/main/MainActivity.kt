@@ -30,8 +30,6 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import javax.inject.Inject
 
-
-
 /**
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
  * select items on the bottom navigation view to switch between fragments.
@@ -42,13 +40,15 @@ import javax.inject.Inject
 class MainActivity : BaseActivity() {
 
     companion
-    object { var wasNotConnected  =false}
+    object {
+        var wasNotConnected = false
+    }
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private var broadCastReciever : BroadCastReceiver= BroadCastReceiver();
+    private var broadCastReciever: BroadCastReceiver = BroadCastReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +58,8 @@ class MainActivity : BaseActivity() {
         setupActionBar()
         setupBottomNavigation()
         subscribeUI()
-       var intentFilter : IntentFilter= IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(broadCastReciever,intentFilter)
+        var intentFilter: IntentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(broadCastReciever, intentFilter)
     }
 
     private fun setupBottomNavigation() {
@@ -152,30 +152,25 @@ class MainActivity : BaseActivity() {
         })
     }
 
-    private fun addingNetworkStatus (message:String)
-    {
-        var textView=  TextView(this)
+    private fun addingNetworkStatus(message: String) {
+        var textView = TextView(this)
         textView.setTextColor(-0x1)
-        textView.setText(message);
+        textView.setText(message)
         networkMessageContainer.addView(textView)
     }
 
-    private fun removeNetworkStatus()
-    {
+    private fun removeNetworkStatus() {
         networkMessageContainer.removeAllViews()
     }
-    private inner class BroadCastReceiver: BroadcastReceiver() {
-
-
-
+    private inner class BroadCastReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (ConnectivityManager.CONNECTIVITY_ACTION == intent.action) {
                 var isNotConnect = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false)
-                if (isNotConnect && !wasNotConnected ) {
+                if (isNotConnect && !wasNotConnected) {
                     wasNotConnected = true
                     addingNetworkStatus(context.getString(R.string.error_no_internet_connection))
                 } else if (!isNotConnect && wasNotConnected) {
-                    wasNotConnected=false
+                    wasNotConnected = false
                     removeNetworkStatus()
                 }
             }
