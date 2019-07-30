@@ -1,16 +1,21 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ca.etsmtl.applets.etsmobile.BuildConfig
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
+import ca.etsmtl.applets.repository.data.db.AppDatabase
 import com.buglife.sdk.Buglife
+import domain.ClearUserDataUseCase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import utils.EtsMobileDispatchers
 import javax.inject.Inject
 
 /**
@@ -19,6 +24,12 @@ import javax.inject.Inject
 
 class MoreViewModel @Inject constructor(
     private val clearUserDataUseCase: ClearUserDataUseCase,
+    /**
+     * Used on logout when the user's data needs to be cleared. Will be removed when the db is
+     * fully implemented in the shared module
+     **/
+    private val androidAppDatabase: AppDatabase,
+    private val prefs: SharedPreferences,
     private val app: App
 ) : AndroidViewModel(app) {
 
@@ -46,10 +57,17 @@ class MoreViewModel @Inject constructor(
      *
      * This function should be called when the user want to log out.
      */
+    @SuppressLint("ApplySharedPref")
     private fun logout() {
         _loading.value = true
         viewModelScope.launch {
             clearUserDataUseCase()
+
+            withContext(EtsMobileDispatchers.IO) {
+                androidAppDatabase.clearAllTables()
+
+                prefs.edit().clear().commit()
+            }
 
             _loading.postValue(false)
 
