@@ -1,4 +1,4 @@
-package presentation
+package presentation.login
 
 import di.Inject
 import domain.CheckUserCredentialsAreValidUseCase
@@ -9,6 +9,9 @@ import kotlinx.coroutines.launch
 import model.Resource
 import model.SignetsUserCredentials
 import model.UniversalCode
+import presentation.Event
+import presentation.ViewModel
+import utils.localizable.LocalizedString
 
 /**
  * Created by Sonphil on 28-02-18.
@@ -45,7 +48,7 @@ class LoginViewModel @Inject constructor(
             val credentials = SignetsUserCredentials(universalCode, password)
             checkUserCredentialsAreValidUseCase(credentials).collect { res ->
                 if (res.status != Resource.Status.LOADING && res.data == false) {
-                    loginErrorMessage.send(Event(res.message ?: "Erreur"))
+                    loginErrorMessage.send(Event(res.message ?: LocalizedString.GENERIC_ERROR.value))
                 }
                 handleLoginResult(res)
             }
@@ -77,9 +80,8 @@ class LoginViewModel @Inject constructor(
             this@LoginViewModel.universalCode = universalCode
 
             when (universalCode.error) {
-                UniversalCode.Error.EMPTY -> universalCodeErrorMessage.send(Event("error_field_required"))
-                UniversalCode.Error.INVALID -> universalCodeErrorMessage.send(Event("string.error_invalid_universal_code"))
-                null -> universalCodeErrorMessage.send(Event(""))
+                UniversalCode.Error.EMPTY -> universalCodeErrorMessage.send(Event(LocalizedString.FIELD_REQUIRED.value))
+                UniversalCode.Error.INVALID -> universalCodeErrorMessage.send(Event(LocalizedString.INVALID_UNIVERSAL_CODE.value))
             }
         }
     }
@@ -89,8 +91,8 @@ class LoginViewModel @Inject constructor(
             this@LoginViewModel.password = password
 
             when {
-                password.isEmpty() -> passwordErrorMessage.send(Event("error_field_required"))
-                else -> passwordErrorMessage.send(Event(""))
+                password.isEmpty() -> passwordErrorMessage.send(Event(LocalizedString.FIELD_REQUIRED.value))
+                else -> passwordErrorMessage.send(Event(LocalizedString.INVALID_UNIVERSAL_CODE.value))
             }
         }
     }

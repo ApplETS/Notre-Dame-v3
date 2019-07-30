@@ -28,6 +28,7 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import presentation.DashboardViewModel
 import presentation.SplashViewModel
+import presentation.login.LoginViewModel
 
 /**
  * Created by Sonphil on 15-03-18.
@@ -52,8 +53,8 @@ interface MainActivityModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(presentation.LoginViewModel::class)
-    fun bindLoginViewModel(loginViewModel: presentation.LoginViewModel): ViewModel
+    @ViewModelKey(LoginViewModel::class)
+    fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
 
     @Binds
     @IntoMap

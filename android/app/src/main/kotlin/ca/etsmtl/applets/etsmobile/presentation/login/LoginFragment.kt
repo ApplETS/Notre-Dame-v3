@@ -37,7 +37,7 @@ import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
 import kotlinx.android.synthetic.main.include_login_form.universalCode
 import presentation.EventObserver
-import presentation.LoginViewModel
+import presentation.login.LoginViewModel
 import javax.inject.Inject
 
 /**
