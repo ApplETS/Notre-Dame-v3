@@ -11,6 +11,7 @@ import model.SignetsUserCredentials
 import model.UniversalCode
 import presentation.Event
 import presentation.ViewModel
+import utils.LastValueReceiveChannel
 import utils.localizable.LocalizedString
 
 /**
@@ -24,7 +25,7 @@ class LoginViewModel @Inject constructor(
     private var universalCode: UniversalCode = UniversalCode("")
     private var password: String = ""
     val navigateToDashboard = Channel<Event<Unit>>()
-    val displayUniversalCodeDialog = Channel<Boolean>()
+    val displayUniversalCodeDialog = LastValueReceiveChannel<Boolean>(Channel())
     val showLoading = Channel<Boolean>()
     val universalCodeErrorMessage = Channel<Event<String>>()
     val passwordErrorMessage = Channel<Event<String>>()
@@ -70,7 +71,7 @@ class LoginViewModel @Inject constructor(
      * be hidden
      */
     fun displayUniversalCodeInfo(shouldShow: Boolean) {
-        vmScope.launch { displayUniversalCodeDialog.send(shouldShow) }
+        vmScope.launch { displayUniversalCodeDialog.submit(shouldShow) }
     }
 
     fun setUniversalCode(universalCode: String) {
