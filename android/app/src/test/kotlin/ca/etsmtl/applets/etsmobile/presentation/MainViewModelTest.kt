@@ -122,6 +122,19 @@ class MainViewModelTest {
     }
 
     @Test
+    fun appBarLayout_OnNavigationToLogin_BecomesNotExpanded() {
+        // given
+        val observer: Observer<Boolean> = mock()
+        mainViewModel.appBarLayoutExpanded.observeForever(observer)
+
+        // when
+        mainViewModel.onNavigationDestinationChanged(Destination.LOGIN)
+
+        // then
+        verify(observer).onChanged(false)
+    }
+
+    @Test
     fun onBack_OnLoginScreen_DoesNothing() {
         // given
         mainViewModel.onNavigationDestinationChanged(Destination.LOGIN)
