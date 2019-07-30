@@ -25,10 +25,10 @@ class LoginViewModel @Inject constructor(
     private var universalCode: UniversalCode = UniversalCode("")
     private var password: String = ""
     val navigateToDashboard = Channel<Event<Unit>>()
-    val displayUniversalCodeDialog = LastValueReceiveChannel<Boolean>(Channel())
+    val displayUniversalCodeDialog = LastValueReceiveChannel<Boolean>()
     val showLoading = Channel<Boolean>()
-    val universalCodeErrorMessage = Channel<Event<String>>()
-    val passwordErrorMessage = Channel<Event<String>>()
+    val universalCodeErrorMessage = LastValueReceiveChannel<LocalizedString?>()
+    val passwordErrorMessage = LastValueReceiveChannel<LocalizedString?>()
     val loginErrorMessage = Channel<Event<String>>()
     val hideKeyboard = Channel<Unit>()
 
@@ -80,10 +80,13 @@ class LoginViewModel @Inject constructor(
 
             this@LoginViewModel.universalCode = universalCode
 
-            when (universalCode.error) {
-                UniversalCode.Error.EMPTY -> universalCodeErrorMessage.send(Event(LocalizedString.FIELD_REQUIRED.value))
-                UniversalCode.Error.INVALID -> universalCodeErrorMessage.send(Event(LocalizedString.INVALID_UNIVERSAL_CODE.value))
-            }
+            universalCodeErrorMessage.submit(
+                when (universalCode.error) {
+                    UniversalCode.Error.EMPTY -> LocalizedString.FIELD_REQUIRED
+                    UniversalCode.Error.INVALID -> LocalizedString.INVALID_UNIVERSAL_CODE
+                    else -> null
+                }
+            )
         }
     }
 
@@ -92,8 +95,8 @@ class LoginViewModel @Inject constructor(
             this@LoginViewModel.password = password
 
             when {
-                password.isEmpty() -> passwordErrorMessage.send(Event(LocalizedString.FIELD_REQUIRED.value))
-                else -> passwordErrorMessage.send(Event(LocalizedString.INVALID_UNIVERSAL_CODE.value))
+                password.isEmpty() -> passwordErrorMessage.submit(LocalizedString.FIELD_REQUIRED)
+                else -> passwordErrorMessage.submit(null)
             }
         }
     }

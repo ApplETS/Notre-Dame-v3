@@ -149,12 +149,12 @@ class LoginFragment : DaggerFragment() {
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
-            universalCodeErrorMessage.toLiveData().observe(this@LoginFragment, EventObserver {
-                setFieldError(layoutUniversalCode, it)
+            universalCodeErrorMessage.toLiveData().observe(this@LoginFragment, Observer {
+                setFieldError(layoutUniversalCode, it?.value)
             })
 
-            passwordErrorMessage.toLiveData().observe(this@LoginFragment, EventObserver {
-                setFieldError(layoutPassword, it)
+            passwordErrorMessage.toLiveData().observe(this@LoginFragment, Observer {
+                setFieldError(layoutPassword, it?.value)
             })
 
             navigateToDashboard.toLiveData().observe(this@LoginFragment, EventObserver {
