@@ -14,10 +14,10 @@ import model.Resource
 class SplashViewModel @Inject constructor(
     private val loginWithSavedCredentials: LoginWithSavedCredentials
 ) : ViewModel() {
-    val navigateToDashboard = Channel<Event<Unit>>()
-    val navigateToLogin = Channel<Event<Unit>>()
+    val navigateToDashboard = Channel<Unit>()
+    val navigateToLogin = Channel<Unit>()
     val showLoading = Channel<Boolean>()
-    val errorMessage = Channel<Event<String>>()
+    val errorMessage = Channel<String>()
 
     fun submitSavedCredentials() {
         vmScope.launch {
@@ -32,9 +32,9 @@ class SplashViewModel @Inject constructor(
 
         if (res.status != Resource.Status.LOADING) {
             if (res.data == true) {
-                navigateToDashboard.send(Event(Unit))
+                navigateToDashboard.send(Unit)
             } else {
-                navigateToLogin.send(Event(Unit))
+                navigateToLogin.send(Unit)
             }
         }
     }

@@ -4,7 +4,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 
 /**
- * A channel that keep its last value
+ * A channel that keeps its last value
  *
  * Created by Sonphil on 29-07-19.
  */

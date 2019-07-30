@@ -15,7 +15,6 @@ import ca.etsmtl.applets.etsmobile.extension.toLiveData
 import ca.etsmtl.applets.etsmobile.extension.toast
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_splash.progressBarSplash
-import presentation.EventObserver
 import presentation.SplashViewModel
 import javax.inject.Inject
 
@@ -50,15 +49,15 @@ class SplashFragment : DaggerFragment() {
                 progressBarSplash.isVisible = it == true
             })
 
-            errorMessage.toLiveData().observe(this@SplashFragment, EventObserver {
+            errorMessage.toLiveData().observe(this@SplashFragment, Observer {
                 context?.toast(it, Toast.LENGTH_LONG)
             })
 
-            navigateToLogin.toLiveData().observe(this@SplashFragment, EventObserver {
+            navigateToLogin.toLiveData().observe(this@SplashFragment, Observer {
                 findNavController().navigate(SplashFragmentDirections.actionFragmentSplashToFragmentLogin())
             })
 
-            navigateToDashboard.toLiveData().observe(this@SplashFragment, EventObserver {
+            navigateToDashboard.toLiveData().observe(this@SplashFragment, Observer {
                 findNavController().navigate(SplashFragmentDirections.actionFragmentSplashToFragmentDashboard())
             })
         }

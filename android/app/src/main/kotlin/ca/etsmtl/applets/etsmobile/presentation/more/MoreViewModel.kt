@@ -24,7 +24,8 @@ import javax.inject.Inject
 
 class MoreViewModel @Inject constructor(
     private val clearUserDataUseCase: ClearUserDataUseCase,
-    /** Used on logout when the user's data needs to be cleared. Will be removed when the db is
+    /**
+     * Used on logout when the user's data needs to be cleared. Will be removed when the db is
      * fully implemented in the shared module
      **/
     private val androidAppDatabase: AppDatabase,

@@ -1,6 +1,8 @@
 package utils.localizable
 
 /**
+ * Provides the device's current language
+ *
  * Created by Sonphil on 29-07-19.
  */
 
