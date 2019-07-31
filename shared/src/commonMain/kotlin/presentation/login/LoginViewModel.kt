@@ -7,7 +7,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import model.Resource
-import model.SignetsUserCredentials
 import model.UniversalCode
 import presentation.ViewModel
 import utils.LastValueReceiveChannel
@@ -21,8 +20,10 @@ class LoginViewModel @Inject constructor(
     private val checkUserCredentialsAreValidUseCase: CheckUserCredentialsAreValidUseCase,
     private val loginWithSavedCredentialsUseCase: LoginWithSavedCredentialsUseCase
 ) : ViewModel() {
-    private var universalCode: UniversalCode = UniversalCode("")
+    var universalCode: UniversalCode = UniversalCode("")
+        private set
     private var password: String = ""
+    /** Emits when a navigation to the dashboard should be triggered **/
     val navigateToDashboard = Channel<Unit>()
     val displayUniversalCodeDialog = LastValueReceiveChannel<Boolean>()
     val showLoading = Channel<Boolean>()
@@ -45,8 +46,7 @@ class LoginViewModel @Inject constructor(
     fun submitCredentials() {
         vmScope.launch {
             hideKeyboard.send(Unit)
-            val credentials = SignetsUserCredentials(universalCode, password)
-            checkUserCredentialsAreValidUseCase(credentials).collect { res ->
+            checkUserCredentialsAreValidUseCase(universalCode, password).collect { res ->
                 if (res.status != Resource.Status.LOADING && res.data == false) {
                     loginErrorMessage.send(res.message ?: LocalizedString.GENERIC_ERROR.value)
                 }
