@@ -194,6 +194,5 @@
     </string-array>
     <string name="label_miscellaneous_pref_category">Divers</string>
     <string name="label_shake_bug_reporter_invocation_method_pref">Secouer pour rapporter un bogue</string>
-    <string name="uri_heuristique" translatable="false">http://lheuristique.ca/</string>
     <string name="title_heuristique">L\'heuristique</string>
 </resources>
