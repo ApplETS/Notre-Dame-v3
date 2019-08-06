@@ -97,6 +97,7 @@
     <string name="title_news">Nouvelles</string>
     <string name="title_moodle">Moodle</string>
     <string name="title_directory">Bottin</string>
+    <string name="title_heuristique">L\'heuristique</string>
 
     <!-- More -->
     <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
