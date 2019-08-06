@@ -98,6 +98,7 @@
     <string name="title_news">News</string>
     <string name="title_moodle">Moodle</string>
     <string name="title_directory">Directory</string>
+    <string name="title_heuristique">L\'heuristique</string>
 
     <!-- More -->
     <string name="more_item_label_about_applets">About ApplETS</string>
