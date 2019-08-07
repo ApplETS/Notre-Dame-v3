@@ -10,6 +10,7 @@ import ca.etsmtl.applets.etsmobile.BuildConfig
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
+import ca.etsmtl.applets.etsmobilenotifications.NotificationsLoginManager
 import ca.etsmtl.applets.repository.data.db.AppDatabase
 import com.buglife.sdk.Buglife
 import domain.ClearUserDataUseCase
@@ -65,6 +66,8 @@ class MoreViewModel @Inject constructor(
 
             withContext(EtsMobileDispatchers.IO) {
                 androidAppDatabase.clearAllTables()
+
+                NotificationsLoginManager.logout(app)
 
                 prefs.edit().clear().commit()
             }
