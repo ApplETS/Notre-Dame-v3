@@ -8,7 +8,7 @@ import model.UserCredentials
  */
 
 data class EtudiantRequestBody(
-    @Json(name = "universalCode") val codeAccesUniversel: String,
+    @Json(name = "codeAccesUniversel") val codeAccesUniversel: String,
     @Json(name = "motPasse") val motPasse: String
 ) {
     constructor(userCredentials: UserCredentials) : this(
