@@ -15,11 +15,11 @@ import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationDao
 import ca.etsmtl.applets.repository.data.db.dao.signets.SommaireElementsEvaluationDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEvaluations
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSommaireEvaluation
-import model.Resource
 import model.Cours
-import model.SignetsUserCredentials
+import model.Resource
 import model.SommaireElementsEvaluation
 import model.SommaireEtEvaluations
+import model.UserCredentials
 import javax.inject.Inject
 
 /**
@@ -45,7 +45,7 @@ class EvaluationRepository @Inject constructor(
      * should only be fetched from the DB.
      */
     fun getEvaluationsSummary(
-        userCredentials: SignetsUserCredentials,
+        userCredentials: UserCredentials,
         cours: Cours,
         shouldFetch: Boolean = true
     ): LiveData<Resource<SommaireElementsEvaluation>> = object : SignetsNetworkBoundResource<SommaireElementsEvaluation, ApiListeDesElementsEvaluation>(appExecutors) {
@@ -68,8 +68,8 @@ class EvaluationRepository @Inject constructor(
         override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>> {
             return api.listeDesElementsEvaluation(
                     ListeDesElementsEvaluationRequestBody(
-                            userCredentials.codeAccesUniversel.value,
-                            userCredentials.motPasse,
+                            userCredentials.universalCode.value,
+                            userCredentials.password,
                             cours.sigle,
                             cours.groupe,
                             cours.session
@@ -90,7 +90,7 @@ class EvaluationRepository @Inject constructor(
      * should only be fetched from the DB.
      */
     fun getSummaryAndEvaluations(
-        userCredentials: SignetsUserCredentials,
+        userCredentials: UserCredentials,
         cours: Cours,
         shouldFetch: Boolean = true
     ): LiveData<Resource<SommaireEtEvaluations>> = object : SignetsNetworkBoundResource<SommaireEtEvaluations, ApiListeDesElementsEvaluation>(appExecutors) {
@@ -130,8 +130,8 @@ class EvaluationRepository @Inject constructor(
         override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesElementsEvaluation>>> {
             return api.listeDesElementsEvaluation(
                     ListeDesElementsEvaluationRequestBody(
-                            userCredentials.codeAccesUniversel.value,
-                            userCredentials.motPasse,
+                            userCredentials.universalCode.value,
+                            userCredentials.password,
                             cours.sigle,
                             cours.groupe,
                             cours.session
