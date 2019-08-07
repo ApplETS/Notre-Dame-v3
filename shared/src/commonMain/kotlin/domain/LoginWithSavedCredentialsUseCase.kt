@@ -26,7 +26,10 @@ class LoginWithSavedCredentialsUseCase @Inject constructor(
                 if (credentials == null) {
                     emit(Resource.error("", false))
                 } else {
-                    emitAll(checkUserCredentialsAreValidUseCase(credentials))
+                    emitAll(checkUserCredentialsAreValidUseCase(
+                        credentials.universalCode,
+                        credentials.password
+                    ))
                 }
             }
         }

@@ -6,7 +6,7 @@ import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
 import model.Resource
 import model.Seance
 import model.Session
-import model.SignetsUserCredentials
+import model.UserCredentials
 import utils.date.ETSMobileDate
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ import javax.inject.Inject
 Created by mykaelll87 on 13/01/19
  */
 class FetchCurrentAndFutureSeancesUseCase @Inject constructor(
-    private val userCredentials: SignetsUserCredentials,
+    private val userCredentials: UserCredentials,
     private val sessionRepository: SessionRepository,
     private val fetchSessionSeancesUseCase: FetchSessionSeancesUseCase
 ) {

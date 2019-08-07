@@ -8,7 +8,7 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import model.Cours
-import model.SignetsUserCredentials
+import model.UserCredentials
 import javax.inject.Inject
 
 /**
@@ -16,7 +16,7 @@ import javax.inject.Inject
  */
 
 class FetchGradesCoursesUseCase @Inject constructor(
-    private var userCredentials: SignetsUserCredentials,
+    private var userCredentials: UserCredentials,
     private val coursRepository: CoursRepository,
     private val updateGradesForCoursesUseCase: UpdateGradesForCoursesUseCase,
     private val app: App

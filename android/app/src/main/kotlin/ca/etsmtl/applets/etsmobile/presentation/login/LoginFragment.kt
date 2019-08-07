@@ -21,6 +21,7 @@ import ca.etsmtl.applets.etsmobile.extension.open
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.extension.toLiveData
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobilenotifications.NotificationsLoginManager
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -36,6 +37,7 @@ import kotlinx.android.synthetic.main.include_login_form.layoutPassword
 import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
 import kotlinx.android.synthetic.main.include_login_form.universalCode
+import model.UserCredentials
 import presentation.login.LoginViewModel
 import javax.inject.Inject
 
@@ -157,6 +159,14 @@ class LoginFragment : DaggerFragment() {
             })
 
             navigateToDashboard.toLiveData().observe(this@LoginFragment, Observer {
+                UserCredentials.INSTANCE?.let {
+                    NotificationsLoginManager.login(
+                        requireContext(),
+                        it.universalCode.value,
+                        it.domain
+                    )
+                }
+
                 findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
             })
 
