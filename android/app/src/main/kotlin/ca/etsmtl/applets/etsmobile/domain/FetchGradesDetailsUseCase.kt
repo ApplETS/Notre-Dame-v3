@@ -10,7 +10,7 @@ import ca.etsmtl.applets.repository.data.repository.signets.EvaluationRepository
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToDouble
 import model.Cours
 import model.Resource
-import model.SignetsUserCredentials
+import model.UserCredentials
 import model.SommaireEtEvaluations
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ import javax.inject.Inject
  */
 
 class FetchGradesDetailsUseCase @Inject constructor(
-    private var userCredentials: SignetsUserCredentials,
+    private var userCredentials: UserCredentials,
     private val evaluationRepository: EvaluationRepository,
     private val fetchCourseEvaluationsCompletedUseCase: FetchCourseEvaluationsCompletedUseCase,
     private val app: App

@@ -13,8 +13,10 @@ import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.toLiveData
 import ca.etsmtl.applets.etsmobile.extension.toast
+import ca.etsmtl.applets.etsmobilenotifications.NotificationsLoginManager
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_splash.progressBarSplash
+import model.UserCredentials
 import presentation.SplashViewModel
 import javax.inject.Inject
 
@@ -59,6 +61,14 @@ class SplashFragment : DaggerFragment() {
             })
 
             navigateToDashboard.toLiveData().observe(this@SplashFragment, Observer {
+                UserCredentials.INSTANCE?.let {
+                    NotificationsLoginManager.login(
+                        requireContext(),
+                        it.universalCode.value,
+                        it.domain
+                    )
+                }
+
                 findNavController().navigate(SplashFragmentDirections.actionFragmentSplashToFragmentDashboard())
             })
         }

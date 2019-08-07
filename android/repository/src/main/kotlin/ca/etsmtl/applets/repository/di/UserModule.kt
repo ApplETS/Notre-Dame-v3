@@ -2,7 +2,7 @@ package ca.etsmtl.applets.repository.di
 
 import dagger.Module
 import dagger.Provides
-import model.SignetsUserCredentials
+import model.UserCredentials
 
 /**
  * Created by Sonphil on 30-12-18.
@@ -11,5 +11,5 @@ import model.SignetsUserCredentials
 @Module
 class UserModule {
     @Provides
-    fun provideSignetsUserCredentials(): SignetsUserCredentials = SignetsUserCredentials.INSTANCE!!
+    fun provideSignetsUserCredentials(): UserCredentials = UserCredentials.INSTANCE!!
 }
