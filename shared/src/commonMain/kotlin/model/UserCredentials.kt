@@ -6,11 +6,12 @@ package model
  * Created by Sonphil on 28-02-18.
  */
 @AndroidParcelize
-data class SignetsUserCredentials(
-    val codeAccesUniversel: UniversalCode,
-    val motPasse: String
+data class UserCredentials(
+    val universalCode: UniversalCode,
+    val password: String,
+    val domain: String
 ) : AndroidParcel {
     companion object {
-        var INSTANCE: SignetsUserCredentials? = null
+        var INSTANCE: UserCredentials? = null
     }
 }
