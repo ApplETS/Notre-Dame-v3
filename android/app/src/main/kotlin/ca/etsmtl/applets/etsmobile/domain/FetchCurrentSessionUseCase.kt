@@ -7,7 +7,7 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
 import model.Resource
 import model.Session
-import model.SignetsUserCredentials
+import model.UserCredentials
 import utils.date.ETSMobileDate
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ import javax.inject.Inject
  */
 
 class FetchCurrentSessionUseCase @Inject constructor(
-    private val userCredentials: SignetsUserCredentials,
+    private val userCredentials: UserCredentials,
     private val sessionRepository: SessionRepository,
     private val app: App
 ) {

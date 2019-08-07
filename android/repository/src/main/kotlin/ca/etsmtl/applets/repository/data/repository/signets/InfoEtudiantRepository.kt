@@ -13,7 +13,7 @@ import ca.etsmtl.applets.repository.data.db.dao.signets.EtudiantDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEtudiant
 import model.Resource
 import model.Etudiant
-import model.SignetsUserCredentials
+import model.UserCredentials
 import javax.inject.Inject
 
 /**
@@ -36,7 +36,7 @@ class InfoEtudiantRepository @Inject constructor(
      * be fetched from the network or only from the DB
      */
     fun getInfoEtudiant(
-        userCredentials: SignetsUserCredentials,
+        userCredentials: UserCredentials,
         shouldFetch: (data: Etudiant?) -> Boolean
     ): LiveData<Resource<Etudiant>> {
         return object : SignetsNetworkBoundResource<Etudiant, ApiEtudiant>(appExecutors) {
