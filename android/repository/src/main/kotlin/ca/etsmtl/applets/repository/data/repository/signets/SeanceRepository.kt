@@ -15,7 +15,7 @@ import model.Cours
 import model.Resource
 import model.Seance
 import model.Session
-import model.SignetsUserCredentials
+import model.UserCredentials
 import utils.date.plus
 import utils.date.toDefaultSignetsDate
 import javax.inject.Inject
@@ -43,7 +43,7 @@ class SeanceRepository @Inject constructor(
      * @return The schedule of the sessions
      */
     fun getSeancesSession(
-        userCredentials: SignetsUserCredentials,
+        userCredentials: UserCredentials,
         session: Session,
         cours: Cours? = null,
         shouldFetch: Boolean = true
@@ -80,8 +80,8 @@ class SeanceRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>> {
                 return api.listeDesSeances(
                         ListeDesSeancesRequestBody(
-                                userCredentials.codeAccesUniversel.value,
-                                userCredentials.motPasse,
+                                userCredentials.universalCode.value,
+                                userCredentials.password,
                                 cours?.sigle ?: "",
                                 session.abrege,
                             session.dateDebut.toDefaultSignetsDate(),

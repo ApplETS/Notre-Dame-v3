@@ -8,14 +8,14 @@ import ca.etsmtl.applets.repository.data.repository.signets.SeanceRepository
 import model.Resource
 import model.Seance
 import model.Session
-import model.SignetsUserCredentials
+import model.UserCredentials
 import javax.inject.Inject
 
 /**
 Created by mykaelll87 on 17/11/18
  */
 class FetchSessionSeancesUseCase @Inject constructor(
-    private val userCredentials: SignetsUserCredentials,
+    private val userCredentials: UserCredentials,
     private val seanceRepository: SeanceRepository,
     private val app: App
 ) {
