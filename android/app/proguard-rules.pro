@@ -59,10 +59,25 @@
 # Kotlin Serialization
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.SerializationKt
--keep,includedescriptorclasses class ca.etsmtl.applets.**$$serializer { *; }
--keepclassmembers class ca.etsmtl.applets.** {
+-keep,includedescriptorclasses class data.api.model.**$$serializer { *; }
+-keepclassmembers class data.api.model.** {
     *** Companion;
 }
--keepclasseswithmembers class ca.etsmtl.applets.** {
+-keepclasseswithmembers class data.api.model.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
+
+# AWS
+# Class names are needed in reflection
+-keepnames class com.amazonaws.**
+-keepnames class com.amazon.**
+# Request handlers defined in request.handlers
+-keep class com.amazonaws.services.**.*Handler
+# The following are referenced but aren't required to run
+-dontwarn com.fasterxml.jackson.**
+-dontwarn org.apache.commons.logging.**
+# Android 6.0 release removes support for the Apache HTTP client
+-dontwarn org.apache.http.**
+# The SDK has several references of Apache HTTP client
+-dontwarn com.amazonaws.http.**
+-dontwarn com.amazonaws.metrics.**
