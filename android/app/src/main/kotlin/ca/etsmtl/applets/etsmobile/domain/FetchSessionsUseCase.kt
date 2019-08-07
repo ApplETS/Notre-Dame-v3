@@ -7,14 +7,14 @@ import ca.etsmtl.applets.etsmobile.presentation.App
 import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
 import model.Session
-import model.SignetsUserCredentials
+import model.UserCredentials
 import javax.inject.Inject
 
 /**
 Created by mykaelll87 on 17/11/18
  */
 class FetchSessionsUseCase @Inject constructor(
-    private val userCredentials: SignetsUserCredentials,
+    private val userCredentials: UserCredentials,
     private val sessionRepository: SessionRepository,
     private val app: App
 ) {
