@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
@@ -101,7 +101,15 @@ class MainActivity : BaseActivity() {
             bottomNavigationView.setupWithNavController(navController)
             bottomNavigationView.setOnNavigationItemSelectedListener { item ->
                 if (mainViewModel.shouldPerformBottomNavigationViewAction()) {
-                    NavigationUI.onNavDestinationSelected(item, navController)
+                    val navOptions = NavOptions.Builder()
+                        .setLaunchSingleTop(true)
+                        .setEnterAnim(androidx.navigation.ui.R.anim.nav_default_enter_anim)
+                        .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
+                        .build()
+
+                    findNavController(R.id.fragmentNavHostMain).navigate(item.itemId, null, navOptions)
+
+                    true
                 } else {
                     false
                 }
