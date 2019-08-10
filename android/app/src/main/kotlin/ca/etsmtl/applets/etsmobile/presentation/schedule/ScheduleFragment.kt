@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import ca.etsmtl.applets.etsmobile.util.ProgressTimeLatch
 import com.alamkanak.weekview.MonthChangeListener
 import com.alamkanak.weekview.ScrollListener
 import com.alamkanak.weekview.WeekView
@@ -45,9 +44,6 @@ class ScheduleFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var adapter: ScheduleAdapter
-    private val progressTimeLatch = ProgressTimeLatch(300, 900) {
-        progressBarSchedule?.isVisible = it
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -135,7 +131,7 @@ class ScheduleFragment : DaggerFragment() {
         })
 
         scheduleViewModel.loading.observe(this, Observer {
-            it?.let { progressTimeLatch.refreshing = it }
+            it?.let { progressBarSchedule.isVisible = it }
         })
 
         scheduleViewModel.errorMessage.observe(this, EventObserver {

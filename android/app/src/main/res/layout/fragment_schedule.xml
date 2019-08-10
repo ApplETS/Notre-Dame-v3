@@ -53,7 +53,7 @@
         app:todayHeaderTextColor="@color/colorPrimary"
         app:xScrollingSpeed="1" />
 
-    <ProgressBar
+    <ca.etsmtl.applets.etsmobile.view.ProgressBarWithProgressTimeLatch
         android:id="@+id/progressBarSchedule"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
