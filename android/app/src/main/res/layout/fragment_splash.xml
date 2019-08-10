@@ -6,7 +6,7 @@
     android:theme="@style/LoginTheme"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.splash.SplashFragment">
 
-    <ProgressBar
+    <ca.etsmtl.applets.etsmobile.view.ProgressBarWithProgressTimeLatch
         android:id="@+id/progressBarSplash"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
