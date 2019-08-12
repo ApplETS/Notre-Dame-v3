@@ -221,7 +221,7 @@ dependencies {
     implementation "com.github.thellmund:Android-Week-View:3.4.2"
 
     // ETSMobile-Notifications
-    implementation 'ca.applets.etsmobilenotifications:etsmobilenotifications:1.0.0'
+    implementation "ca.applets.etsmobilenotifications:etsmobilenotifications:1.0.2"
 
     implementation project(':android:repository')
 }
