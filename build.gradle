@@ -21,7 +21,7 @@ buildscript {
             "leakcanary": "2.0-alpha-1",
             "lifecycle": "2.0.0",
             "lifecycle_viewmodel_ktx": "2.2.0-alpha02",
-            "material_components": "1.1.0-alpha08",
+            "material_components": "1.1.0-alpha09",
             "materialprogressview": "1.0.6",
             "mockito": "2.28.2",
             "mockito_kotlin": "2.1.0",
