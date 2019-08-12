@@ -17,10 +17,10 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.fadeTo
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.hideKeyboard
+import ca.etsmtl.applets.etsmobile.extension.loginNotifications
 import ca.etsmtl.applets.etsmobile.extension.open
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
-import ca.etsmtl.applets.etsmobilenotifications.NotificationsLoginManager
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -38,7 +38,6 @@ import kotlinx.android.synthetic.main.include_login_form.layoutUniversalCode
 import kotlinx.android.synthetic.main.include_login_form.password
 import kotlinx.android.synthetic.main.include_login_form.universalCode
 import model.UniversalCode
-import model.UserCredentials
 import presentation.login.LoginViewModel
 import javax.inject.Inject
 
@@ -148,8 +147,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             errorMessage.observe(this@LoginFragment, EventObserver {
-                if(!it.equals(context?.getString(R.string.error_no_internet_connection)))
-                    Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
             universalCodeError.observe(this@LoginFragment, Observer {
@@ -161,15 +159,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             navigateToDashboard.toLiveData().observe(this@LoginFragment, Observer {
-                UserCredentials.INSTANCE?.let {
-                    NotificationsLoginManager.login(
-                        requireContext(),
-                        it.universalCode.value,
-                        it.domain
-                    )
-                }
-
-
+                requireContext().loginNotifications()
                 findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
             })
 
