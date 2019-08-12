@@ -16,6 +16,7 @@
         app:endIconMode="custom"
         app:endIconTint="@android:color/white"
         app:errorEnabled="true"
+        app:errorIconDrawable="@null"
         app:errorTextColor="@color/material_yellow_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
