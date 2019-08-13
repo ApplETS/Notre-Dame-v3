@@ -50,6 +50,7 @@
     <string name="label_schedule_no_visible_days_pref">Nombre de journées visibles</string>
     <string name="label_schedule_x_scrolling_speed_pref">Vitesse de défilement horizontale</string>
     <string name="label_schedule_scroll_duration_pref">Durée de défilement en millisecondes</string>
+    <string name="error_no_event_found">Aucun événement trouvé</string>
 
     <!-- Grades -->
     <string name="title_grades">Notes</string>
@@ -116,7 +117,6 @@
     <!-- About -->
     <string name="applets_about">ÉTSMobile a été réalisée par le club scientifique ApplETS de l\'École de technologie supérieure.\n\nApplETS se veut, avant tout, un regroupement d’étudiants qui partagent un intérêt commun pour le domaine des télécommunications et des applications mobiles.
         La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nSuivez-nous sur : </string>
-    <string name="msg_no_seances">Aucune séance de cours pour la session actuelle</string>
 
     <!-- Buglife -->
     <string name="screenshot_annotator_activity_label" tools:override="true">Capture d\'écran</string>
