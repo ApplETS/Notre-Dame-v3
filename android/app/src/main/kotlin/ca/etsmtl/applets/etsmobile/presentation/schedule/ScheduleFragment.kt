@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -9,13 +8,13 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.generateColor
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.alamkanak.weekview.MonthChangeListener
 import com.alamkanak.weekview.ScrollListener
@@ -106,11 +105,7 @@ class ScheduleFragment : DaggerFragment() {
     private fun Seance.toWeekViewEvent(): WeekViewEvent<Seance> {
         val style = WeekViewEvent.Style
             .Builder()
-            .setBackgroundColor(ColorUtils.blendARGB(
-                sigleCours.hashCode(),
-                Color.BLACK,
-                0.3f
-            ))
+            .setBackgroundColor(generateColor())
             .build()
 
         return WeekViewEvent.Builder<Seance>()
