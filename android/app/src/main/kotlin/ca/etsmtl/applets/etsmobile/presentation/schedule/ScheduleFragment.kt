@@ -23,8 +23,6 @@ import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewDisplayable
 import com.alamkanak.weekview.WeekViewEvent
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.empty_view_schedule.btnRetry
-import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
 import kotlinx.android.synthetic.main.fragment_schedule.btnToday
 import kotlinx.android.synthetic.main.fragment_schedule.progressBarSchedule
 import kotlinx.android.synthetic.main.fragment_schedule.weekView
@@ -63,7 +61,6 @@ class ScheduleFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btnRetry.setOnClickListener { scheduleViewModel.refresh() }
         btnToday.setOnClickListener { weekView.goToToday() }
         setupWeekView()
         subscribeUI()
@@ -138,13 +135,6 @@ class ScheduleFragment : DaggerFragment() {
             it?.let {
                 if (!it.equals(context?.getString(R.string.error_no_internet_connection)))
                     Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-            }
-        })
-
-        scheduleViewModel.showEmptyView.observe(this, Observer {
-            it?.let {
-                emptyViewSchedule.isVisible = it
-                weekView.isVisible = !it
             }
         })
 

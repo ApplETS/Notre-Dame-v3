@@ -38,8 +38,12 @@ class FetchCurrentAndFutureSeancesUseCase @Inject constructor(
                     .also { currentOrNextSessions ->
                         numberOfSessionsToFetchSeancesFor = currentOrNextSessions.count()
 
-                        currentOrNextSessions.forEach { session ->
-                            result.fetchSeances(session)
+                        if (numberOfSessionsToFetchSeancesFor == 0) {
+                            result.value = Resource.success(emptyList())
+                        } else {
+                            currentOrNextSessions.forEach { session ->
+                                result.fetchSeances(session)
+                            }
                         }
                     }
             }
