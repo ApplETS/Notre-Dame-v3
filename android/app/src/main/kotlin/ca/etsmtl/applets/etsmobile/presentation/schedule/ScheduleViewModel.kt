@@ -41,8 +41,11 @@ class ScheduleViewModel @Inject constructor(
     val errorMessage: LiveData<Event<String?>> = Transformations.map(seanceRes) {
         if (app.getString(R.string.msg_api_no_seance) == it.message) {
             Event(null)
-        } else
+        } else if (seanceRes.value?.status == Resource.Status.SUCCESS && seanceRes.value?.data.isNullOrEmpty()) {
+            Event(app.getString(R.string.error_no_event_found))
+        } else {
             it.getGenericErrorMessage(app)
+        }
     }
 
     val seances: LiveData<List<Seance>> = Transformations.map(seanceRes) { res ->
@@ -53,9 +56,6 @@ class ScheduleViewModel @Inject constructor(
         it?.status == Resource.Status.LOADING
     }
 
-    val showEmptyView: LiveData<Boolean> = Transformations.map(seanceRes) {
-        it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
-    }
     private val showTodayButtonPref = MutableLiveData<Boolean>()
     private val currentDay = MutableLiveData<ETSMobileDate>()
     val showTodayButton = MutableLiveData<Boolean>()
