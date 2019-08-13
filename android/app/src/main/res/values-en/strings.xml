@@ -51,6 +51,7 @@
     <string name="label_schedule_no_visible_days_pref">Number of visible days</string>
     <string name="label_schedule_x_scrolling_speed_pref">Horizontal scrolling speed</string>
     <string name="label_schedule_scroll_duration_pref">Scroll duration in milliseconds</string>
+    <string name="error_no_event_found">No event found</string>
 
     <!-- Grades -->
     <string name="title_grades">Grades</string>
@@ -117,7 +118,6 @@
     <!-- About -->
     <string name="applets_about">ÉTSMobile was conceived by the ApplETS scientific club from the École de technologie supérieure.\n\nApplets is, most importantly, a gathering of students who share a typical enthusiasm for the field of telecommunications and mobile applications.
         The mission of ApplETS is to train students in mobile development and promote the production of mobile applications within the student community.\n\nFollow us on: </string>
-    <string name="msg_no_seances">No class period for this semester</string>
 
     <!-- Buglife -->
     <string name="screenshot_annotator_activity_label" tools:override="true">Screenshot</string>
