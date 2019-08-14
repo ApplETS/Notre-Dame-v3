@@ -56,8 +56,6 @@ fun Context.getColorFromAttr(
  */
 fun Context.loginNotifications() {
     UserCredentials.INSTANCE?.let { creds ->
-        if (isDeviceConnected()) {
-            NotificationsLoginManager.login(this, creds.universalCode.value, creds.domain)
-        }
+        NotificationsLoginManager.login(this, creds.universalCode.value, creds.domain)
     }
 }
