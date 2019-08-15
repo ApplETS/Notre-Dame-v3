@@ -66,7 +66,7 @@ class ScheduleWeekInnerListAdapter : RecyclerView.Adapter<ScheduleWeekInnerListA
                     dateFin.timeInMilliseconds,
                     DateUtils.FORMAT_SHOW_TIME
                 )
-            holder.separatorSchedule.setBackgroundColor(generateColor())
+            holder.separatorSchedule.setBackgroundColor(generateColor(holder.itemView.context))
         }
     }
 
