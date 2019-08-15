@@ -2,6 +2,7 @@ package ca.etsmtl.applets.etsmobile.extension
 
 import android.Manifest
 import android.content.Context
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.util.TypedValue
 import androidx.annotation.AttrRes
@@ -15,6 +16,16 @@ import model.UserCredentials
 /**
  * Created by Sonphil on 18-05-18.
  */
+
+/**
+ * Returns true when dark theme is on, false otherwise.
+ */
+inline val Context.isDarkMode: Boolean
+    get() {
+        val uiMode = resources.configuration.uiMode
+
+        return uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+    }
 
 /**
  * Check if the device is connected
