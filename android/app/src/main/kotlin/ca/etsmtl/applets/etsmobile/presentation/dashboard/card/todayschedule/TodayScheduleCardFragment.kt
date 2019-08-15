@@ -76,7 +76,6 @@ class TodayScheduleCardFragment : DaggerFragment() {
                     Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             }
         })
-
         todayScheduleCardViewModel.loading.observe(this, Observer { visible ->
             progressBarTodaySchedule.isVisible = visible
         })
