@@ -18,10 +18,9 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import dagger.android.support.DaggerFragment
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
-import kotlinx.android.synthetic.main.empty_view_courses_grades.btnRetry
 import kotlinx.android.synthetic.main.fragment_grades.recyclerViewCoursesGrades
-import kotlinx.android.synthetic.main.fragment_grades_card.includeEmptyView
 import kotlinx.android.synthetic.main.fragment_grades_card.progressBarGrades
+import kotlinx.android.synthetic.main.fragment_grades_card.tvEmptyView
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
 import model.Cours
 import javax.inject.Inject
@@ -37,20 +36,8 @@ class GradesCardFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val adapter: GradesCardAdapter by lazy {
-        GradesCardAdapter(object : GradesCardAdapter.OnCourseClickListener {
-            override fun onCourseClick(cours: Cours, holder: GradesCardAdapter.GradeViewHolder) {
-                this@GradesCardFragment.activity?.let {
-                    GradesDetailsActivity.start(
-                        it as AppCompatActivity,
-                        holder.itemView,
-                        holder.tvCourseSigle,
-                        cours
-                    )
-                }
-            }
-        })
-    }
+    private val adapter: GradesCardAdapter = GradesCardAdapter()
+    private var onCourseClickListener: GradesCardAdapter.OnCourseClickListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,16 +48,29 @@ class GradesCardFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpRecyclerView()
-        btnRetry.setOnClickListener { gradesCardViewModel.refresh() }
+        setupRecyclerView()
         subscribeUI()
     }
-    private fun setUpRecyclerView() {
+
+    private fun setupRecyclerView() {
         recyclerViewCoursesGrades.adapter = adapter
         recyclerViewCoursesGrades.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW).apply {
             justifyContent = JustifyContent.FLEX_START
         }
         recyclerViewCoursesGrades.itemAnimator = FadeInAnimator()
+        onCourseClickListener = object : GradesCardAdapter.OnCourseClickListener {
+            override fun onCourseClick(cours: Cours, holder: GradesCardAdapter.GradeViewHolder) {
+                requireActivity().let {
+                    GradesDetailsActivity.start(
+                        it as AppCompatActivity,
+                        holder.itemView,
+                        holder.tvCourseSigle,
+                        cours
+                    )
+                }
+            }
+        }
+        adapter.onCourseClickListener = onCourseClickListener
     }
 
     private fun subscribeUI() {
@@ -79,8 +79,8 @@ class GradesCardFragment : DaggerFragment() {
         })
 
         gradesCardViewModel.showEmptyView.observe(this, Observer {
-            recyclerViewCoursesGrades.isVisible = it == false
-            includeEmptyView.isVisible = it == true
+            recyclerViewCoursesGrades.isVisible = !it
+            tvEmptyView.isVisible = it
         })
 
         gradesCardViewModel.loading.observe(this, Observer {
@@ -97,6 +97,7 @@ class GradesCardFragment : DaggerFragment() {
 
     override fun onDestroyView() {
         adapter.onCourseClickListener = null
+        onCourseClickListener = null
         recyclerViewCoursesGrades.adapter = null
 
         super.onDestroyView()

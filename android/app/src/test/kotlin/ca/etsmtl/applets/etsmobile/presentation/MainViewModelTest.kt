@@ -5,11 +5,11 @@ import androidx.lifecycle.Observer
 import ca.etsmtl.applets.etsmobile.presentation.main.Destination
 import ca.etsmtl.applets.etsmobile.presentation.main.MainViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.capture
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.never
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.capture
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -119,6 +119,19 @@ class MainViewModelTest {
 
         // then
         verify(observer).onChanged(true)
+    }
+
+    @Test
+    fun appBarLayout_OnNavigationToLogin_BecomesNotExpanded() {
+        // given
+        val observer: Observer<Boolean> = mock()
+        mainViewModel.appBarLayoutExpanded.observeForever(observer)
+
+        // when
+        mainViewModel.onNavigationDestinationChanged(Destination.LOGIN)
+
+        // then
+        verify(observer).onChanged(false)
     }
 
     @Test

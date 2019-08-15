@@ -9,6 +9,8 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
+import ca.etsmtl.applets.etsmobilenotifications.NotificationsLoginManager
+import model.UserCredentials
 
 /**
  * Created by Sonphil on 18-05-18.
@@ -47,4 +49,13 @@ fun Context.getColorFromAttr(
 ): Int {
     theme.resolveAttribute(attrColor, typedValue, resolveRefs)
     return typedValue.data
+}
+
+/**
+ * Provides credentials to notifications library and lets it register the user to AWS SNS
+ */
+fun Context.loginNotifications() {
+    UserCredentials.INSTANCE?.let { creds ->
+        NotificationsLoginManager.login(this, creds.universalCode.value, creds.domain)
+    }
 }
