@@ -6,12 +6,12 @@ import android.transition.TransitionInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
+import ca.etsmtl.applets.etsmobile.extension.isDarkMode
 import ca.etsmtl.applets.etsmobile.extension.toast
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_grades_details.*
@@ -71,7 +71,7 @@ class GradesDetailsActivity : BaseActivity() {
 
         setupToolbar()
 
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+        if (isDarkMode) {
             window.statusBarColor = getColorCompat(R.color.etsRougeClair)
         }
 
@@ -133,7 +133,7 @@ class GradesDetailsActivity : BaseActivity() {
             }
         }
 
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+        if (isDarkMode) {
             window.statusBarColor = getColorCompat(R.color.colorPrimaryDark)
         }
 
