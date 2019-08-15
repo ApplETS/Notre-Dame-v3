@@ -121,4 +121,10 @@ class DashboardFragment : DaggerFragment() {
 
         super.onPause()
     }
+
+    override fun onDestroyView() {
+        rvCards.adapter = null
+
+        super.onDestroyView()
+    }
 }
