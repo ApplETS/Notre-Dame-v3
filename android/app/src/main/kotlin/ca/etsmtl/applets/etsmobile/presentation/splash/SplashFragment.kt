@@ -49,6 +49,7 @@ class SplashFragment : DaggerFragment() {
             })
 
             errorMessage.observe(this@SplashFragment, EventObserver {
+                if(!it.equals(context?.getString(R.string.error_no_internet_connection)))
                 context?.toast(it, Toast.LENGTH_LONG)
             })
 

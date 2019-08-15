@@ -146,7 +146,8 @@ class LoginFragment : DaggerFragment() {
             })
 
             errorMessage.observe(this@LoginFragment, EventObserver {
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                if(!it.equals(context?.getString(R.string.error_no_internet_connection)))
+                    Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
             universalCodeError.observe(this@LoginFragment, Observer {
