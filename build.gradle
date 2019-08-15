@@ -13,7 +13,7 @@ buildscript {
             "flexbox" : "1.1.0",
             "glide": "4.9.0",
             "google_maps": "16.1.0",
-            "gradle": '3.4.2',
+            "gradle": '3.4.1',
             "groupie": "2.3.0",
             "junit": "4.12",
             "klock": "1.1.1",
