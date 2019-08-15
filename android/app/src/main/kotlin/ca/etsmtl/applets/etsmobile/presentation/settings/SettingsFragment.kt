@@ -51,8 +51,6 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
     private fun handleDarkThemePreferenceChange(newValue: Any?) {
         if (newValue is String) {
             context?.applyDarkThemePref(newValue)
-
-            activity?.recreate()
         }
     }
 
