@@ -224,10 +224,7 @@ class MainActivity : BaseActivity() {
                 if (isNotConnect && !wasNotConnected ) {
                     wasNotConnected = true
                     addingNetworkStatus(context.getString(R.string.error_no_internet_connection))
-                   // Toast.makeText(context, context.getString(R.string.error_no_internet_connection), Toast.LENGTH_SHORT).show()
-
                 } else if (!isNotConnect && wasNotConnected) {
-                   // Toast.makeText(context, context.getString(R.string.internet_connected), Toast.LENGTH_SHORT).show()
                     wasNotConnected=false
 >>>>>>> adding text view and lienear layout to main
                     removeNetworkStatus()
