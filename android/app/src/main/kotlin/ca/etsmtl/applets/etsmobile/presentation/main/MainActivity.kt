@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import android.net.ConnectivityManager
