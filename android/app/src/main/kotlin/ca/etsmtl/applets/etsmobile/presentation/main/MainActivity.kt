@@ -1,6 +1,10 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -24,8 +28,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import javax.inject.Inject
-import ca.etsmtl.applets.etsmobile.util.BroadCastReceiver
+import android.widget.Toast
+
+
 /**
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
  * select items on the bottom navigation view to switch between fragments.
@@ -35,13 +42,14 @@ import ca.etsmtl.applets.etsmobile.util.BroadCastReceiver
 
 class MainActivity : BaseActivity() {
 
-
+    companion
+    object { var wasNotConnected  =false}
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    var broadCastReciever : BroadCastReceiver= BroadCastReceiver();
+    private var broadCastReciever : BroadCastReceiver= BroadCastReceiver();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,5 +151,38 @@ class MainActivity : BaseActivity() {
         mainViewModel.navigateBack.observe(this, EventObserver {
             super.onBackPressed()
         })
+    }
+
+    private fun addingNetworkStatus (message:String)
+    {
+        var textView=  TextView(this)
+        textView.setTextColor(-0x1)
+        textView.setText(message);
+        networkMessageContainer.addView(textView)
+    }
+
+    private fun removeNetworkStatus()
+    {
+        networkMessageContainer.removeAllViews()
+    }
+    private inner class BroadCastReceiver: BroadcastReceiver() {
+
+
+
+        override fun onReceive(context: Context, intent: Intent) {
+            if (ConnectivityManager.CONNECTIVITY_ACTION == intent.action) {
+                var isNotConnect = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false)
+                if (isNotConnect && !wasNotConnected ) {
+                    wasNotConnected = true
+                    addingNetworkStatus(context.getString(R.string.error_no_internet_connection))
+                   // Toast.makeText(context, context.getString(R.string.error_no_internet_connection), Toast.LENGTH_SHORT).show()
+
+                } else if (!isNotConnect && wasNotConnected) {
+                   // Toast.makeText(context, context.getString(R.string.internet_connected), Toast.LENGTH_SHORT).show()
+                    wasNotConnected=false
+                    removeNetworkStatus()
+                }
+            }
+        }
     }
 }

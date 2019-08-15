@@ -88,7 +88,8 @@ class GradesCardFragment : DaggerFragment() {
         })
 
         gradesCardViewModel.errorMessage.observe(this, EventObserver {
-            it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+            it?.let {  if(!it.equals(context?.getString(R.string.error_no_internet_connection)))
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
 
         this.lifecycle.addObserver(gradesCardViewModel)
