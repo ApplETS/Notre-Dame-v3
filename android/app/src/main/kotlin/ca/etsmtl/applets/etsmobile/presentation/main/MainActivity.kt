@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -38,6 +37,7 @@ import android.content.Intent
 import android.content.IntentFilter
 
 
+
 /**
  * A screen which displays a bottom navigation view and wrapper for fragment. The user can
  * select items on the bottom navigation view to switch between fragments.
@@ -48,24 +48,17 @@ import android.content.IntentFilter
 class MainActivity : BaseActivity() {
 
     companion
-<<<<<<< HEAD
     object {
         var wasNotConnected = false
     }
-=======
-    object { var wasNotConnected  =false}
->>>>>>> adding text view and lienear layout to main
+
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-<<<<<<< HEAD
     private var broadCastReciever: BroadCastReceiver = BroadCastReceiver()
     private var intentFilter: IntentFilter? = null
-=======
-    private var broadCastReciever : BroadCastReceiver= BroadCastReceiver();
->>>>>>> adding text view and lienear layout to main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
