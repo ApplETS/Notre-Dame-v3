@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -30,7 +29,7 @@ import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import javax.inject.Inject
-import android.widget.Toast
+
 
 
 /**
