@@ -1,8 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
-import android.content.IntentFilter
 import android.graphics.PorterDuff
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -24,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import android.net.ConnectivityManager
@@ -69,13 +68,6 @@ class MainActivity : BaseActivity() {
             addingNetworkStatus(this.getString(R.string.error_no_internet_connection))
         else
             removeNetworkStatus()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unregisterReceiver(broadCastReciever)
-        var intentFilter: IntentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(broadCastReciever, intentFilter)
     }
 
     override fun onDestroy() {
