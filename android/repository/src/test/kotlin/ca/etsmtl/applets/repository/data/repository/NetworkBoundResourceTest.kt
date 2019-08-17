@@ -21,11 +21,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ca.etsmtl.applets.repository.data.api.ApiResponse
+import model.Resource
 import ca.etsmtl.applets.repository.util.ApiUtil
 import ca.etsmtl.applets.repository.util.CountingAppExecutors
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
-import com.nhaarman.mockitokotlin2.mock
-import model.Resource
+import com.nhaarman.mockito_kotlin.mock
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import org.hamcrest.CoreMatchers.`is`

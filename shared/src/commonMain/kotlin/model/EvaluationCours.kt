@@ -1,11 +1,11 @@
 package model
 
-import utils.date.ETSMobileDate
+import com.soywiz.klock.DateTime
 
 data class EvaluationCours(
     var session: String,
-    var dateDebutEvaluation: ETSMobileDate,
-    var dateFinEvaluation: ETSMobileDate,
+    var dateDebutEvaluation: DateTime,
+    var dateFinEvaluation: DateTime,
     var enseignant: String,
     var estComplete: Boolean = false,
     var groupe: String,

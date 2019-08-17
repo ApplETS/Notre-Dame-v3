@@ -33,11 +33,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
     }
 
     fun onNavigationDestinationChanged(destination: Destination) {
-        if (destination == Destination.LOGIN) {
-            bottomNavigationViewVisible.value = false
-            appBarLayoutExpanded.value = false
-        } else if (topLevelDestinations.contains(destination)) {
+        if (topLevelDestinations.contains(destination)) {
             bottomNavigationViewVisible.value = true
+
             appBarLayoutExpanded.value = true
         } else {
             bottomNavigationViewVisible.value = false

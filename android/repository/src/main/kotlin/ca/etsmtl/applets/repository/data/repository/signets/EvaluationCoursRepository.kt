@@ -11,10 +11,10 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeEvaluation
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.EvaluationCoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toEvaluationCours
+import model.Resource
 import model.Cours
 import model.EvaluationCours
-import model.Resource
-import model.UserCredentials
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -26,7 +26,7 @@ class EvaluationCoursRepository @Inject constructor(
     private val evaluationCoursDao: EvaluationCoursDao
 ) : SignetsRepository(appExecutors) {
     fun getEvaluationCours(
-        userCredentials: UserCredentials,
+        userCredentials: SignetsUserCredentials,
         cours: Cours,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<EvaluationCours>>> = object : SignetsNetworkBoundResource<List<EvaluationCours>, ApiListeEvaluationCours>(appExecutors) {
@@ -43,8 +43,8 @@ class EvaluationCoursRepository @Inject constructor(
 
         override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeEvaluationCours>>> {
             return api.listeEvaluationCours(ListeEvaluationCoursRequestBody(
-                userCredentials.universalCode.value,
-                userCredentials.password,
+                userCredentials.codeAccesUniversel.value,
+                userCredentials.motPasse,
                 cours.session
             ))
         }

@@ -13,7 +13,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.coordinatorLayout
-import kotlinx.android.synthetic.main.btn_emergency_call.view.btnEmergencyCall
+import kotlinx.android.synthetic.main.btn_emergency_call.btnEmergencyCall
 import kotlinx.android.synthetic.main.fragment_security_detail.webView
 
 class SecurityDetailFragment : Fragment() {
@@ -51,17 +51,13 @@ class SecurityDetailFragment : Fragment() {
         inflater: LayoutInflater
     ) {
         activity.coordinatorLayout?.let { coordinatorLayout ->
-            emergencyCallBtn = coordinatorLayout.btnEmergencyCall
+            emergencyCallBtn = inflater.inflate(
+                R.layout.btn_emergency_call,
+                coordinatorLayout,
+                false
+            ) as Button
 
-            if (emergencyCallBtn == null) {
-                emergencyCallBtn = inflater.inflate(
-                    R.layout.btn_emergency_call,
-                    coordinatorLayout,
-                    false
-                ) as Button
-
-                coordinatorLayout.addView(emergencyCallBtn)
-            }
+            coordinatorLayout.addView(emergencyCallBtn)
         }
     }
 
@@ -80,22 +76,21 @@ class SecurityDetailFragment : Fragment() {
         webView.loadUrl(fileUrl)
     }
 
-    private fun setButtonListener() {
-        emergencyCallBtn?.setOnClickListener {
+    private fun setButtonListener() = (activity as? MainActivity)
+        ?.btnEmergencyCall
+        ?.setOnClickListener {
             val uri = "tel:" + resources.getString(R.string.emergency_number)
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse(uri)
             startActivity(intent)
         }
-    }
 
     override fun onDestroyView() {
         (activity as? MainActivity)?.let {
             it.appBarLayout?.setExpanded(true, true)
 
-            // Remove emergency call button from MainActivity
-            emergencyCallBtn?.setOnClickListener(null)
-            (emergencyCallBtn?.parent as? ViewGroup)?.removeView(emergencyCallBtn)
+            // Remove emergency call button from main layout
+            it.coordinatorLayout?.removeView(emergencyCallBtn)
         }
 
         super.onDestroyView()
