@@ -22,7 +22,6 @@
             android:clipToPadding="false"
             android:descendantFocusability="blocksDescendants"
             android:paddingStart="8dp"
-            android:paddingEnd="12dp"
             tools:ignore="PrivateResource"
             tools:listitem="@layout/item_grade_course" />
     </FrameLayout>

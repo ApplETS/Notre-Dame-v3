@@ -11,12 +11,13 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeDesSeances
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.SeanceDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSeances
-import ca.etsmtl.applets.repository.util.unixToDefaultSignetsDate
 import model.Cours
 import model.Resource
 import model.Seance
 import model.Session
-import model.SignetsUserCredentials
+import model.UserCredentials
+import utils.date.plus
+import utils.date.toDefaultSignetsDate
 import javax.inject.Inject
 
 /**
@@ -28,6 +29,10 @@ class SeanceRepository @Inject constructor(
     private val api: SignetsApi,
     private val dao: SeanceDao
 ) : SignetsRepository(appExecutors) {
+    companion object {
+        const val NB_MS_IN_A_DAY = 86400000L
+    }
+
     /**
      * Returns the schedule of the sessions for a given course and a given session
      *
@@ -38,7 +43,7 @@ class SeanceRepository @Inject constructor(
      * @return The schedule of the sessions
      */
     fun getSeancesSession(
-        userCredentials: SignetsUserCredentials,
+        userCredentials: UserCredentials,
         session: Session,
         cours: Cours? = null,
         shouldFetch: Boolean = true
@@ -75,12 +80,12 @@ class SeanceRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeDesSeances>>> {
                 return api.listeDesSeances(
                         ListeDesSeancesRequestBody(
-                                userCredentials.codeAccesUniversel.value,
-                                userCredentials.motPasse,
+                                userCredentials.universalCode.value,
+                                userCredentials.password,
                                 cours?.sigle ?: "",
                                 session.abrege,
-                            session.dateDebut.unixToDefaultSignetsDate(),
-                            session.dateFin.unixToDefaultSignetsDate()
+                            session.dateDebut.toDefaultSignetsDate(),
+                            (session.dateFin + NB_MS_IN_A_DAY).toDefaultSignetsDate()
                         )
                 )
             }

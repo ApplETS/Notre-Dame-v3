@@ -96,6 +96,15 @@ android {
             java.srcDirs += 'src/androidTest/kotlin'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 play {
@@ -121,10 +130,10 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
     implementation "androidx.core:core-ktx:$versions.android_ktx"
     implementation 'androidx.fragment:fragment-ktx:1.0.0'
-    implementation "androidx.preference:preference:1.0.0"
+    implementation "androidx.preference:preference:1.1.0-rc01"
 
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
@@ -190,7 +199,7 @@ dependencies {
     implementation "com.crashlytics.sdk.android:crashlytics:$versions.firebase_crashlytics"
 
     // Mockito-Kotlin
-    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$versions.mockito_kotlin"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito_kotlin"
 
     // RecyclerView Animators
     implementation "jp.wasabeef:recyclerview-animators:$versions.recyclerviewanimators"
@@ -207,6 +216,12 @@ dependencies {
 
     // Buglife
     implementation "com.buglife.sdk:buglife-android:$versions.buglife"
+
+    // Android Week View
+    implementation "com.github.thellmund:Android-Week-View:3.4.2"
+
+    // ETSMobile-Notifications
+    implementation "ca.applets.etsmobilenotifications:etsmobilenotifications:1.1.0"
 
     implementation project(':android:repository')
 }

@@ -130,7 +130,7 @@ fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map
 
 fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
     val noteSur = liste.asSequence()
-            .filter { it.note != null && it.ignoreDuCalcul == "Non" }
+            .filter { it.note != null && it.ignoreDuCalcul == "Non" && it.publie == "Oui" }
             .map { it.ponderation.replaceCommaAndParseToFloat() ?: 0f }
             .sum()
             .coerceAtMost(100f)

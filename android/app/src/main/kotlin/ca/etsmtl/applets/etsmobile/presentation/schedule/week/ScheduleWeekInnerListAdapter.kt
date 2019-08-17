@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.generateColor
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.sub_item_schedule.separatorSchedule
 import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleEndTime
 import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleLocal
 import kotlinx.android.synthetic.main.sub_item_schedule.textViewScheduleSigleGroup
@@ -55,15 +57,16 @@ class ScheduleWeekInnerListAdapter : RecyclerView.Adapter<ScheduleWeekInnerListA
             holder.textViewScheduleStartTime.text = DateUtils
                 .formatDateTime(
                     holder.containerView.context,
-                    dateDebut.unixMillisLong,
+                    dateDebut.timeInMilliseconds,
                     DateUtils.FORMAT_SHOW_TIME
                 )
             holder.textViewScheduleEndTime.text = DateUtils
                 .formatDateTime(
                     holder.containerView.context,
-                    dateFin.unixMillisLong,
+                    dateFin.timeInMilliseconds,
                     DateUtils.FORMAT_SHOW_TIME
                 )
+            holder.separatorSchedule.setBackgroundColor(generateColor(holder.itemView.context))
         }
     }
 

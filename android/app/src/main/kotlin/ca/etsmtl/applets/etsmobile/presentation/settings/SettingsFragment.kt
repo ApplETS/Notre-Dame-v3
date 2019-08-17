@@ -6,6 +6,8 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.applyDarkThemePref
+import com.buglife.sdk.Buglife
+import com.buglife.sdk.InvocationMethod
 
 /**
  * Settings screen
@@ -20,26 +22,45 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
         preferenceManager.sharedPreferencesMode = Context.MODE_PRIVATE
         addPreferencesFromResource(R.xml.preferences)
 
-        val darkThemePref: Preference = findPreference(getString(R.string.key_dark_theme_pref))
+        listOf(
+            R.string.key_dark_theme_pref,
+            R.string.key_shake_bug_reporter_invocation_method_pref
+        ).forEach { keyId ->
+            val pref = findPreference<Preference>(getString(keyId))
 
-        darkThemePref.onPreferenceChangeListener = this
+            pref?.onPreferenceChangeListener = this
+        }
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        return if (preference.key == getString(R.string.key_dark_theme_pref)) {
-            handleDarkThemePreferenceChange(newValue)
+        return when (preference.key) {
+            getString(R.string.key_dark_theme_pref) -> {
+                handleDarkThemePreferenceChange(newValue)
 
-            true
-        } else {
-            false
+                true
+            }
+            getString(R.string.key_shake_bug_reporter_invocation_method_pref) -> {
+                handleShakeBugReporterInvocationMethodPreferenceChange(newValue)
+
+                true
+            }
+            else -> false
         }
     }
 
     private fun handleDarkThemePreferenceChange(newValue: Any?) {
         if (newValue is String) {
             context?.applyDarkThemePref(newValue)
-
-            activity?.recreate()
         }
+    }
+
+    private fun handleShakeBugReporterInvocationMethodPreferenceChange(newValue: Any?) {
+        Buglife.setInvocationMethod(
+            if (newValue == true) {
+                InvocationMethod.SHAKE
+            } else {
+                InvocationMethod.NONE
+            }
+        )
     }
 }

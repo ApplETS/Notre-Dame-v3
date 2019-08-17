@@ -6,7 +6,8 @@ import ca.etsmtl.applets.repository.data.repository.signets.EvaluationCoursRepos
 import model.Cours
 import model.EvaluationCours
 import model.Resource
-import model.SignetsUserCredentials
+import model.UserCredentials
+import utils.date.ETSMobileDate
 import javax.inject.Inject
 
 /**
@@ -14,7 +15,7 @@ import javax.inject.Inject
  */
 
 class FetchCourseEvaluationsCompletedUseCase @Inject constructor(
-    private var userCredentials: SignetsUserCredentials,
+    private var userCredentials: UserCredentials,
     private val evaluationCoursRepository: EvaluationCoursRepository
 ) {
     operator fun invoke(cours: Cours): LiveData<Resource<Boolean>> {
@@ -34,6 +35,10 @@ class FetchCourseEvaluationsCompletedUseCase @Inject constructor(
     }
 
     private fun List<EvaluationCours>.areCourseEvaluationsCompletedForCourse(cours: Cours): Boolean {
-        return find { !it.estComplete && it.sigle == cours.sigle } == null
+        return find {
+            val duringEvaluationPeriod = ETSMobileDate() in it.dateDebutEvaluation..it.dateFinEvaluation
+
+            !it.estComplete && it.sigle == cours.sigle && duringEvaluationPeriod
+        } == null
     }
 }

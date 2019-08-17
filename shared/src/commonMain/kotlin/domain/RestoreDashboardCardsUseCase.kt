@@ -8,5 +8,5 @@ import di.Inject
  */
 
 class RestoreDashboardCardsUseCase @Inject constructor(private val repository: DashboardCardRepository) {
-    operator fun invoke()= repository.restore()
+    suspend operator fun invoke() = repository.restore()
 }

@@ -35,6 +35,23 @@ class MoreFragment : DaggerFragment() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val reportBugDialog: AlertDialog? by lazy {
+        context?.let {
+            val builder = AlertDialog.Builder(it, R.style.AppTheme_Dialog_Alert)
+
+            builder.setMessage(R.string.prompt_report_bug_method)
+                .setTitle(getString(R.string.more_item_label_report_bug))
+                .setPositiveButton(R.string.report_bug_method_screenshot) { _, _ ->
+                    moreViewModel.reportBugWithScreenshot()
+                }
+                .setNegativeButton(R.string.report_bug_method_video) { _, _ ->
+                    moreViewModel.reportBugWithVideo()
+                }
+                .setOnCancelListener { moreViewModel.clickLogoutConfirmationDialogButton(false) }
+
+            builder.create()
+        }
+    }
     private val logoutConfirmationDialog: AlertDialog? by lazy {
         context?.let {
             val builder = AlertDialog.Builder(it, R.style.AppTheme_Dialog_Alert)
@@ -130,6 +147,16 @@ class MoreFragment : DaggerFragment() {
             it?.let { loading ->
                 svMoreContent.isVisible = !loading
                 progressMore.isVisible = loading
+            }
+        })
+
+        moreViewModel.displayBugReportDialog.observe(this, Observer {
+            reportBugDialog.takeIf { it != null && !it.isShowing }?.let { dialog ->
+                if (it == true) {
+                    dialog.show()
+                } else {
+                    dialog.dismiss()
+                }
             }
         })
     }
