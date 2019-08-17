@@ -28,7 +28,7 @@ internal class SharedPreferencesWrapper constructor(
             val keyPair = getKeyPair(key)
 
             cipherUtils.decrypt(encrypted, keyPair.private)
-        } else {
+        }  else {
             defaultValue
         }
     }
