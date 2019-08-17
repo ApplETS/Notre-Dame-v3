@@ -1,8 +1,12 @@
 package data.repository
 
-import data.db.DashboardCardDatabase
+import ca.etsmtl.applets.shared.db.DashboardCardQueries
 import di.Inject
+import extension.asChannel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import model.DashboardCard
 import utils.EtsMobileDispatchers
@@ -11,20 +15,27 @@ import utils.EtsMobileDispatchers
  * Created by Sonphil on 09-02-19.
  */
 
-class DashboardCardRepository @Inject constructor(private val database: DashboardCardDatabase) {
+class DashboardCardRepository @Inject constructor(private val dashboardCardQueries: DashboardCardQueries) {
     suspend fun dashboardCards(): ReceiveChannel<List<DashboardCard>> {
         return withContext(EtsMobileDispatchers.IO) {
-            database.dashboardCards()
+            dashboardCardQueries
+                .selectAll { type, _, visible, dismissible ->
+                    DashboardCard(type, visible, dismissible)
+                }
+                .asChannel()
+                .map(EtsMobileDispatchers.IO) { query ->
+                    query.executeAsList()
+                }
         }
     }
 
-    suspend fun updateDashboardCard(card: DashboardCard, position: Int) {
-        withContext(EtsMobileDispatchers.IO) {
-            database.updateCard(card, position)
+    fun updateDashboardCard(card: DashboardCard, position: Int) = CoroutineScope(EtsMobileDispatchers.IO)
+        .launch {
+            dashboardCardQueries.updateCard(position.toLong(), card.visible, card.type)
         }
-    }
 
-    suspend fun restore() = withContext(EtsMobileDispatchers.IO) {
-        database.reset()
+    fun restore() {
+        dashboardCardQueries.deleteAll()
+        dashboardCardQueries.insertInitialCards()
     }
 }
