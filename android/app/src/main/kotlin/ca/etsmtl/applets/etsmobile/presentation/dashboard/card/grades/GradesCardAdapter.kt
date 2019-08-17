@@ -16,8 +16,7 @@ import model.Cours
  * Created by Sonphil on 03-03-19.
  */
 
-class GradesCardAdapter : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder>() {
-    var onCourseClickListener: OnCourseClickListener? = null
+class GradesCardAdapter(var onCourseClickListener: OnCourseClickListener?) : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder>() {
     var items: List<Cours> = emptyList()
         set(value) {
             val diffCallback = object : DiffUtil.Callback() {

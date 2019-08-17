@@ -8,14 +8,14 @@ import ca.etsmtl.applets.etsmobile.extension.isDeviceConnected
 import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.InfoEtudiantRepository
 import model.Etudiant
-import model.UserCredentials
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 class CheckUserCredentialsValidUseCase @Inject constructor(
     private val repository: InfoEtudiantRepository,
     private val app: App
 ) {
-    operator fun invoke(userCredentials: UserCredentials): LiveData<Resource<Boolean>> {
+    operator fun invoke(userCredentials: SignetsUserCredentials): LiveData<Resource<Boolean>> {
         val shouldFetch: (data: Etudiant?) -> Boolean = { it == null }
 
         return Transformations.map(repository.getInfoEtudiant(userCredentials, shouldFetch)) { res ->

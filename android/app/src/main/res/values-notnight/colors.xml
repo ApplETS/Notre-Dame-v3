@@ -8,6 +8,4 @@
     <color name="colorDialogBg">@android:color/white</color>
     <color name="colorControlNormal">@android:color/black</color>
     <color name="colorNavigationBar">@color/etsRougeClair</color>
-    <color name="colorScheduleText">@color/etsGrisClair</color>
-    <color name="colorScheduleLine">#1E000000</color>
 </resources>

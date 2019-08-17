@@ -6,10 +6,10 @@ import androidx.lifecycle.Observer
 import model.Resource
 import ca.etsmtl.applets.repository.util.zipResourceTo
 import ca.etsmtl.applets.repository.util.zipTo
-import com.nhaarman.mockitokotlin2.capture
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.times
+import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

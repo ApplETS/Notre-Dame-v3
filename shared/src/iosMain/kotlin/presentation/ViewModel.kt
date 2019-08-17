@@ -7,6 +7,6 @@ import kotlinx.coroutines.CoroutineScope
  */
 
 actual open class ViewModel {
-    actual val vmScope: CoroutineScope
-        get() = TODO()
+    actual val scope: CoroutineScope
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
 }
