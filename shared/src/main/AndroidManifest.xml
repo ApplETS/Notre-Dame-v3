@@ -6,6 +6,5 @@
             android:exported="false"
             android:enabled="true"
             android:name="data.securepreferences.PreferencesProvider"/>
-
     </application>
 </manifest>
