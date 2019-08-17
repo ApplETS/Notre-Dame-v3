@@ -2,16 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: "org.jlleitschuh.gradle.ktlint"
+apply plugin: 'com.squareup.sqldelight'
 apply from: rootProject.file('gradle/android.gradle')
 
-android {
-    kapt {
-        arguments {
-            arg("room.schemaLocation", "$projectDir/schemas".toString())
-        }
-    }
+sqldelight {
+    packageName = "ca.etsmtl.applets.shared.db"
+    className = "EtsMobileDb"
 }
 
 androidExtensions {
@@ -41,17 +37,12 @@ kotlin {
             dependencies {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-common'
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlinx_serialization"
-
-                // Coroutines
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.coroutines"
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$versions.coroutines"
+                api "com.soywiz:klock:$versions.klock"
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+                implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_viewmodel_ktx"
                 implementation "javax.inject:javax.inject:1"
-
-                // Ktor
-                implementation "io.ktor:ktor-client-core:$versions.ktor"
-                implementation "io.ktor:ktor-client-json:$versions.ktor"
-                implementation "io.ktor:ktor-client-serialization:$versions.ktor"
             }
         }
 
@@ -60,24 +51,10 @@ kotlin {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7'
-
+                api "com.squareup.sqldelight:android-driver:$versions.sqldelight"
+                api "com.squareup.sqldelight:android-paging-extensions:$versions.sqldelight"
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
                 implementation "androidx.core:core-ktx:$versions.android_ktx"
-                api "androidx.room:room-runtime:$versions.room"
-                implementation "androidx.room:room-coroutines:$versions.room"
-
-                // We need RxJava support for Room because Room can't return Coroutines Channels.
-                // Instead, we make Room returns Flowables and convert them afterwards.
-                implementation "androidx.room:room-rxjava2:$versions.room"
-
-                // Ktor
-                implementation "io.ktor:ktor-client-android:$versions.ktor"
-                implementation "io.ktor:ktor-client-json-jvm:$versions.ktor"
-                implementation "io.ktor:ktor-client-serialization-jvm:$versions.ktor"
-
-                // Lifecycle
-                implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
-                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_viewmodel_ktx"
             }
         }
 
@@ -85,14 +62,11 @@ kotlin {
             dependsOn commonMain
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$versions.kotlinx_serialization"
+                api "com.squareup.sqldelight:ios-driver:$versions.sqldelight"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$versions.coroutines"
             }
         }
     }
-}
-
-dependencies {
-    kapt "androidx.room:room-compiler:$versions.room"
 }
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170

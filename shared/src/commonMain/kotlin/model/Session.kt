@@ -1,12 +1,10 @@
 package model
 
-import utils.date.ETSMobileDate
-
 data class Session(
     var abrege: String,
     var auLong: String,
-    var dateDebut: ETSMobileDate,
-    var dateFin: ETSMobileDate,
+    var dateDebut: Long,
+    var dateFin: Long,
     var dateFinCours: Long,
     var dateDebutChemiNot: Long,
     var dateFinChemiNot: Long,

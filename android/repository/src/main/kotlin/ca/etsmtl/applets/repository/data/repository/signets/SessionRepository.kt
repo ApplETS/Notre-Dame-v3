@@ -13,7 +13,7 @@ import ca.etsmtl.applets.repository.data.db.dao.signets.SessionDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toSessions
 import model.Resource
 import model.Session
-import model.UserCredentials
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 class SessionRepository @Inject constructor(
@@ -30,7 +30,7 @@ class SessionRepository @Inject constructor(
      * from the network or only from the DB
      */
     fun getSessions(
-        userCredentials: UserCredentials,
+        userCredentials: SignetsUserCredentials,
         shouldFetch: (data: List<Session>?) -> Boolean
     ): LiveData<Resource<List<Session>>> {
         return object : SignetsNetworkBoundResource<List<Session>, ApiListeDeSessions>(appExecutors) {
