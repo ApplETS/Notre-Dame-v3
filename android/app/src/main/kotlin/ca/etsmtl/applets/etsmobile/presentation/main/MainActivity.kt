@@ -60,6 +60,10 @@ class MainActivity : BaseActivity() {
         subscribeUI()
         var intentFilter : IntentFilter= IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(broadCastReciever,intentFilter)
+        if (wasNotConnected)
+            addingNetworkStatus(this.getString(R.string.error_no_internet_connection))
+        else
+            removeNetworkStatus()
     }
 
     override fun onDestroy() {
