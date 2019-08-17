@@ -14,15 +14,8 @@
     <string name="uri_applets_fb" translatable="false">https://www.facebook.com/ClubApplETS</string>
     <string name="uri_applets_twitter" translatable="false">https://twitter.com/ClubApplETS</string>
     <string name="uri_applets_yt" translatable="false">https://www.youtube.com/channel/UCiSzzfW1bVbE_0KcEZO52ew</string>
-    <string name="uri_heuristique" translatable="false">http://lheuristique.ca/</string>
     <string name="msg_api_no_seance" translatable="false">"Aucune donnée.  Cela peut être causé parce que l'horaire détaillé n'est pas encore finalisé (il l'est généralement quelques jours avant le début de la session), ou parce que l'horaire est trop ancien (nous ne gardons que 4 sessions), ou que vous n'êtes pas inscrit, ou que vous n'êtes inscrit qu'à des activité sans horaire, comme un stage ou que que vous êtes en rédaction de mémoire ou de thèse."</string>
     <string name="email_applets" translatable="false">info@clubapplets.ca</string>
-
-    <!-- Schedule Settings -->
-    <string name="key_schedule_show_today_btn_pref" translatable="false">schedule_show_today_btn_pref</string>
-    <string name="key_schedule_no_visible_days_pref" translatable="false">schedule_no_visible_days_pref</string>
-    <string name="key_schedule_x_scrolling_speed_pref" translatable="false">schedule_x_scrolling_speed_pref</string>
-    <string name="key_schedule_scroll_duration_pref" translatable="false">schedule_scroll_duration_pref</string>
 
     <!-- Settings-->
     <string name="key_display_pref_category" translatable="false">display_category</string>
@@ -36,7 +29,5 @@
         <item>@string/entry_value_dark_theme_pref_disabled</item>
         <item>@string/entry_value_dark_theme_pref_battery_saver</item>
     </string-array>
-    <string name="key_miscellaneous_pref_category" translatable="false">miscellaneous_category</string>
     <string name="default_entry_value_dark_theme_pref" translatable="false">@string/entry_value_dark_theme_pref_battery_saver</string>
-    <string name="key_shake_bug_reporter_invocation_method_pref" translatable="false">shake_bug_reporter_invocation_method_pref</string>
 </resources>

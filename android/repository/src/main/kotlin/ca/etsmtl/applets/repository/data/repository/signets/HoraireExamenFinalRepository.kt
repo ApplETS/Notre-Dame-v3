@@ -11,10 +11,10 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiListeHoraireExa
 import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.HoraireExamenFinalDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toHorairesExamensFinaux
-import model.HoraireExamenFinal
 import model.Resource
+import model.HoraireExamenFinal
 import model.Session
-import model.UserCredentials
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -38,7 +38,7 @@ class HoraireExamenFinalRepository @Inject constructor(
      * should only be fetched from the DB.
      */
     fun getHorairesExamensFinaux(
-        userCredentials: UserCredentials,
+        userCredentials: SignetsUserCredentials,
         session: Session,
         shouldFetch: Boolean
     ): LiveData<Resource<List<HoraireExamenFinal>>> {
@@ -58,8 +58,8 @@ class HoraireExamenFinalRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<ApiSignetsModel<ApiListeHoraireExamensFinaux>>> {
                 return api.listeHoraireExamensFinaux(
                         ListeHoraireExamensFinauxRequestBody(
-                                userCredentials.universalCode.value,
-                                userCredentials.password,
+                                userCredentials.codeAccesUniversel.value,
+                                userCredentials.motPasse,
                                 session.abrege
                         )
                 )

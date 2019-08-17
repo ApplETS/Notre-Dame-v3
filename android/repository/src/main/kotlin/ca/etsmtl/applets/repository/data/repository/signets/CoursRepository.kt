@@ -13,7 +13,7 @@ import ca.etsmtl.applets.repository.data.db.dao.signets.CoursDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toCours
 import model.Resource
 import model.Cours
-import model.UserCredentials
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -36,7 +36,7 @@ class CoursRepository @Inject constructor(
      * @return The courses
      */
     fun getCours(
-        userCredentials: UserCredentials,
+        userCredentials: SignetsUserCredentials,
         shouldFetch: Boolean = true
     ): LiveData<Resource<List<Cours>>> {
         return object : SignetsNetworkBoundResource<List<Cours>, ApiListeDeCours>(appExecutors) {

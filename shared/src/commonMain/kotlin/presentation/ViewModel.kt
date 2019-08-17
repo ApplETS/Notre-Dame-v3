@@ -7,5 +7,5 @@ import kotlinx.coroutines.CoroutineScope
  */
 
 expect open class ViewModel() {
-    val vmScope: CoroutineScope
+    val scope: CoroutineScope
 }
