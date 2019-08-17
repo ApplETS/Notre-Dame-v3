@@ -50,6 +50,7 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private var broadCastReciever: BroadCastReceiver = BroadCastReceiver()
+    private var intentFilter: IntentFilter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +60,14 @@ class MainActivity : BaseActivity() {
         setupActionBar()
         setupBottomNavigation()
         subscribeUI()
-        var intentFilter: IntentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(broadCastReciever, intentFilter)
+        if (intentFilter == null) {
+            intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+            registerReceiver(broadCastReciever, intentFilter)
+        }
+        if (wasNotConnected)
+            addingNetworkStatus(this.getString(R.string.error_no_internet_connection))
+        else
+            removeNetworkStatus()
     }
 
     override fun onDestroy() {
