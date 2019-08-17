@@ -105,7 +105,7 @@ class ScheduleFragment : DaggerFragment() {
     private fun Seance.toWeekViewEvent(): WeekViewEvent<Seance> {
         val style = WeekViewEvent.Style
             .Builder()
-            .setBackgroundColor(generateColor())
+            .setBackgroundColor(generateColor(requireContext()))
             .build()
 
         return WeekViewEvent.Builder<Seance>()
