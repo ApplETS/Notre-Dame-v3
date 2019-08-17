@@ -1,22 +1,16 @@
 package ca.etsmtl.applets.etsmobile.presentation.more
 
-import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.BuildConfig
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.domain.ClearUserDataUseCase
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
-import ca.etsmtl.applets.etsmobilenotifications.NotificationsLoginManager
-import ca.etsmtl.applets.repository.data.db.AppDatabase
 import com.buglife.sdk.Buglife
-import domain.ClearUserDataUseCase
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import utils.EtsMobileDispatchers
 import javax.inject.Inject
 
 /**
@@ -25,17 +19,11 @@ import javax.inject.Inject
 
 class MoreViewModel @Inject constructor(
     private val clearUserDataUseCase: ClearUserDataUseCase,
-    /**
-     * Used on logout when the user's data needs to be cleared. Will be removed when the db is
-     * fully implemented in the shared module
-     **/
-    private val androidAppDatabase: AppDatabase,
-    private val prefs: SharedPreferences,
     private val app: App
 ) : AndroidViewModel(app) {
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
+    private val logoutMediatorLiveData = MediatorLiveData<Boolean>()
+    val loading: LiveData<Boolean> = Transformations.map(logoutMediatorLiveData) { it }
     private val _displayLogoutConfirmationDialog = MutableLiveData<Boolean>()
     val displayLogoutConfirmationDialog: LiveData<Boolean> = _displayLogoutConfirmationDialog
     private val _displayMessage = MutableLiveData<Event<String>>()
@@ -50,40 +38,34 @@ class MoreViewModel @Inject constructor(
     val navigateToSettings: LiveData<Event<Unit>> = _navigateToSettings
     private val _navigateToUri = MutableLiveData<Event<Int>>()
     val navigateToUri: LiveData<Event<Int>> = _navigateToUri
-    private val _displayBugReportDialog = MutableLiveData<Boolean>()
-    val displayBugReportDialog: LiveData<Boolean> = _displayBugReportDialog
 
     /**
      * Clears the user's data
      *
      * This function should be called when the user want to log out.
      */
-    @SuppressLint("ApplySharedPref")
     private fun logout() {
-        _loading.value = true
-        viewModelScope.launch {
-            clearUserDataUseCase()
+        with(clearUserDataUseCase()) {
+            logoutMediatorLiveData.addSource(this) { finished ->
+                finished?.let {
+                    logoutMediatorLiveData.value = finished
 
-            withContext(EtsMobileDispatchers.IO) {
-                androidAppDatabase.clearAllTables()
+                    if (finished) {
+                        _displayMessage.value = Event(app.getString(R.string.msg_logout_success))
 
-                NotificationsLoginManager.logout(app)
+                        logoutMediatorLiveData.removeSource(this)
 
-                prefs.edit().clear().commit()
+                        _navigateToLogin.value = Event(Unit)
+                    }
+                }
             }
-
-            _loading.postValue(false)
-
-            _displayMessage.postValue(Event(app.getString(R.string.msg_logout_success)))
-
-            _navigateToLogin.postValue(Event(Unit))
         }
     }
 
     fun itemsList(): List<MoreItem> {
         val items = mutableListOf(
             MoreItem(R.drawable.ic_bug_report_black_24dp, R.string.more_item_label_report_bug) {
-                _displayBugReportDialog.value = true
+                navigateToBuglifeReporter()
             },
             MoreItem(R.drawable.ic_people_outline_black_24dp, R.string.more_item_label_contributors) {
                 _navigateToUri.value = Event(R.string.uri_github_contributors)
@@ -93,7 +75,6 @@ class MoreViewModel @Inject constructor(
             }
         )
 
-        @Suppress("ConstantConditionIf")
         if (BuildConfig.FLAVOR == "beta") {
             items.add(MoreItem(R.drawable.ic_help_outline_black_24dp, R.string.more_item_label_beta_faq) {
                 _navigateToUri.value = Event(R.string.uri_beta_faq)
@@ -111,18 +92,11 @@ class MoreViewModel @Inject constructor(
         return items
     }
 
-    fun reportBugWithScreenshot() {
-        _displayBugReportDialog.value = false
-        val screenshot = Buglife.captureScreenshot()
+    private fun navigateToBuglifeReporter() {
+        val screenShot = Buglife.captureScreenshot() // TODO: Let user attach his own file
 
-        screenshot?.let { Buglife.addAttachment(it) }
+        screenShot?.let { Buglife.addAttachment(it) }
         Buglife.showReporter()
-    }
-
-    fun reportBugWithVideo() {
-        _displayBugReportDialog.value = false
-
-        Buglife.startScreenRecording() // TODO: Fix Buglife's permission flow
     }
 
     fun clickAbout() {

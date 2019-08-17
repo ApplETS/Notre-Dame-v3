@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
-import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
 import model.Resource
+import ca.etsmtl.applets.repository.data.repository.signets.SessionRepository
+import ca.etsmtl.applets.repository.util.timeInSeconds
 import model.Session
-import model.UserCredentials
-import utils.date.ETSMobileDate
+import model.SignetsUserCredentials
+import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -16,7 +17,7 @@ import javax.inject.Inject
  */
 
 class FetchCurrentSessionUseCase @Inject constructor(
-    private val userCredentials: UserCredentials,
+    private val userCredentials: SignetsUserCredentials,
     private val sessionRepository: SessionRepository,
     private val app: App
 ) {
@@ -24,7 +25,7 @@ class FetchCurrentSessionUseCase @Inject constructor(
         return Transformations.map(sessionRepository.getSessions(userCredentials) { true }) { res ->
             val sessions = res.data.orEmpty()
             val currentSession = sessions.find { session ->
-                ETSMobileDate() in session.dateDebut..session.dateFin
+                Date().timeInSeconds in session.dateDebut..session.dateFin
             } ?: sessions.getPreviousSession()
             ?: sessions.lastOrNull()
 
@@ -39,6 +40,6 @@ class FetchCurrentSessionUseCase @Inject constructor(
     }
 
     private fun List<Session>.getPreviousSession(): Session? = findLast { session ->
-        ETSMobileDate() > session.dateFin
+        Date().timeInSeconds > session.dateFin
     }
 }

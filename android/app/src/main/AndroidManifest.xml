@@ -56,23 +56,5 @@
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:theme="@style/AppOssLicensesTheme" />
-
-        <service android:name=".notification.NotificationService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <meta-data
-            android:name="ca.etsmtl.applets.etsmobilenotifications.AWS_ACCESS_KEY"
-            android:value="@string/aws_access_key" />
-
-        <meta-data
-            android:name="ca.etsmtl.applets.etsmobilenotifications.AWS_SECRET_KEY"
-            android:value="@string/aws_secret_key" />
-
-        <meta-data
-            android:name="ca.etsmtl.applets.etsmobilenotifications.SNS_ARN"
-            android:value="@string/aws_application_arn" />
     </application>
 </manifest>

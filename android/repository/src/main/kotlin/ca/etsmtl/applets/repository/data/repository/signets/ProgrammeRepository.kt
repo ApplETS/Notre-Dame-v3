@@ -12,7 +12,7 @@ import ca.etsmtl.applets.repository.data.api.response.signets.ApiSignetsModel
 import ca.etsmtl.applets.repository.data.db.dao.signets.ProgrammeDao
 import ca.etsmtl.applets.repository.data.db.entity.mapper.toProgrammes
 import model.Programme
-import model.UserCredentials
+import model.SignetsUserCredentials
 import javax.inject.Inject
 
 /**
@@ -32,7 +32,7 @@ class ProgrammeRepository @Inject constructor(
      * be fetched from the network or only from the DB
      */
     fun getProgrammes(
-        userCredentials: UserCredentials,
+        userCredentials: SignetsUserCredentials,
         shouldFetch: (data: List<Programme>?) -> Boolean
     ) = object : SignetsNetworkBoundResource<List<Programme>, ApiListeProgrammes>(appExecutors) {
         override fun saveSignetsData(item: ApiListeProgrammes) {

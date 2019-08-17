@@ -1,76 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootSchedule"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/design_bottom_navigation_height"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/design_bottom_navigation_height"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment"
+    android:layout_marginBottom="@dimen/design_bottom_navigation_height"
     tools:ignore="PrivateResource">
 
-    <com.alamkanak.weekview.WeekView
-        android:id="@+id/weekView"
+    <ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch
+        android:id="@+id/swipeRefreshLayoutSchedule"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:columnGap="1dp"
-        app:dayBackgroundColor="@android:color/transparent"
-        app:daySeparatorColor="@color/colorScheduleLine"
-        app:defaultEventColor="@color/colorPrimary"
-        app:eventCornerRadius="4dp"
-        app:eventTextColor="@android:color/white"
-        app:eventTextSize="14sp"
-        app:headerRowBackgroundColor="@android:color/transparent"
-        app:headerRowBottomLineColor="@color/colorScheduleLine"
-        app:headerRowBottomLineWidth="1dp"
-        app:headerRowPadding="12dp"
-        app:headerRowTextColor="@color/colorScheduleText"
-        app:headerRowTextSize="12sp"
-        app:hourHeight="60dp"
-        app:hourSeparatorColor="@color/colorScheduleLine"
-        app:minHour="7"
-        app:nowLineColor="@color/colorPrimary"
-        app:nowLineStrokeWidth="1dp"
-        app:numberOfVisibleDays="1"
-        app:overlappingEventGap="1dp"
-        app:showHeaderRowBottomLine="true"
-        app:showNowLine="true"
-        app:showTimeColumnSeparator="true"
-        app:singleDayHorizontalMargin="2dp"
-        app:timeColumnBackgroundColor="@android:color/transparent"
-        app:timeColumnPadding="8dp"
-        app:timeColumnSeparatorColor="@color/colorScheduleLine"
-        app:timeColumnSeparatorStrokeWidth="1dp"
-        app:timeColumnTextColor="@color/colorScheduleText"
-        app:timeColumnTextSize="12dp"
-        app:todayBackgroundColor="@color/colorScheduleTodayBg"
-        app:todayHeaderTextColor="@color/colorPrimary"
-        app:xScrollingSpeed="1" />
-
-    <ca.etsmtl.applets.etsmobile.view.ProgressBarWithProgressTimeLatch
-        android:id="@+id/progressBarSchedule"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnToday"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:visibility="gone"
-        app:borderWidth="0dp"
-        app:fabSize="auto"
-        app:srcCompat="@drawable/ic_today_white_24dp"
-        app:tint="@android:color/white"
-        tools:visibility="visible" />
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                layout="@layout/empty_view_schedule"
+                android:visibility="gone" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/schedule_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+    </ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch>
 </FrameLayout>
 
