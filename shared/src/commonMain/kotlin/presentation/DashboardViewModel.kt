@@ -4,7 +4,6 @@ import di.Inject
 import domain.FetchDashboardCardsUseCase
 import domain.RestoreDashboardCardsUseCase
 import domain.SaveDashboardCardsUseCase
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
@@ -28,17 +27,17 @@ class DashboardViewModel @Inject constructor(
     private var hiddenCards: MutableList<DashboardCard> = mutableListOf()
     private var lastRemovedCardPosition = -1
 
-    fun load() = vmScope.launch {
-        for (cards in fetchDashboardCardsUseCase()) {
-            val cards = cards.partition { card ->
+    fun load() = scope.launch {
+        val cards = fetchDashboardCardsUseCase()
+            .receive()
+            .partition { card ->
                 card.visible
             }
 
-            visibleCards = cards.first.toMutableList()
-            hiddenCards = cards.second.toMutableList()
+        visibleCards = cards.first.toMutableList()
+        hiddenCards = cards.second.toMutableList()
 
-            this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
-        }
+        this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
     }
 
     fun onCardMoved(fromPosition: Int, toPosition: Int) {
@@ -69,14 +68,12 @@ class DashboardViewModel @Inject constructor(
         _cardsChannel.offer(visibleCards.toList())
     }
 
-    fun save() = GlobalScope.launch {
-        saveDashboardCardsUseCase(
-            visibleCards,
-            hiddenCards
-        )
-    }
+    fun save() = saveDashboardCardsUseCase(
+        visibleCards,
+        hiddenCards
+    )
 
-    fun restore() = vmScope.launch {
+    fun restore() {
         _showUndoRemoveChannel.offer(false)
         restoreDashboardCardsUseCase()
         load()

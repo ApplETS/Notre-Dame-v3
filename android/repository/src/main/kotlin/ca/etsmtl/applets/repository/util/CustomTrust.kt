@@ -16,6 +16,7 @@
 package ca.etsmtl.applets.repository.util
 
 import android.content.Context
+import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import java.io.IOException
@@ -50,6 +51,7 @@ internal abstract class CustomTrust(context: Context) {
 
         OkHttpClient.Builder()
             .sslSocketFactory(sslSocketFactory, trustManager)
+            .addInterceptor(ChuckInterceptor(context.applicationContext))
             .build()
     }
 

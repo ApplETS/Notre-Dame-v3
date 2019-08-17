@@ -23,7 +23,10 @@
 		25553FAC20545D42009897F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAA20545D42009897F7 /* Main.storyboard */; };
 		25553FAE20545D42009897F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAD20545D42009897F7 /* Assets.xcassets */; };
 		25553FB120545D42009897F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25553FAF20545D42009897F7 /* LaunchScreen.storyboard */; };
-		3302B4285AB5BEF29192FE3F /* Pods_ETSMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226CDCEB9C2BB569A61C6C93 /* Pods_ETSMobile.framework */; };
+		25553FBC20545D42009897F7 /* ETSMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FBB20545D42009897F7 /* ETSMobileTests.swift */; };
+		25553FC720545D42009897F7 /* ETSMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25553FC620545D42009897F7 /* ETSMobileUITests.swift */; };
+		3C3DAA0712832A60E4FAE299 /* Pods_ETSMobileUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43949F5E677A04728A6D0FF /* Pods_ETSMobileUITests.framework */; };
+		510B5B370EFA71A096DCAD66 /* Pods_ETSMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D02B165835FDFDB5440AD499 /* Pods_ETSMobileTests.framework */; };
 		6A0EDD0C223D4B35007213F2 /* ETSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0EDD0B223D4B34007213F2 /* ETSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6A0EDD0D223D4B75007213F2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0EDD0B223D4B34007213F2 /* ETSKit.framework */; };
 		846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */; };
@@ -38,6 +41,7 @@
 		95186718218E0650009DDD47 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95186717218E0650009DDD47 /* GradientView.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
+		B6D2C0C1F41F5A744715A147 /* Pods_ETSMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C47FBC9D32E951F0CF7689 /* Pods_ETSMobile.framework */; };
 		C8B61D042162D9100040A732 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D032162D9100040A732 /* UserType.swift */; };
 		C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D072162DB1D0040A732 /* MonETSClient.swift */; };
 		C8B61D0A2162E8660040A732 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D092162E8660040A732 /* Environment.swift */; };
@@ -50,7 +54,26 @@
 		C8C49A862162D553006CCBED /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A852162D553006CCBED /* Schedule.storyboard */; };
 		C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C49A882162D60D006CCBED /* SchoolViewController.swift */; };
 		C8C49A8B2162D641006CCBED /* School.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C49A8A2162D641006CCBED /* School.storyboard */; };
+		C8EBC5FD221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
+		C8EBC5FE221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		25553FB820545D42009897F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25553F9920545D42009897F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25553FA020545D42009897F7;
+			remoteInfo = "ETS-mobile";
+		};
+		25553FC320545D42009897F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25553F9920545D42009897F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25553FA020545D42009897F7;
+			remoteInfo = "ETS-mobile";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C8EBC604221EF4F40049BCB2 /* Embed Frameworks */ = {
@@ -67,6 +90,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E9F43F9021ED627796E284E /* Pods-ETSMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobile/Pods-ETSMobile.release.xcconfig"; sourceTree = "<group>"; };
 		142FC845208B9B6600C58563 /* BombThreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombThreatViewController.swift; sourceTree = "<group>"; };
 		14487BEE20C4808000769881 /* SuspiciousPackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousPackageViewController.swift; sourceTree = "<group>"; };
 		14487BF020C4938100769881 /* FireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireViewController.swift; sourceTree = "<group>"; };
@@ -83,24 +107,27 @@
 		146F3B0F208B89E100275F71 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		146F3B11208B89EB00275F71 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		14E8E3BD20C8CC9B00751350 /* SuspiciousSmellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspiciousSmellViewController.swift; sourceTree = "<group>"; };
-		226CDCEB9C2BB569A61C6C93 /* Pods_ETSMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25553FA120545D42009897F7 /* ETSMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ETSMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25553FA420545D42009897F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25553FAB20545D42009897F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		25553FAD20545D42009897F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25553FB020545D42009897F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25553FB220545D42009897F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25553FB720545D42009897F7 /* ETSMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ETSMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25553FBB20545D42009897F7 /* ETSMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSMobileTests.swift; sourceTree = "<group>"; };
 		25553FBD20545D42009897F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25553FC220545D42009897F7 /* ETSMobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ETSMobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25553FC620545D42009897F7 /* ETSMobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSMobileUITests.swift; sourceTree = "<group>"; };
 		25553FC820545D42009897F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A82EA90523B5D0618113F93 /* Pods-ETSMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobile.release.xcconfig"; path = "Target Support Files/Pods-ETSMobile/Pods-ETSMobile.release.xcconfig"; sourceTree = "<group>"; };
-		669E89682F70D48036542C49 /* Pods-ETSMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobile.debug.xcconfig"; path = "Target Support Files/Pods-ETSMobile/Pods-ETSMobile.debug.xcconfig"; sourceTree = "<group>"; };
+		39C47FBC9D32E951F0CF7689 /* Pods_ETSMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C9FC6BF358932EF25AFBB5D /* Pods-ETSMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileTests/Pods-ETSMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A0EDD0B223D4B34007213F2 /* ETSKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ETSKit.framework; path = "../../shared/build/xcode-frameworks/ETSKit.framework"; sourceTree = "<group>"; };
+		746DE73AC48DA6601015F6EF /* Pods-ETSMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobile/Pods-ETSMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		846B169D20C710FB00AE5D1F /* ArmedPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmedPersonViewController.swift; sourceTree = "<group>"; };
 		84D608F820C74500007D9976 /* MedicalEmergencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalEmergencyViewController.swift; sourceTree = "<group>"; };
 		8F1C750321835CE1002CE21F /* LoginValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginValidation.swift; sourceTree = "<group>"; };
 		8F1C750521835F47002CE21F /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		8F27F9B57DB34AC0E59FFD28 /* Pods-ETSMobileUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileUITests/Pods-ETSMobileUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F2994432163C2DB00747A21 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8F4CAF2821825178009ADDEF /* ETSLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSLoadingIndicator.swift; sourceTree = "<group>"; };
 		8F83BEE52180E501006294B0 /* ETSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSTextField.swift; sourceTree = "<group>"; };
@@ -109,6 +136,7 @@
 		95186717218E0650009DDD47 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		BDF2469E7134D6E5966A13B9 /* Pods-ETSMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileTests/Pods-ETSMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C8B61D032162D9100040A732 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		C8B61D072162DB1D0040A732 /* MonETSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonETSClient.swift; sourceTree = "<group>"; };
 		C8B61D092162E8660040A732 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -122,6 +150,9 @@
 		C8C49A882162D60D006CCBED /* SchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolViewController.swift; sourceTree = "<group>"; };
 		C8C49A8A2162D641006CCBED /* School.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = School.storyboard; sourceTree = "<group>"; };
 		C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ETSKit.framework; path = ../../shared/ETSKit.framework; sourceTree = "<group>"; };
+		D02B165835FDFDB5440AD499 /* Pods_ETSMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEEB8EE6E30435FCA83AD267 /* Pods-ETSMobileUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ETSMobileUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ETSMobileUITests/Pods-ETSMobileUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E43949F5E677A04728A6D0FF /* Pods_ETSMobileUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ETSMobileUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,22 +161,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A0EDD0D223D4B75007213F2 /* ETSKit.framework in Frameworks */,
-				3302B4285AB5BEF29192FE3F /* Pods_ETSMobile.framework in Frameworks */,
+				B6D2C0C1F41F5A744715A147 /* Pods_ETSMobile.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25553FB420545D42009897F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8EBC5FD221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */,
+				510B5B370EFA71A096DCAD66 /* Pods_ETSMobileTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25553FBF20545D42009897F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8EBC5FE221EF4DC0049BCB2 /* ETSKit.framework in Frameworks */,
+				3C3DAA0712832A60E4FAE299 /* Pods_ETSMobileUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04DD03E374349481F9330000 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				669E89682F70D48036542C49 /* Pods-ETSMobile.debug.xcconfig */,
-				2A82EA90523B5D0618113F93 /* Pods-ETSMobile.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		142FC841208B90E400C58563 /* Emergencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,8 +249,8 @@
 				25553FBA20545D42009897F7 /* ETSMobileTests */,
 				25553FC520545D42009897F7 /* ETSMobileUITests */,
 				25553FA220545D42009897F7 /* Products */,
+				577BBEBEFE4EA8B9E76F166B /* Pods */,
 				CFD252A53B6D99BD26458F33 /* Frameworks */,
-				04DD03E374349481F9330000 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -218,6 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				25553FA120545D42009897F7 /* ETSMobile.app */,
+				25553FB720545D42009897F7 /* ETSMobileTests.xctest */,
+				25553FC220545D42009897F7 /* ETSMobileUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -254,6 +296,19 @@
 				25553FC820545D42009897F7 /* Info.plist */,
 			);
 			path = ETSMobileUITests;
+			sourceTree = "<group>";
+		};
+		577BBEBEFE4EA8B9E76F166B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				746DE73AC48DA6601015F6EF /* Pods-ETSMobile.debug.xcconfig */,
+				0E9F43F9021ED627796E284E /* Pods-ETSMobile.release.xcconfig */,
+				BDF2469E7134D6E5966A13B9 /* Pods-ETSMobileTests.debug.xcconfig */,
+				3C9FC6BF358932EF25AFBB5D /* Pods-ETSMobileTests.release.xcconfig */,
+				8F27F9B57DB34AC0E59FFD28 /* Pods-ETSMobileUITests.debug.xcconfig */,
+				DEEB8EE6E30435FCA83AD267 /* Pods-ETSMobileUITests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		8F2994422163C2C500747A21 /* Util */ = {
@@ -333,7 +388,9 @@
 			isa = PBXGroup;
 			children = (
 				C8EBC5FB221EF4DC0049BCB2 /* ETSKit.framework */,
-				226CDCEB9C2BB569A61C6C93 /* Pods_ETSMobile.framework */,
+				39C47FBC9D32E951F0CF7689 /* Pods_ETSMobile.framework */,
+				D02B165835FDFDB5440AD499 /* Pods_ETSMobileTests.framework */,
+				E43949F5E677A04728A6D0FF /* Pods_ETSMobileUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -345,14 +402,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25553FCB20545D42009897F7 /* Build configuration list for PBXNativeTarget "ETSMobile" */;
 			buildPhases = (
-				51DC0CBD8AED6330559C19E3 /* [CP] Check Pods Manifest.lock */,
+				2D7C32B011916B225BBB6870 /* [CP] Check Pods Manifest.lock */,
 				C8EBC605221EF5620049BCB2 /* Prepare ETSKit Framework */,
 				25553F9D20545D42009897F7 /* Sources */,
 				25553F9E20545D42009897F7 /* Frameworks */,
 				25553F9F20545D42009897F7 /* Resources */,
+				2C1BB3868ED0EEE31E21924B /* [CP] Embed Pods Frameworks */,
 				C8EBC604221EF4F40049BCB2 /* Embed Frameworks */,
 				8F91DFA2218DE83800472BE7 /* Lint */,
-				DCCE6DEE8F27D0EF1198EE40 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -362,6 +419,44 @@
 			productName = "ETS-mobile";
 			productReference = 25553FA120545D42009897F7 /* ETSMobile.app */;
 			productType = "com.apple.product-type.application";
+		};
+		25553FB620545D42009897F7 /* ETSMobileTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25553FCE20545D42009897F7 /* Build configuration list for PBXNativeTarget "ETSMobileTests" */;
+			buildPhases = (
+				2F6A6041A828F6668B4FE1F9 /* [CP] Check Pods Manifest.lock */,
+				25553FB320545D42009897F7 /* Sources */,
+				25553FB420545D42009897F7 /* Frameworks */,
+				25553FB520545D42009897F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				25553FB920545D42009897F7 /* PBXTargetDependency */,
+			);
+			name = ETSMobileTests;
+			productName = "ETS-mobileTests";
+			productReference = 25553FB720545D42009897F7 /* ETSMobileTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		25553FC120545D42009897F7 /* ETSMobileUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25553FD120545D42009897F7 /* Build configuration list for PBXNativeTarget "ETSMobileUITests" */;
+			buildPhases = (
+				FC7794D21227206AE616840C /* [CP] Check Pods Manifest.lock */,
+				25553FBE20545D42009897F7 /* Sources */,
+				25553FBF20545D42009897F7 /* Frameworks */,
+				25553FC020545D42009897F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				25553FC420545D42009897F7 /* PBXTargetDependency */,
+			);
+			name = ETSMobileUITests;
+			productName = "ETS-mobileUITests";
+			productReference = 25553FC220545D42009897F7 /* ETSMobileUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -375,13 +470,25 @@
 				TargetAttributes = {
 					25553FA020545D42009897F7 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
 								enabled = 0;
 							};
 						};
+					};
+					25553FB620545D42009897F7 = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 25553FA020545D42009897F7;
+					};
+					25553FC120545D42009897F7 = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 25553FA020545D42009897F7;
 					};
 				};
 			};
@@ -400,6 +507,8 @@
 			projectRoot = "";
 			targets = (
 				25553FA020545D42009897F7 /* ETSMobile */,
+				25553FB620545D42009897F7 /* ETSMobileTests */,
+				25553FC120545D42009897F7 /* ETSMobileUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -424,10 +533,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25553FB520545D42009897F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25553FC020545D42009897F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		51DC0CBD8AED6330559C19E3 /* [CP] Check Pods Manifest.lock */ = {
+		2C1BB3868ED0EEE31E21924B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ETSMobile/Pods-ETSMobile-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ETSMobile/Pods-ETSMobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D7C32B011916B225BBB6870 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -443,6 +584,24 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-ETSMobile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2F6A6041A828F6668B4FE1F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ETSMobileTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -485,22 +644,22 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT/../../shared/build/xcode-frameworks\"\n./gradlew :shared:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
 		};
-		DCCE6DEE8F27D0EF1198EE40 /* [CP] Embed Pods Frameworks */ = {
+		FC7794D21227206AE616840C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ETSMobile/Pods-ETSMobile-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"$(DERIVED_FILE_DIR)/Pods-ETSMobileUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ETSMobile/Pods-ETSMobile-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -541,7 +700,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25553FB320545D42009897F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25553FBC20545D42009897F7 /* ETSMobileTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25553FBE20545D42009897F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25553FC720545D42009897F7 /* ETSMobileUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		25553FB920545D42009897F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25553FA020545D42009897F7 /* ETSMobile */;
+			targetProxy = 25553FB820545D42009897F7 /* PBXContainerItemProxy */;
+		};
+		25553FC420545D42009897F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25553FA020545D42009897F7 /* ETSMobile */;
+			targetProxy = 25553FC320545D42009897F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1454550320B3647000EB7682 /* Localizable.strings */ = {
@@ -692,45 +880,111 @@
 		};
 		25553FCC20545D42009897F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 669E89682F70D48036542C49 /* Pods-ETSMobile.debug.xcconfig */;
+			baseConfigurationReference = 746DE73AC48DA6601015F6EF /* Pods-ETSMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N742HF354K;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../shared/build/xcode-frameworks",
 				);
 				INFOPLIST_FILE = ETSMobile/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.applets.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		25553FCD20545D42009897F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A82EA90523B5D0618113F93 /* Pods-ETSMobile.release.xcconfig */;
+			baseConfigurationReference = 0E9F43F9021ED627796E284E /* Pods-ETSMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N742HF354K;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../shared/build/xcode-frameworks",
 				);
 				INFOPLIST_FILE = "ETS-mobile/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.etsmtl.applets.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		25553FCF20545D42009897F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF2469E7134D6E5966A13B9 /* Pods-ETSMobileTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ETS-mobileTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.ETS-mobileTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ETSMobile.app/ETSMobile";
+			};
+			name = Debug;
+		};
+		25553FD020545D42009897F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C9FC6BF358932EF25AFBB5D /* Pods-ETSMobileTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ETS-mobileTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.ETS-mobileTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ETSMobile.app/ETSMobile";
+			};
+			name = Release;
+		};
+		25553FD220545D42009897F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F27F9B57DB34AC0E59FFD28 /* Pods-ETSMobileUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ETS-mobileUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.ETS-mobileUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ETS-mobile";
+			};
+			name = Debug;
+		};
+		25553FD320545D42009897F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEEB8EE6E30435FCA83AD267 /* Pods-ETSMobileUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "ETS-mobileUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.ETS-mobileUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ETS-mobile";
 			};
 			name = Release;
 		};
@@ -751,6 +1005,24 @@
 			buildConfigurations = (
 				25553FCC20545D42009897F7 /* Debug */,
 				25553FCD20545D42009897F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25553FCE20545D42009897F7 /* Build configuration list for PBXNativeTarget "ETSMobileTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25553FCF20545D42009897F7 /* Debug */,
+				25553FD020545D42009897F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25553FD120545D42009897F7 /* Build configuration list for PBXNativeTarget "ETSMobileUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25553FD220545D42009897F7 /* Debug */,
+				25553FD320545D42009897F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

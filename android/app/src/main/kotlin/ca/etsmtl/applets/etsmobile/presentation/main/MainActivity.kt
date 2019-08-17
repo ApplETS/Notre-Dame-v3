@@ -1,20 +1,15 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.graphics.PorterDuff
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
@@ -27,9 +22,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
-import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
 import javax.inject.Inject
-
+import kotlinx.android.synthetic.main.activity_main.networkMessageContainer
+import android.net.ConnectivityManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 
 
 /**
@@ -43,6 +42,7 @@ class MainActivity : BaseActivity() {
 
     companion
     object { var wasNotConnected  =false}
+
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
     }
@@ -58,8 +58,13 @@ class MainActivity : BaseActivity() {
         setupActionBar()
         setupBottomNavigation()
         subscribeUI()
-       var intentFilter : IntentFilter= IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        var intentFilter : IntentFilter= IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(broadCastReciever,intentFilter)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(broadCastReciever)
     }
 
     private fun setupBottomNavigation() {
@@ -86,15 +91,7 @@ class MainActivity : BaseActivity() {
             bottomNavigationView.setupWithNavController(navController)
             bottomNavigationView.setOnNavigationItemSelectedListener { item ->
                 if (mainViewModel.shouldPerformBottomNavigationViewAction()) {
-                    val navOptions = NavOptions.Builder()
-                        .setLaunchSingleTop(true)
-                        .setEnterAnim(androidx.navigation.ui.R.anim.nav_default_enter_anim)
-                        .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
-                        .build()
-
-                    findNavController(R.id.fragmentNavHostMain).navigate(item.itemId, null, navOptions)
-
-                    true
+                    NavigationUI.onNavDestinationSelected(item, navController)
                 } else {
                     false
                 }
@@ -159,7 +156,6 @@ class MainActivity : BaseActivity() {
             super.onBackPressed()
         })
     }
-
     private fun addingNetworkStatus (message:String)
     {
         var textView=  TextView(this)

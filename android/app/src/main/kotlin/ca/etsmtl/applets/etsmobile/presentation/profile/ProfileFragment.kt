@@ -67,10 +67,7 @@ class ProfileFragment : DaggerFragment() {
             it?.let { swipeRefreshLayoutProfile.isRefreshing = it }
         })
         profileViewModel.errorMessage.observe(this, EventObserver { errorMessage ->
-            errorMessage?.let {
-
-                it -> if(!it.equals(context?.getString(R.string.error_no_internet_connection)))
-                context?.toast(it) }
+            errorMessage?.let { it -> context?.toast(it) }
         })
         this.lifecycle.addObserver(profileViewModel)
     }

@@ -9,9 +9,9 @@ import ca.etsmtl.applets.etsmobile.extension.mockNetwork
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.util.Event
 import model.Resource
-import com.nhaarman.mockitokotlin2.capture
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import model.Cours
 import org.junit.Before
 import org.junit.Rule

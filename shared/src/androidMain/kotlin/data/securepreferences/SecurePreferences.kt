@@ -6,7 +6,7 @@ import di.Inject
  * Created by Sonphil on 18-05-19.
  */
 
-actual class SecurePreferences @Inject constructor() {
+actual class SecurePreferences @Inject constructor(){
 
     private val prefs by lazy {
         PreferencesProvider.preferences()
