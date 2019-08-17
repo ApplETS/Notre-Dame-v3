@@ -1,6 +1,6 @@
 package model
 
-import utils.date.ETSMobileDate
+import com.soywiz.klock.DateTime
 
 data class Evaluation(
     var cours: String,
@@ -8,7 +8,7 @@ data class Evaluation(
     var session: String,
     var nom: String,
     var equipe: String,
-    var dateCible: ETSMobileDate?,
+    var dateCible: DateTime?,
     var note: String?,
     var corrigeSur: String?,
     var notePourcentage: String?,

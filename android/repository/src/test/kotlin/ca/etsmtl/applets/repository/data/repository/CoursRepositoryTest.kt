@@ -15,16 +15,16 @@ import ca.etsmtl.applets.repository.data.db.entity.mapper.toCours
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.CoursEntityAndNoteSur100
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
+import model.Resource
 import ca.etsmtl.applets.repository.data.repository.signets.CoursRepository
 import ca.etsmtl.applets.repository.util.ApiUtil
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.capture
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.capture
 import junit.framework.Assert.assertEquals
 import model.Cours
-import model.Resource
+import model.SignetsUserCredentials
 import model.UniversalCode
-import model.UserCredentials
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -76,7 +76,7 @@ class CoursRepositoryTest {
             ""
         )
     }
-    private val userCredentials = UserCredentials(UniversalCode("test"), "foo", "ENS")
+    private val userCredentials = SignetsUserCredentials(UniversalCode("test"), "foo")
     @Captor
     private lateinit var coursEntitiesArgumentCaptor: ArgumentCaptor<List<CoursEntity>>
 

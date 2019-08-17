@@ -44,14 +44,6 @@
     <string name="text_applets_card">ÉTSMobile a été conçue par le club ApplETS. Supportez-nous en aimant notre page Facebook, en contribuant sur GitHub ou en nous faisant part de vos commentaires par courriel.</string>
     <string name="error_no_email_app">Aucune application de courriel disponible</string>
 
-    <!-- Schedule -->
-    <string name="title_schedule_settings">Paramètres de l\'horaire</string>
-    <string name="label_schedule_show_today_btn_pref">Afficher le bouton Aujourd\'hui</string>
-    <string name="label_schedule_no_visible_days_pref">Nombre de journées visibles</string>
-    <string name="label_schedule_x_scrolling_speed_pref">Vitesse de défilement horizontale</string>
-    <string name="label_schedule_scroll_duration_pref">Durée de défilement en millisecondes</string>
-    <string name="error_no_event_found">Aucun événement trouvé</string>
-
     <!-- Grades -->
     <string name="title_grades">Notes</string>
     <string name="msg_no_grades">Aucune note disponible</string>
@@ -98,14 +90,10 @@
     <string name="title_news">Nouvelles</string>
     <string name="title_moodle">Moodle</string>
     <string name="title_directory">Bottin</string>
-    <string name="title_heuristique">L\'heuristique</string>
 
     <!-- More -->
     <string name="more_item_label_about_applets">À propos d\'ApplETS</string>
     <string name="more_item_label_report_bug">Rapporter un bogue</string>
-    <string name="prompt_report_bug_method">Comment souhaitez-vous rapporter le bogue?</string>
-    <string name="report_bug_method_screenshot">Capture d\'écran</string>
-    <string name="report_bug_method_video">Capture vidéo</string>
     <string name="more_item_label_contributors">Contributeurs</string>
     <string name="more_item_label_open_source_licenses">@string/oss_license_title</string>
     <string name="more_item_label_beta_faq">FAQ Bêta</string>
@@ -117,6 +105,7 @@
     <!-- About -->
     <string name="applets_about">ÉTSMobile a été réalisée par le club scientifique ApplETS de l\'École de technologie supérieure.\n\nApplETS se veut, avant tout, un regroupement d’étudiants qui partagent un intérêt commun pour le domaine des télécommunications et des applications mobiles.
         La mission d\'ApplETS est de former les étudiants au développement mobile et de promouvoir la production d\'applications mobiles au sein de la communauté étudiante.\n\nSuivez-nous sur : </string>
+    <string name="msg_no_seances">Aucune séance de cours pour la session actuelle</string>
 
     <!-- Buglife -->
     <string name="screenshot_annotator_activity_label" tools:override="true">Capture d\'écran</string>
@@ -136,9 +125,6 @@
     <string name="error_serialize_report" tools:override="true">Échec de la sérialisation du rapport de bogue.</string>
     <string name="error_process_report" tools:override="true">Une erreur est survenue lors du traitement du rapport de bogue!</string>
     <string name="error_save_screenshot" tools:override="true">Une erreur est survenue lors de la sauvegarde du capture d\'écran.</string>
-    <string name="screen_recording_minimum_os_error" tools:override="true">Oups! La capture vidéo nécessite Android 6.0 (Marshmallow) ou une version ultérieure.</string>
-    <string name="screen_recording_permission_denied_overlay" tools:override="true">Oups! Nous avons besoin de votre autorisation pour afficher des éléments par dessus avant de pouvoir enregistrer votre écran.</string>
-    <string name="screen_recording_permission_denied_recording" tools:override="true">Oups! Nous avons besoin de votre permission pour enregistrer votre écran.</string>
     <string name="buglife_email">Adresse courriel</string>
     <string name="buglife_reproducibility">Reproductibilité</string>
     <string-array name="buglife_reproducibility_levels">
@@ -147,6 +133,7 @@
         <item>Rarement</item>
     </string-array>
     <string name="buglife_steps_to_reproduce">Étapes pour reproduire</string>
+
 
     <!-- Security -->
     <string-array name="array_security_type">
@@ -193,6 +180,4 @@
         <item>Désactivé</item>
         <item>Défini par l\'économiseur de batterie</item>
     </string-array>
-    <string name="label_miscellaneous_pref_category">Divers</string>
-    <string name="label_shake_bug_reporter_invocation_method_pref">Secouer pour rapporter un bogue</string>
 </resources>
