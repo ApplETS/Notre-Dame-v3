@@ -12,6 +12,7 @@ import ca.etsmtl.applets.etsmobile.presentation.ets.EtsViewModel
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment
+import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
 import ca.etsmtl.applets.etsmobile.presentation.main.MainViewModel
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreFragment
 import ca.etsmtl.applets.etsmobile.presentation.more.MoreViewModel
@@ -27,8 +28,6 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import presentation.DashboardViewModel
-import presentation.SplashViewModel
-import presentation.login.LoginViewModel
 
 /**
  * Created by Sonphil on 15-03-18.
@@ -46,11 +45,11 @@ interface MainActivityModule {
     @ContributesAndroidInjector
     fun contributeLoginFragment(): LoginFragment
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(SplashViewModel::class)
-    fun bindSplashViewModel(splashViewModel: SplashViewModel): ViewModel
-
+    /**
+     * Cette fonction injecte, dans une Map, LoginViewModel::class en tant que clé. En effet, ceci
+     * est clairement stipulé par les annotations(@IntoMap @ViewModelKey(LoginViewModel::class).
+     * Cette clée est associée à un Provider qui aura le rôle d'instancier un LoginViewModel.
+     */
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)

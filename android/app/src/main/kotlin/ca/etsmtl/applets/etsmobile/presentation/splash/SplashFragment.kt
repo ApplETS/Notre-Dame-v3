@@ -11,12 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.loginNotifications
-import ca.etsmtl.applets.etsmobile.extension.toLiveData
 import ca.etsmtl.applets.etsmobile.extension.toast
+import ca.etsmtl.applets.etsmobile.presentation.login.LoginViewModel
+import ca.etsmtl.applets.etsmobile.util.EventObserver
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_splash.progressBarSplash
-import presentation.SplashViewModel
 import javax.inject.Inject
 
 /**
@@ -24,8 +23,8 @@ import javax.inject.Inject
  */
 
 class SplashFragment : DaggerFragment() {
-    private val splashViewModel: SplashViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel::class.java)
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
     }
 
     @Inject
@@ -41,12 +40,11 @@ class SplashFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeUI()
-        splashViewModel.submitSavedCredentials()
     }
 
     private fun subscribeUI() {
-        with(splashViewModel) {
-            showLoading.toLiveData().observe(this@SplashFragment, Observer {
+        with(loginViewModel) {
+            showLoading.observe(this@SplashFragment, Observer {
                 progressBarSplash.isVisible = it == true
             })
             errorMessage.toLiveData().observe(this@SplashFragment, Observer {
@@ -54,15 +52,15 @@ class SplashFragment : DaggerFragment() {
                     context?.toast(it, Toast.LENGTH_LONG)
             })
 
-            navigateToLogin.toLiveData().observe(this@SplashFragment, Observer {
+            navigateToLogin.observe(this@SplashFragment, EventObserver {
                 findNavController().navigate(SplashFragmentDirections.actionFragmentSplashToFragmentLogin())
             })
 
-            navigateToDashboard.toLiveData().observe(this@SplashFragment, Observer {
-                requireContext().loginNotifications()
-
+            navigateToDashboard.observe(this@SplashFragment, EventObserver {
                 findNavController().navigate(SplashFragmentDirections.actionFragmentSplashToFragmentDashboard())
             })
+
+            lifecycle.addObserver(this)
         }
     }
 
