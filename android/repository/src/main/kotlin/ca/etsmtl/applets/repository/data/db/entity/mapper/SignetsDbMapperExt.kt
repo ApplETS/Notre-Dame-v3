@@ -11,6 +11,8 @@ import ca.etsmtl.applets.repository.data.db.entity.signets.ProgrammeEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SeanceEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SessionEntity
 import ca.etsmtl.applets.repository.data.db.entity.signets.SommaireElementsEvaluationEntity
+import com.soywiz.klock.DateTime
+import com.soywiz.klock.seconds
 import model.Cours
 import model.Etudiant
 import model.Evaluation
@@ -21,8 +23,6 @@ import model.Programme
 import model.Seance
 import model.Session
 import model.SommaireElementsEvaluation
-import utils.date.ETSMobileDate
-import utils.date.MILLIS_PER_SECOND
 
 /**
  * Created by Sonphil on 09-07-18.
@@ -60,7 +60,7 @@ fun EvaluationEntity.toEvaluation() = Evaluation(
         this.session,
         this.nom,
         this.equipe,
-        dateCible?.let { ETSMobileDate(it * MILLIS_PER_SECOND) },
+        dateCible?.let { DateTime(it.seconds.millisecondsLong) },
         this.note,
         this.corrigeSur,
         this.notePourcentage,
@@ -79,8 +79,8 @@ fun List<EvaluationEntity>.toEvaluations() = map { it.toEvaluation() }
 
 fun EvaluationCoursEntity.toEvaluationCours() = EvaluationCours(
     session,
-    ETSMobileDate(dateDebutEvaluation * MILLIS_PER_SECOND),
-    ETSMobileDate(dateFinEvaluation * MILLIS_PER_SECOND),
+    DateTime(dateDebutEvaluation.seconds.millisecondsLong),
+    DateTime(dateFinEvaluation.seconds.millisecondsLong),
     enseignant,
     estComplete,
     groupe,
@@ -129,8 +129,8 @@ fun ProgrammeEntity.toProgramme() = Programme(
 fun List<ProgrammeEntity>.toProgrammes(): List<Programme> = map { it.toProgramme() }
 
 fun SeanceEntity.toSeance() = Seance(
-        ETSMobileDate(dateDebut * MILLIS_PER_SECOND),
-        ETSMobileDate(dateFin * MILLIS_PER_SECOND),
+        DateTime(dateDebut.seconds.millisecondsLong),
+        DateTime(dateFin.seconds.millisecondsLong),
         this.nomActivite,
         this.local,
         this.descriptionActivite,
@@ -160,8 +160,8 @@ fun SommaireElementsEvaluationEntity.toSommaireEvaluation() = SommaireElementsEv
 fun SessionEntity.toSession() = Session(
         abrege,
         auLong,
-        ETSMobileDate(dateDebut * MILLIS_PER_SECOND),
-        ETSMobileDate(dateFin * MILLIS_PER_SECOND),
+        dateDebut,
+        dateFin,
         dateFinCours,
         dateDebutChemiNot,
         dateFinChemiNot,
