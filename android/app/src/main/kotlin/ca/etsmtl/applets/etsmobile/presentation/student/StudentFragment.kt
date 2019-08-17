@@ -5,6 +5,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.fadeTo
@@ -55,13 +56,13 @@ class StudentFragment : DaggerFragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         (activity as? MainActivity)?.let {
             it.appBarLayout.setExpanded(true, false)
             it.tabLayout.setupWithViewPager(null)
             it.tabLayout.isVisible = false
         }
+
+        super.onDestroyView()
         showTabsHandler.removeCallbacks(showTabsRunnable)
     }
 

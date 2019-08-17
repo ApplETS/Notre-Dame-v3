@@ -1,0 +1,34 @@
+import model.DashboardCard;
+import model.DashboardCard.Type;
+
+CREATE TABLE dashboardCardEntity (
+  type TEXT AS DashboardCard.Type NOT NULL PRIMARY KEY,
+  pos INTEGER NOT NULL,
+  visible INTEGER AS Boolean DEFAULT 1 NOT NULL,
+  dismissible INTEGER AS Boolean DEFAULT 1 NOT NULL
+);
+
+INSERT INTO dashboardCardEntity (type, pos)
+VALUES ('DASHBOARD_CARD_APPLETS', 0),
+('DASHBOARD_CARD_TODAY_SCHEDULE', 1),
+('DASHBOARD_CARD_GRADES', 2);
+
+insertInitialCards:
+INSERT INTO dashboardCardEntity (type, pos)
+VALUES ('DASHBOARD_CARD_APPLETS', 0),
+('DASHBOARD_CARD_TODAY_SCHEDULE', 1),
+('DASHBOARD_CARD_GRADES', 2);
+
+selectAll:
+SELECT *
+FROM dashboardCardEntity
+ORDER BY pos;
+
+updateCard:
+UPDATE dashboardCardEntity
+SET pos = ?, visible = ?
+WHERE type = ?;
+
+deleteAll:
+DELETE
+FROM dashboardCardEntity;
