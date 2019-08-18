@@ -175,6 +175,7 @@ class MainActivity : BaseActivity() {
     private fun removeNetworkStatus() {
         networkMessageContainer.removeAllViews()
     }
+
     private inner class BroadCastReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (ConnectivityManager.CONNECTIVITY_ACTION == intent.action) {
