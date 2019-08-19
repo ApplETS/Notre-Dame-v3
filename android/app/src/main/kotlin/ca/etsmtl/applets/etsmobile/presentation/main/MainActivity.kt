@@ -132,9 +132,7 @@ class MainActivity : BaseActivity() {
         })
 
         mainViewModel.bottomNavigationViewVisible.observe(this, Observer { visible ->
-            val duration: Long = if (visible) 200 else 0
-
-            bottomNavigationView?.setVisible(visible, duration)
+            bottomNavigationView?.setVisible(visible)
         })
 
         mainViewModel.closeApp.observe(this, EventObserver {
