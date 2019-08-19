@@ -38,6 +38,7 @@ class MainActivity : BaseActivity() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val navController by lazy { findNavController(R.id.fragmentNavHostMain) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +69,6 @@ class MainActivity : BaseActivity() {
         }
 
         fun setupNavigation() {
-            val navController = findNavController(R.id.fragmentNavHostMain)
-
             bottomNavigationView.setupWithNavController(navController)
             bottomNavigationView.setOnNavigationItemSelectedListener { item ->
                 if (mainViewModel.shouldPerformBottomNavigationViewAction()) {
@@ -79,7 +78,7 @@ class MainActivity : BaseActivity() {
                         .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
                         .build()
 
-                    findNavController(R.id.fragmentNavHostMain).navigate(item.itemId, null, navOptions)
+                    navController.navigate(item.itemId, null, navOptions)
 
                     true
                 } else {
@@ -102,7 +101,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        val navController = findNavController(R.id.fragmentNavHostMain)
+        appBarLayout.setExpanded(false, false)
+
         val topLevelDestinations = mainViewModel.topLevelDestinations.map {
             it.toDestinationId()
         }.toSet()
@@ -124,11 +124,11 @@ class MainActivity : BaseActivity() {
 
     private fun subscribeUI() {
         mainViewModel.navigateToDestination.observe(this, EventObserver {
-            findNavController(R.id.fragmentNavHostMain).navigate(it.toDestinationId())
+            navController.navigate(it.toDestinationId())
         })
 
-        mainViewModel.appBarLayoutExpanded.observe(this, Observer { expanded ->
-            appBarLayout.setExpanded(expanded, true)
+        mainViewModel.expandAppBarLayout.observe(this, Observer { expand ->
+            appBarLayout.setExpanded(expand, true)
         })
 
         mainViewModel.bottomNavigationViewVisible.observe(this, Observer { visible ->

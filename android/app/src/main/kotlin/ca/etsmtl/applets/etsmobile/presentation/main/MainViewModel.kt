@@ -11,6 +11,9 @@ import javax.inject.Inject
  */
 
 class MainViewModel @Inject constructor() : ViewModel() {
+    /**
+     * Destinations shown on the bottom navigation view
+     */
     val topLevelDestinations = setOf(
         Destination.DASHBOARD,
         Destination.SCHEDULE,
@@ -21,13 +24,18 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private var currentDestination: Destination = Destination.SPLASH
     private val _navigateToDestination = MutableLiveData<Event<Destination>>()
     val navigateToDestination: LiveData<Event<Destination>> = _navigateToDestination
-    var appBarLayoutExpanded = MutableLiveData<Boolean>()
+    var expandAppBarLayout = MutableLiveData<Boolean>()
     var bottomNavigationViewVisible = MutableLiveData<Boolean>()
     private val _closeApp = MutableLiveData<Event<Unit>>()
     val closeApp: LiveData<Event<Unit>> = _closeApp
     private val _navigateBack = MutableLiveData<Event<Unit>>()
     val navigateBack: LiveData<Event<Unit>> = _navigateBack
 
+    /**
+     * Should be called when the user click on one of the bottom navigation view's item
+     *
+     * @return True if the action should be performed
+     */
     fun shouldPerformBottomNavigationViewAction(): Boolean {
         return currentDestination != Destination.SPLASH && currentDestination != Destination.LOGIN
     }
@@ -35,13 +43,13 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun onNavigationDestinationChanged(destination: Destination) {
         if (destination == Destination.LOGIN) {
             bottomNavigationViewVisible.value = false
-            appBarLayoutExpanded.value = false
+            expandAppBarLayout.value = false
         } else if (topLevelDestinations.contains(destination)) {
             bottomNavigationViewVisible.value = true
-            appBarLayoutExpanded.value = true
+            expandAppBarLayout.value = true
         } else {
             bottomNavigationViewVisible.value = false
-            appBarLayoutExpanded.value = true
+            expandAppBarLayout.value = true
         }
 
         currentDestination = destination

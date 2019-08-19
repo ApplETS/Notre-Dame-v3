@@ -112,7 +112,7 @@ class MainViewModelTest {
     fun appBarLayout_OnNavigationToTopLevelDestination_BecomesExpanded() {
         // given
         val observer: Observer<Boolean> = mock()
-        mainViewModel.appBarLayoutExpanded.observeForever(observer)
+        mainViewModel.expandAppBarLayout.observeForever(observer)
 
         // when
         mainViewModel.onNavigationDestinationChanged(Destination.DASHBOARD)
@@ -125,7 +125,7 @@ class MainViewModelTest {
     fun appBarLayout_OnNavigationToNotTopLevelDestination_BecomesExpanded() {
         // given
         val observer: Observer<Boolean> = mock()
-        mainViewModel.appBarLayoutExpanded.observeForever(observer)
+        mainViewModel.expandAppBarLayout.observeForever(observer)
 
         // when
         mainViewModel.onNavigationDestinationChanged(Destination.OTHER)
@@ -138,7 +138,7 @@ class MainViewModelTest {
     fun appBarLayout_OnNavigationToLogin_BecomesNotExpanded() {
         // given
         val observer: Observer<Boolean> = mock()
-        mainViewModel.appBarLayoutExpanded.observeForever(observer)
+        mainViewModel.expandAppBarLayout.observeForever(observer)
 
         // when
         mainViewModel.onNavigationDestinationChanged(Destination.LOGIN)
