@@ -41,6 +41,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
             appBarLayoutExpanded.value = true
         } else {
             bottomNavigationViewVisible.value = false
+            appBarLayoutExpanded.value = true
         }
 
         currentDestination = destination
