@@ -37,6 +37,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
@@ -67,6 +68,11 @@
 >>>>>>> adding text view and lienear layout to main
 =======
 >>>>>>> eliminating conflicts
+=======
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+>>>>>>> after rebase
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

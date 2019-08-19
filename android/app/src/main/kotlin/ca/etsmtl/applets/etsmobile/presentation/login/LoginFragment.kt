@@ -20,6 +20,7 @@ import ca.etsmtl.applets.etsmobile.extension.hideKeyboard
 import ca.etsmtl.applets.etsmobile.extension.open
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -156,20 +157,8 @@ class LoginFragment : DaggerFragment() {
             passwordError.observe(this@LoginFragment, Observer {
                 setFieldError(layoutPassword, it)
             })
-            navigateToDashboard.toLiveData().observe(this@LoginFragment, Observer {
-                requireContext().loginNotifications()
-                UserCredentials.INSTANCE?.let {
-                    NotificationsLoginManager.login(
-                            requireContext(),
-                            it.universalCode.value,
-                            it.domain
-                    )
-                }
 
-                findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
-            })
-
-            navigateToDashboard.toLiveData().observe(this@LoginFragment, Observer {
+            navigateToDashboard.observe(this@LoginFragment, EventObserver {
                 findNavController().navigate(LoginFragmentDirections.actionFragmentLoginToFragmentDashboard())
             })
 
@@ -188,6 +177,7 @@ class LoginFragment : DaggerFragment() {
             lifecycle.addObserver(this)
         }
     }
+
     private fun setFieldError(textInputLayout: TextInputLayout, errorMessage: String?) {
         if (errorMessage.isNullOrEmpty()) {
             textInputLayout.error = null
