@@ -63,6 +63,12 @@ fun Context.getColorFromAttr(
 }
 
 /**
+ * Returns the height of the status bar
+ */
+fun Context.getStatusBarHeight() = resources
+    .getAndroidDimensionInPixelSize("status_bar_height") ?: 0
+
+/**
  * Provides credentials to notifications library and lets it register the user to AWS SNS
  */
 fun Context.loginNotifications() {
