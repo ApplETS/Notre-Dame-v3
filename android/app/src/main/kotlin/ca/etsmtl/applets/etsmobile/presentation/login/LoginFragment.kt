@@ -146,7 +146,7 @@ class LoginFragment : DaggerFragment() {
             })
 
             errorMessage.observe(this@LoginFragment, EventObserver {
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             })
 
             universalCodeError.observe(this@LoginFragment, Observer {
