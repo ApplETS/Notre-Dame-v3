@@ -128,7 +128,7 @@ class MainActivity : BaseActivity() {
         })
 
         mainViewModel.expandAppBarLayout.observe(this, Observer { expand ->
-            appBarLayout.setExpanded(expand, true)
+            appBarLayout.setExpanded(expand)
         })
 
         mainViewModel.bottomNavigationViewVisible.observe(this, Observer { visible ->
