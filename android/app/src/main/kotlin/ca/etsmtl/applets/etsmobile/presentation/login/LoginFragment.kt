@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -88,29 +89,29 @@ class LoginFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        view.setupStatusBarAndNavigationBar()
+
         (activity as MainActivity).bottomNavigationView.setVisible(false, 0)
 
         Glide.with(this).load(R.drawable.ic_ets_logo_blanc).into(iVETSLogo)
 
         setupFields()
 
-        View.OnClickListener {
-            when (it.id) {
-                R.id.btnSignIn -> { setCredentialsFieldsAndSubmitCredentials() }
-                R.id.btnForgotPassword -> {
-                    context?.let {
-                        Uri.parse(getString(R.string.uri_password_forgotten)).open(it)
-                    }
-                }
-            }
-        }.apply {
-            btnSignIn.setOnClickListener(this)
-            btnForgotPassword.setOnClickListener(this)
-            btnApplets.setOnClickListener(this)
-        }
+        setupButtons()
 
         subscribeUI()
         loginViewModel.submitSavedCredentials()
+    }
+
+    private fun View.setupStatusBarAndNavigationBar() {
+        val activity = requireActivity()
+
+        activity.window.statusBarColor = activity.getColorCompat(R.color.colorPrimary)
+
+        systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
+        activity.window.navigationBarColor = activity.getColorCompat(android.R.color.transparent)
     }
 
     private fun setupFields() {
@@ -133,6 +134,23 @@ class LoginFragment : DaggerFragment() {
         R.id.universalCode -> loginViewModel.setUniversalCode(universalCode.text.toString())
         R.id.password -> loginViewModel.setPassword(password.text.toString())
         else -> Unit
+    }
+
+    private fun setupButtons() {
+        View.OnClickListener {
+            when (it.id) {
+                R.id.btnSignIn -> { setCredentialsFieldsAndSubmitCredentials() }
+                R.id.btnForgotPassword -> {
+                    context?.let {
+                        Uri.parse(getString(R.string.uri_password_forgotten)).open(it)
+                    }
+                }
+            }
+        }.apply {
+            btnSignIn.setOnClickListener(this)
+            btnForgotPassword.setOnClickListener(this)
+            btnApplets.setOnClickListener(this)
+        }
     }
 
     /**
@@ -211,7 +229,22 @@ class LoginFragment : DaggerFragment() {
         loginViewModel.submitCredentials()
     }
 
+    private fun View.resetStatusBarAndNavigationBar() {
+        val activity = requireActivity()
+
+        activity.window.statusBarColor = activity.getColorCompat(
+            R.color.colorPrimaryDark
+        )
+
+        systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+            SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+
+        activity.window.navigationBarColor = activity.getColorCompat(R.color.colorNavigationBar)
+    }
+
     override fun onDestroyView() {
+        view?.resetStatusBarAndNavigationBar()
+
         /*
         The focus will be lost. However, we don't want to submit the credentials, so we must remove
         the focus change listener to prevent it from submitting the credentials.

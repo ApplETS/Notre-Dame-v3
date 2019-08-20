@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.getAndroidDimensionInPixelSize
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.getColorFromAttr
 import ca.etsmtl.applets.etsmobile.extension.open
@@ -40,7 +39,7 @@ class AboutFragment : Fragment() {
     }
     private var isEnterTransitionCanceled: Boolean = false
     private val statusBarHeight by lazy {
-        resources.getAndroidDimensionInPixelSize("status_bar_height") ?: 0
+        resources.getDimension(R.dimen.status_bar_height).toInt()
     }
 
     override fun onCreateView(
