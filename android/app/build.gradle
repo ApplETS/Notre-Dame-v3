@@ -46,6 +46,8 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.debug
             manifestPlaceholders = [enableCrashReporting: "false"]
+            // Prevent Crashlytics from updating app resources with its own unique build ID
+            ext.alwaysUpdateBuildId = false
         }
 
         release {
