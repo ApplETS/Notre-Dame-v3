@@ -1,6 +1,6 @@
 package data.db
 
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 import model.DashboardCard
 
 /**
@@ -11,7 +11,7 @@ expect class DashboardCardDatabase {
     /**
      * Returns the dashboard cards ordered according the user preference
      */
-    fun dashboardCards(): ReceiveChannel<List<DashboardCard>>
+    fun dashboardCards(): Flow<List<DashboardCard>>
 
     /**
      * Update a dashboard card and set to the provided position

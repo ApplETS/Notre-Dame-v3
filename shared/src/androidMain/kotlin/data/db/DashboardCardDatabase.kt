@@ -4,24 +4,25 @@ import data.db.dao.DashboardCardDao
 import data.db.entity.DashboardCardEntity
 import data.db.entity.mapper.toDashboardCardEntity
 import data.db.entity.mapper.toDashboardCards
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.reactive.openSubscription
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import model.DashboardCard
 import javax.inject.Inject
 
 /**
+ * Implementation of the expected [DashboardCardDatabase]
+ *
  * Created by Sonphil on 02-06-19.
  */
 
 actual class DashboardCardDatabase @Inject constructor(
     private val dao: DashboardCardDao
 ) {
-    actual fun dashboardCards(): ReceiveChannel<List<DashboardCard>> {
-        return dao.getAll().map {
-            it.toDashboardCards()
-        }.openSubscription()
-    }
+    actual fun dashboardCards(): Flow<List<DashboardCard>> = dao.getAll()
+        .map { entities ->
+            entities.toDashboardCards()
+        }
 
     actual suspend fun updateCard(dashboardCard: DashboardCard, position: Int) {
         dao.updateDashboardCard(dashboardCard.toDashboardCardEntity(position))

@@ -30,7 +30,7 @@ buildscript {
             "okhttp": "4.1.0",
             "recyclerviewanimators": "3.0.0",
             "retrofit": "2.6.1",
-            "room": "2.1.0-alpha04",
+            "room": "2.2.0-beta01",
             "test": "1.2.0",
             "support": "1.0.0"
     ]

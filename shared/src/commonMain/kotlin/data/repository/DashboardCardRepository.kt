@@ -2,7 +2,7 @@ package data.repository
 
 import data.db.DashboardCardDatabase
 import di.Inject
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import model.DashboardCard
 import utils.EtsMobileDispatchers
@@ -12,7 +12,7 @@ import utils.EtsMobileDispatchers
  */
 
 class DashboardCardRepository @Inject constructor(private val database: DashboardCardDatabase) {
-    suspend fun dashboardCards(): ReceiveChannel<List<DashboardCard>> {
+    suspend fun dashboardCards(): Flow<List<DashboardCard>> {
         return withContext(EtsMobileDispatchers.IO) {
             database.dashboardCards()
         }

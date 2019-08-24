@@ -35,8 +35,6 @@ class LoginRepository @Inject constructor(
         }
     }
 
-    fun getSavedUserMonETSDomaine(): String? = securePrefs.getString(DOMAINE_KEY, null)
-
     suspend fun authenticate(universalCode: UniversalCode, password: String): MonETSUser = withContext(EtsMobileDispatchers.IO) {
         val monETSUser = monETSApi.authenticateUser(MonETSAuthenticationRequestBody(
             password,

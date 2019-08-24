@@ -7,6 +7,7 @@ import domain.SaveDashboardCardsUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import model.DashboardCard
 
@@ -29,13 +30,13 @@ class DashboardViewModel @Inject constructor(
     private var lastRemovedCardPosition = -1
 
     fun load() = vmScope.launch {
-        for (cards in fetchDashboardCardsUseCase()) {
-            val cards = cards.partition { card ->
+        fetchDashboardCardsUseCase().collect { cards ->
+            val (visible, hidden) = cards.partition { card ->
                 card.visible
             }
 
-            visibleCards = cards.first.toMutableList()
-            hiddenCards = cards.second.toMutableList()
+            visibleCards = visible.toMutableList()
+            hiddenCards = hidden.toMutableList()
 
             this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
         }
