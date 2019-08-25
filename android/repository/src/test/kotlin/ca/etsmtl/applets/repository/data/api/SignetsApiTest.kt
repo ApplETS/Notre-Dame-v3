@@ -35,7 +35,8 @@ import ca.etsmtl.applets.repository.util.LiveDataCallAdapterFactory
 import com.squareup.moshi.Moshi
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import okio.Okio
+import okio.buffer
+import okio.source
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -112,13 +113,14 @@ class SignetsApiTest {
     @Throws(IOException::class)
     private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
         val inputStream = javaClass.classLoader.getResourceAsStream("api-response/$fileName")
-        val source = Okio.buffer(Okio.source(inputStream))
+        val source = inputStream.source()
+        val sourceBuffer = source.buffer()
         val mockResponse = MockResponse()
         for ((key, value) in headers) {
             mockResponse.addHeader(key, value)
         }
         mockWebServer.enqueue(mockResponse
-            .setBody(source.readString(StandardCharsets.UTF_8)))
+            .setBody(sourceBuffer.readString(StandardCharsets.UTF_8)))
     }
 
     @Test
