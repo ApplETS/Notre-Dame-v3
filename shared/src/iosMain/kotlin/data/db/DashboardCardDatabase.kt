@@ -1,6 +1,6 @@
 package data.db
 
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 import model.DashboardCard
 
 /**
@@ -11,7 +11,7 @@ actual class DashboardCardDatabase {
     /**
      * Returns the dashboard cards ordered according the user preference
      */
-    actual fun dashboardCards(): ReceiveChannel<List<DashboardCard>> {
+    actual fun dashboardCards(): Flow<List<DashboardCard>> {
         TODO("not implemented")
     }
 

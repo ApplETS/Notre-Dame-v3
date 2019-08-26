@@ -64,6 +64,12 @@ Le projet est en cours de migration vers [Kotlin Multiplatform](https://kotlinla
     <img src="docs/images/architecture_multiplatform.png" width="600" />
 </a>
 
+## :shirt: [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle)
+Le projet utilise [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle), un adaptateur (wrapper) de [ktlint](https://ktlint.github.io/). Il s'agit d'un linter et d'un formatteur pour du code rédigé avec le langage Kotlin. Afin de vérifier que le code soit bien formatté, le logiciel d'intégration continue exécute la commande suivante : 
+```shell
+$ ./gradlew ktlintCheck
+```
+
 ## 🤔 Question ou problème?
 
 Consultez la [FAQ](https://github.com/ApplETS/Notre-Dame/wiki/Beta-Test-FAQ-(FR)), ouvrez une [issue](https://github.com/ApplETS/Notre-Dame/issues/new/choose) ou envoyez un courriel à l'adresse suivante : info@clubapplets.ca.

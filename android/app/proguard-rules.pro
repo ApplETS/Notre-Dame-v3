@@ -44,6 +44,7 @@
 
 # Okio
 -dontwarn okio.**
+-dontwarn org.codehaus.mojo.animal_sniffer.*
 
 # ServiceLoader support
 -keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}

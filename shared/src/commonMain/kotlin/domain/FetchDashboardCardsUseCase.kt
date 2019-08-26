@@ -2,7 +2,7 @@ package domain
 
 import data.repository.DashboardCardRepository
 import di.Inject
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 import model.DashboardCard
 
 /**
@@ -10,5 +10,5 @@ import model.DashboardCard
  */
 
 class FetchDashboardCardsUseCase @Inject constructor(private val repository: DashboardCardRepository) {
-    suspend operator fun invoke(): ReceiveChannel<List<DashboardCard>> = repository.dashboardCards()
+    suspend operator fun invoke(): Flow<List<DashboardCard>> = repository.dashboardCards()
 }
