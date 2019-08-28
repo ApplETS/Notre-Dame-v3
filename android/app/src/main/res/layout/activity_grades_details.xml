@@ -27,19 +27,19 @@
         android:id="@+id/appBarLayoutGradesDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
         android:transitionName="@string/transition_grades_details_toolbar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:collapsedTitleTextAppearance="@style/TextAppearance.AppTheme.CollapsingToolbar.Collapsed"
-            app:contentScrim="@color/colorPrimary"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.GradesDetailsTheme.CollapsingToolbar.Collapsed"
+            app:contentScrim="@color/colorToolbar"
             app:expandedTitleGravity="center_vertical"
             app:expandedTitleMarginStart="19dp"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppTheme.CollapsingToolbar.Expanded"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:expandedTitleTextAppearance="@style/TextAppearance.GradesDetailsTheme.CollapsingToolbar.Expanded"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@color/colorToolbar">
 
             <LinearLayout
                 android:id="@+id/containerTvGradesDetailsSubtitle"
