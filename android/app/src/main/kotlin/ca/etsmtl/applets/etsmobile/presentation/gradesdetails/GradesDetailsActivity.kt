@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.transition.Transition
@@ -8,10 +7,7 @@ import android.transition.TransitionInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.ColorRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.transition.doOnStart
-import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.animateBetweenColors
@@ -29,44 +25,6 @@ import model.Cours
  */
 
 class GradesDetailsActivity : BaseActivity() {
-    companion object {
-        private const val EXTRA_COURS = "ExtraCours"
-
-        /**
-         * Starts [GradesDetailsActivity] with a shared element transition
-         *
-         * @param activity The host activity
-         * @param content View used to for the shared element transition of the background
-         * @param toolBar View used for the shared element transition of the toolbar
-         * @param cours The course selected by the user
-         */
-        fun start(activity: AppCompatActivity, content: View, toolBar: View, cours: Cours) {
-            val options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    activity,
-                    Pair.create(content, activity.getString(R.string
-                        .transition_grades_details_content)),
-                    Pair.create(toolBar, activity.getString(R.string
-                        .transition_grades_details_toolbar))
-                )
-            activity.startActivity(Intent(activity, GradesDetailsActivity::class.java).apply {
-                putExtra(EXTRA_COURS, cours)
-            }, options.toBundle())
-        }
-
-        /**
-         * Starts [GradesDetailsActivity] without a shared element transition
-         *
-         * @param activity
-         * @param cours The course selected by the user
-         */
-        fun start(activity: AppCompatActivity, cours: Cours) {
-            activity.startActivity(Intent(activity, GradesDetailsActivity::class.java).apply {
-                putExtra(EXTRA_COURS, cours)
-            })
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -76,33 +34,33 @@ class GradesDetailsActivity : BaseActivity() {
 
         setupToolbar()
 
-        with(intent?.extras) {
-            with(this?.getParcelable(EXTRA_COURS) as? Cours) {
-                if (this == null) {
-                    toast(R.string.error)
-                    onBackPressed()
-                } else {
-                    if (savedInstanceState == null) {
-                        addFragment(this)
-                    }
+        val bundle = intent?.extras
 
-                    supportActionBar?.let {
-                        it.title = sigle
-                    }
-                    tvGradesDetailsCourseName.text = titreCours
-                    tvGradesDetailsGroup.text = String.format(getString(R.string.text_group), groupe)
-                }
+        if (bundle == null) {
+            toast(R.string.error)
+            onBackPressed()
+        } else {
+            val cours = GradesDetailsActivityArgs.fromBundle(bundle).course
+
+            if (savedInstanceState == null) {
+                addFragment(cours)
             }
+
+            supportActionBar?.let {
+                it.title = cours.sigle
+            }
+            tvGradesDetailsCourseName.text = cours.titreCours
+            tvGradesDetailsGroup.text = String.format(getString(R.string.text_group), cours.groupe)
         }
     }
 
     private fun setupWindow() = with(window) {
-        window.sharedElementEnterTransition = createAppBarTransition(
+        window.sharedElementEnterTransition = createTransition(
             R.color.colorPrimary,
             R.color.colorToolbar,
             1000L
         )
-        window.sharedElementReturnTransition = createAppBarTransition(
+        window.sharedElementReturnTransition = createTransition(
             R.color.colorToolbar,
             R.color.colorPrimary,
             resources.getInteger(android.R.integer.config_longAnimTime).toLong()
@@ -154,7 +112,17 @@ class GradesDetailsActivity : BaseActivity() {
         super.onBackPressed()
     }
 
-    private fun createAppBarTransition(
+    /**
+     * Returns the enter/exit [Transition]
+     *
+     * The app's bar color smoothly changes between [startColor] and [endColor].
+     *
+     * @param startColor The app bar's start color
+     * @param endColor The app bar's end color
+     * @param duration The app's bar color transition duration in milliseconds
+     *
+     */
+    private fun createTransition(
         @ColorRes startColor: Int,
         @ColorRes endColor: Int,
         duration: Long

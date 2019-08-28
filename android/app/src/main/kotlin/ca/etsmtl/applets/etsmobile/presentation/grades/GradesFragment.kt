@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.applyAppTheme
-import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity
+import ca.etsmtl.applets.etsmobile.presentation.gradesdetails.navigateToGradesDetails
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -47,14 +47,12 @@ class GradesFragment : DaggerFragment() {
         GradesAdapter(object : GradesAdapter.OnCourseClickListener {
             override fun onCourseClick(cours: Cours, holder: GradesAdapter.CourseGradeViewHolder) {
                 currentCourseShown = cours
-                this@GradesFragment.activity?.let {
-                    GradesDetailsActivity.start(
-                        it as AppCompatActivity,
-                        holder.itemView,
-                        holder.tvCourseSigle,
-                        cours
-                    )
-                }
+                findNavController().navigateToGradesDetails(
+                    requireActivity(),
+                    holder.tvCourseSigle,
+                    holder.itemView,
+                    cours
+                )
             }
         })
     }
