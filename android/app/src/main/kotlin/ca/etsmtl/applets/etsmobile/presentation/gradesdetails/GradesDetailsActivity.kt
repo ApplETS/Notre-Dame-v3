@@ -3,14 +3,18 @@ package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.transition.Transition
 import android.transition.TransitionInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.transition.doOnStart
 import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.animateBetweenColors
 import ca.etsmtl.applets.etsmobile.extension.toast
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_grades_details.appBarLayoutGradesDetails
@@ -38,13 +42,13 @@ class GradesDetailsActivity : BaseActivity() {
          */
         fun start(activity: AppCompatActivity, content: View, toolBar: View, cours: Cours) {
             val options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                            activity,
-                            Pair.create(content, activity.getString(R.string
-                                    .transition_grades_details_content)),
-                            Pair.create(toolBar, activity.getString(R.string
-                                    .transition_grades_details_toolbar))
-                    )
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    activity,
+                    Pair.create(content, activity.getString(R.string
+                        .transition_grades_details_content)),
+                    Pair.create(toolBar, activity.getString(R.string
+                        .transition_grades_details_toolbar))
+                )
             activity.startActivity(Intent(activity, GradesDetailsActivity::class.java).apply {
                 putExtra(EXTRA_COURS, cours)
             }, options.toBundle())
@@ -93,10 +97,16 @@ class GradesDetailsActivity : BaseActivity() {
     }
 
     private fun setupWindow() = with(window) {
-        val transition = TransitionInflater.from(this@GradesDetailsActivity)
-            .inflateTransition(R.transition.expand_grade_transition)
-        window.sharedElementEnterTransition = transition
-        window.sharedElementExitTransition = transition
+        window.sharedElementEnterTransition = createAppBarTransition(
+            R.color.colorPrimary,
+            R.color.colorToolbar,
+            1000L
+        )
+        window.sharedElementReturnTransition = createAppBarTransition(
+            R.color.colorToolbar,
+            R.color.colorPrimary,
+            resources.getInteger(android.R.integer.config_longAnimTime).toLong()
+        )
 
         decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -143,4 +153,19 @@ class GradesDetailsActivity : BaseActivity() {
 
         super.onBackPressed()
     }
+
+    private fun createAppBarTransition(
+        @ColorRes startColor: Int,
+        @ColorRes endColor: Int,
+        duration: Long
+    ): Transition = TransitionInflater
+        .from(this@GradesDetailsActivity)
+        .inflateTransition(R.transition.expand_grade_transition)
+        .apply {
+            doOnStart {
+                animateBetweenColors(startColor, endColor, duration) { updatedColor ->
+                    appBarLayoutGradesDetails.setBackgroundColor(updatedColor)
+                }
+            }
+        }
 }
