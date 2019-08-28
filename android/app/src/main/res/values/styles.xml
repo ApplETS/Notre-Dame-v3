@@ -90,7 +90,6 @@
         <item name="rippleColor">@color/colorPrimary</item>
     </style>
 
-
     <style name="Widget.AppTheme.Dashboard.Card.Applets.Button" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@android:color/white</item>
         <item name="rippleColor">@android:color/white</item>

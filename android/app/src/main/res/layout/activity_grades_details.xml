@@ -8,11 +8,27 @@
     android:orientation="vertical"
     tools:context=".presentation.gradesdetails.GradesDetailsActivity">
 
+    <FrameLayout
+        android:id="@+id/containerGradesDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Background for shared element transition -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:transitionName="@string/transition_grades_details_content" />
+    </FrameLayout>
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutGradesDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
         android:transitionName="@string/transition_grades_details_toolbar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -65,19 +81,4 @@
                 app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/containerGradesDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <!-- Background for shared element transition -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:transitionName="@string/transition_grades_details_content" />
-    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
