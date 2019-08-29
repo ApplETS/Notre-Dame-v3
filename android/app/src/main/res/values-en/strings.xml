@@ -164,16 +164,16 @@
     </string-array>
 
     <string-array name="array_security_file">
-        <item>file:///android_asset/bomb_threat_detail_en.html</item>
-        <item>file:///android_asset/suspicious_packages_detail_en.html</item>
-        <item>file:///android_asset/evacuation_detail_en.html</item>
-        <item>file:///android_asset/gas_leak_detail_en.html</item>
-        <item>file:///android_asset/fire_detail_en.html</item>
-        <item>file:///android_asset/broken_elevator_detail_en.html</item>
-        <item>file:///android_asset/electrical_outage_detail_en.html</item>
-        <item>file:///android_asset/armed_person_detail_en.html</item>
-        <item>file:///android_asset/earthquake_detail_en.html</item>
-        <item>file:///android_asset/medical_emergency_detail_en.html</item>
+        <item>bomb_threat_detail_en.html</item>
+        <item>suspicious_packages_detail_en.html</item>
+        <item>evacuation_detail_en.html</item>
+        <item>gas_leak_detail_en.html</item>
+        <item>fire_detail_en.html</item>
+        <item>broken_elevator_detail_en.html</item>
+        <item>electrical_outage_detail_en.html</item>
+        <item>armed_person_detail_en.html</item>
+        <item>earthquake_detail_en.html</item>
+        <item>medical_emergency_detail_en.html</item>
     </string-array>
 
     <string name="emergency_call">Emergency call</string>

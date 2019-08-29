@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.etsmobile.presentation.security
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.isDarkModeOn
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.appBarLayout
 import kotlinx.android.synthetic.main.activity_main.coordinatorLayout
@@ -77,7 +79,33 @@ class SecurityDetailFragment : Fragment() {
         val fileUrlIndex = securityTypeList.indexOf(args.securityTitle)
         val fileUrl = resources.getStringArray(R.array.array_security_file)[fileUrlIndex]
 
-        webView.loadUrl(fileUrl)
+        if (requireContext().isDarkModeOn) {
+            showEmergencyDetailPageInDarkMode(fileUrl)
+        } else {
+            webView.loadUrl("file:///android_asset/$fileUrl")
+        }
+    }
+
+    private fun showEmergencyDetailPageInDarkMode(url: String) {
+        val inputStream = resources.assets.open(url)
+        val size = inputStream.available()
+        val buffer = ByteArray(size)
+
+        inputStream.read(buffer)
+        inputStream.close()
+
+        var htmlData = "<link rel=\"stylesheet\" type=\"text/css\" href=\"dark_theme.css\" />"
+
+        htmlData += String(buffer)
+
+        webView.setBackgroundColor(Color.TRANSPARENT)
+        webView.loadDataWithBaseURL(
+            "file:///android_asset/",
+            htmlData,
+            "text/html",
+            "UTF-8",
+            null
+        )
     }
 
     private fun setButtonListener() {
