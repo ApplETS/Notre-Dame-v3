@@ -51,7 +51,22 @@
         android:id="@+id/fragmentStudent"
         android:name="ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment"
         android:label="@string/title_student"
-        tools:layout="@layout/fragment_student" />
+        tools:layout="@layout/fragment_student">
+    </fragment>
+    <action
+        android:id="@+id/action_to_activityGradesDetails"
+        app:destination="@id/activityGradesDetails">
+        <argument
+            android:name="course"
+            app:argType="model.Cours" />
+    </action>
+    <activity
+        android:id="@+id/activityGradesDetails"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity">
+        <argument
+            android:name="course"
+            app:argType="model.Cours" />
+    </activity>
     <fragment
         android:id="@+id/fragmentEts"
         android:name="ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment"

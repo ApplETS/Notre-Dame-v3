@@ -26,7 +26,7 @@
     </color>
     <color name="background_material_dark">#ffffff</color>
 
-    <color name="colorToolbar">#121212</color>
+    <color name="colorToolbar">#212121</color>
     <color name="colorToolbarAccent">@android:color/white</color>
     <color name="colorSwipeRefreshBg">@color/etsNoir</color>
     <color name="colorDialogBg">@color/etsNoir</color>

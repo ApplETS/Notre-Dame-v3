@@ -1,6 +1,8 @@
 package ca.etsmtl.applets.etsmobile.extension
 
 import android.Manifest
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Configuration
 import android.net.ConnectivityManager
@@ -20,7 +22,7 @@ import model.UserCredentials
 /**
  * Returns true when dark theme is on, false otherwise.
  */
-inline val Context.isDarkMode: Boolean
+inline val Context.isDarkModeOn: Boolean
     get() {
         val uiMode = resources.configuration.uiMode
 
@@ -60,6 +62,21 @@ fun Context.getColorFromAttr(
 ): Int {
     theme.resolveAttribute(attrColor, typedValue, resolveRefs)
     return typedValue.data
+}
+
+fun Context.animateBetweenColors(
+    @ColorRes startColor: Int,
+    @ColorRes endColor: Int,
+    duration: Long,
+    update: (animatedColorValue: Int) -> Unit
+) = with(ValueAnimator.ofObject(
+    ArgbEvaluator(),
+    getColorCompat(startColor),
+    getColorCompat(endColor)
+)) {
+    this.duration = duration
+    addUpdateListener { update(it.animatedValue as Int) }
+    start()
 }
 
 /**

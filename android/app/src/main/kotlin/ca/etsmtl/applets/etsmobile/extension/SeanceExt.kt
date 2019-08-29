@@ -10,7 +10,7 @@ import model.Seance
  */
 
 fun Seance.generateColor(context: Context): Int {
-    val secondColor = if (context.isDarkMode) {
+    val secondColor = if (context.isDarkModeOn) {
         Color.WHITE
     } else {
         Color.BLACK

@@ -25,8 +25,8 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
 
 /**
- * A screen which displays a bottom navigation view and wrapper for fragment. The user can
- * select items on the bottom navigation view to switch between fragments.
+ * A screen which displays an app bar, a bottom navigation view and wrapper for fragment. The user
+ * can select items on the bottom navigation view to switch between fragments.
  *
  * Created by Sonphil on 24-02-18.
  */
