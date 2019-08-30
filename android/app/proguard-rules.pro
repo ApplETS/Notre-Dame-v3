@@ -82,3 +82,6 @@
 # The SDK has several references of Apache HTTP client
 -dontwarn com.amazonaws.http.**
 -dontwarn com.amazonaws.metrics.**
+
+# Model classes' names
+-keepnames class model.*
