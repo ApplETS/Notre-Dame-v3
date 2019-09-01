@@ -16,7 +16,11 @@ class MoreRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
             LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_more, parent, false)
-    )
+    ).apply {
+        itemView.setOnClickListener {
+            items[adapterPosition].moreItemClickHandler.invoke(adapterPosition)
+        }
+    }
 
     override fun getItemCount(): Int = items.size
 
@@ -27,9 +31,6 @@ class MoreRecyclerViewAdapter(
             iVMoreItemIcon.setImageResource(item.iconId)
             iVMoreItemIcon.transitionName = iVMoreItemIcon.context.getString(item.label)
             textViewMoreItemLabel.setText(item.label)
-            containerView.setOnClickListener {
-                item.moreItemClickHandler.invoke(position)
-            }
         }
     }
 
