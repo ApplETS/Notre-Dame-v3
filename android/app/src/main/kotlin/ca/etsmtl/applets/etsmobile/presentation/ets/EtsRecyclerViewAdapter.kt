@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_ets.*
+import kotlinx.android.synthetic.main.item_ets.ivEts
+import kotlinx.android.synthetic.main.item_ets.tvEts
 
 /**
  * Created by Sonphil on 09-12-18.
@@ -19,7 +20,11 @@ class EtsRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context)
             .inflate(R.layout.item_ets, parent, false)
-    )
+    ).apply {
+        itemView.setOnClickListener {
+            items[adapterPosition].onItemClickHandler.invoke(adapterPosition)
+        }
+    }
 
     override fun getItemCount(): Int = items.size
 
@@ -33,9 +38,6 @@ class EtsRecyclerViewAdapter(
             } else {
                 tvEts.setText(item.label)
                 tvEts.visibility = View.VISIBLE
-            }
-            containerView.setOnClickListener {
-                item.onItemClickHandler.invoke(position)
             }
         }
     }
