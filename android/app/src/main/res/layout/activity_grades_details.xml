@@ -36,7 +36,7 @@
             app:collapsedTitleTextAppearance="@style/TextAppearance.GradesDetailsTheme.CollapsingToolbar.Collapsed"
             app:contentScrim="@color/colorToolbar"
             app:expandedTitleGravity="center_vertical"
-            app:expandedTitleMarginStart="19dp"
+            app:expandedTitleMarginStart="@dimen/action_bar_content_inset_grade_details"
             app:expandedTitleTextAppearance="@style/TextAppearance.GradesDetailsTheme.CollapsingToolbar.Expanded"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:statusBarScrim="@color/colorToolbar">
@@ -47,7 +47,7 @@
                 android:layout_height="125dp"
                 android:gravity="bottom"
                 android:orientation="vertical"
-                android:paddingStart="20dp"
+                android:paddingStart="@dimen/action_bar_content_inset_grade_details"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="10dp"
