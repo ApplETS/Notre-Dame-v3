@@ -119,7 +119,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Support libraries
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "com.google.android.material:material:$versions.material_components"
     implementation "androidx.legacy:legacy-support-v4:$versions.support"
     implementation "androidx.cardview:cardview:$versions.support"
@@ -127,8 +127,8 @@ dependencies {
     implementation "androidx.browser:browser:$versions.support"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
     implementation "androidx.core:core-ktx:$versions.android_ktx"
-    implementation 'androidx.fragment:fragment-ktx:1.0.0'
-    implementation "androidx.preference:preference:1.1.0-rc01"
+    implementation 'androidx.fragment:fragment-ktx:1.1.0'
+    implementation "androidx.preference:preference:1.1.0"
 
     // Google Play Services
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
