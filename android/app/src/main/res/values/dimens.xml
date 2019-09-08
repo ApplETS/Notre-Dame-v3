@@ -11,5 +11,5 @@
 
     <dimen name="status_bar_height">24dp</dimen>
     <dimen name="navigation_bar_height">48dp</dimen>
-    <dimen name="action_bar_content_inset_grade_details">19dp</dimen>
+    <dimen name="grade_details_action_bar_content_inset">19dp</dimen>
 </resources>
