@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="grade_details_action_bar_content_inset">27dp</dimen>
+</resources>
