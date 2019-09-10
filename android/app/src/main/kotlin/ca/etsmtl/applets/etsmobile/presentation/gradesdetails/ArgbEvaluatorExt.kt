@@ -1,8 +1,9 @@
-package ca.etsmtl.applets.etsmobile.extension
+package ca.etsmtl.applets.etsmobile.presentation.gradesdetails
 
 import android.animation.ArgbEvaluator
 import android.content.Context
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 
 /**
  * Created by Sonphil on 20-09-18.
