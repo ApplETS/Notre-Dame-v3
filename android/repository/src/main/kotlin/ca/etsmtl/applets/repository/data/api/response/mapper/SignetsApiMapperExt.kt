@@ -112,7 +112,7 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
             this.equipe,
             dateCible.takeIf { !it.isNullOrBlank() }?.signetsDefaultDateToUnix(),
             note?.formatSingleFractionDigits(),
-            corrigeSur.replaceCommaAndParseToFloat()?.formatSingleFractionDigits(),
+            corrigeSur,
             notePourcentage?.formatSingleFractionDigits(),
             ponderation.replaceCommaAndParseToFloat()?.formatSingleFractionDigits() ?: "0",
             moyenne?.formatSingleFractionDigits(),
@@ -126,7 +126,9 @@ fun ApiEvaluation.toEvaluationEntity(cours: Cours): EvaluationEntity {
     )
 }
 
-fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map { it.toEvaluationEntity(cours) }
+fun ApiListeDesElementsEvaluation.toEvaluationEntities(cours: Cours) = liste.map {
+    it.toEvaluationEntity(cours)
+}
 
 fun ApiListeDesElementsEvaluation.toSommaireEvaluationEntity(cours: Cours): SommaireElementsEvaluationEntity {
     val noteSur = liste.asSequence()

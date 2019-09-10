@@ -112,7 +112,7 @@ class SignetsApiTest {
 
     @Throws(IOException::class)
     private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
-        val inputStream = javaClass.classLoader.getResourceAsStream("api-response/$fileName")
+        val inputStream = javaClass.classLoader!!.getResourceAsStream("api-response/$fileName")
         val source = inputStream.source()
         val sourceBuffer = source.buffer()
         val mockResponse = MockResponse()
