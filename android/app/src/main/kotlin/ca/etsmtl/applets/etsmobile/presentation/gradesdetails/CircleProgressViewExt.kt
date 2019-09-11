@@ -45,12 +45,15 @@ fun CircleProgressView.showGradePercentage(
     animated: Boolean,
     onUpdate: ((currentProgressColor: Int) -> Unit)?
 ) {
-    setEndProgress(gradePercentage.coerceIn(0f, 100f))
+    val endProgress = gradePercentage.coerceIn(0f, 100f)
+
+    setEndProgress(endProgress)
 
     if (animated) {
         animateGradePercentageProgress(onUpdate)
     } else {
-        this.progress = progress
+        stopProgressAnimation()
+        progress = endProgress
         val progressColor = setGradePercentageColor(gradePercentage)
 
         if (onUpdate != null) {
@@ -63,11 +66,14 @@ fun CircleProgressView.showAveragePercentage(
     averagePercentage: Float,
     animated: Boolean
 ) {
-    setEndProgress(averagePercentage.coerceIn(0f, 100f))
+    val endProgress = averagePercentage.coerceIn(0f, 100f)
+
+    setEndProgress(endProgress)
 
     if (animated) {
         startProgressAnimation()
     } else {
-        this.progress = progress
+        stopProgressAnimation()
+        this.progress = endProgress
     }
 }
