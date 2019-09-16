@@ -30,64 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:titleTextColor="@color/colorToolbarAccent"
-                tools:title="Title" >
-                <LinearLayout
-                    android:id="@+id/networkMessageContainer"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-
-=======
-=======
->>>>>>> eliminating conflicts
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
->>>>>>> adding text view and lienear layout to main
-=======
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" />
->>>>>>> adding text view and lienear layout to main
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> eliminating conflicts
-=======
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
->>>>>>> eliminating conflicts
-<<<<<<< HEAD
-=======
->>>>>>> adding text view and lienear layout to main
-=======
->>>>>>> eliminating conflicts
-=======
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
->>>>>>> after rebase
-=======
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" />
->>>>>>> adding text view and lienear layout to main
-=======
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
->>>>>>> eliminating conflicts
-            </androidx.appcompat.widget.Toolbar>
+                tools:title="Title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
+        <LinearLayout
+            android:id="@+id/networkMessageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
