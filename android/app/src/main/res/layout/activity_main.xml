@@ -30,13 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:titleTextColor="@color/colorToolbarAccent"
-                tools:title="Title" >
-                <LinearLayout
-                    android:id="@+id/networkMessageContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </androidx.appcompat.widget.Toolbar>
+                tools:title="Title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
         <LinearLayout
             android:id="@+id/networkMessageContainer"
