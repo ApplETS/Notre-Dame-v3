@@ -1,5 +1,4 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
-
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
