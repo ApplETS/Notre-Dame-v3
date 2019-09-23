@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_schedule.weekView
 import model.Seance
 import utils.date.toCalendar
 import java.util.Calendar
+import java.util.GregorianCalendar
 import javax.inject.Inject
 
 /**
@@ -85,11 +86,12 @@ class ScheduleFragment : DaggerFragment() {
         // Listener called when the week view needs to load another month
         val monthChangeListener = object : MonthChangeListener<Seance> {
             override fun onMonthChange(startDate: Calendar, endDate: Calendar): List<WeekViewDisplayable<Seance>> {
-                return scheduleViewModel.getSeancesForDates(startDate, endDate).map { seance ->
+                return scheduleViewModel.getSeancesForDates(startDate, endDate.tomorrow()).map { seance ->
                     seance.toWeekViewEvent() as WeekViewDisplayable<Seance>
                 }
             }
         }
+
         (weekView as WeekView<Seance>).setMonthChangeListener(monthChangeListener)
 
         weekView.scrollListener = object : ScrollListener {
@@ -100,6 +102,12 @@ class ScheduleFragment : DaggerFragment() {
                 scheduleViewModel.onDayChanged(newFirstVisibleDay)
             }
         }
+    }
+
+    private fun Calendar.tomorrow() = GregorianCalendar().apply {
+        time = this@tomorrow.time
+
+        add(Calendar.DAY_OF_MONTH, 1)
     }
 
     private fun Seance.toWeekViewEvent(): WeekViewEvent<Seance> {
