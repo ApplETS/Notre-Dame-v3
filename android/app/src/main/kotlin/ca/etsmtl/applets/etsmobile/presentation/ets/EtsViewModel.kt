@@ -22,7 +22,7 @@ class EtsViewModel @Inject constructor() : ViewModel() {
                 EtsItem(R.drawable.ic_security_white_24dp, R.string.title_security) {
                     _navigateToSecurity.value = Event(Unit)
                 },
-                EtsItem(R.drawable.ic_monets, null) {
+                EtsItem(R.drawable.ic_monets_sans_nom, R.string.title_monets) {
                     _navigateToUri.value = Event(R.string.uri_mon_ets)
                 },
                 EtsItem(R.drawable.ic_book_white_24dp, R.string.title_bibliotech) {
