@@ -20,7 +20,7 @@ buildscript {
             "ktor": "1.2.3",
             "leakcanary": "2.0-beta-3",
             "lifecycle": "2.1.0",
-            "lifecycle_viewmodel_ktx": "2.2.0-alpha04",
+            "lifecycle_viewmodel_ktx": "2.2.0-alpha05",
             "material_components": "1.1.0-alpha10",
             "materialprogressview": "1.0.6",
             "mockito": "2.28.2",
