@@ -1,5 +1,6 @@
 package data.db
 
+import data.api.model.ApiGitHubContributor
 import kotlinx.coroutines.flow.Flow
 import model.GitHubContributor
 
@@ -9,7 +10,12 @@ import model.GitHubContributor
 
 expect class GitHubDatabase {
     /**
-     * Returns the GitHub contributors
+     * Returns the GitHub getContributors
      */
-    fun gitHubContributors(): Flow<List<GitHubContributor>>
+    fun getGitHubContributors(): Flow<List<GitHubContributor>>
+
+    /**
+     * Update the GitHub getContributors
+     */
+    fun setGitHubContributors(gitHubContributors: List<ApiGitHubContributor>)
 }

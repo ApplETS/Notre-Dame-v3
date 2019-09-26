@@ -1,5 +1,6 @@
 package data.db
 
+import data.api.model.ApiGitHubContributor
 import kotlinx.coroutines.flow.Flow
 import model.GitHubContributor
 
@@ -9,9 +10,16 @@ import model.GitHubContributor
 
 actual class GitHubDatabase {
     /**
-     * Returns the GitHub contributors
+     * Returns the GitHub getContributors
      */
-    actual fun gitHubContributors(): Flow<List<GitHubContributor>> {
+    actual fun getGitHubContributors(): Flow<List<GitHubContributor>> {
+        TODO("not implemented")
+    }
+
+    /**
+     * Update the GitHub getContributors
+     */
+    actual fun setGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
         TODO("not implemented")
     }
 }

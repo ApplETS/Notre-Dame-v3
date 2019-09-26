@@ -1,6 +1,8 @@
 package data.db
 
+import data.api.model.ApiGitHubContributor
 import data.db.dao.GitHubContributorDao
+import data.db.entity.mapper.toGitHubContributorEntities
 import data.db.entity.mapper.toGitHubContributors
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -15,11 +17,18 @@ actual class GitHubDatabase @Inject constructor(
     private val dao: GitHubContributorDao
 ) {
     /**
-     * Returns the GitHub contributors
+     * Returns the GitHub getContributors
      */
-    actual fun gitHubContributors(): Flow<List<GitHubContributor>> {
+    actual fun getGitHubContributors(): Flow<List<GitHubContributor>> {
         return dao.getAll().map {
             it.toGitHubContributors()
         }
+    }
+
+    /**
+     * Update the GitHub getContributors
+     */
+    actual fun setGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
+        dao.clearAndInsertContributors(gitHubContributors.toGitHubContributorEntities())
     }
 }
