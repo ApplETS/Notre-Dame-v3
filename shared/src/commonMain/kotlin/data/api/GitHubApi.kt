@@ -1,6 +1,6 @@
 package data.api
 
-import data.api.model.GitHubContributor
+import data.api.model.ApiGitHubContributor
 import di.Inject
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
@@ -19,7 +19,7 @@ class GitHubApi @Inject constructor() {
         private const val BASE_URL = "https://api.github.com/"
     }
 
-    suspend fun contributors(): List<GitHubContributor> = client.get {
+    suspend fun contributors(): List<ApiGitHubContributor> = client.get {
         url {
             takeFrom(BASE_URL + "repos/ApplETS/Notre-Dame/contributors")
         }
