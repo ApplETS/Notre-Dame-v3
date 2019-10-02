@@ -24,7 +24,7 @@ abstract class GitHubContributorDao {
     abstract fun deleteAll()
 
     @Transaction
-    fun clearAndInsertContributors(contributors: List<GitHubContributorEntity>) {
+    open fun clearAndInsertContributors(contributors: List<GitHubContributorEntity>) {
         deleteAll()
         addAll(contributors)
     }
