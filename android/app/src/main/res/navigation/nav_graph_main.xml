@@ -51,8 +51,7 @@
         android:id="@+id/fragmentStudent"
         android:name="ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment"
         android:label="@string/title_student"
-        tools:layout="@layout/fragment_student">
-    </fragment>
+        tools:layout="@layout/fragment_student"></fragment>
     <action
         android:id="@+id/action_to_activityGradesDetails"
         app:destination="@id/activityGradesDetails">
@@ -116,6 +115,11 @@
         android:id="@+id/fragmentAbout"
         android:name="ca.etsmtl.applets.etsmobile.presentation.about.AboutFragment"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/fragmentGitHubContributors"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.github.GitHubContributorsFragment"
+        android:label="@string/more_item_label_contributors"
+        tools:layout="@layout/fragment_github_contributors" />
     <activity
         android:id="@+id/activityOpenSourceLicenses"
         android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"></activity>

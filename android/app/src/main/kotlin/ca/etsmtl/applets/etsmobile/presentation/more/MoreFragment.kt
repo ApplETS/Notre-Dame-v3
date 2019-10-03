@@ -130,6 +130,10 @@ class MoreFragment : DaggerFragment() {
             goToAbout(ivAppletsLogo)
         })
 
+        moreViewModel.navigateToGitHubContributors.observe(this, EventObserver {
+            findNavController().navigate(R.id.fragmentGitHubContributors)
+        })
+
         moreViewModel.navigateToOpenSourcesLicenses.observe(this, EventObserver {
             findNavController().navigate(R.id.activityOpenSourceLicenses)
         })
