@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayoutGitHubContributors"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGitHubContributors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_github_contributor" />
+</ca.etsmtl.applets.etsmobile.view.SwipeRefreshLayoutWithProgressTimeLatch>
