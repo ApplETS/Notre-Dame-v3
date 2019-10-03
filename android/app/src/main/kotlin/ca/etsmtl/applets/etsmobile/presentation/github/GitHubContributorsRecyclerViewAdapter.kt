@@ -1,11 +1,13 @@
 package ca.etsmtl.applets.etsmobile.presentation.github
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.open
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_github_contributor.view.ivGitHubContributorAvatar
@@ -16,7 +18,7 @@ import model.GitHubContributor
  * Created by Sonphil on 02-10-19.
  */
 
-class GitHubContributorsRecyclerViewAdapter  : RecyclerView.Adapter<GitHubContributorsRecyclerViewAdapter.ViewHolder>() {
+class GitHubContributorsRecyclerViewAdapter : RecyclerView.Adapter<GitHubContributorsRecyclerViewAdapter.ViewHolder>() {
     var items: List<GitHubContributor> = emptyList()
         set(value) {
             val diffCallback = object : DiffUtil.Callback() {
@@ -45,13 +47,22 @@ class GitHubContributorsRecyclerViewAdapter  : RecyclerView.Adapter<GitHubContri
             diffResult.dispatchUpdatesTo(this)
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(
             R.layout.item_github_contributor,
             parent,
             false
         )
-    )
+        val viewHolder = ViewHolder(view)
+
+        view.setOnClickListener { view ->
+            val item = items[viewHolder.adapterPosition]
+
+            Uri.parse(item.htmlUrl).open(view.context)
+        }
+
+        return viewHolder
+    }
 
     override fun getItemCount() = items.count()
 
