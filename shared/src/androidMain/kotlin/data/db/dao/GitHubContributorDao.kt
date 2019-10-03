@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class GitHubContributorDao {
-    @Query("SELECT * FROM githubcontributorentity")
+    @Query("SELECT * FROM githubcontributorentity ORDER BY contributions DESC")
     abstract fun getAll(): Flow<List<GitHubContributorEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
