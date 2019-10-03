@@ -10,7 +10,7 @@ buildscript {
             "firebase": "17.0.0",
             "firebase_crashlytics": "2.10.1",
             "flexbox" : "1.1.0",
-            "glide": "4.9.0",
+            "glide": "4.10.0",
             "google_maps": "17.0.0",
             "gradle": '3.5.1',
             "groupie": "2.3.0",
