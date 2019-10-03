@@ -21,7 +21,7 @@ class GitHubApi @Inject constructor() {
 
     suspend fun getContributors(): List<ApiGitHubContributor> = client.get {
         url {
-            takeFrom(BASE_URL + "repos/ApplETS/Notre-Dame/getContributors")
+            takeFrom(BASE_URL + "repos/ApplETS/Notre-Dame/contributors")
         }
         parameter("anon", 0)
         accept(ContentType.Application.Json)

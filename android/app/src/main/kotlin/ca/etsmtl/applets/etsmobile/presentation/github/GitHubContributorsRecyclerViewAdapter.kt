@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_github_contributor.ivGitHubContributorAvatar
+import kotlinx.android.synthetic.main.item_github_contributor.view.ivGitHubContributorAvatar
 import kotlinx.android.synthetic.main.item_github_contributor.view.tvGitHubContributorUserName
 import model.GitHubContributor
 
@@ -47,7 +47,7 @@ class GitHubContributorsRecyclerViewAdapter  : RecyclerView.Adapter<GitHubContri
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(parent.context).inflate(
-            R.layout.fragment_github_contributors,
+            R.layout.item_github_contributor,
             parent,
             false
         )
@@ -61,7 +61,7 @@ class GitHubContributorsRecyclerViewAdapter  : RecyclerView.Adapter<GitHubContri
         Glide
             .with(holder.itemView)
             .load(contributor.avatarUrl)
-            .into(holder.ivGitHubContributorAvatar)
+            .into(holder.itemView.ivGitHubContributorAvatar)
 
         holder.itemView.tvGitHubContributorUserName.text = contributor.login
     }

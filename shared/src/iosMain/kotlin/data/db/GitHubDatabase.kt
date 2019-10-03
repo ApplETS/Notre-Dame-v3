@@ -19,7 +19,7 @@ actual class GitHubDatabase {
     /**
      * Update the GitHub getContributors
      */
-    actual fun setGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
+    actual fun updateGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
         TODO("not implemented")
     }
 }

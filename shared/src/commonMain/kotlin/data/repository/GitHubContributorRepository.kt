@@ -5,10 +5,10 @@ import data.db.GitHubDatabase
 import di.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.singleOrNull
-import kotlinx.coroutines.withContext
 import model.GitHubContributor
 import model.Resource
 import utils.EtsMobileDispatchers
@@ -22,32 +22,33 @@ class GitHubContributorRepository @Inject constructor(
     private val api: GitHubApi
 ) {
     suspend fun gitHubContributors(): Flow<Resource<List<GitHubContributor>>> {
-        return flow {
-            withContext(EtsMobileDispatchers.IO) {
-                val dbContributors = database
+        val flow: Flow<Resource<List<GitHubContributor>>> = flow {
+            emit(Resource.loading(null))
+
+            val dbContributors = database
+                .getGitHubContributors()
+                .first()
+
+            emit(Resource.loading(dbContributors))
+
+            try {
+                val apiContributors = api.getContributors()
+
+                // Update contributors in database
+                database.updateGitHubContributors(apiContributors)
+
+                val contributorsResFlow = database
                     .getGitHubContributors()
-                    .singleOrNull()
-                    .orEmpty()
+                    .map { dbContributors ->
+                        Resource.success(dbContributors)
+                    }
 
-                emit(Resource.loading(dbContributors))
-
-                try {
-                    val apiContributors = api.getContributors()
-
-                    // Update contributors in database
-                    database.setGitHubContributors(apiContributors)
-
-                    val contributorsResFlow = database
-                        .getGitHubContributors()
-                        .map { dbContributors ->
-                            Resource.success(dbContributors)
-                        }
-
-                    emitAll(contributorsResFlow)
-                } catch (cause: Throwable) {
-                    emit(Resource.error(cause.message ?: cause.toString(), dbContributors))
-                }
+                emitAll(contributorsResFlow)
+            } catch (cause: Throwable) {
+                emit(Resource.error(cause.message ?: cause.toString(), dbContributors))
             }
         }
+
+        return flow.flowOn(EtsMobileDispatchers.IO)
     }
 }

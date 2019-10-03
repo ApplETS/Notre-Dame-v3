@@ -17,5 +17,5 @@ expect class GitHubDatabase {
     /**
      * Update the GitHub getContributors
      */
-    fun setGitHubContributors(gitHubContributors: List<ApiGitHubContributor>)
+    fun updateGitHubContributors(gitHubContributors: List<ApiGitHubContributor>)
 }

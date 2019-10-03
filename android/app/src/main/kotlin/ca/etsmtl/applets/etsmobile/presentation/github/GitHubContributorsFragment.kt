@@ -8,7 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.applyAppTheme
 import ca.etsmtl.applets.etsmobile.extension.toLiveData
+import ca.etsmtl.applets.etsmobile.extension.toast
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_github_contributors.rvGitHubContributors
 import kotlinx.android.synthetic.main.fragment_github_contributors.swipeRefreshLayoutGitHubContributors
@@ -37,8 +39,16 @@ class GitHubContributorsFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupSwipeRefreshLayout()
         subscribeUI()
         viewModel.fetchContributors()
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        swipeRefreshLayoutGitHubContributors.applyAppTheme(requireContext())
+        swipeRefreshLayoutGitHubContributors.setOnRefreshListener {
+            viewModel.refreshContributors()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -59,7 +69,14 @@ class GitHubContributorsFragment : DaggerFragment() {
             .openSubscription()
             .toLiveData()
             .observe(this, Observer { showLoading ->
-                swipeRefreshLayoutGitHubContributors.isRefreshing = true
+                swipeRefreshLayoutGitHubContributors.isRefreshing = showLoading
+            })
+
+        viewModel.errorMessage
+            .openSubscription()
+            .toLiveData()
+            .observe(this, Observer { message ->
+                context?.toast(message)
             })
     }
 }

@@ -28,7 +28,7 @@ actual class GitHubDatabase @Inject constructor(
     /**
      * Update the GitHub getContributors
      */
-    actual fun setGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
+    actual fun updateGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
         dao.clearAndInsertContributors(gitHubContributors.toGitHubContributorEntities())
     }
 }
