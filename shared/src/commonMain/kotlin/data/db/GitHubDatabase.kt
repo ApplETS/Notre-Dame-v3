@@ -10,12 +10,12 @@ import model.GitHubContributor
 
 expect class GitHubDatabase {
     /**
-     * Returns the GitHub getContributors
+     * Returns the GitHub contributors
      */
     fun getGitHubContributors(): Flow<List<GitHubContributor>>
 
     /**
-     * Update the GitHub getContributors
+     * Update GitHub contributors
      */
     fun updateGitHubContributors(gitHubContributors: List<ApiGitHubContributor>)
 }

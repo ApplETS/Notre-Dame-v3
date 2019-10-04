@@ -10,14 +10,14 @@ import model.GitHubContributor
 
 actual class GitHubDatabase {
     /**
-     * Returns the GitHub getContributors
+     * Returns the GitHub contributors
      */
     actual fun getGitHubContributors(): Flow<List<GitHubContributor>> {
         TODO("not implemented")
     }
 
     /**
-     * Update the GitHub getContributors
+     * Update GitHub contributors
      */
     actual fun updateGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
         TODO("not implemented")

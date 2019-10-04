@@ -17,7 +17,7 @@ actual class GitHubDatabase @Inject constructor(
     private val dao: GitHubContributorDao
 ) {
     /**
-     * Returns the GitHub getContributors
+     * Returns the GitHub contributors
      */
     actual fun getGitHubContributors(): Flow<List<GitHubContributor>> {
         return dao.getAll().map {
@@ -26,7 +26,7 @@ actual class GitHubDatabase @Inject constructor(
     }
 
     /**
-     * Update the GitHub getContributors
+     * Update GitHub contributors
      */
     actual fun updateGitHubContributors(gitHubContributors: List<ApiGitHubContributor>) {
         dao.clearAndInsertContributors(gitHubContributors.toGitHubContributorEntities())
