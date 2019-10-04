@@ -48,6 +48,9 @@ class MoreFragment : DaggerFragment() {
                     moreViewModel.reportBugWithVideo()
                 }
                 .setOnCancelListener { moreViewModel.clickLogoutConfirmationDialogButton(false) }
+                .setOnDismissListener {
+                    moreViewModel.dismissReportBugDialog()
+                }
 
             builder.create()
         }

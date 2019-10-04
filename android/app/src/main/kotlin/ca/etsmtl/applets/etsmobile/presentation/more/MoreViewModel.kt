@@ -127,6 +127,10 @@ class MoreViewModel @Inject constructor(
         Buglife.startScreenRecording() // TODO: Fix Buglife's permission flow
     }
 
+    fun dismissReportBugDialog() {
+        _displayBugReportDialog.value = false
+    }
+
     fun clickAbout() {
         _navigateToAbout.value = Event(Unit)
     }
