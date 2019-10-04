@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/design_bottom_navigation_height"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/design_bottom_navigation_height"
     tools:context="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment"
     tools:ignore="PrivateResource">
 
