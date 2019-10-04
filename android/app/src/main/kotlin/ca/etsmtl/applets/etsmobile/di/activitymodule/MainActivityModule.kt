@@ -9,6 +9,7 @@ import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.todayschedule.Tod
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.todayschedule.TodayScheduleCardViewModel
 import ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment
 import ca.etsmtl.applets.etsmobile.presentation.ets.EtsViewModel
+import ca.etsmtl.applets.etsmobile.presentation.github.GitHubContributorsFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesViewModel
 import ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment
@@ -27,6 +28,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import presentation.DashboardViewModel
+import presentation.GitHubContributorsViewModel
 import presentation.SplashViewModel
 import presentation.login.LoginViewModel
 
@@ -127,4 +129,12 @@ interface MainActivityModule {
     @IntoMap
     @ViewModelKey(MoreViewModel::class)
     fun bindMoreViewModel(moreViewModel: MoreViewModel): ViewModel
+
+    @ContributesAndroidInjector
+    fun contributeGitHubContributorsFragment(): GitHubContributorsFragment
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GitHubContributorsViewModel::class)
+    fun bindGitHubContributorsViewModel(gitHubContributorsViewModel: GitHubContributorsViewModel): ViewModel
 }

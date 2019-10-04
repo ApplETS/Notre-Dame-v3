@@ -7,7 +7,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
 import data.db.DashboardCardRoomDatabase
+import data.db.GitHubRoomDatabase
 import data.db.dao.DashboardCardDao
+import data.db.dao.GitHubContributorDao
 import data.db.entity.DashboardCardEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -24,13 +26,13 @@ import javax.inject.Singleton
 internal abstract class DbModule {
     @Module
     internal object Providers {
-        private lateinit var DB_INSTANCE: DashboardCardRoomDatabase
+        private lateinit var DASHBOARD_CARDS_DB_INSTANCE: DashboardCardRoomDatabase
 
         @JvmStatic
         @Singleton
         @Provides
         fun provideDashboardCardRoomDb(context: Context): DashboardCardRoomDatabase {
-            DB_INSTANCE = Room.databaseBuilder(
+            DASHBOARD_CARDS_DB_INSTANCE = Room.databaseBuilder(
                 context,
                 DashboardCardRoomDatabase::class.java,
                 "etsmobiledashboardcard.db"
@@ -38,12 +40,12 @@ internal abstract class DbModule {
                 .fallbackToDestructiveMigration()
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
-                        initDashboardCardDbContent(DB_INSTANCE)
+                        initDashboardCardDbContent(DASHBOARD_CARDS_DB_INSTANCE)
                     }
                 })
                 .build()
 
-            return DB_INSTANCE
+            return DASHBOARD_CARDS_DB_INSTANCE
         }
 
         private fun initDashboardCardDbContent(db: DashboardCardRoomDatabase) {
@@ -74,5 +76,23 @@ internal abstract class DbModule {
         @Singleton
         @Provides
         fun provideDashboardCardDao(db: DashboardCardRoomDatabase): DashboardCardDao = db.dashboardCardDao()
+
+        @JvmStatic
+        @Singleton
+        @Provides
+        fun provideGitHubRoomDb(context: Context): GitHubRoomDatabase {
+            return Room.databaseBuilder(
+                context,
+                GitHubRoomDatabase::class.java,
+                "etsmobilegithub.db"
+            )
+                .fallbackToDestructiveMigration()
+                .build()
+        }
+
+        @JvmStatic
+        @Singleton
+        @Provides
+        fun provideGitHubContributorDao(db: GitHubRoomDatabase): GitHubContributorDao = db.contributorsDao()
     }
 }

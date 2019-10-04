@@ -48,6 +48,9 @@ class MoreFragment : DaggerFragment() {
                     moreViewModel.reportBugWithVideo()
                 }
                 .setOnCancelListener { moreViewModel.clickLogoutConfirmationDialogButton(false) }
+                .setOnDismissListener {
+                    moreViewModel.dismissReportBugDialog()
+                }
 
             builder.create()
         }
@@ -128,6 +131,10 @@ class MoreFragment : DaggerFragment() {
 
         moreViewModel.navigateToAbout.observe(this, EventObserver {
             goToAbout(ivAppletsLogo)
+        })
+
+        moreViewModel.navigateToGitHubContributors.observe(this, EventObserver {
+            findNavController().navigate(R.id.fragmentGitHubContributors)
         })
 
         moreViewModel.navigateToOpenSourcesLicenses.observe(this, EventObserver {

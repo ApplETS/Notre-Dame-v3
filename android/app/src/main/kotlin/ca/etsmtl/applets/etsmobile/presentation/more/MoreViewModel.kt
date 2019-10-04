@@ -44,6 +44,8 @@ class MoreViewModel @Inject constructor(
     val navigateToLogin: LiveData<Event<Unit>> = _navigateToLogin
     private val _navigateToAbout = MutableLiveData<Event<Unit>>()
     val navigateToAbout: LiveData<Event<Unit>> = _navigateToAbout
+    private val _navigateToGitHubContributors = MutableLiveData<Event<Unit>>()
+    val navigateToGitHubContributors: LiveData<Event<Unit>> = _navigateToGitHubContributors
     private val _navigateToOpenSourceLicenses = MutableLiveData<Event<Unit>>()
     val navigateToOpenSourcesLicenses: LiveData<Event<Unit>> = _navigateToOpenSourceLicenses
     private val _navigateToSettings = MutableLiveData<Event<Unit>>()
@@ -86,7 +88,7 @@ class MoreViewModel @Inject constructor(
                 _displayBugReportDialog.value = true
             },
             MoreItem(R.drawable.ic_people_outline_black_24dp, R.string.more_item_label_contributors) {
-                _navigateToUri.value = Event(R.string.uri_github_contributors)
+                _navigateToGitHubContributors.value = Event(Unit)
             },
             MoreItem(R.drawable.ic_code_black_24dp, R.string.more_item_label_open_source_licenses) {
                 _navigateToOpenSourceLicenses.value = Event(Unit)
@@ -123,6 +125,10 @@ class MoreViewModel @Inject constructor(
         _displayBugReportDialog.value = false
 
         Buglife.startScreenRecording() // TODO: Fix Buglife's permission flow
+    }
+
+    fun dismissReportBugDialog() {
+        _displayBugReportDialog.value = false
     }
 
     fun clickAbout() {

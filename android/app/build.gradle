@@ -214,6 +214,9 @@ dependencies {
     // Android Week View
     implementation "com.github.thellmund:Android-Week-View:3.4.2"
 
+    // CircleImageView
+    implementation "de.hdodenhof:circleimageview:3.0.1"
+
     // ETSMobile-Notifications
     implementation "ca.applets.etsmobilenotifications:etsmobilenotifications:1.1.0"
 
