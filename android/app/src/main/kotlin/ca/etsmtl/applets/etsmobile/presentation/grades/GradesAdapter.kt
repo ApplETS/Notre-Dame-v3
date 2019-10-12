@@ -68,7 +68,13 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
         val view = inflater.inflate(viewType, parent, false)
 
         return when (viewType) {
-            R.layout.item_grade_course -> GradeViewHolder(view)
+            R.layout.item_grade_course -> GradeViewHolder(view).apply {
+                view.setOnClickListener {
+                    val cours = itemsList[adapterPosition] as Cours
+
+                    onCourseClickListener.onCourseClick(cours, this)
+                }
+            }
             R.layout.header_grade_course -> HeaderViewHolder(view)
             else -> throw IllegalStateException("Unknown viewType $viewType")
         }
@@ -93,8 +99,6 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
                     holder.tvCourseSigle.text = this.sigle
 
                     ViewCompat.setTransitionName(holder.tvCourseGrade, this.sigle)
-
-                    holder.itemView.setOnClickListener { onCourseClickListener.onCourseClick(this@with, holder) }
                 }
             }
             is HeaderViewHolder -> {

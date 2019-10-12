@@ -1,22 +1,26 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
-import android.util.Range
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.domain.FetchFutureSeancesUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchCurrentAndFutureSeancesUseCase
+import ca.etsmtl.applets.etsmobile.domain.FetchSchedulePref
 import ca.etsmtl.applets.etsmobile.extension.getGenericErrorMessage
 import ca.etsmtl.applets.etsmobile.presentation.App
 import ca.etsmtl.applets.etsmobile.util.Event
 import ca.etsmtl.applets.etsmobile.util.RefreshableLiveData
 import com.shopify.livedataktx.map
-import com.shopify.livedataktx.nonNull
 import model.Resource
 import model.Seance
+import utils.date.ETSMobileDate
+import utils.date.isToday
+import utils.date.toCalendar
+import utils.date.toETSMobileDate
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -24,56 +28,76 @@ import javax.inject.Inject
  * Created by mykaelll87 on 2018-10-24
  */
 class ScheduleViewModel @Inject constructor(
-    private val fetchFutureSeancesUseCase: FetchFutureSeancesUseCase,
+    private val fetchCurrentAndFutureSeancesUseCase: FetchCurrentAndFutureSeancesUseCase,
+    private val fetchSchedulePref: FetchSchedulePref,
     private val app: App
 ) : ViewModel(), LifecycleObserver {
     private var seanceRes = object : RefreshableLiveData<Resource<List<Seance>>>() {
         override fun updateSource(): LiveData<Resource<List<Seance>>> {
-            return fetchFutureSeancesUseCase()
+            return fetchCurrentAndFutureSeancesUseCase()
         }
     }
 
-    val errorMessage: LiveData<Event<String?>> = seanceRes.nonNull().map {
+    val errorMessage: LiveData<Event<String?>> = Transformations.map(seanceRes) {
         if (app.getString(R.string.msg_api_no_seance) == it.message) {
             Event(null)
-        } else
+        } else if (seanceRes.value?.status == Resource.Status.SUCCESS && seanceRes.value?.data.isNullOrEmpty()) {
+            Event(app.getString(R.string.error_no_event_found))
+        } else {
             it.getGenericErrorMessage(app)
+        }
     }
 
-    val seances: LiveData<Map<Range<Calendar>, List<Seance>>> = seanceRes.nonNull()
-        .map { res ->
-            res.data?.groupBy {
-                it.extractWeekRange()
-            }
-        }
+    val seances: LiveData<List<Seance>> = Transformations.map(seanceRes) { res ->
+        res.data
+    }
 
     val loading: LiveData<Boolean> = seanceRes.map {
-        it == null || it.status == Resource.Status.LOADING
+        it?.status == Resource.Status.LOADING
     }
 
-    val showEmptyView: LiveData<Boolean> = seanceRes.nonNull().map {
-        it.status != Resource.Status.LOADING && (it?.data == null || it.data?.isEmpty() == true)
-    }
+    private val showTodayButtonPref = MutableLiveData<Boolean>()
+    private val currentDay = MutableLiveData<ETSMobileDate>()
+    val showTodayButton = MutableLiveData<Boolean>()
+    val numberOfVisibleDays = MutableLiveData<Int>()
+    val xScrollingSpeed = MutableLiveData<Float>()
+    val scrollDuration = MutableLiveData<Int>()
 
-    /**
-     *  Finds the pair of calendar that represents the week that this seance belongs to
-     */
-    @VisibleForTesting
-    private fun Seance.extractWeekRange(): Range<Calendar> {
-        val beginningCal = Calendar.getInstance()
+    fun getSeancesForDates(startDate: Calendar, endDate: Calendar): List<Seance> {
+        val seances = seanceRes.value?.data
 
-        beginningCal.timeInMillis = dateDebut.timeInMilliseconds
-        beginningCal.set(Calendar.DAY_OF_WEEK, beginningCal.firstDayOfWeek)
-        beginningCal.set(Calendar.HOUR_OF_DAY, 0)
-        beginningCal.clear(Calendar.MINUTE)
-        beginningCal.clear(Calendar.SECOND)
-
-        val endCal = beginningCal.clone() as Calendar
-        endCal.add(Calendar.WEEK_OF_YEAR, 1)
-
-        return Range(beginningCal, endCal)
+        return seances?.filter { seance ->
+            seance.dateDebut.toCalendar() in startDate..endDate
+        }.orEmpty()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun init() {
+        seanceRes.refreshIfValueIsNull()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun loadPreferences() {
+        showTodayButtonPref.value = fetchSchedulePref.showTodayButton()
+        showTodayButton.value = showTodayButtonPref.value
+        numberOfVisibleDays.value = fetchSchedulePref.numberOfVisibleDays()
+        xScrollingSpeed.value = fetchSchedulePref.xScrollingSpeed()
+        scrollDuration.value = fetchSchedulePref.scrollDuration()
+    }
+
     fun refresh() = seanceRes.refresh()
+
+    /**
+     * Should be called when the day is changed
+     *
+     * @param newFirstVisibleDay
+     */
+    fun onDayChanged(newFirstVisibleDay: Calendar) {
+        if (showTodayButtonPref.value == true) {
+            currentDay.value = newFirstVisibleDay.toETSMobileDate(newFirstVisibleDay.timeInMillis)
+
+            // Hide today button if it's today
+            showTodayButton.value = currentDay.value?.isToday()?.not() ?: true
+        }
+    }
 }

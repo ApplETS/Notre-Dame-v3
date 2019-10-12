@@ -8,4 +8,10 @@
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
 
     <dimen name="ets_app_bar_image_max_height">200dp</dimen>
+
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="navigation_bar_height">48dp</dimen>
+    <dimen name="grade_details_action_bar_content_inset">19dp</dimen>
+    <!-- BottomNavigationView's height + 16dp (standard margin according to Material Design) -->
+    <dimen name="schedule_fab_bottom_margin">72dp</dimen>
 </resources>

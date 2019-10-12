@@ -8,22 +8,38 @@
     android:orientation="vertical"
     tools:context=".presentation.gradesdetails.GradesDetailsActivity">
 
+    <FrameLayout
+        android:id="@+id/containerGradesDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Background for shared element transition -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:transitionName="@string/transition_grades_details_content" />
+    </FrameLayout>
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutGradesDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
         android:transitionName="@string/transition_grades_details_toolbar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:collapsedTitleTextAppearance="@style/TextAppearance.AppTheme.CollapsingToolbar.Collapsed"
-            app:contentScrim="@color/colorPrimary"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.GradesDetailsTheme.CollapsingToolbar.Collapsed"
+            app:contentScrim="@color/colorToolbar"
             app:expandedTitleGravity="center_vertical"
-            app:expandedTitleMarginStart="19dp"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppTheme.CollapsingToolbar.Expanded"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:expandedTitleMarginStart="@dimen/grade_details_action_bar_content_inset"
+            app:expandedTitleTextAppearance="@style/TextAppearance.GradesDetailsTheme.CollapsingToolbar.Expanded"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@color/colorToolbar">
 
             <LinearLayout
                 android:id="@+id/containerTvGradesDetailsSubtitle"
@@ -31,7 +47,7 @@
                 android:layout_height="125dp"
                 android:gravity="bottom"
                 android:orientation="vertical"
-                android:paddingStart="20dp"
+                android:paddingStart="@dimen/grade_details_action_bar_content_inset"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="10dp"
@@ -65,19 +81,4 @@
                 app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/containerGradesDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <!-- Background for shared element transition -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:transitionName="@string/transition_grades_details_content" />
-    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -30,8 +30,8 @@ mkdir -p $HOME/.android && touch $HOME/.android/repositories.cfg
 
 # Install Android SDK components
 yes | sdkmanager "platform-tools" > /dev/null
-yes | sdkmanager "build-tools;28.0.2" > /dev/null
-yes | sdkmanager "platforms;android-28" > /dev/null
+yes | sdkmanager "build-tools;29.0.0" > /dev/null
+yes | sdkmanager "platforms;android-29" > /dev/null
 yes | sdkmanager "extras;google;m2repository" > /dev/null
 yes | sdkmanager "extras;android;m2repository" > /dev/null
 yes | sdkmanager "system-images;android-21;default;x86_64" > /dev/null

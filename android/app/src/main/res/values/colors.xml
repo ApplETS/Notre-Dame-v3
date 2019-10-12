@@ -15,6 +15,7 @@
 
     <color name="applets">#19375F</color>
 
+    <color name="colorAverage">@color/colorPrimary</color>
     <color name="colorFailureGradeMin">#D32F2F</color>
     <color name="colorFailureGradeMax">#FF7043</color>
     <color name="colorPassingGrade">#FFF176</color>
@@ -26,10 +27,13 @@
     </color>
     <color name="background_material_dark">#ffffff</color>
 
-    <color name="colorToolbar">#121212</color>
+    <color name="colorToolbar">#212121</color>
     <color name="colorToolbarAccent">@android:color/white</color>
     <color name="colorSwipeRefreshBg">@color/etsNoir</color>
     <color name="colorDialogBg">@color/etsNoir</color>
     <color name="colorControlNormal">@color/etsGrisFonce</color>
     <color name="colorNavigationBar">@color/colorPrimaryDark</color>
+    <color name="colorScheduleTodayBg">#2BEF3E45</color>
+    <color name="colorScheduleText">@android:color/white</color>
+    <color name="colorScheduleLine">@color/etsGrisFonce</color>
 </resources>

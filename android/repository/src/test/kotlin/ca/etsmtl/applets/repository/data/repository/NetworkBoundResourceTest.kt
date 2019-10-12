@@ -25,9 +25,12 @@ import ca.etsmtl.applets.repository.util.ApiUtil
 import ca.etsmtl.applets.repository.util.CountingAppExecutors
 import ca.etsmtl.applets.repository.util.InstantAppExecutors
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.reset
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import model.Resource
-import okhttp3.MediaType
-import okhttp3.ResponseBody
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
@@ -35,9 +38,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import org.mockito.Mockito.reset
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
 import retrofit2.Response
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
@@ -136,13 +136,14 @@ class NetworkBoundResourceTest(private val useRealExecutors: Boolean) {
         handleSaveCallResult = {
             saved.set(true)
         }
-        val body = ResponseBody.create(MediaType.parse("text/html"), "error")
-        handleCreateCall = { ApiUtil.createCall(Response.error<Foo>(500, body)) }
+        val responseBody = fakeErrorResponseBody()
+        handleCreateCall = { ApiUtil.createCall(Response.error<Foo>(500, responseBody)) }
 
         val observer = mock<Observer<Resource<Foo>>>()
         networkBoundResource.asLiveData().observeForever(observer)
         drain()
         verify(observer).onChanged(Resource.loading(null))
+        reset(observer)
         reset(observer)
         dbData.value = null
         drain()
@@ -184,7 +185,7 @@ class NetworkBoundResourceTest(private val useRealExecutors: Boolean) {
         handleSaveCallResult = {
             saved.set(true)
         }
-        val body = ResponseBody.create(MediaType.parse("text/html"), "error")
+        val body = fakeErrorResponseBody()
         val apiResponseLiveData = MutableLiveData<ApiResponse<Foo>>()
         handleCreateCall = { apiResponseLiveData }
 
@@ -239,6 +240,9 @@ class NetworkBoundResourceTest(private val useRealExecutors: Boolean) {
         verify(observer).onChanged(Resource.success(dbValue2))
         verifyNoMoreInteractions(observer)
     }
+
+    private fun fakeErrorResponseBody() = "error"
+        .toResponseBody("text/html".toMediaType())
 
     private data class Foo(var value: Int)
 

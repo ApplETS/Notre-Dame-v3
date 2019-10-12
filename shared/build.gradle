@@ -3,6 +3,7 @@ apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "org.jlleitschuh.gradle.ktlint"
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
@@ -40,12 +41,17 @@ kotlin {
             dependencies {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-common'
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlinx_serialization"
+
+                // Coroutines
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.coroutines"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$versions.coroutines"
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
-                implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
-                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_viewmodel_ktx"
                 implementation "javax.inject:javax.inject:1"
+
+                // Ktor
+                implementation "io.ktor:ktor-client-core:$versions.ktor"
+                implementation "io.ktor:ktor-client-json:$versions.ktor"
+                implementation "io.ktor:ktor-client-serialization:$versions.ktor"
             }
         }
 
@@ -54,14 +60,20 @@ kotlin {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7'
+
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
                 implementation "androidx.core:core-ktx:$versions.android_ktx"
                 api "androidx.room:room-runtime:$versions.room"
-                implementation "androidx.room:room-coroutines:$versions.room"
+                implementation "androidx.room:room-ktx:$versions.room"
 
-                // We need RxJava support for Room because Room can't return Coroutines Channels.
-                // Instead, we make Room returns Flowables and convert them afterwards.
-                implementation "androidx.room:room-rxjava2:$versions.room"
+                // Ktor
+                implementation "io.ktor:ktor-client-android:$versions.ktor"
+                implementation "io.ktor:ktor-client-json-jvm:$versions.ktor"
+                implementation "io.ktor:ktor-client-serialization-jvm:$versions.ktor"
+
+                // Lifecycle
+                implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+                implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_viewmodel_ktx"
             }
         }
 
@@ -70,6 +82,10 @@ kotlin {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$versions.kotlinx_serialization"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$versions.coroutines"
+
+                //Ktor
+                implementation "io.ktor:ktor-client-ios:$versions.ktor"
+                implementation "io.ktor:ktor-client-serialization-native:$versions.ktor"
             }
         }
     }

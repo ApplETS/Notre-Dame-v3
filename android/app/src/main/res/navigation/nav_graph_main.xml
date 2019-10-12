@@ -34,17 +34,43 @@
         android:id="@+id/fragmentSchedule"
         android:name="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleFragment"
         android:label="@string/title_schedule"
-        tools:layout="@layout/fragment_schedule" />
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/action_fragmentSchedule_to_fragmentScheduleSettings"
+            app:destination="@id/fragmentScheduleSettings"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentScheduleSettings"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleSettingsFragment"
+        android:label="@string/title_schedule_settings" />
     <fragment
         android:id="@+id/fragmentStudent"
         android:name="ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment"
         android:label="@string/title_student"
-        tools:layout="@layout/fragment_student" />
+        tools:layout="@layout/fragment_student"></fragment>
+    <action
+        android:id="@+id/action_to_activityGradesDetails"
+        app:destination="@id/activityGradesDetails">
+        <argument
+            android:name="course"
+            app:argType="model.Cours" />
+    </action>
+    <activity
+        android:id="@+id/activityGradesDetails"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.gradesdetails.GradesDetailsActivity">
+        <argument
+            android:name="course"
+            app:argType="model.Cours" />
+    </activity>
     <fragment
         android:id="@+id/fragmentEts"
         android:name="ca.etsmtl.applets.etsmobile.presentation.ets.EtsFragment"
         android:label="@string/title_ets"
-        tools:layout="@layout/fragment_ets" >
+        tools:layout="@layout/fragment_ets">
         <action
             android:id="@+id/action_navigation_ets_to_securityFragment"
             app:destination="@id/fragmentSecurity"
@@ -57,7 +83,7 @@
         android:id="@+id/fragmentSecurity"
         android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityFragment"
         android:label="@string/title_security"
-        tools:layout="@layout/fragment_security" >
+        tools:layout="@layout/fragment_security">
         <action
             android:id="@+id/action_securityFragment_to_securityDetailFragment"
             app:destination="@id/fragmentSecurityDetail" />
@@ -65,7 +91,7 @@
     <fragment
         android:id="@+id/fragmentSecurityDetail"
         android:name="ca.etsmtl.applets.etsmobile.presentation.security.SecurityDetailFragment"
-        android:label="{securityTitle}" >
+        android:label="{securityTitle}">
         <argument
             android:name="securityTitle"
             app:argType="string" />
@@ -89,12 +115,16 @@
         android:id="@+id/fragmentAbout"
         android:name="ca.etsmtl.applets.etsmobile.presentation.about.AboutFragment"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/fragmentGitHubContributors"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.github.GitHubContributorsFragment"
+        android:label="@string/more_item_label_contributors"
+        tools:layout="@layout/fragment_github_contributors" />
     <activity
         android:id="@+id/activityOpenSourceLicenses"
-        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity">
-    </activity>
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"></activity>
     <fragment
         android:id="@+id/fragmentSettings"
-        android:label="@string/title_settings"
-        android:name="ca.etsmtl.applets.etsmobile.presentation.settings.SettingsFragment" />
+        android:name="ca.etsmtl.applets.etsmobile.presentation.settings.SettingsFragment"
+        android:label="@string/title_settings" />
 </navigation>

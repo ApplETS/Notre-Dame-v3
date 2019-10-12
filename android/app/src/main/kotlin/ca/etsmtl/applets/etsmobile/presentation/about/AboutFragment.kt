@@ -1,6 +1,5 @@
 package ca.etsmtl.applets.etsmobile.presentation.about
 
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.getAndroidDimensionInPixelSize
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.getColorFromAttr
 import ca.etsmtl.applets.etsmobile.extension.open
@@ -32,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_about.btnYoutube
 import kotlinx.android.synthetic.main.fragment_about.content
 import kotlinx.android.synthetic.main.fragment_about.ivAppletsLogo
 import kotlinx.android.synthetic.main.fragment_about.toolbarAbout
+import kotlin.math.max
 
 class AboutFragment : Fragment() {
 
@@ -40,7 +39,7 @@ class AboutFragment : Fragment() {
     }
     private var isEnterTransitionCanceled: Boolean = false
     private val statusBarHeight by lazy {
-        resources.getAndroidDimensionInPixelSize("status_bar_height") ?: 0
+        resources.getDimension(R.dimen.status_bar_height).toInt()
     }
 
     override fun onCreateView(
@@ -60,15 +59,15 @@ class AboutFragment : Fragment() {
     }
 
     /**
-     * Sets margin to compensate for the status bar height when setting
+     * Sets top margin to compensate for the status bar height when setting
      * [WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS] to the window
      *
      * The flag allows the circular reveal animation to be integrated with the status bar.
      */
     private fun compensateForTranslucentBar() {
-        (content.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-            topMargin = statusBarHeight
-        }
+        val layoutParams = content.layoutParams as? ViewGroup.MarginLayoutParams
+
+        layoutParams?.topMargin = statusBarHeight
     }
 
     private fun initViewTransition(savedInstanceState: Bundle?) {
@@ -105,7 +104,7 @@ class AboutFragment : Fragment() {
         val centerY = ivAppletsLogo.run {
             (y + statusBarHeight + toolbarAbout.height + height / 2).toInt()
         }
-        val endRadius = revealView.run { Math.max(revealView.width, revealView.height) }
+        val endRadius = revealView.run { max(revealView.width, revealView.height) }
         ViewAnimationUtils.createCircularReveal(
             revealView,
             centerX,
@@ -128,24 +127,27 @@ class AboutFragment : Fragment() {
 
     private fun setInitialActivityState() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(false, true)
             it.bottomNavigationView.setVisible(false)
             it.window.apply {
-                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    setFlags(
-                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-                    )
-                }
+                setFlags(
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                )
                 statusBarColor = it.getColorCompat(R.color.applets)
                 navigationBarColor = it.getColorCompat(R.color.applets)
             }
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        (activity as? MainActivity)?.appBarLayout?.setExpanded(false, false)
+    }
+
     private fun restoreActivityState() {
         (activity as? MainActivity)?.let {
-            it.appBarLayout.setExpanded(true, true)
+            it.appBarLayout.setExpanded(true, false)
             it.bottomNavigationView.setVisible(true)
             it.window.apply {
                 clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)

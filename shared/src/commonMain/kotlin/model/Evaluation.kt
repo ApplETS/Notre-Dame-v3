@@ -10,6 +10,10 @@ data class Evaluation(
     var equipe: String,
     var dateCible: ETSMobileDate?,
     var note: String?,
+    /**
+     * This string represents the value the exam is graded on. The value can also contains the
+     * bonus points separated by a plus sign  e.g. "50+3".
+     */
     var corrigeSur: String?,
     var notePourcentage: String?,
     var ponderation: String,

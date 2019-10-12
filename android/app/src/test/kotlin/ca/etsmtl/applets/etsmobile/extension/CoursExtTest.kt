@@ -4,6 +4,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.presentation.App
 import com.nhaarman.mockitokotlin2.mock
 import model.Cours
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -17,6 +18,11 @@ import kotlin.test.assertEquals
 @RunWith(JUnit4::class)
 class CoursExtTest {
     private val app: App = mock()
+
+    @Before
+    fun setup() {
+        Mockito.`when`(app.getString(R.string.abbreviation_not_available)).thenReturn("N/A")
+    }
 
     @Test
     fun cote_NotNullOrEmpty_ReturnsCote() {
@@ -42,7 +48,7 @@ class CoursExtTest {
     }
 
     @Test
-    fun cote_CoteEmptyAndNotSur100NotNullOrEmpty_ReturnsNoteSur100() {
+    fun cote_CoteEmptyAndNoteSur100NotNullOrEmpty_ReturnsNoteSur100() {
         // given
         val cours = Cours(
             "MAT123",

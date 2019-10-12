@@ -46,6 +46,8 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.debug
             manifestPlaceholders = [enableCrashReporting: "false"]
+            // Prevent Crashlytics from updating app resources with its own unique build ID
+            ext.alwaysUpdateBuildId = false
         }
 
         release {
@@ -97,8 +99,9 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/*.kotlin_module'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -116,7 +119,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Support libraries
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "com.google.android.material:material:$versions.material_components"
     implementation "androidx.legacy:legacy-support-v4:$versions.support"
     implementation "androidx.cardview:cardview:$versions.support"
@@ -124,11 +127,11 @@ dependencies {
     implementation "androidx.browser:browser:$versions.support"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
     implementation "androidx.core:core-ktx:$versions.android_ktx"
-    implementation 'androidx.fragment:fragment-ktx:1.0.0'
-    implementation "androidx.preference:preference:1.0.0"
+    implementation 'androidx.fragment:fragment-ktx:1.1.0'
+    implementation "androidx.preference:preference:1.1.0"
 
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
@@ -179,10 +182,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
-
     // Material Design Dimensions
     implementation "com.dmitrymalkovich.android:material-design-dimens:$versions.dimens"
 
@@ -211,6 +210,15 @@ dependencies {
 
     // Buglife
     implementation "com.buglife.sdk:buglife-android:$versions.buglife"
+
+    // Android Week View
+    implementation "com.github.thellmund:Android-Week-View:3.4.2"
+
+    // CircleImageView
+    implementation "de.hdodenhof:circleimageview:3.0.1"
+
+    // ETSMobile-Notifications
+    implementation "ca.applets.etsmobilenotifications:etsmobilenotifications:1.1.0"
 
     implementation project(':android:repository')
 }

@@ -7,6 +7,7 @@ import domain.SaveDashboardCardsUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import model.DashboardCard
 
@@ -28,14 +29,14 @@ class DashboardViewModel @Inject constructor(
     private var hiddenCards: MutableList<DashboardCard> = mutableListOf()
     private var lastRemovedCardPosition = -1
 
-    fun load() = scope.launch {
-        for (cards in fetchDashboardCardsUseCase()) {
-            val cards = cards.partition { card ->
+    fun load() = vmScope.launch {
+        fetchDashboardCardsUseCase().collect { cards ->
+            val (visible, hidden) = cards.partition { card ->
                 card.visible
             }
 
-            visibleCards = cards.first.toMutableList()
-            hiddenCards = cards.second.toMutableList()
+            visibleCards = visible.toMutableList()
+            hiddenCards = hidden.toMutableList()
 
             this@DashboardViewModel._cardsChannel.send(visibleCards.toList())
         }
@@ -76,7 +77,7 @@ class DashboardViewModel @Inject constructor(
         )
     }
 
-    fun restore() = scope.launch {
+    fun restore() = vmScope.launch {
         _showUndoRemoveChannel.offer(false)
         restoreDashboardCardsUseCase()
         load()

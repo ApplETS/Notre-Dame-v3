@@ -8,7 +8,7 @@ import java.util.Date
 /**
  * Creates a new [ETSMobileDate] from the specified [timestamp]
  *
- * @param timestamp Unix time (Number of Epoch milliseconds)
+ * @param timestamp Unix time (Number of Epoch milliseconds) (it is `now` by default)
  */
 actual fun ETSMobileDate(timestamp: Long?): ETSMobileDate {
     return Calendar.getInstance().toETSMobileDate(timestamp)
@@ -34,7 +34,7 @@ actual fun ETSMobileDate(
     set(Calendar.MILLISECOND, 0)
 }.toETSMobileDate(null)
 
-private fun Calendar.toETSMobileDate(timestamp: Long?): ETSMobileDate {
+fun Calendar.toETSMobileDate(timestamp: Long? = null): ETSMobileDate {
     timestamp?.let { timeInMillis = it }
 
     val seconds = get(Calendar.SECOND)
@@ -63,9 +63,15 @@ private fun Calendar.toETSMobileDate(timestamp: Long?): ETSMobileDate {
     )
 }
 
-/**
- * Creates a new [ETSMobileDate] which represents the current time
- */
-actual fun ETSMobileDate.now() = ETSMobileDate(Date().time)
-
 fun ETSMobileDate.toJvmDate(): Date = Date(timeInMilliseconds)
+
+fun ETSMobileDate.toCalendar(): Calendar = Calendar.getInstance().apply {
+    set(Calendar.YEAR, year)
+    // January is month 0 in Java's Calendar
+    set(Calendar.MONTH, month.ordinal)
+    set(Calendar.DAY_OF_MONTH, dayOfMonth)
+    set(Calendar.HOUR_OF_DAY, hours)
+    set(Calendar.MINUTE, minutes)
+    set(Calendar.SECOND, seconds)
+    set(Calendar.MILLISECOND, 0)
+}

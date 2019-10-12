@@ -1,9 +1,9 @@
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -14,5 +14,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             consumerProguardFiles 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
     }
 }

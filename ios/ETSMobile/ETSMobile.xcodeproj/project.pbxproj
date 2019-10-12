@@ -12,7 +12,6 @@
 		14487BF120C4938100769881 /* FireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14487BF020C4938100769881 /* FireViewController.swift */; };
 		1454550520B3647000EB7682 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1454550320B3647000EB7682 /* Localizable.strings */; };
 		146F3B04208B878900275F71 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B03208B878900275F71 /* HomeViewController.swift */; };
-		146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B05208B87AD00275F71 /* ProfileViewController.swift */; };
 		146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B07208B87C900275F71 /* ScheduleViewController.swift */; };
 		146F3B0C208B883400275F71 /* EmergencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B0B208B883400275F71 /* EmergencyTableViewController.swift */; };
 		146F3B0E208B89AA00275F71 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F3B0D208B89AA00275F71 /* HomeView.swift */; };
@@ -35,11 +34,8 @@
 		8F91DFA4218E07CA00472BE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */; };
 		8F9F71152182265A0052D16C /* ETSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F71142182265A0052D16C /* ETSButton.swift */; };
 		95186718218E0650009DDD47 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95186717218E0650009DDD47 /* GradientView.swift */; };
-		9521A22522B8221B007CDEF8 /* SemesterCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521A22422B8221B007CDEF8 /* SemesterCourses.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
-		95920B0122C2A7370062E5F0 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95920B0022C2A7370062E5F0 /* CourseModel.swift */; };
-		95A0600222B559540028DF1B /* CourseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0600122B559540028DF1B /* CourseCard.swift */; };
 		C8B61D042162D9100040A732 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D032162D9100040A732 /* UserType.swift */; };
 		C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D072162DB1D0040A732 /* MonETSClient.swift */; };
 		C8B61D0A2162E8660040A732 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D092162E8660040A732 /* Environment.swift */; };
@@ -78,7 +74,6 @@
 		1454550720B3655C00EB7682 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1454550820B3655C00EB7682 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		146F3B03208B878900275F71 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		146F3B05208B87AD00275F71 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		146F3B07208B87C900275F71 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		146F3B0B208B883400275F71 /* EmergencyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyTableViewController.swift; sourceTree = "<group>"; };
 		146F3B0D208B89AA00275F71 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -108,11 +103,8 @@
 		8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8F9F71142182265A0052D16C /* ETSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSButton.swift; sourceTree = "<group>"; };
 		95186717218E0650009DDD47 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		9521A22422B8221B007CDEF8 /* SemesterCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemesterCourses.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		95920B0022C2A7370062E5F0 /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
-		95A0600122B559540028DF1B /* CourseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCard.swift; sourceTree = "<group>"; };
 		C8B61D032162D9100040A732 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		C8B61D072162DB1D0040A732 /* MonETSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonETSClient.swift; sourceTree = "<group>"; };
 		C8B61D092162E8660040A732 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -179,9 +171,6 @@
 			isa = PBXGroup;
 			children = (
 				C8C49A832162D4B7006CCBED /* Profile.storyboard */,
-				146F3B05208B87AD00275F71 /* ProfileViewController.swift */,
-				95A0600122B559540028DF1B /* CourseCard.swift */,
-				9521A22422B8221B007CDEF8 /* SemesterCourses.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -297,7 +286,6 @@
 			children = (
 				958F2F012106ADF70074DBF5 /* UserInfo.swift */,
 				C8B61D032162D9100040A732 /* UserType.swift */,
-				95920B0022C2A7370062E5F0 /* CourseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -520,9 +508,7 @@
 				846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */,
 				146F3B0C208B883400275F71 /* EmergencyTableViewController.swift in Sources */,
 				25553FA520545D42009897F7 /* AppDelegate.swift in Sources */,
-				146F3B06208B87AD00275F71 /* ProfileViewController.swift in Sources */,
 				14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */,
-				95920B0122C2A7370062E5F0 /* CourseModel.swift in Sources */,
 				C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */,
 				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
 				C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */,
@@ -534,9 +520,7 @@
 				84D608F920C74500007D9976 /* MedicalEmergencyViewController.swift in Sources */,
 				958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */,
 				8F1C750621835F47002CE21F /* Regex.swift in Sources */,
-				9521A22522B8221B007CDEF8 /* SemesterCourses.swift in Sources */,
 				8F4CAF2921825178009ADDEF /* ETSLoadingIndicator.swift in Sources */,
-				95A0600222B559540028DF1B /* CourseCard.swift in Sources */,
 				146F3B08208B87C900275F71 /* ScheduleViewController.swift in Sources */,
 				958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */,
 				C8B61D042162D9100040A732 /* UserType.swift in Sources */,
@@ -711,7 +695,7 @@
 					"$(SRCROOT)/../../shared/build/xcode-frameworks",
 				);
 				INFOPLIST_FILE = ETSMobile/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.etsmtl.applets.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -733,7 +717,7 @@
 					"$(SRCROOT)/../../shared/build/xcode-frameworks",
 				);
 				INFOPLIST_FILE = "ETS-mobile/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.etsmtl.applets.;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -55,9 +55,25 @@ data class ETSMobileDate internal constructor(
 }
 
 /**
+ * Formats date to Signets default date format (yyyy-MM-dd)
+ */
+fun ETSMobileDate.toDefaultSignetsDate(): String {
+    val monthStr = (month.ordinal + 1).twoDigits()
+    val dayOfMonthStr = dayOfMonth.twoDigits()
+
+    return "$year-$monthStr-$dayOfMonthStr"
+}
+
+private fun Int.twoDigits(): String {
+    val str = "$this"
+
+    return if (str.length < 2) { "0$str" } else str
+}
+
+/**
  * Creates a new [ETSMobileDate] from the specified [timestamp]
  *
- * @param timestamp Unix time (Number of Epoch milliseconds)
+ * @param timestamp Unix time (Number of Epoch milliseconds) (it is `now` by default)
  */
 @Suppress("FunctionName")
 expect fun ETSMobileDate(timestamp: Long? = null): ETSMobileDate
@@ -76,11 +92,6 @@ expect fun ETSMobileDate(
 ): ETSMobileDate
 
 /**
- * Creates a new [ETSMobileDate] which represents the current time
- */
-expect fun ETSMobileDate.now(): ETSMobileDate
-
-/**
  * Adds the specified number of [milliseconds]
  */
 operator fun ETSMobileDate.plus(milliseconds: Long): ETSMobileDate = ETSMobileDate(timeInMilliseconds + milliseconds)
@@ -89,3 +100,12 @@ operator fun ETSMobileDate.plus(milliseconds: Long): ETSMobileDate = ETSMobileDa
  * Subtracts the specified number of [milliseconds]
  */
 operator fun ETSMobileDate.minus(milliseconds: Long): ETSMobileDate = ETSMobileDate(timeInMilliseconds - milliseconds)
+
+/**
+ * Returns true if it's today
+ */
+fun ETSMobileDate.isToday(): Boolean {
+    val now = ETSMobileDate()
+
+    return dayOfYear == now.dayOfYear && year == now.year
+}

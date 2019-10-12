@@ -11,7 +11,7 @@ data class ApiEvaluation(
     @Json(name = "dateCible") var dateCible: String,
     @Json(name = "note") var note: String?,
     /**
-     * This string represents the value the exam is corrected on. The value can also contains the
+     * This string represents the value the exam is graded on. The value can also contains the
      * bonus points separated by a plus sign  e.g. "50+3".
      */
     @Json(name = "corrigeSur") var corrigeSur: String,

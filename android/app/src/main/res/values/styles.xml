@@ -31,14 +31,14 @@
         <item name="colorControlNormal">@android:color/white</item>
     </style>
 
-    <style name="TextAppearance.AppTheme.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.GradesDetailsTheme.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="TextAppearance.AppTheme.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.GradesDetailsTheme.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/colorToolbarAccent</item>
     </style>
 
     <style name="WindowAnimationTransition">
@@ -68,10 +68,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="TextAppearance.Login.Error" parent="TextAppearance.Design.Error">
-        <item name="android:textColor">@color/material_yellow_500</item>
-    </style>
-
     <style name="AppTheme.Dialog.Alert" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
@@ -93,7 +89,6 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="rippleColor">@color/colorPrimary</item>
     </style>
-
 
     <style name="Widget.AppTheme.Dashboard.Card.Applets.Button" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@android:color/white</item>

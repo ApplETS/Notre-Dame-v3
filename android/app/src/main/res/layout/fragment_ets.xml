@@ -9,10 +9,7 @@
         android:id="@+id/rvEts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="@dimen/design_bottom_navigation_height"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:ignore="PrivateResource"
         tools:listitem="@layout/item_ets" />

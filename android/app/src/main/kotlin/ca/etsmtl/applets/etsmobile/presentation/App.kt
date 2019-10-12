@@ -31,8 +31,19 @@ class App : DaggerApplication() {
 
     private fun setupBuglife() {
         Buglife.initWithApiKey(this, getString(R.string.buglife_key))
-        Buglife.setInvocationMethod(InvocationMethod.BUG_BUTTON)
-        Buglife.setInvocationMethod(InvocationMethod.SHAKE)
+
+        val shakeEnabled = prefs.getBoolean(
+            getString(R.string.key_shake_bug_reporter_invocation_method_pref),
+            true
+        )
+
+        Buglife.setInvocationMethod(
+            if (shakeEnabled) {
+                InvocationMethod.SHAKE
+            } else {
+                InvocationMethod.NONE
+            }
+        )
 
         val summaryField = TextInputField.summaryInputField()
         val emailField = TextInputField(getString(R.string.buglife_email))

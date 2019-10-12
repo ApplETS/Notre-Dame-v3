@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.etsmtl.applets.etsmobile.R
@@ -25,8 +25,8 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
 
 /**
- * A screen which displays a bottom navigation view and wrapper for fragment. The user can
- * select items on the bottom navigation view to switch between fragments.
+ * A screen which displays an app bar, a bottom navigation view and wrapper for fragment. The user
+ * can select items on the bottom navigation view to switch between fragments.
  *
  * Created by Sonphil on 24-02-18.
  */
@@ -38,6 +38,7 @@ class MainActivity : BaseActivity() {
     }
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val navController by lazy { findNavController(R.id.fragmentNavHostMain) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,12 +69,18 @@ class MainActivity : BaseActivity() {
         }
 
         fun setupNavigation() {
-            val navController = findNavController(R.id.fragmentNavHostMain)
-
             bottomNavigationView.setupWithNavController(navController)
             bottomNavigationView.setOnNavigationItemSelectedListener { item ->
                 if (mainViewModel.shouldPerformBottomNavigationViewAction()) {
-                    NavigationUI.onNavDestinationSelected(item, navController)
+                    val navOptions = NavOptions.Builder()
+                        .setLaunchSingleTop(true)
+                        .setEnterAnim(androidx.navigation.ui.R.anim.nav_default_enter_anim)
+                        .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
+                        .build()
+
+                    navController.navigate(item.itemId, null, navOptions)
+
+                    true
                 } else {
                     false
                 }
@@ -94,7 +101,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        val navController = findNavController(R.id.fragmentNavHostMain)
+        appBarLayout.setExpanded(false, false)
+
         val topLevelDestinations = mainViewModel.topLevelDestinations.map {
             it.toDestinationId()
         }.toSet()
@@ -116,17 +124,15 @@ class MainActivity : BaseActivity() {
 
     private fun subscribeUI() {
         mainViewModel.navigateToDestination.observe(this, EventObserver {
-            findNavController(R.id.fragmentNavHostMain).navigate(it.toDestinationId())
+            navController.navigate(it.toDestinationId())
         })
 
-        mainViewModel.appBarLayoutExpanded.observe(this, Observer { expanded ->
-            appBarLayout.setExpanded(expanded, true)
+        mainViewModel.expandAppBarLayout.observe(this, Observer { expand ->
+            appBarLayout.setExpanded(expand)
         })
 
         mainViewModel.bottomNavigationViewVisible.observe(this, Observer { visible ->
-            val duration: Long = if (visible) 200 else 0
-
-            bottomNavigationView?.setVisible(visible, duration)
+            bottomNavigationView?.setVisible(visible)
         })
 
         mainViewModel.closeApp.observe(this, EventObserver {

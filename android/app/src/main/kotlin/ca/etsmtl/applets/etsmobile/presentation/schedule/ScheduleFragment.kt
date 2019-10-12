@@ -1,8 +1,10 @@
 package ca.etsmtl.applets.etsmobile.presentation.schedule
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,20 +12,23 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.viewpager.widget.ViewPager
+import androidx.navigation.fragment.findNavController
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.applyAppTheme
-import ca.etsmtl.applets.etsmobile.extension.fadeTo
-import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
+import ca.etsmtl.applets.etsmobile.extension.generateColor
 import ca.etsmtl.applets.etsmobile.util.EventObserver
-import com.google.android.material.tabs.TabLayout
+import com.alamkanak.weekview.MonthChangeListener
+import com.alamkanak.weekview.ScrollListener
+import com.alamkanak.weekview.WeekView
+import com.alamkanak.weekview.WeekViewDisplayable
+import com.alamkanak.weekview.WeekViewEvent
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_main.appBarLayout
-import kotlinx.android.synthetic.main.activity_main.tabLayout
-import kotlinx.android.synthetic.main.empty_view_schedule.btnRetry
-import kotlinx.android.synthetic.main.empty_view_schedule.emptyViewSchedule
-import kotlinx.android.synthetic.main.fragment_schedule.schedule_pager
-import kotlinx.android.synthetic.main.fragment_schedule.swipeRefreshLayoutSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.btnToday
+import kotlinx.android.synthetic.main.fragment_schedule.progressBarSchedule
+import kotlinx.android.synthetic.main.fragment_schedule.weekView
+import model.Seance
+import utils.date.toCalendar
+import java.util.Calendar
+import java.util.GregorianCalendar
 import javax.inject.Inject
 
 /**
@@ -38,23 +43,10 @@ class ScheduleFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var adapter: ScheduleAdapter
 
-    private val showTabsHandler = Handler()
-    private var showTabsRunnable: Runnable? = null
-    private var selectTabsRunnable: Runnable? = null
-    private val onPageChangeListener by lazy {
-        object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-                swipeRefreshLayoutSchedule?.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
 
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {}
-
-            override fun onPageSelected(position: Int) {}
-        }
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -69,90 +61,99 @@ class ScheduleFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpSwipeRefresh()
-        setUpPager()
-        btnRetry.setOnClickListener { scheduleViewModel.refresh() }
+        btnToday.setOnClickListener { weekView.goToToday() }
+        setupWeekView()
         subscribeUI()
     }
 
-    private fun setUpSwipeRefresh() {
-        swipeRefreshLayoutSchedule.applyAppTheme(requireContext())
-        swipeRefreshLayoutSchedule.setOnRefreshListener { scheduleViewModel.refresh() }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_schedule, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun setUpPager() {
-        schedule_pager.adapter = adapter
-
-        schedule_pager.addOnPageChangeListener(onPageChangeListener)
-
-        (activity as? MainActivity)?.tabLayout?.let {
-            showTabsRunnable = Runnable {
-                it.tabMode = TabLayout.MODE_SCROLLABLE
-                it.setupWithViewPager(schedule_pager)
-                it.fadeTo(View.VISIBLE)
-            }
-            showTabsHandler.postDelayed(
-                showTabsRunnable,
-                resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-            )
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.item_settings -> {
+            findNavController().navigate(ScheduleFragmentDirections.actionFragmentScheduleToFragmentScheduleSettings())
+            true
         }
+        else -> super.onContextItemSelected(item)
+    }
+
+    private fun setupWeekView() {
+        weekView.setShowTimeColumnHourSeparator(true)
+
+        // Listener called when the week view needs to load another month
+        val monthChangeListener = object : MonthChangeListener<Seance> {
+            override fun onMonthChange(startDate: Calendar, endDate: Calendar): List<WeekViewDisplayable<Seance>> {
+                return scheduleViewModel.getSeancesForDates(startDate, endDate.tomorrow()).map { seance ->
+                    seance.toWeekViewEvent() as WeekViewDisplayable<Seance>
+                }
+            }
+        }
+
+        (weekView as WeekView<Seance>).setMonthChangeListener(monthChangeListener)
+
+        weekView.scrollListener = object : ScrollListener {
+            override fun onFirstVisibleDayChanged(
+                newFirstVisibleDay: Calendar,
+                oldFirstVisibleDay: Calendar?
+            ) {
+                scheduleViewModel.onDayChanged(newFirstVisibleDay)
+            }
+        }
+    }
+
+    private fun Calendar.tomorrow() = GregorianCalendar().apply {
+        time = this@tomorrow.time
+
+        add(Calendar.DAY_OF_MONTH, 1)
+    }
+
+    private fun Seance.toWeekViewEvent(): WeekViewEvent<Seance> {
+        val style = WeekViewEvent.Style
+            .Builder()
+            .setBackgroundColor(generateColor(requireContext()))
+            .build()
+
+        return WeekViewEvent.Builder<Seance>()
+            .setTitle(libelleCours)
+            .setLocation("\n$sigleCours $nomActivite\n$local")
+            .setStartTime(dateDebut.toCalendar())
+            .setEndTime(dateFin.toCalendar())
+            .setStyle(style)
+            .build()
     }
 
     private fun subscribeUI() {
         scheduleViewModel.seances.observe(this, Observer {
-            it?.let {
-                if (it.isNotEmpty()) {
-                    adapter.items = it
-                    adapter.notifyDataSetChanged()
-
-                    selectTabsRunnable = Runnable {
-                        (activity as? MainActivity)?.tabLayout?.getTabAt(adapter.getCurrentPosition())?.select()
-                    }
-                    showTabsHandler.postDelayed(
-                        selectTabsRunnable,
-                        resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-                    )
-                }
-            }
+            weekView.notifyDataSetChanged()
         })
 
         scheduleViewModel.loading.observe(this, Observer {
-            it?.let { swipeRefreshLayoutSchedule.isRefreshing = it }
+            it?.let { progressBarSchedule.isVisible = it }
         })
 
         scheduleViewModel.errorMessage.observe(this, EventObserver {
             it?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
         })
 
-        scheduleViewModel.showEmptyView.observe(this, Observer {
-            it?.let {
-                schedule_pager.isVisible = !it
-                emptyViewSchedule.isVisible = it
-            }
+        scheduleViewModel.showTodayButton.observe(this, Observer { show ->
+            if (show) btnToday.show() else btnToday.hide()
+        })
+
+        scheduleViewModel.numberOfVisibleDays.observe(this, Observer {
+            weekView.numberOfVisibleDays = it
+        })
+
+        scheduleViewModel.xScrollingSpeed.observe(this, Observer { speed ->
+            weekView.xScrollingSpeed = speed
+        })
+
+        scheduleViewModel.scrollDuration.observe(this, Observer { duration ->
+            weekView.scrollDuration = duration
         })
 
         this.lifecycle.addObserver(scheduleViewModel)
-    }
-
-    override fun onDestroyView() {
-        (activity as? MainActivity)?.let { activity ->
-            activity.appBarLayout.setExpanded(true, false)
-
-            schedule_pager.removeOnPageChangeListener(onPageChangeListener)
-            activity.tabLayout?.let {
-                it.setupWithViewPager(null)
-                it.tabMode = TabLayout.MODE_FIXED
-                it.isVisible = false
-            }
-        }
-        super.onDestroyView()
-
-        showTabsHandler.removeCallbacks(showTabsRunnable)
-        showTabsHandler.removeCallbacks(selectTabsRunnable)
-    }
-
-    companion object {
-        private const val TAG = "ScheduleFragment"
-        fun newInstance(): ScheduleFragment = ScheduleFragment()
     }
 }

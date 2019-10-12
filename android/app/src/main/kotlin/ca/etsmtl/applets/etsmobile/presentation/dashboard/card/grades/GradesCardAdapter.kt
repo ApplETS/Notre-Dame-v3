@@ -48,7 +48,11 @@ class GradesCardAdapter : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder
             parent,
             false
         )
-    )
+    ).apply {
+        itemView.setOnClickListener {
+            onCourseClickListener?.onCourseClick(items[adapterPosition], this)
+        }
+    }
 
     override fun getItemCount() = items.count()
 
@@ -58,7 +62,6 @@ class GradesCardAdapter : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder
         holder.tvCourseGrade.text = course.cote
         holder.tvCourseSigle.text = course.sigle
         ViewCompat.setTransitionName(holder.tvCourseGrade, course.sigle)
-        holder.itemView.setOnClickListener { onCourseClickListener?.onCourseClick(course, holder) }
     }
 
     class GradeViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer
