@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import ca.etsmtl.applets.etsmobile.R
-import ca.etsmtl.applets.etsmobile.extension.fadeTo
 import ca.etsmtl.applets.etsmobile.presentation.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
@@ -44,7 +43,7 @@ class StudentFragment : DaggerFragment() {
                 showTabsRunnable = Runnable {
                     viewPagerStudent.adapter = StudentPagerAdapter(activity, childFragmentManager)
                     tabLayout.setupWithViewPager(viewPagerStudent)
-                    tabLayout.fadeTo(View.VISIBLE)
+                    tabLayout.isVisible = true
                 }
                 showTabsHandler.postDelayed(
                     showTabsRunnable,
