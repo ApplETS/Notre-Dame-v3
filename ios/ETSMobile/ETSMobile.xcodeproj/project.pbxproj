@@ -34,6 +34,9 @@
 		8F91DFA4218E07CA00472BE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */; };
 		8F9F71152182265A0052D16C /* ETSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F71142182265A0052D16C /* ETSButton.swift */; };
 		95186718218E0650009DDD47 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95186717218E0650009DDD47 /* GradientView.swift */; };
+		95515B5123516D870064419E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95515B5023516D870064419E /* ProfileViewController.swift */; };
+		95515B532352281D0064419E /* SemesterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95515B522352281D0064419E /* SemesterTableViewCell.swift */; };
+		95515B55235234690064419E /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95515B54235234690064419E /* CourseCollectionViewCell.swift */; };
 		958AD36E210E069200A5D5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AD36D210E069200A5D5B0 /* LoginViewController.swift */; };
 		958F2F022106ADF70074DBF5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F2F012106ADF70074DBF5 /* UserInfo.swift */; };
 		C8B61D042162D9100040A732 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D032162D9100040A732 /* UserType.swift */; };
@@ -103,6 +106,9 @@
 		8F91DFA3218E07CA00472BE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8F9F71142182265A0052D16C /* ETSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSButton.swift; sourceTree = "<group>"; };
 		95186717218E0650009DDD47 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		95515B5023516D870064419E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		95515B522352281D0064419E /* SemesterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemesterTableViewCell.swift; sourceTree = "<group>"; };
+		95515B54235234690064419E /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
 		958AD36D210E069200A5D5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		958F2F012106ADF70074DBF5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		C8B61D032162D9100040A732 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
@@ -171,6 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				C8C49A832162D4B7006CCBED /* Profile.storyboard */,
+				95515B5023516D870064419E /* ProfileViewController.swift */,
+				95515B522352281D0064419E /* SemesterTableViewCell.swift */,
+				95515B54235234690064419E /* CourseCollectionViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -507,9 +516,12 @@
 				14487BEF20C4808000769881 /* SuspiciousPackageViewController.swift in Sources */,
 				846B169E20C710FB00AE5D1F /* ArmedPersonViewController.swift in Sources */,
 				146F3B0C208B883400275F71 /* EmergencyTableViewController.swift in Sources */,
+				95515B55235234690064419E /* CourseCollectionViewCell.swift in Sources */,
 				25553FA520545D42009897F7 /* AppDelegate.swift in Sources */,
 				14E8E3BE20C8CC9B00751350 /* SuspiciousSmellViewController.swift in Sources */,
+				95515B532352281D0064419E /* SemesterTableViewCell.swift in Sources */,
 				C8B61D082162DB1D0040A732 /* MonETSClient.swift in Sources */,
+				95515B5123516D870064419E /* ProfileViewController.swift in Sources */,
 				14487BF120C4938100769881 /* FireViewController.swift in Sources */,
 				C8C49A892162D60D006CCBED /* SchoolViewController.swift in Sources */,
 				C8B61D0A2162E8660040A732 /* Environment.swift in Sources */,

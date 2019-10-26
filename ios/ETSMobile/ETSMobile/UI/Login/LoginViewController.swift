@@ -55,14 +55,14 @@ class LoginViewController: UIViewController {
         usernameInfoButton.translatesAutoresizingMaskIntoConstraints = false
         let usernameInfoButtonContainer = UIView()
         usernameInfoButtonContainer.translatesAutoresizingMaskIntoConstraints = false
-        usernameInfoButtonContainer.widthAnchor.constraint(equalToConstant: 40.0).isActive = true
+        usernameInfoButtonContainer.widthAnchor.constraint(equalToConstant: 36.0).isActive = true
         usernameInfoButtonContainer.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
         usernameInfoButtonContainer.addSubview(usernameInfoButton)
         usernameInfoButton.topAnchor.constraint(equalTo: usernameInfoButtonContainer.topAnchor).isActive = true
         usernameInfoButton.leftAnchor.constraint(equalTo: usernameInfoButtonContainer.leftAnchor).isActive = true
         usernameInfoButton.bottomAnchor.constraint(equalTo: usernameInfoButtonContainer.bottomAnchor).isActive = true
         usernameTextField.rightView = usernameInfoButtonContainer
-        usernameTextField.rightViewMode = .unlessEditing
+        usernameTextField.rightViewMode = .always
 
         let showPasswordButton = UIButton()
         showPasswordButton.setImage(UIImage(named: "eyeClosed"), for: .normal)
@@ -72,14 +72,14 @@ class LoginViewController: UIViewController {
         showPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         let showPasswordButtonContainer = UIView()
         showPasswordButtonContainer.translatesAutoresizingMaskIntoConstraints = false
-        showPasswordButtonContainer.widthAnchor.constraint(equalToConstant: 36.0).isActive = true
+        showPasswordButtonContainer.widthAnchor.constraint(equalToConstant: 32.0).isActive = true
         showPasswordButtonContainer.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
         showPasswordButtonContainer.addSubview(showPasswordButton)
         showPasswordButton.topAnchor.constraint(equalTo: showPasswordButtonContainer.topAnchor).isActive = true
         showPasswordButton.leftAnchor.constraint(equalTo: showPasswordButtonContainer.leftAnchor).isActive = true
         showPasswordButton.bottomAnchor.constraint(equalTo: showPasswordButtonContainer.bottomAnchor).isActive = true
         passwordTextField.rightView = showPasswordButtonContainer
-        passwordTextField.rightViewMode = .unlessEditing
+        passwordTextField.rightViewMode = .always
 
         madeByLabel.text = NSLocalizedString("madeBy", comment: "Réalisé par")
         loginButton.setTitle(NSLocalizedString("login", comment: "Login"), for: UIControl.State.normal)
