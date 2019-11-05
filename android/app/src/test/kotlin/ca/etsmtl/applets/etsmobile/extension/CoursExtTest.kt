@@ -39,12 +39,10 @@ class CoursExtTest {
         )
 
         // when
-        val resultCours = cours.apply {
-            adjustCoteForDisplay(app)
-        }
+        val displayableCote = cours.getDisplayableCote(app)
 
         // then
-        assertEquals(cours, resultCours)
+        assertEquals(cours.cote, displayableCote)
     }
 
     @Test
@@ -63,12 +61,10 @@ class CoursExtTest {
         Mockito.`when`(app.getString(R.string.text_grade_in_percentage)).thenReturn("%1\$s %%")
 
         // when
-        val resultCours = cours.apply {
-            adjustCoteForDisplay(app)
-        }
+        val displayableCote = cours.getDisplayableCote(app)
 
         // then
-        assertEquals(cours.copy(cote = cours.noteSur100 + " %"), resultCours)
+        assertEquals(cours.noteSur100 + " %", displayableCote)
     }
 
     @Test
@@ -87,11 +83,9 @@ class CoursExtTest {
         Mockito.`when`(app.getString(R.string.abbreviation_not_available)).thenReturn("N/A")
 
         // when
-        val resultCours = cours.apply {
-            adjustCoteForDisplay(app)
-        }
+        val displayableCote = cours.getDisplayableCote(app)
 
         // then
-        assertEquals(cours.copy(cote = "N/A"), resultCours)
+        assertEquals("N/A", displayableCote)
     }
 }

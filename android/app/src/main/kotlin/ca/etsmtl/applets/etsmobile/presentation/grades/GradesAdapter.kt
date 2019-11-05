@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.getDisplayableCote
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.GradeViewHolder
 import ca.etsmtl.applets.etsmobile.presentation.grades.GradesAdapter.CourseGradeViewHolder.HeaderViewHolder
 import kotlinx.android.extensions.LayoutContainer
@@ -94,7 +95,7 @@ class GradesAdapter(private val onCourseClickListener: OnCourseClickListener) : 
         when (holder) {
             is GradeViewHolder -> {
                 with(itemsList[position] as Cours) {
-                    holder.tvCourseGrade.text = cote
+                    holder.tvCourseGrade.text = this.getDisplayableCote(holder.containerView.context)
 
                     holder.tvCourseSigle.text = this.sigle
 
