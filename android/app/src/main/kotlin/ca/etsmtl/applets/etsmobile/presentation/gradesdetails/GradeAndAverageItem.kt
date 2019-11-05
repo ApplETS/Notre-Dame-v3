@@ -4,17 +4,17 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.repository.util.replaceCommaAndParseToFloat
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.item_grade_average.progressViewCourseAverage
-import kotlinx.android.synthetic.main.item_grade_average.progressViewCourseGrade
-import kotlinx.android.synthetic.main.item_grade_average.tvAverage
-import kotlinx.android.synthetic.main.item_grade_average.tvGrade
-import kotlinx.android.synthetic.main.item_grade_average.tvLabelGrade
-import kotlinx.android.synthetic.main.item_grade_average.tvRating
+import kotlinx.android.synthetic.main.item_grade_and_average.progressViewCourseAverage
+import kotlinx.android.synthetic.main.item_grade_and_average.progressViewCourseGrade
+import kotlinx.android.synthetic.main.item_grade_and_average.tvAverage
+import kotlinx.android.synthetic.main.item_grade_and_average.tvGrade
+import kotlinx.android.synthetic.main.item_grade_and_average.tvLabelGrade
+import kotlinx.android.synthetic.main.item_grade_and_average.tvRating
 
 /**
  * Created by Sonphil on 08-09-18.
  */
-class GradeAverageItem(
+class GradeAndAverageItem(
     private val rating: String?,
     private val grade: String?,
     private val gradeOn: String?,
@@ -70,5 +70,5 @@ class GradeAverageItem(
         }
     }
 
-    override fun getLayout() = R.layout.item_grade_average
+    override fun getLayout() = R.layout.item_grade_and_average
 }
