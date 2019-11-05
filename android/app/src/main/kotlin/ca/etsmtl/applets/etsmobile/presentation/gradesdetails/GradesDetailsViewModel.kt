@@ -49,6 +49,23 @@ class GradesDetailsViewModel @Inject constructor(
             Event(it.message)
         }
 
+    private fun SommaireEtEvaluations.createGradeAndAverageItem() = sommaireElementsEvaluation
+        .run {
+            val rating = cours.value?.cote ?: String.format(
+                app.getString(R.string.text_grade_in_percentage),
+                noteSur100.zeroIfNullOrBlank()
+            )
+
+            GradeAndAverageItem(
+                rating,
+                note.zeroIfNullOrBlank(),
+                noteSur.zeroIfNullOrBlank(),
+                noteSur100.zeroIfNullOrBlank(),
+                moyenneClasse.zeroIfNullOrBlank(),
+                moyenneClassePourcentage.zeroIfNullOrBlank()
+            )
+        }
+
     private fun SommaireElementsEvaluation.createSummaryItems() = listOf(
         EvaluationDetailItem(app.getString(R.string.label_median), medianeClasse),
         EvaluationDetailItem(app.getString(R.string.label_standard_deviation), ecartTypeClasse),
@@ -112,16 +129,7 @@ class GradesDetailsViewModel @Inject constructor(
 
     val detailsListItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluations) {
         it?.takeIf { it.status != Resource.Status.LOADING }?.data?.let { sommaireEtEvaluations ->
-            val gradeAndAverageItem = sommaireEtEvaluations.sommaireElementsEvaluation.run {
-                GradeAndAverageItem(
-                    cours.value?.cote,
-                    note.zeroIfNullOrBlank(),
-                    noteSur.zeroIfNullOrBlank(),
-                    noteSur100.zeroIfNullOrBlank(),
-                    moyenneClasse.zeroIfNullOrBlank(),
-                    moyenneClassePourcentage.zeroIfNullOrBlank()
-                )
-            }
+            val gradeAndAverageItem = sommaireEtEvaluations.createGradeAndAverageItem()
 
             mutableListOf<Group>(gradeAndAverageItem).apply {
                 add(SectionTitleItem(app.getString(R.string.title_section_summary)))
