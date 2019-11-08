@@ -8,10 +8,10 @@ import model.Cours
  * Created by Sonphil on 02-03-19.
  */
 
-fun Cours.adjustCoteForDisplay(context: Context) {
+fun Cours.getDisplayableCote(context: Context): String {
     val notAvailableStr = context.getString(R.string.abbreviation_not_available)
 
-    cote = when {
+    return when {
         !cote.isNullOrEmpty() && cote != notAvailableStr -> cote!!
         !noteSur100.isNullOrEmpty() -> {
             String.format(

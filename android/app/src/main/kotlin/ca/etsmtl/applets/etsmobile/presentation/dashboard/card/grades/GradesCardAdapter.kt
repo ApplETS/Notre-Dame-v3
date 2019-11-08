@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.getDisplayableCote
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseGrade
 import kotlinx.android.synthetic.main.item_grade_course.tvCourseSigle
@@ -59,7 +60,7 @@ class GradesCardAdapter : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder
     override fun onBindViewHolder(holder: GradeViewHolder, position: Int) {
         val course = items[position]
 
-        holder.tvCourseGrade.text = course.cote
+        holder.tvCourseGrade.text = course.getDisplayableCote(holder.containerView.context)
         holder.tvCourseSigle.text = course.sigle
         ViewCompat.setTransitionName(holder.tvCourseGrade, course.sigle)
     }
