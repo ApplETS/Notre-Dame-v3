@@ -73,7 +73,7 @@ class GradesCardFragment : DaggerFragment() {
 
     private fun subscribeUI() {
         gradesCardViewModel.cours.observe(this, Observer {
-            it?.takeIf { it.isNotEmpty() }?.let { adapter.items = it }
+            it?.takeIf { it.isNotEmpty() }?.let { adapter.submitList(it) }
         })
 
         gradesCardViewModel.showEmptyView.observe(this, Observer {

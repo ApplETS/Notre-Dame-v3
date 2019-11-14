@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.getDisplayableCote
@@ -17,31 +17,8 @@ import model.Cours
  * Created by Sonphil on 03-03-19.
  */
 
-class GradesCardAdapter : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder>() {
+class GradesCardAdapter : ListAdapter<Cours, GradesCardAdapter.GradeViewHolder>(CourseDiffCallback()) {
     var onCourseClickListener: OnCourseClickListener? = null
-    var items: List<Cours> = emptyList()
-        set(value) {
-            val diffCallback = object : DiffUtil.Callback() {
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return field[oldItemPosition] == value[newItemPosition]
-                }
-
-                override fun getOldListSize(): Int = field.size
-
-                override fun getNewListSize(): Int = value.size
-
-                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return field[oldItemPosition].sigle == value[newItemPosition].sigle &&
-                        field[oldItemPosition].groupe == value[newItemPosition].groupe &&
-                        field[oldItemPosition].session == value[newItemPosition].session
-                }
-            }
-
-            val diffResult = DiffUtil.calculateDiff(diffCallback)
-
-            field = value
-            diffResult.dispatchUpdatesTo(this)
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GradeViewHolder(
         LayoutInflater.from(parent.context).inflate(
@@ -51,14 +28,12 @@ class GradesCardAdapter : RecyclerView.Adapter<GradesCardAdapter.GradeViewHolder
         )
     ).apply {
         itemView.setOnClickListener {
-            onCourseClickListener?.onCourseClick(items[adapterPosition], this)
+            onCourseClickListener?.onCourseClick(getItem(adapterPosition), this)
         }
     }
 
-    override fun getItemCount() = items.count()
-
     override fun onBindViewHolder(holder: GradeViewHolder, position: Int) {
-        val course = items[position]
+        val course = getItem(position)
 
         holder.tvCourseGrade.text = course.getDisplayableCote(holder.containerView.context)
         holder.tvCourseSigle.text = course.sigle
