@@ -2,25 +2,29 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="70dp"
-    android:layout_height="70dp"
-    android:layout_marginStart="4dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/item_grade_course_left_margin"
+    android:layout_marginTop="@dimen/item_grade_course_top_margin"
+    android:layout_marginBottom="@dimen/item_grade_course_bottom_margin"
     android:stateListAnimator="@animator/selector_elevation_card_item"
     app:cardCornerRadius="1dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/item_grade_course_min_width"
+        android:minHeight="@dimen/item_grade_course_min_height"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvCourseSigle"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:gravity="center"
+            android:minWidth="@dimen/item_grade_course_min_width"
+            android:minHeight="@dimen/item_grade_course_sigle_tv_min_height"
             android:textColor="@android:color/white"
             tools:text="LOG121" />
 
@@ -30,8 +34,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:minWidth="@dimen/item_grade_course_min_width"
+            android:paddingStart="@dimen/item_grade_course_grade_tv_left_padding"
+            android:paddingEnd="@dimen/item_grade_course_grade_tv_right_padding"
             android:textSize="23sp"
             app:autoSizeMaxTextSize="23sp"
             app:autoSizeMinTextSize="20sp"

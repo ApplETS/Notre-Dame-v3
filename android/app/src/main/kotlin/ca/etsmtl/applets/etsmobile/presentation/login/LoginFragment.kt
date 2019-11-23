@@ -141,9 +141,10 @@ class LoginFragment : DaggerFragment() {
             when (it.id) {
                 R.id.btnSignIn -> { setCredentialsFieldsAndSubmitCredentials() }
                 R.id.btnForgotPassword -> {
-                    context?.let {
-                        Uri.parse(getString(R.string.uri_password_forgotten)).open(it)
-                    }
+                    Uri.parse(getString(R.string.uri_password_forgotten)).open(requireContext())
+                }
+                R.id.btnApplets -> {
+                    Uri.parse(getString(R.string.uri_applets_website)).open(requireContext())
                 }
             }
         }.apply {

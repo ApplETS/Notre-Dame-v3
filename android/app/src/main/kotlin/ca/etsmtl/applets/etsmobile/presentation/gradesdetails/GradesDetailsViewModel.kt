@@ -48,85 +48,101 @@ class GradesDetailsViewModel @Inject constructor(
         .map {
             Event(it.message)
         }
-    val detailsListItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluations) {
-        fun getSummaryItems(sommaireElementsEvaluation: SommaireElementsEvaluation) = listOf(
-            EvaluationDetailItem(app.getString(R.string.label_median), sommaireElementsEvaluation.medianeClasse),
-            EvaluationDetailItem(app.getString(R.string.label_standard_deviation), sommaireElementsEvaluation.ecartTypeClasse),
-            EvaluationDetailItem(app.getString(R.string.label_percentile_rank), sommaireElementsEvaluation.rangCentileClasse)
-        )
 
-        fun getEvaluationDetailItems(grade: String, average: String, evaluation: Evaluation) = listOf(
-            EvaluationDetailItem(
-                app.getString(R.string.label_grade),
-                grade
-            ),
-            EvaluationDetailItem(
-                app.getString(R.string.label_average),
-                average
-            ),
-            EvaluationDetailItem(
-                app.getString(R.string.label_median),
-                evaluation.mediane
-            ),
-            EvaluationDetailItem(
-                app.getString(R.string.label_standard_deviation),
-                evaluation.ecartType
-            ),
-            EvaluationDetailItem(
-                app.getString(R.string.label_percentile_rank),
-                evaluation.rangCentile
-            ),
-            EvaluationDetailItem(
-                app.getString(R.string.label_target_date),
-                evaluation.dateCible?.toJvmDate()?.toLocalizedString() ?: ""
+    private fun SommaireEtEvaluations.createGradeAndAverageItem() = sommaireElementsEvaluation
+        .run {
+            val rating = cours.value?.cote ?: String.format(
+                app.getString(R.string.text_grade_in_percentage),
+                noteSur100.zeroIfNullOrBlank()
             )
+
+            GradeAndAverageItem(
+                rating,
+                note.zeroIfNullOrBlank(),
+                noteSur.zeroIfNullOrBlank(),
+                noteSur100.zeroIfNullOrBlank(),
+                moyenneClasse.zeroIfNullOrBlank(),
+                moyenneClassePourcentage.zeroIfNullOrBlank()
+            )
+        }
+
+    private fun SommaireElementsEvaluation.createSummaryItems() = listOf(
+        EvaluationDetailItem(app.getString(R.string.label_median), medianeClasse),
+        EvaluationDetailItem(app.getString(R.string.label_standard_deviation), ecartTypeClasse),
+        EvaluationDetailItem(app.getString(R.string.label_percentile_rank), rangCentileClasse)
+    )
+
+    private fun createEvaluationDetailItems(grade: String, average: String, evaluation: Evaluation) = listOf(
+        EvaluationDetailItem(
+            app.getString(R.string.label_grade),
+            grade
+        ),
+        EvaluationDetailItem(
+            app.getString(R.string.label_average),
+            average
+        ),
+        EvaluationDetailItem(
+            app.getString(R.string.label_median),
+            evaluation.mediane
+        ),
+        EvaluationDetailItem(
+            app.getString(R.string.label_standard_deviation),
+            evaluation.ecartType
+        ),
+        EvaluationDetailItem(
+            app.getString(R.string.label_percentile_rank),
+            evaluation.rangCentile
+        ),
+        EvaluationDetailItem(
+            app.getString(R.string.label_target_date),
+            evaluation.dateCible?.toJvmDate()?.toLocalizedString() ?: ""
         )
+    )
 
-        it?.takeIf { it.status != Resource.Status.LOADING }?.data?.let {
-            val gradeAverageItem = it.sommaireElementsEvaluation.run {
-                GradeAverageItem(
-                    cours.value?.cote,
-                    note.zeroIfNullOrBlank(),
-                    noteSur.zeroIfNullOrBlank(),
-                    noteSur100.zeroIfNullOrBlank(),
-                    moyenneClasse.zeroIfNullOrBlank(),
-                    moyenneClassePourcentage.zeroIfNullOrBlank()
-                )
+    private fun SommaireEtEvaluations.createEvaluationsItems() = this
+        .evaluations
+        .map { evaluation ->
+            evaluation.notePourcentage = evaluation.notePourcentage.zeroIfNullOrBlank()
+
+            ExpandableGroup(EvaluationHeaderItem(evaluation)).apply {
+                val grade = if (evaluation.note != null) String.format(
+                    app.getString(R.string.text_grade_with_percentage),
+                    evaluation.note,
+                    evaluation.corrigeSur,
+                    evaluation.notePourcentage
+                ) else {
+                    ""
+                }
+
+                val averageStr = if (evaluation.moyenne != null) String.format(
+                    app.getString(R.string.text_grade_with_percentage),
+                    evaluation.moyenne,
+                    evaluation.corrigeSur,
+                    evaluation.moyennePourcentage
+                ) else {
+                    ""
+                }
+
+                add(Section(createEvaluationDetailItems(grade, averageStr, evaluation)))
             }
+        }
 
-            mutableListOf<Group>(gradeAverageItem).apply {
+    val detailsListItems: LiveData<List<Group>> = Transformations.map(summaryAndEvaluations) {
+        it?.takeIf { it.status != Resource.Status.LOADING }?.data?.let { sommaireEtEvaluations ->
+            val gradeAndAverageItem = sommaireEtEvaluations.createGradeAndAverageItem()
+
+            mutableListOf<Group>(gradeAndAverageItem).apply {
                 add(SectionTitleItem(app.getString(R.string.title_section_summary)))
 
-                addAll(getSummaryItems(it.sommaireElementsEvaluation))
+                val summaryItems = sommaireEtEvaluations
+                    .sommaireElementsEvaluation
+                    .createSummaryItems()
+                addAll(summaryItems)
 
                 add(SectionTitleItem(app.getString(R.string.title_section_evaluations)))
 
-                val evaluationsItems = it.evaluations.map { evaluation ->
-                    evaluation.notePourcentage = evaluation.notePourcentage.zeroIfNullOrBlank()
-
-                    ExpandableGroup(EvaluationHeaderItem(evaluation)).apply {
-                        val grade = if (evaluation.note != null) String.format(
-                            app.getString(R.string.text_grade_with_percentage),
-                            evaluation.note,
-                            evaluation.corrigeSur,
-                            evaluation.notePourcentage
-                        ) else {
-                            ""
-                        }
-
-                        val averageStr = if (evaluation.moyenne != null) String.format(
-                            app.getString(R.string.text_grade_with_percentage),
-                            evaluation.moyenne,
-                            evaluation.corrigeSur,
-                            evaluation.moyennePourcentage
-                        ) else {
-                            ""
-                        }
-
-                        add(Section(getEvaluationDetailItems(grade, averageStr, evaluation)))
-                    }
-                }
-
+                val evaluationsItems = sommaireEtEvaluations
+                    .createEvaluationsItems()
                 addAll(evaluationsItems)
             }
         }
