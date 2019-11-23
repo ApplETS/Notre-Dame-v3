@@ -68,10 +68,6 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "courseCell", for: indexPath) as! CourseCollectionViewCell
         cell.courseTitle.text = "LOG121"
         cell.gradeTitle.text = "90%"
-        
-
         return cell
     }
-    
-    
 }
