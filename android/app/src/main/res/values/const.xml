@@ -40,9 +40,9 @@
     <string name="default_entry_value_dark_theme_pref" translatable="false">@string/entry_value_dark_theme_pref_battery_saver</string>
     <string name="key_shake_bug_reporter_invocation_method_pref" translatable="false">shake_bug_reporter_invocation_method_pref</string>
     <string name="key_language_pref" translatable="false">language</string>
-    <string name="default_entry_value_language_pref" translatable="false">fr-CA</string>
+    <string name="default_entry_value_language_pref" translatable="false">fr</string>
     <string-array name="entry_values_language_pref">
-        <item>fr-CA</item>
-        <item>en-CA</item>
+        <item>fr</item>
+        <item>en</item>
     </string-array>
 </resources>

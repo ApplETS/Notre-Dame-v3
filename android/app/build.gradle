@@ -103,6 +103,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 play {
@@ -136,8 +140,8 @@ dependencies {
     // Architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
     kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
-    implementation "android.arch.navigation:navigation-fragment-ktx:$versions.navigation"
-    implementation "android.arch.navigation:navigation-ui-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_viewmodel_ktx"
 
     // Kotlin

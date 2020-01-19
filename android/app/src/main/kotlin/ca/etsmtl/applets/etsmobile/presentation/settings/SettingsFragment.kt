@@ -2,10 +2,12 @@ package ca.etsmtl.applets.etsmobile.presentation.settings
 
 import android.content.Context
 import android.os.Bundle
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.applyDarkThemePref
+import ca.etsmtl.applets.etsmobile.util.Const
 import com.buglife.sdk.Buglife
 import com.buglife.sdk.InvocationMethod
 
@@ -45,6 +47,11 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
                 true
             }
+            getString(R.string.key_language_pref) -> {
+                handleLanguagePreferenceChange()
+
+                true
+            }
             else -> false
         }
     }
@@ -63,5 +70,23 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
                 InvocationMethod.NONE
             }
         )
+    }
+
+    /**
+     * Restarts the application to apply language change
+     */
+    private fun handleLanguagePreferenceChange() = restartApp()
+
+    private fun restartApp() {
+        val args = Bundle().apply {
+            this.putBoolean(Const.ARG_SETTINGS_RESTART, true)
+        }
+        val pendingIntent = NavDeepLinkBuilder(requireContext())
+            .setGraph(R.navigation.nav_graph_main)
+            .setDestination(R.id.fragmentDashboard)
+            .setArguments(args)
+            .createPendingIntent()
+
+        pendingIntent.send()
     }
 }
