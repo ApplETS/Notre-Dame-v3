@@ -22,5 +22,14 @@
             app:key="@string/key_shake_bug_reporter_invocation_method_pref"
             app:singleLineTitle="false"
             app:title="@string/label_shake_bug_reporter_invocation_method_pref" />
+
+        <ListPreference
+            app:defaultValue="@string/default_entry_value_language_pref"
+            app:entries="@array/entries_language_pref"
+            app:entryValues="@array/entry_values_language_pref"
+            app:icon="@drawable/ic_translate_control_normal_24dp"
+            app:key="@string/key_language_pref"
+            app:summary="%s"
+            app:title="@string/label_language_pref" />
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

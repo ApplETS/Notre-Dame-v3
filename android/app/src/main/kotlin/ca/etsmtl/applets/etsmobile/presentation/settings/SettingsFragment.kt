@@ -24,7 +24,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
         listOf(
             R.string.key_dark_theme_pref,
-            R.string.key_shake_bug_reporter_invocation_method_pref
+            R.string.key_shake_bug_reporter_invocation_method_pref,
+            R.string.key_language_pref
         ).forEach { keyId ->
             val pref = findPreference<Preference>(getString(keyId))
 

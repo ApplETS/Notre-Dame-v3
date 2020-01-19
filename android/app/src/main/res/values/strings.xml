@@ -195,4 +195,9 @@
     </string-array>
     <string name="label_miscellaneous_pref_category">Divers</string>
     <string name="label_shake_bug_reporter_invocation_method_pref">Secouer pour rapporter un bogue</string>
+    <string name="label_language_pref">Langue</string>
+    <string-array name="entries_language_pref">
+        <item>Français</item>
+        <item>English</item>
+    </string-array>
 </resources>
