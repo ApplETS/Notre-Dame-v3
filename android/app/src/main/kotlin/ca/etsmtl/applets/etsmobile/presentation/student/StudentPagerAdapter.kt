@@ -11,7 +11,7 @@ import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment
 class StudentPagerAdapter(
     val context: Context,
     fragmentManager: FragmentManager
-) : FragmentPagerAdapter(fragmentManager) {
+) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     companion object {
         const val GRADES = 0
