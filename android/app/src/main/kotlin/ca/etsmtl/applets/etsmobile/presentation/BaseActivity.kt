@@ -34,6 +34,9 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     }
 
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleUtils.updateContext(newBase))
+        val overrideConfiguration = LocaleUtils.createConfiguration(newBase)
+        val updatedBase = newBase.createConfigurationContext(overrideConfiguration)
+
+        super.attachBaseContext(updatedBase)
     }
 }

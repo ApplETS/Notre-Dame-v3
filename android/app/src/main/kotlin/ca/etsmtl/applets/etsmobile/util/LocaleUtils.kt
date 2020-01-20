@@ -1,6 +1,7 @@
 package ca.etsmtl.applets.etsmobile.util
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import ca.etsmtl.applets.etsmobile.R
 import java.util.Locale
@@ -10,11 +11,14 @@ import java.util.Locale
  */
 
 object LocaleUtils {
-    fun updateContext(context: Context): Context {
-        val lang = context.getLanguagePref()
-        val locale = Locale(lang, "CA")
+    fun createConfiguration(
+        context: Context,
+        language: String = context.getLanguagePref()
+    ): Configuration {
+        val locale = Locale(language, "CA")
         Locale.setDefault(locale)
-        val overrideConfiguration = context
+
+        return context
             .resources
             .configuration
             .apply {
@@ -24,8 +28,6 @@ object LocaleUtils {
                     this.locale = locale
                 }
             }
-
-        return context.createConfigurationContext(overrideConfiguration)
     }
 
     private fun Context.getLanguagePref(): String {
