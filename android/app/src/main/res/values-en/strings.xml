@@ -68,7 +68,7 @@
     <string name="label_percentile_rank">Percentile Rank</string>
     <string name="label_target_date">Target Date</string>
     <string name="title_ignored_evaluation">Ignored evaluation</string>
-    <string name="text_ignored_evaluation">This evaluation is ignored in the calculation of the final grade. This situation occurs when the teacher has decided to keep, for example, the top three grades of the six assignments he has asked for. The three lowest notes would then be ignored.</string>
+    <string name="text_ignored_evaluation">This evaluation is ignored in the calculation of the final grade. This situation occurs when the teacher has decided to keep, for example, the top three marks of the six assignments he has asked for. The three lowest grades would then be ignored.</string>
     <string name="error_failed_to_retrieve_data_course">Failed to retrieve data for this course</string>
     <string name="title_section_summary">Summary</string>
     <string name="title_section_evaluations">Evaluations</string>

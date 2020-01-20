@@ -9,7 +9,7 @@ import ca.etsmtl.applets.etsmobile.presentation.grades.GradesFragment
 import ca.etsmtl.applets.etsmobile.presentation.profile.ProfileFragment
 
 class StudentPagerAdapter(
-    context: Context,
+    val context: Context,
     fragmentManager: FragmentManager
 ) : FragmentPagerAdapter(fragmentManager) {
 
@@ -17,8 +17,6 @@ class StudentPagerAdapter(
         const val GRADES = 0
         const val PROFILE = 1
     }
-
-    private var context: Context = context.applicationContext
 
     override fun getCount() = 2
 
