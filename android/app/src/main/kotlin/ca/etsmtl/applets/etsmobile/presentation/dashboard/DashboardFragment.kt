@@ -65,7 +65,7 @@ class DashboardFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // If the app has been restarted from the settings screen, navigate back to it.
+        // If a restart occurred from the settings screen, navigate back to it.
         if (arguments?.getBoolean(Const.ARG_SETTINGS_RESTART, false) == true) {
             findNavController().navigate(R.id.fragmentMore)
             findNavController().navigate(R.id.fragmentSettings)

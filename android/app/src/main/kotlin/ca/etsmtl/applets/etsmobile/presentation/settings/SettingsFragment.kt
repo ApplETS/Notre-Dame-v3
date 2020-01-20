@@ -86,13 +86,13 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
             }
         }
 
-        // Reload to apply the language change
-        reload()
+        // Reload the activity to apply the language change
+        reloadActivity()
     }
 
-    private fun reload() {
+    private fun reloadActivity() {
         val args = Bundle().apply {
-            // Indicate that the app has been restarted from the Settings screen
+            // Indicate that the activity has been restarted from the Settings screen
             this.putBoolean(Const.ARG_SETTINGS_RESTART, true)
         }
         val pendingIntent = NavDeepLinkBuilder(requireContext())

@@ -5,6 +5,6 @@ package ca.etsmtl.applets.etsmobile.util
  */
 
 object Const {
-    /** Indicates that the app has been restarted from the settings screen **/
+    /** Indicates that a restart has occurred from the settings screen **/
     const val ARG_SETTINGS_RESTART = "ExtraSettingsRestart"
 }

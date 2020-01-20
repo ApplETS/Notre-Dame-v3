@@ -1,9 +1,11 @@
 package ca.etsmtl.applets.etsmobile.presentation
 
+import android.content.Context
 import android.content.SharedPreferences
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.di.DaggerAppComponent
 import ca.etsmtl.applets.etsmobile.extension.applyDarkThemePref
+import ca.etsmtl.applets.etsmobile.util.LocaleUtils
 import ca.etsmtl.applets.repository.di.RepositoryModule
 import com.buglife.sdk.Buglife
 import com.buglife.sdk.InvocationMethod
@@ -75,5 +77,12 @@ class App : DaggerApplication() {
         )
 
         applyDarkThemePref(prefValue)
+    }
+
+    override fun attachBaseContext(base: Context) {
+        val overrideConfiguration = LocaleUtils.createConfiguration(base)
+        val updatedBase = base.createConfigurationContext(overrideConfiguration)
+
+        super.attachBaseContext(updatedBase)
     }
 }
