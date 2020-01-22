@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.toLiveData
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardAdapter
 import ca.etsmtl.applets.etsmobile.presentation.dashboard.card.DashboardCardsTouchHelperCallback
+import ca.etsmtl.applets.etsmobile.util.Const
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_dashboard.rvCards
@@ -63,9 +65,15 @@ class DashboardFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
+        // If a restart occurred from the settings screen, navigate back to it.
+        if (arguments?.getBoolean(Const.ARG_SETTINGS_RESTART, false) == true) {
+            findNavController().navigate(R.id.fragmentMore)
+            findNavController().navigate(R.id.fragmentSettings)
+        } else {
+            setupRecyclerView()
 
-        subscribeUI()
+            subscribeUI()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

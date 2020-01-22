@@ -37,14 +37,12 @@ class ProfileFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_profile, container, false)
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        if (isVisibleToUser && view != null) {
-            setUpSwipeRefresh()
-            setUpRecyclerView()
-            subscribeUI()
-        }
+        setUpSwipeRefresh()
+        setUpRecyclerView()
+        subscribeUI()
     }
 
     private fun setUpSwipeRefresh() {

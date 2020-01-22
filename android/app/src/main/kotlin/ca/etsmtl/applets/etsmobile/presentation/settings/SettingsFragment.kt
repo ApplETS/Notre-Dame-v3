@@ -2,10 +2,13 @@ package ca.etsmtl.applets.etsmobile.presentation.settings
 
 import android.content.Context
 import android.os.Bundle
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.applyDarkThemePref
+import ca.etsmtl.applets.etsmobile.util.Const
+import ca.etsmtl.applets.etsmobile.util.LocaleUtils
 import com.buglife.sdk.Buglife
 import com.buglife.sdk.InvocationMethod
 
@@ -24,7 +27,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
         listOf(
             R.string.key_dark_theme_pref,
-            R.string.key_shake_bug_reporter_invocation_method_pref
+            R.string.key_shake_bug_reporter_invocation_method_pref,
+            R.string.key_language_pref
         ).forEach { keyId ->
             val pref = findPreference<Preference>(getString(keyId))
 
@@ -41,6 +45,11 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
             }
             getString(R.string.key_shake_bug_reporter_invocation_method_pref) -> {
                 handleShakeBugReporterInvocationMethodPreferenceChange(newValue)
+
+                true
+            }
+            getString(R.string.key_language_pref) -> {
+                handleLanguagePreferenceChange(newValue)
 
                 true
             }
@@ -62,5 +71,40 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
                 InvocationMethod.NONE
             }
         )
+    }
+
+    private fun handleLanguagePreferenceChange(newValue: Any?) {
+        if (newValue is String) {
+            // Update application context
+            with(requireContext().applicationContext) {
+                val overrideConfiguration = LocaleUtils.createConfiguration(
+                    this,
+                    newValue
+                )
+
+                resources.updateConfiguration(overrideConfiguration, resources.displayMetrics)
+            }
+        }
+
+        // Reload the activity to apply the language change
+        reloadActivity()
+    }
+
+    private fun reloadActivity() {
+        val args = Bundle().apply {
+            // Indicate that the activity has been restarted from the Settings screen
+            this.putBoolean(Const.ARG_SETTINGS_RESTART, true)
+        }
+        val pendingIntent = NavDeepLinkBuilder(requireContext())
+            .setGraph(R.navigation.nav_graph_main)
+            // DashboardFragment will navigate to MoreFragment then to the SettingsFragment.
+            // We can't go directly to the SettingsFragment because the navigation flow would not be
+            // maintained. If we would set SettingsFragment as the destination, the user would not
+            // be brought back to MoreFragment when the back button is pressed.
+            .setDestination(R.id.fragmentDashboard)
+            .setArguments(args)
+            .createPendingIntent()
+
+        pendingIntent.send()
     }
 }
