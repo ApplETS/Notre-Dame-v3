@@ -6,7 +6,7 @@ import io.ktor.client.features.cookies.AcceptAllCookiesStorage
 import io.ktor.client.features.cookies.HttpCookies
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 
 /**
  * Created by Sonphil on 18-05-19.

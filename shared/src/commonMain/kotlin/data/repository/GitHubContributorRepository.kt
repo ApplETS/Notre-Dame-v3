@@ -23,7 +23,7 @@ class GitHubContributorRepository @Inject constructor(
 ) {
     suspend fun gitHubContributors(): Flow<Resource<List<GitHubContributor>>> {
         val flow: Flow<Resource<List<GitHubContributor>>> = flow {
-            emit(Resource.loading(null))
+            emit(Resource.loading(emptyList()))
 
             val dbContributors = database
                 .getGitHubContributors()
