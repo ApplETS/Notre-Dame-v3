@@ -8,7 +8,7 @@ import platform.Foundation.NSUserDefaults
  * Created by Sonphil on 18-05-19.
  */
 actual class SecurePreferences {
-    val settings: Settings = AppleSettings.Factory().create("etsmobile_secure_prefs")
+    private val settings: Settings = AppleSettings.Factory().create("etsmobile_secure_prefs")
 
     actual fun getString(key: String, defaultValue: String?): String? = settings.getStringOrNull(key)
 
