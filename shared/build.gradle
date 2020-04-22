@@ -86,6 +86,9 @@ kotlin {
                 //Ktor
                 implementation "io.ktor:ktor-client-ios:$versions.ktor"
                 implementation "io.ktor:ktor-client-serialization-native:$versions.ktor"
+
+                //SharedPrefs like
+                implementation "com.russhwolf:multiplatform-settings:0.5.1"
             }
         }
     }
