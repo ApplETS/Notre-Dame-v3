@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="32dp">
-
-    <TextView
-        android:id="@+id/tvTitle"
+    app:cardCornerRadius="20dp"
+    android:id="@+id/itemWhatsNew"
+    android:layout_margin="8dp"
+    android:elevation="@dimen/cardview_default_elevation">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/material_component_lists_single_line_height"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/material_typography_title"
-        android:text="What's New" />
+        android:layout_height="match_parent"
+        android:layout_margin="32dp">
 
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/material_component_lists_single_line_height"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/material_component_lists_single_line_text_size"
-        android:text="Description: " />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_component_lists_single_line_height"
+            android:gravity="center_vertical"
+            android:text="@string/label_what_s_new"
+            android:textSize="@dimen/material_typography_title"
+            android:textStyle="bold" />
 
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_component_lists_single_line_height"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/material_typography_title"/>
 
-    <TextView
-        android:id="@+id/tvVersion"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/material_component_lists_single_line_height"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/material_component_lists_single_line_text_size"
-        android:text="Version: " />
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_component_lists_single_line_height"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/material_component_lists_single_line_text_size" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/material_component_lists_single_line_height"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/material_component_lists_single_line_text_size"
+                android:text="@string/label_version" />
+            <TextView
+                android:id="@+id/tvVersionNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/material_component_lists_single_line_height"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/material_component_lists_single_line_text_size" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

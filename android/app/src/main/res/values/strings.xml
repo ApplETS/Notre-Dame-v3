@@ -200,4 +200,9 @@
         <item>Français</item>
         <item>English</item>
     </string-array>
+
+    <!-- What's new -->
+    <string name="label_what_s_new"><u>Nouveautés</u></string>
+    <string name="label_version">"Version: "</string>
+    <string name="close">Fermer</string>
 </resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    android:elevation="@dimen/cardview_default_elevation"
+    android:background="@color/ets_red">
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:id="@+id/rvWhatsNew"
+       android:scrollbars="horizontal">
+   </androidx.recyclerview.widget.RecyclerView>
+
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="@string/close"
+       android:textColor="@color/ets_red"
+       android:id="@+id/btnCloseWhatsNew"
+       android:backgroundTint="@android:color/white">
+   </Button>
+
+</LinearLayout>
