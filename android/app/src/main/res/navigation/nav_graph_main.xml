@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/fragmentWhatsNew">
+    app:startDestination="@id/fragmentSplash">
     <fragment
         android:id="@+id/fragmentSplash"
         android:name="ca.etsmtl.applets.etsmobile.presentation.splash.SplashFragment"
@@ -19,11 +19,7 @@
     <fragment
         android:id="@+id/fragmentWhatsNew"
         android:name="ca.etsmtl.applets.etsmobile.presentation.whatsnew.WhatsNewFragment"
-        tools:layout="@layout/fragment_whats_new">
-        <action
-            android:id="@+id/action_fragmentWhatsNew_to_fragmentSplash"
-            app:destination="@id/fragmentSplash" />
-    </fragment>
+        tools:layout="@layout/fragment_whats_new"/>
     <fragment
         android:id="@+id/fragmentLogin"
         android:name="ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment"
