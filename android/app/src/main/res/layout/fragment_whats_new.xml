@@ -3,9 +3,19 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:paddingTop="32dp"
     android:elevation="@dimen/cardview_default_elevation"
     android:background="@color/ets_red">
+
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/material_component_lists_single_line_height"
+       android:gravity="center_horizontal"
+       android:text="@string/label_what_s_new"
+       android:textSize="@dimen/material_typography_display1"
+       android:textColor="@color/material_light_white"
+       android:textStyle="bold" />
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
@@ -18,6 +28,7 @@
    <Button
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:layout_margin="32dp"
        android:text="@string/close"
        android:textColor="@color/ets_red"
        android:id="@+id/btnCloseWhatsNew"

@@ -5,21 +5,13 @@
     android:layout_height="match_parent"
     app:cardCornerRadius="20dp"
     android:id="@+id/itemWhatsNew"
-    android:layout_margin="8dp"
+    android:layout_margin="32dp"
     android:elevation="@dimen/cardview_default_elevation">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="32dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/material_component_lists_single_line_height"
-            android:gravity="center_vertical"
-            android:text="@string/label_what_s_new"
-            android:textSize="@dimen/material_typography_title"
-            android:textStyle="bold" />
+        android:layout_margin="16dp">
 
         <TextView
             android:id="@+id/tvTitle"
