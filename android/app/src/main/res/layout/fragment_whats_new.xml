@@ -21,8 +21,7 @@
        android:layout_width="match_parent"
        android:layout_height="0dp"
        android:layout_weight="1"
-       android:id="@+id/rvWhatsNew"
-       android:scrollbars="horizontal">
+       android:id="@+id/rvWhatsNew">
    </androidx.recyclerview.widget.RecyclerView>
 
    <Button
