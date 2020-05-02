@@ -1,10 +1,12 @@
 <manifest package="ca.etsmtl.applets.shared"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <application>
+    <application
+        android:usesCleartextTraffic="true">
         <provider
             android:authorities="${applicationId}.initprovider"
             android:exported="false"
             android:enabled="true"
             android:name="data.securepreferences.PreferencesProvider"/>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

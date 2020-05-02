@@ -1,6 +1,7 @@
 package data.api
 
 import data.api.model.ApiGitHubContributor
+import data.api.model.WhatsNewItems
 import io.ktor.client.HttpClient
 import io.ktor.client.features.cookies.AcceptAllCookiesStorage
 import io.ktor.client.features.cookies.HttpCookies
@@ -18,6 +19,7 @@ internal object AppHttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer().apply {
                     register<List<ApiGitHubContributor>>(ApiGitHubContributor.serializer().list)
+                    register<List<WhatsNewItems>>(WhatsNewItems.serializer().list)
                 }
             }
 
