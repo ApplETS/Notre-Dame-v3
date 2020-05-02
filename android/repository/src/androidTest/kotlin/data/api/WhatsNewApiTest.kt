@@ -15,5 +15,8 @@ internal class WhatsNewApiTest {
 
     @Test
     fun getWhatsNewFr() {
+        val whatsNewApi = WhatsNewApi()
+        val whatsnewItems =runBlocking {whatsNewApi.getWhatsNewFr("1.0.0", "7.2.0")}
+        assert(!whatsnewItems.isEmpty())
     }
 }
