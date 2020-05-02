@@ -35,16 +35,31 @@ actual class SecurePreferences {
         putData(key, value)
     }
 
-    actual fun clear() {}
+    actual fun clear() {
+        val query = CFDictionaryCreateMutable(null, 1, null, null)
+        CFDictionaryAddValue(query, kSecClass, kSecClassGenericPassword)
 
+        SecItemDelete(query)
+    }
+
+    /**
+     * Add some data to the iOS Keychain
+     * @param key of the value to store into the keychain
+     * @param value to store into the keychain
+     */
     private fun putData(key: String, value: Any) {
         val prefixedKey:String = prefTag + key
 
         val query = CFDictionaryCreateMutable(null, 3, null, null)
         // We use generic password to store any type of string
         CFDictionaryAddValue(query, kSecClass, kSecClassGenericPassword);
-        // Adding the key and the value to the dictionary
+        // Adding the key
         CFDictionaryAddValue(query, kSecAttrAccount, CFBridgingRetain(prefixedKey));
+
+        // Delete any existing ref to this key
+        SecItemDelete(query)
+
+        // Adding the value
         CFDictionaryAddValue(query, kSecValueData, CFBridgingRetain(value));
 
         // Add the value to the Keychain
@@ -52,6 +67,10 @@ actual class SecurePreferences {
         CFBridgingRelease(query);
     }
 
+    /**
+     * @param key of the value to return
+     * @return CValue value of corresponding to the param key into the iOS Keychain, null if not found
+     */
     private fun getData(key: String): CValue<CFTypeRefVar>? {
         val prefixedKey:String = prefTag + key
         val query = CFDictionaryCreateMutable(null, 5, null, null)
