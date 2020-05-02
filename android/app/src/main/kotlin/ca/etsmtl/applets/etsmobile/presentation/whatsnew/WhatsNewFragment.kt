@@ -19,14 +19,9 @@ import ca.etsmtl.applets.etsmobile.R
 import kotlinx.android.synthetic.main.fragment_whats_new.*
 import java.util.*
 
-
 class WhatsNewFragment : Fragment() {
     private var mWhatsNewData = ArrayList<WhatsNewObject>()
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_whats_new, container, false)
     }
 
@@ -114,7 +109,6 @@ class WhatsNewFragment : Fragment() {
             val indicatorPosY = parent.height - mIndicatorHeight / 2f
             drawInactiveIndicators(c, indicatorStartX, indicatorPosY, itemCount)
 
-
             // find active page (which should be highlighted)
             val layoutManager = parent.layoutManager as LinearLayoutManager?
             val activePosition = layoutManager!!.findFirstVisibleItemPosition()
@@ -147,10 +141,8 @@ class WhatsNewFragment : Fragment() {
             }
         }
 
-        private fun drawHighlights(c: Canvas, indicatorStartX: Float, indicatorPosY: Float,
-                                   highlightPosition: Int, progress: Float) {
+        private fun drawHighlights(c: Canvas, indicatorStartX: Float, indicatorPosY: Float, highlightPosition: Int, progress: Float) {
             mPaint.color = Color.WHITE
-
             // width of item indicator including padding
             val itemWidth = mIndicatorItemLength + mIndicatorItemPadding
             if (progress == 0f) {
@@ -180,7 +172,3 @@ class WhatsNewFragment : Fragment() {
         }
     }
 }
-
-
-
-

@@ -1,9 +1,9 @@
 package ca.etsmtl.applets.etsmobile.presentation.whatsnew
 
 class WhatsNewObject(title: String, description: String, version: String) {
-    private var mTitle:String = title
-    private var mInfo:String = description
-    private var mVersion:String = version
+    private var mTitle: String = title
+    private var mInfo: String = description
+    private var mVersion: String = version
 
     /**
      * Gets the title of the WhatsNew.

@@ -7,14 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
 
-class WhatsNewAdapter(whatsNewData: ArrayList<WhatsNewObject>): RecyclerView.Adapter<WhatsNewAdapter.ViewHolder?>() {
+class WhatsNewAdapter(whatsNewData: ArrayList<WhatsNewObject>) : RecyclerView.Adapter<WhatsNewAdapter.ViewHolder?>() {
 
     // Member variables.
     private var mWhatsNewData: ArrayList<WhatsNewObject>? = whatsNewData
     /**
      * ViewHolder class that represents each row of data in the RecyclerView.
      */
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Member Variables for the TextViews
         private val mTitleText: TextView = itemView.findViewById(R.id.tvTitle)
         private val mInfoText: TextView = itemView.findViewById(R.id.tvDescription)
@@ -34,10 +34,7 @@ class WhatsNewAdapter(whatsNewData: ArrayList<WhatsNewObject>): RecyclerView.Ada
      * @param holder The viewholder into which the data should be put.
      * @param position The adapter position.
      */
-    override fun onBindViewHolder(
-            holder: ViewHolder,
-            position: Int
-    ) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Get current WhatsNew.
         val currentWhatsNew = mWhatsNewData!![position]
 
