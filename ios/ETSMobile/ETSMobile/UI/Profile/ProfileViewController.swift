@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: 75, height: 75)
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
         flowLayout.minimumInteritemSpacing = 5.0
         cell.coursesCollectionView.collectionViewLayout = flowLayout
         return cell
@@ -68,6 +68,10 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "courseCell", for: indexPath) as! CourseCollectionViewCell
         cell.courseTitle.text = "LOG121"
         cell.gradeTitle.text = "90%"
+        cell.roundCorners()
+        cell.setCellShadows()
+        cell.setBackgroundColor()
+        cell.contentView.layer.masksToBounds = true
         return cell
     }
 }
