@@ -16,6 +16,7 @@ import ca.etsmtl.applets.etsmobile.R
 import ca.etsmtl.applets.etsmobile.extension.getColorCompat
 import ca.etsmtl.applets.etsmobile.extension.setVisible
 import ca.etsmtl.applets.etsmobile.presentation.BaseActivity
+import ca.etsmtl.applets.etsmobile.presentation.whatsnew.WhatsNewFragment
 import ca.etsmtl.applets.etsmobile.util.EventObserver
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
@@ -47,7 +48,14 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setupActionBar()
         setupBottomNavigation()
+        showWhatsNew()
         subscribeUI()
+    }
+
+    private fun showWhatsNew(){
+        val whatNewFragment = WhatsNewFragment()
+        var fm = supportFragmentManager
+        whatNewFragment.show(fm, "fgsdgf")
     }
 
     private fun setupBottomNavigation() {

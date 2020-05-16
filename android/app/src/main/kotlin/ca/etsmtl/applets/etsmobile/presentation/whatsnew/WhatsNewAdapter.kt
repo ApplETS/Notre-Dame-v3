@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.etsmtl.applets.etsmobile.R
+import data.api.model.WhatsNewItems
 
-class WhatsNewAdapter(whatsNewData: ArrayList<WhatsNewObject>) : RecyclerView.Adapter<WhatsNewAdapter.ViewHolder?>() {
+class WhatsNewAdapter(whatsNewData: ArrayList<WhatsNewItems>) : RecyclerView.Adapter<WhatsNewAdapter.ViewHolder?>() {
 
     // Member variables.
-    private var mWhatsNewData: ArrayList<WhatsNewObject>? = whatsNewData
+    private var mWhatsNewData: ArrayList<WhatsNewItems>? = whatsNewData
     /**
      * ViewHolder class that represents each row of data in the RecyclerView.
      */
@@ -20,11 +21,11 @@ class WhatsNewAdapter(whatsNewData: ArrayList<WhatsNewObject>) : RecyclerView.Ad
         private val mInfoText: TextView = itemView.findViewById(R.id.tvDescription)
         private val mVersionText: TextView = itemView.findViewById(R.id.tvVersionNumber)
 
-        fun bindTo(currentWhatsNew: WhatsNewObject) {
+        fun bindTo(currentWhatsNew: WhatsNewItems) {
             // Populate the textviews with data.
-            mTitleText.text = currentWhatsNew.getTitle()
-            mInfoText.text = currentWhatsNew.getInfo()
-            mVersionText.text = currentWhatsNew.getVersion()
+            mTitleText.text = currentWhatsNew.title
+            mInfoText.text = currentWhatsNew.description
+            mVersionText.text = currentWhatsNew.version
         }
     }
 

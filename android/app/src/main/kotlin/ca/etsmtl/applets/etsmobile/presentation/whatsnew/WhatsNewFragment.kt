@@ -10,20 +10,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
-import androidx.fragment.app.Fragment
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import ca.etsmtl.applets.etsmobile.R
+import dagger.android.support.DaggerDialogFragment
 import kotlinx.android.synthetic.main.fragment_whats_new.*
 import java.util.*
+import javax.inject.Inject
+import data.api.model.WhatsNewItems
+import data.repository.WhatsNewRepository
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.runBlocking
+import kotlin.collections.ArrayList
 
-class WhatsNewFragment : Fragment() {
-    private var mWhatsNewData = ArrayList<WhatsNewObject>()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_whats_new, container, false)
-    }
+
+class WhatsNewFragment :  DaggerDialogFragment()  {
+
+    private var mWhatsNewData = ArrayList<WhatsNewItems>()
+    @Inject
+    lateinit var whatsnewRepository: WhatsNewRepository
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_whats_new, container, false)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,13 +47,13 @@ class WhatsNewFragment : Fragment() {
     }
 
     private fun setViewListener() {
-        btnCloseWhatsNew.setOnClickListener {
-            TODO()
+    btnCloseWhatsNew.setOnClickListener {
+           dismiss()
         }
     }
 
     private fun setRecyclerView() {
-
+        initializeData()
         rvWhatsNew.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -48,25 +62,26 @@ class WhatsNewFragment : Fragment() {
         }
         val snapHelper: SnapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(rvWhatsNew)
-        initializeData()
+        rvWhatsNew!!.adapter?.notifyDataSetChanged()
     }
 
-    private fun initializeData() {
-        // Get the resources from the XML file.
-        val title = arrayOf("Whats1", "Whats2", "Whats3")
-        val desc = arrayOf("changes1", "changes2", "changes3")
-        val version = arrayOf("123.21", "122134", "234.324.436")
-        // Clear the existing data (to avoid duplication).
-        mWhatsNewData.clear()
 
-        // Create the ArrayList of Sports objects with titles and
-        // information about each sport.
-        for (i in title.indices) {
-            mWhatsNewData.add(WhatsNewObject(title[i], desc[i], version[i]))
+    private fun initializeData() {
+
+        val currentLang = Locale.getDefault().language
+        val manager = context!!.packageManager
+        val info = manager.getPackageInfo(context!!.packageName, 0)
+        val version = info.versionName
+        if(currentLang =="en")
+        {
+           runBlocking { whatsnewRepository.whatsNewEn("1.0.0", "7.0.0").collect{items ->
+               mWhatsNewData = ArrayList(items) }}
+        }
+        else {
+            runBlocking { whatsnewRepository.whatsNewFr("1.0.0", "7.0.0").collect{items ->
+                mWhatsNewData = ArrayList(items) }}
         }
 
-        // Notify the adapter of the change.
-        rvWhatsNew!!.adapter?.notifyDataSetChanged()
     }
 
     class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {

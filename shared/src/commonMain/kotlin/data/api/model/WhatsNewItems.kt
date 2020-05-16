@@ -5,12 +5,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WhatsNewItems(
-        @SerialName("_id")
-        var id: String?,
-        @SerialName("title")
-        var title: String?,
-        @SerialName("description")
-        var description: String?,
-        @SerialName("version")
-        var version: String ?
+    @SerialName("_id")
+    var id: String?,
+    @SerialName("title")
+    var title: String?,
+    @SerialName("description")
+    var description: String?,
+    @SerialName("version")
+    var version: String ?
 )
