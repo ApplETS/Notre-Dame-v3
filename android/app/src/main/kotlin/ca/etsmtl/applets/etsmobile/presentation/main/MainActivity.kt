@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.main
 
+import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
@@ -40,22 +41,25 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val navController by lazy { findNavController(R.id.fragmentNavHostMain) }
+    @Inject
+    lateinit var prefs: SharedPreferences
 
+    private val whatNewFragment = WhatsNewFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
         setupActionBar()
         setupBottomNavigation()
-        showWhatsNew()
         subscribeUI()
     }
 
     private fun showWhatsNew() {
-        val whatNewFragment = WhatsNewFragment()
         var fm = supportFragmentManager
-        whatNewFragment.show(fm, "fgsdgf")
+        whatNewFragment.show(fm, "What's new")
+        val editor = prefs.edit()
+        editor.putBoolean("firstTime", false)
+        editor.apply()
     }
 
     private fun setupBottomNavigation() {
@@ -141,6 +145,10 @@ class MainActivity : BaseActivity() {
 
         mainViewModel.bottomNavigationViewVisible.observe(this, Observer { visible ->
             bottomNavigationView?.setVisible(visible)
+            val isFirstTime = prefs.getBoolean("firstTime", true)
+            if (visible && isFirstTime) {
+                    showWhatsNew()
+            }
         })
 
         mainViewModel.closeApp.observe(this, EventObserver {

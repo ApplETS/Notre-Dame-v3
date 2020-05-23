@@ -6,7 +6,6 @@ package ca.etsmtl.applets.etsmobile.presentation.main
 
 enum class Destination {
     SPLASH,
-    WHATSNEW,
     LOGIN,
     DASHBOARD,
     SCHEDULE,

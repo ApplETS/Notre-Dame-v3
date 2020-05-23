@@ -37,11 +37,11 @@ class MainViewModel @Inject constructor() : ViewModel() {
      * @return True if the action should be performed
      */
     fun shouldPerformBottomNavigationViewAction(): Boolean {
-        return currentDestination != Destination.SPLASH && currentDestination != Destination.LOGIN && currentDestination != Destination.WHATSNEW
+        return currentDestination != Destination.SPLASH && currentDestination != Destination.LOGIN
     }
 
     fun onNavigationDestinationChanged(destination: Destination) {
-        if ((destination == Destination.LOGIN) or (destination == Destination.WHATSNEW)) {
+        if ((destination == Destination.LOGIN)) {
             bottomNavigationViewVisible.value = false
             expandAppBarLayout.value = false
         } else if (topLevelDestinations.contains(destination)) {
