@@ -141,5 +141,4 @@ interface MainActivityModule {
     @IntoMap
     @ViewModelKey(GitHubContributorsViewModel::class)
     fun bindGitHubContributorsViewModel(gitHubContributorsViewModel: GitHubContributorsViewModel): ViewModel
-
 }

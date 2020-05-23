@@ -52,7 +52,7 @@ class MainActivity : BaseActivity() {
         subscribeUI()
     }
 
-    private fun showWhatsNew(){
+    private fun showWhatsNew() {
         val whatNewFragment = WhatsNewFragment()
         var fm = supportFragmentManager
         whatNewFragment.show(fm, "fgsdgf")

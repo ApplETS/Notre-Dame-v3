@@ -19,7 +19,7 @@ class WhatsNewApi @Inject constructor() {
         private const val BASE_URL = "http://10.0.2.2:8080/whatsNew/"
     }
 
-    suspend fun getWhatsNewEn(versionFrom: String, versionTo: String): List<WhatsNewItems> =client.get {
+    suspend fun getWhatsNewEn(versionFrom: String, versionTo: String): List<WhatsNewItems> = client.get {
         url {
             takeFrom(BASE_URL + "en/" + versionTo + "?versionFrom=" + versionFrom)
         }

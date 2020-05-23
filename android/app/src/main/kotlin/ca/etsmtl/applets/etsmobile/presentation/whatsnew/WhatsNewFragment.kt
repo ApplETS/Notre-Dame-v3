@@ -16,39 +16,39 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import ca.etsmtl.applets.etsmobile.R
+import ca.etsmtl.applets.etsmobile.extension.toast
 import dagger.android.support.DaggerDialogFragment
 import kotlinx.android.synthetic.main.fragment_whats_new.*
 import java.util.*
 import javax.inject.Inject
 import data.api.model.WhatsNewItems
 import data.repository.WhatsNewRepository
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import kotlin.collections.ArrayList
 
-
-class WhatsNewFragment :  DaggerDialogFragment()  {
+class WhatsNewFragment : DaggerDialogFragment() {
 
     private var mWhatsNewData = ArrayList<WhatsNewItems>()
     @Inject
     lateinit var whatsnewRepository: WhatsNewRepository
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_whats_new, container, false)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setRecyclerView()
         setViewListener()
     }
 
     private fun setViewListener() {
     btnCloseWhatsNew.setOnClickListener {
-           dismiss()
+        dismiss()
         }
     }
 
@@ -65,23 +65,34 @@ class WhatsNewFragment :  DaggerDialogFragment()  {
         rvWhatsNew!!.adapter?.notifyDataSetChanged()
     }
 
-
     private fun initializeData() {
-
         val currentLang = Locale.getDefault().language
         val manager = context!!.packageManager
         val info = manager.getPackageInfo(context!!.packageName, 0)
         val version = info.versionName
-        if(currentLang =="en")
-        {
-           runBlocking { whatsnewRepository.whatsNewEn("1.0.0", "7.0.0").collect{items ->
-               mWhatsNewData = ArrayList(items) }}
+        if (currentLang == "en") {
+            try {
+                runBlocking {
+                    // 10 seconds delay
+                    withTimeout(10000L) {
+                        whatsnewRepository.whatsNewEn("1.0.0", "7.0.0")
+                                .collect { items -> mWhatsNewData = ArrayList(items) } }
+                }
+            } catch (ex: TimeoutCancellationException) {
+                context?.toast("Could not connect to web service")
+            }
+        } else {
+            try {
+                runBlocking {
+                    // 10 seconds delay
+                    withTimeout(10000L) {
+                        whatsnewRepository.whatsNewFr("1.0.0", "7.0.0")
+                                .collect { items -> mWhatsNewData = ArrayList(items) } }
+                    }
+            } catch (ex: TimeoutCancellationException) {
+                context?.toast("Impossible de se connecter au service Web")
+            }
         }
-        else {
-            runBlocking { whatsnewRepository.whatsNewFr("1.0.0", "7.0.0").collect{items ->
-                mWhatsNewData = ArrayList(items) }}
-        }
-
     }
 
     class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
