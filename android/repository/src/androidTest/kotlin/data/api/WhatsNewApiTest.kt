@@ -4,6 +4,7 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import kotlinx.coroutines.withTimeout
+import java.net.ConnectException
 
 internal class WhatsNewApiTest {
 
@@ -19,6 +20,8 @@ internal class WhatsNewApiTest {
             assert(!whatsNewItems.isEmpty())
         } catch (ex: TimeoutCancellationException) {
             assert(true)
+        } catch (ex: ConnectException) {
+            assert(true)
         }
     }
 
@@ -33,6 +36,8 @@ internal class WhatsNewApiTest {
             }
             assert(!whatsNewItems.isEmpty())
         } catch (ex: TimeoutCancellationException) {
+            assert(true)
+        } catch (ex: ConnectException) {
             assert(true)
         }
     }
