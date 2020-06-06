@@ -32,8 +32,10 @@ import kotlin.collections.ArrayList
 class WhatsNewFragment : DaggerDialogFragment() {
 
     private var mWhatsNewData = ArrayList<WhatsNewItems>()
+
     @Inject
     lateinit var whatsnewRepository: WhatsNewRepository
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,6 +46,11 @@ class WhatsNewFragment : DaggerDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView()
         setViewListener()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mWhatsNewData.clear()
     }
 
     private fun setViewListener() {
@@ -70,12 +77,18 @@ class WhatsNewFragment : DaggerDialogFragment() {
         val manager = context!!.packageManager
         val info = manager.getPackageInfo(context!!.packageName, 0)
         val version = info.versionName
+        val isBeta = version.contains("beta")
+        val versionParts = version.split(".")
+        val versionToInt = (versionParts[0] + versionParts[1]).toInt()
+        val versionFromInt = if (isBeta) versionToInt else versionToInt - 2
+        val versionTo = (versionToInt.toFloat() / 10).toString() + ".0"
+        val versionFrom = (versionFromInt.toFloat() / 10).toString() + ".0"
         if (currentLang == "en") {
             try {
                 runBlocking {
                     // 10 seconds delay
                     withTimeout(10000L) {
-                        whatsnewRepository.whatsNewEn("1.0.0", "7.0.0")
+                        whatsnewRepository.whatsNewEn(versionFrom, versionTo)
                                 .collect { items -> mWhatsNewData = ArrayList(items) } }
                 }
             } catch (ex: TimeoutCancellationException) {
@@ -86,7 +99,7 @@ class WhatsNewFragment : DaggerDialogFragment() {
                 runBlocking {
                     // 10 seconds delay
                     withTimeout(10000L) {
-                        whatsnewRepository.whatsNewFr("1.0.0", "7.0.0")
+                        whatsnewRepository.whatsNewFr(versionFrom, versionTo)
                                 .collect { items -> mWhatsNewData = ArrayList(items) } }
                     }
             } catch (ex: TimeoutCancellationException) {
