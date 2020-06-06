@@ -1,5 +1,6 @@
 package ca.etsmtl.applets.etsmobile.presentation.whatsnew
 
+import android.content.SharedPreferences
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -35,6 +36,9 @@ class WhatsNewFragment : DaggerDialogFragment() {
 
     @Inject
     lateinit var whatsnewRepository: WhatsNewRepository
+
+    @Inject
+    lateinit var prefs: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,6 +97,7 @@ class WhatsNewFragment : DaggerDialogFragment() {
                 }
             } catch (ex: TimeoutCancellationException) {
                 context?.toast("Could not connect to web service")
+                OnTimeOut()
             }
         } else {
             try {
@@ -104,8 +109,16 @@ class WhatsNewFragment : DaggerDialogFragment() {
                     }
             } catch (ex: TimeoutCancellationException) {
                 context?.toast("Impossible de se connecter au service Web")
+                OnTimeOut()
             }
         }
+    }
+
+    private fun OnTimeOut() {
+        dismiss()
+        val editor = prefs.edit()
+        editor.putBoolean("firstTime", true)
+        editor.apply()
     }
 
     class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
