@@ -87,5 +87,7 @@ dependencies {
     // livedata-ktx
     api "com.shopify:livedata-ktx:2.0.2"
 
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
+
     api project(':shared')
 }

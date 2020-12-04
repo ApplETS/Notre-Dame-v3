@@ -224,6 +224,8 @@ dependencies {
     // ETSMobile-Notifications
     implementation "ca.applets.etsmobilenotifications:etsmobilenotifications:1.1.0"
 
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
+
     implementation project(':android:repository')
 }
 
