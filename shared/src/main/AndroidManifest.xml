@@ -7,4 +7,5 @@
             android:enabled="true"
             android:name="data.securepreferences.PreferencesProvider"/>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

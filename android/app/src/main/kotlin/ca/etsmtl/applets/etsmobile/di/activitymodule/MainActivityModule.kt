@@ -23,6 +23,7 @@ import ca.etsmtl.applets.etsmobile.presentation.schedule.ScheduleViewModel
 import ca.etsmtl.applets.etsmobile.presentation.schedule.week.ScheduleWeekFragment
 import ca.etsmtl.applets.etsmobile.presentation.splash.SplashFragment
 import ca.etsmtl.applets.etsmobile.presentation.student.StudentFragment
+import ca.etsmtl.applets.etsmobile.presentation.whatsnew.WhatsNewFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -132,6 +133,9 @@ interface MainActivityModule {
 
     @ContributesAndroidInjector
     fun contributeGitHubContributorsFragment(): GitHubContributorsFragment
+
+    @ContributesAndroidInjector
+    fun contributeWhatsNewFragment(): WhatsNewFragment
 
     @Binds
     @IntoMap

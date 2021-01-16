@@ -17,6 +17,10 @@
             app:destination="@id/fragmentDashboard" />
     </fragment>
     <fragment
+        android:id="@+id/fragmentWhatsNew"
+        android:name="ca.etsmtl.applets.etsmobile.presentation.whatsnew.WhatsNewFragment"
+        tools:layout="@layout/fragment_whats_new"/>
+    <fragment
         android:id="@+id/fragmentLogin"
         android:name="ca.etsmtl.applets.etsmobile.presentation.login.LoginFragment"
         android:label="@string/title_activity_login"

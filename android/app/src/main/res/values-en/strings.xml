@@ -197,4 +197,9 @@
     <string name="label_miscellaneous_pref_category">Miscellaneous</string>
     <string name="label_shake_bug_reporter_invocation_method_pref">Shake to report a bug</string>
     <string name="label_language_pref">Language</string>
+
+    <!-- What's new -->
+    <string name="label_version">Version: </string>
+    <string name="label_what_s_new"><u>What\'s New</u></string>
+    <string name="close">Close</string>
 </resources>
